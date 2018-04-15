@@ -41,7 +41,7 @@ function wildcard(lhs) {
  */
 export default function compareCourseToCourse(
     query: Course,
-    other: Course
+    other: Course,
 ): boolean {
     // If the query is more specific than the one being compared to, and
     // things don't match, return false.
@@ -60,6 +60,6 @@ export default function compareCourseToCourse(
     // We only check the specified keys.
     // If any of them are not equal, we return false.
     return every(keysToCheck, key =>
-        isEqualWith(query[key], other[key], wildcard)
+        isEqualWith(query[key], other[key], wildcard),
     )
 }

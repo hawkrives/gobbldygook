@@ -24,7 +24,7 @@ import type {
  */
 export default function getMatchesFromChildren(
     expr: ModifierChildrenExpression | ModifierChildrenWhereExpression,
-    ctx: Requirement
+    ctx: Requirement,
 ): Course[] {
     if (expr.$type !== 'modifier') {
         return []

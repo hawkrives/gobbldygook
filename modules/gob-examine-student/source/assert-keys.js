@@ -14,7 +14,7 @@ export default function assertKeys(obj: any, ...listOfKeys: string[]) {
     if (missingKeys.length) {
         const missing = missingKeys.join(', ')
         throw new ReferenceError(
-            `assertKeys(): missing ${missing} from ${JSON.stringify(obj)}`
+            `assertKeys(): missing ${missing} from ${JSON.stringify(obj)}`,
         )
     }
 }

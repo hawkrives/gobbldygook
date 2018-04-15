@@ -19,7 +19,7 @@ export function importStudent({data, type} = {}) {
             type: IMPORT_STUDENT,
             error: true,
             payload: new TypeError(
-                `importStudent: ${type} is an invalid data type`
+                `importStudent: ${type} is an invalid data type`,
             ),
         }
     }

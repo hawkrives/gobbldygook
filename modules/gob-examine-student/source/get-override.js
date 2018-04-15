@@ -11,7 +11,7 @@ import type {OverridesPath, OverridesObject} from './types'
  */
 export default function getOverride(
     path: OverridesPath,
-    overrides: OverridesObject
+    overrides: OverridesObject,
 ): boolean {
     return overrides[pathToOverride(path)]
 }

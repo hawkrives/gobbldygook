@@ -69,7 +69,7 @@ const saveStudentsMiddleware = store => next => action => {
 
     // save them
     const promises = map(studentsToSave, stu =>
-        store.dispatch(saveStudent(stu.data.present.id))
+        store.dispatch(saveStudent(stu.data.present.id)),
     )
 
     return Promise.all(promises).then(() => result)

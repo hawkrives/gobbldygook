@@ -8,7 +8,7 @@ export default {
                     content: require('./degub').default,
                 })
             },
-            'degub.components'
+            'degub.components',
         )
     },
 }

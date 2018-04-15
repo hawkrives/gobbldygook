@@ -59,7 +59,7 @@ export default class SemesterDetail extends React.Component<Props, State> {
 
         const schedules = map(
             filter(student.schedules, isCurrentSemester(year, semester)),
-            sched => omit(sched, 'courses')
+            sched => omit(sched, 'courses'),
         )
 
         const sem = semesterName(semester)

@@ -9,7 +9,7 @@ type State = {
 
 export default class CourseWithModal extends React.PureComponent<
     MiniProps,
-    State
+    State,
 > {
     state = {
         isOpen: false,

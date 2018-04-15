@@ -13,7 +13,7 @@ type Props = {
 }
 
 export default class GraduationStatusContainer extends React.PureComponent<
-    Props
+    Props,
 > {
     render() {
         const student = this.props.student

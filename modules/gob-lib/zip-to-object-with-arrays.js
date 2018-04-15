@@ -6,7 +6,7 @@ import has from 'lodash/has'
 
 export function zipToObjectWithArrays<T>(
     keys: string[],
-    vals: T[]
+    vals: T[],
 ): {[key: string]: Array<T>} {
     let arr = zip(keys, vals)
 
@@ -21,6 +21,6 @@ export function zipToObjectWithArrays<T>(
 
             return obj
         },
-        {}
+        {},
     )
 }

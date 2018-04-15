@@ -22,7 +22,7 @@ describe('getMatchesFromFilter', () => {
         }
 
         expect(getMatchesFromFilter(requirement)).toBe(
-            requirement.filter._matches
+            requirement.filter._matches,
         )
     })
 })

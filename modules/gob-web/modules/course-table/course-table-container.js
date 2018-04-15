@@ -26,7 +26,7 @@ const addYear = (addSchedule, student) => {
 const addSemester = (addSchedule, student, year) => {
     const nextAvailableSemester = findFirstAvailableSemester(
         student.schedules,
-        year
+        year,
     )
 
     addSchedule(student.id, {
@@ -40,7 +40,7 @@ const addSemester = (addSchedule, student, year) => {
 const removeYear = (destroySchedules, student, year) => {
     const thisYearSchedules = filter(
         student.schedules,
-        s => s.year === parseInt(year)
+        s => s.year === parseInt(year),
     )
     const scheduleIds = map(thisYearSchedules, s => s.id)
 

@@ -44,7 +44,7 @@ export default function queryCourseDatabase(queryString, baseQuery = {}) {
         .catch(
             err =>
                 new Error(
-                    `course query failed on "${queryString}" with error "${err}"`
-                )
+                    `course query failed on "${queryString}" with error "${err}"`,
+                ),
         )
 }

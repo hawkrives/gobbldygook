@@ -4,7 +4,7 @@ const parse = customParser({allowedStartRules: ['Filter']})
 describe('FilterExpression', () => {
     it('allows filtering by a list of valid courses', () => {
         expect(
-            parse('only courses from (CSCI 121, CSCI 125)')
+            parse('only courses from (CSCI 121, CSCI 125)'),
         ).toMatchSnapshot()
     })
 
@@ -14,7 +14,7 @@ describe('FilterExpression', () => {
 
     it('allows a "distinct" modifier', () => {
         expect(
-            parse('only distinct courses from (CSCI 121, CSCI 125)')
+            parse('only distinct courses from (CSCI 121, CSCI 125)'),
         ).toMatchSnapshot()
     })
 })

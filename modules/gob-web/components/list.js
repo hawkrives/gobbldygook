@@ -56,7 +56,7 @@ export default function List(props: ListProps) {
                       ...child.props,
                       className: cx('list-item', child.props.className),
                   })
-                : child
+                : child,
     )
 
     let ListType = PlainList

@@ -69,7 +69,7 @@ class ManualCreationScreen extends React.Component {
                 matriculation: val,
                 matriculationIsValid: isValid,
             }),
-            this.checkValidity
+            this.checkValidity,
         )
     }
 
@@ -81,7 +81,7 @@ class ManualCreationScreen extends React.Component {
                 graduation: val,
                 graduationIsValid: isValid,
             }),
-            this.checkValidity
+            this.checkValidity,
         )
     }
 
@@ -105,7 +105,7 @@ class ManualCreationScreen extends React.Component {
             this.state.degree,
             this.state.major,
             this.state.concentration,
-            this.state.emphasis
+            this.state.emphasis,
         )
 
         // pick out only the values that we want

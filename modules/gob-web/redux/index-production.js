@@ -10,9 +10,9 @@ const finalCreateStore = compose(
         promiseMiddleware,
         thunkMiddleware,
         checkStudentsMiddleware,
-        saveStudentsMiddleware
+        saveStudentsMiddleware,
     ),
-    window && window.devToolsExtension ? window.devToolsExtension() : f => f
+    window && window.devToolsExtension ? window.devToolsExtension() : f => f,
 )(createStore)
 
 export default function configureStore(initialState) {

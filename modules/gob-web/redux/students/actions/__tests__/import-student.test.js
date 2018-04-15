@@ -14,7 +14,7 @@ describe('importStudent action', () => {
         expect(action).toHaveProperty('error', true)
         expect(action).toHaveProperty('payload')
         expect(action.payload.message).toBe(
-            'importStudent: undefined is an invalid data type'
+            'importStudent: undefined is an invalid data type',
         )
     })
 
@@ -33,7 +33,7 @@ describe('importStudent action', () => {
         expect(action).toHaveProperty('error', true)
         expect(action).toHaveProperty('payload')
         expect(action.payload.message).toBe(
-            'importStudent: text/html is an invalid data type'
+            'importStudent: text/html is an invalid data type',
         )
     })
 

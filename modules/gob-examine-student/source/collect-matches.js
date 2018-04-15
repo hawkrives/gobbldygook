@@ -12,7 +12,7 @@ import type {Expression, Requirement, Course} from './types'
  * @returns {Course[]} matches - the list of matched courses
  */
 export default function collectMatches(
-    expr: Expression | Requirement
+    expr: Expression | Requirement,
 ): Course[] {
     assertKeys(expr, '$type')
 
@@ -56,7 +56,7 @@ export default function collectMatches(
     } else {
         throw new TypeError(
             `collectMatches(): unknown expression type "${expr.$type ||
-                'undefined'}"`
+                'undefined'}"`,
         )
     }
 

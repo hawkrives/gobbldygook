@@ -28,7 +28,7 @@ class DraggableCourse extends React.PureComponent {
         return this.props.connectDragSource(
             <div>
                 <Draggable className={classSet} {...this.props} />
-            </div>
+            </div>,
         )
     }
 }

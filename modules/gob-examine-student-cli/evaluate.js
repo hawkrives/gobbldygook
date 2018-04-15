@@ -27,7 +27,7 @@ function condenseCourse(course) {
 function summarize(requirement, name, path, depth = 0) {
     let prose = ''
     const subReqs = filter(toPairs(requirement), ([k, _]) =>
-        isRequirementName(k)
+        isRequirementName(k),
     )
     if (subReqs.length) {
         prose =
@@ -112,7 +112,7 @@ function stringifyModifier(expr) {
         modifier = `where {${stringifyWhereClause(expr.$where)}}`
     } else if (expr.$from === 'children-where') {
         modifier = `${stringifyChildren(expr)}, where {${stringifyWhereClause(
-            expr.$where
+            expr.$where,
         )}}`
     }
 
@@ -166,7 +166,7 @@ function stringifyQualification({$key, $operator, $value}) {
                 throw new TypeError(msg)
             }
             return map(ds, val =>
-                stringifyQualification({$key, $operator, $value: val})
+                stringifyQualification({$key, $operator, $value: val}),
             ).join(conjunction)
         } else {
             const msg = `stringifyQualification(): "${
@@ -192,7 +192,7 @@ function stringifyQualification({$key, $operator, $value}) {
     }
 
     throw new TypeError(
-        `stringifyQualification: "${$operator} is not a valid operator"`
+        `stringifyQualification: "${$operator} is not a valid operator"`,
     )
 }
 
@@ -242,7 +242,7 @@ function proseify(requirement, name, path, depth = 0) {
     const hasChildren = some(keys(requirement), isRequirementName)
     if (hasChildren) {
         const subReqs = filter(toPairs(requirement), ([k, _]) =>
-            isRequirementName(k)
+            isRequirementName(k),
         )
 
         prose = map(subReqs, ([k, v]) => {

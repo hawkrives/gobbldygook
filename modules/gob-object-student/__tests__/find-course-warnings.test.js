@@ -9,7 +9,7 @@ import {
 describe('checkForInvalidYear', () => {
     it('checks for an invalid year on a course', () => {
         expect(
-            checkForInvalidYear({year: 1994, semester: 1}, 2012)
+            checkForInvalidYear({year: 1994, semester: 1}, 2012),
         ).toMatchSnapshot()
     })
 

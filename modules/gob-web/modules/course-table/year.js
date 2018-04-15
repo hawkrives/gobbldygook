@@ -117,7 +117,7 @@ export default class Year extends React.PureComponent {
 
         const nextAvailableSemester = findFirstAvailableSemester(
             schedules,
-            year
+            year,
         )
         const isAddSemesterDisabled = !canAddSemester(schedules, year)
 

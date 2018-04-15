@@ -32,7 +32,7 @@ describe('extractTermList', () => {
 
     it('returns an empty list when no term options are found', () => {
         const actual = extractTermList(
-            parseHtml('<select name=searchyearterm></select>')
+            parseHtml('<select name=searchyearterm></select>'),
         )
         const expected = []
         expect(actual).toEqual(expected)

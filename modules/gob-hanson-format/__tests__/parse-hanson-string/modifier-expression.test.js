@@ -18,7 +18,7 @@ describe('ModifierExpression', () => {
         expect(() => parse('one department from children')).not.toThrow()
         expect(() => parse('one department from filter')).not.toThrow()
         expect(() =>
-            parse('one department from courses where {a = b}')
+            parse('one department from courses where {a = b}'),
         ).toThrow('cannot use a modifier with "departments"')
     })
 
@@ -32,7 +32,7 @@ describe('ModifierExpression', () => {
         expect(
             parse('one course from (BTS-B, B)', {
                 abbreviations: {'BTS-B': 'Bible'},
-            })
+            }),
         ).toMatchSnapshot()
     })
 
@@ -50,7 +50,7 @@ describe('ModifierExpression', () => {
 
     it('can count from a where-statement, with the input filtered by all children', () => {
         expect(
-            parse('one course from children where {a = b}')
+            parse('one course from children where {a = b}'),
         ).toMatchSnapshot()
     })
 
@@ -60,15 +60,15 @@ describe('ModifierExpression', () => {
 
     it('will refuse to count anything but courses from children-where', () => {
         expect(() =>
-            parse('one department from children where {a = b}')
+            parse('one department from children where {a = b}'),
         ).toThrow('must use "courses from" with "children where"')
 
         expect(() => parse('one credit from children where {a = b}')).toThrow(
-            'must use "courses from" with "children where"'
+            'must use "courses from" with "children where"',
         )
 
         expect(() =>
-            parse('one course from children where {a = b}')
+            parse('one course from children where {a = b}'),
         ).not.toThrow()
     })
 })

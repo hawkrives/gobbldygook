@@ -47,7 +47,7 @@ function checkCourseAgainstQueryBit(course, [key, values]) {
                 'times',
                 'locations',
             ],
-            key
+            key,
         )
     ) {
         substring = true
@@ -60,8 +60,8 @@ function checkCourseAgainstQueryBit(course, [key, values]) {
         } else if (isArray(course[key]) && substring) {
             return some(
                 map(course[key], item =>
-                    includes(item.toLowerCase(), val.toLowerCase())
-                )
+                    includes(item.toLowerCase(), val.toLowerCase()),
+                ),
             )
         } else if (substring) {
             return includes(course[key].toLowerCase(), val.toLowerCase())
@@ -91,7 +91,7 @@ function checkCourseAgainstQueryBit(course, [key, values]) {
 export function checkCourseAgainstQuery(query, course) {
     let kvPairs = toPairs(query)
     let matches = takeWhile(kvPairs, pair =>
-        checkCourseAgainstQueryBit(course, pair)
+        checkCourseAgainstQueryBit(course, pair),
     )
 
     return size(kvPairs) === size(matches) && every(matches)

@@ -55,7 +55,7 @@ function CourseRemovalBox(props: Props) {
                 </BlockIcon>
                 Drop a course here to remove it.
             </Box>
-        </div>
+        </div>,
     )
 }
 
@@ -89,5 +89,5 @@ function collect(connect, monitor) {
 }
 
 export default DropTarget(IDENT_COURSE, removeCourseTarget, collect)(
-    CourseRemovalBox
+    CourseRemovalBox,
 )

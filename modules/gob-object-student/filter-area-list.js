@@ -31,13 +31,14 @@ export function filterAreaList(areas, {graduation}) {
     let onlyAvailableAreas = reject(
         areas,
         area =>
-            area['available through'] && area['available through'] <= graduation
+            area['available through'] &&
+            area['available through'] <= graduation,
     )
 
     // Group them together to filter them down
     const groupedAreas = groupBy(
         onlyAvailableAreas,
-        area => `(${area.name}, ${area.type})`
+        area => `(${area.name}, ${area.type})`,
     )
 
     onlyAvailableAreas = flatten(
@@ -65,7 +66,7 @@ export function filterAreaList(areas, {graduation}) {
                     // falls between the two revisions.
                     // if it does, then this revision is *available*.
                     let nextAreaRevision = convertRevisionToYear(
-                        list[i + 1].revision
+                        list[i + 1].revision,
                     )
                     return (
                         revision <= graduation && graduation <= nextAreaRevision
@@ -75,7 +76,7 @@ export function filterAreaList(areas, {graduation}) {
                     return revision <= graduation
                 }
             })
-        })
+        }),
     )
 
     return onlyAvailableAreas

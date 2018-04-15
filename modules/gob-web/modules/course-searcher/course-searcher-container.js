@@ -95,9 +95,9 @@ const mapDispatchToProps = dispatch =>
             updateQuery,
             setPartialQuery,
         },
-        dispatch
+        dispatch,
     )
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-    CourseSearcherContainer
+    CourseSearcherContainer,
 )

@@ -23,13 +23,13 @@ export function getPriorAreas(path: string) {
         .store('areas')
         .getAll(range({eq: path}))
         .then(oldItems =>
-            fromPairs(map(oldItems, item => [item.sourcePath, null]))
+            fromPairs(map(oldItems, item => [item.sourcePath, null])),
         )
 }
 
 export default async function cleanPriorData(
     path: string,
-    type: InfoFileTypeEnum
+    type: InfoFileTypeEnum,
 ) {
     log(path)
 
@@ -41,7 +41,7 @@ export default async function cleanPriorData(
     } else {
         log(`"${type}" is not a valid store type`)
         throw new TypeError(
-            `cleanPriorData: "${type}" is not a valid store type`
+            `cleanPriorData: "${type}" is not a valid store type`,
         )
     }
 

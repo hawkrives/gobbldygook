@@ -36,7 +36,7 @@ export class SemesterContainer extends React.Component {
         const {student, semester, year} = this.props
         const thisSemesterSchedules = filter(
             student.schedules,
-            isCurrentSemester(year, semester)
+            isCurrentSemester(year, semester),
         )
         const scheduleIds = map(thisSemesterSchedules, s => s.id)
         this.props.destroySchedules(student.id, ...scheduleIds)

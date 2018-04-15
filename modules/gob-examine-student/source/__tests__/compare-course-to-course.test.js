@@ -5,8 +5,8 @@ describe('compareCourseToCourse', () => {
         expect(
             compareCourseToCourse(
                 {department: ['ART'], number: 310},
-                {department: ['ART'], number: 310}
-            )
+                {department: ['ART'], number: 310},
+            ),
         ).toBe(true)
     })
 
@@ -19,8 +19,8 @@ describe('compareCourseToCourse', () => {
             expect(
                 compareCourseToCourse(
                     {department: ['ART']},
-                    {department: ['ART']}
-                )
+                    {department: ['ART']},
+                ),
             ).toBe(true)
         })
 
@@ -28,8 +28,8 @@ describe('compareCourseToCourse', () => {
             expect(
                 compareCourseToCourse(
                     {department: ['ART']},
-                    {department: ['ART', 'ASIAN']}
-                )
+                    {department: ['ART', 'ASIAN']},
+                ),
             ).toBe(false)
         })
 
@@ -37,8 +37,8 @@ describe('compareCourseToCourse', () => {
             expect(
                 compareCourseToCourse(
                     {department: ['ASIAN']},
-                    {department: ['ART']}
-                )
+                    {department: ['ART']},
+                ),
             ).toBe(false)
         })
 
@@ -46,8 +46,8 @@ describe('compareCourseToCourse', () => {
             expect(
                 compareCourseToCourse(
                     {department: ['CHEM', 'BIO']},
-                    {department: ['BIO', 'CHEM']}
-                )
+                    {department: ['BIO', 'CHEM']},
+                ),
             ).toBe(false)
         })
     })
@@ -55,19 +55,19 @@ describe('compareCourseToCourse', () => {
     describe('compares the "semester" prop', () => {
         it('and the same semester is equal to itself', () => {
             expect(compareCourseToCourse({semester: 1}, {semester: 1})).toBe(
-                true
+                true,
             )
         })
 
         it('and different semesters are not equal', () => {
             expect(compareCourseToCourse({semester: 2}, {semester: 1})).toBe(
-                false
+                false,
             )
         })
 
         it('and supports the wildcard selector', () => {
             expect(compareCourseToCourse({semester: '*'}, {semester: 1})).toBe(
-                true
+                true,
             )
         })
     })
@@ -79,7 +79,7 @@ describe('compareCourseToCourse', () => {
 
         it('and different years are not equal', () => {
             expect(compareCourseToCourse({year: 2014}, {year: 2015})).toBe(
-                false
+                false,
             )
         })
 
@@ -91,7 +91,7 @@ describe('compareCourseToCourse', () => {
     describe('compares the "number" prop', () => {
         it('the same number is equal to itself', () => {
             expect(compareCourseToCourse({number: 201}, {number: 201})).toBe(
-                true
+                true,
             )
         })
         it('zero is equal', () => {
@@ -105,12 +105,12 @@ describe('compareCourseToCourse', () => {
         })
         it('infinity is not negative infinity', () => {
             expect(
-                compareCourseToCourse({number: Infinity}, {number: -Infinity})
+                compareCourseToCourse({number: Infinity}, {number: -Infinity}),
             ).toBe(false)
         })
         it('infinity equals infinity', () => {
             expect(
-                compareCourseToCourse({number: Infinity}, {number: Infinity})
+                compareCourseToCourse({number: Infinity}, {number: Infinity}),
             ).toBe(true)
         })
     })
@@ -121,7 +121,7 @@ describe('compareCourseToCourse', () => {
         })
         it('different levels are different', () => {
             expect(compareCourseToCourse({level: 100}, {level: 200})).toBe(
-                false
+                false,
             )
         })
     })
@@ -131,16 +131,16 @@ describe('compareCourseToCourse', () => {
             expect(
                 compareCourseToCourse(
                     {international: true},
-                    {international: true}
-                )
+                    {international: true},
+                ),
             ).toBe(true)
         })
         it('different values are different', () => {
             expect(
                 compareCourseToCourse(
                     {international: true},
-                    {international: false}
-                )
+                    {international: false},
+                ),
             ).toBe(false)
         })
     })
@@ -148,12 +148,12 @@ describe('compareCourseToCourse', () => {
     describe('compares the "type" prop', () => {
         it('the same "type" value is equal', () => {
             expect(compareCourseToCourse({type: 'Lab'}, {type: 'Lab'})).toBe(
-                true
+                true,
             )
         })
         it('different "type" values are different', () => {
             expect(
-                compareCourseToCourse({type: 'Lab'}, {type: 'Research'})
+                compareCourseToCourse({type: 'Lab'}, {type: 'Research'}),
             ).toBe(false)
         })
     })
@@ -161,19 +161,19 @@ describe('compareCourseToCourse', () => {
     describe('compares the "section" prop', () => {
         it('and the same section is equal', () => {
             expect(compareCourseToCourse({section: 'A'}, {section: 'A'})).toBe(
-                true
+                true,
             )
         })
 
         it('and different sections are different', () => {
             expect(compareCourseToCourse({section: 'A'}, {section: 'B'})).toBe(
-                false
+                false,
             )
         })
 
         it('and supports the wildcard selector', () => {
             expect(compareCourseToCourse({section: '*'}, {section: 'D'})).toBe(
-                true
+                true,
             )
         })
     })
@@ -182,8 +182,8 @@ describe('compareCourseToCourse', () => {
         expect(
             compareCourseToCourse(
                 {department: ['ASIAN'], number: 310, section: 'A'},
-                {department: ['ASIAN'], number: 310}
-            )
+                {department: ['ASIAN'], number: 310},
+            ),
         ).toBe(false)
     })
 
@@ -191,8 +191,8 @@ describe('compareCourseToCourse', () => {
         expect(
             compareCourseToCourse(
                 {department: ['ASIAN'], number: 310},
-                {department: ['ASIAN'], number: 310, section: 'A'}
-            )
+                {department: ['ASIAN'], number: 310, section: 'A'},
+            ),
         ).toBe(true)
     })
 })

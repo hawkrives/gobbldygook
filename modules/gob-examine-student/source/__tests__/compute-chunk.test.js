@@ -7,7 +7,7 @@ describe('computeChunk', () => {
 
     it('throws when encountering an unknown type', () => {
         expect(() => computeChunk({expr: {$type: 'invalid'}})).toThrow(
-            TypeError
+            TypeError,
         )
     })
 })

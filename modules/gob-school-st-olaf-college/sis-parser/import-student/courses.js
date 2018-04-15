@@ -10,8 +10,8 @@ function convertRowToCourse(term, sisRow) {
     let clbid = Number(
         selectOne('.sis-coursename > a', sisRow).attribs.href.replace(
             /JavaScript:sis_coursedesc\('(\d*)'\);/,
-            '$1'
-        )
+            '$1',
+        ),
     )
 
     return {
@@ -46,7 +46,7 @@ function getCourses(studentId, term) {
         searchyearterm: term,
     }
     return fetchHtml(COURSES_URL, {method: 'POST'}, body).then(response =>
-        getCoursesFromHtml(response, term)
+        getCoursesFromHtml(response, term),
     )
 }
 

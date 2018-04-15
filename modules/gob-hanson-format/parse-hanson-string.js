@@ -241,7 +241,7 @@ function peg$parse(input, options) {
         peg$c43 = peg$classExpectation(
             [['a', 'z'], ['0', '9'], '_', '-'],
             false,
-            true
+            true,
         ),
         peg$c44 = function peg$c44(word) {
             return word.join('')
@@ -391,7 +391,7 @@ function peg$parse(input, options) {
                         ofList.length +
                         ' options (' +
                         JSON.stringify(ofList) +
-                        ').'
+                        ').',
                 )
             }
             return {$type: 'of', $count: count, $of: ofList}
@@ -434,7 +434,7 @@ function peg$parse(input, options) {
         peg$c136 = function peg$c136(count, what, besides, from) {
             if (from.$from === 'where' && what === 'department') {
                 throw new Error(
-                    'cannot use a modifier with "departments" or "department"'
+                    'cannot use a modifier with "departments" or "department"',
                 )
             }
             if (from.$from === 'children-where' && what !== 'course') {
@@ -442,7 +442,7 @@ function peg$parse(input, options) {
             }
             if (count.$operator !== '$gte' && what !== 'course') {
                 throw new Error(
-                    'can only use at-least style counters with non-course requests'
+                    'can only use at-least style counters with non-course requests',
                 )
             }
             var result = assign({}, from, {
@@ -466,7 +466,7 @@ function peg$parse(input, options) {
         peg$c143 = peg$classExpectation(
             [['A', 'Z'], ['a', 'z'], ['0', '9'], '_', '-', ' ', '/', "'", '.'],
             false,
-            false
+            false,
         ),
         peg$c144 = function peg$c144(initial, rest) {
             return initial + rest.join('')
@@ -552,7 +552,7 @@ function peg$parse(input, options) {
         },
         peg$c168 = function peg$c168() {
             throw new SyntaxError(
-                'A course section must be either an uppercase letter [A-Z] or an asterisk [*].'
+                'A course section must be either an uppercase letter [A-Z] or an asterisk [*].',
             )
         },
         peg$c169 = function peg$c169(nums) {
@@ -560,7 +560,7 @@ function peg$parse(input, options) {
         },
         peg$c170 = function peg$c170() {
             throw new SyntaxError(
-                'A course year must be either a four-digit year [e.g. 1994] or an asterisk [*].'
+                'A course year must be either a four-digit year [e.g. 1994] or an asterisk [*].',
             )
         },
         peg$c171 = /^[1-5]/,
@@ -570,7 +570,7 @@ function peg$parse(input, options) {
         },
         peg$c174 = function peg$c174() {
             throw new SyntaxError(
-                'A course semester must be either a number between 1 [Fall] and 5 [Summer Session 2], or an asterisk [*].'
+                'A course semester must be either a number between 1 [Fall] and 5 [Summer Session 2], or an asterisk [*].',
             )
         },
         peg$c175 = peg$anyExpectation(),
@@ -610,7 +610,7 @@ function peg$parse(input, options) {
     if ('startRule' in options) {
         if (!(options.startRule in peg$startRuleFunctions)) {
             throw new Error(
-                'Can\'t start parsing from rule "' + options.startRule + '".'
+                'Can\'t start parsing from rule "' + options.startRule + '".',
             )
         }
         peg$startRuleFunction = peg$startRuleFunctions[options.startRule]
@@ -629,7 +629,7 @@ function peg$parse(input, options) {
         throw peg$buildStructuredError(
             [peg$otherExpectation(description)],
             input.substring(peg$savedPos, peg$currPos),
-            location
+            location,
         )
     }
     function error(message, location) {
@@ -718,7 +718,7 @@ function peg$parse(input, options) {
             peg$SyntaxError.buildMessage(expected, found),
             expected,
             found,
-            location
+            location,
         )
     }
     function peg$parseResult() {
@@ -1339,7 +1339,7 @@ function peg$parse(input, options) {
                                                 if (
                                                     input.substr(
                                                         peg$currPos,
-                                                        5
+                                                        5,
                                                     ) === peg$c6
                                                 ) {
                                                     s12 = peg$c6
@@ -1362,7 +1362,7 @@ function peg$parse(input, options) {
                                                                 s1,
                                                                 s3,
                                                                 s6,
-                                                                s14
+                                                                s14,
                                                             )
                                                             s5 = s6
                                                         } else {
@@ -2002,7 +2002,7 @@ function peg$parse(input, options) {
                                                 if (
                                                     input.substr(
                                                         peg$currPos,
-                                                        4
+                                                        4,
                                                     ) === peg$c96
                                                 ) {
                                                     s1 = peg$c96
@@ -2017,7 +2017,7 @@ function peg$parse(input, options) {
                                                     if (
                                                         input.substr(
                                                             peg$currPos,
-                                                            3
+                                                            3,
                                                         ) === peg$c98
                                                     ) {
                                                         s1 = peg$c98
@@ -2899,7 +2899,7 @@ function peg$parse(input, options) {
                                                     if (
                                                         input.substr(
                                                             peg$currPos,
-                                                            5
+                                                            5,
                                                         ) === peg$c6
                                                     ) {
                                                         s13 = peg$c6
@@ -2928,7 +2928,7 @@ function peg$parse(input, options) {
                                                                     s1,
                                                                     s3,
                                                                     s6,
-                                                                    s15
+                                                                    s15,
                                                                 )
                                                                 s10 = s11
                                                             } else {
@@ -2956,7 +2956,7 @@ function peg$parse(input, options) {
                                                 if (
                                                     input.substr(
                                                         peg$currPos,
-                                                        8
+                                                        8,
                                                     ) === peg$c124
                                                 ) {
                                                     s11 = peg$c124
@@ -2977,7 +2977,7 @@ function peg$parse(input, options) {
                                                     if (
                                                         input.substr(
                                                             peg$currPos,
-                                                            6
+                                                            6,
                                                         ) === peg$c128
                                                     ) {
                                                         s11 = peg$c128
@@ -2999,7 +2999,7 @@ function peg$parse(input, options) {
                                                             if (
                                                                 input.substr(
                                                                     peg$currPos,
-                                                                    5
+                                                                    5,
                                                                 ) === peg$c6
                                                             ) {
                                                                 s13 = peg$c6
@@ -3011,7 +3011,7 @@ function peg$parse(input, options) {
                                                                     0
                                                                 ) {
                                                                     peg$fail(
-                                                                        peg$c7
+                                                                        peg$c7,
                                                                     )
                                                                 }
                                                             }
@@ -3034,7 +3034,7 @@ function peg$parse(input, options) {
                                                                             s1,
                                                                             s3,
                                                                             s6,
-                                                                            s15
+                                                                            s15,
                                                                         )
                                                                         s10 = s11
                                                                     } else {
@@ -3062,7 +3062,7 @@ function peg$parse(input, options) {
                                                         if (
                                                             input.substr(
                                                                 peg$currPos,
-                                                                6
+                                                                6,
                                                             ) === peg$c128
                                                         ) {
                                                             s11 = peg$c128
@@ -3074,7 +3074,7 @@ function peg$parse(input, options) {
                                                                 0
                                                             ) {
                                                                 peg$fail(
-                                                                    peg$c129
+                                                                    peg$c129,
                                                                 )
                                                             }
                                                         }
@@ -3085,7 +3085,7 @@ function peg$parse(input, options) {
                                                             s11 = peg$c131(
                                                                 s1,
                                                                 s3,
-                                                                s6
+                                                                s6,
                                                             )
                                                         }
                                                         s10 = s11
@@ -3096,7 +3096,7 @@ function peg$parse(input, options) {
                                                             if (
                                                                 input.substr(
                                                                     peg$currPos,
-                                                                    7
+                                                                    7,
                                                                 ) === peg$c11
                                                             ) {
                                                                 s11 = peg$c11
@@ -3108,7 +3108,7 @@ function peg$parse(input, options) {
                                                                     0
                                                                 ) {
                                                                     peg$fail(
-                                                                        peg$c12
+                                                                        peg$c12,
                                                                     )
                                                                 }
                                                             }
@@ -3124,7 +3124,7 @@ function peg$parse(input, options) {
                                                                     if (
                                                                         input.substr(
                                                                             peg$currPos,
-                                                                            5
+                                                                            5,
                                                                         ) ===
                                                                         peg$c6
                                                                     ) {
@@ -3137,7 +3137,7 @@ function peg$parse(input, options) {
                                                                             0
                                                                         ) {
                                                                             peg$fail(
-                                                                                peg$c7
+                                                                                peg$c7,
                                                                             )
                                                                         }
                                                                     }
@@ -3160,7 +3160,7 @@ function peg$parse(input, options) {
                                                                                     s1,
                                                                                     s3,
                                                                                     s6,
-                                                                                    s15
+                                                                                    s15,
                                                                                 )
                                                                                 s10 = s11
                                                                             } else {
@@ -3201,7 +3201,7 @@ function peg$parse(input, options) {
                                                                         if (
                                                                             input.substr(
                                                                                 peg$currPos,
-                                                                                5
+                                                                                5,
                                                                             ) ===
                                                                             peg$c6
                                                                         ) {
@@ -3214,7 +3214,7 @@ function peg$parse(input, options) {
                                                                                 0
                                                                             ) {
                                                                                 peg$fail(
-                                                                                    peg$c7
+                                                                                    peg$c7,
                                                                                 )
                                                                             }
                                                                         }
@@ -3238,7 +3238,7 @@ function peg$parse(input, options) {
                                                                                         s3,
                                                                                         s6,
                                                                                         s11,
-                                                                                        s15
+                                                                                        s15,
                                                                                     )
                                                                                     s10 = s11
                                                                                 } else {
@@ -3276,7 +3276,7 @@ function peg$parse(input, options) {
                                                                             s1,
                                                                             s3,
                                                                             s6,
-                                                                            s11
+                                                                            s11,
                                                                         )
                                                                     }
                                                                     s10 = s11
@@ -3295,7 +3295,7 @@ function peg$parse(input, options) {
                                                                                 s1,
                                                                                 s3,
                                                                                 s6,
-                                                                                s11
+                                                                                s11,
                                                                             )
                                                                         }
                                                                         s10 = s11
@@ -4096,7 +4096,7 @@ function peg$parse(input, options) {
             peg$maxFailPos < input.length ? input.charAt(peg$maxFailPos) : null,
             peg$maxFailPos < input.length
                 ? peg$computeLocation(peg$maxFailPos, peg$maxFailPos + 1)
-                : peg$computeLocation(peg$maxFailPos, peg$maxFailPos)
+                : peg$computeLocation(peg$maxFailPos, peg$maxFailPos),
         )
     }
 }

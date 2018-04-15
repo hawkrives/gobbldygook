@@ -599,7 +599,7 @@ describe('computeModifier', () => {
         expect(() =>
             computeModifier({
                 expr: {$what: 'invalid', $from: {}, $count: {}},
-            })
+            }),
         ).toThrowError(TypeError)
     })
 })

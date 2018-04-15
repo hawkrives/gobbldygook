@@ -114,14 +114,14 @@ export function studentReducer(state = initialState, action) {
             return renameScheduleInStudent(
                 state,
                 payload.scheduleId,
-                payload.newTitle
+                payload.newTitle,
             )
         }
         case REORDER_SCHEDULE: {
             return reorderScheduleInStudent(
                 state,
                 payload.scheduleId,
-                payload.newIndex
+                payload.newIndex,
             )
         }
         case MOVE_SCHEDULE: {
@@ -138,7 +138,7 @@ export function studentReducer(state = initialState, action) {
             return removeCourseFromSchedule(
                 state,
                 payload.scheduleId,
-                payload.clbid
+                payload.clbid,
             )
         }
         case REORDER_COURSE: {

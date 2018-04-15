@@ -63,7 +63,7 @@ export default function CourseList(props: Props) {
                     scheduleId={props.schedule.id}
                     studentId={props.studentId}
                 />
-            )
+            ),
     )
 
     const usedCredits = Math.floor(props.creditCount)

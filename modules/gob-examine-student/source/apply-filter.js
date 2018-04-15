@@ -15,7 +15,7 @@ const filterByOfExpression = (courses: Array<Course>, $of: Array<Course>) =>
  */
 export default function applyFilter(
     expr: FilterExpression,
-    courses: Course[]
+    courses: Course[],
 ): Course[] {
     // default to an empty array
     let filtered: Array<Course> = []

@@ -66,7 +66,7 @@ describe('filterForRecentCourses', () => {
             {type: 'json', year: 2000, path: '', hash: ''},
         ]
         const actual = fileRefs.filter(f =>
-            load.filterForRecentCourses(f, 2000)
+            load.filterForRecentCourses(f, 2000),
         )
         const expected = fileRefs.filter(f => f.type === 'json')
         expect(actual).toEqual(expected)
@@ -82,7 +82,7 @@ describe('filterForRecentCourses', () => {
         ]
         const year = 2002
         const actual = fileRefs.filter(f =>
-            load.filterForRecentCourses(f, year)
+            load.filterForRecentCourses(f, year),
         )
         const expected = fileRefs.filter(f => f.year >= year)
         expect(actual).toEqual(expected)
@@ -250,7 +250,7 @@ describe('proceedWithUpdate', () => {
 
     test('rejects if any fail', async () => {
         needsUpdate.mockImplementationOnce(() =>
-            Promise.reject(new Error('mock error'))
+            Promise.reject(new Error('mock error')),
         )
 
         const baseUrl = 'remote'
@@ -294,7 +294,7 @@ describe('loadFiles', () => {
 
     test('rejects if the fetch fails', async () => {
         global.fetch.mockImplementationOnce(() =>
-            Promise.reject(new Error('Other Error'))
+            Promise.reject(new Error('Other Error')),
         )
         expect.assertions(1)
         try {
@@ -306,7 +306,7 @@ describe('loadFiles', () => {
 
     test('does not reject if the fetch fails with an offline error', async () => {
         global.fetch.mockImplementationOnce(() =>
-            Promise.reject(new Error('Failed to fetch URL'))
+            Promise.reject(new Error('Failed to fetch URL')),
         )
         expect.assertions(1)
 

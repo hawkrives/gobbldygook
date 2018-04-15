@@ -20,7 +20,7 @@ export default {
                             console.error(err)
                             throw err
                         },
-                        'new-student.import.component'
+                        'new-student.import.component',
                     )
                 },
             },
@@ -32,7 +32,7 @@ export default {
                         () => {
                             cb(null, require('./method-manual').default)
                         },
-                        'new-student.manual.component'
+                        'new-student.manual.component',
                     )
                 },
             },
@@ -44,7 +44,7 @@ export default {
                         () => {
                             cb(null, require('./method-drive').default)
                         },
-                        'new-student.drive.component'
+                        'new-student.drive.component',
                     )
                 },
             },
@@ -56,7 +56,7 @@ export default {
                         () => {
                             cb(null, require('./method-upload').default)
                         },
-                        'new-student.upload.component'
+                        'new-student.upload.component',
                     )
                 },
             },

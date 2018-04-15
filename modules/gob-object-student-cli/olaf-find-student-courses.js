@@ -57,7 +57,7 @@ function makeHeading(str) {
 function evaluateStudentAgainstEachMajor(student) {
     const degreeEvaluation = evaluate(
         student,
-        find(student.areas, a => a.type === 'degree')
+        find(student.areas, a => a.type === 'degree'),
     )
     const countedTowardsDegree = [...degreeEvaluation.result._matches]
     // console.log(yaml.safeDump(degreeEvaluation))
@@ -77,7 +77,7 @@ function evaluateStudentAgainstEachMajor(student) {
 
     let usedCourses = uniqBy(
         [...coursesUsedInMajor, ...countedTowardsDegree],
-        simplifyCourse
+        simplifyCourse,
     )
     let usedClbids = map(usedCourses, c => c.clbid)
 
@@ -88,15 +88,15 @@ function evaluateStudentAgainstEachMajor(student) {
                 ...flatten(countedTowardsMajors),
                 ...countedTowardsDegree,
             ],
-            simplifyCourse
+            simplifyCourse,
         ),
-        c => includes(usedClbids, c.clbid)
+        c => includes(usedClbids, c.clbid),
     )
 
     console.log(
         makeHeading(
-            `${`Used for ${name}… (result: ${find(areas, {name}).computed})`}`
-        )
+            `${`Used for ${name}… (result: ${find(areas, {name}).computed})`}`,
+        ),
     )
     console.log(prettyCourseList(usedCourses))
     console.log()

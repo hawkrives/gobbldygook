@@ -35,8 +35,8 @@ module.exports = async function search({riddles, unique, sort} = {}) {
     let courses = flatten(
         map(
             fs.readdirSync(base),
-            fn => tryReadJsonFile(path.join(base, fn)) || []
-        )
+            fn => tryReadJsonFile(path.join(base, fn)) || [],
+        ),
     )
 
     riddles = riddles.map(getDeptNumsFromRiddles)

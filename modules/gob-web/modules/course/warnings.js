@@ -61,7 +61,7 @@ export default class CourseWarnings extends React.PureComponent<Props> {
         }
 
         const warnings = this.props.warnings.filter(
-            w => w && w.warning === true
+            w => w && w.warning === true,
         )
 
         if (!warnings.length) {

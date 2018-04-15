@@ -59,7 +59,7 @@ function queryStore(query) {
 
         // Filter down to just the requested keys that also have indices
         let keysWithIndices = filter(indexKeys, key =>
-            includes(this.indexes, key)
+            includes(this.indexes, key),
         )
 
         // Prioritize some keys over others
@@ -70,12 +70,12 @@ function queryStore(query) {
         if (size(keysWithIndices)) {
             // We only want to search some indices
             const indices = filter(this.indexes, index =>
-                includes(keysWithIndices, index)
+                includes(keysWithIndices, index),
             )
 
             // Run the queries
             const resultPromises = map(indices, indexName =>
-                this.index(indexName).query(query, true)
+                this.index(indexName).query(query, true),
             )
 
             // Wait for all indices to finish querying before getting their results

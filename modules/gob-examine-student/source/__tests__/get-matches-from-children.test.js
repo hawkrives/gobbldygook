@@ -115,7 +115,7 @@ describe('getMatchesFromChildren', () => {
         }
 
         expect(getMatchesFromChildren(requirement.result, requirement)).toEqual(
-            requirement.Child.result._matches
+            requirement.Child.result._matches,
         )
     })
 
@@ -284,7 +284,7 @@ describe('getMatchesFromChildren', () => {
                     _result: true,
                     year: 2015,
                 },
-            ]
+            ],
         )
     })
 })

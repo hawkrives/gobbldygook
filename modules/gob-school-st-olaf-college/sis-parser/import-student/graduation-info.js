@@ -58,7 +58,7 @@ export function getGraduationInformation(dom) {
         let degreeInfoTable = elements[degreeAnchorIndex + 3]
         let degree = extractInformationFromDegreeAudit(
             degreeAuditInfo,
-            degreeInfoTable
+            degreeInfoTable,
         )
         degrees.push(degree)
 

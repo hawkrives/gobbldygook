@@ -7,7 +7,7 @@ import type {InfoFileTypeEnum} from './types'
 export default function needsUpdate(
     type: InfoFileTypeEnum,
     path: string,
-    hash: string
+    hash: string,
 ) {
     return db
         .store(getCacheStoreName(type))

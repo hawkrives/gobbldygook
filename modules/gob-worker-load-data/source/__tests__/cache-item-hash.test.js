@@ -12,7 +12,7 @@ beforeEach(async () => {
 
 test('cacheItemHash runs', () => {
     expect(() =>
-        cacheItemHash('folder/file', 'courses', 'deadbeef')
+        cacheItemHash('folder/file', 'courses', 'deadbeef'),
     ).not.toThrow()
 })
 

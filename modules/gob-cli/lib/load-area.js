@@ -25,7 +25,8 @@ async function getArea({name, type, revision}) {
     const filteredAreas = filter(
         areas,
         area =>
-            area.type.toLowerCase() === type && area.name.toLowerCase() === name
+            area.type.toLowerCase() === type &&
+            area.name.toLowerCase() === name,
     )
 
     if (!revision) {

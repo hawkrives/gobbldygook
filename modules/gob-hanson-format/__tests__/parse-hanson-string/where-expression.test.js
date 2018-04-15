@@ -9,7 +9,7 @@ describe('WhereExpression', () => {
 
     it('may require distinct course', () => {
         expect(
-            parseWhere('two distinct courses where {a = 1}')
+            parseWhere('two distinct courses where {a = 1}'),
         ).toMatchSnapshot()
     })
 })
@@ -18,7 +18,7 @@ describe('qualifiers syntax', () => {
     it('key must be a string', () => {
         expect(() => parseQualifier('{a = b}')).not.toThrow()
         expect(() => parseQualifier('{1 = b}')).toThrowError(
-            'Expected qualification-or but "1" found.'
+            'Expected qualification-or but "1" found.',
         )
     })
 
@@ -80,18 +80,18 @@ describe('qualifiers can use boolean logic', () => {
     })
     it('boolean logic can be overridden by parens: (a | b) & c', () => {
         expect(
-            parseQualifier('{ dept = THEAT & (num = 233 | num = 253) }')
+            parseQualifier('{ dept = THEAT & (num = 233 | num = 253) }'),
         ).toMatchSnapshot()
     })
 
     it('value may be a boolean and-list', () => {
         expect(
-            parseQualifier('{ dept = THEAT & (num = (233 & 253) ) }')
+            parseQualifier('{ dept = THEAT & (num = (233 & 253) ) }'),
         ).toMatchSnapshot()
     })
     it('value may be a boolean or-list', () => {
         expect(
-            parseQualifier('{ dept = THEAT & (num = (233 | 253) ) }')
+            parseQualifier('{ dept = THEAT & (num = (233 | 253) ) }'),
         ).toMatchSnapshot()
     })
 })
@@ -101,10 +101,10 @@ describe('nested qualifiers', () => {
 
     it('function may optionally include a space between the name and the paren', () => {
         const withSpace = parseQualifier(
-            '{ year = max (year) from courses where {gereqs=year} }'
+            '{ year = max (year) from courses where {gereqs=year} }',
         )
         const noSpace = parseQualifier(
-            '{ year = max(year) from courses where {gereqs=year} }'
+            '{ year = max(year) from courses where {gereqs=year} }',
         )
 
         expect(withSpace).toMatchSnapshot()

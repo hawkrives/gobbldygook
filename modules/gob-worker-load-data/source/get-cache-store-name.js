@@ -12,7 +12,7 @@ export default function getCacheStoreName(type: InfoFileTypeEnum) {
     } else {
         log(`"${type}" is not a valid store type`)
         throw new TypeError(
-            `getCacheStoreName(): "${type}" is not a valid store type`
+            `getCacheStoreName(): "${type}" is not a valid store type`,
         )
     }
 }

@@ -23,7 +23,7 @@ export function embedActiveStudentCourses(student, {cache = []}) {
                         clbid,
                         term: parseInt(`${schedule.year}${schedule.semester}`),
                     },
-                    student.fabrications
+                    student.fabrications,
                 )
             )
         })

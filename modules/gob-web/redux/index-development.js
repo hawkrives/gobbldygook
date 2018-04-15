@@ -13,9 +13,9 @@ const finalCreateStore = compose(
         thunkMiddleware,
         freezingMiddleware,
         checkStudentsMiddleware,
-        saveStudentsMiddleware
+        saveStudentsMiddleware,
     ),
-    window && window.devToolsExtension ? window.devToolsExtension() : f => f
+    window && window.devToolsExtension ? window.devToolsExtension() : f => f,
 )(createStore)
 
 export default function configureStore(initialState) {
@@ -23,7 +23,7 @@ export default function configureStore(initialState) {
 
     if (module.hot) {
         module.hot.accept('./reducer', () =>
-            store.replaceReducer(require('./reducer').default)
+            store.replaceReducer(require('./reducer').default),
         )
     }
 

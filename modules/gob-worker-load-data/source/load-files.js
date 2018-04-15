@@ -57,7 +57,7 @@ export function getFilesToLoad({type, oldestYear}: Args, data: InfoIndexFile) {
 
 export async function filterFiles(
     {type}: Args,
-    files: InfoFileRef[]
+    files: InfoFileRef[],
 ): Promise<Array<InfoFileRef>> {
     // For each file, see if it needs loading. We then update each promise
     // with either the path or `null`.
@@ -75,7 +75,7 @@ export async function filterFiles(
 
 export function slurpIntoDatabase(
     {type, baseUrl, notification}: Args,
-    files: Array<InfoFileRef>
+    files: Array<InfoFileRef>,
 ) {
     // Exit early if nothing needs to happen
     if (files.length === 0) {

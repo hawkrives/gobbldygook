@@ -7,7 +7,7 @@ const initialState = {data: [], isLoading: false}
 
 export default function reducer(
     state: State = initialState,
-    action: {type: string, payload: any[]}
+    action: {type: string, payload: any[]},
 ) {
     const {type, payload} = action
 

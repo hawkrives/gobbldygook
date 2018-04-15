@@ -63,7 +63,7 @@ class AreaOfStudySidebarComponent extends React.PureComponent<Props, State> {
 
         // group the studies by their type
         const groupedStudies = groupBy(sortedStudies, study =>
-            study.type.toLowerCase()
+            study.type.toLowerCase(),
         )
 
         // pull out the results
@@ -73,9 +73,9 @@ class AreaOfStudySidebarComponent extends React.PureComponent<Props, State> {
                 area =>
                     find(
                         student.areas,
-                        pick(area, ['name', 'type', 'revision'])
-                    ) || area
-            )
+                        pick(area, ['name', 'type', 'revision']),
+                    ) || area,
+            ),
         )
 
         // and then render them
@@ -97,7 +97,7 @@ class AreaOfStudySidebarComponent extends React.PureComponent<Props, State> {
 
         const areaTypesToShowButtonsFor = union(
             usedAreaTypes,
-            keys(pickBy(showAreaPickerFor, v => v === true))
+            keys(pickBy(showAreaPickerFor, v => v === true)),
         )
 
         const unusedTypes = difference(allAreaTypes, areaTypesToShowButtonsFor)
@@ -123,7 +123,7 @@ class AreaOfStudySidebarComponent extends React.PureComponent<Props, State> {
         const unusedTypesToShow = filter(
             toPairs(showAreaPickerFor),
             ([type, toShow]) =>
-                toShow === true && !includes(usedAreaTypes, type)
+                toShow === true && !includes(usedAreaTypes, type),
         )
 
         const unusedTypesToShowComponents = map(
@@ -139,7 +139,7 @@ class AreaOfStudySidebarComponent extends React.PureComponent<Props, State> {
                     student={student}
                     type={type}
                 />
-            )
+            ),
         )
 
         return (

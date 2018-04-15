@@ -12,7 +12,7 @@ import {deptNumRegex} from './dept-num-regex'
  */
 export function splitDeptNum(
     deptNumString: string,
-    includeSection?: boolean = false
+    includeSection?: boolean = false,
 ) {
     // "AS/RE 230A" -> ["AS/RE 230A", "AS/RE", "AS", "RE", "230", "A"]
     // -> {departments: ['AS', 'RE'], number: 230}

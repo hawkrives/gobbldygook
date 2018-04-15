@@ -25,7 +25,7 @@ type Schedule = {
  */
 export function findFirstAvailableYear(
     schedules: Schedule[],
-    matriculation: number
+    matriculation: number,
 ) {
     if (schedules && schedules.length === 0 && matriculation === undefined) {
         return new Date().getFullYear()

@@ -12,7 +12,7 @@ import type {OverridesObject, OverridesPath} from './types'
  */
 export default function hasOverride(
     path: OverridesPath,
-    overrides: OverridesObject
+    overrides: OverridesObject,
 ) {
     return has(overrides, pathToOverride(path))
 }

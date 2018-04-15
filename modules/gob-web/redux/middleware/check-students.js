@@ -75,7 +75,7 @@ const checkMiddleware = (store: any) => (next: any) => async (action: any) => {
 
     // check them
     const promises = affectedStudents.map(s =>
-        store.dispatch(checkStudent(s.data.present.id))
+        store.dispatch(checkStudent(s.data.present.id)),
     )
 
     await Promise.all(promises)

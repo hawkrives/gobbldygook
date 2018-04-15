@@ -83,13 +83,13 @@ function AreaPicker(props: AreaPickerProps) {
 
     const currentAreaNames = map(props.currentAreas, a => a.name)
     let onlyAvailableAreas = reject(props.areaList, area =>
-        includes(currentAreaNames, area.name)
+        includes(currentAreaNames, area.name),
     )
 
     onlyAvailableAreas = filterAreaList(onlyAvailableAreas, {graduation})
 
     const filteredOnName = filter(onlyAvailableAreas, area =>
-        fuzzysearch(props.filterText, area.name.toLowerCase())
+        fuzzysearch(props.filterText, area.name.toLowerCase()),
     )
 
     const areaList = map(filteredOnName, (area, i) => (
@@ -138,7 +138,7 @@ type AreaPickerContainerState = {
 
 export default class AreaPickerContainer extends React.PureComponent<
     AreaPickerContainerProps,
-    AreaPickerContainerState
+    AreaPickerContainerState,
 > {
     state = {
         filter: '',

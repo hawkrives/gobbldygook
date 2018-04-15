@@ -13,15 +13,15 @@ export function initStudent(raw) {
         forEach(range(student.matriculation, student.graduation), year => {
             student = addScheduleToStudent(
                 student,
-                Schedule({year, index: 1, active: true, semester: 1})
+                Schedule({year, index: 1, active: true, semester: 1}),
             )
             student = addScheduleToStudent(
                 student,
-                Schedule({year, index: 1, active: true, semester: 2})
+                Schedule({year, index: 1, active: true, semester: 2}),
             )
             student = addScheduleToStudent(
                 student,
-                Schedule({year, index: 1, active: true, semester: 3})
+                Schedule({year, index: 1, active: true, semester: 3}),
             )
         })
     }

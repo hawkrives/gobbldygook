@@ -6,7 +6,7 @@ export function prepareStudentForSave(student) {
     student = Object.assign({}, student)
     student = omit(student, ['areas', 'canGraduate', 'fulfilled'])
     student.schedules = mapValues(student.schedules, s =>
-        omit(s, ['courses', 'conflicts', 'hasConflict'])
+        omit(s, ['courses', 'conflicts', 'hasConflict']),
     )
     return student
 }

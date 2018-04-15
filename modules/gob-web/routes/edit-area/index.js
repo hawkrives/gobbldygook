@@ -9,7 +9,7 @@ export default {
                     content: require('../../modules/area-editor').default,
                 })
             },
-            'area-editor.components'
+            'area-editor.components',
         )
     },
 }

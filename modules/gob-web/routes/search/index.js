@@ -8,7 +8,7 @@ export default {
                     overlay: require('./course-searcher-overlay').default,
                 })
             },
-            'course-overlay.components'
+            'course-overlay.components',
         )
     },
 }

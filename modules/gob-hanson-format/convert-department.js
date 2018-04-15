@@ -170,7 +170,7 @@ forEach(
         // mapping
         departmentAbbreviationsToNames[key] =
             departmentAbbreviationsToNames[val]
-    }
+    },
 )
 
 // eslint-disable-next-line no-unused-vars
@@ -225,7 +225,7 @@ const courseTypesMapping = {
 const toDepartmentAbbreviations = Object.assign(
     {},
     shortDepartmentAbbreviationsToFullDepartmentAbbreviations,
-    fullDepartmentNamesToFullDepartmentAbbreviations
+    fullDepartmentNamesToFullDepartmentAbbreviations,
 )
 const toDepartmentNames = Object.assign({}, departmentAbbreviationsToNames)
 
@@ -233,7 +233,7 @@ export function expandDepartment(dept: string) {
     dept = dept.toUpperCase()
     if (!(dept in toDepartmentNames)) {
         throw new TypeError(
-            `expandDepartment(): '${dept}' is not a valid department shorthand`
+            `expandDepartment(): '${dept}' is not a valid department shorthand`,
         )
     }
     return toDepartmentNames[dept]

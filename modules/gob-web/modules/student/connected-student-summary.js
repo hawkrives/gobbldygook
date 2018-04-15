@@ -53,10 +53,10 @@ const mapDispatch = dispatch =>
             changeMatriculation,
             changeGraduation,
         },
-        dispatch
+        dispatch,
     )
 
 // $FlowFixMe
 export const ConnectedStudentSummary = connect(null, mapDispatch)(
-    WrappedStudentSummary
+    WrappedStudentSummary,
 )

@@ -9,7 +9,7 @@ export default {
                     content: require('../../modules/course-table').default,
                 })
             },
-            'course-table.components'
+            'course-table.components',
         )
     },
 
@@ -25,7 +25,7 @@ export default {
                                 sidebar: require('./search-sidebar').default,
                             })
                         },
-                        'search-sidebar.components'
+                        'search-sidebar.components',
                     )
                 },
             },
@@ -39,7 +39,7 @@ export default {
                                 overlay: require('./share-student').default,
                             })
                         },
-                        'share-student.components'
+                        'share-student.components',
                     )
                 },
             },
@@ -54,7 +54,7 @@ export default {
                                     .default,
                             })
                         },
-                        'semester-detail.components'
+                        'semester-detail.components',
                     )
                 },
             },
@@ -67,7 +67,7 @@ export default {
             () => {
                 cb(null, {content: require('../../modules/student').default})
             },
-            'student.components'
+            'student.components',
         )
     },
 }

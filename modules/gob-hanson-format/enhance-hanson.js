@@ -49,7 +49,7 @@ export function enhanceHanson(
     {
         topLevel = true,
         declaredVariables = {},
-    }: {topLevel: boolean, declaredVariables: StringMap} = {}
+    }: {topLevel: boolean, declaredVariables: StringMap} = {},
 ) {
     // 1. adds 'result' key, if missing
     // 2. parses the 'result' and 'filter' keys
@@ -68,7 +68,7 @@ export function enhanceHanson(
         let requiredKeys = quoteAndJoin(oneOfTheseKeysMustExist)
         let existingKeys = quoteAndJoin(keys(data))
         throw new TypeError(
-            `enhanceHanson(): could not find any of [${requiredKeys}] in [${existingKeys}].`
+            `enhanceHanson(): could not find any of [${requiredKeys}] in [${existingKeys}].`,
         )
     }
 
@@ -78,7 +78,7 @@ export function enhanceHanson(
         if (!isRequirementName(key) && !includes(whitelist, key)) {
             const whitelistStr = quoteAndJoin(whitelist)
             throw new TypeError(
-                `enhanceHanson: only [${whitelistStr}] keys are allowed, and '${key}' is not one of them. All requirement names must begin with an uppercase letter or a number.`
+                `enhanceHanson: only [${whitelistStr}] keys are allowed, and '${key}' is not one of them. All requirement names must begin with an uppercase letter or a number.`,
             )
         }
     })
@@ -95,7 +95,7 @@ export function enhanceHanson(
             throw new TypeError(
                 `enhanceHanson: "revision" must be a string. Try wrapping it in single quotes. "${
                     data.revision
-                }" is a ${typeof data.revision}.`
+                }" is a ${typeof data.revision}.`,
             )
         }
     }
@@ -107,10 +107,16 @@ export function enhanceHanson(
     // PEG's ReferenceExpression can correctly reference them.
     const requirements = filter(keys(data), isRequirementName)
     const abbreviations = fromPairs(
-        map(requirements, req => [req.replace(requirementNameRegex, '$2'), req])
+        map(requirements, req => [
+            req.replace(requirementNameRegex, '$2'),
+            req,
+        ]),
     )
     const titles = fromPairs(
-        map(requirements, req => [req.replace(requirementNameRegex, '$1'), req])
+        map(requirements, req => [
+            req.replace(requirementNameRegex, '$1'),
+            req,
+        ]),
     )
 
     // (Variables)
@@ -138,7 +144,7 @@ export function enhanceHanson(
         } else if (key === 'result' || key === 'filter') {
             if (typeof value !== 'string') {
                 throw new Error(
-                    `value ${value.toString()} should be a string, not a ${typeof value}`
+                    `value ${value.toString()} should be a string, not a ${typeof value}`,
                 )
             }
 
@@ -164,7 +170,7 @@ export function enhanceHanson(
                 })
             } catch (e) {
                 throw new SyntaxError(
-                    `enhanceHanson: ${e.message} (in '${value}')`
+                    `enhanceHanson: ${e.message} (in '${value}')`,
                 )
             }
         }

@@ -24,7 +24,7 @@ test('Year renders shallowly', () => {
             removeYear={removeYear}
             student={mockStudent()}
             year={2016}
-        />
+        />,
     )
 
     expect(tree).toMatchSnapshot()
@@ -42,7 +42,7 @@ test('Year can add a semester', () => {
             removeYear={removeYear}
             student={student}
             year={2016}
-        />
+        />,
     )
 
     expect(tree).toMatchSnapshot()
@@ -67,7 +67,7 @@ test('Year can remove a semester', () => {
             removeYear={removeYear}
             student={student}
             year={2016}
-        />
+        />,
     )
 
     expect(tree).toMatchSnapshot()

@@ -46,7 +46,7 @@ HJSPlugin.prototype.addAssets = function(compiler, data) {
         pages = data
     } else {
         throw new Error(
-            'Result from `html` callback must be a string or an object'
+            'Result from `html` callback must be a string or an object',
         )
     }
 

@@ -2,7 +2,7 @@
 
 export function findWordForProgress(
     maxProgress: number,
-    currentProgress: number
+    currentProgress: number,
 ): string {
     const progress = currentProgress / maxProgress
 

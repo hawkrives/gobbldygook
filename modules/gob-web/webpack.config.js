@@ -47,7 +47,7 @@ function config() {
         entry.main.unshift(
             // 'react-hot-loader/patch',
             'webpack-dev-server/client?/',
-            'webpack/hot/only-dev-server'
+            'webpack/hot/only-dev-server',
         )
     }
 
@@ -123,7 +123,7 @@ function config() {
         new NormalModuleReplacementPlugin(/schema\/default_full$/, result => {
             result.request = result.request.replace(
                 'default_full',
-                'default_safe'
+                'default_safe',
             )
         }),
 
@@ -134,7 +134,7 @@ function config() {
             // across both local dev and gh-pages.
             APP_BASE: JSON.stringify(publicPath),
             'process.env.TRAVIS_COMMIT': JSON.stringify(
-                process.env.TRAVIS_COMMIT || process.env.COMMIT_REF
+                process.env.TRAVIS_COMMIT || process.env.COMMIT_REF,
             ),
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         }),
@@ -179,18 +179,18 @@ function config() {
                     ecma: 8,
                     warnings: false,
                 },
-            })
+            }),
         )
         plugins.push(
             new ExtractTextPlugin({
                 filename: isDevelopment ? 'app.css' : 'app.[contenthash].css',
                 allChunks: true,
-            })
+            }),
         )
         plugins.push(
             new LoaderOptionsPlugin({
                 minimize: true,
-            })
+            }),
         )
         plugins.push(new DuplicatePackageCheckerPlugin())
     }

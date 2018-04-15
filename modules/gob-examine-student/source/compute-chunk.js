@@ -69,8 +69,8 @@ export default function computeChunk({
     if (typeof expr !== 'object') {
         throw new TypeError(
             `computeChunk(): the expr \`${stringify(
-                expr
-            )}\` must be an object, not a ${typeof expr}`
+                expr,
+            )}\` must be an object, not a ${typeof expr}`,
         )
     }
     assertKeys(expr, '$type')
@@ -134,7 +134,7 @@ export default function computeChunk({
         throw new TypeError(
             `computeChunk(): the type "${
                 expr.$type
-            }" is not a valid expression type.`
+            }" is not a valid expression type.`,
         )
     }
 
@@ -246,14 +246,14 @@ export function computeBoolean({
                 courses,
                 dirty,
                 isNeeded,
-            })
+            }),
         )
         computedResult = results.every(Boolean)
     } else {
         throw new TypeError(
             `computeBoolean(): neither $or nor $and could be found in ${stringify(
-                expr
-            )}`
+                expr,
+            )}`,
         )
     }
 
@@ -331,7 +331,7 @@ export function computeModifier({expr, ctx, courses}: ModifierChunkArgs) {
     if (what !== 'course' && what !== 'credit' && what !== 'department') {
         throw new TypeError(
             `computeModifier(): "${what ||
-                'undefined'}" is not a valid source for a modifier`
+                'undefined'}" is not a valid source for a modifier`,
         )
     }
 
@@ -358,13 +358,13 @@ export function computeModifier({expr, ctx, courses}: ModifierChunkArgs) {
         filtered = filterByWhereClause(filtered, expr.$where)
     } else {
         throw new TypeError(
-            `computeModifier: "${expr.$from}" is not a valid $from value`
+            `computeModifier: "${expr.$from}" is not a valid $from value`,
         )
     }
 
     if (!expr.$count) {
         throw new TypeError(
-            `expression must include $count! ${JSON.stringify(expr)}`
+            `expression must include $count! ${JSON.stringify(expr)}`,
         )
     }
 
@@ -380,7 +380,7 @@ export function computeModifier({expr, ctx, courses}: ModifierChunkArgs) {
 
     // eslint-disable-next-line no-confusing-arrow
     filtered = filtered.map(
-        course => ('$course' in course ? (course: any).$course : course)
+        course => ('$course' in course ? (course: any).$course : course),
     )
 
     if (expr.$besides) {
@@ -396,13 +396,13 @@ export function computeModifier({expr, ctx, courses}: ModifierChunkArgs) {
         numCounted = countCredits(filtered)
     } else {
         throw new TypeError(
-            `computeModifier: "${what}" is not a valid thing to count`
+            `computeModifier: "${what}" is not a valid thing to count`,
         )
     }
 
     if (!expr.$count) {
         throw new TypeError(
-            `expression must include $count! ${JSON.stringify(expr)}`
+            `expression must include $count! ${JSON.stringify(expr)}`,
         )
     }
 
@@ -515,7 +515,7 @@ export function computeOf({expr, ctx, courses, dirty, isNeeded}: OfChunkArgs) {
         } else {
             const op = expr.$count.$operator
             throw new TypeError(
-                `computeOf: not sure what to do with a "${op}" operator`
+                `computeOf: not sure what to do with a "${op}" operator`,
             )
         }
     })
@@ -552,7 +552,7 @@ export function computeReference({
         throw new ReferenceError(
             `computeReference(): the requirement "${
                 expr.$requirement
-            }" does not exist in the provided requirement context`
+            }" does not exist in the provided requirement context`,
         )
     }
 

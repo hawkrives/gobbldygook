@@ -83,7 +83,7 @@ describe('addFabricationToStudent', () => {
         expect(() => addFabricationToStudent(stu, goodFab)).not.toThrow()
         const badFab = {title: "I'm a fabrication!"}
         expect(() => addFabricationToStudent(stu, badFab)).toThrowError(
-            ReferenceError
+            ReferenceError,
         )
     })
 
@@ -93,7 +93,7 @@ describe('addFabricationToStudent', () => {
         expect(() => addFabricationToStudent(stu, goodFab)).not.toThrow()
         const badFab = {clbid: 12345, title: "I'm a fabrication!"}
         expect(() => addFabricationToStudent(stu, badFab)).toThrowError(
-            TypeError
+            TypeError,
         )
     })
 })
@@ -104,7 +104,7 @@ describe('removeFabricationFromStudent', () => {
         let addedFabrication = addFabricationToStudent(stu, {clbid: '123'})
         let noMoreFabrication = removeFabricationFromStudent(
             addedFabrication,
-            '123'
+            '123',
         )
         expect(noMoreFabrication.fabrications.hasOwnProperty('a')).toBe(false)
     })
@@ -116,7 +116,7 @@ describe('removeFabricationFromStudent', () => {
             title: "I'm a fabrication!",
         })
         expect(() =>
-            removeFabricationFromStudent(stuWithFab, 123)
+            removeFabricationFromStudent(stuWithFab, 123),
         ).toThrowError(TypeError)
     })
 })
@@ -195,7 +195,7 @@ describe('addScheduleToStudent', () => {
                 index: 1,
                 semester: 0,
                 year: 0,
-            })
+            }),
         )
         expect(newSchedule.schedules['10912']).toEqual({
             id: '10912',
@@ -385,7 +385,7 @@ describe('moveScheduleInStudent', () => {
         expect(() =>
             moveScheduleInStudent(stu, sched.id, {
                 year: '2014',
-            })
+            }),
         ).toThrowError(TypeError)
     })
 
@@ -395,7 +395,7 @@ describe('moveScheduleInStudent', () => {
         expect(() =>
             moveScheduleInStudent(stu, sched.id, {
                 semester: '5',
-            })
+            }),
         ).toThrowError(TypeError)
     })
 
@@ -404,7 +404,7 @@ describe('moveScheduleInStudent', () => {
         let actual = moveScheduleInStudent(
             {schedules: {[sched.id]: sched}},
             sched.id,
-            {year: 2014}
+            {year: 2014},
         )
         expect(actual.schedules[sched.id]).not.toBe(sched)
     })
@@ -413,7 +413,7 @@ describe('moveScheduleInStudent', () => {
         let sched = Schedule()
         let stu = {schedules: {}}
         expect(() =>
-            moveScheduleInStudent(stu, sched.id, {year: 2000})
+            moveScheduleInStudent(stu, sched.id, {year: 2000}),
         ).toThrowError(ReferenceError)
     })
 })
@@ -438,7 +438,7 @@ describe('reorderScheduleInStudent', () => {
         let sched = Schedule()
         let stu = {schedules: {}}
         expect(() => reorderScheduleInStudent(stu, sched.id, 3)).toThrowError(
-            ReferenceError
+            ReferenceError,
         )
     })
 })
@@ -463,7 +463,7 @@ describe('renameScheduleInStudent', () => {
         let sched = Schedule()
         let stu = {schedules: {}}
         expect(() =>
-            renameScheduleInStudent(stu, sched.id, 'third')
+            renameScheduleInStudent(stu, sched.id, 'third'),
         ).toThrowError(ReferenceError)
     })
 })
@@ -480,7 +480,7 @@ describe('addCourseToSchedule', () => {
         const sched = Schedule()
         const stu = addScheduleToStudent(Student(), sched)
         expect(() => addCourseToSchedule(stu, sched.id, '918')).toThrowError(
-            TypeError
+            TypeError,
         )
     })
 
@@ -503,7 +503,7 @@ describe('addCourseToSchedule', () => {
         let sched = Schedule({clbids: [456]})
         let stu = addScheduleToStudent(Student(), sched)
         expect(() =>
-            addCourseToSchedule(stu, sched.id + 'bad', 456)
+            addCourseToSchedule(stu, sched.id + 'bad', 456),
         ).toThrowError(ReferenceError)
     })
 })
@@ -520,7 +520,7 @@ describe('removeCourseFromSchedule', () => {
         const sched = Schedule({clbids: [123]})
         const stu = addScheduleToStudent(Student(), sched)
         expect(() =>
-            removeCourseFromSchedule(stu, sched.id, '918')
+            removeCourseFromSchedule(stu, sched.id, '918'),
         ).toThrowError(TypeError)
     })
 
@@ -543,7 +543,7 @@ describe('removeCourseFromSchedule', () => {
         let sched = Schedule({clbids: [456]})
         let stu = addScheduleToStudent(Student(), sched)
         expect(() =>
-            removeCourseFromSchedule(stu, sched.id + 'bad', 456)
+            removeCourseFromSchedule(stu, sched.id + 'bad', 456),
         ).toThrowError(ReferenceError)
     })
 })
@@ -571,7 +571,7 @@ describe('reorderCourseInSchedule', () => {
             reorderCourseInSchedule(stu, sched.id, {
                 clbid: '123',
                 index: 1,
-            })
+            }),
         ).toThrowError(TypeError)
     })
 
@@ -594,7 +594,7 @@ describe('reorderCourseInSchedule', () => {
             reorderCourseInSchedule(stu, sched.id, {
                 clbid: 123456789,
                 index: 0,
-            })
+            }),
         ).toThrowError(ReferenceError)
     })
 
@@ -605,7 +605,7 @@ describe('reorderCourseInSchedule', () => {
             reorderCourseInSchedule(stu, sched.id + 'bad', {
                 clbid: 123,
                 index: 0,
-            })
+            }),
         ).toThrowError(ReferenceError)
     })
 
@@ -619,8 +619,8 @@ describe('reorderCourseInSchedule', () => {
         expect(
             findIndex(
                 reordered.schedules[sched.id].clbids,
-                c => c === 123456789
-            )
+                c => c === 123456789,
+            ),
         ).toBe(1)
     })
 
@@ -634,8 +634,8 @@ describe('reorderCourseInSchedule', () => {
         expect(
             findIndex(
                 reordered.schedules[sched.id].clbids,
-                c => c === 123456789
-            )
+                c => c === 123456789,
+            ),
         ).toBe(1)
     })
 
@@ -647,7 +647,7 @@ describe('reorderCourseInSchedule', () => {
             index: -10,
         })
         expect(
-            findIndex(reordered.schedules[sched.id].clbids, c => c === 123)
+            findIndex(reordered.schedules[sched.id].clbids, c => c === 123),
         ).toBe(0)
     })
 })

@@ -30,7 +30,7 @@ export function cli({courses, area}) {
     // console.log(courses.find(c => c.department[0] === 'CSCI' && c.number === 251))
     const {name, type} = area
     console.log(
-        evaluate(area, {path: [type, name], courses}).map(simplifyCourse)
+        evaluate(area, {path: [type, name], courses}).map(simplifyCourse),
     )
 }
 
@@ -64,9 +64,9 @@ function evaluate(requirement, {path, courses = [], allMatched = []}) {
                     ctx: requirement,
                     courses,
                     allMatched,
-                })
+                }),
             ),
-            x => x.clbid
+            x => x.clbid,
         )
     }
 
@@ -74,7 +74,7 @@ function evaluate(requirement, {path, courses = [], allMatched = []}) {
         padStart('', indent),
         'evalute end:',
         path.join(' > '),
-        allMatched.length
+        allMatched.length,
     )
     indent--
     return allMatched
@@ -89,13 +89,13 @@ function evaluateChunk({expr, ctx, courses, allMatched}) {
     let res = []
     if (expr.$type === 'boolean') {
         res = allMatched.concat(
-            evaluateBoolean({expr, ctx, courses, allMatched})
+            evaluateBoolean({expr, ctx, courses, allMatched}),
         )
     } else if (expr.$type === 'course') {
         res = allMatched.concat(evaluateCourse({expr, courses, allMatched}))
     } else if (expr.$type === 'modifier') {
         res = allMatched.concat(
-            evaluateModifier({expr, ctx, courses, allMatched})
+            evaluateModifier({expr, ctx, courses, allMatched}),
         )
     } else if (expr.$type === 'occurrence') {
         res = allMatched.concat(evaluateOccurrence({expr, courses, allMatched}))
@@ -118,11 +118,11 @@ function evaluateBoolean({expr, ctx, courses, allMatched}) {
     let res = []
     if ('$or' in expr) {
         res = flatMap(expr.$or, req =>
-            evaluateChunk({expr: req, ctx, courses, allMatched})
+            evaluateChunk({expr: req, ctx, courses, allMatched}),
         )
     } else if ('$and' in expr) {
         res = flatMap(expr.$and, req =>
-            evaluateChunk({expr: req, ctx, courses, allMatched})
+            evaluateChunk({expr: req, ctx, courses, allMatched}),
         )
     }
     console.log(padStart('', indent), 'evaluateBoolean done', res.length)
@@ -171,7 +171,7 @@ function evaluateModifier({expr, ctx, courses}) {
     // eslint-disable-next-line no-confusing-arrow
     filtered = map(
         filtered,
-        course => ('$course' in course ? course.$course : course)
+        course => ('$course' in course ? course.$course : course),
     )
 
     if (expr.$besides) {
@@ -195,7 +195,7 @@ function evaluateOf({expr, ctx, courses, allMatched}) {
     indent++
     console.log(padStart('', indent), 'evaluateOf start')
     let result = flatMap(expr.$of, req =>
-        evaluateChunk({expr: req, ctx, courses, allMatched})
+        evaluateChunk({expr: req, ctx, courses, allMatched}),
     )
     console.log(padStart('', indent), 'evaluateOf done', result.length)
     indent--

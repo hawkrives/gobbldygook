@@ -3,7 +3,7 @@ import type {OrExpression, Expression, Fulfillment} from './types'
 
 export default function applyFulfillmentToExpression(
     expr: Expression,
-    fulfillment: Fulfillment
+    fulfillment: Fulfillment,
 ): Expression {
     // If it's a Boolean / course expr, it gets wrapped in an OR.
     // Otherwise, we don't do anything at this stage.

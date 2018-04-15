@@ -100,7 +100,7 @@ const promiseCache = Object.create(null)
 
 export default function getArea(
     areaQuery: AreaQueryType,
-    {cache = []}: {cache: any[]}
+    {cache = []}: {cache: any[]},
 ): any {
     const {name, type, revision, source, isCustom} = areaQuery
     let cachedArea = find(
@@ -108,7 +108,7 @@ export default function getArea(
         a =>
             a.name === name &&
             a.type === type &&
-            (revision === 'latest' ? true : a.revision === revision)
+            (revision === 'latest' ? true : a.revision === revision),
     )
     if (cachedArea) {
         log('loadArea used cached area')

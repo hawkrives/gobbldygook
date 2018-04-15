@@ -5,6 +5,6 @@ import {isCurrentSemester} from '@gob/object-student'
 export function getSchedule(student, year, semester) {
     return find(
         filter(student.schedules, sched => sched.active),
-        isCurrentSemester(year, semester)
+        isCurrentSemester(year, semester),
     )
 }

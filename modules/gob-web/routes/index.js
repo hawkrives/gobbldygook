@@ -18,7 +18,7 @@ export default {
                                             .default,
                                     })
                                 },
-                                'student-picker.components'
+                                'student-picker.components',
                             )
                         },
                     },

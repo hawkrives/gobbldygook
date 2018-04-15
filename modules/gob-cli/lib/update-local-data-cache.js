@@ -64,21 +64,21 @@ async function cache() {
         infoFiles.map(async file => {
             return await fs.writeFileAsync(
                 `${cacheDir}/Courses/${path.basename(file.path)}`,
-                await file.data
+                await file.data,
             )
-        })
+        }),
     )
 
     await fs.writeFileAsync(
         `${cacheDir}/Courses/info.prior.json`,
-        JSON.stringify(courseInfo)
+        JSON.stringify(courseInfo),
     )
 
     const infoFileExists = fs.existsSync(`${cacheDir}/Courses/info.json`)
     if (!infoFileExists) {
         fs.writeFileSync(
             `${cacheDir}/Courses/info.json`,
-            JSON.stringify(courseInfo)
+            JSON.stringify(courseInfo),
         )
     }
 
@@ -100,7 +100,7 @@ async function checkForStaleData() {
     const needsUpdate = some(newCourseInfo.files, file => {
         const oldEntry = find(courseInfo.files, file)
         const isCached = fs.existsSync(
-            `${cacheDir}/Courses/${path.basename(file.path)}`
+            `${cacheDir}/Courses/${path.basename(file.path)}`,
         )
         return (Boolean(oldEntry) && oldEntry.hash !== file.hash) || !isCached
     })

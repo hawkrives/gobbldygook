@@ -11,7 +11,7 @@ describe('pathToOverride', () => {
 
     it('retains spaces in the path', () => {
         expect(pathToOverride(['aA', 'b', 'Studio aRt'])).toBe(
-            'aa.b.studio art'
+            'aa.b.studio art',
         )
     })
 })

@@ -131,7 +131,7 @@ class UploadFileScreen extends React.Component {
                                     {stu.error}
                                     "
                                 </li>
-                            )
+                            ),
                     )}
                     {map(files, file => <li key={file.name}>{file.name}</li>)}
                 </List>

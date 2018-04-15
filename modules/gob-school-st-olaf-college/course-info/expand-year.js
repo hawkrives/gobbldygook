@@ -3,7 +3,7 @@
 export function expandYear(
     year: string | number,
     short?: boolean = false,
-    separator?: string = '—'
+    separator?: string = '—',
 ) {
     if (typeof year === 'string') {
         year = parseInt(year, 10)

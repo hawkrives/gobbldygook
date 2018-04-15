@@ -63,7 +63,7 @@ export class AreaEditScreen extends React.Component {
             area =>
                 area.type === type &&
                 area.name === name &&
-                area.revision === revision
+                area.revision === revision,
         )
 
         let data = omit(area, 'sourcePath')

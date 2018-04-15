@@ -19,6 +19,6 @@ export default function computeCountWithOperator({
     }
 
     throw new TypeError(
-        `computeModifier(): "${comparator}" must be one of $eq, $lte, or $gte.`
+        `computeModifier(): "${comparator}" must be one of $eq, $lte, or $gte.`,
     )
 }

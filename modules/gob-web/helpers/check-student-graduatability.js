@@ -21,7 +21,7 @@ export function checkStudentGraduatability(student) {
     return Promise.all(areaPromises).then(areaDetails => {
         const goodAreas = filter(
             areaDetails,
-            area => area._area && area._area.computed === true
+            area => area._area && area._area.computed === true,
         )
         const allAreasPass = size(goodAreas) === size(areaDetails)
 

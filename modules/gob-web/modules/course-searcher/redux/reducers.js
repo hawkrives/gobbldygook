@@ -46,11 +46,11 @@ const TIME_OF_DAY = course =>
                       flatMap(course.offerings, offer =>
                           map(
                               offer.times,
-                              time => `${to12(time.start)}-${to12(time.end)}`
-                          )
-                      )
-                  )
-              )
+                              time => `${to12(time.start)}-${to12(time.end)}`,
+                          ),
+                      ),
+                  ),
+              ),
           )
         : 'No Times Listed'
 
@@ -87,7 +87,7 @@ function sortAndGroup({sortBy: sorting, groupBy: grouping, rawResults}) {
     // TODO: Speed this up! This preperation stuff takes ~230ms by itself,
     // with enough courses rendered. (like, say, {year: 2012})
     const sortByArgs = ['year', 'deptnum', 'semester', 'section'].concat(
-        SORT_BY_TO_KEY[sorting]
+        SORT_BY_TO_KEY[sorting],
     )
     const sorted = sortBy(rawResults, sortByArgs)
 

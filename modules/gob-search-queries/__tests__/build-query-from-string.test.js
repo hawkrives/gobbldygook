@@ -112,18 +112,18 @@ describe('buildQueryFromString', () => {
 
     it('makes professors properly title-cased', () => {
         expect(
-            buildQueryFromString('prof: Katherine Tegtmeyer-pak')
+            buildQueryFromString('prof: Katherine Tegtmeyer-pak'),
         ).toMatchSnapshot()
         expect(
             buildQueryFromString('prof: Katherine Tegtmeyer-pak', {
                 profWords: true,
-            })
+            }),
         ).toMatchSnapshot()
         expect(
-            buildQueryFromString('prof: olaf a. hall-holt')
+            buildQueryFromString('prof: olaf a. hall-holt'),
         ).toMatchSnapshot()
         expect(
-            buildQueryFromString('prof: olaf a. hall-holt', {profWords: true})
+            buildQueryFromString('prof: olaf a. hall-holt', {profWords: true}),
         ).toMatchSnapshot()
     })
 

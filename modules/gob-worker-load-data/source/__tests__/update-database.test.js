@@ -54,10 +54,10 @@ describe('updateDatabase', () => {
             {
                 path: 'folder/file.json',
                 hash: 'badidea',
-            }
+            },
         )
         expect(global.fetch).toHaveBeenLastCalledWith(
-            'http://unique.com//folder/file.json?v=badidea'
+            'http://unique.com//folder/file.json?v=badidea',
         )
     })
 
@@ -68,7 +68,7 @@ describe('updateDatabase', () => {
                 'courses',
                 'http://i.am.an.url/',
                 dispatch.Notification(),
-                {path: 'terms/20161.json', hash: 'deadbeef'}
+                {path: 'terms/20161.json', hash: 'deadbeef'},
             )
 
             expect(global.fetch).toHaveBeenCalledTimes(1)
@@ -81,7 +81,7 @@ describe('updateDatabase', () => {
                 'courses',
                 'http://i.am.an.url/',
                 dispatch.Notification(),
-                {path: 'terms/20161.json', hash: 'deadbeef'}
+                {path: 'terms/20161.json', hash: 'deadbeef'},
             )
 
             expect(global.fetch).toHaveBeenCalledTimes(1)
@@ -121,7 +121,7 @@ describe('updateDatabase', () => {
             {
                 path: 'terms/20161.json',
                 hash: 'deadbeef',
-            }
+            },
         )
 
         expect(cleanPriorData).toHaveBeenCalledTimes(1)
@@ -132,7 +132,7 @@ describe('updateDatabase', () => {
     test('aborts the sequence if one rejects', async () => {
         global.fetch.mockImplementationOnce(goodFetch)
         cleanPriorData.mockImplementationOnce(() =>
-            Promise.reject(new Error('problem'))
+            Promise.reject(new Error('problem')),
         )
         expect.assertions(3)
 
@@ -143,7 +143,7 @@ describe('updateDatabase', () => {
             {
                 path: 'terms/20161.json',
                 hash: 'deadbeef',
-            }
+            },
         )
 
         expect(cleanPriorData).toHaveBeenCalledTimes(1)
@@ -161,7 +161,7 @@ describe('updateDatabase', () => {
                 {
                     path: 'terms/20161.json',
                     hash: 'deadbeef',
-                }
+                },
             )
             expect(value).toBe(false)
         })
@@ -169,7 +169,7 @@ describe('updateDatabase', () => {
         test('false if any step fails', async () => {
             global.fetch.mockImplementationOnce(goodFetch)
             storeData.mockImplementationOnce(() =>
-                Promise.reject(new Error('problem'))
+                Promise.reject(new Error('problem')),
             )
             const value = await updateDatabase(
                 'courses',
@@ -178,7 +178,7 @@ describe('updateDatabase', () => {
                 {
                     path: 'terms/20161.json',
                     hash: 'deadbeef',
-                }
+                },
             )
             expect(value).toBe(false)
         })
@@ -192,7 +192,7 @@ describe('updateDatabase', () => {
                 {
                     path: 'terms/20161.json',
                     hash: 'deadbeef',
-                }
+                },
             )
             expect(value).toBe(true)
         })

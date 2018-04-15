@@ -49,7 +49,7 @@ export function getCourseFromDatabase(clbid: number) {
 // @fulfill {Object} - the course object, potentially with an embedded error message.
 export function getCourse(
     {clbid, term}: {clbid: number, term: number},
-    fabrications: any = {}
+    fabrications: any = {},
 ) {
     if (clbid in fabrications) {
         return fabrications[clbid]
@@ -62,7 +62,7 @@ export function getCourse(
 
     return getCourseFrom(clbid)
         .then(
-            course => course || {clbid, term, error: `Could not find ${clbid}`}
+            course => course || {clbid, term, error: `Could not find ${clbid}`},
         )
         .catch(error => ({clbid, term, error: error.message}))
 }

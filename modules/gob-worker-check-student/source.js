@@ -61,13 +61,13 @@ function doWork(student: any, area: any) {
 
 export default async function checkStudentAgainstArea(
     student: any,
-    area: any
+    area: any,
 ): any {
     if (!area || area._error || !area._area) {
         log(
             'checkStudentAgainstArea:',
             area ? area._error : 'area is null',
-            area
+            area,
         )
         return area
     }

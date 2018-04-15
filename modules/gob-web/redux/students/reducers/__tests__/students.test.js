@@ -520,7 +520,7 @@ describe('students reducer', () => {
         expect(actual.schedules).not.toBe(student.schedules)
         expect(actual.schedules['1']).not.toBe(student.schedules['1'])
         expect(actual.schedules['1'].clbids).not.toBe(
-            student.schedules['1'].clbids
+            student.schedules['1'].clbids,
         )
     })
 
@@ -554,7 +554,7 @@ describe('students reducer', () => {
         expect(actual.schedules).not.toBe(student.schedules)
         expect(actual.schedules['1']).not.toBe(student.schedules['1'])
         expect(actual.schedules['1'].clbids).not.toBe(
-            student.schedules['1'].clbids
+            student.schedules['1'].clbids,
         )
     })
 
@@ -589,7 +589,7 @@ describe('students reducer', () => {
         expect(actual.schedules).not.toBe(student.schedules)
         expect(actual.schedules['1']).not.toBe(student.schedules['1'])
         expect(actual.schedules['1'].clbids).not.toBe(
-            student.schedules['1'].clbids
+            student.schedules['1'].clbids,
         )
     })
 
@@ -629,7 +629,7 @@ describe('students reducer', () => {
         expect(actual.schedules).not.toBe(student.schedules)
         expect(actual.schedules['1']).not.toBe(student.schedules['1'])
         expect(actual.schedules['1'].clbids).not.toBe(
-            student.schedules['1'].clbids
+            student.schedules['1'].clbids,
         )
     })
 
@@ -817,10 +817,13 @@ describe('the undoable students reducer', () => {
     })
 
     it('allows redoing to a future state', () => {
-        const initial = undoableReducer({}, {
-            type: INIT_STUDENT,
-            payload: {id: 'xyz'},
-        })
+        const initial = undoableReducer(
+            {},
+            {
+                type: INIT_STUDENT,
+                payload: {id: 'xyz'},
+            },
+        )
         const hasOneStudent = undoableReducer(initial, {
             type: CHANGE_NAME,
             payload: {name: 'abc'},

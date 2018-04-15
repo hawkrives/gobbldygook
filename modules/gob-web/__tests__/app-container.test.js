@@ -16,7 +16,7 @@ test('AppContainer renders', () => {
     mount(
         <ReduxWrapper store={configureStore()}>
             <Router history={createMemoryHistory()} routes={routes} />
-        </ReduxWrapper>
+        </ReduxWrapper>,
     )
 })
 
@@ -27,7 +27,7 @@ xtest('AppContainer can navigate to /create', () => {
     const app = mount(
         <ReduxWrapper store={store}>
             <Router history={history} routes={routes} />
-        </ReduxWrapper>
+        </ReduxWrapper>,
     )
 
     history.push('/create')

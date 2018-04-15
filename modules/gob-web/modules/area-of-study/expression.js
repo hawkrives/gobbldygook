@@ -31,7 +31,7 @@ function makeBooleanExpression({expr, ctx}) {
             acc.push(
                 <span key={`${i}-joiner`} className="joiner">
                     {JOINERS[kind]}
-                </span>
+                </span>,
             )
         }
 

@@ -48,7 +48,7 @@ describe('OfExpression', () => {
 
     it('supports where-clauses within the parens', () => {
         const actual = parse(
-            'one of (CSCI 121, one course where {gereqs = WRI})'
+            'one of (CSCI 121, one course where {gereqs = WRI})',
         )
         expect(actual).toMatchSnapshot()
 
@@ -74,7 +74,7 @@ describe('OfExpression', () => {
 
     it('supports modifiers within the parens', () => {
         const actual = parse(
-            'one of (two courses from children, two courses from filter, two credits from courses where {year <= 2016})'
+            'one of (two courses from children, two courses from filter, two credits from courses where {year <= 2016})',
         )
         expect(actual).toMatchSnapshot()
 
@@ -93,7 +93,7 @@ describe('OfExpression', () => {
             `you requested 3 items, but only gave 2 options (${JSON.stringify([
                 course('CSCI 121'),
                 course('CSCI 125'),
-            ])})`
+            ])})`,
         )
     })
 })

@@ -31,7 +31,7 @@ export default function compute(
         overrides: OverridesObject,
         fulfillments: FulfillmentsObject,
         dirty?: Set<string>,
-    }
+    },
 ) {
     let childrenShareCourses = Boolean(outerReq['children share courses'])
 
@@ -57,7 +57,7 @@ export default function compute(
                 })
             }
             return req
-        }
+        },
     )
 
     let computed = false
@@ -72,8 +72,8 @@ export default function compute(
         if (requirement.result === '') {
             throw new SyntaxError(
                 `compute(): requirement.result must not be empty (in ${JSON.stringify(
-                    requirement
-                )})`
+                    requirement,
+                )})`,
             )
         }
 
@@ -81,7 +81,7 @@ export default function compute(
         if (fulfillment) {
             requirement.result = applyFulfillmentToExpression(
                 requirement.result,
-                fulfillment
+                fulfillment,
             )
         }
 
@@ -98,7 +98,7 @@ export default function compute(
     } else {
         // or throw an error
         throw new TypeError(
-            'compute(): either `message` or `result` is required'
+            'compute(): either `message` or `result` is required',
         )
     }
 

@@ -21,7 +21,7 @@ worker.onerror = msg => log('[main] received error from load-data worker:', msg)
 worker.onmessage = ({data: [resultId, type, actionInfo]}) => {
     if (resultId === null && type === 'dispatch') {
         const action = actions[actionInfo.type][actionInfo.action](
-            ...actionInfo.args
+            ...actionInfo.args,
         )
         global._dispatch && global._dispatch(action)
     }

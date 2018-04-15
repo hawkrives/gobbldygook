@@ -65,7 +65,7 @@ export default function applyFulfillmentToResult({
         })
     } else {
         throw new Error(
-            'Expression needs a fulfillment, but expression is not countable!'
+            'Expression needs a fulfillment, but expression is not countable!',
         )
     }
 

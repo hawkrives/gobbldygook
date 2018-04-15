@@ -26,11 +26,13 @@ function loadStudents(dir) {
 
 async function benchmark({runs, graph}) {
     for (const {courses = [], overrides = {}, areas = []} of loadStudents(
-        './test/example-students/'
+        './test/example-students/',
     )) {
         for (const areaInfo of areas) {
             console.log(
-                `the '${areaInfo.name}' ${areaInfo.type} (${areaInfo.revision})`
+                `the '${areaInfo.name}' ${areaInfo.type} (${
+                    areaInfo.revision
+                })`,
             )
             const areaData = await loadArea(areaInfo) // eslint-disable-line no-await-in-loop
 

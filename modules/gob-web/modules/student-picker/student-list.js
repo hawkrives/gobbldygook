@@ -33,10 +33,10 @@ export default function StudentList(props) {
             filter(students, s =>
                 fuzzysearch(
                     filterText,
-                    (s.data.present.name || '').toLowerCase()
-                )
+                    (s.data.present.name || '').toLowerCase(),
+                ),
             ),
-            s => s.data.present[sortByKey]
+            s => s.data.present[sortByKey],
         ),
         (student, i) => (
             <StudentListItem
@@ -45,7 +45,7 @@ export default function StudentList(props) {
                 destroyStudent={destroyStudent}
                 isEditing={isEditing}
             />
-        )
+        ),
     )
 
     return <ListOfStudents type="plain">{studentObjects}</ListOfStudents>

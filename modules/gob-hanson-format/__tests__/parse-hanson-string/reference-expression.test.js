@@ -62,10 +62,10 @@ describe('titles may include', () => {
         expect(() => parseRequirementTitle('0A')).not.toThrow()
         expect(() => parseRequirementTitle('A0')).not.toThrow()
         expect(() => parseRequirementTitle('_A0')).toThrowError(
-            'Expected [A-Z0-9] but "_" found.'
+            'Expected [A-Z0-9] but "_" found.',
         )
         expect(() => parseRequirementTitle('-A0')).toThrowError(
-            'Expected [A-Z0-9] but "-" found.'
+            'Expected [A-Z0-9] but "-" found.',
         )
         expect(parseRequirementTitle('A0')).toBe('A0')
     })

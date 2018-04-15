@@ -116,14 +116,14 @@ function Semester(props) {
         infoBar.push(
             <InfoItem key="course-count">
                 {courseCount} {courseCount === 1 ? 'course' : 'courses'}
-            </InfoItem>
+            </InfoItem>,
         )
         currentCredits &&
             infoBar.push(
                 <InfoItem key="credit-count">
                     {currentCredits}{' '}
                     {currentCredits === 1 ? 'credit' : 'credits'}
-                </InfoItem>
+                </InfoItem>,
             )
     }
 
@@ -198,7 +198,7 @@ const semesterTarget = {
                 props.studentId,
                 fromScheduleId,
                 toSchedule.id,
-                clbid
+                clbid,
             )
         } else {
             props.addCourse(props.studentId, toSchedule.id, clbid)

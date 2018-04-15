@@ -42,7 +42,7 @@ export function ShareSheet(props: PropTypes) {
         props.router.push(`/s/${props.params.studentId}/`)
 
     const encodedStudentUrl = `data:text/json;charset=utf-8,${encodeStudent(
-        student
+        student,
     )}`
 
     return (

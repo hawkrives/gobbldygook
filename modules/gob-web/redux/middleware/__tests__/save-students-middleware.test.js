@@ -42,7 +42,7 @@ describe('saveStudentsMiddleware', () => {
             it('should return a promise', () => {
                 const actionHandler = nextHandler(doNextAction)
                 expect(typeof actionHandler({type: CHANGE_NAME}).then).toBe(
-                    'function'
+                    'function',
                 )
             })
 

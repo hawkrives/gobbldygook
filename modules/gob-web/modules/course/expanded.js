@@ -110,7 +110,7 @@ export default class ExpandedCourse extends React.PureComponent<Props> {
                                             {offering.location}
                                         </ListItem>
                                     )
-                                })
+                                }),
                             )}
                         </BulletedList>
                     </div>

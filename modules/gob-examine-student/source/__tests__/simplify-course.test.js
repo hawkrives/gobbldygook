@@ -8,7 +8,7 @@ describe('simplifyCourse', () => {
                 number: 121,
                 year: 2014,
                 type: 'Research',
-            })
+            }),
         ).toBe('CSCI 121 Research')
     })
 
@@ -18,7 +18,7 @@ describe('simplifyCourse', () => {
                 department: ['AS', 'RE'],
                 number: 121,
                 type: 'Research',
-            })
+            }),
         ).toBe('AS/RE 121 Research')
     })
 
@@ -28,7 +28,7 @@ describe('simplifyCourse', () => {
                 department: ['CH', 'BI'],
                 number: 121,
                 type: 'Research',
-            })
+            }),
         ).toBe('BI/CH 121 Research')
     })
 
@@ -38,7 +38,7 @@ describe('simplifyCourse', () => {
                 department: ['CH', 'BI'],
                 number: 121,
                 type: 'FLAC',
-            })
+            }),
         ).toBe('BI/CH 121 FLAC')
     })
 })

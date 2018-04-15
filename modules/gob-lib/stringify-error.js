@@ -3,7 +3,7 @@
 export function stringifyError(
     err: any,
     filter?: Array<any> | ((key: any, value: any) => any),
-    space?: string | number
+    space?: string | number,
 ) {
     let plainObject = {}
     Object.getOwnPropertyNames(err).forEach(key => {

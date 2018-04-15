@@ -18,7 +18,7 @@ export function convertStudent({courses, degrees}, getCourse) {
             Object.assign({}, info, {
                 schedules,
                 fabrications,
-            })
+            }),
         )
     })
 }
@@ -34,10 +34,10 @@ export function processSchedules(courses, getCourse) {
                 }
                 return resolvedCourse
             })
-        })
+        }),
     ).then(courses => {
         let fabrications = fromPairs(
-            map(filter(courses, '_fabrication'), c => [c.clbid, c])
+            map(filter(courses, '_fabrication'), c => [c.clbid, c]),
         )
 
         let schedules = groupBy(courses, 'term')
@@ -64,21 +64,21 @@ export function processDegrees(degrees) {
     for (let {concentrations, emphases, majors, degree} of degrees) {
         studies.push({name: degree, type: 'degree', revision: 'latest'})
         studies = studies.concat(
-            majors.map(name => ({name, type: 'major', revision: 'latest'}))
+            majors.map(name => ({name, type: 'major', revision: 'latest'})),
         )
         studies = studies.concat(
             concentrations.map(name => ({
                 name,
                 type: 'concentration',
                 revision: 'latest',
-            }))
+            })),
         )
         studies = studies.concat(
             emphases.map(name => ({
                 name,
                 type: 'emphasis',
                 revision: 'latest',
-            }))
+            })),
         )
     }
 
@@ -98,14 +98,14 @@ export function resolveSingularDataPoints(degrees) {
         if (len > 1) {
             throw new Error(
                 `convertStudent: The student has more than one ${name}: ${JSON.stringify(
-                    group
-                )}`
+                    group,
+                )}`,
             )
         } else if (len === 0) {
             throw new Error(
                 `convertStudent: The student has no ${name}: ${JSON.stringify(
-                    group
-                )}`
+                    group,
+                )}`,
             )
         }
     })

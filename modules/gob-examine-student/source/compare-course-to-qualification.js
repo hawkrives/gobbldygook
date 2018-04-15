@@ -17,11 +17,11 @@ import type {Course, Qualification} from './types'
  */
 export default function compareCourseToQualification(
     course: Course,
-    {$key, $operator, $value, $type}: Qualification
+    {$key, $operator, $value, $type}: Qualification,
 ) {
     if (Array.isArray($value)) {
         throw new TypeError(
-            "compareCourseToQualification(): what would a comparison to a list even do? oh, wait; I suppose it could compare against one of several values… well, I'm not doing that right now. If you want it, edit the PEG and stick appropriate stuff in here (probably simplest to just call this function again with each possible value and return true if any are true.)"
+            "compareCourseToQualification(): what would a comparison to a list even do? oh, wait; I suppose it could compare against one of several values… well, I'm not doing that right now. If you want it, edit the PEG and stick appropriate stuff in here (probably simplest to just call this function again with each possible value and return true if any are true.)",
         )
     } else if (isPlainObject($value)) {
         return compareCourseToQualificationViaObject(course, {
@@ -42,11 +42,11 @@ export default function compareCourseToQualification(
 
 function compareCourseToQualificationViaObject(
     course: Course,
-    {$key, $operator, $value, $type}: Qualification
+    {$key, $operator, $value, $type}: Qualification,
 ) {
     if (typeof $value !== 'object') {
         throw new TypeError(
-            `compareCourseToQualification(): $value must be an object; "${typeof $value}" is not an object.`
+            `compareCourseToQualification(): $value must be an object; "${typeof $value}" is not an object.`,
         )
     }
 
@@ -69,7 +69,7 @@ function compareCourseToQualificationViaObject(
                     $operator,
                     $value: val,
                     $type,
-                })
+                }),
             )
         } else if ($value.$booleanType === 'and') {
             return every($value.$and, val =>
@@ -78,27 +78,27 @@ function compareCourseToQualificationViaObject(
                     $operator,
                     $value: val,
                     $type,
-                })
+                }),
             )
         } else {
             throw new TypeError(
                 `compareCourseToQualification(): neither $or nor $and could be found in ${JSON.stringify(
-                    $value
-                )}`
+                    $value,
+                )}`,
             )
         }
     } else {
         throw new TypeError(
             `compareCourseToQualification(): "${
                 $value.$type
-            }" is not a valid type for a qualification's value.`
+            }" is not a valid type for a qualification's value.`,
         )
     }
 }
 
 function compareCourseToQualificationViaOperator(
     course: Course,
-    {$key, $operator, $value}: Qualification
+    {$key, $operator, $value}: Qualification,
 ) {
     // get the actual course out of the object
     course = (course: any).$course || course
@@ -124,7 +124,7 @@ function compareCourseToQualificationViaOperator(
         return course[$key] >= $value
     } else {
         throw new TypeError(
-            `compareCourseToQualificationViaOperator: "${$operator} is not a valid operator"`
+            `compareCourseToQualificationViaOperator: "${$operator} is not a valid operator"`,
         )
     }
 }

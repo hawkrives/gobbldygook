@@ -29,7 +29,7 @@ export function generateOps(allAreas: AreaOfStudy[]) {
 
     const grouped = groupBy(
         allAreas,
-        area => `{${area.name}, ${area.type}, ${area.revision}}`
+        area => `{${area.name}, ${area.type}, ${area.revision}}`,
     )
     const duplicateGroup = filter(grouped, list => list.length > 1)
 
@@ -51,7 +51,7 @@ export function generateOps(allAreas: AreaOfStudy[]) {
     // --- something about any values that aren't objects
     const requiredKeys = ['name', 'revision', 'type']
     const invalidAreas = filter(allAreas, area =>
-        requiredKeys.some(key => area[key] === undefined)
+        requiredKeys.some(key => area[key] === undefined),
     )
 
     return {...ops, ...buildRemoveAreaOps(invalidAreas)}

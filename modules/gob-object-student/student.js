@@ -50,7 +50,7 @@ export function Student(data) {
             map(student.schedules, s => [
                 String(s.id),
                 Object.assign({}, s, {id: String(s.id)}),
-            ])
+            ]),
         )
     }
 
@@ -110,7 +110,7 @@ export function changeStudentSetting(student, key, value) {
 export function addScheduleToStudent(student, newSchedule) {
     if (student.schedules instanceof Array) {
         throw new TypeError(
-            'addScheduleToStudent: schedules must not be an array!'
+            'addScheduleToStudent: schedules must not be an array!',
         )
     }
 
@@ -126,13 +126,13 @@ export function destroyScheduleFromStudent(student, scheduleId) {
 
     if (student.schedules instanceof Array) {
         throw new TypeError(
-            'destroyScheduleFromStudent: schedules must not be an array!'
+            'destroyScheduleFromStudent: schedules must not be an array!',
         )
     }
 
     if (!(scheduleId in student.schedules)) {
         throw new ReferenceError(
-            `Could not find a schedule with an ID of ${scheduleId}.`
+            `Could not find a schedule with an ID of ${scheduleId}.`,
         )
     }
 
@@ -145,7 +145,7 @@ export function destroyScheduleFromStudent(student, scheduleId) {
             sched =>
                 sched.year === deadSched.year &&
                 sched.semester === deadSched.semester &&
-                sched.id !== deadSched.id
+                sched.id !== deadSched.id,
         )
 
         /* istanbul ignore else */
@@ -153,7 +153,7 @@ export function destroyScheduleFromStudent(student, scheduleId) {
             schedules[otherSchedKey] = Object.assign(
                 {},
                 schedules[otherSchedKey],
-                {active: true}
+                {active: true},
             )
         }
     }
@@ -168,7 +168,7 @@ export function addCourseToSchedule(student, scheduleId, clbid) {
 
     if (!(scheduleId in student.schedules)) {
         throw new ReferenceError(
-            `Could not find a schedule with an ID of ${scheduleId}.`
+            `Could not find a schedule with an ID of ${scheduleId}.`,
         )
     }
 
@@ -182,7 +182,7 @@ export function addCourseToSchedule(student, scheduleId, clbid) {
     log(
         `adding clbid ${clbid} to schedule ${schedule.id} (${schedule.year}-${
             schedule.semester
-        }.${schedule.index})`
+        }.${schedule.index})`,
     )
 
     schedule.clbids = schedule.clbids.concat(clbid)
@@ -197,13 +197,13 @@ export function addCourseToSchedule(student, scheduleId, clbid) {
 export function removeCourseFromSchedule(student, scheduleId, clbid) {
     if (!isNumber(clbid)) {
         throw new TypeError(
-            `removeCourse(): clbid must be a number (was ${typeof clbid})`
+            `removeCourse(): clbid must be a number (was ${typeof clbid})`,
         )
     }
 
     if (!(scheduleId in student.schedules)) {
         throw new ReferenceError(
-            `Could not find a schedule with an ID of ${scheduleId}.`
+            `Could not find a schedule with an ID of ${scheduleId}.`,
         )
     }
 
@@ -217,7 +217,7 @@ export function removeCourseFromSchedule(student, scheduleId, clbid) {
     log(
         `removing clbid ${clbid} from schedule ${schedule.id} (${
             schedule.year
-        }-${schedule.semester}.${schedule.index})`
+        }-${schedule.semester}.${schedule.index})`,
     )
 
     schedule.clbids = reject(schedule.clbids, id => id === clbid)
@@ -231,10 +231,10 @@ export function removeCourseFromSchedule(student, scheduleId, clbid) {
 
 export function moveCourseToSchedule(
     student,
-    {fromScheduleId, toScheduleId, clbid}
+    {fromScheduleId, toScheduleId, clbid},
 ) {
     log(
-        `moveCourseToSchedule(): moving ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`
+        `moveCourseToSchedule(): moving ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`,
     )
 
     student = removeCourseFromSchedule(student, fromScheduleId, clbid)
@@ -269,7 +269,7 @@ export function removeOverrideFromStudent(student, key) {
 export function addFabricationToStudent(student, fabrication) {
     if (!('clbid' in fabrication)) {
         throw new ReferenceError(
-            'addFabricationToStudent: fabrications must include a clbid'
+            'addFabricationToStudent: fabrications must include a clbid',
         )
     }
     if (typeof fabrication.clbid !== 'string') {
@@ -292,11 +292,11 @@ export function removeFabricationFromStudent(student, fabricationId) {
 export function moveScheduleInStudent(
     student,
     scheduleId,
-    {year, semester} = {}
+    {year, semester} = {},
 ) {
     if (year === undefined && semester === undefined) {
         throw new RangeError(
-            'moveScheduleInStudent: Either year or semester must be provided.'
+            'moveScheduleInStudent: Either year or semester must be provided.',
         )
     }
     if (!isUndefined(year) && !isNumber(year)) {
@@ -308,7 +308,7 @@ export function moveScheduleInStudent(
 
     if (!(scheduleId in student.schedules)) {
         throw new ReferenceError(
-            `moveScheduleInStudent: Could not find a schedule with an ID of "${scheduleId}".`
+            `moveScheduleInStudent: Could not find a schedule with an ID of "${scheduleId}".`,
         )
     }
 
@@ -331,7 +331,7 @@ export function moveScheduleInStudent(
 export function reorderScheduleInStudent(student, scheduleId, index) {
     if (!(scheduleId in student.schedules)) {
         throw new ReferenceError(
-            `reorderScheduleInStudent: Could not find a schedule with an ID of "${scheduleId}".`
+            `reorderScheduleInStudent: Could not find a schedule with an ID of "${scheduleId}".`,
         )
     }
 
@@ -348,7 +348,7 @@ export function reorderScheduleInStudent(student, scheduleId, index) {
 export function renameScheduleInStudent(student, scheduleId, title) {
     if (!(scheduleId in student.schedules)) {
         throw new ReferenceError(
-            `renameScheduleInStudent: Could not find a schedule with an ID of "${scheduleId}".`
+            `renameScheduleInStudent: Could not find a schedule with an ID of "${scheduleId}".`,
         )
     }
 
@@ -369,7 +369,7 @@ export function reorderCourseInSchedule(student, scheduleId, {clbid, index}) {
 
     if (!(scheduleId in student.schedules)) {
         throw new ReferenceError(
-            `reorderCourseInSchedule: Could not find a schedule with an ID of "${scheduleId}".`
+            `reorderCourseInSchedule: Could not find a schedule with an ID of "${scheduleId}".`,
         )
     }
 
@@ -385,7 +385,7 @@ export function reorderCourseInSchedule(student, scheduleId, {clbid, index}) {
 
     if (oldIndex === -1) {
         throw new ReferenceError(
-            `reorderCourseInSchedule: ${clbid} is not in schedule "${scheduleId}"`
+            `reorderCourseInSchedule: ${clbid} is not in schedule "${scheduleId}"`,
         )
     }
 

@@ -24,7 +24,7 @@ type Schedule = {
  */
 export function findFirstAvailableSemester(
     schedules: Schedule[],
-    forYear: number
+    forYear: number,
 ) {
     const thisYear = filter(schedules, s => s.year === forYear)
     const semesters = map(thisYear, s => s.semester)

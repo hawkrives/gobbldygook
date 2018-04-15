@@ -9,13 +9,13 @@ export class ExtensionTooOldError extends Error {}
 export function fetchHtml(url, fetchArgs, fetchBody) {
     if (!global.gobbldygook_extension) {
         return Promise.reject(
-            new ExtensionNotLoadedError('Extension not loaded')
+            new ExtensionNotLoadedError('Extension not loaded'),
         )
     }
     if (global.gobbldygook_extension < '1.0.0') {
         const ver = global.gobbldygook_extension_version
         return Promise.reject(
-            new ExtensionTooOldError(`Extension version ${ver} is too old.`)
+            new ExtensionTooOldError(`Extension version ${ver} is too old.`),
         )
     }
 
@@ -51,7 +51,7 @@ export function fetchHtml(url, fetchArgs, fetchBody) {
                 fetchArgs,
                 fetchBody,
             },
-            '*'
+            '*',
         )
     })
 }

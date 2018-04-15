@@ -22,7 +22,7 @@ export default function updateDatabase(
     type: InfoFileTypeEnum,
     infoFileBase: string,
     notification: Notification,
-    {path, hash}: InfoFileRef
+    {path, hash}: InfoFileRef,
 ) {
     log(path)
 

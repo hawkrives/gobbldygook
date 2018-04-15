@@ -109,7 +109,7 @@ describe('filterByQualification', () => {
         ]
 
         expect(() =>
-            filterByQualification(courses, basicQualification)
+            filterByQualification(courses, basicQualification),
         ).toThrowError(TypeError)
     })
 
@@ -151,7 +151,7 @@ describe('filterByQualification', () => {
         ]
 
         expect(
-            filterByQualification(courses, advancedQualificationMax)
+            filterByQualification(courses, advancedQualificationMax),
         ).toEqual([
             {
                 department: ['ART', 'ASIAN'],
@@ -209,7 +209,7 @@ describe('filterByQualification', () => {
         ]
 
         expect(
-            filterByQualification(courses, advancedQualificationMin)
+            filterByQualification(courses, advancedQualificationMin),
         ).toEqual([
             {
                 department: ['ART', 'ASIAN'],
@@ -265,7 +265,7 @@ describe('filterByQualification', () => {
         ]
 
         expect(() =>
-            filterByQualification(courses, advancedQualificationBad)
+            filterByQualification(courses, advancedQualificationBad),
         ).toThrowError(ReferenceError)
     })
 
@@ -307,7 +307,7 @@ describe('filterByQualification', () => {
         ]
 
         expect(() =>
-            filterByQualification(courses, advancedQualificationBad)
+            filterByQualification(courses, advancedQualificationBad),
         ).toThrowError(TypeError)
     })
 

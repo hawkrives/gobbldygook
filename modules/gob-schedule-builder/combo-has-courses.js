@@ -4,7 +4,7 @@ import {queryCourses} from '@gob/search-queries'
 export function comboHasCourses(courses, combinationOfClasses) {
     const these = takeWhile(
         courses,
-        course => queryCourses(course, combinationOfClasses).length >= 1
+        course => queryCourses(course, combinationOfClasses).length >= 1,
     )
 
     return these.length === courses.length

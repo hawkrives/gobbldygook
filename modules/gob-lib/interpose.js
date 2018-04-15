@@ -12,6 +12,6 @@ export function interpose<T, U>(data: T[], value: U): (T | U)[] {
             }
             return arr.concat(item)
         },
-        []
+        [],
     )
 }

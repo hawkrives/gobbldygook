@@ -8,7 +8,7 @@ describe('compareCourseToQualification', () => {
                 $key: 'number',
                 $operator: '$eq',
                 $value: 310,
-            })
+            }),
         ).toBe(true)
     })
 
@@ -19,7 +19,7 @@ describe('compareCourseToQualification', () => {
                 $key: 'number',
                 $operator: '$eq',
                 $value: 310,
-            })
+            }),
         ).toBe(true)
     })
 
@@ -30,14 +30,14 @@ describe('compareCourseToQualification', () => {
                 $key: 'number',
                 $operator: '$ne',
                 $value: 210,
-            })
+            }),
         ).toBe(true)
         expect(
             compareCourseToQualification(course, {
                 $key: 'number',
                 $operator: '$ne',
                 $value: 310,
-            })
+            }),
         ).toBe(false)
     })
 
@@ -48,14 +48,14 @@ describe('compareCourseToQualification', () => {
                 $key: 'number',
                 $operator: '$lt',
                 $value: 300,
-            })
+            }),
         ).toBe(true)
         expect(
             compareCourseToQualification(course, {
                 $key: 'number',
                 $operator: '$lt',
                 $value: 100,
-            })
+            }),
         ).toBe(false)
     })
 
@@ -66,14 +66,14 @@ describe('compareCourseToQualification', () => {
                 $key: 'number',
                 $operator: '$lte',
                 $value: 310,
-            })
+            }),
         ).toBe(true)
         expect(
             compareCourseToQualification(course, {
                 $key: 'number',
                 $operator: '$lte',
                 $value: 200,
-            })
+            }),
         ).toBe(false)
     })
 
@@ -84,14 +84,14 @@ describe('compareCourseToQualification', () => {
                 $key: 'number',
                 $operator: '$gt',
                 $value: 200,
-            })
+            }),
         ).toBe(true)
         expect(
             compareCourseToQualification(course, {
                 $key: 'number',
                 $operator: '$gt',
                 $value: 400,
-            })
+            }),
         ).toBe(false)
     })
 
@@ -102,14 +102,14 @@ describe('compareCourseToQualification', () => {
                 $key: 'number',
                 $operator: '$gte',
                 $value: 310,
-            })
+            }),
         ).toBe(true)
         expect(
             compareCourseToQualification(course, {
                 $key: 'number',
                 $operator: '$gte',
                 $value: 400,
-            })
+            }),
         ).toBe(false)
     })
 
@@ -120,14 +120,14 @@ describe('compareCourseToQualification', () => {
                 $key: 'department',
                 $operator: '$eq',
                 $value: 'ART',
-            })
+            }),
         ).toBe(true)
         expect(
             compareCourseToQualification(course, {
                 $key: 'department',
                 $operator: '$eq',
                 $value: 'ASIAN',
-            })
+            }),
         ).toBe(true)
     })
 
@@ -138,7 +138,7 @@ describe('compareCourseToQualification', () => {
                 $key: 'department',
                 $operator: '$ne',
                 $value: 'CSCI',
-            })
+            }),
         ).toBe(true)
     })
 
@@ -160,7 +160,7 @@ describe('compareCourseToQualification', () => {
             $value: [2016],
         }
         expect(() =>
-            compareCourseToQualification(course, qualification)
+            compareCourseToQualification(course, qualification),
         ).toThrowError(TypeError)
     })
 
@@ -172,7 +172,7 @@ describe('compareCourseToQualification', () => {
             $value: {$type: 'unknown'},
         }
         expect(() =>
-            compareCourseToQualification(course, qualification)
+            compareCourseToQualification(course, qualification),
         ).toThrowError(TypeError)
     })
 
@@ -200,7 +200,7 @@ describe('compareCourseToQualification', () => {
             },
         }
         expect(compareCourseToQualification(course1, qualification1)).toBe(
-            false
+            false,
         )
 
         const course2 = {department: ['ART', 'ASIAN'], year: 2013}
@@ -224,7 +224,7 @@ describe('compareCourseToQualification', () => {
             $value: {$type: 'boolean', $booleanType: 'xor', $xor: []},
         }
         expect(() =>
-            compareCourseToQualification(course, qualification)
+            compareCourseToQualification(course, qualification),
         ).toThrowError(TypeError)
     })
 })

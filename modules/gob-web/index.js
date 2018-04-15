@@ -48,7 +48,7 @@ let renderFunc = Root => {
         <Root store={store}>
             <Router history={history} routes={routes} />
         </Root>,
-        renderEl
+        renderEl,
     )
 }
 

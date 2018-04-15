@@ -42,7 +42,7 @@ export function startProgress(
         value = 0,
         max = 1,
         showButton = false,
-    }: {value: number, max: number, showButton?: boolean} = {}
+    }: {value: number, max: number, showButton?: boolean} = {},
 ) {
     return {
         type: START_PROGRESS,

@@ -65,7 +65,7 @@ export function storeArea(path: string, data: BasicArea) {
 export default function storeData(
     path: string,
     type: InfoFileTypeEnum,
-    data: any
+    data: any,
 ) {
     // istanbul ignore else
     if (type === 'courses') {

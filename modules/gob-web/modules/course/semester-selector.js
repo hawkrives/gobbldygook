@@ -18,7 +18,7 @@ function findSemesterList(student: ?Object) {
 
     return groupBy(
         sortBy(schedules, [s => s.year, s => s.semester]),
-        s => s.year
+        s => s.year,
     )
 }
 

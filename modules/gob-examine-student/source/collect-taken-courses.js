@@ -17,7 +17,7 @@ export default function collectTakenCourses(expr: Expression): Course[] {
     // if not, check all sub-chunks
     const tuples = values(expr)
     const onlyChildItems = tuples.filter(
-        value => isPlainObject(value) || Array.isArray(value)
+        value => isPlainObject(value) || Array.isArray(value),
     )
     const children = onlyChildItems.map(collectTakenCourses)
 

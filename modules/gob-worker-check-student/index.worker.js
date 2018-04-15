@@ -30,7 +30,7 @@ if (
             })
             .catch(err => {
                 self.postMessage(
-                    JSON.stringify([id, 'error', stringifyError(err)])
+                    JSON.stringify([id, 'error', stringifyError(err)]),
                 )
                 log(`(${student.name}, ${area.name})`, err)
             })
