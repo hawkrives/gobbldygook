@@ -26,15 +26,7 @@
     "useTabs": true,
     "singleQuote": true,
     "semi": false,
-    "bracketSpacing": false,
-    "overrides": [
-      {
-        "files": "*.scss",
-        "options": {
-          "useTabs": true
-        }
-      }
-    ]
+    "bracketSpacing": false
   },
   "jest": {
     "collectCoverageFrom": [
