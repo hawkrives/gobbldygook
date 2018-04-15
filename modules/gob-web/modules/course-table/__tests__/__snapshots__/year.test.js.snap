@@ -130,7 +130,7 @@ exports[`Year renders shallowly 1`] = `
     </h1>
     <span>
       <button
-        className="year__TitleButton-iceypU btWOsu button__BaseButton-dVUXkm bqhNoR"
+        className="year__TitleButton-iceypU btWOsu button__BaseButton-dVUXkm liHsZO"
         disabled={undefined}
         onClick={[Function]}
         style={undefined}
@@ -143,7 +143,7 @@ exports[`Year renders shallowly 1`] = `
         ’
       </button>
       <button
-        className="year__RemoveYearButton-irTWOs jraVKV year__TitleButton-iceypU btWOsu button__BaseButton-dVUXkm bqhNoR"
+        className="year__RemoveYearButton-irTWOs jraVKV year__TitleButton-iceypU btWOsu button__BaseButton-dVUXkm liHsZO"
         disabled={undefined}
         onClick={[Function]}
         style={undefined}
