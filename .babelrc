@@ -18,7 +18,7 @@
 		"transform-object-rest-spread",
 		"transform-react-display-name",
 		"babel-plugin-styled-components",
-		["transform-runtime", {"polyfill": false}]
+		["transform-runtime", {"polyfill": false, "regenerator": false}]
 		// turns `import {sum} from 'lodash'`
 		// into `import sum from 'lodash/sum'`
 		// "lodash",
