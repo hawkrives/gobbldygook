@@ -16,13 +16,13 @@ const Wrapper = styled.div`
     margin: 0;
     padding: 0;
 
-    ${({size = 48}) => css`
-        width: ${size}px;
-        height: ${size}px;
-        line-height: ${size}px;
-        font-size: ${size / 3 * 2}px;
+    ${({size = '48px'}) => css`
+        width: ${size};
+        height: ${size};
+        line-height: ${size};
+        font-size: calc(${size} / 3 * 2);
 
-        border-radius: ${size}px;
+        border-radius: ${size};
     `};
 `
 
