@@ -1,6 +1,5 @@
 // @flow
 
-import 'whatwg-fetch'
 import serializeError from 'serialize-error'
 import debug from 'debug'
 import loadFiles from './source/load-files'

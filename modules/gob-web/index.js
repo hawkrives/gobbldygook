@@ -1,7 +1,6 @@
 // @flow
 
 // Include fetch
-import 'whatwg-fetch'
 import 'typeface-fira-sans'
 import './styles/normalize.scss'
 

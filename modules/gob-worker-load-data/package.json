@@ -14,7 +14,6 @@
     "p-series": "^1.1.0",
     "present": "^1.0.0",
     "serialize-error": "^2.1.0",
-    "sto-sis-time-parser": "^2.3.3",
-    "whatwg-fetch": "^2.0.4"
+    "sto-sis-time-parser": "^2.3.3"
   }
 }
