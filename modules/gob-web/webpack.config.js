@@ -92,7 +92,9 @@ function config() {
 
         // Generates an index.html for us.
         new HtmlPlugin(context => {
-            let cssLink = context.css ? `<link rel="stylesheet" href="${publicPath}${context.css}">` : null
+            let cssLink = context.css
+                ? `<link rel="stylesheet" href="${publicPath}${context.css}">`
+                : null
             let polyfills = isProduction
                 ? '<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>'
                 : ''

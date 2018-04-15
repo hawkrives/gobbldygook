@@ -16,7 +16,14 @@ export default function prepareCourse(course: any) {
         dept: course.dept || buildDeptString(course.departments),
         deptnum: course.deptnum || buildDeptNum(course),
         offerings: course.offerings || convertTimeStringsToOfferings(course),
-        words: [...new Set([...nameWords, ...notesWords, ...titleWords, ...descWords])],
+        words: [
+            ...new Set([
+                ...nameWords,
+                ...notesWords,
+                ...titleWords,
+                ...descWords,
+            ]),
+        ],
         profWords: [...new Set(flatMap(course.instructors, splitParagraph))],
     }
 }

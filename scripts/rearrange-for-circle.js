@@ -9,21 +9,22 @@ let base = __dirname + '/../modules/gob-web/build'
 let files = () => fs.readdirSync(base)
 
 for (let file of files()) {
-	for (let toRemove of extensionsToRemove) {
-		if (file.endsWith(toRemove)) {
-			console.log(`rm ${path.join(base, file)}`)
-			fs.unlinkSync(path.join(base, file))
-		}
-	}
+    for (let toRemove of extensionsToRemove) {
+        if (file.endsWith(toRemove)) {
+            console.log(`rm ${path.join(base, file)}`)
+            fs.unlinkSync(path.join(base, file))
+        }
+    }
 }
 
 for (let file of files()) {
-	if (!(file.endsWith('.js') || file.endsWith('.css'))) {
-		continue
-	}
+    if (!(file.endsWith('.js') || file.endsWith('.css'))) {
+        continue
+    }
 
-	let chunks = file.split('.')
-	let newName = chunks.slice(0, -2).join('.') + '.' + chunks[chunks.length - 1]
-	console.log(`mv ${path.join(base, file)} ${path.join(base, newName)}`)
-	fs.renameSync(path.join(base, file), path.join(base, newName))
+    let chunks = file.split('.')
+    let newName =
+        chunks.slice(0, -2).join('.') + '.' + chunks[chunks.length - 1]
+    console.log(`mv ${path.join(base, file)} ${path.join(base, newName)}`)
+    fs.renameSync(path.join(base, file), path.join(base, newName))
 }
