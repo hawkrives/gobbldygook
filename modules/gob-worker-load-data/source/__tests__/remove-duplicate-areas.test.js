@@ -58,7 +58,6 @@ describe('generateOps', () => {
 
 	test('removes invalid areas that got added somehow', () => {
 		const areas = [
-			// $FlowFixMe
 			{
 				name: 'invalid-area',
 				type: 'type',
@@ -66,6 +65,7 @@ describe('generateOps', () => {
 				sourcePath: 'type/invalid-area.yaml',
 			},
 		]
+		// $FlowFixMe this is an explicit test for handling revision:undefined
 		expect(generateOps(areas)).toEqual({
 			'type/invalid-area.yaml': null,
 		})

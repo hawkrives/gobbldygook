@@ -107,7 +107,7 @@ function AreaPicker(props: AreaPickerProps) {
 	let message
 	if (props.filterText) {
 		message = `No matching ${pluralizeArea(props.type)}.`
-	} else if (currentAreaNames.size) {
+	} else if (currentAreaNames.length) {
 		message = `All ${pluralizeArea(props.type)} have been added.`
 	} else {
 		message = `No ${pluralizeArea(props.type)} are available.`
