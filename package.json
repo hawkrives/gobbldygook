@@ -23,6 +23,7 @@
   "prettier": {
     "trailingComma": "all",
     "tabWidth": 4,
+    "useTabs": true,
     "singleQuote": true,
     "semi": false,
     "bracketSpacing": false,
