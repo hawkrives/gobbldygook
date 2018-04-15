@@ -28,6 +28,7 @@
     "@gob/worker-load-data": "^3.0.0-rc.2",
     "@gob/worker-check-student": "^3.0.0-rc.2",
     "babel-runtime": "^6.26.0",
+    "bugsnag-js": "^4.5.0",
     "classnames": "^2.2.5",
     "codemirror": "^5.36.0",
     "css-select": "^2.0.0",

@@ -93,9 +93,6 @@ function config() {
         // Generates an index.html for us.
         new HtmlPlugin(context => {
             let cssPath = context.css ? `${publicPath}${context.css}` : null
-            let bugsnag = isProduction
-                ? '<script src="https://d2wy8f7a9ursnm.cloudfront.net/bugsnag-3.min.js" data-apikey="7e393deddaeb885f5b140b4320ecef6b"></script>'
-                : ''
             let polyfills = isProduction
                 ? '<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>'
                 : ''
@@ -109,7 +106,6 @@ function config() {
 
                 <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/nhhpgddphdimipafjfiggjnbbmcoklld">
 
-                ${bugsnag}
                 ${polyfills}
                 ${cssPath ? `<link rel="stylesheet" href="${cssPath}">` : ''}
 
