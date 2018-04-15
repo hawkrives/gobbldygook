@@ -1,7 +1,7 @@
 {
   "name": "@gob/worker-check-student",
   "version": "3.0.0-rc.2",
-  "main": "index.js",
+  "main": "index.worker.js",
   "license": "MIT",
   "dependencies": {
   	"@gob/courses": "^3.0.0-rc.2",
