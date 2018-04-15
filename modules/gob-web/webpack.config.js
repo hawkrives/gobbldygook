@@ -92,7 +92,7 @@ function config() {
 
         // Generates an index.html for us.
         new HtmlPlugin(context => {
-            let cssPath = context.css ? `${publicPath}${context.css}` : null
+            let cssLink = context.css ? `<link rel="stylesheet" href="${publicPath}${context.css}">` : null
             let polyfills = isProduction
                 ? '<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>'
                 : ''
@@ -107,7 +107,7 @@ function config() {
                 <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/nhhpgddphdimipafjfiggjnbbmcoklld">
 
                 ${polyfills}
-                ${cssPath ? `<link rel="stylesheet" href="${cssPath}">` : ''}
+                ${cssLink ? cssLink : ''}
 
                 <main id="gobbldygook"></main>
                 <script src="${publicPath}${context.main}"></script>
