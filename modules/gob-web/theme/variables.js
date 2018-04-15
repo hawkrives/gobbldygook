@@ -31,12 +31,12 @@ export const sidebarWidth = '270px'
 export const semesterSpacing = '4px'
 
 export const semesterTopPadding = css`
-    ${blockEdgePadding};
+	${blockEdgePadding};
 `
 export const semesterSidePadding = css`
     calc(${blockEdgePadding} * 1.5);
 `
 
 export const semesterPadding = css`
-    padding: ${semesterTopPadding} ${semesterSidePadding};
+	padding: ${semesterTopPadding} ${semesterSidePadding};
 `

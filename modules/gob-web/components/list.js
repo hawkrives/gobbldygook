@@ -1,8 +1,8 @@
 // @flow
 import React, {
-    Children as ReactChildren,
-    isValidElement,
-    cloneElement,
+	Children as ReactChildren,
+	isValidElement,
+	cloneElement,
 } from 'react'
 import cx from 'classnames'
 import styled from 'styled-components'
@@ -13,60 +13,60 @@ const BaseList = `
 `
 
 export const PlainList = styled.ul`
-    ${BaseList};
-    list-style: none;
+	${BaseList};
+	list-style: none;
 `
 
 export const InlineList = styled.ul`
-    ${BaseList};
-    display: inline-block;
+	${BaseList};
+	display: inline-block;
 
-    & > .list-item {
-        display: inline-block;
-    }
+	& > .list-item {
+		display: inline-block;
+	}
 `
 
 export const BulletedList = styled.ul`
-    ${BaseList};
+	${BaseList};
 `
 
 export const NumberedList = styled.ol`
-    ${BaseList};
+	${BaseList};
 `
 
 export const ListItem = styled.li``
 
 export const InlineListItem = styled.li`
-    display: inline-block;
+	display: inline-block;
 `
 
 type ListProps = {
-    children?: any,
-    className?: string,
-    type?: 'inline' | 'number' | 'bullet' | 'plain',
+	children?: any,
+	className?: string,
+	type?: 'inline' | 'number' | 'bullet' | 'plain',
 }
 
 export default function List(props: ListProps) {
-    const {className, children, type = 'inline'} = props
-    const contents = ReactChildren.map(
-        children,
-        child =>
-            isValidElement(child)
-                ? cloneElement(child, {
-                      ...child.props,
-                      className: cx('list-item', child.props.className),
-                  })
-                : child,
-    )
+	const {className, children, type = 'inline'} = props
+	const contents = ReactChildren.map(
+		children,
+		child =>
+			isValidElement(child)
+				? cloneElement(child, {
+						...child.props,
+						className: cx('list-item', child.props.className),
+				  })
+				: child,
+	)
 
-    let ListType = PlainList
-    if (type === 'inline') {
-        ListType = InlineList
-    } else if (type === 'number') {
-        ListType = NumberedList
-    } else if (type === 'bullet') {
-        ListType = BulletedList
-    }
+	let ListType = PlainList
+	if (type === 'inline') {
+		ListType = InlineList
+	} else if (type === 'number') {
+		ListType = NumberedList
+	} else if (type === 'bullet') {
+		ListType = BulletedList
+	}
 
-    return <ListType className={className}>{contents}</ListType>
+	return <ListType className={className}>{contents}</ListType>
 }

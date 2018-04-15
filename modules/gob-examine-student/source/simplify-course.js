@@ -31,8 +31,8 @@ import type {Course} from './types'
  * @returns {string} - the stringified, simplified course
  */
 function simplifyCourse(course: Course): string {
-    const depts = sortBy(course.department).join('/')
-    return `${depts} ${course.number} ${course.type}`
+	const depts = sortBy(course.department).join('/')
+	return `${depts} ${course.number} ${course.type}`
 }
 
 export default simplifyCourse

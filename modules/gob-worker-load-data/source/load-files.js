@@ -12,123 +12,123 @@ import type {InfoFileTypeEnum, InfoFileRef, InfoIndexFile} from './types'
 const log = debug('worker:load-data:load-files')
 
 const fetchJson = (...args) =>
-    fetch(...args)
-        .then(status)
-        .then(json)
+	fetch(...args)
+		.then(status)
+		.then(json)
 
 type Args = {|
-    baseUrl: string,
-    notification: Notification,
-    oldestYear: number,
-    type: InfoFileTypeEnum,
+	baseUrl: string,
+	notification: Notification,
+	oldestYear: number,
+	type: InfoFileTypeEnum,
 |}
 
 export default function loadFiles(url: string, baseUrl: string) {
-    log(url)
+	log(url)
 
-    return fetchJson(url)
-        .then(data => proceedWithUpdate(baseUrl, data))
-        .catch(err => handleErrors(err, url))
+	return fetchJson(url)
+		.then(data => proceedWithUpdate(baseUrl, data))
+		.catch(err => handleErrors(err, url))
 }
 
 export async function proceedWithUpdate(baseUrl: string, data: InfoIndexFile) {
-    const type: InfoFileTypeEnum = data.type
-    const notification = new Notification(type)
-    const oldestYear = new Date().getFullYear() - 5
-    const args = {type, notification, baseUrl, oldestYear}
+	const type: InfoFileTypeEnum = data.type
+	const notification = new Notification(type)
+	const oldestYear = new Date().getFullYear() - 5
+	const args = {type, notification, baseUrl, oldestYear}
 
-    const files = await getFilesToLoad(args, data)
-    const filtered = await filterFiles(args, files)
-    await slurpIntoDatabase(args, filtered)
+	const files = await getFilesToLoad(args, data)
+	const filtered = await filterFiles(args, files)
+	await slurpIntoDatabase(args, filtered)
 
-    await deduplicateAreas(args)
-    await finishUp(args)
+	await deduplicateAreas(args)
+	await finishUp(args)
 }
 
 export function getFilesToLoad({type, oldestYear}: Args, data: InfoIndexFile) {
-    let files = data.files
+	let files = data.files
 
-    if (type === 'courses') {
-        files = files.filter(f => filterForRecentCourses(f, oldestYear))
-    }
+	if (type === 'courses') {
+		files = files.filter(f => filterForRecentCourses(f, oldestYear))
+	}
 
-    return files
+	return files
 }
 
 export async function filterFiles(
-    {type}: Args,
-    files: InfoFileRef[],
+	{type}: Args,
+	files: InfoFileRef[],
 ): Promise<Array<InfoFileRef>> {
-    // For each file, see if it needs loading. We then update each promise
-    // with either the path or `null`.
-    const promises = files.map(async (file: InfoFileRef) => {
-        if (await needsUpdate(type, file.path, file.hash)) {
-            return file
-        }
-        return null
-    })
+	// For each file, see if it needs loading. We then update each promise
+	// with either the path or `null`.
+	const promises = files.map(async (file: InfoFileRef) => {
+		if (await needsUpdate(type, file.path, file.hash)) {
+			return file
+		}
+		return null
+	})
 
-    // Finally, we filter the items
-    // $FlowFixMe
-    return (await Promise.all(promises)).filter(Boolean)
+	// Finally, we filter the items
+	// $FlowFixMe
+	return (await Promise.all(promises)).filter(Boolean)
 }
 
 export function slurpIntoDatabase(
-    {type, baseUrl, notification}: Args,
-    files: Array<InfoFileRef>,
+	{type, baseUrl, notification}: Args,
+	files: Array<InfoFileRef>,
 ) {
-    // Exit early if nothing needs to happen
-    if (files.length === 0) {
-        log(`[${type}] no files need loading`)
-        return
-    }
+	// Exit early if nothing needs to happen
+	if (files.length === 0) {
+		log(`[${type}] no files need loading`)
+		return
+	}
 
-    log(`[${type}] these files need loading:`, ...files)
+	log(`[${type}] these files need loading:`, ...files)
 
-    // Fire off the progress bar
-    notification.start(files.length)
+	// Fire off the progress bar
+	notification.start(files.length)
 
-    // Load them into the database
-    const runUpdate = file => () =>
-        updateDatabase(type, baseUrl, notification, file)
-    return series(files.map(runUpdate))
+	// Load them into the database
+	const runUpdate = file => () =>
+		updateDatabase(type, baseUrl, notification, file)
+	return series(files.map(runUpdate))
 }
 
 export function deduplicateAreas({type}: Args) {
-    // Clean up the database a bit
-    if (type === 'areas') {
-        return removeDuplicateAreas()
-    }
+	// Clean up the database a bit
+	if (type === 'areas') {
+		return removeDuplicateAreas()
+	}
 }
 
 export function finishUp({type, notification}: Args) {
-    log(`[${type}] done loading`)
+	log(`[${type}] done loading`)
 
-    // Remove the progress bar after 1.5 seconds
-    notification.remove()
+	// Remove the progress bar after 1.5 seconds
+	notification.remove()
 
-    // istanbul ignore else
-    if (type === 'courses') {
-        return refreshCourses()
-    } else if (type === 'areas') {
-        return refreshAreas()
-    }
+	// istanbul ignore else
+	if (type === 'courses') {
+		return refreshCourses()
+	} else if (type === 'areas') {
+		return refreshAreas()
+	}
 }
 
 function handleErrors(err: Error, url: string) {
-    if (startsWith(err.message, 'Failed to fetch')) {
-        log(`Failed to fetch ${url}`)
-        return
-    }
-    throw err
+	if (startsWith(err.message, 'Failed to fetch')) {
+		log(`Failed to fetch ${url}`)
+		return
+	}
+	throw err
 }
 
 export function filterForRecentCourses(file: InfoFileRef, oldestYear: number) {
-    // Only download the json courses
-    const isJson = file.type === 'json'
+	// Only download the json courses
+	const isJson = file.type === 'json'
 
-    // Only get the last four years of data
-    const isRecent = file.year && file.year >= oldestYear
+	// Only get the last four years of data
+	const isRecent = file.year && file.year >= oldestYear
 
-    return isJson && isRecent
+	return isJson && isRecent
 }

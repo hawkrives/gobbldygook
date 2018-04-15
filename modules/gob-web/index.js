@@ -40,16 +40,16 @@ global._dispatch = store.dispatch
 global._store = store
 
 let renderFunc = Root => {
-    let renderEl = document.getElementById('gobbldygook')
-    if (!renderEl) {
-        return
-    }
-    render(
-        <Root store={store}>
-            <Router history={history} routes={routes} />
-        </Root>,
-        renderEl,
-    )
+	let renderEl = document.getElementById('gobbldygook')
+	if (!renderEl) {
+		return
+	}
+	render(
+		<Root store={store}>
+			<Router history={history} routes={routes} />
+		</Root>,
+		renderEl,
+	)
 }
 
 renderFunc(ReduxWrapper)

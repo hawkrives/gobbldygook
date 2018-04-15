@@ -1,8 +1,8 @@
 export function mockArea(name, type, revision, sourcePath = null) {
-    return {
-        name,
-        type,
-        revision,
-        sourcePath: sourcePath || `${type}/${name}.yaml`,
-    }
+	return {
+		name,
+		type,
+		revision,
+		sourcePath: sourcePath || `${type}/${name}.yaml`,
+	}
 }

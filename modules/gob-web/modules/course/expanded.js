@@ -10,156 +10,156 @@ import {semesterName, buildDeptNum} from '@gob/school-st-olaf-college'
 import {to12HourTime} from '@gob/lib'
 
 const Heading = styled.h2`
-    font-weight: 500;
-    font-feature-settings: 'smcp';
-    font-size: 1em;
-    margin-bottom: 0;
+	font-weight: 500;
+	font-feature-settings: 'smcp';
+	font-size: 1em;
+	margin-bottom: 0;
 `
 
 const Description = styled.div`
-    hyphens: auto;
+	hyphens: auto;
 `
 
 const Column = styled.div`
-    flex: 1;
+	flex: 1;
 
-    @media screen and (min-width: 45em) {
-        & + & {
-            margin-left: 3em;
-        }
-    }
+	@media screen and (min-width: 45em) {
+		& + & {
+			margin-left: 3em;
+		}
+	}
 `
 
 const InfoSegment = styled.div`
-    padding-bottom: 20px;
+	padding-bottom: 20px;
 `
 
 const ColumnsWrapper = styled.div`
-    display: flex;
-    flex-flow: row nowrap;
+	display: flex;
+	flex-flow: row nowrap;
 
-    @media screen and (max-width: 45em) {
-        flex-flow: column;
-    }
+	@media screen and (max-width: 45em) {
+		flex-flow: column;
+	}
 `
 
 const SummaryThing = styled.div`
-    white-space: normal;
+	white-space: normal;
 `
 
 type Props = {
-    className?: string,
-    course: Object,
+	className?: string,
+	course: Object,
 }
 
 export default class ExpandedCourse extends React.PureComponent<Props> {
-    render() {
-        const {course, className} = this.props
+	render() {
+		const {course, className} = this.props
 
-        const infoColumn = (
-            <Column>
-                {course.description && (
-                    <Description>
-                        <Heading>Description</Heading>
-                        <p>{course.description}</p>
-                    </Description>
-                )}
+		const infoColumn = (
+			<Column>
+				{course.description && (
+					<Description>
+						<Heading>Description</Heading>
+						<p>{course.description}</p>
+					</Description>
+				)}
 
-                <p>
-                    Offered in {semesterName(course.semester)} {course.year}.
-                </p>
+				<p>
+					Offered in {semesterName(course.semester)} {course.year}.
+				</p>
 
-                <p>
-                    {course.credits || 0}
-                    {` ${course.credits === 1 ? 'credit' : 'credits'}.`}
-                </p>
-            </Column>
-        )
+				<p>
+					{course.credits || 0}
+					{` ${course.credits === 1 ? 'credit' : 'credits'}.`}
+				</p>
+			</Column>
+		)
 
-        const detailColumn = (
-            <Column>
-                {course.prerequisites && (
-                    <div>
-                        <Heading>Prerequisites</Heading>
-                        <p>{course.prerequisites}</p>
-                    </div>
-                )}
+		const detailColumn = (
+			<Column>
+				{course.prerequisites && (
+					<div>
+						<Heading>Prerequisites</Heading>
+						<p>{course.prerequisites}</p>
+					</div>
+				)}
 
-                {course.times && (
-                    <div>
-                        <Heading>
-                            {course.offerings && course.offerings.length === 1
-                                ? 'Offering'
-                                : 'Offerings'}
-                        </Heading>
-                        <BulletedList>
-                            {flatMap(course.offerings, offering =>
-                                map(offering.times, time => {
-                                    const day = offering.day
-                                    const {start, end} = time
-                                    return (
-                                        <ListItem
-                                            key={`${day}-${start}-${end}`}
-                                        >
-                                            {offering.day}
-                                            {' from '}
-                                            {to12HourTime(time.start)}
-                                            {' to '}
-                                            {to12HourTime(time.end)}
-                                            {', in '}
-                                            {offering.location}
-                                        </ListItem>
-                                    )
-                                }),
-                            )}
-                        </BulletedList>
-                    </div>
-                )}
+				{course.times && (
+					<div>
+						<Heading>
+							{course.offerings && course.offerings.length === 1
+								? 'Offering'
+								: 'Offerings'}
+						</Heading>
+						<BulletedList>
+							{flatMap(course.offerings, offering =>
+								map(offering.times, time => {
+									const day = offering.day
+									const {start, end} = time
+									return (
+										<ListItem
+											key={`${day}-${start}-${end}`}
+										>
+											{offering.day}
+											{' from '}
+											{to12HourTime(time.start)}
+											{' to '}
+											{to12HourTime(time.end)}
+											{', in '}
+											{offering.location}
+										</ListItem>
+									)
+								}),
+							)}
+						</BulletedList>
+					</div>
+				)}
 
-                {course.instructors && (
-                    <div>
-                        <Heading>
-                            {course.instructors &&
-                            course.instructors.length === 1
-                                ? 'Instructor'
-                                : 'Instructors'}
-                        </Heading>
-                        <div>{oxford(course.instructors)}</div>
-                    </div>
-                )}
+				{course.instructors && (
+					<div>
+						<Heading>
+							{course.instructors &&
+							course.instructors.length === 1
+								? 'Instructor'
+								: 'Instructors'}
+						</Heading>
+						<div>{oxford(course.instructors)}</div>
+					</div>
+				)}
 
-                {course.gereqs && (
-                    <div>
-                        <Heading>G.E. Requirements</Heading>
-                        <BulletedList>
-                            {map(course.gereqs, ge => (
-                                <ListItem key={ge}>{ge}</ListItem>
-                            ))}
-                        </BulletedList>
-                    </div>
-                )}
-            </Column>
-        )
+				{course.gereqs && (
+					<div>
+						<Heading>G.E. Requirements</Heading>
+						<BulletedList>
+							{map(course.gereqs, ge => (
+								<ListItem key={ge}>{ge}</ListItem>
+							))}
+						</BulletedList>
+					</div>
+				)}
+			</Column>
+		)
 
-        return (
-            <div className={className}>
-                <InfoSegment>
-                    <CourseTitle {...course} />
+		return (
+			<div className={className}>
+				<InfoSegment>
+					<CourseTitle {...course} />
 
-                    <SummaryThing>
-                        <span className="identifier">
-                            {buildDeptNum(course, true)}
-                        </span>
-                        {' • '}
-                        <span className="type">{course.type}</span>
-                    </SummaryThing>
-                </InfoSegment>
+					<SummaryThing>
+						<span className="identifier">
+							{buildDeptNum(course, true)}
+						</span>
+						{' • '}
+						<span className="type">{course.type}</span>
+					</SummaryThing>
+				</InfoSegment>
 
-                <ColumnsWrapper>
-                    {infoColumn}
-                    {detailColumn}
-                </ColumnsWrapper>
-            </div>
-        )
-    }
+				<ColumnsWrapper>
+					{infoColumn}
+					{detailColumn}
+				</ColumnsWrapper>
+			</div>
+		)
+	}
 }
