@@ -1,4 +1,4 @@
 // @flow
-export * from './colors'
+export * from '@gob/colors'
 export * from './mixins'
 export * from './variables'

@@ -56,7 +56,7 @@ function config() {
         publicPath: publicPath,
 
         // extract-text-plugin uses [contenthash], and webpack uses [hash].
-        filename: isDevelopment ? 'app.js' : `${pkg.name}.[hash].js`,
+        filename: isDevelopment ? 'app.js' : 'app.[hash].js',
         chunkFilename: 'chunk.[name].[chunkhash].js',
 
         // Add /*filename*/ comments to generated require()s in the output.
@@ -92,10 +92,9 @@ function config() {
 
         // Generates an index.html for us.
         new HtmlPlugin(context => {
-            let cssPath = context.css ? `${publicPath}${context.css}` : null
-            let bugsnag = isProduction
-                ? '<script src="https://d2wy8f7a9ursnm.cloudfront.net/bugsnag-3.min.js" data-apikey="7e393deddaeb885f5b140b4320ecef6b"></script>'
-                : ''
+            let cssLink = context.css
+                ? `<link rel="stylesheet" href="${publicPath}${context.css}">`
+                : null
             let polyfills = isProduction
                 ? '<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>'
                 : ''
@@ -109,9 +108,8 @@ function config() {
 
                 <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/nhhpgddphdimipafjfiggjnbbmcoklld">
 
-                ${bugsnag}
                 ${polyfills}
-                ${cssPath ? `<link rel="stylesheet" href="${cssPath}">` : ''}
+                ${cssLink ? cssLink : ''}
 
                 <main id="gobbldygook"></main>
                 <script src="${publicPath}${context.main}"></script>
@@ -185,9 +183,7 @@ function config() {
         )
         plugins.push(
             new ExtractTextPlugin({
-                filename: isDevelopment
-                    ? 'app.css'
-                    : `${pkg.name}.[contenthash].css`,
+                filename: isDevelopment ? 'app.css' : 'app.[contenthash].css',
                 allChunks: true,
             })
         )

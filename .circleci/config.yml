@@ -97,3 +97,6 @@ jobs:
       - run: yarn install
       - save_cache: *save-cache-yarn
       - run: yarn run --silent build
+      - run: node scripts/rearrange-for-circle.js
+      - store_artifacts:
+          path: ./modules/gob-web/build

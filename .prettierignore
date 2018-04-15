@@ -2,3 +2,4 @@ modules/gob-web/styles/normalize.scss
 *.md
 *.json
 flow-typed/
+build/

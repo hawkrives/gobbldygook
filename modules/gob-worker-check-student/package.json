@@ -1,0 +1,14 @@
+{
+  "name": "@gob/worker-check-student",
+  "version": "3.0.0-rc.2",
+  "main": "index.worker.js",
+  "license": "MIT",
+  "dependencies": {
+  	"@gob/courses": "^3.0.0-rc.2",
+    "@gob/lib": "^3.0.0-rc.2",
+  	"@gob/examine-student": "^3.0.0-rc.2",
+  	"@gob/object-student": "^3.0.0-rc.2",
+    "debug": "^3.1.0",
+    "lodash": "^4.17.5"
+  }
+}

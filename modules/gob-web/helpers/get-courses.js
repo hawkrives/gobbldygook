@@ -1,5 +1,5 @@
 // @flow
-import db from './db'
+import {db} from './db'
 import omit from 'lodash/omit'
 import padStart from 'lodash/padStart'
 import {status, json} from '@gob/lib'

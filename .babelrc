@@ -5,10 +5,10 @@
 		["env", {
 			"modules": false,
 			"targets": {
-				"ie": 12,
 				"browsers": [
 					"last 2 versions",
-					"Firefox ESR"
+					"not android > 0",
+					"not ie > 0"
 				]
 			}
 		}]
@@ -18,7 +18,7 @@
 		"transform-object-rest-spread",
 		"transform-react-display-name",
 		"babel-plugin-styled-components",
-		["transform-runtime", {"polyfill": false}]
+		["transform-runtime", {"polyfill": false, "regenerator": false}]
 		// turns `import {sum} from 'lodash'`
 		// into `import sum from 'lodash/sum'`
 		// "lodash",

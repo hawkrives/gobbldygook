@@ -817,7 +817,7 @@ describe('the undoable students reducer', () => {
     })
 
     it('allows redoing to a future state', () => {
-        const initial = undoableReducer(initial, {
+        const initial = undoableReducer({}, {
             type: INIT_STUDENT,
             payload: {id: 'xyz'},
         })

@@ -1,0 +1,20 @@
+{
+  "name": "@gob/worker-load-data",
+  "version": "3.0.0-rc.2",
+  "main": "index.worker.js",
+  "license": "MIT",
+  "dependencies": {
+    "@gob/lib": "^3.0.0-rc.2",
+    "@gob/school-st-olaf-college": "^3.0.0-rc.2",
+    "@gob/web-database": "^3.0.0-rc.2",
+    "debug": "^3.1.0",
+    "idb-range": "^3.1.3",
+    "js-yaml": "^3.11.0",
+    "lodash": "^4.17.5",
+    "p-series": "^1.1.0",
+    "present": "^1.0.0",
+    "serialize-error": "^2.1.0",
+    "sto-sis-time-parser": "^2.3.3",
+    "whatwg-fetch": "^2.0.4"
+  }
+}

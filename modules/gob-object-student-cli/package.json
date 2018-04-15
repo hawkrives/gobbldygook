@@ -8,14 +8,14 @@
   "dependencies": {
     "@gob/cli": "^3.0.0-rc.2",
     "@gob/examine-student": "^3.0.0-rc.2",
-    "chalk": "2.3.2",
-    "graceful-fs": "4.1.11",
-    "js-yaml": "3.11.0",
-    "junk": "2.1.0",
-    "lodash": "4.17.5",
-    "nomnom": "1.8.1",
-    "pify": "3.0.0",
-    "plur": "3.0.0",
-    "sparkly": "3.1.2"
+    "chalk": "^2.3.2",
+    "graceful-fs": "^4.1.11",
+    "js-yaml": "^3.11.0",
+    "junk": "^2.1.0",
+    "lodash": "^4.17.5",
+    "nomnom": "^1.8.1",
+    "pify": "^3.0.0",
+    "plur": "^3.0.0",
+    "sparkly": "^3.1.2"
   }
 }
