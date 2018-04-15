@@ -14,7 +14,7 @@ describe('AvatarLetter', () => {
     })
 
     it('uses the first letter of the value as its text', () => {
-        const wrapper = mount(<AvatarLetter value={'Hawken'} />)
+        const wrapper = mount(<AvatarLetter value="Hawken" />)
         expect(wrapper.text()).toBe('H')
     })
 
