@@ -151,17 +151,6 @@ function config() {
 		// a plugin that prints an error when you attempt to do this.
 		new CaseSensitivePathsPlugin(),
 
-		new LoaderOptionsPlugin({
-			options: {
-				worker: {
-					output: {
-						filename: '[hash].worker.js',
-						chunkFilename: '[id].[hash].worker.js',
-					},
-				},
-			},
-		}),
-
 		new NamedModulesPlugin(),
 
 		// copy files – into the webpack {output} directory
