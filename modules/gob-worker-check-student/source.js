@@ -21,7 +21,7 @@ function doWork(student: any, area: any) {
 	student.courses = map(getActiveCourses(student), alterCourse)
 
 	let details = tryEvaluate(student, area._area)
-	if (details._error) {
+	if ('_error' in details) {
 		return details
 	}
 
