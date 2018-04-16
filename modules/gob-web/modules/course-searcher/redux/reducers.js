@@ -83,7 +83,7 @@ const SORT_BY_TO_KEY = {
 function sortAndGroup({sortBy: sorting, groupBy: grouping, rawResults}) {
 	const start = present()
 
-	// TODO: Speed this up! This preperation stuff takes ~230ms by itself,
+	// TODO: Speed this up! This preparation stuff takes ~230ms by itself,
 	// with enough courses rendered. (like, say, {year: 2012})
 	const sorted = sortBy(rawResults, SORT_BY_TO_KEY[sorting])
 
