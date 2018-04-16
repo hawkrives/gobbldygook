@@ -7,6 +7,7 @@ import CourseWithModal from './with-modal'
 
 type Props = {
 	className?: string,
+	style?: any,
 	connectDragSource: () => any, // react-dnd
 	isDragging: boolean, // react-dnd
 }
@@ -24,7 +25,7 @@ class DraggableCourse extends React.PureComponent<Props> {
 		})
 
 		return this.props.connectDragSource(
-			<div>
+			<div style={this.props.style}>
 				<Draggable className={classSet} {...this.props} />
 			</div>,
 		)
