@@ -4,6 +4,7 @@ import '@babel/polyfill'
 
 import 'typeface-fira-sans'
 import './styles/normalize.scss'
+import 'react-virtualized/styles.css'
 
 import debug from 'debug'
 const log = debug('web')
