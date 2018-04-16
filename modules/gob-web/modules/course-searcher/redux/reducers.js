@@ -92,7 +92,7 @@ function sortAndGroup({sortBy: sorting, groupBy: grouping, rawResults}) {
 
 	// Sort the result arrays by the first element, the term, because
 	// object keys don't have an implicit sort.
-	let processed = sortBy(groupedAndPaired, group => group[0])
+	let processed = sortBy(groupedAndPaired, ([key]) => key)
 
 	if (REVERSE_ORDER.has(grouping)) {
 		// Also reverse it, so the most recent is at the top.
