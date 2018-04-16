@@ -5,7 +5,7 @@ import cx from 'classnames'
 import {IDENT_COURSE} from '@gob/object-student'
 import CourseWithModal from './with-modal'
 
-type PropTypes = {
+type Props = {
 	className?: string,
 	connectDragSource: () => any, // react-dnd
 	isDragging: boolean, // react-dnd
@@ -17,9 +17,7 @@ const Draggable = styled(CourseWithModal)`
 	}
 `
 
-class DraggableCourse extends React.PureComponent {
-	props: PropTypes
-
+class DraggableCourse extends React.PureComponent<Props> {
 	render() {
 		const classSet = cx(this.props.className, {
 			'is-dragging': this.props.isDragging,
