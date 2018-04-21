@@ -2,7 +2,7 @@
 
 import series from 'p-series'
 import debug from 'debug'
-import {status, text} from '@gob/lib'
+import {status} from '@gob/lib'
 
 import parseData from './parse-data'
 import cleanPriorData from './clean-prior-data'
@@ -13,10 +13,11 @@ import {Notification} from './lib-dispatch'
 import type {InfoFileTypeEnum, InfoFileRef} from './types'
 
 const log = debug('worker:load-data:update-database')
-const fetchText = (...args) =>
-	fetch(...args)
+const fetchText = (...args): Promise<string> => {
+	return fetch(...args)
 		.then(status)
-		.then(text)
+		.then(r => r.text())
+}
 
 export default function updateDatabase(
 	type: InfoFileTypeEnum,
@@ -29,7 +30,7 @@ export default function updateDatabase(
 	// Append the hash, to act as a sort of cache-busting mechanism
 	const url = `${infoFileBase}/${path}?v=${hash}`
 
-	const nextStep = rawData => {
+	const nextStep = (rawData: string) => {
 		// now parse the data into a usable form
 		const data = parseData(rawData, type)
 

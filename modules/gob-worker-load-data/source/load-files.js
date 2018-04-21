@@ -2,7 +2,7 @@
 
 import startsWith from 'lodash/startsWith'
 import series from 'p-series'
-import {status, json} from '@gob/lib'
+import {status} from '@gob/lib'
 import debug from 'debug'
 import {refreshCourses, refreshAreas, Notification} from './lib-dispatch'
 import needsUpdate from './needs-update'
@@ -11,10 +11,11 @@ import removeDuplicateAreas from './remove-duplicate-areas'
 import type {InfoFileTypeEnum, InfoFileRef, InfoIndexFile} from './types'
 const log = debug('worker:load-data:load-files')
 
-const fetchJson = (...args) =>
-	fetch(...args)
+const fetchJson = (...args): Promise<mixed> => {
+	return fetch(...args)
 		.then(status)
-		.then(json)
+		.then(r => r.json())
+}
 
 type Args = {|
 	baseUrl: string,
@@ -27,7 +28,9 @@ export default function loadFiles(url: string, baseUrl: string) {
 	log(url)
 
 	return fetchJson(url)
-		.then(data => proceedWithUpdate(baseUrl, data))
+		.then(data => {
+			return proceedWithUpdate(baseUrl, ((data: any): InfoIndexFile))
+		})
 		.catch(err => handleErrors(err, url))
 }
 
