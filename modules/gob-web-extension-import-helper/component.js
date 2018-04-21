@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 import styled from 'styled-components'
 import {interpose} from '@gob/lib'
 import brwsr from 'brwsr'
@@ -33,12 +33,70 @@ type Props = {
 type State = {
 	installError: ?Error,
 	installAttempted: boolean,
+	browser: string,
+	buttons: Array<BrowserButton>,
 }
 
 export class BrowserExtensionsComponent extends React.Component<Props, State> {
 	state = {
 		installAttempted: false,
 		installError: null,
+		browser: brwsr(),
+		buttons: [
+			{
+				name: 'Google Chrome',
+				button: (
+					<BrowserButton
+						key="chrome"
+						onClick={this.installChromeExtension}
+						browserName="Chrome"
+					/>
+				),
+			},
+			{
+				name: 'Mozilla Firefox',
+				button: (
+					<BrowserButton
+						key="firefox"
+						onClick={this.installFirefoxExtension}
+						browserName="Firefox"
+					/>
+				),
+			},
+			{
+				name: 'Microsoft Edge',
+				button: (
+					<BrowserButton
+						key="edge"
+						disabled
+						onClick={this.installEdgeExtension}
+						browserName="Edge"
+					/>
+				),
+			},
+			{
+				name: 'Safari',
+				button: (
+					<BrowserButton
+						key="safari"
+						disabled
+						onClick={this.installSafariExtension}
+						browserName="Safari"
+					/>
+				),
+			},
+			{
+				name: 'Opera',
+				button: (
+					<BrowserButton
+						key="opera"
+						disabled
+						onClick={this.installOperaExtension}
+						browserName="Opera"
+					/>
+				),
+			},
+		],
 	}
 
 	checkExtensionStatus = () => {
@@ -106,110 +164,60 @@ export class BrowserExtensionsComponent extends React.Component<Props, State> {
 		return `${base} Use the appropriate link below to install the extension.`
 	}
 
-	buttons() {
-		return [
-			{
-				name: 'Google Chrome',
-				button: (
-					<BrowserButton
-						key="chrome"
-						onClick={this.installChromeExtension}
-						browserName="Chrome"
-					/>
-				),
-			},
-			{
-				name: 'Mozilla Firefox',
-				button: (
-					<BrowserButton
-						key="firefox"
-						onClick={this.installFirefoxExtension}
-						browserName="Firefox"
-					/>
-				),
-			},
-			{
-				name: 'Microsoft Edge',
-				button: (
-					<BrowserButton
-						key="edge"
-						disabled
-						onClick={this.installEdgeExtension}
-						browserName="Edge"
-					/>
-				),
-			},
-			{
-				name: 'Safari',
-				button: (
-					<BrowserButton
-						key="safari"
-						disabled
-						onClick={this.installSafariExtension}
-						browserName="Safari"
-					/>
-				),
-			},
-			{
-				name: 'Opera',
-				button: (
-					<BrowserButton
-						key="opera"
-						disabled
-						onClick={this.installOperaExtension}
-						browserName="Opera"
-					/>
-				),
-			},
-		]
-	}
-
-	primaryButton() {
-		return this.buttons()
-			.filter(btn => btn.name === this.detectBrowser())
-			.map(btn => btn.button)[0]
-	}
-
-	secondaryButtons() {
-		return this.buttons()
-			.filter(btn => btn.name !== this.detectBrowser())
+	buttons(): Array<BrowserButton> {
+		return this.state.buttons
+			.filter(btn => btn.name !== this.state.browser)
 			.map(btn => btn.button)
+	}
+
+	primaryButton(): BrowserButton {
+		return this.buttons()[0]
+	}
+
+	secondaryButtons(): Array<BrowserButton> {
+		return this.buttons()
 	}
 
 	render() {
 		if (this.checkExtensionStatus()) {
-			return (
-				<div>
-					<p>The extension is installed and active. Let's rock!</p>
-				</div>
-			)
+			return <p>The extension is installed and active. Let's rock!</p>
 		}
 
 		return (
-			<div>
+			<React.Fragment>
 				<p>
 					Gobbldygook uses a browser extension to import your data
 					from the SIS. Once you have imported your information, you
-					don't need the extension anymore.
+					no longer need the extension.
 				</p>
 
 				<p>{this.flavorText()}</p>
 
-				<p>Install for {this.primaryButton()}. </p>
-
-				<details>
-					<summary>Not {this.detectBrowser()}?</summary>
-					<p>
-						We also have {interpose(this.secondaryButtons(), ', ')}.
-					</p>
-				</details>
+				<ul>
+					{this.state.buttons.map(btn => {
+						return (
+							<li
+								key={btn.name}
+								className={
+									btn.name === this.state.browser
+										? 'active'
+										: ''
+								}
+							>
+								{btn.name}
+								<br />
+								{btn.button}
+							</li>
+						)
+					})}
+				</ul>
 
 				<p>
 					{this.state.installError
 						? this.state.installError.message
 						: null}
 				</p>
-			</div>
+			</React.Fragment>
 		)
 	}
 }
