@@ -2,7 +2,7 @@
 
 import startsWith from 'lodash/startsWith'
 import series from 'p-series'
-import {status} from '@gob/lib'
+import {status, json} from '@gob/lib'
 import debug from 'debug'
 import {refreshCourses, refreshAreas, Notification} from './lib-dispatch'
 import needsUpdate from './needs-update'
@@ -14,7 +14,7 @@ const log = debug('worker:load-data:load-files')
 const fetchJson = (...args): Promise<mixed> => {
 	return fetch(...args)
 		.then(status)
-		.then(r => r.json())
+		.then(json)
 }
 
 type Args = {|

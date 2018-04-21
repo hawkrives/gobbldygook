@@ -2,7 +2,7 @@
 
 import series from 'p-series'
 import debug from 'debug'
-import {status} from '@gob/lib'
+import {status, text} from '@gob/lib'
 
 import parseData from './parse-data'
 import cleanPriorData from './clean-prior-data'
@@ -14,9 +14,10 @@ import type {InfoFileTypeEnum, InfoFileRef} from './types'
 
 const log = debug('worker:load-data:update-database')
 const fetchText = (...args): Promise<string> => {
+	// $FlowFixMe text isn't refining the return type
 	return fetch(...args)
 		.then(status)
-		.then(r => r.text())
+		.then(text)
 }
 
 export default function updateDatabase(
