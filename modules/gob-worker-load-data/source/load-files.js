@@ -11,10 +11,11 @@ import removeDuplicateAreas from './remove-duplicate-areas'
 import type {InfoFileTypeEnum, InfoFileRef, InfoIndexFile} from './types'
 const log = debug('worker:load-data:load-files')
 
-const fetchJson = (...args) =>
-	fetch(...args)
+const fetchJson = (...args): Promise<mixed> => {
+	return fetch(...args)
 		.then(status)
 		.then(json)
+}
 
 type Args = {|
 	baseUrl: string,
@@ -27,7 +28,9 @@ export default function loadFiles(url: string, baseUrl: string) {
 	log(url)
 
 	return fetchJson(url)
-		.then(data => proceedWithUpdate(baseUrl, data))
+		.then(data => {
+			return proceedWithUpdate(baseUrl, ((data: any): InfoIndexFile))
+		})
 		.catch(err => handleErrors(err, url))
 }
 

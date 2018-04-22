@@ -39,6 +39,7 @@ rules:
   consistent-this: [warn, self]
   curly: [error, multi-line]
   default-case: error
+  eqeqeq: [error, smart]
   guard-for-in: error
   new-cap: off
   no-await-in-loop: warn
@@ -47,7 +48,6 @@ rules:
   no-console: off
   no-const-assign: error
   no-div-regex: error
-  no-eq-null: error
   no-extra-label: error
   no-fallthrough: error
   no-implicit-coercion: [error, {boolean: true, number: true, string: true}]
@@ -60,7 +60,7 @@ rules:
   no-underscore-dangle: off
   no-unmodified-loop-condition: error
   no-unused-labels: error
-  no-unused-vars: ['warn', {args: 'after-used', argsIgnorePattern: '^_$'}]
+  no-unused-vars: ['warn', {args: 'after-used', argsIgnorePattern: '^_'}]
   no-useless-constructor: error
   no-var: error
   prefer-spread: warn

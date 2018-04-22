@@ -4,9 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-  	"@gob/lib": "^3.0.0-rc.2",
+    "@gob/lib": "^3.0.0-rc.2",
     "brwsr": "^1.0.1",
-    "react": "^16.3.1",
-    "styled-components": "^3.2.5"
+    "react": "^16.3.2",
+    "styled-components": "^3.2.6"
   }
 }

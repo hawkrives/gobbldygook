@@ -11,7 +11,7 @@
     "css-select": "^2.0.0",
     "htmlparser2": "^3.9.2",
     "lodash": "^4.17.5",
-    "p-props": "^1.1.0",
+    "p-props": "^1.2.0",
     "uuid": "^3.2.1"
   }
 }
