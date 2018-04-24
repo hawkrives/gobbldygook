@@ -6418,9 +6418,9 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-codemirror2@^4.2.1:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/react-codemirror2/-/react-codemirror2-4.2.1.tgz#4ad3c5c60ebbcb34880f961721b51527324ec021"
+react-codemirror2@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/react-codemirror2/-/react-codemirror2-5.0.1.tgz#81eb8e17bfe859633a6855a9ce40307914d42891"
 
 react-dnd-html5-backend@^2.6.0:
   version "2.6.0"
