@@ -5,6 +5,7 @@
 
 const pkg = require('./package.json')
 const webpack = require('webpack')
+const Stylish = require('webpack-stylish')
 
 const {
 	DefinePlugin,
@@ -155,6 +156,8 @@ function config() {
 
 		// copy files – into the webpack {output} directory
 		new CopyWebpackPlugin([{from: './static/*', flatten: true}]),
+
+		new Stylish(),
 	]
 
 	if (isProduction) {
