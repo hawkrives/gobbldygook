@@ -86,4 +86,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
 	bindActionCreators({undo, redo, loadStudents}, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(DegubContainer)
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)(DegubContainer)

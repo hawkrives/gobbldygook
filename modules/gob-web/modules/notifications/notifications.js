@@ -44,4 +44,7 @@ const selectDispatch = dispatch => ({
 	...bindActionCreators({removeNotification}, dispatch),
 })
 
-export default connect(selectState, selectDispatch)(Notifications)
+export default connect(
+	selectState,
+	selectDispatch,
+)(Notifications)

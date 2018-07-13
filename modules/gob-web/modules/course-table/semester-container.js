@@ -67,6 +67,9 @@ export class SemesterContainer extends React.Component {
 const mapDispatchToProps = dispatch =>
 	bindActionCreators({destroySchedules, moveCourse, addCourse}, dispatch)
 
-const connected = connect(undefined, mapDispatchToProps)(SemesterContainer)
+const connected = connect(
+	undefined,
+	mapDispatchToProps,
+)(SemesterContainer)
 
 export default connected

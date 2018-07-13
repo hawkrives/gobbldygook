@@ -16,23 +16,19 @@ module.exports.cli = function cli() {
 
 	const nom = nomnom()
 
-	nom
-		.command('check')
+	nom.command('check')
 		.callback(check)
 		.help('check a student')
 
-	nom
-		.command('lint')
+	nom.command('lint')
 		.callback(lint)
 		.help('lint (syntax-check) an area file')
 
-	nom
-		.command('update')
+	nom.command('update')
 		.callback(update)
 		.help('update local data cache')
 
-	nom
-		.command('search')
+	nom.command('search')
 		.callback(search)
 		.help('search for a course')
 		.option('riddles', {

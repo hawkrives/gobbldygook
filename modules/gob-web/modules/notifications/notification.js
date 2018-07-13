@@ -99,7 +99,7 @@ export default function Notification(props: Props) {
 	const progressBar = type === 'progress' && (
 		<ProgressContainer>
 			<ProgressBar value={value} max={max} />
-			<Percentage>{round(value / max * 100, 0)}%</Percentage>
+			<Percentage>{round((value / max) * 100, 0)}%</Percentage>
 		</ProgressContainer>
 	)
 

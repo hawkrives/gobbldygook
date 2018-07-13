@@ -98,6 +98,7 @@ const mapDispatchToProps = dispatch =>
 		dispatch,
 	)
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-	CourseSearcherContainer,
-)
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)(CourseSearcherContainer)

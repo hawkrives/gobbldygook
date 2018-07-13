@@ -135,4 +135,7 @@ const mapDispatchToProps = dispatch => ({
 	...bindActionCreators({loadAllAreas}, dispatch),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(AreaEditScreen)
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)(AreaEditScreen)

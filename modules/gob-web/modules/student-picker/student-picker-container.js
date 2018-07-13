@@ -69,6 +69,7 @@ const mapDispatchToProps = dispatch => ({
 	...bindActionCreators({destroyStudent, loadStudents}, dispatch),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-	StudentPickerContainer,
-)
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)(StudentPickerContainer)

@@ -72,4 +72,7 @@ CourseTableContainer.propTypes = {
 const mapDispatchToProps = dispatch =>
 	bindActionCreators({addSchedule, destroySchedules}, dispatch)
 
-export default connect(undefined, mapDispatchToProps)(CourseTableContainer)
+export default connect(
+	undefined,
+	mapDispatchToProps,
+)(CourseTableContainer)

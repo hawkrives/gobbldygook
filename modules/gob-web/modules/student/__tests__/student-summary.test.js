@@ -173,8 +173,7 @@ describe('DateSummary', () => {
 		)
 
 		expect(tree).toMatchSnapshot()
-		tree
-			.find('ContentEditable')
+		tree.find('ContentEditable')
 			.at(0)
 			.simulate('blur', '2010')
 		expect(onChangeMatriculation).toHaveBeenCalledWith('2010')
@@ -191,8 +190,7 @@ describe('DateSummary', () => {
 		)
 
 		expect(tree).toMatchSnapshot()
-		tree
-			.find('ContentEditable')
+		tree.find('ContentEditable')
 			.at(1)
 			.simulate('blur', '2018')
 		expect(onChangeGraduation).toHaveBeenCalledWith('2018')
@@ -398,8 +396,7 @@ describe('Header', () => {
 		)
 
 		expect(tree).toMatchSnapshot()
-		tree
-			.find('ContentEditable')
+		tree.find('ContentEditable')
 			.at(0)
 			.simulate('blur', 'Black Widow')
 		expect(onChangeName).toHaveBeenCalledWith('Black Widow')

@@ -242,4 +242,7 @@ let mapState = state => ({
 
 let mapDispatch = dispatch => ({dispatch})
 
-export default connect(mapState, mapDispatch)(withRouter(ManualCreationScreen))
+export default connect(
+	mapState,
+	mapDispatch,
+)(withRouter(ManualCreationScreen))

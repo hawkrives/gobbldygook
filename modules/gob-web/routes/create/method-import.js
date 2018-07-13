@@ -218,4 +218,7 @@ const StudentInfo = ({student}: {student: mixed}) => (
 
 let mapDispatch = dispatch => ({dispatch})
 
-export default connect(undefined, mapDispatch)(withRouter(SISImportScreen))
+export default connect(
+	undefined,
+	mapDispatch,
+)(withRouter(SISImportScreen))

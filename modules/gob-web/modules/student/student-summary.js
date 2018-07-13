@@ -151,9 +151,11 @@ type FooterProps = {
 }
 
 export class Footer extends React.PureComponent<FooterProps> {
-	goodGraduationMessage = "It looks like you'll make it! Just follow the plan, and go over my output with your advisor a few times."
+	goodGraduationMessage =
+		"It looks like you'll make it! Just follow the plan, and go over my output with your advisor a few times."
 
-	badGraduationMessage = "You haven't planned everything out yet. Ask your advisor if you need help fitting everything in."
+	badGraduationMessage =
+		"You haven't planned everything out yet. Ask your advisor if you need help fitting everything in."
 
 	render() {
 		const msg = this.props.canGraduate

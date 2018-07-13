@@ -96,4 +96,7 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = dispatch =>
 	bindActionCreators({loadStudent}, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(Student)
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)(Student)

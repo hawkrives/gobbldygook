@@ -89,4 +89,7 @@ const mapDispatch = dispatch =>
 	bindActionCreators({addArea, removeArea}, dispatch)
 
 // $FlowFixMe
-export default connect(null, mapDispatch)(AreaOfStudyGroup)
+export default connect(
+	null,
+	mapDispatch,
+)(AreaOfStudyGroup)
