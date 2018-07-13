@@ -10,10 +10,10 @@
     "@gob/lib": "^3.0.0-rc.2",
     "debug": "^3.1.0",
     "listify": "^1.0.0",
-    "lodash": "^4.17.5",
+    "lodash": "^4.17.10",
     "ord": "^0.1.1",
     "stabilize": "^1.0.0",
     "sto-sis-time-parser": "^2.3.3",
-    "uuid": "^3.2.1"
+    "uuid": "^3.3.2"
   }
 }

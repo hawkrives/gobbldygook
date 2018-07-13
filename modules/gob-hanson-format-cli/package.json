@@ -8,8 +8,8 @@
   "dependencies": {
     "@gob/hanson-format": "^3.0.0-rc.2",
     "get-stdin": "^5.0.1",
-    "js-yaml": "^3.11.0",
-    "lodash": "^4.17.5",
+    "js-yaml": "^3.12.0",
+    "lodash": "^4.17.10",
     "nomnom": "^1.8.1"
   }
 }

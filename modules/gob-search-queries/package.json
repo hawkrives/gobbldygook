@@ -9,8 +9,8 @@
     "@gob/lib": "^3.0.0-rc.2",
     "@gob/school-st-olaf-college": "^3.0.0-rc.2",
     "css-select": "^2.0.0",
-    "lodash": "^4.17.5",
+    "lodash": "^4.17.10",
     "p-props": "^1.2.0",
-    "uuid": "^3.2.1"
+    "uuid": "^3.3.2"
   }
 }
