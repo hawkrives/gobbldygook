@@ -3,11 +3,13 @@
 .manual .autosize-input > input {
 	border: 0;
 	border-bottom: 1px solid $gray-400;
-	padding: 0 0.125em 0 0;
+	// padding: 0 0.125em 0 0;
+	padding: 0 0.0625em 0 0.125em;
 
 	&:focus {
 		outline: 0;
-		background-color: $gray-50;
+		background-color: $blue-50;
+		border-bottom-color: $blue-400;
 	}
 }
 
