@@ -48,7 +48,7 @@ function config() {
 		entry.main.unshift(
 			// 'react-hot-loader/patch',
 			'webpack-dev-server/client?/',
-			'webpack/hot/only-dev-server',
+			// 'webpack/hot/only-dev-server',
 		)
 	}
 
@@ -84,10 +84,10 @@ function config() {
 
 		// We also do the manual entry above and the manual adding of the hot
 		// module replacment plugin below.
-		hot: true,
+		// hot: true,
 	}
 
-	const plugins = [
+	let plugins = [
 		// clean out the build folder between builds
 		new CleanWebpackPlugin([outputFolder]),
 
@@ -162,7 +162,8 @@ function config() {
 
 	if (isProduction) {
 		// minify in production
-		plugins.push(
+		plugins = [
+			...plugins,
 			new UglifyJsPlugin({
 				cache: true,
 				parallel: true,
@@ -172,24 +173,20 @@ function config() {
 					warnings: false,
 				},
 			}),
-		)
-		plugins.push(
 			new ExtractTextPlugin({
 				filename: isDevelopment ? 'app.css' : 'app.[contenthash].css',
 				allChunks: true,
 			}),
-		)
-		plugins.push(
 			new LoaderOptionsPlugin({
 				minimize: true,
 			}),
-		)
-		plugins.push(new DuplicatePackageCheckerPlugin())
+			new DuplicatePackageCheckerPlugin(),
+		]
 	}
 
 	if (isDevelopment) {
 		// add dev plugins
-		plugins.push(new HotModuleReplacementPlugin())
+		// plugins = [...plugins, new HotModuleReplacementPlugin()]
 	}
 
 	const babelLoader = {

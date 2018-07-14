@@ -21,11 +21,11 @@ const finalCreateStore = compose(
 export default function configureStore(initialState) {
 	const store = finalCreateStore(rootReducer, initialState)
 
-	if (module.hot) {
-		module.hot.accept('./reducer', () =>
-			store.replaceReducer(require('./reducer').default),
-		)
-	}
+	// if (module.hot) {
+	// 	module.hot.accept('./reducer', () =>
+	// 		store.replaceReducer(require('./reducer').default),
+	// 	)
+	// }
 
 	return store
 }
