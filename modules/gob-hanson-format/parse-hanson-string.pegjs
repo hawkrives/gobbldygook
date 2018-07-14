@@ -301,6 +301,7 @@ Modifier
         'course'
       / 'credit'
       / 'department'
+      / 'term'
     ) OptionalS _ besides:Besides? _ 'from' _
     from:(
         'children' _ 'where' _ where:Qualifier { return { $from: 'children-where', $where: where, $children: '$all' } }
@@ -315,6 +316,9 @@ Modifier
     {
       if (from.$from === 'where' && what === 'department') {
         throw new Error('cannot use a modifier with "departments" or "department"')
+      }
+      if (from.$from === 'where' && what === 'term') {
+        throw new Error('cannot use a modifier with "terms" or "term"')
       }
       if (from.$from === 'children-where' && what !== 'course') {
         throw new Error('must use "courses from" with "children where"')
