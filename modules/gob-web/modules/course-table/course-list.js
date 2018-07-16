@@ -54,7 +54,7 @@ export default function CourseList(props: Props) {
 	const courseObjects = props.courses.map(
 		(course, i) =>
 			course.error ? (
-				<Missing clbid={course.clbid} error={course.error} />
+				<Missing id={course.id} error={course.error} />
 			) : (
 				<Course
 					index={i}
