@@ -6,7 +6,7 @@ import {semesterName, buildDeptString} from '@gob/school-st-olaf-college'
 import './expression--course.scss'
 
 export default function CourseExpression(props) {
-	const department = buildDeptString(props.department)
+	const department = props.subject//buildDeptString(props.department)
 
 	const international = props.international && (
 		<span className="course--international">I</span>
@@ -66,14 +66,15 @@ export default function CourseExpression(props) {
 CourseExpression.propTypes = {
 	_result: PropTypes.bool,
 	_taken: PropTypes.bool,
-	department: PropTypes.arrayOf(PropTypes.string).isRequired,
+	//department: PropTypes.arrayOf(PropTypes.string).isRequired,
 	international: PropTypes.bool,
 	lab: PropTypes.bool,
 	level: PropTypes.number,
-	number: PropTypes.number,
+	number: PropTypes.string,
 	section: PropTypes.string,
 	semester: PropTypes.number,
 	style: PropTypes.object,
+	subject: PropTypes.string.isRequired,
 	type: PropTypes.string,
 	year: PropTypes.number,
 }
