@@ -4,8 +4,11 @@ import has from 'lodash/has'
 
 const SEMESTERS = {
 	'0': 'Abroad',
+	'FA': 'Fall',
 	'1': 'Fall',
-	'2': 'Interim',
+	'WI': 'Winter',
+	'2': 'Winter',
+	'SP': 'Spring',
 	'3': 'Spring',
 	'4': 'Summer Session 1',
 	'5': 'Summer Session 2',
