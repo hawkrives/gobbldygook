@@ -5,6 +5,9 @@
   "repository": "hawkrives/gobbldygook",
   "author": "Hawken MacKay Rives",
   "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
   "dependencies": {
     "@gob/hanson-format": "^3.0.0-rc.2",
     "@gob/lib": "^3.0.0-rc.2",
