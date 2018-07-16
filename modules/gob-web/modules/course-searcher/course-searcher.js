@@ -1,7 +1,6 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 
-import map from 'lodash/map'
 import uniqueId from 'lodash/uniqueId'
 import {toPrettyTerm} from '@gob/school-st-olaf-college'
 
@@ -148,17 +147,19 @@ export default function CourseSearcher(props: CourseSearcherProps) {
 						Close
 					</Button>
 				</div>
+
 				<div className="row">
 					<input
 						type="search"
 						className="search-box"
 						value={query}
-						placeholder={'Search for a course or phrase'}
+						placeholder='Search for a course or phrase'
 						onChange={onQueryChange}
 						onKeyDown={onKeyDown}
 						autoFocus={true}
 					/>
 				</div>
+
 				<div className="row submit">
 					<Button
 						className="submit-search-query"
@@ -168,13 +169,14 @@ export default function CourseSearcher(props: CourseSearcherProps) {
 						disabled={inProgress}
 					>
 						{inProgress
-							? [<span key="msg">Searching…</span>]
-							: [
-									<span key="msg">Search </span>,
-									<Icon key="icon">
+							? <span key="msg">Searching…</span>
+							: <React.Fragment>
+									<span>Search </span>
+									<Icon>
 										{androidArrowForward}
-									</Icon>,
-							  ]}
+									</Icon>
+							  </React.Fragment>
+						}
 					</Button>
 				</div>
 
