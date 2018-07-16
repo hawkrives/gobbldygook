@@ -28,7 +28,15 @@ export function Schedule(data = {}) {
 	}
 
 	if (typeof schedule.semester === 'string') {
-		schedule.semester = parseInt(schedule.semester, 10)
+		if (schedule.semester === 'FA') {
+			return 1
+		} else if (schedule.semester === 'WI') {
+			return 2
+		} else if (schedule.semester === 'SP') {
+			return 3
+		} else {
+			schedule.semester = parseInt(schedule.semester, 10)
+		}
 	}
 
 	return schedule
