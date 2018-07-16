@@ -79,7 +79,7 @@ const SemesterList = styled.div`
 `
 
 const canAddSemester = (schedules, year) =>
-	findFirstAvailableSemester(schedules, year) <= 5
+	findFirstAvailableSemester(schedules, year) <= 3
 
 export default class Year extends React.PureComponent {
 	// props: PropTypes;
