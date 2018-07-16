@@ -16,7 +16,18 @@ function checkCourseAgainstQueryBit(course, [key, values]) {
 		return false
 	}
 
-	let substring = false
+	let substringKeys = [
+		'title',
+		'name',
+		'description',
+		'notes',
+		'instructors',
+		'times',
+		'locations',
+		'summary',
+		'comments',
+	]
+	let substring = substringKeys.includes(key)
 
 	// values is either:
 	// - a 1-long array
@@ -34,23 +45,6 @@ function checkCourseAgainstQueryBit(course, [key, values]) {
 		// remove the first value from the array
 		// by returning all but the first element
 		values = tail(values)
-	}
-
-	if (
-		includes(
-			[
-				'title',
-				'name',
-				'description',
-				'notes',
-				'instructors',
-				'times',
-				'locations',
-			],
-			key,
-		)
-	) {
-		substring = true
 	}
 
 	let internalMatches = map(values, val => {
