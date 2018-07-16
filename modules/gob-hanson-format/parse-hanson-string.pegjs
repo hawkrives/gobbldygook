@@ -301,6 +301,7 @@ Modifier
         'course'
       / 'credit'
       / 'department'
+      / 'subject'
       / 'term'
     ) OptionalS _ besides:Besides? _ 'from' _
     from:(
@@ -314,6 +315,10 @@ Modifier
       / child:Reference                        { return { $from: 'children', $children: [child]} }
     )
     {
+      if (what === 'subject') {
+        what = 'department'
+      }
+
       if (from.$from === 'where' && what === 'department') {
         throw new Error('cannot use a modifier with "departments" or "department"')
       }
@@ -326,6 +331,7 @@ Modifier
       if (count.$operator !== '$gte' && what !== 'course') {
         throw new Error('can only use at-least style counters with non-course requests')
       }
+
       let result = assign({}, from, {
         $type: 'modifier',
         $count: count,
