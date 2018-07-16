@@ -1,56 +1,36 @@
-import endsWith from 'lodash/endsWith'
-import filter from 'lodash/filter'
+// @flow
+
 import flatten from 'lodash/flatten'
-import includes from 'lodash/includes'
 import map from 'lodash/map'
 import mapValues from 'lodash/mapValues'
-import startsWith from 'lodash/startsWith'
 import toPairs from 'lodash/toPairs'
-import trim from 'lodash/trim'
 import unzip from 'lodash/unzip'
 
-import {
-	quacksLikeDeptNum,
-	splitDeptNum,
-	buildDeptNum,
-} from '@gob/school-st-olaf-college'
+import {quacksLikeDeptNum, splitDeptNum} from '@gob/school-st-olaf-college'
 
 import {partitionByIndex, splitParagraph, zipToObjectWithArrays} from '@gob/lib'
 
-import departmentMapping from 'sto-course-related-data/handmade/to_department_abbreviations.json'
-import gereqMapping from 'sto-course-related-data/handmade/to_gereq_abbreviations.json'
-
 let semesters = {
-	fall: 1,
-	interim: 2,
-	'j-term': 2,
-	jterm: 2,
-	j: 2,
-	spring: 3,
-	'summer 1': 4,
-	summer1: 4,
-	early: 4,
-	'early summer': 4,
-	'summer session 1': 4,
-	'summer session 2': 5,
-	late: 5,
-	'late summer': 5,
-	summer2: 5,
-	'summer 2': 5,
-	summers: ['$OR', 4, 5],
+	fall: 'FA',
+	interim: 'WI',
+	'j-term': 'WI',
+	jterm: 'WI',
+	j: 'WI',
+	winter: 'WI',
+	spring: 'SP',
 }
 
 let keywordMappings = {
 	day: 'times',
 	days: 'times',
-	department: 'departments',
-	dept: 'departments',
-	depts: 'departments',
-	ge: 'gereqs',
-	gened: 'gereqs',
-	geneds: 'gereqs',
-	gereq: 'gereqs',
-	ges: 'gereqs',
+	department: 'subject',
+	dept: 'subject',
+	depts: 'subject',
+	ge: 'requirements',
+	gened: 'requirements',
+	geneds: 'requirements',
+	gereq: 'requirements',
+	ges: 'requirements',
 	inst: 'instructors',
 	instructor: 'instructors',
 	locations: 'location',
@@ -61,61 +41,57 @@ let keywordMappings = {
 	profs: 'instructors',
 	professor: 'instructors',
 	professors: 'instructors',
+	requirement: 'requirements',
 	sem: 'semester',
 	teacher: 'instructors',
 	teachers: 'instructors',
 	time: 'times',
+	title: 'name',
+	description: 'summary',
+	notes: 'comments',
 }
 
 function organizeValues([key, values], words = false, profWords = false) {
+	let intKeys = ['year'/* , 'term', 'level', 'number', 'groupid', 'clbid', 'crsid' */]
+	let strKeys = [/* 'title', */ 'name', 'comments', /* 'notes', 'description', 'words' */]
+
 	let organizedValues = map(values, val => {
-		if (startsWith(val, '$')) {
+		// handle the numeric values first
+		if (key === 'credits') {
+			val = parseFloat(val)
+		} else if (intKeys.includes(key)) {
+			val = parseInt(val, 10)
+		}
+
+		if (typeof val !== 'string') {
+			return val
+		}
+
+		// now deal with the strings
+		if (val.startsWith('$')) {
 			return val.toUpperCase()
-		} else if (key === 'departments') {
-			val = val.toLowerCase()
-			val = departmentMapping[val] || val.toUpperCase()
-		} else if (key === 'gereqs') {
-			val = val.toLowerCase()
-			val = gereqMapping[val] || val.toUpperCase()
+		} else if (key === 'subject') {
+			val = val.toUpperCase()
+		} else if (key === 'requirements') {
+			val = val.toUpperCase()
 		} else if (key === 'deptnum') {
 			val = val.toUpperCase()
 		} else if (key === 'semester') {
 			val = val.toLowerCase()
-			val = semesters[val] || parseInt(val, 10)
-		} else if (key === 'instructors') {
-			if (profWords) {
-				val = splitParagraph(val)
-				key = 'profWords'
-			}
+			val = semesters[val] || val.toUpperCase()
+		} else if (key === 'instructors' && profWords) {
+			val = splitParagraph(val)
+			key = 'profWords'
 		} else if (key === 'times' || key === 'locations') {
 			val = val.toUpperCase()
 		} else if (key === 'pf') {
 			val = val === 'true'
-		} else if (key === 'credits') {
-			val = parseFloat(val)
-		} else if (
-			includes(
-				[
-					'year',
-					'term',
-					'level',
-					'number',
-					'groupid',
-					'clbid',
-					'crsid',
-				],
-				key,
-			)
-		) {
-			val = parseInt(val, 10)
-		} else if (
-			includes(['title', 'name', 'notes', 'description', 'words'], key)
-		) {
+		} else if (strKeys.includes(key)) {
 			if (words || key === 'words') {
 				val = splitParagraph(val)
 				key = 'words'
 			} else {
-				val = trim(val)
+				val = val.trim()
 			}
 		}
 
@@ -129,9 +105,9 @@ function organizeValues([key, values], words = false, profWords = false) {
 	return [key, organizedValues]
 }
 
-export function buildQueryFromString(queryString = '', opts = {}) {
-	queryString = trim(queryString)
-	if (endsWith(queryString, ':')) {
+export function buildQueryFromString(queryString: string = '', opts: {words?: boolean, profWords?: boolean} = {}) {
+	queryString = queryString.trim()
+	if (queryString.endsWith(':')) {
 		queryString = queryString.substring(0, queryString.length - 1)
 	}
 
@@ -149,16 +125,24 @@ export function buildQueryFromString(queryString = '', opts = {}) {
 	let matches = queryString.split(rex)
 
 	// Remove extra whitespace and remove empty strings
-	let cleaned = filter(map(matches, trim), str => str.length > 0)
+	let cleaned = matches.map(s => s.trim()).filter(s => s.length > 0)
 
 	// Grab the keys and values from the lists
 	let [keys, values] = partitionByIndex(cleaned)
 
 	if (stringThing && quacksLikeDeptNum(stringThing)) {
-		let {departments, number} = splitDeptNum(stringThing)
-		let deptnum = buildDeptNum({departments, number})
-		keys.push('deptnum')
-		values.push(deptnum)
+		let {departments, number, section} = splitDeptNum(stringThing)
+		// let deptnum = buildDeptNum({subject: departments[0], number})
+		keys.push('subject')
+		values.push(departments[0])
+		keys.push('number')
+		values.push(number)
+		if (section) {
+			keys.push('section')
+			values.push(section)
+		}
+		// values.push(deptnum)
+		// console.log(deptnum)
 	} else if (stringThing) {
 		keys.push('title')
 		values.push(stringThing)
@@ -168,7 +152,7 @@ export function buildQueryFromString(queryString = '', opts = {}) {
 	keys = map(keys, key => {
 		key = key.toLowerCase()
 		/* istanbul ignore else */
-		if (!startsWith(key, '_')) {
+		if (!key.startsWith('_')) {
 			key = keywordMappings[key] || key
 		}
 		return key
@@ -179,22 +163,24 @@ export function buildQueryFromString(queryString = '', opts = {}) {
 
 	// Perform initial cleaning of the values, dependent on the keys
 	let paired = unzip(
-		map(toPairs(zipped), kvpairs =>
+		toPairs(zipped).map(kvpairs =>
 			organizeValues(kvpairs, opts.words, opts.profWords),
 		),
 	)
 
 	let organized = zipToObjectWithArrays(...paired) // spread the [k, v] pairs into the arguments properly
 
-	return mapValues(organized, val => {
+	let retval = mapValues(organized, val => {
 		// flatten the results list
 		val = flatten(val)
 
 		// if it's a multi-value thing and doesn't include a boolean yet, default to $AND
-		if (val.length > 1 && !startsWith(val[0], '$')) {
+		if (val.length > 1 && (typeof val[0] !== 'string' || !val[0].startsWith('$'))) {
 			val.unshift('$AND')
 		}
 
 		return val
 	})
+
+	return retval
 }
