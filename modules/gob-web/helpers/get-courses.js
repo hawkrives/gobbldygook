@@ -24,16 +24,17 @@ export function getCourseFromNetwork(clbid: number) {
 }
 
 const courseCache = Object.create(null)
-export function getCourseFromDatabase(clbid: number) {
+export function getCourseFromDatabase(clbid: string) {
 	if (clbid in courseCache) {
 		return courseCache[clbid]
 	}
 
 	courseCache[clbid] = db
 		.store('courses')
-		.index('clbid')
+		.index('id')
 		.get(clbid)
 		.then(course => omit(course, ['profWords', 'words', 'sourcePath']))
+		.catch(console.error)
 
 	return courseCache[clbid].then(course => {
 		delete courseCache[clbid]
@@ -48,7 +49,7 @@ export function getCourseFromDatabase(clbid: number) {
 // @returns {Promise} - TreoDatabasePromise
 // @fulfill {Object} - the course object, potentially with an embedded error message.
 export function getCourse(
-	{clbid, term}: {clbid: number, term: number},
+	{clbid, term}: {clbid: string, term: number},
 	fabrications: any = {},
 ) {
 	if (clbid in fabrications) {
@@ -56,9 +57,9 @@ export function getCourse(
 	}
 
 	let getCourseFrom = getCourseFromDatabase
-	if (global.useNetworkOnly) {
-		getCourseFrom = getCourseFromNetwork
-	}
+	// if (global.useNetworkOnly) {
+	// 	getCourseFrom = getCourseFromNetwork
+	// }
 
 	return getCourseFrom(clbid)
 		.then(
