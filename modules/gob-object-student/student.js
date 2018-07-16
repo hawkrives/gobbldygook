@@ -25,7 +25,7 @@ export function Student(data) {
 		name: 'Student ' + randomChar(),
 		version: VERSION,
 
-		creditsNeeded: 35,
+		creditsNeeded: 210,
 
 		matriculation: now.getFullYear() - 2,
 		graduation: now.getFullYear() + 2,
