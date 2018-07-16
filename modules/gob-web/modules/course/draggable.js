@@ -40,7 +40,7 @@ const courseSource = {
 		return {
 			isFromSchedule: scheduleId !== null,
 			isFromSearch: scheduleId === null,
-			clbid: props.course.clbid,
+			clbid: props.course.id,
 			groupid: props.course.groupid,
 			fromScheduleId: scheduleId,
 		}
