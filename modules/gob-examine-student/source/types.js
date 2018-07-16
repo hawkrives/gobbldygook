@@ -33,23 +33,62 @@ export type Requirement = {
 	'children share courses'?: boolean,
 }
 
-export type clbidT = number
-export type crsidT = number
+// {
+// 	"comments": [],
+// 	"credits": 6.0,
+// 	"department": "AFST",
+// 	"id": "AFST 112.00",
+// 	"instructors": ["Charisse E Burden-Stelly"],
+// 	"number": "112",
+// 	"offerings": {
+// 		"locations": ["Leighton 426"],
+// 		"times": [
+// 			{"day": "Tu", "end": "4:55pm", "start": "3:10pm"},
+// 			{"day": "Th", "end": "4:55pm", "start": "3:10pm"}
+// 		]
+// 	},
+// 	"prerequisites": null,
+// 	"requirements": ["SI", "WR2", "IDS"],
+// 	"scnc": null,
+// 	"section": "00",
+// 	"semester": "FA",
+// 	"size": {"registered": 24, "total": 30, "waitlist": 0},
+// 	"status": "Open",
+// 	"summary": null,
+// 	"synonym": "49138",
+// 	"tags": ["AFSTSI", "POSI-PLI2", "AMSTREI", "AFSTCORE"],
+// 	"title": "Black Revolution on Campus",
+// 	"type": "Course"
+// 	"year": 2000
+// }
 
-export type CourseType = 'Research' | 'FLAC'
+export opaque type clbidT = number
+export opaque type crsidT = number
+
+export type CourseType = 'Course' | 'Lab' | 'Juried' | 'FLAC' | 'St. Olaf'
 
 export type Course = {
-	clbid: clbidT,
+	id: string,
+	comments: Array<string>,
 	credits: number,
-	crsid: crsidT,
-	department: Array<string>,
-	gereqs: string[],
-	groupid: number,
-	level: number,
-	name: string,
-	number: number,
-	pf: boolean,
-	semester: number,
+	instructor: Array<string>,
+	number: string,
+	offerings: {
+		locations: Array<string>,
+		times: Array<{day: string, start: string, end: string}>,
+	},
+	prerequisites: null | string,
+	requirements: Array<string>,
+	scnc: null | true,
+	section: string,
+	semester: string,
+	size: {registered: number, total: number, waitlist: number},
+	status: null | "Open" | "Closed",
+	subject: string,
+	summary: null | string,
+	synonym: string,
+	tags: Array<string>,
+	title: string,
 	type: CourseType,
 	year: number,
 	_extraKeys?: Array<string>,
@@ -146,7 +185,7 @@ export type AndQualification = {
 export type BooleanQualification = OrQualification | AndQualification
 export type Qualifier = BooleanQualification | Qualification
 
-type ModifierWhatEnum = 'course' | 'credit' | 'department'
+type ModifierWhatEnum = 'course' | 'credit' | 'department' | 'term'
 type BaseModifierExpression = {
 	_fulfillment?: Fulfillment,
 	_matches?: Array<Course>,
