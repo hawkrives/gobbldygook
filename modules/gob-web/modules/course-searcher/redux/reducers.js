@@ -61,12 +61,18 @@ const DEPARTMENT = course =>
 // eslint-disable-next-line no-confusing-arrow
 const GEREQ = course => (course.gereqs ? oxford(course.gereqs) : 'No GEs')
 
+const SEMESTER = course => ['FA', 'WI', 'SP'].indexOf(course.semester) + 1
+
+const TERM = course => {
+	return `${course.year}${['FA', 'WI', 'SP'].indexOf(course.semester) + 1}`
+}
+
 const GROUP_BY_TO_KEY = {
 	'Day of Week': DAY_OF_WEEK,
 	Department: DEPARTMENT,
 	GenEd: GEREQ,
-	Semester: 'semester',
-	Term: 'term',
+	Semester: SEMESTER,
+	Term: TERM,
 	'Time of Day': TIME_OF_DAY,
 	Year: 'year',
 	None: false,
@@ -86,9 +92,7 @@ function sortAndGroup({sortBy: sorting, groupBy: grouping, rawResults}) {
 
 	// TODO: Speed this up! This preperation stuff takes ~230ms by itself,
 	// with enough courses rendered. (like, say, {year: 2012})
-	const sortByArgs = ['year', 'deptnum', 'semester', 'section'].concat(
-		SORT_BY_TO_KEY[sorting],
-	)
+	const sortByArgs = ['year', 'subject', 'number', c => ['FA', 'WI', 'SP'].indexOf(c.semester), 'section', SORT_BY_TO_KEY[sorting]]
 	const sorted = sortBy(rawResults, sortByArgs)
 
 	// Group them by term, then turn the object into an array of pairs.
