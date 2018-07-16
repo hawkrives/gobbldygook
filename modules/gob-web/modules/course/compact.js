@@ -82,10 +82,10 @@ export default class CompactCourse extends React.PureComponent<Props> {
 
 				<SummaryRow>
 					<Identifier>{buildDeptNum(course, true)}</Identifier>
-					{course.type !== 'Research' && <Type>{course.type}</Type>}
-					{course.gereqs && (
+					{course.type !== 'Course' && <Type>{course.type}</Type>}
+					{course.requirements && (
 						<InlineList>
-							{map(course.gereqs, ge => (
+							{map(course.requirements, ge => (
 								<GeReqItem key={ge}>{ge}</GeReqItem>
 							))}
 						</InlineList>
