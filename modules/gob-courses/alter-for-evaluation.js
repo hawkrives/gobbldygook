@@ -5,16 +5,13 @@ import filter from 'lodash/filter'
 import includes from 'lodash/includes'
 
 const whitelist = [
-	'clbid',
+	'id',
 	'credits',
-	'crsid',
-	'department',
-	'gereqs',
-	'groupid',
-	'level',
+	'subject',
+	'requirements',
 	'name',
 	'number',
-	'pf',
+	'scnc',
 	'semester',
 	'type',
 	'year',
@@ -31,5 +28,6 @@ export function alterForEvaluation(course) {
 
 	let pairs = toPairs(course)
 	pairs = filter(pairs, ([key]) => includes(whitelist, key))
+
 	return fromPairs(pairs)
 }
