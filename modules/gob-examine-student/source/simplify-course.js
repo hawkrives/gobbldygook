@@ -31,7 +31,15 @@ import type {Course} from './types'
  * @returns {string} - the stringified, simplified course
  */
 function simplifyCourse(course: Course): string {
-	const depts = sortBy(course.department).join('/')
+	// $FlowFixMe
+	let depts = course.department
+	// $FlowFixMe
+	if (Array.isArray(course.department)) {
+		depts = sortBy(course.department).join('/')
+	}
+	if (!depts && course.subject) {
+		depts = course.subject
+	}
 	return `${depts} ${course.number} ${course.type}`
 }
 
