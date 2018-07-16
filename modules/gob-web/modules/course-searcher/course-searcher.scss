@@ -57,6 +57,7 @@
 	&:focus {
 		background-color: $blue-50;
 		color: $blue-900;
+
 		&::-webkit-input-placeholder {
 			color: desaturate($light-blue-300, 75%);
 		}
@@ -135,7 +136,6 @@
 	text-align: center;
 }
 
-.search-filters label {
-	font-size: 0.9em;
-	font-weight: 500;
+.search-filters .filter:not(:last-child) {
+	margin-right: 0.25em;
 }

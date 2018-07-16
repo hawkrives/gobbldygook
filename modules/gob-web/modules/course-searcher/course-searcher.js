@@ -2,6 +2,7 @@
 import React from 'react'
 
 import map from 'lodash/map'
+import uniqueId from 'lodash/uniqueId'
 import {toPrettyTerm} from '@gob/school-st-olaf-college'
 
 import Button from '../../components/button'
@@ -11,6 +12,8 @@ import CourseResultsList from './course-results-list'
 import {androidArrowForward} from '../../icons/ionicons'
 
 import {SORT_BY, GROUP_BY} from './course-searcher-options'
+
+import styled from 'styled-components'
 
 import './course-searcher.scss'
 
@@ -30,6 +33,45 @@ type CourseSearcherProps = {
 	results: any[],
 	sortBy: string,
 	studentId?: string,
+}
+
+let Label = styled.label`
+	display: block;
+
+	font-size: 0.9em;
+	font-weight: 500;
+`
+
+let FullWidthSelect = styled.select`
+	width: 100%;
+`
+
+const LabelledSelect = ({className, onChange, value, label, options}: {
+	onChange: (ev: SyntheticInputEvent<HTMLSelectElement>) => void,
+	value: string,
+	label: string,
+	options: Array<string>,
+	className: string,
+}) => {
+	let id = `labelled-select-${uniqueId()}`
+
+	return (
+		<span className={className}>
+			<Label htmlFor={id}>{label}</Label>
+
+			<FullWidthSelect
+				id={id}
+				value={value}
+				onChange={onChange}
+			>
+				{options.map(opt => (
+					<option key={opt} value={opt}>
+						{opt}
+					</option>
+				))}
+			</FullWidthSelect>
+		</span>
+	)
 }
 
 export default function CourseSearcher(props: CourseSearcherProps) {
@@ -135,38 +177,24 @@ export default function CourseSearcher(props: CourseSearcherProps) {
 							  ]}
 					</Button>
 				</div>
+
 				{hasQueried && (
 					<div className="row search-filters">
-						<span className="filter">
-							<label htmlFor="sort">Sort by:</label>
-							<br />
-							<select
-								id="sort"
-								value={sortBy}
-								onChange={onSortChange}
-							>
-								{map(SORT_BY, opt => (
-									<option key={opt} value={opt}>
-										{opt}
-									</option>
-								))}
-							</select>
-						</span>
-						<span className="filter">
-							<label htmlFor="group">Group by:</label>
-							<br />
-							<select
-								id="group"
-								value={groupBy}
-								onChange={onGroupByChange}
-							>
-								{map(GROUP_BY, opt => (
-									<option key={opt} value={opt}>
-										{opt}
-									</option>
-								))}
-							</select>
-						</span>
+						<LabelledSelect
+							className="filter"
+							label="Sort by:"
+							options={((Object.values(SORT_BY): Array<any>): Array<string>)}
+							onChange={onSortChange}
+							value={sortBy}
+						/>
+
+						<LabelledSelect
+							className="filter"
+							label="Group by:"
+							options={((Object.values(GROUP_BY): Array<any>): Array<string>)}
+							onChange={onGroupByChange}
+							value={groupBy}
+						/>
 					</div>
 				)}
 			</header>
