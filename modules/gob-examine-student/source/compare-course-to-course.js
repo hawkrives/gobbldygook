@@ -7,13 +7,13 @@ import includes from 'lodash/includes'
 import type {Course} from './types'
 
 const baseKeys = [
-	'department',
-	'international',
-	'level',
+	'subject',
+	// 'international',
+	// 'level',
 	'number',
 	'section',
 	'semester',
-	'type',
+	// 'type',
 	'year',
 ]
 
@@ -52,8 +52,7 @@ export default function compareCourseToCourse(
 	// the keys that overlap between `baseKeys` and the list of keys in the
 	// query object.
 
-	// this should accomplish the same effect as
-	// `intersection(keys(query), baseKeys)`,
+	// this should accomplish the same effect as `intersection(keys(query), baseKeys)`,
 	// but it benchmarks quite a bit faster.
 	const keysToCheck = filter(keys(query), key => includes(baseKeys, key))
 
