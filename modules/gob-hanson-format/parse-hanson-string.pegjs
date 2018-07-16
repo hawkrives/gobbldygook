@@ -416,7 +416,7 @@ CourseNumber 'course number'
     {
       let result = {}
 
-      let number = parseInt(nums.join(''))
+      let number = nums.join('')
 
       if (international) {
         result.international = true
