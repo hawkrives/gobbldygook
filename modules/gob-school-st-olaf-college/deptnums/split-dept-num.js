@@ -14,7 +14,7 @@ export function splitDeptNum(
 	deptNumString: string,
 	includeSection?: boolean = false,
 ) {
-	// "AS/RE 230A" -> ["AS/RE 230A", "AS/RE", "AS", "RE", "230", "A"]
+	// "AS/RE 230.A" -> ["AS/RE 230A", "AS/RE", "AS", "RE", "230", "A"]
 	// -> {departments: ['AS', 'RE'], number: 230}
 	let matches = deptNumRegex.exec(deptNumString)
 
@@ -27,7 +27,7 @@ export function splitDeptNum(
 			matches[1].indexOf('/') !== -1
 				? [matches[2], matches[3]]
 				: [matches[1]],
-		number: parseInt(matches[4], 10),
+		number: matches[4],
 	}
 
 	if (includeSection && matches.length >= 6 && matches[5]) {
