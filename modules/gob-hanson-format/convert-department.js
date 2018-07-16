@@ -19,6 +19,7 @@ const shortDepartmentAbbreviationsToFullDepartmentAbbreviations = {
 	SA: 'SOAN',
 }
 
+// eslint-disable-next-line no-unused-vars
 const fullDepartmentNamesToFullDepartmentAbbreviations = {
 	'AFRICA AND THE AMERICAS': 'AFAM',
 	'ALTERNATE LANGUAGE STUDY OPTION': 'ALSO',
@@ -222,12 +223,12 @@ const courseTypesMapping = {
 	E: 'Ensemble',
 }
 
-const toDepartmentAbbreviations = Object.assign(
-	{},
-	shortDepartmentAbbreviationsToFullDepartmentAbbreviations,
-	fullDepartmentNamesToFullDepartmentAbbreviations,
-)
-const toDepartmentNames = Object.assign({}, departmentAbbreviationsToNames)
+// const toDepartmentAbbreviations = Object.assign(
+// 	{},
+// 	shortDepartmentAbbreviationsToFullDepartmentAbbreviations,
+// 	fullDepartmentNamesToFullDepartmentAbbreviations,
+// )
+const toDepartmentNames = {}//Object.assign({}, departmentAbbreviationsToNames)
 
 export function expandDepartment(dept: string) {
 	dept = dept.toUpperCase()
@@ -241,8 +242,8 @@ export function expandDepartment(dept: string) {
 
 export function normalizeDepartment(dept: string) {
 	dept = dept.toUpperCase()
-	if (!(dept in toDepartmentAbbreviations)) {
-		return dept
-	}
-	return toDepartmentAbbreviations[dept]
+	return dept
+	// if (!(dept in toDepartmentAbbreviations)) {
+	// }
+	// return toDepartmentAbbreviations[dept]
 }
