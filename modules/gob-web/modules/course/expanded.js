@@ -7,7 +7,7 @@ import oxford from 'listify'
 import {BulletedList, ListItem} from '../../components/list'
 import CourseTitle from './course-title'
 import {semesterName, buildDeptNum} from '@gob/school-st-olaf-college'
-import {to12HourTime} from '@gob/lib'
+// import {to12HourTime} from '@gob/lib'
 
 const Heading = styled.h2`
 	font-weight: 500;
@@ -59,10 +59,10 @@ export default class ExpandedCourse extends React.PureComponent<Props> {
 
 		const infoColumn = (
 			<Column>
-				{course.description && (
+				{course.summary && (
 					<Description>
 						<Heading>Description</Heading>
-						<p>{course.description}</p>
+						<p>{course.summary}</p>
 					</Description>
 				)}
 
@@ -86,7 +86,7 @@ export default class ExpandedCourse extends React.PureComponent<Props> {
 					</div>
 				)}
 
-				{course.times && (
+				{course.offerings && (
 					<div>
 						<Heading>
 							{course.offerings && course.offerings.length === 1
@@ -94,25 +94,17 @@ export default class ExpandedCourse extends React.PureComponent<Props> {
 								: 'Offerings'}
 						</Heading>
 						<BulletedList>
-							{flatMap(course.offerings, offering =>
-								map(offering.times, time => {
-									const day = offering.day
-									const {start, end} = time
-									return (
-										<ListItem
-											key={`${day}-${start}-${end}`}
-										>
-											{offering.day}
-											{' from '}
-											{to12HourTime(time.start)}
-											{' to '}
-											{to12HourTime(time.end)}
-											{', in '}
-											{offering.location}
-										</ListItem>
-									)
-								}),
-							)}
+							{flatMap(course.offerings.times, offering => {
+								let {start, end, day} = offering
+								return (
+									<ListItem
+										key={`${day}-${start}-${end}`}
+									>
+										{day}{' from '}{start}{' to '}{end}
+										{/* {', in '}{offering.location || '?????'} */}
+									</ListItem>
+								)
+							})}
 						</BulletedList>
 					</div>
 				)}
@@ -129,11 +121,12 @@ export default class ExpandedCourse extends React.PureComponent<Props> {
 					</div>
 				)}
 
-				{course.gereqs && (
+				{course.requirements && (
 					<div>
-						<Heading>G.E. Requirements</Heading>
+						{/* todo: fix name */}
+						<Heading>Distribution Requirements</Heading>
 						<BulletedList>
-							{map(course.gereqs, ge => (
+							{map(course.requirements, ge => (
 								<ListItem key={ge}>{ge}</ListItem>
 							))}
 						</BulletedList>
