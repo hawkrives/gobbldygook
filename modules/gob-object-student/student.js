@@ -185,7 +185,7 @@ export function addCourseToSchedule(student, scheduleId, clbid) {
 		}.${schedule.index})`,
 	)
 
-	schedule.clbids = schedule.clbids.concat(clbid)
+	schedule.clbids = [...schedule.clbids, clbid]
 
 	return Object.assign({}, student, {
 		schedules: Object.assign({}, student.schedules, {
