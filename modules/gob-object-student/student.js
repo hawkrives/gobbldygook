@@ -162,9 +162,9 @@ export function destroyScheduleFromStudent(student, scheduleId) {
 }
 
 export function addCourseToSchedule(student, scheduleId, clbid) {
-	if (!isNumber(clbid)) {
-		throw new TypeError('addCourse(): clbid must be a number')
-	}
+	// if (!isNumber(clbid)) {
+	// 	throw new TypeError('addCourse(): clbid must be a number')
+	// }
 
 	if (!(scheduleId in student.schedules)) {
 		throw new ReferenceError(
@@ -195,11 +195,11 @@ export function addCourseToSchedule(student, scheduleId, clbid) {
 }
 
 export function removeCourseFromSchedule(student, scheduleId, clbid) {
-	if (!isNumber(clbid)) {
-		throw new TypeError(
-			`removeCourse(): clbid must be a number (was ${typeof clbid})`,
-		)
-	}
+	// if (!isNumber(clbid)) {
+	// 	throw new TypeError(
+	// 		`removeCourse(): clbid must be a number (was ${typeof clbid})`,
+	// 	)
+	// }
 
 	if (!(scheduleId in student.schedules)) {
 		throw new ReferenceError(
@@ -363,9 +363,9 @@ export function renameScheduleInStudent(student, scheduleId, title) {
 }
 
 export function reorderCourseInSchedule(student, scheduleId, {clbid, index}) {
-	if (!isNumber(clbid)) {
-		throw new TypeError('reorderCourse(): clbid must be a number')
-	}
+	// if (!isNumber(clbid)) {
+	// 	throw new TypeError('reorderCourse(): clbid must be a number')
+	// }
 
 	if (!(scheduleId in student.schedules)) {
 		throw new ReferenceError(
