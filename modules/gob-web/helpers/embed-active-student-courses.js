@@ -3,7 +3,7 @@ import map from 'lodash/map'
 import fromPairs from 'lodash/fromPairs'
 import {getCourse} from './get-courses'
 
-export function embedActiveStudentCourses(student, {cache = []}) {
+export function embedActiveStudentCourses(student, {cache = Object.create(null)}) {
 	// - At it's core, this method just needs to get the list of courses that a student has chosen.
 	// - Each schedule has a list of courses that are a part of that schedule.
 	// - Additionally, we only care about the schedules that are marked as "active".
@@ -15,17 +15,14 @@ export function embedActiveStudentCourses(student, {cache = []}) {
 	const active = filter(student.schedules, {active: true})
 
 	const enhanced = map(active, schedule => {
-		let courses = map(schedule.clbids, clbid => {
-			return (
-				cache[clbid] ||
-				getCourse(
-					{
-						clbid,
-						term: parseInt(`${schedule.year}${schedule.semester}`),
-					},
-					student.fabrications,
-				)
-			)
+		let courses = schedule.clbids.map(clbid => {
+			if (clbid in cache) {
+				return cache[clbid]
+			}
+
+			let sem = ['FA', 'WI', 'SP'].indexOf(schedule.semester) + 1
+			let query = {clbid, term: `${schedule.year}${sem}`}
+			return getCourse(query, student.fabrications)
 		})
 
 		return Promise.all(courses).then(fulfilledCourses => {
