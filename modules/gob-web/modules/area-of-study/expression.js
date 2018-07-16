@@ -68,7 +68,11 @@ function makeModifierExpression({expr}) {
 	const op = humanizeOperator(expr.$count.$operator)
 	const num = expr.$count.$num
 	const needs = `${op} ${num} ${plur(expr.$what, expr.$count.$num)}`
-	const description = `${expr._counted} of ${needs} from ${expr.$from}`
+	let from = expr.$from
+	if (expr.$from === 'where') {
+		from = 'courses where ' + makeWhereQualifier(expr.$where)
+	}
+	const description = `${expr._counted} of ${needs} from ${from}`
 	return {description}
 }
 
