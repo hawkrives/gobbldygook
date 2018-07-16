@@ -329,7 +329,7 @@ export function computeModifier({expr, ctx, courses}: ModifierChunkArgs) {
 	assertKeys(expr, '$what', '$count', '$from')
 	const what = expr.$what
 
-	if (what !== 'course' && what !== 'credit' && what !== 'department') {
+	if (what !== 'course' && what !== 'credit' && what !== 'department' && what !== 'term') {
 		throw new TypeError(
 			`computeModifier(): "${what ||
 				'undefined'}" is not a valid source for a modifier`,
