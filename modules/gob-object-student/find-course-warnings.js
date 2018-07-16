@@ -6,7 +6,8 @@ import zip from 'lodash/zip'
 
 import ordinal from 'ord'
 import oxford from 'listify'
-import {findScheduleTimeConflicts} from 'sto-sis-time-parser'
+// import {findScheduleTimeConflicts} from 'sto-sis-time-parser'
+import {findScheduleTimeConflicts} from './find-course-warnings-lib'
 import {expandYear, semesterName} from '@gob/school-st-olaf-college'
 
 export function checkForInvalidYear(course, scheduleYear) {
@@ -77,7 +78,8 @@ export function checkForTimeConflicts(courses) {
 export function findWarnings(courses, schedule) {
 	let warningsOfInvalidity = map(courses, course => {
 		let invalidYear = checkForInvalidYear(course, schedule.year)
-		let invalidSemester = checkForInvalidSemester(course, schedule.semester)
+		let sem = {'1': 'FA', '2': 'WI', '3': 'SP'}[schedule.semester]
+		let invalidSemester = checkForInvalidSemester(course, sem)
 		return [invalidYear, invalidSemester]
 	})
 
