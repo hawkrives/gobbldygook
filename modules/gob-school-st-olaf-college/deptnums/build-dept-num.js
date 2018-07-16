@@ -1,7 +1,5 @@
 // @flow
 
-import {buildDeptString} from './build-dept'
-
 /**
  * Builds a deptnum string from a course.
  *
@@ -10,24 +8,21 @@ import {buildDeptString} from './build-dept'
  * @returns {String} - the deptnum string
  */
 export function buildDeptNum(
-	{
-		departments,
-		number,
-		section = '',
-		deptnum,
-	}: {
-		departments: string[],
-		number: number,
+	course: {
+		subject: string,
+		number: string,
 		section?: string,
 		deptnum?: string,
 	},
 	includeSection?: boolean = false,
 ) {
-	const dept = buildDeptString(departments)
+	let {subject, number, section = '', deptnum} = course
+
+	const dept = subject
 	const deptnumString = deptnum || `${dept} ${number}`
 
 	if (includeSection) {
-		return `${deptnumString}${section}`
+		return `${deptnumString}.${section}`
 	}
 
 	return deptnumString
