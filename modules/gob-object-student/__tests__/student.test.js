@@ -48,7 +48,7 @@ describe('Student', () => {
 		expect(stu.id).toBeDefined()
 		expect(stu.matriculation).toBe(2012)
 		expect(stu.graduation).toBe(2016)
-		expect(stu.creditsNeeded).toBe(35)
+		expect(stu.creditsNeeded).toBe(210)
 		expect(stu.studies).toEqual(demoStudent.studies)
 		expect(stu.schedules).toEqual(demoStudent.schedules)
 		expect(stu.fabrications).toEqual(demoStudent.fabrications)
