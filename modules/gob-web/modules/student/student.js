@@ -23,24 +23,23 @@ type Props = {
 	student: StudentType, // redux
 }
 
-export class Student extends Component<Props> {
-	componentWillMount() {
-		this.loadStudent(this.props)
-	}
+type State = {
+	cachedStudentId: ?string,
+}
 
-	componentWillReceiveProps(nextProps: Props) {
-		this.loadStudent(nextProps)
-	}
+export class Student extends Component<Props, State> {
+	static getDerivedStateFromProps(props: Props, state: State) {
+		let studentId = props.params.studentId
 
-	loadStudent = (props: Props) => {
 		// We have to be able to load the student here because we only load
 		// students on-demand into the redux store
-		const didStudentChange =
-			props.params.studentId !== this.props.params.studentId
+		const didStudentChange = studentId !== state.cachedStudentId
 
 		if (!props.student || didStudentChange) {
-			props.loadStudent(props.params.studentId)
+			props.loadStudent(studentId)
 		}
+
+		return {cachedStudentId: studentId}
 	}
 
 	render() {
