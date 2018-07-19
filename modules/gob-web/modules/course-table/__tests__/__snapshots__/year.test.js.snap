@@ -118,19 +118,19 @@ exports[`Year can remove a semester 2`] = `
 
 exports[`Year renders shallowly 1`] = `
 <div
-  className="year__Container-jrlgyY jBcoS"
+  className="year__Container-egxAsM eRrGhm"
 >
   <header
-    className="year__Header-hJUXLR gLMUwJ"
+    className="year__Header-knveQC ckOWbh"
   >
     <h1
-      className="year__TitleText-gubaPC kbiaR"
+      className="year__TitleText-fHSGp kKKBj"
     >
       2016—2017
     </h1>
     <span>
       <button
-        className="year__TitleButton-iceypU btWOsu button__BaseButton-dVUXkm liHsZO"
+        className="year__TitleButton-jBlQpr cGPKzX button__BaseButton-kfpwnX kTlvxs"
         disabled={undefined}
         onClick={[Function]}
         style={undefined}
@@ -143,7 +143,7 @@ exports[`Year renders shallowly 1`] = `
         ’
       </button>
       <button
-        className="year__RemoveYearButton-irTWOs jraVKV year__TitleButton-iceypU btWOsu button__BaseButton-dVUXkm liHsZO"
+        className="year__RemoveYearButton-hGQXvs dQSlRw year__TitleButton-jBlQpr cGPKzX button__BaseButton-kfpwnX kTlvxs"
         disabled={undefined}
         onClick={[Function]}
         style={undefined}
@@ -156,7 +156,7 @@ exports[`Year renders shallowly 1`] = `
     </span>
   </header>
   <div
-    className="year__SemesterList-gyQlFP cibOCg"
+    className="year__SemesterList-ghmIqd isKUoa"
   />
 </div>
 `;
