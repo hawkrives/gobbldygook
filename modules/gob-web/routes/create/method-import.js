@@ -49,7 +49,7 @@ class SISImportScreen extends React.Component {
 		extensionInstalled: false,
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		this.checkLoginState()
 	}
 

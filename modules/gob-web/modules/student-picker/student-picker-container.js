@@ -20,7 +20,7 @@ class StudentPickerContainer extends React.Component {
 		groupBy: 'nothing',
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		this.props.loadStudents()
 	}
 
