@@ -9,7 +9,7 @@ const Stylish = require('webpack-stylish')
 
 const {
 	DefinePlugin,
-	HotModuleReplacementPlugin,
+	// HotModuleReplacementPlugin,
 	LoaderOptionsPlugin,
 	NormalModuleReplacementPlugin,
 	NamedModulesPlugin,
