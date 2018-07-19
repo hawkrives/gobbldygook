@@ -56,7 +56,7 @@ const TIME_OF_DAY = course =>
 
 // eslint-disable-next-line no-confusing-arrow
 const DEPARTMENT = course =>
-	course.departments ? buildDeptString(course.departments) : 'No Department'
+	course.subject// ? buildDeptString(course.departments) : 'No Department'
 
 // eslint-disable-next-line no-confusing-arrow
 const GEREQ = course => (course.gereqs ? oxford(course.gereqs) : 'No GEs')
