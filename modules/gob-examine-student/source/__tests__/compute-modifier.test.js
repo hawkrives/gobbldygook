@@ -362,15 +362,15 @@ describe('computeModifier', () => {
 						{
 							$type: 'course',
 							$course: {
-								department: ['CHEM', 'BIO'],
-								number: 111,
+								subject: 'CHEM',
+								number: '111',
 							},
 						},
 						{
 							$type: 'course',
 							$course: {
-								department: ['CHEM', 'BIO'],
-								number: 112,
+								subject: 'BIO',
+								number: '112',
 							},
 						},
 					],
@@ -380,7 +380,7 @@ describe('computeModifier', () => {
 				$type: 'requirement',
 				result: {
 					$type: 'course',
-					$course: {department: ['CSCI'], number: 251},
+					$course: {subject: 'CSCI', number: '251'},
 				},
 			},
 			result: modifier,
@@ -388,9 +388,9 @@ describe('computeModifier', () => {
 
 		const dirty = new Set()
 		const courses = [
-			{department: ['CHEM', 'BIO'], number: 111, credits: 1.0},
-			{department: ['CHEM', 'BIO'], number: 112, credits: 1.0},
-			{department: ['CSCI'], number: 251, credits: 1.0},
+			{subject: 'CHEM', number: '111', credits: 1.0},
+			{subject: 'BIO', number: '112', credits: 1.0},
+			{subject: 'CSCI', number: '251', credits: 1.0},
 		]
 
 		req.CHBI.computed = computeChunk({
@@ -520,14 +520,14 @@ describe('computeModifier', () => {
 				$type: 'requirement',
 				result: {
 					$type: 'course',
-					$course: {department: ['CHEM', 'BIO'], number: 111},
+					$course: {subject: 'CHEM', number: '111'},
 				},
 			},
 			B: {
 				$type: 'requirement',
 				result: {
 					$type: 'course',
-					$course: {department: ['CHEM', 'BIO'], number: 112},
+					$course: {subject: 'BIO', number: '112'},
 				},
 			},
 			result: modifier,
@@ -535,8 +535,8 @@ describe('computeModifier', () => {
 
 		const dirty = new Set()
 		const courses = [
-			{department: ['CHEM', 'BIO'], number: 111, credits: 1.0},
-			{department: ['CHEM', 'BIO'], number: 112, credits: 1.0},
+			{subject: 'CHEM', number: '111', credits: 1.0},
+			{subject: 'BIO', number: '112', credits: 1.0},
 		]
 
 		req.A.computed = computeChunk({

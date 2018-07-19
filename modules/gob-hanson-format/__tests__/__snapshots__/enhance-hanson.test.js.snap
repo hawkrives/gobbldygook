@@ -25,82 +25,64 @@ Object {
       "$of": Array [
         Object {
           "$course": Object {
-            "department": Array [
-              "MATH",
-            ],
-            "number": 330,
+            "number": "330",
+            "subject": "MATH",
           },
           "$type": "course",
         },
         Object {
           "$course": Object {
-            "department": Array [
-              "MATH",
-            ],
-            "number": 340,
+            "number": "340",
+            "subject": "MATH",
           },
           "$type": "course",
         },
         Object {
           "$course": Object {
-            "department": Array [
-              "MATH",
-            ],
-            "number": 344,
+            "number": "344",
+            "subject": "MATH",
           },
           "$type": "course",
         },
         Object {
           "$course": Object {
-            "department": Array [
-              "MATH",
-            ],
-            "number": 348,
+            "number": "348",
+            "subject": "MATH",
           },
           "$type": "course",
         },
         Object {
           "$course": Object {
-            "department": Array [
-              "MATH",
-            ],
-            "number": 351,
+            "number": "351",
+            "subject": "MATH",
           },
           "$type": "course",
         },
         Object {
           "$course": Object {
-            "department": Array [
-              "MATH",
-            ],
-            "number": 356,
+            "number": "356",
+            "subject": "MATH",
           },
           "$type": "course",
         },
         Object {
           "$course": Object {
-            "department": Array [
-              "MATH",
-            ],
-            "number": 364,
+            "number": "364",
+            "subject": "MATH",
           },
           "$type": "course",
         },
         Object {
           "$course": Object {
-            "department": Array [
-              "MATH",
-            ],
-            "number": 382,
+            "number": "382",
+            "subject": "MATH",
           },
           "$type": "course",
         },
         Object {
           "$course": Object {
-            "department": Array [
-              "MATH",
-            ],
-            "number": 384,
+            "number": "384",
+            "subject": "MATH",
           },
           "$type": "course",
         },
@@ -130,82 +112,64 @@ Object {
       "$of": Array [
         Object {
           "$course": Object {
-            "department": Array [
-              "MATH",
-            ],
-            "number": 330,
+            "number": "330",
+            "subject": "MATH",
           },
           "$type": "course",
         },
         Object {
           "$course": Object {
-            "department": Array [
-              "MATH",
-            ],
-            "number": 340,
+            "number": "340",
+            "subject": "MATH",
           },
           "$type": "course",
         },
         Object {
           "$course": Object {
-            "department": Array [
-              "MATH",
-            ],
-            "number": 344,
+            "number": "344",
+            "subject": "MATH",
           },
           "$type": "course",
         },
         Object {
           "$course": Object {
-            "department": Array [
-              "MATH",
-            ],
-            "number": 348,
+            "number": "348",
+            "subject": "MATH",
           },
           "$type": "course",
         },
         Object {
           "$course": Object {
-            "department": Array [
-              "MATH",
-            ],
-            "number": 351,
+            "number": "351",
+            "subject": "MATH",
           },
           "$type": "course",
         },
         Object {
           "$course": Object {
-            "department": Array [
-              "MATH",
-            ],
-            "number": 356,
+            "number": "356",
+            "subject": "MATH",
           },
           "$type": "course",
         },
         Object {
           "$course": Object {
-            "department": Array [
-              "MATH",
-            ],
-            "number": 364,
+            "number": "364",
+            "subject": "MATH",
           },
           "$type": "course",
         },
         Object {
           "$course": Object {
-            "department": Array [
-              "MATH",
-            ],
-            "number": 382,
+            "number": "382",
+            "subject": "MATH",
           },
           "$type": "course",
         },
         Object {
           "$course": Object {
-            "department": Array [
-              "MATH",
-            ],
-            "number": 384,
+            "number": "384",
+            "subject": "MATH",
           },
           "$type": "course",
         },
@@ -228,10 +192,8 @@ Object {
     "$type": "requirement",
     "result": Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
-        "number": 121,
+        "number": "121",
+        "subject": "CSCI",
       },
       "$type": "course",
     },
@@ -263,10 +225,8 @@ Object {
       "$of": Array [
         Object {
           "$course": Object {
-            "department": Array [
-              "CSCI",
-            ],
-            "number": 121,
+            "number": "121",
+            "subject": "CSCI",
           },
           "$type": "course",
         },
@@ -295,10 +255,8 @@ Object {
       "$of": Array [
         Object {
           "$course": Object {
-            "department": Array [
-              "CSCI",
-            ],
-            "number": 121,
+            "number": "121",
+            "subject": "CSCI",
           },
           "$type": "course",
         },

@@ -7,22 +7,16 @@ Array [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
-      "CHEM",
-      "BIO",
-    ],
-    "number": 111,
+    "number": "111",
+    "subject": "CHEM",
   },
   Object {
     "_extraKeys": Array [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
-      "CHEM",
-      "BIO",
-    ],
-    "number": 112,
+    "number": "112",
+    "subject": "BIO",
   },
 ]
 `;
@@ -34,22 +28,16 @@ Array [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
-      "CHEM",
-      "BIO",
-    ],
-    "number": 111,
+    "number": "111",
+    "subject": "CHEM",
   },
   Object {
     "_extraKeys": Array [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
-      "CHEM",
-      "BIO",
-    ],
-    "number": 112,
+    "number": "112",
+    "subject": "BIO",
   },
 ]
 `;
@@ -264,32 +252,24 @@ Array [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
-      "CHEM",
-      "BIO",
-    ],
-    "number": 111,
+    "number": "111",
+    "subject": "CHEM",
   },
   Object {
     "_extraKeys": Array [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
-      "CHEM",
-      "BIO",
-    ],
-    "number": 112,
+    "number": "112",
+    "subject": "BIO",
   },
   Object {
     "_extraKeys": Array [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
-      "CSCI",
-    ],
-    "number": 251,
+    "number": "251",
+    "subject": "CSCI",
   },
 ]
 `;

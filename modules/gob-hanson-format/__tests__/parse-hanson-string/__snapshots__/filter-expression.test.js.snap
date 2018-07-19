@@ -7,19 +7,15 @@ Object {
   "$of": Array [
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
-        "number": 121,
+        "number": "121",
+        "subject": "CSCI",
       },
       "$type": "course",
     },
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
-        "number": 125,
+        "number": "125",
+        "subject": "CSCI",
       },
       "$type": "course",
     },
@@ -35,19 +31,15 @@ Object {
   "$of": Array [
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
-        "number": 121,
+        "number": "121",
+        "subject": "CSCI",
       },
       "$type": "course",
     },
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
-        "number": 125,
+        "number": "125",
+        "subject": "CSCI",
       },
       "$type": "course",
     },
