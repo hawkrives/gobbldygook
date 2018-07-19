@@ -28,6 +28,10 @@ type State = {
 }
 
 export class Student extends Component<Props, State> {
+	state = {
+		cachedStudentId: null,
+	}
+
 	static getDerivedStateFromProps(props: Props, state: State) {
 		let studentId = props.params.studentId
 
