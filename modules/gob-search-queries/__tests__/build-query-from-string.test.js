@@ -54,7 +54,7 @@ describe('buildQueryFromString', () => {
 	})
 
 	it('can also search for deptnums with sections even with no keys', () => {
-		let query = 'AS/RE 220A'
+		let query = 'ASIAN 220.A'
 
 		expect(buildQueryFromString(query)).toMatchSnapshot()
 	})

@@ -52,11 +52,16 @@ let keywordMappings = {
 }
 
 function organizeValues([key, values], words = false, profWords = false) {
-	let intKeys = ['year'/* , 'term', 'level', 'number', 'groupid', 'clbid', 'crsid' */]
-	let strKeys = [/* 'title', */ 'name', 'comments', /* 'notes', 'description', 'words' */]
+	let intKeys = ['year', 'level'/* , 'term', 'number', 'groupid', 'clbid', 'crsid' */]
+	let strKeys = [/* 'title', */ 'name', 'comments', 'summary' /*, 'notes', 'description', 'words' */]
 
-	let organizedValues = map(values, val => {
-		// handle the numeric values first
+	let organizedValues = values.map(val => {
+		// handle $OR and $AND
+		if (/^\$/.test(val)) {
+			return val.toUpperCase()
+		}
+
+		// handle the numeric values
 		if (key === 'credits') {
 			val = parseFloat(val)
 		} else if (intKeys.includes(key)) {
@@ -68,9 +73,7 @@ function organizeValues([key, values], words = false, profWords = false) {
 		}
 
 		// now deal with the strings
-		if (val.startsWith('$')) {
-			return val.toUpperCase()
-		} else if (key === 'subject') {
+		if (key === 'subject') {
 			val = val.toUpperCase()
 		} else if (key === 'requirements') {
 			val = val.toUpperCase()
@@ -98,9 +101,7 @@ function organizeValues([key, values], words = false, profWords = false) {
 		return val
 	})
 
-	if (organizedValues.length && Array.isArray(organizedValues[0])) {
-		organizedValues = flatten(organizedValues)
-	}
+	organizedValues = flatten(organizedValues)
 
 	return [key, organizedValues]
 }
@@ -131,7 +132,7 @@ export function buildQueryFromString(queryString: string = '', opts: {words?: bo
 	let [keys, values] = partitionByIndex(cleaned)
 
 	if (stringThing && quacksLikeDeptNum(stringThing)) {
-		let {departments, number, section} = splitDeptNum(stringThing)
+		let {departments, number, section} = splitDeptNum(stringThing, true)
 		// let deptnum = buildDeptNum({subject: departments[0], number})
 		keys.push('subject')
 		values.push(departments[0])
@@ -144,7 +145,7 @@ export function buildQueryFromString(queryString: string = '', opts: {words?: bo
 		// values.push(deptnum)
 		// console.log(deptnum)
 	} else if (stringThing) {
-		keys.push('title')
+		keys.push('name')
 		values.push(stringThing)
 	}
 
@@ -175,7 +176,7 @@ export function buildQueryFromString(queryString: string = '', opts: {words?: bo
 		val = flatten(val)
 
 		// if it's a multi-value thing and doesn't include a boolean yet, default to $AND
-		if (val.length > 1 && (typeof val[0] !== 'string' || !val[0].startsWith('$'))) {
+		if (val.length > 1 && !/^\$/.test(val)) {
 			val.unshift('$AND')
 		}
 
