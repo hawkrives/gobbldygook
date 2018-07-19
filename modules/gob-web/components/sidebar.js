@@ -105,4 +105,7 @@ const mapDispatch = dispatch =>
 	bindActionCreators({undo, redo, removeCourse}, dispatch)
 
 // $FlowFixMe
-export default connect(undefined, mapDispatch)(Sidebar)
+export default connect(
+	undefined,
+	mapDispatch,
+)(Sidebar)

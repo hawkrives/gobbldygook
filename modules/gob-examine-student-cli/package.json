@@ -8,12 +8,12 @@
   "dependencies": {
     "@gob/cli": "^3.0.0-rc.2",
     "@gob/examine-student": "^3.0.0-rc.2",
-    "chalk": "^2.4.0",
+    "chalk": "^2.4.1",
     "graceful-fs": "^4.1.11",
-    "js-yaml": "^3.11.0",
+    "js-yaml": "^3.12.0",
     "lodash": "^4.17.10",
     "nomnom": "^1.8.1",
     "pify": "^3.0.0",
-    "plur": "^3.0.0"
+    "plur": "^3.0.1"
   }
 }

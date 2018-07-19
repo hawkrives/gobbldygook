@@ -228,4 +228,7 @@ const mapDispatch = dispatch =>
 	bindActionCreators({setOverride, removeOverride}, dispatch)
 
 // $FlowFixMe
-export default connect(null, mapDispatch)(AreaOfStudyContainer)
+export default connect(
+	null,
+	mapDispatch,
+)(AreaOfStudyContainer)

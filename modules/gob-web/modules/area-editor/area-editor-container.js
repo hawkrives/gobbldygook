@@ -27,33 +27,15 @@ export class AreaEditScreen extends React.Component {
 		}).isRequired, // react-router
 	}
 
-	state = {
-		area: null,
-		code: '',
-		isEditing: false,
-	}
-
-	componentWillMount() {
-		this.props.loadAllAreas()
-	}
-
-	componentDidMount() {
-		this.handleNewData(this.props)
-	}
-
-	componentWillReceiveProps(nextProps) {
-		this.handleNewData(nextProps)
-	}
-
-	handleNewData = props => {
-		if (this.state.isEditing) {
-			return
+	static getDerivedStateFromProps(props, state) {
+		if (state.isEditing) {
+			return null
 		}
 
 		let {type, name, revision} = props.params
 
 		if (!type || !name || !revision) {
-			return
+			return null
 		}
 
 		const allAreas = props.areas.data
@@ -73,9 +55,17 @@ export class AreaEditScreen extends React.Component {
 			data = yaml.safeDump(data)
 		}
 
-		this.setState({
-			area: data,
-		})
+		return {area: data}
+	}
+
+	state = {
+		area: null,
+		code: '',
+		isEditing: false,
+	}
+
+	componentDidMount() {
+		this.props.loadAllAreas()
 	}
 
 	handleChange = newValue => {
@@ -135,4 +125,7 @@ const mapDispatchToProps = dispatch => ({
 	...bindActionCreators({loadAllAreas}, dispatch),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(AreaEditScreen)
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)(AreaEditScreen)

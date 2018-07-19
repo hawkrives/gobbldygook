@@ -20,7 +20,7 @@ class StudentPickerContainer extends React.Component {
 		groupBy: 'nothing',
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		this.props.loadStudents()
 	}
 
@@ -69,6 +69,7 @@ const mapDispatchToProps = dispatch => ({
 	...bindActionCreators({destroyStudent, loadStudents}, dispatch),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-	StudentPickerContainer,
-)
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)(StudentPickerContainer)

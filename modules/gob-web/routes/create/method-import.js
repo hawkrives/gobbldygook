@@ -49,40 +49,45 @@ class SISImportScreen extends React.Component {
 		extensionInstalled: false,
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		this.checkLoginState()
 	}
 
-	checkLoginState = () => {
-		checkIfLoggedIn()
-			.then(ids => {
-				if (ids.length === 1) {
-					this.setState({
-						loggedIn: true,
-						checkingLogin: false,
-						selectedId: ids[0],
-					})
-				} else {
-					this.setState({
-						loggedIn: true,
-						checkingLogin: false,
-						ids,
-					})
-				}
+	checkLoginState = async () => {
+		try {
+			let ids = await checkIfLoggedIn()
+
+			if (ids.length === 1) {
+				this.setState({
+					loggedIn: true,
+					checkingLogin: false,
+					selectedId: ids[0],
+				})
+			} else {
+				this.setState({
+					loggedIn: true,
+					checkingLogin: false,
+					ids,
+				})
+			}
+		} catch (err) {
+			log(err)
+
+			let errorMessage = 'other error'
+			if (err instanceof ExtensionNotLoadedError) {
+				errorMessage = 'The extension is not loaded properly.'
+			} else if (err instanceof ExtensionTooOldError) {
+				errorMessage = 'The extension is too old.'
+			} else {
+				errorMessage = serializeError(err)
+			}
+
+			this.setState({
+				loggedIn: false,
+				checkingLogin: false,
+				error: errorMessage,
 			})
-			.catch(err => {
-				log(err)
-				this.setState({loggedIn: false, checkingLogin: false})
-				if (err instanceof ExtensionNotLoadedError) {
-					this.setState({
-						error: 'The extension is not loaded properly.',
-					})
-				} else if (err instanceof ExtensionTooOldError) {
-					this.setState({error: 'The extension is too old.'})
-				} else {
-					this.setState({error: serializeError(err)})
-				}
-			})
+		}
 	}
 
 	handleImportData = () => {
@@ -218,4 +223,7 @@ const StudentInfo = ({student}: {student: mixed}) => (
 
 let mapDispatch = dispatch => ({dispatch})
 
-export default connect(undefined, mapDispatch)(withRouter(SISImportScreen))
+export default connect(
+	undefined,
+	mapDispatch,
+)(withRouter(SISImportScreen))

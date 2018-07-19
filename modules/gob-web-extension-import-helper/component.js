@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react'
 import styled from 'styled-components'
-import {interpose} from '@gob/lib'
 import brwsr from 'brwsr'
 
 import {installExtension as installChrome} from './chrome'

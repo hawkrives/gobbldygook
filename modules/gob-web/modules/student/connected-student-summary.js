@@ -57,6 +57,7 @@ const mapDispatch = dispatch =>
 	)
 
 // $FlowFixMe
-export const ConnectedStudentSummary = connect(null, mapDispatch)(
-	WrappedStudentSummary,
-)
+export const ConnectedStudentSummary = connect(
+	null,
+	mapDispatch,
+)(WrappedStudentSummary)

@@ -2,3 +2,4 @@ node_modules/
 *.min.js
 modules/gob-hanson-format/parse-hanson-string.js
 !.webpackrc.js
+modules/gob-web/build/

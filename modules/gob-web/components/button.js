@@ -17,7 +17,7 @@ const BaseButton = styled.button`
 	// also show newlines, so be careful.
 	white-space: pre;
 
-	padding: 1ex 2em;
+	padding: 0.5em 0.5em;
 	border: solid 1px transparent;
 
 	transition: all 0.2s ease-out;
