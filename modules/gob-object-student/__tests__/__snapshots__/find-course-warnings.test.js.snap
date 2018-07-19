@@ -2,7 +2,7 @@
 
 exports[`checkForInvalidSemester checks for an invalid semester on a course 1`] = `
 Object {
-  "msg": "Wrong Semester (originally from Interim)",
+  "msg": "Wrong Semester (originally from Winter)",
   "type": "invalid-semester",
   "warning": true,
 }
