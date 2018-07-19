@@ -6,7 +6,7 @@ describe('CourseExpression', () => {
 		expect(parse('CSCI 121')).toMatchSnapshot()
 	})
 
-	it('parses courses with a two departments', () => {
+	xit('parses courses with a two departments', () => {
 		expect(parse('AS/ES 121')).toMatchSnapshot()
 	})
 

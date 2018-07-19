@@ -1,6 +1,6 @@
 import {expandDepartment} from '../convert-department'
 
-describe('expandDepartment', () => {
+xdescribe('expandDepartment', () => {
 	it('expands a short department abbreviation into a long abbreviation', () => {
 		expect(expandDepartment('AS')).toBe('Asian Studies')
 	})
