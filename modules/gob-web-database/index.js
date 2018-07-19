@@ -1,6 +1,6 @@
 import treo, {Database} from 'treo'
 
-//import Promise from 'es6-promise'
+import Promise from 'es6-promise'
 treo.Promise = Promise
 
 import queryTreoDatabase from '@gob/treo-plugin-query'

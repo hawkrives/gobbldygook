@@ -7,10 +7,8 @@ Object {
     "$operator": "$gte",
   },
   "$course": Object {
-    "department": Array [
-      "CSCI",
-    ],
-    "number": 121,
+    "number": "121",
+    "subject": "CSCI",
   },
   "$type": "occurrence",
 }

@@ -4,8 +4,8 @@ describe('compareCourseToCourse', () => {
 	it('compares select keys of courses', () => {
 		expect(
 			compareCourseToCourse(
-				{department: ['ART'], number: 310},
-				{department: ['ART'], number: 310},
+				{subject: 'ART', number: '310'},
+				{subject: 'ART', number: '310'},
 			),
 		).toBe(true)
 	})
@@ -18,13 +18,13 @@ describe('compareCourseToCourse', () => {
 		it('the same department is equal to itself', () => {
 			expect(
 				compareCourseToCourse(
-					{department: ['ART']},
-					{department: ['ART']},
+					{subject: 'ART'},
+					{subject: 'ART'},
 				),
 			).toBe(true)
 		})
 
-		it('multiple departments are not the same as a single department', () => {
+		xit('multiple departments are not the same as a single department', () => {
 			expect(
 				compareCourseToCourse(
 					{department: ['ART']},
@@ -36,13 +36,13 @@ describe('compareCourseToCourse', () => {
 		it('different departments are not equal', () => {
 			expect(
 				compareCourseToCourse(
-					{department: ['ASIAN']},
-					{department: ['ART']},
+					{subject: 'ASIAN'},
+					{subject: 'ART'},
 				),
 			).toBe(false)
 		})
 
-		it('order is significant', () => {
+		xit('order is significant', () => {
 			expect(
 				compareCourseToCourse(
 					{department: ['CHEM', 'BIO']},
@@ -54,19 +54,19 @@ describe('compareCourseToCourse', () => {
 
 	describe('compares the "semester" prop', () => {
 		it('and the same semester is equal to itself', () => {
-			expect(compareCourseToCourse({semester: 1}, {semester: 1})).toBe(
+			expect(compareCourseToCourse({semester: 'FA'}, {semester: 'FA'})).toBe(
 				true,
 			)
 		})
 
 		it('and different semesters are not equal', () => {
-			expect(compareCourseToCourse({semester: 2}, {semester: 1})).toBe(
+			expect(compareCourseToCourse({semester: 'SP'}, {semester: 'FA'})).toBe(
 				false,
 			)
 		})
 
 		it('and supports the wildcard selector', () => {
-			expect(compareCourseToCourse({semester: '*'}, {semester: 1})).toBe(
+			expect(compareCourseToCourse({semester: '*'}, {semester: 'FA'})).toBe(
 				true,
 			)
 		})
@@ -90,7 +90,7 @@ describe('compareCourseToCourse', () => {
 
 	describe('compares the "number" prop', () => {
 		it('the same number is equal to itself', () => {
-			expect(compareCourseToCourse({number: 201}, {number: 201})).toBe(
+			expect(compareCourseToCourse({number: '201'}, {number: '201'})).toBe(
 				true,
 			)
 		})
@@ -115,7 +115,7 @@ describe('compareCourseToCourse', () => {
 		})
 	})
 
-	describe('compares the "level" prop', () => {
+	xdescribe('compares the "level" prop', () => {
 		it('the same level is equal to itself', () => {
 			expect(compareCourseToCourse({level: 100}, {level: 100})).toBe(true)
 		})
@@ -126,7 +126,7 @@ describe('compareCourseToCourse', () => {
 		})
 	})
 
-	describe('compares the "international" prop', () => {
+	xdescribe('compares the "international" prop', () => {
 		it('the same "international" value is equal', () => {
 			expect(
 				compareCourseToCourse(
@@ -145,7 +145,7 @@ describe('compareCourseToCourse', () => {
 		})
 	})
 
-	describe('compares the "type" prop', () => {
+	xdescribe('compares the "type" prop', () => {
 		it('the same "type" value is equal', () => {
 			expect(compareCourseToCourse({type: 'Lab'}, {type: 'Lab'})).toBe(
 				true,
@@ -181,8 +181,8 @@ describe('compareCourseToCourse', () => {
 	it('returns false if the query is more specific than the possibility', () => {
 		expect(
 			compareCourseToCourse(
-				{department: ['ASIAN'], number: 310, section: 'A'},
-				{department: ['ASIAN'], number: 310},
+				{subject: 'ASIAN', number: '310', section: 'A'},
+				{subject: 'ASIAN', number: '310'},
 			),
 		).toBe(false)
 	})
@@ -190,8 +190,8 @@ describe('compareCourseToCourse', () => {
 	it('returns true if the query is less specific than the possibility', () => {
 		expect(
 			compareCourseToCourse(
-				{department: ['ASIAN'], number: 310},
-				{department: ['ASIAN'], number: 310, section: 'A'},
+				{subject: 'ASIAN', number: '310'},
+				{subject: 'ASIAN', number: '310', section: 'A'},
 			),
 		).toBe(true)
 	})

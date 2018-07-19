@@ -3,10 +3,8 @@
 exports[`CourseExpression parses courses with a single department 1`] = `
 Object {
   "$course": Object {
-    "department": Array [
-      "CSCI",
-    ],
-    "number": 121,
+    "number": "121",
+    "subject": "CSCI",
   },
   "$type": "course",
 }
@@ -28,7 +26,7 @@ Object {
 exports[`CourseExpression parses courses with no departments as having no department 1`] = `
 Object {
   "$course": Object {
-    "number": 121,
+    "number": "121",
   },
   "$type": "course",
 }
@@ -37,11 +35,9 @@ Object {
 exports[`CourseExpression parses courses with sections 1`] = `
 Object {
   "$course": Object {
-    "department": Array [
-      "CSCI",
-    ],
-    "number": 121,
+    "number": "121",
     "section": "A",
+    "subject": "CSCI",
   },
   "$type": "course",
 }
@@ -50,12 +46,10 @@ Object {
 exports[`CourseExpression parses courses with semesters 1`] = `
 Object {
   "$course": Object {
-    "department": Array [
-      "CSCI",
-    ],
-    "number": 121,
+    "number": "121",
     "section": "A",
     "semester": 1,
+    "subject": "CSCI",
     "year": 2014,
   },
   "$type": "course",
@@ -65,11 +59,9 @@ Object {
 exports[`CourseExpression parses courses with years 1`] = `
 Object {
   "$course": Object {
-    "department": Array [
-      "CSCI",
-    ],
-    "number": 121,
+    "number": "121",
     "section": "A",
+    "subject": "CSCI",
     "year": 2014,
   },
   "$type": "course",
@@ -79,11 +71,9 @@ Object {
 exports[`CourseExpression supports international courses 1`] = `
 Object {
   "$course": Object {
-    "department": Array [
-      "CSCI",
-    ],
     "international": true,
-    "number": 121,
+    "number": "121",
+    "subject": "CSCI",
   },
   "$type": "course",
 }
@@ -92,11 +82,9 @@ Object {
 exports[`CourseExpression supports international labs 1`] = `
 Object {
   "$course": Object {
-    "department": Array [
-      "CSCI",
-    ],
     "international": true,
-    "number": 121,
+    "number": "121",
+    "subject": "CSCI",
     "type": "Lab",
   },
   "$type": "course",
@@ -106,10 +94,8 @@ Object {
 exports[`CourseExpression supports labs 1`] = `
 Object {
   "$course": Object {
-    "department": Array [
-      "CSCI",
-    ],
-    "number": 121,
+    "number": "121",
+    "subject": "CSCI",
     "type": "Lab",
   },
   "$type": "course",
@@ -119,11 +105,9 @@ Object {
 exports[`CourseExpression supports wildcard sections 1`] = `
 Object {
   "$course": Object {
-    "department": Array [
-      "CSCI",
-    ],
-    "number": 121,
+    "number": "121",
     "section": "*",
+    "subject": "CSCI",
   },
   "$type": "course",
 }
@@ -132,12 +116,10 @@ Object {
 exports[`CourseExpression supports wildcard semesters 1`] = `
 Object {
   "$course": Object {
-    "department": Array [
-      "CSCI",
-    ],
-    "number": 121,
+    "number": "121",
     "section": "*",
     "semester": "*",
+    "subject": "CSCI",
     "year": "*",
   },
   "$type": "course",
@@ -147,11 +129,9 @@ Object {
 exports[`CourseExpression supports wildcard years 1`] = `
 Object {
   "$course": Object {
-    "department": Array [
-      "CSCI",
-    ],
-    "number": 121,
+    "number": "121",
     "section": "*",
+    "subject": "CSCI",
     "year": "*",
   },
   "$type": "course",

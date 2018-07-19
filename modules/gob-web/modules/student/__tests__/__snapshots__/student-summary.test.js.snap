@@ -1100,7 +1100,7 @@ exports[`StudentSummary renders 1`] = `
     />
     <CreditSummary
       currentCredits={0}
-      neededCredits={35}
+      neededCredits={210}
     />
     <Footer />
   </div>
@@ -1129,7 +1129,7 @@ exports[`StudentSummary renders a student with canGraduate=false 1`] = `
     />
     <CreditSummary
       currentCredits={0}
-      neededCredits={35}
+      neededCredits={210}
     />
     <Footer
       canGraduate={false}

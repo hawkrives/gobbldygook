@@ -1,6 +1,6 @@
 import {normalizeDepartment} from '../convert-department'
 
-describe('normalizeDepartment', () => {
+xdescribe('normalizeDepartment', () => {
 	it('expands a short department abbreviation into a long abbreviation', () => {
 		expect(normalizeDepartment('AS')).toBe('ASIAN')
 	})
