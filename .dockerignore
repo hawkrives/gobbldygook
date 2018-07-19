@@ -1,0 +1,13 @@
+.idea/
+.circleci/
+.git/
+.cache/
+dist/
+node_modules/
+modules/*/node_modules/
+playground/
+screenshots/
+flow-typed/
+config/
+.eslintcache
+*.log
