@@ -126,8 +126,8 @@ export default function StudentPicker(props: PropTypes) {
 	return (
 		<Overview>
 			<AppTitle>
-				<h1>GobbldygooK</h1>
-				<h2>A Course Scheduling Helper</h2>
+				<h1>GobbldygooK (Carleton)</h1>
+				<h2>A Course Scheduling Helper (Alpha-ish)</h2>
 				<small>
 					<code>{process.env.TRAVIS_COMMIT}</code>
 				</small>
