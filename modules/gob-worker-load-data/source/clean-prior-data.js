@@ -14,7 +14,7 @@ export function getPriorCourses(path: string) {
 		.store('courses')
 		.index('sourcePath')
 		.getAll(range({eq: path}))
-		.then(oldItems => fromPairs(map(oldItems, item => [item.clbid, null])))
+		.then(oldItems => fromPairs(map(oldItems, item => [item.id, null])))
 }
 
 export function getPriorAreas(path: string) {
