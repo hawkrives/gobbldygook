@@ -57,7 +57,7 @@ function organizeValues([key, values], words = false, profWords = false) {
 
 	let organizedValues = values.map(val => {
 		// handle $OR and $AND
-		if (/^\$/.test(val)) {
+		if (typeof val ==='string' && /^\$/.test(val)) {
 			return val.toUpperCase()
 		}
 
@@ -176,7 +176,8 @@ export function buildQueryFromString(queryString: string = '', opts: {words?: bo
 		val = flatten(val)
 
 		// if it's a multi-value thing and doesn't include a boolean yet, default to $AND
-		if (val.length > 1 && !/^\$/.test(val)) {
+		let startsWithBoolean = typeof val[0] === 'string' && /^\$/.test(val[0])
+		if (val.length > 1 && !startsWithBoolean) {
 			val.unshift('$AND')
 		}
 
