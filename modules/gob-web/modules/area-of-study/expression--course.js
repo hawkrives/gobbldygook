@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
-import {semesterName, buildDeptString} from '@gob/school-st-olaf-college'
+import {semesterName} from '@gob/school-st-olaf-college'
 
 import './expression--course.scss'
 
