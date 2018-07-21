@@ -51,14 +51,14 @@ jobs:
       - run: yarn install
       - save_cache: *save-cache-yarn
       - run: yarn run --silent test --coverage
-      - run:
-          name: coveralls
-          command: |
-            export PATH=$PATH:$(yarn global bin)
-            export COVERALLS_SERVICE_NAME=CircleCI
-            export COVERALLS_SERVICE_JOB_ID=$CIRCLE_BUILD_NUM
-            yarn global add coveralls
-            coveralls < ./coverage/lcov.info
+      # - run:
+      #     name: coveralls
+      #     command: |
+      #       export PATH=$PATH:$(yarn global bin)
+      #       export COVERALLS_SERVICE_NAME=CircleCI
+      #       export COVERALLS_SERVICE_JOB_ID=$CIRCLE_BUILD_NUM
+      #       yarn global add coveralls
+      #       coveralls < ./coverage/lcov.info
 
   prettier:
     docker: [{image: 'circleci/node:8'}]
