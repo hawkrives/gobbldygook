@@ -52,12 +52,19 @@ let keywordMappings = {
 }
 
 function organizeValues([key, values], words = false, profWords = false) {
-	let intKeys = ['year', 'level'/* , 'term', 'number', 'groupid', 'clbid', 'crsid' */]
-	let strKeys = [/* 'title', */ 'name', 'comments', 'summary' /*, 'notes', 'description', 'words' */]
+	let intKeys = [
+		'year',
+		'level' /* , 'term', 'number', 'groupid', 'clbid', 'crsid' */,
+	]
+	let strKeys = [
+		/* 'title', */ 'name',
+		'comments',
+		'summary' /*, 'notes', 'description', 'words' */,
+	]
 
 	let organizedValues = values.map(val => {
 		// handle $OR and $AND
-		if (/^\$/.test(val)) {
+		if (typeof val === 'string' && /^\$/.test(val)) {
 			return val.toUpperCase()
 		}
 
@@ -106,7 +113,10 @@ function organizeValues([key, values], words = false, profWords = false) {
 	return [key, organizedValues]
 }
 
-export function buildQueryFromString(queryString: string = '', opts: {words?: boolean, profWords?: boolean} = {}) {
+export function buildQueryFromString(
+	queryString: string = '',
+	opts: {words?: boolean, profWords?: boolean} = {},
+) {
 	queryString = queryString.trim()
 	if (queryString.endsWith(':')) {
 		queryString = queryString.substring(0, queryString.length - 1)
@@ -176,7 +186,8 @@ export function buildQueryFromString(queryString: string = '', opts: {words?: bo
 		val = flatten(val)
 
 		// if it's a multi-value thing and doesn't include a boolean yet, default to $AND
-		if (val.length > 1 && !/^\$/.test(val)) {
+		let startsWithBoolean = typeof val[0] === 'string' && /^\$/.test(val[0])
+		if (val.length > 1 && !startsWithBoolean) {
 			val.unshift('$AND')
 		}
 

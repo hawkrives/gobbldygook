@@ -97,10 +97,12 @@ export default class ExpandedCourse extends React.PureComponent<Props> {
 							{flatMap(course.offerings.times, offering => {
 								let {start, end, day} = offering
 								return (
-									<ListItem
-										key={`${day}-${start}-${end}`}
-									>
-										{day}{' from '}{start}{' to '}{end}
+									<ListItem key={`${day}-${start}-${end}`}>
+										{day}
+										{' from '}
+										{start}
+										{' to '}
+										{end}
 										{/* {', in '}{offering.location || '?????'} */}
 									</ListItem>
 								)

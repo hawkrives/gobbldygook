@@ -17,10 +17,7 @@ describe('compareCourseToCourse', () => {
 	describe('compares the "department" prop', () => {
 		it('the same department is equal to itself', () => {
 			expect(
-				compareCourseToCourse(
-					{subject: 'ART'},
-					{subject: 'ART'},
-				),
+				compareCourseToCourse({subject: 'ART'}, {subject: 'ART'}),
 			).toBe(true)
 		})
 
@@ -35,10 +32,7 @@ describe('compareCourseToCourse', () => {
 
 		it('different departments are not equal', () => {
 			expect(
-				compareCourseToCourse(
-					{subject: 'ASIAN'},
-					{subject: 'ART'},
-				),
+				compareCourseToCourse({subject: 'ASIAN'}, {subject: 'ART'}),
 			).toBe(false)
 		})
 
@@ -54,21 +48,21 @@ describe('compareCourseToCourse', () => {
 
 	describe('compares the "semester" prop', () => {
 		it('and the same semester is equal to itself', () => {
-			expect(compareCourseToCourse({semester: 'FA'}, {semester: 'FA'})).toBe(
-				true,
-			)
+			expect(
+				compareCourseToCourse({semester: 'FA'}, {semester: 'FA'}),
+			).toBe(true)
 		})
 
 		it('and different semesters are not equal', () => {
-			expect(compareCourseToCourse({semester: 'SP'}, {semester: 'FA'})).toBe(
-				false,
-			)
+			expect(
+				compareCourseToCourse({semester: 'SP'}, {semester: 'FA'}),
+			).toBe(false)
 		})
 
 		it('and supports the wildcard selector', () => {
-			expect(compareCourseToCourse({semester: '*'}, {semester: 'FA'})).toBe(
-				true,
-			)
+			expect(
+				compareCourseToCourse({semester: '*'}, {semester: 'FA'}),
+			).toBe(true)
 		})
 	})
 
@@ -90,9 +84,9 @@ describe('compareCourseToCourse', () => {
 
 	describe('compares the "number" prop', () => {
 		it('the same number is equal to itself', () => {
-			expect(compareCourseToCourse({number: '201'}, {number: '201'})).toBe(
-				true,
-			)
+			expect(
+				compareCourseToCourse({number: '201'}, {number: '201'}),
+			).toBe(true)
 		})
 		it('zero is equal', () => {
 			expect(compareCourseToCourse({number: 0}, {number: 0})).toBe(true)

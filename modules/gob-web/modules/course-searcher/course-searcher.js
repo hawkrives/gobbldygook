@@ -10,7 +10,7 @@ import Loading from '../../components/loading'
 import CourseResultsList from './course-results-list'
 import {androidArrowForward} from '../../icons/ionicons'
 
-import {SORT_BY, GROUP_BY} from './course-searcher-options'
+import {sortByOptions, groupByOptions} from './course-searcher-options'
 
 import styled from 'styled-components'
 
@@ -45,24 +45,28 @@ let FullWidthSelect = styled.select`
 	width: 100%;
 `
 
-const LabelledSelect = ({className, onChange, value, label, options}: {
+type LabelledSelectProps = {
 	onChange: (ev: SyntheticInputEvent<HTMLSelectElement>) => void,
 	value: string,
 	label: string,
 	options: Array<string>,
 	className: string,
-}) => {
+}
+
+const LabelledSelect = ({
+	className,
+	onChange,
+	value,
+	label,
+	options,
+}: LabelledSelectProps) => {
 	let id = `labelled-select-${uniqueId()}`
 
 	return (
 		<span className={className}>
 			<Label htmlFor={id}>{label}</Label>
 
-			<FullWidthSelect
-				id={id}
-				value={value}
-				onChange={onChange}
-			>
+			<FullWidthSelect id={id} value={value} onChange={onChange}>
 				{options.map(opt => (
 					<option key={opt} value={opt}>
 						{opt}
@@ -153,7 +157,7 @@ export default function CourseSearcher(props: CourseSearcherProps) {
 						type="search"
 						className="search-box"
 						value={query}
-						placeholder='Search for a course or phrase'
+						placeholder="Search for a course or phrase"
 						onChange={onQueryChange}
 						onKeyDown={onKeyDown}
 						autoFocus={true}
@@ -168,15 +172,14 @@ export default function CourseSearcher(props: CourseSearcherProps) {
 						onClick={onQuerySubmit}
 						disabled={inProgress}
 					>
-						{inProgress
-							? <span key="msg">Searching…</span>
-							: <React.Fragment>
-									<span>Search </span>
-									<Icon>
-										{androidArrowForward}
-									</Icon>
-							  </React.Fragment>
-						}
+						{inProgress ? (
+							<span key="msg">Searching…</span>
+						) : (
+							<React.Fragment>
+								<span>Search </span>
+								<Icon>{androidArrowForward}</Icon>
+							</React.Fragment>
+						)}
 					</Button>
 				</div>
 
@@ -185,7 +188,7 @@ export default function CourseSearcher(props: CourseSearcherProps) {
 						<LabelledSelect
 							className="filter"
 							label="Sort by:"
-							options={((Object.values(SORT_BY): Array<any>): Array<string>)}
+							options={sortByOptions}
 							onChange={onSortChange}
 							value={sortBy}
 						/>
@@ -193,7 +196,7 @@ export default function CourseSearcher(props: CourseSearcherProps) {
 						<LabelledSelect
 							className="filter"
 							label="Group by:"
-							options={((Object.values(GROUP_BY): Array<any>): Array<string>)}
+							options={groupByOptions}
 							onChange={onGroupByChange}
 							value={groupBy}
 						/>

@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
-import {semesterName, buildDeptString} from '@gob/school-st-olaf-college'
+import {semesterName} from '@gob/school-st-olaf-college'
 
 import './expression--course.scss'
 
 export default function CourseExpression(props) {
-	const department = props.subject//buildDeptString(props.department)
+	const department = props.subject //buildDeptString(props.department)
 
 	const international = props.international && (
 		<span className="course--international">I</span>

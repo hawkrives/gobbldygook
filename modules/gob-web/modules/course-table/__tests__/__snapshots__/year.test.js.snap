@@ -131,11 +131,8 @@ exports[`Year renders shallowly 1`] = `
     <span>
       <button
         className="year__TitleButton-jBlQpr cGPKzX button__BaseButton-kfpwnX dVOzbX"
-        disabled={undefined}
         onClick={[Function]}
-        style={undefined}
         title="Add Semester"
-        to={undefined}
         type="button"
       >
         Add ‘
@@ -144,11 +141,8 @@ exports[`Year renders shallowly 1`] = `
       </button>
       <button
         className="year__RemoveYearButton-hGQXvs dQSlRw year__TitleButton-jBlQpr cGPKzX button__BaseButton-kfpwnX dVOzbX"
-        disabled={undefined}
         onClick={[Function]}
-        style={undefined}
         title="Remove the year 2016—2017"
-        to={undefined}
         type="button"
       >
         Remove Year

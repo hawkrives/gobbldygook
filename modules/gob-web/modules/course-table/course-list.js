@@ -71,9 +71,8 @@ export default function CourseList(props: Props) {
 	}
 
 	let usedSlots = Math.floor(props.usedSlots)
-	let emptySlots = usedSlots < props.maxSlots
-		? range(usedSlots, props.maxSlots)
-		: []
+	let emptySlots =
+		usedSlots < props.maxSlots ? range(usedSlots, props.maxSlots) : []
 	emptySlots = emptySlots.map(n => <Empty key={n} />)
 
 	return (
