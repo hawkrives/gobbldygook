@@ -83,7 +83,7 @@ export type Course = {
 	section: string,
 	semester: string,
 	size: {registered: number, total: number, waitlist: number},
-	status: null | "Open" | "Closed",
+	status: null | 'Open' | 'Closed',
 	subject: string,
 	summary: null | string,
 	synonym: string,

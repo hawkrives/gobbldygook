@@ -228,7 +228,7 @@ const courseTypesMapping = {
 // 	shortDepartmentAbbreviationsToFullDepartmentAbbreviations,
 // 	fullDepartmentNamesToFullDepartmentAbbreviations,
 // )
-const toDepartmentNames = {}//Object.assign({}, departmentAbbreviationsToNames)
+const toDepartmentNames = {} //Object.assign({}, departmentAbbreviationsToNames)
 
 export function expandDepartment(dept: string) {
 	dept = dept.toUpperCase()

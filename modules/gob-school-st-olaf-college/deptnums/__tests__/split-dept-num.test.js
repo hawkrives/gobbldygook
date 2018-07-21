@@ -20,7 +20,7 @@ describe('splitDeptNum', () => {
 
 		expect(splitDeptNum(deptnum)).toEqual({
 			departments: ['ASIAN'],
-			number: "275",
+			number: '275',
 		})
 	})
 
@@ -29,7 +29,7 @@ describe('splitDeptNum', () => {
 
 		expect(splitDeptNum(deptnum, true)).toEqual({
 			departments: ['ASIAN'],
-			number: "275",
+			number: '275',
 			section: 'A',
 		})
 	})

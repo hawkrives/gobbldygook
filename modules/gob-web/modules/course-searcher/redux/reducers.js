@@ -54,8 +54,7 @@ const TIME_OF_DAY = course =>
 		: 'No Times Listed'
 
 // eslint-disable-next-line no-confusing-arrow
-const DEPARTMENT = course =>
-	course.subject// ? buildDeptString(course.departments) : 'No Department'
+const DEPARTMENT = course => course.subject // ? buildDeptString(course.departments) : 'No Department'
 
 // eslint-disable-next-line no-confusing-arrow
 const GEREQ = course => (course.gereqs ? oxford(course.gereqs) : 'No GEs')
@@ -91,7 +90,14 @@ function sortAndGroup({sortBy: sorting, groupBy: grouping, rawResults}) {
 
 	// TODO: Speed this up! This preperation stuff takes ~230ms by itself,
 	// with enough courses rendered. (like, say, {year: 2012})
-	const sortByArgs = ['year', 'subject', 'number', c => ['FA', 'WI', 'SP'].indexOf(c.semester), 'section', SORT_BY_TO_KEY[sorting]]
+	const sortByArgs = [
+		'year',
+		'subject',
+		'number',
+		c => ['FA', 'WI', 'SP'].indexOf(c.semester),
+		'section',
+		SORT_BY_TO_KEY[sorting],
+	]
 	const sorted = sortBy(rawResults, sortByArgs)
 
 	// Group them by term, then turn the object into an array of pairs.

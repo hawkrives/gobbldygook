@@ -15,10 +15,7 @@ const whitelist = new Set([
 	'year',
 ])
 
-const mapping = [
-	['departments', 'subject'],
-	['department', 'subject'],
-]
+const mapping = [['departments', 'subject'], ['department', 'subject']]
 
 export function alterForEvaluation(course) {
 	course = {...course}
