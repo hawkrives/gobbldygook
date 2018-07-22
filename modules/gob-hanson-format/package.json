@@ -6,7 +6,15 @@
   "author": "Hawken MacKay Rives",
   "license": "MIT",
   "scripts": {
-    "build": "pegjs --allowed-start-rules Result,Filter < ./parse-hanson-string.pegjs | babel-stdin | prettier $npm_package_config_prettier --stdin > ./parse-hanson-string.js"
+    "build": "pegjs --allowed-start-rules Result,Filter < ./parse-hanson-string.pegjs | babel-stdin > ./parse-hanson-string.js && prettier --write ./parse-hanson-string.js"
+  },
+  "prettier": {
+    "trailingComma": "all",
+    "tabWidth": 4,
+    "useTabs": true,
+    "singleQuote": true,
+    "semi": false,
+    "bracketSpacing": false
   },
   "dependencies": {
     "@gob/examine-student": "^3.0.0-rc.2",
