@@ -18,6 +18,7 @@ const Heading = styled.h2`
 
 const Description = styled.div`
 	hyphens: auto;
+	margin-bottom: 1em;
 `
 
 const Column = styled.div`
