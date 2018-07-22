@@ -1,4 +1,3 @@
-import map from 'lodash/map'
 import takeWhile from 'lodash/takeWhile'
 import toPairs from 'lodash/toPairs'
 
@@ -39,7 +38,7 @@ function checkCourseAgainstQueryBit(course, [key, values]) {
 		values = values.slice(1)
 	}
 
-	let internalMatches = map(values, val => {
+	let internalMatches = values.map(val => {
 		// dept, gereqs, etc.
 		if (Array.isArray(course[key]) && !substring) {
 			return course[key].includes(val)
