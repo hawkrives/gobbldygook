@@ -1,7 +1,6 @@
 import compact from 'lodash/compact'
 import every from 'lodash/every'
 import includes from 'lodash/includes'
-import indexOf from 'lodash/indexOf'
 import isArray from 'lodash/isArray'
 import map from 'lodash/map'
 import size from 'lodash/size'
@@ -32,7 +31,7 @@ function checkCourseAgainstQueryBit(course, [key, values]) {
 	// - an $AND, $OR, $NOT, $NOR, or $XOR query
 	// - one of the above, but substring
 
-	let hasBool = indexOf(values[0], '$') === 0
+	let hasBool = typeof values[0] === 'string' && values[0].startsWith('$')
 	let OR = values[0] === '$OR'
 	let NOR = values[0] === '$NOR'
 	let AND = values[0] === '$AND'
