@@ -67,11 +67,30 @@ let keywordMappings = {
 	time: 'times',
 }
 
+let intKeys = new Set(['year', 'level', 'term', 'number', 'groupid', 'clbid', 'crsid'])
+let strKeys = new Set(['title', 'name', 'notes', 'description', 'words'])
+
 function organizeValues([key, values], words = false, profWords = false) {
-	let organizedValues = map(values, val => {
-		if (startsWith(val, '$')) {
+	let organizedValues = flatMap(values, val => {
+		// handle $OR and $AND and other boolean operators
+		if (typeof val === 'string' && /^\$/.test(val)) {
 			return val.toUpperCase()
-		} else if (key === 'departments') {
+		}
+
+		// handle the numeric values
+		if (key === 'credits') {
+			val = parseFloat(val)
+		} else if (intKeys.has(key)) {
+			val = parseInt(val, 10)
+		}
+
+		// make flow happy by proving that val is now a string
+		if (typeof val !== 'string') {
+			return val
+		}
+
+		// now deal with the strings
+		if (key === 'departments') {
 			val = val.toLowerCase()
 			val = departmentMapping[val] || val.toUpperCase()
 		} else if (key === 'gereqs') {
@@ -89,40 +108,17 @@ function organizeValues([key, values], words = false, profWords = false) {
 			val = val.toUpperCase()
 		} else if (key === 'pf') {
 			val = val === 'true'
-		} else if (key === 'credits') {
-			val = parseFloat(val)
-		} else if (
-			includes(
-				[
-					'year',
-					'term',
-					'level',
-					'number',
-					'groupid',
-					'clbid',
-					'crsid',
-				],
-				key,
-			)
-		) {
-			val = parseInt(val, 10)
-		} else if (
-			includes(['title', 'name', 'notes', 'description', 'words'], key)
-		) {
+		} else if (strKeys.has(key)) {
 			if (words || key === 'words') {
 				val = splitParagraph(val)
 				key = 'words'
 			} else {
-				val = trim(val)
+				val = val.trim()
 			}
 		}
 
 		return val
 	})
-
-	if (organizedValues.length && Array.isArray(organizedValues[0])) {
-		organizedValues = flatten(organizedValues)
-	}
 
 	return [key, organizedValues]
 }
