@@ -4,7 +4,6 @@ import {db} from './db'
 import range from 'idb-range'
 import fromPairs from 'lodash/fromPairs'
 import map from 'lodash/map'
-import series from 'p-series'
 import debug from 'debug'
 import getCacheStoreName from './get-cache-store-name'
 import type {InfoFileTypeEnum} from './types'
@@ -45,8 +44,6 @@ export default async function cleanPriorData(
 		)
 	}
 
-	return series([
-		() => db.store(type).batch(operations),
-		() => db.store(getCacheStoreName(type)).del(path),
-	])
+	await db.store(type).batch(operations)
+	await db.store(getCacheStoreName(type)).del(path)
 }
