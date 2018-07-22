@@ -16,25 +16,23 @@ import {
 	GROUP_BY,
 } from '../../../modules/course-searcher/course-searcher-options'
 
-import includes from 'lodash/includes'
 import uniq from 'lodash/uniq'
 import flatMap from 'lodash/flatMap'
 import toPairs from 'lodash/toPairs'
 import round from 'lodash/round'
 import oxford from 'listify'
-import map from 'lodash/map'
 import present from 'present'
 import debug from 'debug'
 const log = debug('web:redux:search')
 
 import {buildDeptString} from '@gob/school-st-olaf-college'
 import {to12HourTime as to12} from '@gob/lib'
-const REVERSE_ORDER = ['Year', 'Term', 'Semester']
+const REVERSE_ORDER = new Set(['Year', 'Term', 'Semester'])
 
 // eslint-disable-next-line no-confusing-arrow
 const DAY_OF_WEEK = course =>
 	course.offerings
-		? map(course.offerings, offer => offer.day).join('/')
+		? (course.offerings || []).map(offer => offer.day).join('/')
 		: 'No Days Listed'
 
 // eslint-disable-next-line no-confusing-arrow
@@ -43,11 +41,8 @@ const TIME_OF_DAY = course =>
 		? oxford(
 				sortBy(
 					uniq(
-						flatMap(course.offerings, offer =>
-							map(
-								offer.times,
-								time => `${to12(time.start)}-${to12(time.end)}`,
-							),
+						flatMap(course.offerings, offer => offer.times).map(
+							time => `${to12(time.start)}-${to12(time.end)}`,
 						),
 					),
 				),
@@ -86,9 +81,13 @@ function sortAndGroup({sortBy: sorting, groupBy: grouping, rawResults}) {
 
 	// TODO: Speed this up! This preperation stuff takes ~230ms by itself,
 	// with enough courses rendered. (like, say, {year: 2012})
-	const sortByArgs = ['year', 'deptnum', 'semester', 'section'].concat(
-		SORT_BY_TO_KEY[sorting],
-	)
+	const sortByArgs = [
+		'year',
+		'deptnum',
+		'semester',
+		'section',
+		...SORT_BY_TO_KEY[sorting],
+	]
 	const sorted = sortBy(rawResults, sortByArgs)
 
 	// Group them by term, then turn the object into an array of pairs.
@@ -98,7 +97,7 @@ function sortAndGroup({sortBy: sorting, groupBy: grouping, rawResults}) {
 	// object keys don't have an implicit sort.
 	let processed = sortBy(groupedAndPaired, group => group[0])
 
-	if (includes(REVERSE_ORDER, grouping)) {
+	if (REVERSE_ORDER.has(grouping)) {
 		// Also reverse it, so the most recent is at the top.
 		processed.reverse()
 	}
