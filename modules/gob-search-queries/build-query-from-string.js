@@ -1,19 +1,14 @@
-import endsWith from 'lodash/endsWith'
-import filter from 'lodash/filter'
+// @flow
+
+import flatMap from 'lodash/flatMap'
 import flatten from 'lodash/flatten'
-import includes from 'lodash/includes'
 import map from 'lodash/map'
 import mapValues from 'lodash/mapValues'
-import startsWith from 'lodash/startsWith'
 import toPairs from 'lodash/toPairs'
-import trim from 'lodash/trim'
 import unzip from 'lodash/unzip'
+import uniq from 'lodash/uniq'
 
-import {
-	quacksLikeDeptNum,
-	splitDeptNum,
-	buildDeptNum,
-} from '@gob/school-st-olaf-college'
+import {quacksLikeDeptNum, splitDeptNum} from '@gob/school-st-olaf-college'
 
 import {partitionByIndex, splitParagraph, zipToObjectWithArrays} from '@gob/lib'
 
@@ -68,70 +63,74 @@ let keywordMappings = {
 }
 
 function organizeValues([key, values], words = false, profWords = false) {
-	let organizedValues = map(values, val => {
-		if (startsWith(val, '$')) {
+	let organizedValues = flatMap(values, val => {
+		// handle $OR and $AND and other boolean operators
+		if (typeof val === 'string' && /^\$/.test(val)) {
 			return val.toUpperCase()
-		} else if (key === 'departments') {
-			val = val.toLowerCase()
-			val = departmentMapping[val] || val.toUpperCase()
-		} else if (key === 'gereqs') {
-			val = val.toLowerCase()
-			val = gereqMapping[val] || val.toUpperCase()
-		} else if (key === 'deptnum') {
-			val = val.toUpperCase()
-		} else if (key === 'semester') {
-			val = val.toLowerCase()
-			val = semesters[val] || parseInt(val, 10)
-		} else if (key === 'instructors') {
-			if (profWords) {
-				val = splitParagraph(val)
-				key = 'profWords'
-			}
-		} else if (key === 'times' || key === 'locations') {
-			val = val.toUpperCase()
-		} else if (key === 'pf') {
-			val = val === 'true'
-		} else if (key === 'credits') {
-			val = parseFloat(val)
-		} else if (
-			includes(
-				[
-					'year',
-					'term',
-					'level',
-					'number',
-					'groupid',
-					'clbid',
-					'crsid',
-				],
-				key,
-			)
-		) {
-			val = parseInt(val, 10)
-		} else if (
-			includes(['title', 'name', 'notes', 'description', 'words'], key)
-		) {
-			if (words || key === 'words') {
-				val = splitParagraph(val)
-				key = 'words'
-			} else {
-				val = trim(val)
-			}
 		}
 
-		return val
+		switch (key) {
+			// handle the numeric values
+			case 'credits':
+				return parseFloat(val)
+			case 'year':
+			case 'level':
+			case 'term':
+			case 'number':
+			case 'groupid':
+			case 'clbid':
+			case 'crsid':
+				return parseInt(val, 10)
+			// handle the lookup values
+			case 'departments':
+				val = val.toLowerCase()
+				return departmentMapping[val] || val.toUpperCase()
+			case 'gereqs':
+				val = val.toLowerCase()
+				return gereqMapping[val] || val.toUpperCase()
+			case 'semester':
+				val = val.toLowerCase()
+				return semesters[val] || parseInt(val, 10)
+			// handle the string values
+			case 'deptnum':
+			case 'times':
+			case 'locations':
+				return val.toUpperCase()
+			// handle the boolean values
+			case 'pf':
+				return val === 'true' ? true : false
+			// handle the multi-word values
+			case 'instructors':
+				if (profWords) {
+					key = 'profWords'
+					return splitParagraph(val)
+				}
+				return val.trim()
+			case 'title':
+			case 'name':
+			case 'notes':
+			case 'description':
+				if (words) {
+					key = 'words'
+					return splitParagraph(val)
+				}
+				return val.trim()
+			case 'words':
+				return splitParagraph(val)
+			default:
+				return val.trim()
+		}
 	})
-
-	if (organizedValues.length && Array.isArray(organizedValues[0])) {
-		organizedValues = flatten(organizedValues)
-	}
 
 	return [key, organizedValues]
 }
 
-export function buildQueryFromString(queryString = '', opts = {}) {
-	queryString = trim(queryString)
-	if (endsWith(queryString, ':')) {
+export function buildQueryFromString(
+	queryString: string = '',
+	opts: {words?: boolean, profWords?: boolean} = {},
+) {
+	queryString = queryString.trim()
+	if (queryString.endsWith(':')) {
 		queryString = queryString.substring(0, queryString.length - 1)
 	}
 
@@ -149,18 +148,34 @@ export function buildQueryFromString(queryString = '', opts = {}) {
 	let matches = queryString.split(rex)
 
 	// Remove extra whitespace and remove empty strings
-	let cleaned = filter(map(matches, trim), str => str.length > 0)
+	let cleaned = matches.map(s => s.trim()).filter(s => s.length > 0)
 
 	// Grab the keys and values from the lists
 	let [keys, values] = partitionByIndex(cleaned)
 
 	if (stringThing && quacksLikeDeptNum(stringThing)) {
-		let {departments, number} = splitDeptNum(stringThing)
-		let deptnum = buildDeptNum({departments, number})
-		keys.push('deptnum')
-		values.push(deptnum)
+		let {departments, number, section} = splitDeptNum(stringThing, true)
+
+		if (departments.length === 1) {
+			keys.push('departments')
+			values.push(departments[0])
+		} else {
+			keys.push('departments')
+			values.push('$AND')
+			for (let dept of departments) {
+				keys.push('departments')
+				values.push(dept)
+			}
+		}
+
+		keys.push('number')
+		values.push(number)
+		if (section) {
+			keys.push('section')
+			values.push(section)
+		}
 	} else if (stringThing) {
-		keys.push('title')
+		keys.push('words')
 		values.push(stringThing)
 	}
 
@@ -168,7 +183,7 @@ export function buildQueryFromString(queryString = '', opts = {}) {
 	keys = map(keys, key => {
 		key = key.toLowerCase()
 		/* istanbul ignore else */
-		if (!startsWith(key, '_')) {
+		if (!key.startsWith('_')) {
 			key = keywordMappings[key] || key
 		}
 		return key
@@ -179,7 +194,7 @@ export function buildQueryFromString(queryString = '', opts = {}) {
 
 	// Perform initial cleaning of the values, dependent on the keys
 	let paired = unzip(
-		map(toPairs(zipped), kvpairs =>
+		toPairs(zipped).map(kvpairs =>
 			organizeValues(kvpairs, opts.words, opts.profWords),
 		),
 	)
@@ -189,9 +204,30 @@ export function buildQueryFromString(queryString = '', opts = {}) {
 	return mapValues(organized, val => {
 		// flatten the results list
 		val = flatten(val)
+		// remove duplicates from the results list
+		val = uniq(val)
 
-		// if it's a multi-value thing and doesn't include a boolean yet, default to $AND
-		if (val.length > 1 && !startsWith(val[0], '$')) {
+		// if it's a single-value or empty value, we don't need to do anything else
+		if (val.length === 0 || val.length === 1) {
+			return val
+		}
+
+		// find the first boolean value in the thing
+		let booleanIndex = val.findIndex(
+			v => typeof v === 'string' && v.startsWith('$'),
+		)
+		let includesBoolean = booleanIndex !== -1
+		let startsWithBoolean = booleanIndex === 0
+
+		// if it's a multi-value thing and has a boolean, but it's not at the start,
+		// move it to the front.
+		if (includesBoolean && !startsWithBoolean) {
+			let [bool] = val.splice(booleanIndex, 1)
+			val.unshift(bool)
+		}
+
+		// if it didn't have a boolean at all, stick $AND at the front
+		if (val.length > 1 && !includesBoolean) {
 			val.unshift('$AND')
 		}
 

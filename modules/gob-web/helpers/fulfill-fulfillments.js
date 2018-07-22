@@ -3,18 +3,20 @@ import props from 'p-props'
 import {getCourse} from './get-courses'
 import {alterCourse} from './alter-course-for-evaluation'
 
-export function fulfillFulfillments(student, {cache = []}) {
+export async function fulfillFulfillments(
+	student,
+	{store = Object.create(null)},
+) {
 	let promises = mapValues(
 		student.fulfillments,
-		clbid => cache[clbid] || getCourse({clbid}, student.fabrications),
+		clbid => store[clbid] || getCourse({clbid}, student.fabrications),
 	)
-	return props(promises).then(result =>
-		mapValues(result, r => {
-			return {
-				$type: 'course',
-				$course: alterCourse(r),
-				_isFulfillment: true,
-			}
-		}),
-	)
+
+	let result = await props(promises)
+
+	return mapValues(result, r => ({
+		$type: 'course',
+		$course: alterCourse(r),
+		_isFulfillment: true,
+	}))
 }

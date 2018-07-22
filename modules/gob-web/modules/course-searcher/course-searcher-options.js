@@ -18,3 +18,8 @@ export const GROUP_BY = {
 	year: 'Year',
 	none: 'None',
 }
+
+export const sortByOptions: Array<string> = (Object.values(SORT_BY): Array<any>)
+export const groupByOptions: Array<string> = (Object.values(GROUP_BY): Array<
+	any,
+>)

@@ -91,16 +91,41 @@ Object {
 
 exports[`buildQueryFromString can also search for deptnums even with no keys 1`] = `
 Object {
-  "deptnum": Array [
-    "ASIAN 220",
+  "departments": Array [
+    "ASIAN",
+  ],
+  "number": Array [
+    220,
   ],
 }
 `;
 
 exports[`buildQueryFromString can also search for deptnums with sections even with no keys 1`] = `
 Object {
-  "deptnum": Array [
-    "ASIAN/REL 220",
+  "departments": Array [
+    "$AND",
+    "ASIAN",
+    "REL",
+  ],
+  "number": Array [
+    220,
+  ],
+  "section": Array [
+    "A",
+  ],
+}
+`;
+
+exports[`buildQueryFromString conjoins a deptnum and a department key 1`] = `
+Object {
+  "departments": Array [
+    "$AND",
+    "MUSIC",
+    "ART",
+    "ASIAN",
+  ],
+  "number": Array [
+    102,
   ],
 }
 `;
@@ -115,8 +140,11 @@ Object {
 
 exports[`buildQueryFromString handles a single key and no value 1`] = `
 Object {
-  "deptnum": Array [
-    "ENGL 200",
+  "departments": Array [
+    "ENGL",
+  ],
+  "number": Array [
+    200,
   ],
 }
 `;
@@ -145,6 +173,22 @@ Object {
 `;
 
 exports[`buildQueryFromString handles no arguments as an empty string 1`] = `Object {}`;
+
+exports[`buildQueryFromString ignores subsequent deptnums in a non-keyed query 1`] = `
+Object {
+  "departments": Array [
+    "$AND",
+    "ASIAN",
+    "REL",
+  ],
+  "number": Array [
+    220,
+  ],
+  "section": Array [
+    "A",
+  ],
+}
+`;
 
 exports[`buildQueryFromString infers $AND from a list of multiple things 1`] = `
 Object {
@@ -214,8 +258,16 @@ Object {
     "$OR",
     1,
     0.25,
-    0.25,
+  ],
+}
+`;
+
+exports[`buildQueryFromString removes duplicate values for a key 1`] = `
+Object {
+  "credits": Array [
+    "$OR",
     1,
+    0.25,
   ],
 }
 `;

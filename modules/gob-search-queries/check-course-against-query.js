@@ -1,98 +1,101 @@
-import compact from 'lodash/compact'
-import every from 'lodash/every'
-import has from 'lodash/has'
-import includes from 'lodash/includes'
-import indexOf from 'lodash/indexOf'
-import isArray from 'lodash/isArray'
-import map from 'lodash/map'
-import size from 'lodash/size'
-import some from 'lodash/some'
-import tail from 'lodash/tail'
-import takeWhile from 'lodash/takeWhile'
+// @flow
+
 import toPairs from 'lodash/toPairs'
 
-function checkCourseAgainstQueryBit(course, [key, values]) {
-	if (!has(course, key)) {
+const isTrue = x => x === true
+
+const SUBSTRING_KEYS = new Set([
+	'title',
+	'name',
+	'description',
+	'notes',
+	'instructors',
+	'times',
+	'locations',
+])
+
+type BooleanBit = '$OR' | '$NOR' | '$AND' | '$NOT' | '$XOR'
+const BOOLEANS: Set<BooleanBit> = new Set([
+	'$OR',
+	'$NOR',
+	'$AND',
+	'$NOT',
+	'$XOR',
+])
+
+type Query = {[key: string]: mixed}
+type Course = {[key: string]: mixed}
+
+function checkQueryBit(course: Course, [key: string, values: Array<mixed>]) {
+	if (!course.hasOwnProperty(key)) {
 		return false
 	}
 
-	let substring = false
+	let substringMatch = SUBSTRING_KEYS.has(key)
 
 	// values is either:
 	// - a 1-long array
 	// - an $AND, $OR, $NOT, $NOR, or $XOR query
-	// - one of the above, but substring
+	// - one of the above, but substringMatch
 
-	let hasBool = indexOf(values[0], '$') === 0
-	let OR = values[0] === '$OR'
-	let NOR = values[0] === '$NOR'
-	let AND = values[0] === '$AND'
-	let NOT = values[0] === '$NOT'
-	let XOR = values[0] === '$XOR'
+	let boolBit: BooleanBit = values[0]
+	let hasBool = BOOLEANS.has(boolBit)
 
 	if (hasBool) {
-		// remove the first value from the array
-		// by returning all but the first element
-		values = tail(values)
+		// remove the first value from the array by returning all but the first element
+		values = values.slice(1)
 	}
 
-	if (
-		includes(
-			[
-				'title',
-				'name',
-				'description',
-				'notes',
-				'instructors',
-				'times',
-				'locations',
-			],
-			key,
-		)
-	) {
-		substring = true
-	}
+	let courseValue = course[key]
 
-	let internalMatches = map(values, val => {
+	let internalMatches = values.map(val => {
 		// dept, gereqs, etc.
-		if (isArray(course[key]) && !substring) {
-			return includes(course[key], val)
-		} else if (isArray(course[key]) && substring) {
-			return some(
-				map(course[key], item =>
-					includes(item.toLowerCase(), val.toLowerCase()),
-				),
-			)
-		} else if (substring) {
-			return includes(course[key].toLowerCase(), val.toLowerCase())
+		if (Array.isArray(courseValue)) {
+			if (substringMatch) {
+				val = val.toLowerCase()
+				return courseValue.some(
+					item =>
+						typeof item === 'string' &&
+						item.toLowerCase().includes(val),
+				)
+			} else {
+				return courseValue.includes(val)
+			}
 		}
-		return course[key] === val
+
+		if (substringMatch && typeof courseValue === 'string') {
+			val = val.toLowerCase()
+			return courseValue.toLowerCase().includes(val)
+		} else {
+			return courseValue === val
+		}
 	})
 
 	if (!hasBool) {
-		return every(internalMatches)
+		return internalMatches.every(isTrue)
 	}
 
-	let result = false
-
-	if (OR) result = some(internalMatches)
-	if (NOR) result = !some(internalMatches)
-	if (AND) result = every(internalMatches)
-	if (NOT) result = !every(internalMatches)
-	if (XOR) result = compact(internalMatches).length === 1
-
-	return result
+	switch (boolBit) {
+		case '$OR':
+			return internalMatches.some(isTrue)
+		case '$NOR':
+			return !internalMatches.some(isTrue)
+		case '$AND':
+			return internalMatches.every(isTrue)
+		case '$NOT':
+			return !internalMatches.every(isTrue)
+		case '$XOR':
+			return internalMatches.filter(isTrue).length === 1
+		default:
+			;(boolBit: empty)
+			return false
+	}
 }
 
 // Checks if a course passes a query check.
 // query: Object | the query object that comes out of buildQueryFromString
 // course: Course | the course to check
 // returns: Boolean | did all query bits pass the check?
-export function checkCourseAgainstQuery(query, course) {
-	let kvPairs = toPairs(query)
-	let matches = takeWhile(kvPairs, pair =>
-		checkCourseAgainstQueryBit(course, pair),
-	)
-
-	return size(kvPairs) === size(matches) && every(matches)
+export function checkCourseAgainstQuery(query: Query, course: Course): boolean {
+	return toPairs(query).every(pair => checkQueryBit(course, pair))
 }

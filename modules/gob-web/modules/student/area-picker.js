@@ -144,16 +144,17 @@ export default class AreaPickerContainer extends React.PureComponent<
 		filter: '',
 	}
 
+	updateQuery = (ev: SyntheticInputEvent<HTMLInputElement>) => {
+		let filter = (ev.target.value || '').toLowerCase()
+		this.setState(() => ({filter}))
+	}
+
 	render() {
 		return (
 			<AreaPicker
 				{...this.props}
 				filterText={this.state.filter}
-				onFilterChange={ev =>
-					this.setState(() => ({
-						filter: (ev.target.value || '').toLowerCase(),
-					}))
-				}
+				onFilterChange={this.updateQuery}
 			/>
 		)
 	}

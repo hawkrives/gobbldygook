@@ -3,22 +3,23 @@ import {embedActiveStudentCourses} from './embed-active-student-courses'
 import {getStudentStudies} from './get-student-studies'
 import {fulfillFulfillments} from './fulfill-fulfillments'
 
-export function getStudentData(student, {areas, courses}) {
-	const promisedAreas = getStudentStudies(student, {cache: areas})
-	const promisedSchedules = embedActiveStudentCourses(student, {
-		cache: courses,
-	})
-	const promisedFulfillments = fulfillFulfillments(student, {
+// @throws
+export async function getStudentData(student, {areas, courses}) {
+	let promisedAreas = getStudentStudies(student, {cache: areas})
+
+	let promisedSchedules = embedActiveStudentCourses(student, {
 		cache: courses,
 	})
 
-	return props({
+	let promisedFulfillments = fulfillFulfillments(student, {
+		cache: courses,
+	})
+
+	let data = await props({
 		areas: promisedAreas,
 		schedules: promisedSchedules,
 		fulfilled: promisedFulfillments,
 	})
-		.then(data => ({...student, ...data}))
-		.catch(err => {
-			throw err
-		})
+
+	return {...student, ...data}
 }

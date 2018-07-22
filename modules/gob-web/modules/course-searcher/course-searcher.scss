@@ -57,6 +57,7 @@
 	&:focus {
 		background-color: $blue-50;
 		color: $blue-900;
+
 		&::-webkit-input-placeholder {
 			color: desaturate($light-blue-300, 75%);
 		}
@@ -133,9 +134,19 @@
 .search-filters .filter {
 	flex: 1;
 	text-align: center;
+
+	&:not(:last-child) {
+		margin-right: 0.25em;
+	}
 }
 
-.search-filters label {
+.search-filters .filter label {
 	font-size: 0.9em;
 	font-weight: 500;
+
+	display: block;
+}
+
+.search-filters .filter select {
+	width: 100%;
 }
