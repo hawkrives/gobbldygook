@@ -154,8 +154,19 @@ export function buildQueryFromString(
 
 	if (stringThing && quacksLikeDeptNum(stringThing)) {
 		let {departments, number, section} = splitDeptNum(stringThing, true)
-		keys.push('departments')
-		values.push(departments)
+
+		if (departments.length === 1) {
+			keys.push('departments')
+			values.push(departments[0])
+		} else {
+			keys.push('departments')
+			values.push('$AND')
+			for (let dept of departments) {
+				keys.push('departments')
+				values.push(dept)
+			}
+		}
+
 		keys.push('number')
 		values.push(number)
 		if (section) {
