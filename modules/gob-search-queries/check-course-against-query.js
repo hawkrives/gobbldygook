@@ -1,3 +1,5 @@
+// @flow
+
 import toPairs from 'lodash/toPairs'
 
 const isTrue = x => x === true
@@ -12,7 +14,10 @@ const SUBSTRING_KEYS = new Set([
 	'locations',
 ])
 
-function checkQueryBit(course, [key, values]) {
+type Query = {[key: string]: mixed}
+type Course = {[key: string]: mixed}
+
+function checkQueryBit(course: Course, [key: string, values: Array<mixed>]) {
 	if (!course.hasOwnProperty(key)) {
 		return false
 	}
@@ -36,22 +41,28 @@ function checkQueryBit(course, [key, values]) {
 		values = values.slice(1)
 	}
 
+	let courseValue = course[key]
+
 	let internalMatches = values.map(val => {
 		// dept, gereqs, etc.
-		if (Array.isArray(course[key])) {
+		if (Array.isArray(courseValue)) {
 			if (substringMatch) {
 				val = val.toLowerCase()
-				return course[key].some(item => item.toLowerCase().includes(val))
+				return courseValue.some(
+					item =>
+						typeof item === 'string' &&
+						item.toLowerCase().includes(val),
+				)
 			} else {
-				return course[key].includes(val)
+				return courseValue.includes(val)
 			}
 		}
 
-		if (substringMatch) {
+		if (substringMatch && typeof courseValue === 'string') {
 			val = val.toLowerCase()
-			return course[key].toLowerCase().includes(val)
+			return courseValue.toLowerCase().includes(val)
 		} else {
-			return course[key] === val
+			return courseValue === val
 		}
 	})
 
@@ -74,6 +85,6 @@ function checkQueryBit(course, [key, values]) {
 // query: Object | the query object that comes out of buildQueryFromString
 // course: Course | the course to check
 // returns: Boolean | did all query bits pass the check?
-export function checkCourseAgainstQuery(query, course) {
+export function checkCourseAgainstQuery(query: Query, course: Course): boolean {
 	return toPairs(query).every(pair => checkQueryBit(course, pair))
 }
