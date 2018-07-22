@@ -34,6 +34,14 @@ describe('buildQueryFromString', () => {
 		expect(buildQueryFromString(query)).toMatchSnapshot()
 	})
 
+	it('conjoins a deptnum and a department key', () => {
+		// note: it's debatable as to what we want here; this test is just for
+		// documentation.
+
+		let query = 'AR/AS 102 department: MUSIC'
+		expect(buildQueryFromString(query)).toMatchSnapshot()
+	})
+
 	it('builds a query string while deduplicating synonyms of keys', () => {
 		let query =
 			'ges: $AND  geneds: history of western culture gened: HBS  semester: Spring  year: 2014'
@@ -57,6 +65,14 @@ describe('buildQueryFromString', () => {
 		let query = 'AS/RE 220A'
 
 		expect(buildQueryFromString(query)).toMatchSnapshot()
+	})
+
+	it('ignores subsequent deptnums in a non-keyed query', () => {
+		let query = 'AS/RE 220A AMCON 102'
+
+		let actual = buildQueryFromString(query)
+		expect(actual).toMatchSnapshot()
+		expect(actual).toEqual({departments: ['$AND', 'ASIAN', 'REL'], number: [220], section: ['A']})
 	})
 
 	it('returns an empty object when given nothing but whitespace', () => {
@@ -132,6 +148,15 @@ describe('buildQueryFromString', () => {
 			'credits: $OR credits: 1.0 credits: 0.25 credits: .25 credits: 1'
 
 		expect(buildQueryFromString(query)).toMatchSnapshot()
+	})
+
+	it('removes duplicate values for a key', () => {
+		let query =
+			'credits: $OR credits: 1.0 credits: 0.25 credits: .25 credits: 1'
+
+		let actual = buildQueryFromString(query)
+		expect(actual).toMatchSnapshot()
+		expect(actual.credits).toEqual(['$OR', 1, 0.25])
 	})
 
 	it('turns pf from a "true" string into a boolean', () => {
