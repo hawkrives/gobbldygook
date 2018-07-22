@@ -1,10 +1,7 @@
-import forEach from 'lodash/forEach'
 import toPairs from 'lodash/toPairs'
 import fromPairs from 'lodash/fromPairs'
-import filter from 'lodash/filter'
-import includes from 'lodash/includes'
 
-const whitelist = [
+const whitelist = new Set([
 	'clbid',
 	'credits',
 	'crsid',
@@ -18,18 +15,19 @@ const whitelist = [
 	'semester',
 	'type',
 	'year',
-]
-const mapping = {
-	departments: 'department',
-}
+])
+
+const mapping = new Map([['departments', 'department']])
+
 export function alterForEvaluation(course) {
 	course = {...course}
 
-	forEach(mapping, (toKey, fromKey) => {
-		course[toKey] = course[fromKey]
-	})
+	for (let [fromKey, toKey] of mapping.entries()) {
+		if (course.hasOwnProperty(fromKey)) {
+			course[toKey] = course[fromKey]
+		}
+	}
 
-	let pairs = toPairs(course)
-	pairs = filter(pairs, ([key]) => includes(whitelist, key))
+	let pairs = toPairs(course).filter(([key]) => whitelist.has(key))
 	return fromPairs(pairs)
 }
