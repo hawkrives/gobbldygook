@@ -10,12 +10,7 @@ import {buildDeptString} from './build-dept'
  * @returns {String} - the deptnum string
  */
 export function buildDeptNum(
-	{
-		departments,
-		number,
-		section = '',
-		deptnum,
-	}: {
+	course: {
 		departments: string[],
 		number: number,
 		section?: string,
@@ -23,6 +18,8 @@ export function buildDeptNum(
 	},
 	includeSection?: boolean = false,
 ) {
+	let {departments, number, section = '', deptnum} = course
+
 	const dept = buildDeptString(departments)
 	const deptnumString = deptnum || `${dept} ${number}`
 
