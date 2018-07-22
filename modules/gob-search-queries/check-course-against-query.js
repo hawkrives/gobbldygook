@@ -12,7 +12,7 @@ const SUBSTRING_KEYS = new Set([
 	'locations',
 ])
 
-function checkCourseAgainstQueryBit(course, [key, values]) {
+function checkQueryBit(course, [key, values]) {
 	if (!course.hasOwnProperty(key)) {
 		return false
 	}
@@ -75,7 +75,5 @@ function checkCourseAgainstQueryBit(course, [key, values]) {
 // course: Course | the course to check
 // returns: Boolean | did all query bits pass the check?
 export function checkCourseAgainstQuery(query, course) {
-	return toPairs(query).every(pair =>
-		checkCourseAgainstQueryBit(course, pair),
-	)
+	return toPairs(query).every(pair => checkQueryBit(course, pair))
 }
