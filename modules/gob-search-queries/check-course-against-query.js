@@ -1,9 +1,9 @@
-import compact from 'lodash/compact'
-import every from 'lodash/every'
 import map from 'lodash/map'
-import some from 'lodash/some'
 import takeWhile from 'lodash/takeWhile'
 import toPairs from 'lodash/toPairs'
+
+const isTrue = x => x === true
+const isTruthy = x => Boolean(x)
 
 const SUBSTRING_KEYS = new Set([
 	'title',
@@ -49,7 +49,7 @@ function checkCourseAgainstQueryBit(course, [key, values]) {
 			val = val.toLowerCase()
 			return course[key]
 				.map(item => item.toLowerCase().includes(val))
-				.some(v => v === true)
+				.some(isTrue)
 		}
 
 		if (substring) {
@@ -61,16 +61,16 @@ function checkCourseAgainstQueryBit(course, [key, values]) {
 	})
 
 	if (!hasBool) {
-		return every(internalMatches)
+		return internalMatches.every(isTrue)
 	}
 
 	let result = false
 
-	if (OR) result = some(internalMatches)
-	if (NOR) result = !some(internalMatches)
-	if (AND) result = every(internalMatches)
-	if (NOT) result = !every(internalMatches)
-	if (XOR) result = compact(internalMatches).length === 1
+	if (OR) result = internalMatches.some(isTrue)
+	if (NOR) result = !internalMatches.some(isTrue)
+	if (AND) result = internalMatches.every(isTrue)
+	if (NOT) result = !internalMatches.every(isTrue)
+	if (XOR) result = internalMatches.filter(isTrue).length === 1
 
 	return result
 }
@@ -85,5 +85,5 @@ export function checkCourseAgainstQuery(query, course) {
 		checkCourseAgainstQueryBit(course, pair),
 	)
 
-	return kvPairs.length === matches.length && every(matches)
+	return kvPairs.length === matches.length && matches.every(isTruthy)
 }
