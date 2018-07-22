@@ -131,8 +131,8 @@ function organizeValues([key, values], words = false, profWords = false) {
 }
 
 export function buildQueryFromString(queryString = '', opts = {}) {
-	queryString = trim(queryString)
-	if (endsWith(queryString, ':')) {
+	queryString = queryString.trim()
+	if (queryString.endsWith(':')) {
 		queryString = queryString.substring(0, queryString.length - 1)
 	}
 
@@ -150,7 +150,7 @@ export function buildQueryFromString(queryString = '', opts = {}) {
 	let matches = queryString.split(rex)
 
 	// Remove extra whitespace and remove empty strings
-	let cleaned = filter(map(matches, trim), str => str.length > 0)
+	let cleaned = matches.map(s => s.trim()).filter(s => s.length > 0)
 
 	// Grab the keys and values from the lists
 	let [keys, values] = partitionByIndex(cleaned)
@@ -169,7 +169,7 @@ export function buildQueryFromString(queryString = '', opts = {}) {
 	keys = map(keys, key => {
 		key = key.toLowerCase()
 		/* istanbul ignore else */
-		if (!startsWith(key, '_')) {
+		if (!key.startsWith('_')) {
 			key = keywordMappings[key] || key
 		}
 		return key
@@ -180,7 +180,7 @@ export function buildQueryFromString(queryString = '', opts = {}) {
 
 	// Perform initial cleaning of the values, dependent on the keys
 	let paired = unzip(
-		map(toPairs(zipped), kvpairs =>
+		toPairs(zipped).map(kvpairs =>
 			organizeValues(kvpairs, opts.words, opts.profWords),
 		),
 	)
