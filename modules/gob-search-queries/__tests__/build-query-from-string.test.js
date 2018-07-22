@@ -72,7 +72,11 @@ describe('buildQueryFromString', () => {
 
 		let actual = buildQueryFromString(query)
 		expect(actual).toMatchSnapshot()
-		expect(actual).toEqual({departments: ['$AND', 'ASIAN', 'REL'], number: [220], section: ['A']})
+		expect(actual).toEqual({
+			departments: ['$AND', 'ASIAN', 'REL'],
+			number: [220],
+			section: ['A'],
+		})
 	})
 
 	it('returns an empty object when given nothing but whitespace', () => {

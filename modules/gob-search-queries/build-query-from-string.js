@@ -213,7 +213,9 @@ export function buildQueryFromString(
 		}
 
 		// find the first boolean value in the thing
-		let booleanIndex = val.findIndex(v => typeof v === 'string' && v.startsWith('$'))
+		let booleanIndex = val.findIndex(
+			v => typeof v === 'string' && v.startsWith('$'),
+		)
 		let includesBoolean = booleanIndex !== -1
 		let startsWithBoolean = booleanIndex === 0
 
