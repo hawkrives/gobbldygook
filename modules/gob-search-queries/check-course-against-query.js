@@ -46,9 +46,7 @@ function checkCourseAgainstQueryBit(course, [key, values]) {
 
 		if (Array.isArray(course[key]) && substring) {
 			val = val.toLowerCase()
-			return course[key]
-				.map(item => item.toLowerCase().includes(val))
-				.some(isTrue)
+			return course[key].some(item => item.toLowerCase().includes(val))
 		}
 
 		if (substring) {
