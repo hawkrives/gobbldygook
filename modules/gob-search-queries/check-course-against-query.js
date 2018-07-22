@@ -1,6 +1,5 @@
 import compact from 'lodash/compact'
 import every from 'lodash/every'
-import includes from 'lodash/includes'
 import map from 'lodash/map'
 import size from 'lodash/size'
 import some from 'lodash/some'
@@ -45,15 +44,15 @@ function checkCourseAgainstQueryBit(course, [key, values]) {
 	let internalMatches = map(values, val => {
 		// dept, gereqs, etc.
 		if (Array.isArray(course[key]) && !substring) {
-			return includes(course[key], val)
+			return course[key].includes(val)
 		} else if (Array.isArray(course[key]) && substring) {
 			return some(
 				map(course[key], item =>
-					includes(item.toLowerCase(), val.toLowerCase()),
+					item.toLowerCase().includes(val.toLowerCase()),
 				),
 			)
 		} else if (substring) {
-			return includes(course[key].toLowerCase(), val.toLowerCase())
+			return course[key].toLowerCase().includes(val.toLowerCase())
 		}
 		return course[key] === val
 	})
