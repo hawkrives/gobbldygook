@@ -163,9 +163,7 @@ export function buildQueryFromString(
 			values.push(section)
 		}
 	} else if (stringThing) {
-		keys.push('title')
-		values.push(stringThing)
-		keys.push('name')
+		keys.push('words')
 		values.push(stringThing)
 	}
 
