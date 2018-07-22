@@ -1,7 +1,6 @@
 import compact from 'lodash/compact'
 import every from 'lodash/every'
 import map from 'lodash/map'
-import size from 'lodash/size'
 import some from 'lodash/some'
 import takeWhile from 'lodash/takeWhile'
 import toPairs from 'lodash/toPairs'
@@ -82,5 +81,5 @@ export function checkCourseAgainstQuery(query, course) {
 		checkCourseAgainstQueryBit(course, pair),
 	)
 
-	return size(kvPairs) === size(matches) && every(matches)
+	return kvPairs.length === matches.length && every(matches)
 }
