@@ -5,7 +5,6 @@ import isArray from 'lodash/isArray'
 import map from 'lodash/map'
 import size from 'lodash/size'
 import some from 'lodash/some'
-import tail from 'lodash/tail'
 import takeWhile from 'lodash/takeWhile'
 import toPairs from 'lodash/toPairs'
 
@@ -41,7 +40,7 @@ function checkCourseAgainstQueryBit(course, [key, values]) {
 	if (hasBool) {
 		// remove the first value from the array
 		// by returning all but the first element
-		values = tail(values)
+		values = values.slice(1)
 	}
 
 	let internalMatches = map(values, val => {
