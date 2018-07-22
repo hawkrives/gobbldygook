@@ -14,6 +14,15 @@ const SUBSTRING_KEYS = new Set([
 	'locations',
 ])
 
+type BooleanBit = '$OR' | '$NOR' | '$AND' | '$NOT' | '$XOR'
+const BOOLEANS: Set<BooleanBit> = new Set([
+	'$OR',
+	'$NOR',
+	'$AND',
+	'$NOT',
+	'$XOR',
+])
+
 type Query = {[key: string]: mixed}
 type Course = {[key: string]: mixed}
 
@@ -29,12 +38,8 @@ function checkQueryBit(course: Course, [key: string, values: Array<mixed>]) {
 	// - an $AND, $OR, $NOT, $NOR, or $XOR query
 	// - one of the above, but substringMatch
 
-	let hasBool = typeof values[0] === 'string' && values[0].startsWith('$')
-	let OR = values[0] === '$OR'
-	let NOR = values[0] === '$NOR'
-	let AND = values[0] === '$AND'
-	let NOT = values[0] === '$NOT'
-	let XOR = values[0] === '$XOR'
+	let boolBit: BooleanBit = values[0]
+	let hasBool = BOOLEANS.has(boolBit)
 
 	if (hasBool) {
 		// remove the first value from the array by returning all but the first element
@@ -70,15 +75,21 @@ function checkQueryBit(course: Course, [key: string, values: Array<mixed>]) {
 		return internalMatches.every(isTrue)
 	}
 
-	let result = false
-
-	if (OR) result = internalMatches.some(isTrue)
-	if (NOR) result = !internalMatches.some(isTrue)
-	if (AND) result = internalMatches.every(isTrue)
-	if (NOT) result = !internalMatches.every(isTrue)
-	if (XOR) result = internalMatches.filter(isTrue).length === 1
-
-	return result
+	switch (boolBit) {
+		case '$OR':
+			return internalMatches.some(isTrue)
+		case '$NOR':
+			return !internalMatches.some(isTrue)
+		case '$AND':
+			return internalMatches.every(isTrue)
+		case '$NOT':
+			return !internalMatches.every(isTrue)
+		case '$XOR':
+			return internalMatches.filter(isTrue).length === 1
+		default:
+			;(boolBit: empty)
+			return false
+	}
 }
 
 // Checks if a course passes a query check.
