@@ -107,10 +107,8 @@ function Semester(props) {
 
 	// `recommendedCredits` is 4 for fall/spring and 1 for everything else
 	const creditsPerCourse = 1
-	const recommendedCredits =
-		semester === 1 || semester === 3
-			? creditsPerCourse * 4
-			: creditsPerCourse * 1
+	let recommendedCredits = semester === 1 || semester === 3 ? 4 : 1
+	let recommendedSlots = creditsPerCourse * recommendedCredits
 	const currentCredits = countCredits(courses || [])
 
 	const infoBar = []
@@ -166,7 +164,7 @@ function Semester(props) {
 				<CourseList
 					courses={courses || []}
 					usedSlots={currentCredits / creditsPerCourse}
-					maxSlots={recommendedCredits / creditsPerCourse}
+					maxSlots={recommendedSlots / creditsPerCourse}
 					studentId={studentId}
 					schedule={schedule}
 					conflicts={conflicts || []}
