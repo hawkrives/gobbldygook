@@ -400,7 +400,7 @@ CourseDepartment
           { return {dept: chars.join(''), type: 'joined'} }
     )
     {
-      const {type, dept: dept2} = part2
+      let {type, dept: dept2} = part2
       let department
       if (type === 'joined') {
         department = {department: [dept1 + dept2]}

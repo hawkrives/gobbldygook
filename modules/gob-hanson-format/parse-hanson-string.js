@@ -346,7 +346,7 @@ function peg$parse(input, options) {
 				return 9
 			} else if (num === 'ten') {
 				return 10
-			} else throw new Error('invalid number "' + num + '"')
+			} else throw new Error(`invalid number "${num}"`)
 		},
 		peg$c101 = '!',
 		peg$c102 = peg$literalExpectation('!', false),
@@ -385,13 +385,9 @@ function peg$parse(input, options) {
 			}
 			if (ofList.length < count.$num) {
 				throw new Error(
-					'you requested ' +
-						count.$num +
-						' items, but only gave ' +
-						ofList.length +
-						' options (' +
-						JSON.stringify(ofList) +
-						').',
+					`you requested ${count.$num} items, but only gave ${
+						ofList.length
+					} options (${JSON.stringify(ofList)}).`,
 				)
 			}
 			return {$type: 'of', $count: count, $of: ofList}
@@ -445,7 +441,7 @@ function peg$parse(input, options) {
 					'can only use at-least style counters with non-course requests',
 				)
 			}
-			var result = assign({}, from, {
+			let result = assign({}, from, {
 				$type: 'modifier',
 				$count: count,
 				$what: what,
@@ -476,10 +472,10 @@ function peg$parse(input, options) {
 		},
 		peg$c146 = peg$otherExpectation('requirement reference'),
 		peg$c147 = function peg$c147(a, t) {
-			return ' (' + t + ')'
+			return ` (${t})`
 		},
 		peg$c148 = function peg$c148(a, b) {
-			return '' + a + (b || '')
+			return `${a}${b || ''}`
 		},
 		peg$c149 = function peg$c149(title) {
 			if (options.abbreviations && title in options.abbreviations) {
@@ -492,13 +488,13 @@ function peg$parse(input, options) {
 		peg$c150 = '.',
 		peg$c151 = peg$literalExpectation('.', false),
 		peg$c152 = function peg$c152(dept, num, section, year, semester) {
-			return {semester: semester}
+			return {semester}
 		},
 		peg$c153 = function peg$c153(dept, num, section, year, sub) {
-			return assign({}, sub, {year: year})
+			return assign({}, sub, {year})
 		},
 		peg$c154 = function peg$c154(dept, num, section, sub) {
-			return assign({}, sub, {section: section})
+			return assign({}, sub, {section})
 		},
 		peg$c155 = function peg$c155(dept, num, details) {
 			return {
@@ -518,9 +514,9 @@ function peg$parse(input, options) {
 			return {dept: chars.join(''), type: 'joined'}
 		},
 		peg$c161 = function peg$c161(dept1, part2) {
-			var type = part2.type,
+			let type = part2.type,
 				dept2 = part2.dept
-			var department = void 0
+			let department
 			if (type === 'joined') {
 				department = {department: [dept1 + dept2]}
 			} else if (type === 'separate') {
@@ -540,15 +536,15 @@ function peg$parse(input, options) {
 		peg$c165 = 'L',
 		peg$c166 = peg$literalExpectation('L', false),
 		peg$c167 = function peg$c167(nums, international, lab) {
-			var result = {}
-			var number = parseInt(nums.join(''))
+			let result = {}
+			let number = parseInt(nums.join(''))
 			if (international) {
 				result.international = true
 			}
 			if (lab) {
 				result.type = 'Lab'
 			}
-			return assign({}, result, {number: number})
+			return assign({}, result, {number})
 		},
 		peg$c168 = function peg$c168() {
 			throw new SyntaxError(
@@ -4316,23 +4312,21 @@ function peg$parse(input, options) {
 		s0 = s1
 		return s0
 	}
-	var globalLastDept = void 0
+	let globalLastDept
 	function storeDept(dept) {
 		globalLastDept = dept
 	}
 	function fetchDept(dept) {
 		return globalLastDept
 	}
-	var flatten = require('lodash/flatten')
-	var assign = require('lodash/assign')
-	var normalizeDepartment = void 0
+	const flatten = require('lodash/flatten')
+	const assign = require('lodash/assign')
+	let normalizeDepartment
 	try {
 		normalizeDepartment = require('./convert-department')
 			.normalizeDepartment
 	} catch (e) {
-		normalizeDepartment = function normalizeDepartment(x) {
-			return x
-		}
+		normalizeDepartment = x => x
 	}
 	peg$result = peg$startRuleFunction()
 	if (peg$result !== peg$FAILED && peg$currPos === input.length) {
