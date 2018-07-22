@@ -17,12 +17,12 @@ function checkQueryBit(course, [key, values]) {
 		return false
 	}
 
-	let substring = SUBSTRING_KEYS.has(key)
+	let substringMatch = SUBSTRING_KEYS.has(key)
 
 	// values is either:
 	// - a 1-long array
 	// - an $AND, $OR, $NOT, $NOR, or $XOR query
-	// - one of the above, but substring
+	// - one of the above, but substringMatch
 
 	let hasBool = typeof values[0] === 'string' && values[0].startsWith('$')
 	let OR = values[0] === '$OR'
@@ -38,21 +38,21 @@ function checkQueryBit(course, [key, values]) {
 
 	let internalMatches = values.map(val => {
 		// dept, gereqs, etc.
-		if (Array.isArray(course[key]) && !substring) {
-			return course[key].includes(val)
+		if (Array.isArray(course[key])) {
+			if (substringMatch) {
+				val = val.toLowerCase()
+				return course[key].some(item => item.toLowerCase().includes(val))
+			} else {
+				return course[key].includes(val)
+			}
 		}
 
-		if (Array.isArray(course[key]) && substring) {
-			val = val.toLowerCase()
-			return course[key].some(item => item.toLowerCase().includes(val))
-		}
-
-		if (substring) {
+		if (substringMatch) {
 			val = val.toLowerCase()
 			return course[key].toLowerCase().includes(val)
+		} else {
+			return course[key] === val
 		}
-
-		return course[key] === val
 	})
 
 	if (!hasBool) {
