@@ -35,8 +35,7 @@ function checkCourseAgainstQueryBit(course, [key, values]) {
 	let XOR = values[0] === '$XOR'
 
 	if (hasBool) {
-		// remove the first value from the array
-		// by returning all but the first element
+		// remove the first value from the array by returning all but the first element
 		values = values.slice(1)
 	}
 
