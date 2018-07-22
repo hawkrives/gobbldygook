@@ -129,6 +129,7 @@ describe('checkCourseAgainstQuery', () => {
 		const falsecourse = {title: '… in a haystack'}
 		expect(checkCourseAgainstQuery(query, falsecourse)).toBe(false)
 	})
+
 	it('handles substring matches on "name"', () => {
 		const query = {name: ['needle']}
 		const course = {name: 'needle in a haystack'}
@@ -136,6 +137,7 @@ describe('checkCourseAgainstQuery', () => {
 		const falsecourse = {name: '… in a haystack'}
 		expect(checkCourseAgainstQuery(query, falsecourse)).toBe(false)
 	})
+
 	it('handles substring matches on "description"', () => {
 		const query = {description: ['needle']}
 		const course = {description: 'needle in a haystack'}
@@ -143,6 +145,7 @@ describe('checkCourseAgainstQuery', () => {
 		const falsecourse = {description: '… in a haystack'}
 		expect(checkCourseAgainstQuery(query, falsecourse)).toBe(false)
 	})
+
 	it('handles substring matches on "notes"', () => {
 		const query = {notes: ['needle']}
 		const course = {notes: 'needle in a haystack'}
@@ -150,6 +153,7 @@ describe('checkCourseAgainstQuery', () => {
 		const falsecourse = {notes: '… in a haystack'}
 		expect(checkCourseAgainstQuery(query, falsecourse)).toBe(false)
 	})
+
 	it('handles substring matches on "instructors"', () => {
 		const query = {instructors: ['needle']}
 		const course = {instructors: ['Haystack, Needle III']}
@@ -157,6 +161,7 @@ describe('checkCourseAgainstQuery', () => {
 		const falsecourse = {instructors: '… in a haystack'}
 		expect(checkCourseAgainstQuery(query, falsecourse)).toBe(false)
 	})
+
 	it('handles substring matches on "times"', () => {
 		const query = {times: ['300']}
 		const course = {times: ['1200-300pm']}
@@ -164,6 +169,7 @@ describe('checkCourseAgainstQuery', () => {
 		const falsecourse = {times: '… in a haystack'}
 		expect(checkCourseAgainstQuery(query, falsecourse)).toBe(false)
 	})
+
 	it('handles substring matches on "locations"', () => {
 		const query = {locations: ['250A']}
 		const course = {locations: ['CHM 250A']}
