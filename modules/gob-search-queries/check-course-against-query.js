@@ -11,12 +11,22 @@ import tail from 'lodash/tail'
 import takeWhile from 'lodash/takeWhile'
 import toPairs from 'lodash/toPairs'
 
+const SUBSTRING_KEYS = new Set([
+	'title',
+	'name',
+	'description',
+	'notes',
+	'instructors',
+	'times',
+	'locations',
+])
+
 function checkCourseAgainstQueryBit(course, [key, values]) {
 	if (!has(course, key)) {
 		return false
 	}
 
-	let substring = false
+	let substring = SUBSTRING_KEYS.has(key)
 
 	// values is either:
 	// - a 1-long array
@@ -34,23 +44,6 @@ function checkCourseAgainstQueryBit(course, [key, values]) {
 		// remove the first value from the array
 		// by returning all but the first element
 		values = tail(values)
-	}
-
-	if (
-		includes(
-			[
-				'title',
-				'name',
-				'description',
-				'notes',
-				'instructors',
-				'times',
-				'locations',
-			],
-			key,
-		)
-	) {
-		substring = true
 	}
 
 	let internalMatches = map(values, val => {
