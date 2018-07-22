@@ -1,8 +1,6 @@
-import takeWhile from 'lodash/takeWhile'
 import toPairs from 'lodash/toPairs'
 
 const isTrue = x => x === true
-const isTruthy = x => Boolean(x)
 
 const SUBSTRING_KEYS = new Set([
 	'title',
@@ -77,10 +75,7 @@ function checkCourseAgainstQueryBit(course, [key, values]) {
 // course: Course | the course to check
 // returns: Boolean | did all query bits pass the check?
 export function checkCourseAgainstQuery(query, course) {
-	let kvPairs = toPairs(query)
-	let matches = takeWhile(kvPairs, pair =>
+	return toPairs(query).every(pair =>
 		checkCourseAgainstQueryBit(course, pair),
 	)
-
-	return kvPairs.length === matches.length && matches.every(isTruthy)
 }
