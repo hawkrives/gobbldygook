@@ -43,9 +43,9 @@ const Empty = styled(EmptyCourseSlot)`
 
 type Props = {
 	courses: Array<Object>,
-	availableCredits: number,
+	usedSlots: number,
 	conflicts: Object[],
-	creditCount: number,
+	maxSlots: number,
 	schedule: Object,
 	studentId: string,
 }
@@ -66,10 +66,14 @@ export default function CourseList(props: Props) {
 			),
 	)
 
-	const usedCredits = Math.floor(props.creditCount)
-	const emptySlots = range(usedCredits, props.availableCredits)
-		.filter(n => n >= 0)
-		.map(n => <Empty key={n} />)
+	if (props.usedSlots < 0 || props.maxSlots < 0) {
+		throw new Error('usedSlots and maxSlots must be >= 0')
+	}
+
+	let usedSlots = Math.floor(props.usedSlots)
+	let emptySlots =
+		usedSlots < props.maxSlots ? range(usedSlots, props.maxSlots) : []
+	emptySlots = emptySlots.map(n => <Empty key={n} />)
 
 	return (
 		<List className="course-list">
