@@ -1,6 +1,5 @@
 import compact from 'lodash/compact'
 import every from 'lodash/every'
-import has from 'lodash/has'
 import includes from 'lodash/includes'
 import indexOf from 'lodash/indexOf'
 import isArray from 'lodash/isArray'
@@ -22,7 +21,7 @@ const SUBSTRING_KEYS = new Set([
 ])
 
 function checkCourseAgainstQueryBit(course, [key, values]) {
-	if (!has(course, key)) {
+	if (!course.hasOwnProperty(key)) {
 		return false
 	}
 
