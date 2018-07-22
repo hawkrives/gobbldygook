@@ -67,9 +67,6 @@ let keywordMappings = {
 	time: 'times',
 }
 
-let intKeys = new Set(['year', 'level', 'term', 'number', 'groupid', 'clbid', 'crsid'])
-let strKeys = new Set(['title', 'name', 'notes', 'description', 'words'])
-
 function organizeValues([key, values], words = false, profWords = false) {
 	let organizedValues = flatMap(values, val => {
 		// handle $OR and $AND and other boolean operators
@@ -77,47 +74,57 @@ function organizeValues([key, values], words = false, profWords = false) {
 			return val.toUpperCase()
 		}
 
-		// handle the numeric values
-		if (key === 'credits') {
-			val = parseFloat(val)
-		} else if (intKeys.has(key)) {
-			val = parseInt(val, 10)
+		switch (key) {
+			// handle the numeric values
+			case 'credits':
+				return parseFloat(val)
+			case 'year':
+			case 'level':
+			case 'term':
+			case 'number':
+			case 'groupid':
+			case 'clbid':
+			case 'crsid':
+				return parseInt(val, 10)
+			// handle the lookup values
+			case 'departments':
+				val = val.toLowerCase()
+				return departmentMapping[val] || val.toUpperCase()
+			case 'gereqs':
+				val = val.toLowerCase()
+				return gereqMapping[val] || val.toUpperCase()
+			case 'semester':
+				val = val.toLowerCase()
+				return semesters[val] || parseInt(val, 10)
+			// handle the string values
+			case 'deptnum':
+			case 'times':
+			case 'locations':
+				return val.toUpperCase()
+			// handle the boolean values
+			case 'pf':
+				return val === 'true' ? true : false
+			// handle the multi-word values
+			case 'instructors':
+				if (profWords) {
+					key = 'profWords'
+					return splitParagraph(val)
+				}
+				return val.trim()
+			case 'title':
+			case 'name':
+			case 'notes':
+			case 'description':
+				if (words) {
+					key = 'words'
+					return splitParagraph(val)
+				}
+				return val.trim()
+			case 'words':
+				return splitParagraph(val)
+			default:
+				return val.trim()
 		}
-
-		// make flow happy by proving that val is now a string
-		if (typeof val !== 'string') {
-			return val
-		}
-
-		// now deal with the strings
-		if (key === 'departments') {
-			val = val.toLowerCase()
-			val = departmentMapping[val] || val.toUpperCase()
-		} else if (key === 'gereqs') {
-			val = val.toLowerCase()
-			val = gereqMapping[val] || val.toUpperCase()
-		} else if (key === 'deptnum') {
-			val = val.toUpperCase()
-		} else if (key === 'semester') {
-			val = val.toLowerCase()
-			val = semesters[val] || parseInt(val, 10)
-		} else if (key === 'instructors' && profWords) {
-			val = splitParagraph(val)
-			key = 'profWords'
-		} else if (key === 'times' || key === 'locations') {
-			val = val.toUpperCase()
-		} else if (key === 'pf') {
-			val = val === 'true'
-		} else if (strKeys.has(key)) {
-			if (words || key === 'words') {
-				val = splitParagraph(val)
-				key = 'words'
-			} else {
-				val = val.trim()
-			}
-		}
-
-		return val
 	})
 
 	return [key, organizedValues]
