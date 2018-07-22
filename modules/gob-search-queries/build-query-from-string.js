@@ -1,12 +1,10 @@
-import endsWith from 'lodash/endsWith'
-import filter from 'lodash/filter'
+// @flow
+
+import flatMap from 'lodash/flatMap'
 import flatten from 'lodash/flatten'
-import includes from 'lodash/includes'
 import map from 'lodash/map'
 import mapValues from 'lodash/mapValues'
-import startsWith from 'lodash/startsWith'
 import toPairs from 'lodash/toPairs'
-import trim from 'lodash/trim'
 import unzip from 'lodash/unzip'
 
 import {quacksLikeDeptNum, splitDeptNum} from '@gob/school-st-olaf-college'
