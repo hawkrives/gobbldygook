@@ -6,6 +6,7 @@ import map from 'lodash/map'
 import mapValues from 'lodash/mapValues'
 import toPairs from 'lodash/toPairs'
 import unzip from 'lodash/unzip'
+import uniq from 'lodash/uniq'
 
 import {quacksLikeDeptNum, splitDeptNum} from '@gob/school-st-olaf-college'
 
@@ -203,10 +204,28 @@ export function buildQueryFromString(
 	return mapValues(organized, val => {
 		// flatten the results list
 		val = flatten(val)
+		// remove duplicates from the results list
+		val = uniq(val)
 
-		// if it's a multi-value thing and doesn't include a boolean yet, default to $AND
-		let startsWithBoolean = typeof val[0] === 'string' && /^\$/.test(val[0])
-		if (val.length > 1 && !startsWithBoolean) {
+		// if it's a single-value or empty value, we don't need to do anything else
+		if (val.length === 0 || val.length === 1) {
+			return val
+		}
+
+		// find the first boolean value in the thing
+		let booleanIndex = val.findIndex(v => typeof v === 'string' && v.startsWith('$'))
+		let includesBoolean = booleanIndex !== -1
+		let startsWithBoolean = booleanIndex === 0
+
+		// if it's a multi-value thing and has a boolean, but it's not at the start,
+		// move it to the front.
+		if (includesBoolean && !startsWithBoolean) {
+			let [bool] = val.splice(booleanIndex, 1)
+			val.unshift(bool)
+		}
+
+		// if it didn't have a boolean at all, stick $AND at the front
+		if (val.length > 1 && !includesBoolean) {
 			val.unshift('$AND')
 		}
 
