@@ -9,11 +9,7 @@ import toPairs from 'lodash/toPairs'
 import trim from 'lodash/trim'
 import unzip from 'lodash/unzip'
 
-import {
-	quacksLikeDeptNum,
-	splitDeptNum,
-	buildDeptNum,
-} from '@gob/school-st-olaf-college'
+import {quacksLikeDeptNum, splitDeptNum} from '@gob/school-st-olaf-college'
 
 import {partitionByIndex, splitParagraph, zipToObjectWithArrays} from '@gob/lib'
 
