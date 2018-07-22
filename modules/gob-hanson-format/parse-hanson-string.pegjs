@@ -301,6 +301,7 @@ Modifier
         'course'
       / 'credit'
       / 'department'
+      / 'term'
     ) OptionalS _ besides:Besides? _ 'from' _
     from:(
         'children' _ 'where' _ where:Qualifier { return { $from: 'children-where', $where: where, $children: '$all' } }
@@ -316,12 +317,16 @@ Modifier
       if (from.$from === 'where' && what === 'department') {
         throw new Error('cannot use a modifier with "departments" or "department"')
       }
+      if (from.$from === 'where' && what === 'term') {
+        throw new Error('cannot use a modifier with "terms" or "term"')
+      }
       if (from.$from === 'children-where' && what !== 'course') {
         throw new Error('must use "courses from" with "children where"')
       }
       if (count.$operator !== '$gte' && what !== 'course') {
         throw new Error('can only use at-least style counters with non-course requests')
       }
+
       let result = assign({}, from, {
         $type: 'modifier',
         $count: count,
@@ -400,7 +405,7 @@ CourseDepartment
           { return {dept: chars.join(''), type: 'joined'} }
     )
     {
-      const {type, dept: dept2} = part2
+      let {type, dept: dept2} = part2
       let department
       if (type === 'joined') {
         department = {department: [dept1 + dept2]}
