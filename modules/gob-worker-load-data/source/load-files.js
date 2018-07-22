@@ -28,9 +28,7 @@ export default function loadFiles(url: string, baseUrl: string) {
 	log(url)
 
 	return fetchJson(url)
-		.then(data => {
-			return proceedWithUpdate(baseUrl, ((data: any): InfoIndexFile))
-		})
+		.then(data => proceedWithUpdate(baseUrl, ((data: any): InfoIndexFile)))
 		.catch(err => handleErrors(err, url))
 }
 
