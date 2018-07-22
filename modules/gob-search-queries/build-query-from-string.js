@@ -82,11 +82,9 @@ function organizeValues([key, values], words = false, profWords = false) {
 		} else if (key === 'semester') {
 			val = val.toLowerCase()
 			val = semesters[val] || parseInt(val, 10)
-		} else if (key === 'instructors') {
-			if (profWords) {
-				val = splitParagraph(val)
-				key = 'profWords'
-			}
+		} else if (key === 'instructors' && profWords) {
+			val = splitParagraph(val)
+			key = 'profWords'
 		} else if (key === 'times' || key === 'locations') {
 			val = val.toUpperCase()
 		} else if (key === 'pf') {
