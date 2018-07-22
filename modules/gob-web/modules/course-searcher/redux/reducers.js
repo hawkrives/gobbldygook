@@ -29,15 +29,15 @@ import {buildDeptString} from '@gob/school-st-olaf-college'
 import {to12HourTime as to12} from '@gob/lib'
 const REVERSE_ORDER = new Set(['Year', 'Term', 'Semester'])
 
-// eslint-disable-next-line no-confusing-arrow
+const TITLE = course => course.title || course.name
+
 const DAY_OF_WEEK = course =>
-	course.offerings
+	course.offerings && course.offerings.length
 		? (course.offerings || []).map(offer => offer.day).join('/')
 		: 'No Days Listed'
 
-// eslint-disable-next-line no-confusing-arrow
 const TIME_OF_DAY = course =>
-	course.offerings
+	course.offerings && course.offerings.length
 		? oxford(
 				sortBy(
 					uniq(
@@ -49,31 +49,36 @@ const TIME_OF_DAY = course =>
 		  )
 		: 'No Times Listed'
 
-// eslint-disable-next-line no-confusing-arrow
 const DEPARTMENT = course =>
 	course.departments ? buildDeptString(course.departments) : 'No Department'
 
-// eslint-disable-next-line no-confusing-arrow
+const NUMBER = course => course.number
+
+const SECTION = course => course.section || 'No Section'
+
 const GEREQ = course => (course.gereqs ? oxford(course.gereqs) : 'No GEs')
+
+const YEAR = course => course.year
+
+const SEMESTER = course => course.semester
 
 const GROUP_BY_TO_KEY = {
 	'Day of Week': DAY_OF_WEEK,
 	Department: DEPARTMENT,
 	GenEd: GEREQ,
-	Semester: 'semester',
-	Term: 'term',
+	Semester: SEMESTER,
+	Term: course => [YEAR(course), SEMESTER(course)].join(''),
 	'Time of Day': TIME_OF_DAY,
-	Year: 'year',
+	Year: YEAR,
 	None: false,
 }
 
 const SORT_BY_TO_KEY = {
-	Year: 'year',
-	Title: 'title',
-	// eslint-disable-next-line no-confusing-arrow
-	Department: DEPARTMENT,
-	'Day of Week': DAY_OF_WEEK,
-	'Time of Day': TIME_OF_DAY,
+	Year: [YEAR, SEMESTER, DEPARTMENT, NUMBER, SECTION],
+	Title: [TITLE, DEPARTMENT, NUMBER, SECTION],
+	Department: [DEPARTMENT, NUMBER, SECTION],
+	'Day of Week': [DAY_OF_WEEK, DEPARTMENT, NUMBER, SECTION],
+	'Time of Day': [TIME_OF_DAY, DEPARTMENT, NUMBER, SECTION],
 }
 
 function sortAndGroup({sortBy: sorting, groupBy: grouping, rawResults}) {
@@ -81,14 +86,7 @@ function sortAndGroup({sortBy: sorting, groupBy: grouping, rawResults}) {
 
 	// TODO: Speed this up! This preperation stuff takes ~230ms by itself,
 	// with enough courses rendered. (like, say, {year: 2012})
-	const sortByArgs = [
-		'year',
-		'deptnum',
-		'semester',
-		'section',
-		...SORT_BY_TO_KEY[sorting],
-	]
-	const sorted = sortBy(rawResults, sortByArgs)
+	const sorted = sortBy(rawResults, SORT_BY_TO_KEY[sorting])
 
 	// Group them by term, then turn the object into an array of pairs.
 	const groupedAndPaired = toPairs(groupBy(sorted, GROUP_BY_TO_KEY[grouping]))
