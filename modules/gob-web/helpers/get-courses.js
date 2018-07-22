@@ -1,7 +1,6 @@
 // @flow
 import {db} from './db'
 import omit from 'lodash/omit'
-import padStart from 'lodash/padStart'
 import {status, json} from '@gob/lib'
 
 const baseUrl = 'https://stodevx.github.io/course-data'
@@ -11,7 +10,7 @@ export function getCourseFromNetwork(clbid: number) {
 		return networkCache[clbid]
 	}
 
-	const id = padStart(clbid.toString(), 10, '0')
+	const id = clbid.toString().padStart(10, '0')
 	const dir = (Math.floor(clbid / 1000) * 1000).toString()
 
 	const path = `${baseUrl}/courses/${dir}/${id}.json`
