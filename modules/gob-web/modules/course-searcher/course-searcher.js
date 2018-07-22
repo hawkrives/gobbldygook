@@ -1,16 +1,16 @@
 // @flow
 import React from 'react'
 
-import map from 'lodash/map'
 import {toPrettyTerm} from '@gob/school-st-olaf-college'
 
+import {LabelledSelect} from './labelled-select'
 import Button from '../../components/button'
 import Icon from '../../components/icon'
 import Loading from '../../components/loading'
 import CourseResultsList from './course-results-list'
 import {androidArrowForward} from '../../icons/ionicons'
 
-import {SORT_BY, GROUP_BY} from './course-searcher-options'
+import {sortByOptions, groupByOptions} from './course-searcher-options'
 
 import './course-searcher.scss'
 
@@ -106,17 +106,19 @@ export default function CourseSearcher(props: CourseSearcherProps) {
 						Close
 					</Button>
 				</div>
+
 				<div className="row">
 					<input
 						type="search"
 						className="search-box"
 						value={query}
-						placeholder={'Search for a course or phrase'}
+						placeholder="Search for a course or phrase"
 						onChange={onQueryChange}
 						onKeyDown={onKeyDown}
 						autoFocus={true}
 					/>
 				</div>
+
 				<div className="row submit">
 					<Button
 						className="submit-search-query"
@@ -125,48 +127,34 @@ export default function CourseSearcher(props: CourseSearcherProps) {
 						onClick={onQuerySubmit}
 						disabled={inProgress}
 					>
-						{inProgress
-							? [<span key="msg">Searching…</span>]
-							: [
-									<span key="msg">Search </span>,
-									<Icon key="icon">
-										{androidArrowForward}
-									</Icon>,
-							  ]}
+						{inProgress ? (
+							<span key="msg">Searching…</span>
+						) : (
+							<React.Fragment>
+								<span>Search </span>
+								<Icon>{androidArrowForward}</Icon>
+							</React.Fragment>
+						)}
 					</Button>
 				</div>
+
 				{hasQueried && (
 					<div className="row search-filters">
-						<span className="filter">
-							<label htmlFor="sort">Sort by:</label>
-							<br />
-							<select
-								id="sort"
-								value={sortBy}
-								onChange={onSortChange}
-							>
-								{map(SORT_BY, opt => (
-									<option key={opt} value={opt}>
-										{opt}
-									</option>
-								))}
-							</select>
-						</span>
-						<span className="filter">
-							<label htmlFor="group">Group by:</label>
-							<br />
-							<select
-								id="group"
-								value={groupBy}
-								onChange={onGroupByChange}
-							>
-								{map(GROUP_BY, opt => (
-									<option key={opt} value={opt}>
-										{opt}
-									</option>
-								))}
-							</select>
-						</span>
+						<LabelledSelect
+							className="filter"
+							label="Sort by:"
+							options={sortByOptions}
+							onChange={onSortChange}
+							value={sortBy}
+						/>
+
+						<LabelledSelect
+							className="filter"
+							label="Group by:"
+							options={groupByOptions}
+							onChange={onGroupByChange}
+							value={groupBy}
+						/>
 					</div>
 				)}
 			</header>
