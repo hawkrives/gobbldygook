@@ -163,6 +163,8 @@ export function buildQueryFromString(queryString = '', opts = {}) {
 	} else if (stringThing) {
 		keys.push('title')
 		values.push(stringThing)
+		keys.push('name')
+		values.push(stringThing)
 	}
 
 	// Process the keys, to clean them up somewhat
