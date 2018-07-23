@@ -184,12 +184,12 @@ function config({mode}) {
 					//chunks: 'all',
 					enforce: true,
 				},
-				styles: {
-					name: 'styles',
-					test: /\.css$/,
-					chunks: 'all',
-					enforce: true,
-				},
+				// styles: {
+				// 	name: 'styles',
+				// 	test: /\.css$/,
+				// 	chunks: 'all',
+				// 	enforce: true,
+				// },
 			},
 		},
 	}
