@@ -37,7 +37,7 @@ const whitelist = new Set([
 	courseConstants.REFRESH_COURSES,
 ])
 
-function shouldTakeAction({type}: {type?: string}) {
+function shouldTakeAction({type}: {type?: string} = {}) {
 	return whitelist.has(type)
 }
 
