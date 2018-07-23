@@ -30,15 +30,6 @@
     to = "/index.html"
     status = 200
 
-# allow requesting data from SIS
-[[redirects]]
-    from = "/sis/*"
-    to = "https://www.stolaf.edu/sis/:splat"
-    status = 200
-    force = true
-    [[redirects.headers]]
-        X-From = "Gobbldygook"
-
 # set headers for the app
 [[headers]]
     for = "/*"
