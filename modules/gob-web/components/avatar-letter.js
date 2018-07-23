@@ -13,7 +13,6 @@ const Wrapper = styled.div`
 
 	display: inline-block;
 
-	margin: 0;
 	padding: 0;
 
 	${({size = '48px'}) => css`
