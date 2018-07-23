@@ -134,18 +134,12 @@ export default class CourseResultsList extends React.Component<Props, State> {
 		return 0
 	}
 
-	renderHeader = ({
-		title: groupTitle,
-		key,
-		style,
-	}: {
-		title: ?string,
-		key: string,
-		style: any,
-	}) => {
+	renderHeader = (args: {title: ?string, key: string, style: any}) => {
+		let {title: groupTitle, key, style} = args
 		if (!groupTitle) {
 			return null
 		}
+
 		const title = GROUP_BY_TO_TITLE[this.props.groupBy](groupTitle)
 		return (
 			<div style={style} key={key} className="course-group-title">
@@ -154,15 +148,8 @@ export default class CourseResultsList extends React.Component<Props, State> {
 		)
 	}
 
-	renderRow = ({
-		index,
-		style,
-		key,
-	}: {
-		index: number,
-		style: Object,
-		key: string,
-	}) => {
+	renderRow = (args: {index: number, style: Object, key: string}) => {
+		let {index, style, key} = args
 		let {isHeader, itemIndex, items, title} = this.extractItemAtIndex(index)
 
 		if (isHeader) {
