@@ -2,6 +2,15 @@
 @import '../../styles/mixins.scss';
 
 .course-search {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+
+	// for AutoSizer (react-virtualized):
+	// > If the parent has style `position: static` (default value), it changes to
+	// > position: relative. It also injects a sibling div for size measuring.
+	position: relative;
+
 	.course-group {
 		@include card();
 		padding: 0.5em;
@@ -32,6 +41,10 @@
 
 		margin-top: 0.25em;
 		margin-bottom: 0.5em;
+	}
+
+	.results-list-sizer {
+		flex: 1;
 	}
 }
 

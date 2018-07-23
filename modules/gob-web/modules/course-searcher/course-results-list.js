@@ -20,9 +20,11 @@ const GROUP_BY_TO_TITLE = {
 	None: () => '',
 }
 
+type Results = Array<[string, Array<any>]>
+
 type Props = {
 	groupBy: string,
-	results: Array<[string, Array<any>]>,
+	results: Results,
 	sortBy?: string,
 	studentId?: string,
 }
@@ -31,8 +33,92 @@ type State = {
 	itemCount: number,
 }
 
+// method borrowed from https://github.com/lucasferreira/react-virtualized-sectionlist/blob/1ed9437c76dbc9b3fcf01dd9c5b50c96d9dc211c/source/index.js#L100-L123
+type ExtractArgs = {
+	title: ?string,
+	items: Array<any>,
+	itemIndex: ?number,
+	sectionIndex: ?number,
+	isHeader: boolean,
+}
+function extractItemAtIndex(index: number, results: Results): ExtractArgs {
+	let itemIndex = index
+
+	for (let i = 0; i < results.length; i++) {
+		let [title, items] = results[i]
+
+		// The section adds an item for the header
+		itemIndex -= 1
+
+		if (itemIndex >= items.length) {
+			itemIndex -= items.length
+			continue
+		}
+
+		let isHeader = itemIndex === -1
+
+		return {
+			title,
+			items,
+			itemIndex: isHeader ? null : itemIndex,
+			sectionIndex: i,
+			isHeader: isHeader,
+		}
+	}
+
+	return {
+		title: null,
+		items: [],
+		itemIndex: null,
+		sectionIndex: null,
+		isHeader: false,
+	}
+}
+
+function getRowHeight(
+	isHeader: boolean,
+	itemIndex: ?number,
+	items: Array<any>,
+) {
+	if (isHeader) {
+		return 35
+	}
+
+	if (itemIndex == null || !items[itemIndex]) {
+		return 0
+	}
+
+	let course = items[itemIndex]
+	let courseRows = 2
+
+	let hasTimes = course.times && course.times.length
+	let hasSubtitle =
+		course.name &&
+		course.title &&
+		(course.type === 'Seminar' || course.type === 'Topic')
+
+	if (hasTimes) {
+		courseRows += 1
+	}
+	if (hasSubtitle) {
+		courseRows += 1
+	}
+
+	if (courseRows === 2) {
+		return 38
+	} else if (courseRows === 3) {
+		return 56
+	} else if (courseRows === 4) {
+		return 71
+	}
+
+	return 0
+}
+
 export default class CourseResultsList extends React.Component<Props, State> {
-	state = {itemCount: 0}
+	state = {
+		itemCount: 0,
+	}
 
 	static getDerivedStateFromProps = (props: Props) => {
 		// add 1 for the section heading
@@ -40,85 +126,11 @@ export default class CourseResultsList extends React.Component<Props, State> {
 		return {itemCount}
 	}
 
-	// method borrowed from https://github.com/lucasferreira/react-virtualized-sectionlist/blob/1ed9437c76dbc9b3fcf01dd9c5b50c96d9dc211c/source/index.js#L100-L123
-	extractItemAtIndex = (
-		index: number,
-	): {
-		title: ?string,
-		items: Array<any>,
-		itemIndex: ?number,
-		sectionIndex: ?number,
-		isHeader: boolean,
-	} => {
-		let itemIndex = index
-
-		for (let i = 0; i < this.props.results.length; i++) {
-			let [title, items] = this.props.results[i]
-
-			// The section adds an item for the header
-			itemIndex -= 1
-
-			if (itemIndex >= items.length) {
-				itemIndex -= items.length
-				continue
-			}
-
-			let isHeader = itemIndex === -1
-
-			return {
-				title,
-				items,
-				itemIndex: isHeader ? null : itemIndex,
-				sectionIndex: i,
-				isHeader: isHeader,
-			}
-		}
-
-		return {
-			title: null,
-			items: [],
-			itemIndex: null,
-			sectionIndex: null,
-			isHeader: false,
-		}
-	}
-
 	getRowHeight = ({index}: {|index: number|}) => {
-		let {isHeader, itemIndex, items} = this.extractItemAtIndex(index)
+		let results = this.props.results
+		let {isHeader, itemIndex, items} = extractItemAtIndex(index, results)
 
-		if (isHeader) {
-			return 35
-		}
-
-		if (itemIndex == null || !items[itemIndex]) {
-			return 0
-		}
-
-		let course = items[itemIndex]
-		let courseRows = 2
-
-		let hasTimes = course.times && course.times.length
-		let hasSubtitle =
-			course.name &&
-			course.title &&
-			(course.type === 'Seminar' || course.type === 'Topic')
-
-		if (hasTimes) {
-			courseRows += 1
-		}
-		if (hasSubtitle) {
-			courseRows += 1
-		}
-
-		if (courseRows === 2) {
-			return 38
-		} else if (courseRows === 3) {
-			return 56
-		} else if (courseRows === 4) {
-			return 71
-		}
-
-		return 0
+		return getRowHeight(isHeader, itemIndex, items)
 	}
 
 	renderHeader = (args: {title: ?string, key: string, style: any}) => {
@@ -137,7 +149,10 @@ export default class CourseResultsList extends React.Component<Props, State> {
 
 	renderRow = (args: {index: number, style: Object, key: string}) => {
 		let {index, style, key} = args
-		let {isHeader, itemIndex, items, title} = this.extractItemAtIndex(index)
+		let {isHeader, itemIndex, items, title} = extractItemAtIndex(
+			index,
+			this.props.results,
+		)
 
 		if (isHeader) {
 			return this.renderHeader({title, key, style})
@@ -161,18 +176,20 @@ export default class CourseResultsList extends React.Component<Props, State> {
 
 	render() {
 		return (
-			<AutoSizer>
-				{({height, width}) => (
-					<List
-						className="term-list"
-						height={height}
-						rowCount={this.state.itemCount}
-						rowHeight={this.getRowHeight}
-						rowRenderer={this.renderRow}
-						width={width}
-					/>
-				)}
-			</AutoSizer>
+			<div className="results-list-sizer">
+				<AutoSizer>
+					{({height, width}) => (
+						<List
+							className="term-list"
+							height={height}
+							rowCount={this.state.itemCount}
+							rowHeight={this.getRowHeight}
+							rowRenderer={this.renderRow}
+							width={width}
+						/>
+					)}
+				</AutoSizer>
+			</div>
 		)
 	}
 

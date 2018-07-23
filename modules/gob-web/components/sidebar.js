@@ -43,6 +43,9 @@ const SidebarElement = styled.aside`
 	${theme.contentBlockSpacing};
 	flex: 1;
 
+	display: flex;
+	flex-direction: column;
+
 	@media all and (min-width: 35em) {
 		max-width: 280px;
 		padding-left: ${theme.pageEdgePadding};
