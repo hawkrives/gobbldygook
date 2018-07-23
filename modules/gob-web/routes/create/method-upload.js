@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import DropZone from 'react-dropzone'
-import map from 'lodash/map'
 import Button from '../../components/button'
 import List from '../../components/list'
 import {StudentSummary} from '../../modules/student/student-summary'
@@ -22,7 +21,7 @@ class UploadFileScreen extends React.Component {
 
 	state = {
 		files: [],
-		actions [],
+		actions: [],
 	}
 
 	handleFileDrop = files => {
@@ -46,7 +45,7 @@ class UploadFileScreen extends React.Component {
 
 	convertOneFile = async file => {
 		let data = await file.data
-			
+
 		let parsed
 		try {
 			parsed = JSON.parse(data)
@@ -65,7 +64,7 @@ class UploadFileScreen extends React.Component {
 			converted = {name: file.name, error: err.message}
 		}
 
-		this.setState((state) => ({actions: [...state.actions, converted]}))
+		this.setState(state => ({actions: [...state.actions, converted]}))
 	}
 
 	convertFilesToStudents = files => {
@@ -104,9 +103,7 @@ class UploadFileScreen extends React.Component {
 				</DropZone>
 
 				<List type="plain" className="upload-results">
-					{// eslint-disable-next-line no-confusing-arrow
-					map(
-						actions,
+					{actions.map(
 						stu =>
 							stu.payload ? (
 								<li key={stu.payload.id}>
@@ -125,7 +122,7 @@ class UploadFileScreen extends React.Component {
 								</li>
 							),
 					)}
-					{map(files, file => <li key={file.name}>{file.name}</li>)}
+					{files.map(file => <li key={file.name}>{file.name}</li>)}
 				</List>
 
 				<Button onClick={this.handleImportStudents}>
@@ -138,7 +135,4 @@ class UploadFileScreen extends React.Component {
 
 let mapDispatch = dispatch => ({dispatch})
 
-export default connect(
-	undefined,
-	mapDispatch,
-)(withRouter(UploadFileScreen))
+export default connect(undefined, mapDispatch)(withRouter(UploadFileScreen))
