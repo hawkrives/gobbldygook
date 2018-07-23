@@ -1,82 +1,55 @@
 /* global module */
 'use strict'
 
-const forEach = require('lodash/forEach')
+class HJSPlugin {
+	constructor(renderFunc) {
+		this.render = renderFunc
+		this.filename = 'index.html'
 
-// Main export
-function HJSPlugin(renderFunc) {
-	this.render = renderFunc
-	this.filename = 'index.html'
-}
-
-HJSPlugin.prototype.apply = function(compiler) {
-	const htmlFunction = this.render
-
-	// let user pass `true` to use the simple default.
-	// Same if `isDev` and `serveCustomHtmlInDev` is falsy
-	if (!htmlFunction) {
-		return
+		this.apply = this.apply.bind(this)
+		this.emit = this.emit.bind(this)
+		this.getAssets = this.getAssets.bind(this)
 	}
 
-	this.compiler = compiler
-
-	compiler.plugin('emit', (compiler, callback) => {
-		// store stats on this
-		this.stats = compiler.getStats().toJson()
-		const context = this.getAssets()
-
-		// access to stats
-		context.stats = this.stats
-
-		this.addAssets(compiler, htmlFunction(context))
-		callback()
-	})
-}
-
-// Oddly enough we have to pass in the compiler here
-// it's changed from when it was stored on `this` previously
-HJSPlugin.prototype.addAssets = function(compiler, data) {
-	let pages
-	// if it's a string, we assume it's an html string for the index file
-	if (typeof data === 'string') {
-		pages = {
-			[this.filename]: data,
-		}
-	} else if (typeof data === 'object') {
-		pages = data
-	} else {
-		throw new Error(
-			'Result from `html` callback must be a string or an object',
-		)
+	apply(compiler) {
+		compiler.hooks.emit.tapAsync({name: 'HtmlPlugin'}, this.emit)
 	}
 
-	forEach(pages, (asset, name) => {
-		compiler.assets[name] = {
-			source: () => asset,
-			size: () => asset.length,
+	emit(compilation, cb) {
+		// console.log(compilation.namedChunks)
+		let context = this.getAssets(compilation.namedChunks)
+		// console.log(context)
+		// process.exit(1)
+
+		let data = this.render(context)
+		compilation.assets[this.filename] = {
+			source: () => data,
+			size: () => data.length,
 		}
-	})
-}
 
-HJSPlugin.prototype.getAssets = function() {
-	const assets = (this.assets = {})
+		cb()
+	}
 
-	forEach(this.stats.assetsByChunkName, (value, chunk) => {
-		// Webpack outputs an array for each chunk when using sourcemaps
-		if (value instanceof Array) {
-			// if we've got a CSS file add it here
-			if (chunk === 'main' && value.length >= 2) {
-				assets.css = value[1]
+	getAssets(namedChunks) {
+		const assets = (this.assets = {})
+
+		for (let [chunkName, chunk] of namedChunks.entries()) {
+			// Webpack outputs an array for each chunk when using sourcemaps
+			if (Array.isArray(chunk.files)) {
+				// if we've got a CSS file add it here
+				// if (chunkName === 'main' && chunk.files.length >= 2) {
+				// 	assets.css = chunk.files[1]
+				// }
+
+				// The main bundle seems like it's always the first
+				chunk = chunk.files.find(f => f.endsWith('.js'))
 			}
 
-			// The main bundle seems like it's always the first
-			value = value[0]
+			assets[chunkName] = chunk
 		}
 
-		assets[chunk] = value
-	})
-
-	return assets
+		return assets
+	}
 }
 
 module.exports = HJSPlugin
