@@ -60,22 +60,17 @@ export default class CourseResultsList extends React.Component<Props, State> {
 
 			if (itemIndex >= items.length) {
 				itemIndex -= items.length
-			} else if (itemIndex === -1) {
-				return {
-					title,
-					items,
-					itemIndex: null,
-					sectionIndex: i,
-					isHeader: true,
-				}
-			} else {
-				return {
-					title,
-					items,
-					itemIndex,
-					sectionIndex: i,
-					isHeader: false,
-				}
+				continue
+			}
+
+			let isHeader = itemIndex === -1
+
+			return {
+				title,
+				items,
+				itemIndex: isHeader ? null : itemIndex,
+				sectionIndex: i,
+				isHeader: isHeader,
 			}
 		}
 
