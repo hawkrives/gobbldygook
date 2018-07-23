@@ -7,11 +7,11 @@
   "author": "Hawken MacKay Rives",
   "license": "MIT",
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack --bail --progress",
-    "build-dev": "webpack --bail --progress --devtool=source-map",
-    "start": "webpack-dev-server --progress",
-    "stats": "cross-env NODE_ENV=production npm run stats-dev",
-    "stats-dev": "webpack --bail --profile --json > stats.json && echo 'open http://webpack.github.io/analyse/'"
+    "build": "webpack --mode production --bail --progress",
+    "build-dev": "webpack --mode development --bail --progress",
+    "start": "webpack-serve --progress --mode development --port 3000 --no-clipboard --content ./build",
+    "stats": "webpack --mode production --bail --profile --json > stats.json && echo 'open http://webpack.github.io/analyse/'",
+    "stats-dev": "webpack --mode development --bail --profile --json > stats.json && echo 'open http://webpack.github.io/analyse/'"
   },
   "dependencies": {
     "@gob/colors": "^3.0.0-rc.2",
@@ -83,11 +83,10 @@
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.5.2",
     "cross-env": "^5.2.0",
-    "css-loader": "^0.28.11",
-    "duplicate-package-checker-webpack-plugin": "^2.1.0",
+    "css-loader": "^1.0.0",
+    "duplicate-package-checker-webpack-plugin": "^3.0.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "extract-text-webpack-plugin": "^3.0.2",
     "fake-indexeddb": "^2.0.4",
     "file-loader": "^1.1.11",
     "jest": "^23.4.1",
@@ -96,6 +95,7 @@
     "jest-styled-components": "^5.0.1",
     "json-loader": "^0.5.7",
     "junk": "^2.1.0",
+    "mini-css-extract-plugin": "^0.4.1",
     "mkdirp": "^0.5.1",
     "node-sass": "^4.9.2",
     "prop-types": "^15.6.2",
@@ -106,9 +106,10 @@
     "style-loader": "^0.21.0",
     "uglifyjs-webpack-plugin": "^1.2.7",
     "url-loader": "^1.0.1",
-    "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.1",
+    "webpack": "^4.16.1",
+    "webpack-cli": "^3.1.0",
     "webpack-stylish": "^0.1.8",
-    "worker-loader": "^1.1.1"
+    "worker-loader": "^2.0.0"
   }
 }

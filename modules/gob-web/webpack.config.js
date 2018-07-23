@@ -1,38 +1,25 @@
 /* global module, __dirname */
 /* eslint-disable camelcase */
-// @flow
 'use strict'
 
 const pkg = require('./package.json')
 const webpack = require('webpack')
-const Stylish = require('webpack-stylish')
 
-const {
-	DefinePlugin,
-	// HotModuleReplacementPlugin,
-	LoaderOptionsPlugin,
-	NormalModuleReplacementPlugin,
-	NamedModulesPlugin,
-	optimize: {CommonsChunkPlugin},
-} = webpack
-
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const HtmlPlugin = require('@gob/webpack-plugin-html')
-const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
-const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const {DefinePlugin} = webpack
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const HtmlPlugin = require('@gob/webpack-plugin-html')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const isCI = Boolean(process.env.CI)
 const outputFolder = __dirname + '/build/'
 
-function config() {
-	const isProduction = process.env.NODE_ENV === 'production'
+function config(_, {mode}) {
+	const isProduction = mode === 'production'
 	const isDevelopment = !isProduction
 	const publicPath = '/'
 
-	const devtool = isProduction ? 'source-map' : 'eval'
+	const devtool = 'source-map'//isProduction ? 'source-map' : 'eval'
 
 	const stats = {}
 	if (isProduction) {
@@ -41,15 +28,6 @@ function config() {
 
 	const entry = {
 		main: ['./index.js'],
-	}
-
-	if (isDevelopment) {
-		// add dev server and hotloading clientside code
-		entry.main.unshift(
-			// 'react-hot-loader/patch',
-			'webpack-dev-server/client?/',
-			// 'webpack/hot/only-dev-server',
-		)
 	}
 
 	const output = {
@@ -63,29 +41,29 @@ function config() {
 		// Add /*filename*/ comments to generated require()s in the output.
 		pathinfo: true,
 	}
-
-	const devServer = {
-		port: 3000, // for webpack-dev-server
-
-		stats: {
-			assets: false,
-			version: false,
-			hash: false,
-			timings: false,
-			chunks: false,
-			chunkModules: false,
-		},
-		contentBase: outputFolder,
-
-		// Makes webpack serve /index.html as the response to any request to
-		// webpack-dev-server, so GET / and GET /s/1234 both get the index
-		// page.
-		historyApiFallback: true,
-
-		// We also do the manual entry above and the manual adding of the hot
-		// module replacment plugin below.
-		// hot: true,
-	}
+//
+// 	const devServer = {
+// 		port: 3000, // for webpack-dev-server
+//
+// 		stats: {
+// 			assets: false,
+// 			version: false,
+// 			hash: false,
+// 			timings: false,
+// 			chunks: false,
+// 			chunkModules: false,
+// 		},
+// 		contentBase: outputFolder,
+//
+// 		// Makes webpack serve /index.html as the response to any request to
+// 		// webpack-dev-server, so GET / and GET /s/1234 both get the index
+// 		// page.
+// 		historyApiFallback: true,
+//
+// 		// We also do the manual entry above and the manual adding of the hot
+// 		// module replacment plugin below.
+// 		// hot: true,
+// 	}
 
 	let plugins = [
 		// clean out the build folder between builds
@@ -93,9 +71,11 @@ function config() {
 
 		// Generates an index.html for us.
 		new HtmlPlugin(context => {
-			let cssLink = context.css
-				? `<link rel="stylesheet" href="${publicPath}${context.css}">`
-				: null
+			// let cssLink = context.styles
+			// 	? `<link rel="stylesheet" href="${publicPath}${
+			// 			context.styles
+			// 	  }">`
+			// 	: null
 			let polyfills = isProduction
 				? '<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>'
 				: ''
@@ -110,7 +90,7 @@ function config() {
                 <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/nhhpgddphdimipafjfiggjnbbmcoklld">
 
                 ${polyfills}
-                ${cssLink ? cssLink : ''}
+                ${/*cssLink ? cssLink : ''*/''}
 
                 <main id="gobbldygook"></main>
                 <script src="${publicPath}${context.main}"></script>
@@ -121,12 +101,12 @@ function config() {
 		// Ignore the "full" schema in js-yaml's module, because it brings in esprima
 		// to support the !!js/function type. We don't use and have no need for it, so
 		// tell webpack to ignore it.
-		new NormalModuleReplacementPlugin(/schema\/default_full$/, result => {
-			result.request = result.request.replace(
-				'default_full',
-				'default_safe',
-			)
-		}),
+		// new NormalModuleReplacementPlugin(/schema\/default_full$/, result => {
+		// 	result.request = result.request.replace(
+		// 		'default_full',
+		// 		'default_safe',
+		// 	)
+		// }),
 
 		// DefinePlugin makes some variables available to the code.
 		new DefinePlugin({
@@ -137,68 +117,26 @@ function config() {
 			'process.env.TRAVIS_COMMIT': JSON.stringify(
 				process.env.TRAVIS_COMMIT || process.env.COMMIT_REF,
 			),
-			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 		}),
 
-		// Extract the common libraries into a single file so that the chunks
-		// don't need to individually bundle them.
-		new CommonsChunkPlugin({
-			name: 'commons',
-			filename: '[name].js',
-			children: true,
+		new MiniCssExtractPlugin({
+			// Options similar to the same options in webpackOptions.output;
+			// both options are optional
+			filename: '[name].css',
+			chunkFilename: '[id].css',
 		}),
-
-		// Watcher doesn't work well if you mistype casing in a path so we use
-		// a plugin that prints an error when you attempt to do this.
-		new CaseSensitivePathsPlugin(),
-
-		new NamedModulesPlugin(),
 
 		// copy files – into the webpack {output} directory
 		new CopyWebpackPlugin([{from: './static/*', flatten: true}]),
-
-		new Stylish(),
 	]
-
-	if (isProduction) {
-		// minify in production
-		plugins = [
-			...plugins,
-			new UglifyJsPlugin({
-				cache: true,
-				parallel: true,
-				sourceMap: true,
-				uglifyOptions: {
-					ecma: 8,
-					warnings: false,
-				},
-			}),
-			new ExtractTextPlugin({
-				filename: isDevelopment ? 'app.css' : 'app.[contenthash].css',
-				allChunks: true,
-			}),
-			new LoaderOptionsPlugin({
-				minimize: true,
-			}),
-			new DuplicatePackageCheckerPlugin(),
-		]
-	}
-
-	if (isDevelopment) {
-		// add dev plugins
-		// plugins = [...plugins, new HotModuleReplacementPlugin()]
-	}
 
 	const babelLoader = {
 		loader: 'babel-loader',
 		options: {cacheDirectory: !isCI},
 	}
 	const urlLoader = {loader: 'url-loader', options: {limit: 10000}}
-	const cssLoader = isProduction
-		? ExtractTextPlugin.extract({
-				fallback: 'style-loader',
-				use: ['css-loader', 'sass-loader'],
-		  })
+	let cssLoader = isProduction
+		? [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
 		: ['style-loader', 'css-loader', 'sass-loader']
 
 	const module = {
@@ -212,10 +150,6 @@ function config() {
 				test: /\.worker\.js$/,
 				exclude: /node_modules/,
 				use: ['worker-loader', babelLoader],
-			},
-			{
-				test: /\.json$/,
-				use: ['json-loader'],
 			},
 			{
 				test: /\.otf|eot|ttf|woff2?$/,
@@ -232,6 +166,31 @@ function config() {
 		],
 	}
 
+	let optimization = {
+		splitChunks: {
+			cacheGroups: {
+				react: {
+					test: /\/node_modules\/(react.*|redux.*|styled-components)\//,
+					name: 'react',
+					// chunks: 'all',
+					enforce: true,
+				},
+				vendor: {
+					test: /\/node_modules\/(?!react.*|redux.*|styled-components)\//,
+					name: 'vendor',
+					//chunks: 'all',
+					enforce: true,
+				},
+				styles: {
+					name: 'styles',
+					test: /\.css$/,
+					chunks: 'all',
+					enforce: true,
+				},
+			},
+		},
+	}
+
 	return {
 		target: 'web',
 		devtool,
@@ -241,6 +200,7 @@ function config() {
 		devServer,
 		plugins,
 		module,
+		optimization,
 	}
 }
 
