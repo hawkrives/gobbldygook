@@ -82,7 +82,7 @@ class UploadFileScreen extends React.Component {
 
 	handleImportStudents = () => {
 		this.state.students.forEach(this.props.dispatch)
-		this.props.dispatch(this.props.router.push('/'))
+		this.props.router.push('/')
 	}
 
 	render() {
