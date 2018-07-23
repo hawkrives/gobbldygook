@@ -1,36 +1,32 @@
 /* global module, __dirname */
-/* eslint-disable camelcase */
 'use strict'
 
 const pkg = require('./package.json')
 const webpack = require('webpack')
 
-const {DefinePlugin} = webpack
+const {DefinePlugin, NormalModuleReplacementPlugin} = webpack
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const HtmlPlugin = require('@gob/webpack-plugin-html')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const HtmlPlugin = require('@gob/webpack-plugin-html')
+
+const webpackServeWaitpage = require('webpack-serve-waitpage')
+const history = require('connect-history-api-fallback')
+const convert = require('koa-connect')
 
 const isCI = Boolean(process.env.CI)
 const outputFolder = __dirname + '/build/'
 
-function config(_, {mode}) {
-	const isProduction = mode === 'production'
-	const isDevelopment = !isProduction
-	const publicPath = '/'
+function config({mode}) {
+	let isProduction = mode === 'production'
+	let isDevelopment = !isProduction
+	let publicPath = '/'
 
-	const devtool = 'source-map'//isProduction ? 'source-map' : 'eval'
+	let devtool = isProduction ? 'source-map' : 'eval'
 
-	const stats = {}
-	if (isProduction) {
-		stats.children = false
-	}
+	let entry = './index.js'
 
-	const entry = {
-		main: ['./index.js'],
-	}
-
-	const output = {
+	let output = {
 		path: outputFolder,
 		publicPath: publicPath,
 
@@ -41,29 +37,24 @@ function config(_, {mode}) {
 		// Add /*filename*/ comments to generated require()s in the output.
 		pathinfo: true,
 	}
-//
-// 	const devServer = {
-// 		port: 3000, // for webpack-dev-server
-//
-// 		stats: {
-// 			assets: false,
-// 			version: false,
-// 			hash: false,
-// 			timings: false,
-// 			chunks: false,
-// 			chunkModules: false,
-// 		},
-// 		contentBase: outputFolder,
-//
-// 		// Makes webpack serve /index.html as the response to any request to
-// 		// webpack-dev-server, so GET / and GET /s/1234 both get the index
-// 		// page.
-// 		historyApiFallback: true,
-//
-// 		// We also do the manual entry above and the manual adding of the hot
-// 		// module replacment plugin below.
-// 		// hot: true,
-// 	}
+
+	let serve = {
+		clipboard: false,
+		port: 3000,
+		content: [outputFolder],
+		hotClient: false,
+		add(app, middleware, options) {
+			// changes the requested location to index.html whenever there is
+			// a request which fulfills the following criteria:
+			// - The request is a GET request which accepts text/html,
+			// - is not a direct file request, i.e. the requested path does not contain a . (DOT) character
+			app.use(convert(history()))
+
+			// Instead of waiting for webpack to finish compiling, see a nice progress page
+			// (Options are: "default", "dark", "material")
+			app.use(webpackServeWaitpage(options))
+		},
+	}
 
 	let plugins = [
 		// clean out the build folder between builds
@@ -71,11 +62,6 @@ function config(_, {mode}) {
 
 		// Generates an index.html for us.
 		new HtmlPlugin(context => {
-			// let cssLink = context.styles
-			// 	? `<link rel="stylesheet" href="${publicPath}${
-			// 			context.styles
-			// 	  }">`
-			// 	: null
 			let polyfills = isProduction
 				? '<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>'
 				: ''
@@ -90,10 +76,10 @@ function config(_, {mode}) {
                 <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/nhhpgddphdimipafjfiggjnbbmcoklld">
 
                 ${polyfills}
-                ${/*cssLink ? cssLink : ''*/''}
 
                 <main id="gobbldygook"></main>
                 <script src="${publicPath}${context.main}"></script>
+                <script src="${publicPath}${context.styles}"></script>
                 </html>
             `
 		}),
@@ -101,12 +87,12 @@ function config(_, {mode}) {
 		// Ignore the "full" schema in js-yaml's module, because it brings in esprima
 		// to support the !!js/function type. We don't use and have no need for it, so
 		// tell webpack to ignore it.
-		// new NormalModuleReplacementPlugin(/schema\/default_full$/, result => {
-		// 	result.request = result.request.replace(
-		// 		'default_full',
-		// 		'default_safe',
-		// 	)
-		// }),
+		new NormalModuleReplacementPlugin(/schema\/default_full$/, result => {
+			result.request = result.request.replace(
+				'default_full',
+				'default_safe',
+			)
+		}),
 
 		// DefinePlugin makes some variables available to the code.
 		new DefinePlugin({
@@ -119,27 +105,37 @@ function config(_, {mode}) {
 			),
 		}),
 
-		new MiniCssExtractPlugin({
-			// Options similar to the same options in webpackOptions.output;
-			// both options are optional
-			filename: '[name].css',
-			chunkFilename: '[id].css',
-		}),
-
 		// copy files – into the webpack {output} directory
 		new CopyWebpackPlugin([{from: './static/*', flatten: true}]),
 	]
 
-	const babelLoader = {
+	if (isProduction) {
+		plugins = [
+			...plugins,
+			new MiniCssExtractPlugin({
+				// Options similar to the same options in webpackOptions.output;
+				// both options are optional
+				filename: '[name].css',
+				chunkFilename: '[id].css',
+			}),
+		]
+	}
+
+	let babelLoader = {
 		loader: 'babel-loader',
 		options: {cacheDirectory: !isCI},
 	}
-	const urlLoader = {loader: 'url-loader', options: {limit: 10000}}
+
+	let urlLoader = {
+		loader: 'url-loader',
+		options: {limit: 10000},
+	}
+
 	let cssLoader = isProduction
 		? [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
 		: ['style-loader', 'css-loader', 'sass-loader']
 
-	const module = {
+	let module = {
 		rules: [
 			{
 				test: /\.js$/,
@@ -192,12 +188,11 @@ function config(_, {mode}) {
 	}
 
 	return {
-		target: 'web',
+		mode: mode,
 		devtool,
-		stats,
 		entry,
 		output,
-		devServer,
+		serve,
 		plugins,
 		module,
 		optimization,
