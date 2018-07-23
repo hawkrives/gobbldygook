@@ -81,7 +81,6 @@ function config({mode}) {
 
                 <main id="gobbldygook"></main>
                 <script src="${publicPath}${context.main}"></script>
-                <script src="${publicPath}${context.styles}"></script>
                 </html>
             `
 		}),
