@@ -121,10 +121,10 @@ exports[`Year renders shallowly 1`] = `
   className="year__Container-egxAsM eRrGhm"
 >
   <header
-    className="year__Header-knveQC ckOWbh"
+    className="year__Header-knveQC kmyYJU"
   >
     <h1
-      className="year__TitleText-fHSGp kKKBj"
+      className="year__TitleText-fHSGp istJGj"
     >
       2016—2017
     </h1>
