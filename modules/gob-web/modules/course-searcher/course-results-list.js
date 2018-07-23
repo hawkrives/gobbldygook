@@ -31,14 +31,6 @@ type State = {
 	itemCount: number,
 }
 
-function* enumerate(iter) {
-	let i = 0
-	for (let item of iter) {
-		yield [i, item]
-		i += 1
-	}
-}
-
 export default class CourseResultsList extends React.Component<Props, State> {
 	state = {itemCount: 0}
 
@@ -63,8 +55,11 @@ export default class CourseResultsList extends React.Component<Props, State> {
 	} => {
 		let itemIndex = index
 
-		for (let [i, [title, items]] of enumerate(this.props.results)) {
-			itemIndex -= 1 // The section adds an item for the header
+		for (let i = 0; i < this.props.results.length; i++) {
+			let [title, items] = this.props.results[i]
+
+			// The section adds an item for the header
+			itemIndex -= 1
 
 			if (itemIndex >= items.length) {
 				itemIndex -= items.length
