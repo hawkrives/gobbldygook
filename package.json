@@ -7,6 +7,7 @@
   ],
   "scripts": {
     "build": "cd modules/gob-web && npm run build",
+    "build-dev": "cd modules/gob-web && npm run build-dev",
     "build-peg": "cd modules/gob-hanson-format && npm run build",
     "bugsnag": "curl -d 'apiKey=7e393deddaeb885f5b140b4320ecef6b' -d 'repository=https://github.com/hawkrives/gobbldygook' -d 'revision=$(git rev-parse --verify HEAD)' 'https://notify.bugsnag.com/deploy'",
     "count": "echo $(fd -e scss | wc -l) files && echo $(fd -e scss | xargs wc -l | gsort | tail -n1) lines",
