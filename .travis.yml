@@ -5,7 +5,7 @@ branches:
 sudo: false
 dist: trusty
 language: node_js
-node_js: 8
+node_js: 10
 
 stages:
   - name: Greenkeeper
