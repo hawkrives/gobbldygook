@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react'
+import sumBy from 'lodash/sumBy'
 import {List, AutoSizer} from 'react-virtualized'
 import {DraggableCourse} from '../course'
 import {
@@ -34,11 +35,8 @@ export default class CourseResultsList extends React.Component<Props, State> {
 	state = {itemCount: 0}
 
 	static getDerivedStateFromProps = (props: Props) => {
-		let itemCount = props.results.reduce((acc, [_title, items]) => {
-			// add 1 for the section heading
-			let childCount = items.length + 1
-			return acc + childCount
-		}, 0)
+		// add 1 for the section heading
+		let itemCount = sumBy(props.results, ([_, items]) => items.length + 1)
 		return {itemCount}
 	}
 
