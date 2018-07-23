@@ -21,7 +21,7 @@ workflows:
 
 jobs:
   cache-yarn:
-    docker: [{image: 'circleci/node:8'}]
+    docker: [{image: 'circleci/node:10'}]
     steps:
       - checkout
       - restore_cache: *restore-cache-yarn
@@ -30,7 +30,7 @@ jobs:
       - save_cache: *save-cache-yarn
 
   flow:
-    docker: [{image: 'circleci/node:8'}]
+    docker: [{image: 'circleci/node:10'}]
     environment:
       task: flow
     steps:
@@ -41,7 +41,7 @@ jobs:
       - run: yarn run --silent flow check --quiet
 
   jest:
-    docker: [{image: 'circleci/node:8'}]
+    docker: [{image: 'circleci/node:10'}]
     environment:
       task: jest
       JEST_JUNIT_OUTPUT: ./test-results/jest/junit.xml
@@ -61,7 +61,7 @@ jobs:
             coveralls < ./coverage/lcov.info
 
   prettier:
-    docker: [{image: 'circleci/node:8'}]
+    docker: [{image: 'circleci/node:10'}]
     environment:
       task: prettier
     steps:
@@ -73,7 +73,7 @@ jobs:
       - run: git diff modules/
 
   eslint:
-    docker: [{image: 'circleci/node:8'}]
+    docker: [{image: 'circleci/node:10'}]
     environment:
       task: lint
     steps:
@@ -88,7 +88,7 @@ jobs:
           path: ./test-results
 
   build:
-    docker: [{image: 'circleci/node:8'}]
+    docker: [{image: 'circleci/node:10'}]
     environment:
       task: build
     steps:
