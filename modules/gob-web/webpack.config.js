@@ -8,6 +8,8 @@ const {DefinePlugin, NormalModuleReplacementPlugin} = webpack
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
+const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
 const HtmlPlugin = require('@gob/webpack-plugin-html')
 
 const webpackServeWaitpage = require('webpack-serve-waitpage')
@@ -105,6 +107,10 @@ function config({mode}) {
 			),
 		}),
 
+		// Watcher doesn't work well if you mistype casing in a path so we use
+		// a plugin that prints an error when you attempt to do this.
+		new CaseSensitivePathsPlugin(),
+
 		// copy files – into the webpack {output} directory
 		new CopyWebpackPlugin([{from: './static/*', flatten: true}]),
 	]
@@ -118,6 +124,7 @@ function config({mode}) {
 				filename: '[name].css',
 				chunkFilename: '[id].css',
 			}),
+			new DuplicatePackageCheckerPlugin(),
 		]
 	}
 
@@ -188,7 +195,8 @@ function config({mode}) {
 	}
 
 	return {
-		mode: mode,
+		target: 'web',
+		mode,
 		devtool,
 		entry,
 		output,
