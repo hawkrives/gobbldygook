@@ -5,7 +5,7 @@ import * as vars from './variables'
 
 export const contentBlockSpacing = css`
 	padding-top: ${vars.pageEdgePadding};
-	padding-bottom: 15vh;
+	padding-bottom: ${vars.pageEdgePadding};
 	overflow-y: scroll;
 `
 
