@@ -3,8 +3,8 @@
     # the directory to publish (relative to root of your repo)
     publish = "modules/gob-web/build/"
     [build.environment]
-        NODE_VERSION = "8"
-        YARN_VERSION = "1.5.1"
+        NODE_VERSION = "10"
+        YARN_VERSION = "1.7.0"
         YARN_FLAGS = "--production=false"
 
 # Production context: All deploys to the main
@@ -29,15 +29,6 @@
     from = "/search/*"
     to = "/index.html"
     status = 200
-
-# allow requesting data from SIS
-[[redirects]]
-    from = "/sis/*"
-    to = "https://www.stolaf.edu/sis/:splat"
-    status = 200
-    force = true
-    [[redirects.headers]]
-        X-From = "Gobbldygook"
 
 # set headers for the app
 [[headers]]
