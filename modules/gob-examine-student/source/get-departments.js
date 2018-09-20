@@ -1,6 +1,4 @@
 // @flow
-import uniq from 'lodash/uniq'
-import flatten from 'lodash/flatten'
 import type {Course} from './types'
 
 /**
@@ -9,6 +7,6 @@ import type {Course} from './types'
  * @param {Course[]} courses - the list of courses
  * @returns {string[]} - the list of unique departments
  */
-export default function getDepartments(courses: Course[]): Array<string> {
-	return uniq(flatten(courses.map(c => c.department)))
+export default function getDepartments(courses: Array<Course>): Array<string> {
+	return [...new Set(courses.map(c => c.department))]
 }
