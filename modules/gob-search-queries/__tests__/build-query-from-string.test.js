@@ -73,7 +73,7 @@ describe('buildQueryFromString', () => {
 		let actual = buildQueryFromString(query)
 		expect(actual).toMatchSnapshot()
 		expect(actual).toEqual({
-			departments: ['$AND', 'ASIAN', 'REL'],
+			department: ['$AND', 'ASIAN', 'REL'],
 			number: [220],
 			section: ['A'],
 		})
