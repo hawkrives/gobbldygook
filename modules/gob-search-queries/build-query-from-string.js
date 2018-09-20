@@ -38,9 +38,10 @@ let semesters = {
 let keywordMappings = {
 	day: 'times',
 	days: 'times',
-	department: 'departments',
-	dept: 'departments',
-	depts: 'departments',
+	department: 'department',
+	departments: 'department',
+	dept: 'department',
+	depts: 'department',
 	ge: 'gereqs',
 	gened: 'gereqs',
 	geneds: 'gereqs',
@@ -82,7 +83,7 @@ function organizeValues([key, values], words = false, profWords = false) {
 			case 'crsid':
 				return parseInt(val, 10)
 			// handle the lookup values
-			case 'departments':
+			case 'department':
 				val = val.toLowerCase()
 				return departmentMapping[val] || val.toUpperCase()
 			case 'gereqs':
@@ -154,16 +155,16 @@ export function buildQueryFromString(
 	let [keys, values] = partitionByIndex(cleaned)
 
 	if (stringThing && quacksLikeDeptNum(stringThing)) {
-		let {departments, number, section} = splitDeptNum(stringThing, true)
+		let {department, number, section} = splitDeptNum(stringThing, true)
 
-		if (departments.length === 1) {
-			keys.push('departments')
-			values.push(departments[0])
+		if (department.length === 1) {
+			keys.push('department')
+			values.push(department[0])
 		} else {
-			keys.push('departments')
+			keys.push('department')
 			values.push('$AND')
-			for (let dept of departments) {
-				keys.push('departments')
+			for (let dept of department) {
+				keys.push('department')
 				values.push(dept)
 			}
 		}

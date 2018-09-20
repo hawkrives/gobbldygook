@@ -13,7 +13,7 @@ function printCourse(course) {
 
 	return [
 		`${course.year}.${course.semester}`,
-		`${course.departments.join('/')} ${course.number}${sect}${type}`,
+		`${course.department} ${course.number}${sect}${type}`,
 		`${course.name}${title}`,
 	]
 }

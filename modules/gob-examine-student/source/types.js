@@ -42,7 +42,7 @@ export type Course = {
 	clbid: clbidT,
 	credits: number,
 	crsid: crsidT,
-	department: Array<string>,
+	department: string,
 	gereqs: string[],
 	groupid: number,
 	level: number,

@@ -15,10 +15,6 @@ async function populateCourses(student) {
 		student.clbids ||
 		flatten(student.schedules.filter(s => s.active).map(s => s.clbids))
 	let courses = await getCoursesByClbid(clbids)
-	courses = courses.map(c => {
-		c.department = c.departments
-		return c
-	})
 	return courses
 }
 

@@ -3,7 +3,7 @@
 import {deptNumRegex} from './dept-num-regex'
 
 export type DeptNum = {
-	departments: Array<string>,
+	department: string,
 	number: number,
 	section?: string,
 }
@@ -29,9 +29,9 @@ export function splitDeptNum(
 	}
 
 	let deptNum: DeptNum = {
-		departments: matches[1].includes('/')
-			? [matches[2], matches[3]]
-			: [matches[1]],
+		department: matches[1].includes('/')
+			? [matches[2], matches[3]].join('/')
+			: matches[1],
 		number: parseInt(matches[4], 10),
 	}
 

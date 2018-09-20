@@ -10,13 +10,6 @@
   }
 
   const flatten = require('lodash/flatten')
-  const assign = require('lodash/assign')
-  let normalizeDepartment
-  try {
-    normalizeDepartment = require('./convert-department').normalizeDepartment
-  } catch (e) {
-    normalizeDepartment = x => x
-  }
 }
 
 
@@ -59,7 +52,7 @@ Filter
       'where' _ where:Qualifier { return {$where: where, $filterType: 'where'} }
     / 'from' _ ofList:OfCourseList { return {$of: ofList, $filterType: 'of'} }
   )
-  { return assign({}, filter, {$distinct: distinct, $type: 'filter'}) }
+  { return {...filter, $distinct: distinct, $type: 'filter'} }
 
 
 Occurrence
@@ -107,7 +100,7 @@ Qualification
   = key:Word _
     op:Operator _
     value:(
-        f:Function _ 'from' _ 'courses' _ 'where' _ q:Qualifier  { return assign({}, f, {$where: q}) }
+        f:Function _ 'from' _ 'courses' _ 'where' _ q:Qualifier  { return {...f, $where: q} }
       / word:QualificationValue
       / list:ParentheticalQualificationValue
     )
@@ -327,11 +320,12 @@ Modifier
         throw new Error('can only use at-least style counters with non-course requests')
       }
 
-      let result = assign({}, from, {
+      let result = {
+        ...from,
         $type: 'modifier',
         $count: count,
         $what: what,
-      })
+      }
       if (besides) {
         result.$besides = besides
       }
@@ -381,17 +375,17 @@ Course
       '.' section:CourseSection sub:(
         '.' year:CourseYear sub:(
           '.' semester:CourseSemester { return {semester} }
-        )? { return assign({}, sub, {year}) }
-      )? { return assign({}, sub, {section}) }
+        )? { return {...sub, year} }
+      )? { return {...sub, section} }
     )?
   {
     return {
       $type: 'course',
-      $course: assign({},
-        details,
-        (dept || fetchDept()),
-        num
-      ),
+      $course: {
+        ...details,
+        ...(dept || fetchDept()),
+        ...num,
+      },
     }
   }
 
@@ -406,16 +400,7 @@ CourseDepartment
     )
     {
       let {type, dept: dept2} = part2
-      let department
-      if (type === 'joined') {
-        department = {department: [dept1 + dept2]}
-      }
-      else if (type === 'separate') {
-        department = {department: [
-          normalizeDepartment(dept1),
-          normalizeDepartment(dept2),
-        ]}
-      }
+      let department = {department: [dept1 + dept2]}
       storeDept(department)
       return department
     }
@@ -436,7 +421,7 @@ CourseNumber 'course number'
         result.type = 'Lab'
       }
 
-      return assign({}, result, {number})
+      return {...result, number }
     }
 
 

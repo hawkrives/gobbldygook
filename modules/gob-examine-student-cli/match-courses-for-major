@@ -16,8 +16,6 @@ const args = nom()
 		.parse()
 
 const courses = JSON.parse(fs.readFileSync(args.courses, 'utf-8')).map(c => {
-	c.department = c.departments
-	delete c.departments
 	delete c.description
 	delete c.prerequisites
 	return c
