@@ -25,7 +25,6 @@ import present from 'present'
 import debug from 'debug'
 const log = debug('web:redux:search')
 
-import {buildDeptString} from '@gob/school-st-olaf-college'
 import {to12HourTime as to12} from '@gob/lib'
 const REVERSE_ORDER = new Set(['Year', 'Term', 'Semester'])
 
@@ -50,7 +49,7 @@ const TIME_OF_DAY = course =>
 		: 'No Times Listed'
 
 const DEPARTMENT = course =>
-	course.departments ? buildDeptString(course.departments) : 'No Department'
+	course.department ? course.department : 'No Department'
 
 const NUMBER = course => course.number
 

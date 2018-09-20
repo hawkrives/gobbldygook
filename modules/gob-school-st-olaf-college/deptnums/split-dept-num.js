@@ -10,7 +10,7 @@ export type DeptNum = {
 
 /**
  * Splits a deptnum string (like "AS/RE 230A") into its components,
- * like {departments: ['AS', 'RE'], number: 230, section: 'A'}.
+ * like {department: 'AS/RE', number: 230, section: 'A'}.
  *
  * @param {String} deptNumString - the deptnum to split
  * @param {Boolean} includeSection - include the section in the result?
@@ -21,7 +21,7 @@ export function splitDeptNum(
 	includeSection?: boolean = false,
 ): ?DeptNum {
 	// "AS/RE 230A" -> ["AS/RE 230A", "AS/RE", "AS", "RE", "230", "A"]
-	// -> {departments: ['AS', 'RE'], number: 230}
+	// -> {department: 'AS/RE', number: 230}
 	let matches = deptNumRegex.exec(deptNumString)
 
 	if (!matches) {
