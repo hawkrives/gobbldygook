@@ -35,7 +35,7 @@ export type StudentType = {
 	dateLastModified: Date,
 	dateCreated: Date,
 
-	studies: Array<AreaOfStudyType>,
+	studies: Array<AreaQuery>,
 	schedules: {[key: string]: ScheduleType},
 	overrides: {[key: string]: OverrideType},
 	fabrications: {[key: string]: FabricationType},
@@ -47,6 +47,8 @@ export type StudentType = {
 export type HydratedStudentType = {
 	...$Exact<StudentType>,
 	canGraduate: boolean,
+	areas: AreaOfStudyType,
+	fulfilled: any,
 }
 
 type IncomingStudent = {}

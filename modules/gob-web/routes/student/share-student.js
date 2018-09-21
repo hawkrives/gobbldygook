@@ -10,6 +10,7 @@ import withRouter from 'react-router/lib/withRouter'
 import {close} from '../../icons/ionicons'
 import styled from 'styled-components'
 import {connect} from 'react-redux'
+import type {HydratedStudentType} from '@gob/object-student'
 
 import {encodeStudent} from '@gob/object-student'
 
@@ -32,18 +33,31 @@ type PropTypes = {
 		studentId: string,
 	},
 	router: Object,
-	student?: Object,
+	student?: HydratedStudentType,
 }
 
 export function ShareSheet(props: PropTypes) {
-	let {student = {}} = props
+	let {student} = props
 
 	const boundCloseModal = () =>
 		props.router.push(`/s/${props.params.studentId}/`)
 
-	const encodedStudentUrl = `data:text/json;charset=utf-8,${encodeStudent(
-		student,
-	)}`
+	if (!student) {
+		return (
+			<ShareModal onClose={boundCloseModal} contentLabel="Share">
+				<WindowTools>
+					<CloseModal onClick={boundCloseModal}>
+						<InlineIcon>{close}</InlineIcon>
+					</CloseModal>
+				</WindowTools>
+
+				<p>No student given?</p>
+			</ShareModal>
+		)
+	}
+
+	let encodedStudent = encodeStudent(student)
+	let encodedStudentUrl = `data:text/json;charset=utf-8,${encodedStudent}`
 
 	return (
 		<ShareModal onClose={boundCloseModal} contentLabel="Share">

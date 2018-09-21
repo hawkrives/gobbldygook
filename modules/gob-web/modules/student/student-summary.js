@@ -10,7 +10,7 @@ import ContentEditable from '../../components/content-editable'
 
 import {getActiveStudentCourses} from '../../helpers/get-active-student-courses'
 import {countCredits} from '@gob/examine-student'
-import type {HydratedStudentType, AreaOfStudyType} from '@gob/object-student'
+import type {HydratedStudentType, AreaQuery} from '@gob/object-student'
 
 import './student-summary.scss'
 
@@ -204,7 +204,7 @@ export class DateSummary extends React.PureComponent<DateSummaryProps> {
 }
 
 type DegreeSummaryProps = {
-	studies: Array<AreaOfStudyType>,
+	studies: Array<AreaQuery>,
 }
 
 export class DegreeSummary extends React.PureComponent<DegreeSummaryProps> {
