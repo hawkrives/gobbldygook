@@ -1,26 +1,20 @@
-import {findWarnings} from './find-course-warnings'
-import filter from 'lodash/filter'
-import flatten from 'lodash/flatten'
-import identity from 'lodash/identity'
-import map from 'lodash/map'
-import some from 'lodash/some'
-import reject from 'lodash/reject'
-import isUndefined from 'lodash/isUndefined'
+// @flow
 
-export function validateSchedule(schedule) {
+import {findWarnings} from './find-course-warnings'
+import type {ScheduleType} from './schedule'
+
+export function validateSchedule(schedule: ScheduleType) {
 	// Checks to see if the schedule is valid
 	let courses = schedule.courses
 
 	// only check the courses that have data
-	courses = reject(courses, isUndefined)
+	courses = courses.filter(c => c)
 
 	// Step one: do any times conflict?
 	const conflicts = findWarnings(courses, schedule)
 
-	const flattened = flatten(conflicts)
-	const filtered = filter(flattened, identity)
-	const warnings = map(filtered, c => c.warning)
-	const hasConflict = some(warnings, w => w === true)
+	const warnings = conflicts.map(c => c && c.warning)
+	const hasConflict = warnings.some(w => w === true)
 
-	return Object.assign({}, schedule, {hasConflict, conflicts})
+	return {...schedule, hasConflict, conflicts}
 }
