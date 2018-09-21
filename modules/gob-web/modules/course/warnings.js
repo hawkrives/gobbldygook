@@ -15,10 +15,13 @@ import type {WarningType} from '@gob/object-student'
 const WarningList = styled(PlainList)`
 	font-size: 0.85em;
 	font-feature-settings: 'onum';
+	display: flex;
+	flex-flow: row wrap;
 `
 
 const WarningItem = styled(ListItem)`
 	display: inline-flex;
+	flex: 1;
 	flex-flow: row nowrap;
 	align-items: center;
 	max-width: 100%;
