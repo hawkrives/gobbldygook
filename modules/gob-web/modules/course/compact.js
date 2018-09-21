@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import map from 'lodash/map'
 import noop from 'lodash/noop'
 import styled from 'styled-components'
 import * as theme from '../../theme'
@@ -90,7 +89,7 @@ export default class CompactCourse extends React.Component<Props> {
 					{course.type !== 'Research' && <Type>{course.type}</Type>}
 					{course.gereqs && (
 						<InlineList>
-							{map(course.gereqs, ge => (
+							{course.gereqs.map(ge => (
 								<GeReqItem key={ge}>{ge}</GeReqItem>
 							))}
 						</InlineList>
