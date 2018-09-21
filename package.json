@@ -65,9 +65,11 @@
     ],
     "globExcludePatterns": [
       "**/__tests__/**",
+      "**/__mocks__/**",
       "**/*-cli/**",
       "modules/gob-hanson-format/parse-hanson-string.js",
       "modules/gob-web/icons/ionicons-all.js",
+      "modules/gob-web/icons/ionicons.js",
       "**/node_modules/**"
     ],
     "reportTypes": [
