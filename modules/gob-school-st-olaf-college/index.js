@@ -1,3 +1,5 @@
+// @flow
+
 export {expandYear, semesterName, toPrettyTerm} from './course-info'
 
 export {
