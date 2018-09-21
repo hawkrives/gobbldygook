@@ -7,11 +7,11 @@ import {semesterName} from '@gob/school-st-olaf-college'
 import './expression--course.scss'
 
 type Props = {
-	_result?: bool,
-	_taken?: bool,
+	_result?: boolean,
+	_taken?: boolean,
 	department: string,
-	international?: bool,
-	lab?: bool,
+	international?: boolean,
+	lab?: boolean,
 	level?: number,
 	number?: number,
 	section?: string,
