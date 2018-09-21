@@ -162,8 +162,8 @@ export function destroyScheduleFromStudent(student, scheduleId) {
 }
 
 export function addCourseToSchedule(student, scheduleId, clbid) {
-	if (!isNumber(clbid)) {
-		throw new TypeError('addCourse(): clbid must be a number')
+	if (typeof clbid !== 'string') {
+		throw new TypeError('addCourse(): clbid must be a string')
 	}
 
 	if (!(scheduleId in student.schedules)) {
@@ -195,9 +195,9 @@ export function addCourseToSchedule(student, scheduleId, clbid) {
 }
 
 export function removeCourseFromSchedule(student, scheduleId, clbid) {
-	if (!isNumber(clbid)) {
+	if (typeof clbid !== 'string') {
 		throw new TypeError(
-			`removeCourse(): clbid must be a number (was ${typeof clbid})`,
+			`removeCourse(): clbid must be a string (was ${typeof clbid})`,
 		)
 	}
 
@@ -363,8 +363,8 @@ export function renameScheduleInStudent(student, scheduleId, title) {
 }
 
 export function reorderCourseInSchedule(student, scheduleId, {clbid, index}) {
-	if (!isNumber(clbid)) {
-		throw new TypeError('reorderCourse(): clbid must be a number')
+	if (typeof clbid !== 'string') {
+		throw new TypeError('reorderCourse(): clbid must be a string')
 	}
 
 	if (!(scheduleId in student.schedules)) {

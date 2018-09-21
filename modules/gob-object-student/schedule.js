@@ -23,6 +23,10 @@ export function Schedule(data = {}) {
 		throw new TypeError('Schedule id must be a string.')
 	}
 
+	if (schedule.clbids.some(id => typeof id === 'number')) {
+		schedule.clbids = schedule.clbids.map(id => typeof id === 'number' ? String(id).padStart(10, '0') : id)
+	}
+
 	if (typeof schedule.year === 'string') {
 		schedule.year = parseInt(schedule.year, 10)
 	}
