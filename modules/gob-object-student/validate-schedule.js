@@ -1,9 +1,9 @@
 // @flow
 
 import {findWarnings} from './find-course-warnings'
-import type {ScheduleType} from './schedule'
+import type {HydratedScheduleType} from './schedule'
 
-export function validateSchedule(schedule: ScheduleType) {
+export function validateSchedule(schedule: HydratedScheduleType) {
 	// Checks to see if the schedule is valid
 	let courses = schedule.courses
 

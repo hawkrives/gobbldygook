@@ -13,6 +13,11 @@ export type ScheduleType = {
 	metadata: Object,
 }
 
+export type HydratedScheduleType = {
+	...$Exact<ScheduleType>,
+	courses: Array<Course>,
+}
+
 type InputSchedule = {
 	id: mixed,
 	active: boolean,

@@ -10,7 +10,7 @@ import {findScheduleTimeConflicts} from 'sto-sis-time-parser'
 import {expandYear, semesterName} from '@gob/school-st-olaf-college'
 
 import type {Course} from '@gob/types'
-import type {Schedule} from './schedule'
+import type {ScheduleType} from './schedule'
 
 export type WarningTypeEnum = 'invalid-semester' | 'invalid-year'
 
@@ -92,7 +92,7 @@ export function checkForTimeConflicts(courses: Array<Course>): Array<?Warning> {
 
 export function findWarnings(
 	courses: Array<Course>,
-	schedule: Schedule,
+	schedule: ScheduleType,
 ): Array<?Warning> {
 	let warningsOfInvalidity = courses.map(course => {
 		let invalidYear = checkForInvalidYear(course, schedule.year)
