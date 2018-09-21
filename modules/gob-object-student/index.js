@@ -12,6 +12,7 @@ export {
 	checkForInvalidSemester,
 	checkForTimeConflicts,
 } from './find-course-warnings'
+export type {Warning as WarningType, WarningTypeEnum} from './find-course-warnings'
 
 export {isCurrentSemester} from './is-current-semester'
 

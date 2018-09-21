@@ -35,7 +35,7 @@ const moveToSchedule = ({
 	removeCourse: Function,
 	scheduleId: ?string,
 	studentId: ?string,
-	clbid: ?number,
+	clbid: ?string,
 }) => {
 	if (!studentId || !scheduleId || clbid === null || clbid === undefined) {
 		return () => {}
@@ -64,10 +64,10 @@ export default function SemesterSelector({
 	removeCourse,
 	clbid,
 }: {
-	addCourse: (string, string, number) => any,
-	clbid?: number,
-	moveCourse: (string, string, string, number) => any,
-	removeCourse: (string, string, number) => any,
+	addCourse: (string, string, string) => any,
+	clbid?: string,
+	moveCourse: (string, string, string, string) => any,
+	removeCourse: (string, string, string) => any,
 	scheduleId?: string,
 	student?: Object,
 }) {

@@ -10,6 +10,7 @@ import {
 	alertCircled,
 } from '../../icons/ionicons'
 import * as theme from '../../theme'
+import type {WarningType} from '@gob/object-student'
 
 const WarningList = styled(PlainList)`
 	font-size: 0.85em;
@@ -44,17 +45,11 @@ const icons = {
 	'invalid-year': alertCircled,
 }
 
-type WarningType = {
-	type: string,
-	msg: string,
-	warning: boolean,
-}
-
 type Props = {
 	warnings: ?Array<WarningType>,
 }
 
-export default class CourseWarnings extends React.PureComponent<Props> {
+export default class CourseWarnings extends React.Component<Props> {
 	render() {
 		if (!this.props.warnings) {
 			return null
