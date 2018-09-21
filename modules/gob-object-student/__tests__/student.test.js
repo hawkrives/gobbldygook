@@ -59,9 +59,7 @@ describe('Student', () => {
 	it('turns an array of schedules into an object', () => {
 		let id = '123'
 		let input = {
-			schedules: [
-				{id: id}
-			]
+			schedules: [{id: id}],
 		}
 
 		let student = Student(input)
