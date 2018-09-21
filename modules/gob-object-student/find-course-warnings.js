@@ -1,15 +1,29 @@
-import map from 'lodash/map'
+// @flow
+
 import flatten from 'lodash/flatten'
 import compact from 'lodash/compact'
 import some from 'lodash/some'
-import zip from 'lodash/zip'
 
 import ordinal from 'ord'
 import oxford from 'listify'
 import {findScheduleTimeConflicts} from 'sto-sis-time-parser'
 import {expandYear, semesterName} from '@gob/school-st-olaf-college'
 
-export function checkForInvalidYear(course, scheduleYear) {
+import type {Course} from '@gob/types'
+import type {Schedule} from './schedule'
+
+type WarningTypeEnum = 'invalid-semester' | 'invalid-year'
+
+type Warning = {
+	warning: true,
+	type: WarningTypeEnum,
+	msg: string,
+}
+
+export function checkForInvalidYear(
+	course: Course,
+	scheduleYear: number,
+): ?Warning {
 	if (course.semester === 9 || course.semester === undefined) {
 		return null
 	}
@@ -28,7 +42,10 @@ export function checkForInvalidYear(course, scheduleYear) {
 	return null
 }
 
-export function checkForInvalidSemester(course, scheduleSemester) {
+export function checkForInvalidSemester(
+	course: Course,
+	scheduleSemester: number,
+): ?Warning {
 	if (course.semester === undefined) {
 		return null
 	}
@@ -45,19 +62,18 @@ export function checkForInvalidSemester(course, scheduleSemester) {
 	return null
 }
 
-export function checkForTimeConflicts(courses) {
+export function checkForTimeConflicts(courses: Array<Course>): Array<?Warning> {
 	let conflicts = findScheduleTimeConflicts(courses)
 
-	conflicts = map(conflicts, conflictSet => {
+	conflicts = conflicts.map(conflictSet => {
 		if (some(conflictSet)) {
 			// +1 to the indices because humans don't 0-index lists
 			const conflicts = compact(
-				map(
-					conflictSet,
+				conflictSet.map(
 					(possibility, i) => (possibility === true ? i + 1 : false),
 				),
 			)
-			const conflicted = map(conflicts, i => `${i}${ordinal(i)}`)
+			const conflicted = conflicts.map(i => `${i}${ordinal(i)}`)
 
 			const conflictsStr = oxford(conflicted, {oxfordComma: true})
 			const word = conflicts.length === 1 ? 'course' : 'courses'
@@ -74,8 +90,11 @@ export function checkForTimeConflicts(courses) {
 	return conflicts
 }
 
-export function findWarnings(courses, schedule) {
-	let warningsOfInvalidity = map(courses, course => {
+export function findWarnings(
+	courses: Array<Course>,
+	schedule: Schedule,
+): Array<?Warning> {
+	let warningsOfInvalidity = courses.map(course => {
 		let invalidYear = checkForInvalidYear(course, schedule.year)
 		let invalidSemester = checkForInvalidSemester(course, schedule.semester)
 		return [invalidYear, invalidSemester]
@@ -83,8 +102,5 @@ export function findWarnings(courses, schedule) {
 
 	let timeConflicts = checkForTimeConflicts(courses)
 
-	let nearlyMerged = zip(warningsOfInvalidity, timeConflicts)
-	let warningsWithTimeConflicts = map(nearlyMerged, flatten)
-
-	return warningsWithTimeConflicts
+	return flatten([...warningsOfInvalidity, ...timeConflicts])
 }
