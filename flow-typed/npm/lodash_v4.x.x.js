@@ -554,7 +554,7 @@ declare module "lodash" {
       array?: ?$ReadOnlyArray<T>,
       iteratee?: ?FlatMapIteratee<T, U>
     ): Array<U>;
-    flatMap<T: Object, U>(
+    flatMap<T: Array<*>, U>(
       object: T,
       iteratee?: OFlatMapIteratee<T, U>
     ): Array<U>;
