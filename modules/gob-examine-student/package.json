@@ -9,7 +9,7 @@
     "@gob/hanson-format": "^3.0.0-rc.2",
     "@gob/lib": "^3.0.0-rc.2",
     "debug": "^4.0.1",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.11",
     "stabilize": "^1.0.0"
   }
 }

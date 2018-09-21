@@ -9,7 +9,7 @@
     "@gob/hanson-format": "^3.0.0-rc.2",
     "get-stdin": "^6.0.0",
     "js-yaml": "^3.12.0",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.11",
     "nomnom": "^1.8.1"
   }
 }
