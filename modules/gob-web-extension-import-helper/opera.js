@@ -2,7 +2,7 @@
 
 const id = '227069'
 
-export function installExtension() {
+export async function installExtension() {
 	if (typeof global.opr === 'undefined') {
 		return Promise.reject('The `opr` global does not exist')
 	}
