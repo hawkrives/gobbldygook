@@ -2,7 +2,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import map from 'lodash/map'
-import flatMap from 'lodash/flatMap'
 import oxford from 'listify'
 import {BulletedList, ListItem} from '../../components/list'
 import CourseTitle from './course-title'
