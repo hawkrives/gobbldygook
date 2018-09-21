@@ -3,7 +3,6 @@
  *
  * http://pegjs.org/
  */ 'use strict'
-import _extends from 'babel-runtime/helpers/extends'
 function peg$subclass(child, parent) {
 	function ctor() {
 		this.constructor = child
@@ -171,7 +170,7 @@ function peg$parse(input, options) {
 			return {$of: ofList, $filterType: 'of'}
 		},
 		peg$c17 = function peg$c17(distinct, filter) {
-			return _extends({}, filter, {$distinct: distinct, $type: 'filter'})
+			return assign({}, filter, {$distinct: distinct, $type: 'filter'})
 		},
 		peg$c18 = 'occurrence',
 		peg$c19 = peg$literalExpectation('occurrence', false),
@@ -208,7 +207,7 @@ function peg$parse(input, options) {
 			}
 		},
 		peg$c36 = function peg$c36(key, op, f, q) {
-			return _extends({}, f, {$where: q})
+			return assign({}, f, {$where: q})
 		},
 		peg$c37 = function peg$c37(key, op, value) {
 			return {
@@ -447,7 +446,7 @@ function peg$parse(input, options) {
 					'can only use at-least style counters with non-course requests',
 				)
 			}
-			let result = _extends({}, from, {
+			let result = assign({}, from, {
 				$type: 'modifier',
 				$count: count,
 				$what: what,
@@ -497,15 +496,15 @@ function peg$parse(input, options) {
 			return {semester}
 		},
 		peg$c155 = function peg$c155(dept, num, section, year, sub) {
-			return _extends({}, sub, {year})
+			return assign({}, sub, {year})
 		},
 		peg$c156 = function peg$c156(dept, num, section, sub) {
-			return _extends({}, sub, {section})
+			return assign({}, sub, {section})
 		},
 		peg$c157 = function peg$c157(dept, num, details) {
 			return {
 				$type: 'course',
-				$course: _extends({}, details, dept || fetchDept(), num),
+				$course: assign({}, details, dept || fetchDept(), num),
 			}
 		},
 		peg$c158 = /^[A-Z\/]/,
@@ -529,7 +528,7 @@ function peg$parse(input, options) {
 			if (lab) {
 				result.type = 'Lab'
 			}
-			return _extends({}, result, {number})
+			return assign({}, result, {number})
 		},
 		peg$c167 = function peg$c167() {
 			throw new SyntaxError(
@@ -4266,14 +4265,15 @@ function peg$parse(input, options) {
 		s0 = s1
 		return s0
 	}
-	let globalLastDept
+	var globalLastDept
 	function storeDept(dept) {
 		globalLastDept = dept
 	}
 	function fetchDept(dept) {
 		return globalLastDept
 	}
-	const flatten = require('lodash/flatten')
+	var flatten = require('lodash/flatten')
+	var assign = require('lodash/assign')
 	peg$result = peg$startRuleFunction()
 	if (peg$result !== peg$FAILED && peg$currPos === input.length) {
 		return peg$result
