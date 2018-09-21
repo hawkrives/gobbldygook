@@ -17,7 +17,7 @@ export function Schedule(data = {}) {
 		metadata: {},
 	}
 
-	let schedule = Object.assign({}, baseSchedule, data)
+	let schedule = {...baseSchedule, ...data}
 
 	if (!isString(schedule.id)) {
 		throw new TypeError('Schedule id must be a string.')
