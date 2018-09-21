@@ -59,6 +59,19 @@
       "__support__"
     ]
   },
+  "flow-coverage-report": {
+    "globIncludePatterns": [
+      "modules/**/*.js"
+    ],
+    "globExcludePatterns": [
+      "**/__tests__/**",
+      "**/*-cli/**",
+      "**/node_modules/**"
+    ],
+    "reportTypes": [
+      "html"
+    ]
+  },
   "greenkeeper": {
     "ignore": [
       "history"
@@ -92,6 +105,7 @@
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-react": "^7.10.0",
     "flow-bin": "^0.77.0",
+    "flow-coverage-report": "^0.6.0",
     "flow-remove-types": "^1.2.3",
     "jest": "^23.4.1",
     "jest-matcher-utils": "^23.2.0",
