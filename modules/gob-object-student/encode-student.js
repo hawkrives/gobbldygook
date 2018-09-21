@@ -1,13 +1,22 @@
 import stringify from 'stabilize'
-import omit from 'lodash/omit'
 import mapValues from 'lodash/mapValues'
 
-export function prepareStudentForSave(student) {
-	student = Object.assign({}, student)
-	student = omit(student, ['areas', 'canGraduate', 'fulfilled'])
-	student.schedules = mapValues(student.schedules, s =>
-		omit(s, ['courses', 'conflicts', 'hasConflict']),
+export function prepareStudentForSave(initialStudent) {
+	// we're going to use object rest/spread to "omit" values from the objects
+
+	let {
+		areas: _areas,
+		canGraduate: _can,
+		fulfilled: _fulfilled,
+		...student
+	} = initialStudent
+
+	student.schedules = mapValues(
+		student.schedules,
+		({courses: _courses, conflicts: _conflicts, hasConflict: _has, ...s}) =>
+			s,
 	)
+
 	return student
 }
 
