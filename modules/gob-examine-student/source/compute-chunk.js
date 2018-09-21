@@ -292,7 +292,7 @@ export function computeCourse({
 
 	const keysNotFromQuery = xor(keys(expr.$course), keys(foundCourse))
 	if (keysNotFromQuery.length) {
-		expr.$course._extraKeys = keysNotFromQuery
+		(expr.$course: any)._extraKeys = keysNotFromQuery
 	}
 
 	expr._request = expr.$course

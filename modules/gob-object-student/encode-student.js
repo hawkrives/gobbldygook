@@ -3,7 +3,10 @@
 import stringify from 'stabilize'
 import mapValues from 'lodash/mapValues'
 
-import type {HydratedStudentType} from '@gob/object-student'
+import type {
+	HydratedStudentType,
+	HydratedScheduleType,
+} from '@gob/object-student'
 
 export function prepareStudentForSave(initialStudent: HydratedStudentType) {
 	// we're going to use object rest/spread to "omit" values from the objects
@@ -17,8 +20,12 @@ export function prepareStudentForSave(initialStudent: HydratedStudentType) {
 
 	student.schedules = mapValues(
 		student.schedules,
-		({courses: _courses, conflicts: _conflicts, hasConflict: _has, ...s}) =>
-			s,
+		({
+			courses: _courses,
+			conflicts: _conflicts,
+			hasConflict: _has,
+			...s
+		}: HydratedScheduleType) => s,
 	)
 
 	return student
