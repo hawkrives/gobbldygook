@@ -46,7 +46,9 @@ export function Schedule(data: InputSchedule = {}): ScheduleType {
 	}
 
 	if (schedule.clbids.some(id => typeof id === 'number')) {
-		schedule.clbids = schedule.clbids.map(id => typeof id === 'number' ? String(id).padStart(10, '0') : id)
+		schedule.clbids = schedule.clbids.map(
+			id => (typeof id === 'number' ? String(id).padStart(10, '0') : id),
+		)
 	}
 
 	if (typeof schedule.year === 'string') {

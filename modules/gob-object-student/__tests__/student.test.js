@@ -519,9 +519,9 @@ describe('removeCourseFromSchedule', () => {
 	it('refuses to remove non-string clbids', () => {
 		const sched = Schedule({clbids: ['123']})
 		const stu = addScheduleToStudent(Student(), sched)
-		expect(() =>
-			removeCourseFromSchedule(stu, sched.id, 918),
-		).toThrowError(TypeError)
+		expect(() => removeCourseFromSchedule(stu, sched.id, 918)).toThrowError(
+			TypeError,
+		)
 	})
 
 	it('returns a new object', () => {
@@ -561,7 +561,11 @@ describe('reorderCourseInSchedule', () => {
 			'456',
 			'789',
 		])
-		expect(rearranged.schedules[sched.id].clbids).toEqual(['456', '123', '789'])
+		expect(rearranged.schedules[sched.id].clbids).toEqual([
+			'456',
+			'123',
+			'789',
+		])
 	})
 
 	it('requires that the clbid be a string', () => {
