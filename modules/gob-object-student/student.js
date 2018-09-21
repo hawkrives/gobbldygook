@@ -22,7 +22,11 @@ import type {
 } from './types'
 
 const now = new Date()
-import {Schedule, type ScheduleType, type HydratedScheduleType} from './schedule'
+import {
+	Schedule,
+	type ScheduleType,
+	type HydratedScheduleType,
+} from './schedule'
 
 export type StudentType = {
 	id: string,
@@ -49,7 +53,7 @@ export type HydratedStudentType = {
 	schedules: {[key: string]: HydratedScheduleType},
 	canGraduate: boolean,
 	areas: AreaOfStudyType,
-	fulfilled: any,
+	fulfilled: mixed,
 }
 
 type IncomingStudent = {}
