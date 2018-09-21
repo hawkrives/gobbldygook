@@ -2,5 +2,5 @@
 // flow-typed version: <<STUB>>/listify_v1.0.0/flow_v0.64.0
 
 declare module 'listify' {
-  declare export default function listify(Array<mixed>, ?{oxfordComma: boolean}): string;
+  declare export default function listify(Array<any>, ?{oxfordComma: boolean}): string;
 }
