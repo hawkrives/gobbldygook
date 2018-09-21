@@ -40,6 +40,17 @@ jobs:
       - save_cache: *save-cache-yarn
       - run: yarn run --silent flow check --quiet
 
+  flow-coverage:
+    docker: [{image: 'circleci/node:10'}]
+    environment:
+      task: flow
+    steps:
+      - checkout
+      - restore_cache: *restore-cache-yarn
+      - run: yarn install
+      - save_cache: *save-cache-yarn
+      - run: yarn run --silent flow-check-coverage
+
   jest:
     docker: [{image: 'circleci/node:10'}]
     environment:
