@@ -9,3 +9,5 @@ export type OverrideType = {||}
 export type FabricationType = {|
 	clbid: string,
 |}
+
+export type FulfillmentType = {||}
