@@ -17,7 +17,7 @@ export function expandYear(
 
 // 2012 => 2012-2013
 export function expandYearToFull(year: ?number, separator?: string = '—') {
-	if (year === undefined || year === null) {
+	if (year == null) {
 		return '???'
 	}
 	let nextYear = year + 1
@@ -26,7 +26,7 @@ export function expandYearToFull(year: ?number, separator?: string = '—') {
 
 // 2012 => 2012-13
 export function expandYearToShort(year: ?number, separator?: string = '—') {
-	if (year === undefined || year === null) {
+	if (year == null) {
 		return '???'
 	}
 	let nextYear = year + 1
