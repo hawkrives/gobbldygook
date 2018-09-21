@@ -99,7 +99,7 @@ export type QualificationBooleanValue =
 	| QualificationBooleanOrValue
 	| QualificationBooleanAndValue
 
-type QualificationValue =
+export type QualificationValue =
 	| QualificationFunctionValue
 	| QualificationBooleanValue
 	| QualificationStaticValue
@@ -163,7 +163,7 @@ export type ModifierChildrenWhereExpression = {
 export type ModifierWhereExpression = {
 	...BaseModifierExpression,
 	$from: 'where',
-	$where: Qualifier,
+	$where: Qualification,
 }
 export type ModifierExpression =
 	| ModifierWhereExpression
