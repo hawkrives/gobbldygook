@@ -391,16 +391,9 @@ Course
 
 
 CourseDepartment
-  = dept1:(c1:UppercaseLetter c2:UppercaseLetter { return c1 + c2 })
-    part2:(
-      '/' l1:UppercaseLetter l2:UppercaseLetter
-          { return {dept: l1 + l2, type: 'separate'} }
-      / chars:UppercaseLetter*
-          { return {dept: chars.join(''), type: 'joined'} }
-    )
+  = dept:[A-Z/]+
     {
-      let {type, dept: dept2} = part2
-      let department = {department: [dept1 + dept2]}
+      let department = {department: dept.join('')}
       storeDept(department)
       return department
     }

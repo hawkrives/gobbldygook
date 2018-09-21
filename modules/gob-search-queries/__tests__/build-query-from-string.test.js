@@ -73,7 +73,7 @@ describe('buildQueryFromString', () => {
 		let actual = buildQueryFromString(query)
 		expect(actual).toMatchSnapshot()
 		expect(actual).toEqual({
-			department: ['$AND', 'ASIAN', 'REL'],
+			department: ['AS/RE'],
 			number: [220],
 			section: ['A'],
 		})
@@ -131,20 +131,23 @@ describe('buildQueryFromString', () => {
 	})
 
 	it('makes professors properly title-cased', () => {
-		expect(
-			buildQueryFromString('prof: Katherine Tegtmeyer-pak'),
-		).toMatchSnapshot()
-		expect(
-			buildQueryFromString('prof: Katherine Tegtmeyer-pak', {
-				profWords: true,
-			}),
-		).toMatchSnapshot()
-		expect(
-			buildQueryFromString('prof: olaf a. hall-holt'),
-		).toMatchSnapshot()
-		expect(
-			buildQueryFromString('prof: olaf a. hall-holt', {profWords: true}),
-		).toMatchSnapshot()
+		let input
+
+		input = buildQueryFromString('prof: Katherine Tegtmeyer-pak')
+		expect(input).toMatchSnapshot()
+
+		input = buildQueryFromString('prof: Katherine Tegtmeyer-pak', {
+			profWords: true,
+		})
+		expect(input).toMatchSnapshot()
+
+		input = buildQueryFromString('prof: olaf a. hall-holt')
+		expect(input).toMatchSnapshot()
+
+		input = buildQueryFromString('prof: olaf a. hall-holt', {
+			profWords: true,
+		})
+		expect(input).toMatchSnapshot()
 	})
 
 	it('parses credits correctly', () => {

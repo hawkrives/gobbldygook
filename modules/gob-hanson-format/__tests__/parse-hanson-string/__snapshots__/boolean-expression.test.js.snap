@@ -8,18 +8,14 @@ Object {
       "$and": Array [
         Object {
           "$course": Object {
-            "department": Array [
-              "CSCI",
-            ],
+            "department": "CSCI",
             "number": 121,
           },
           "$type": "course",
         },
         Object {
           "$course": Object {
-            "department": Array [
-              "CSCI",
-            ],
+            "department": "CSCI",
             "number": 122,
           },
           "$type": "course",
@@ -30,9 +26,7 @@ Object {
     },
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 123,
       },
       "$type": "course",
@@ -48,9 +42,7 @@ Object {
   "$or": Array [
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 121,
       },
       "$type": "course",
@@ -59,18 +51,14 @@ Object {
       "$and": Array [
         Object {
           "$course": Object {
-            "department": Array [
-              "CSCI",
-            ],
+            "department": "CSCI",
             "number": 122,
           },
           "$type": "course",
         },
         Object {
           "$course": Object {
-            "department": Array [
-              "CSCI",
-            ],
+            "department": "CSCI",
             "number": 123,
           },
           "$type": "course",
@@ -89,36 +77,28 @@ Object {
   "$and": Array [
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 121,
       },
       "$type": "course",
     },
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 125,
       },
       "$type": "course",
     },
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 126,
       },
       "$type": "course",
     },
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 123,
       },
       "$type": "course",
@@ -135,36 +115,28 @@ Object {
   "$or": Array [
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 121,
       },
       "$type": "course",
     },
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 125,
       },
       "$type": "course",
     },
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 126,
       },
       "$type": "course",
     },
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 123,
       },
       "$type": "course",
@@ -180,18 +152,14 @@ Object {
   "$or": Array [
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 121,
       },
       "$type": "course",
     },
     Object {
       "$course": Object {
-        "department": Array [
-          "PSCI",
-        ],
+        "department": "PSCI",
         "number": 125,
       },
       "$type": "course",
@@ -207,27 +175,21 @@ Object {
   "$or": Array [
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 121,
       },
       "$type": "course",
     },
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 121,
       },
       "$type": "course",
     },
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 125,
       },
       "$type": "course",
@@ -242,18 +204,14 @@ Object {
   "$and": Array [
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 121,
       },
       "$type": "course",
     },
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 125,
       },
       "$type": "course",
@@ -270,18 +228,14 @@ Object {
   "$or": Array [
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 121,
       },
       "$type": "course",
     },
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 125,
       },
       "$type": "course",
@@ -297,18 +251,14 @@ Object {
   "$or": Array [
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 121,
       },
       "$type": "course",
     },
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 125,
       },
       "$type": "course",
@@ -326,18 +276,14 @@ Object {
       "$or": Array [
         Object {
           "$course": Object {
-            "department": Array [
-              "CSCI",
-            ],
+            "department": "CSCI",
             "number": 121,
           },
           "$type": "course",
         },
         Object {
           "$course": Object {
-            "department": Array [
-              "CSCI",
-            ],
+            "department": "CSCI",
             "number": 122,
           },
           "$type": "course",
@@ -347,9 +293,7 @@ Object {
     },
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 123,
       },
       "$type": "course",

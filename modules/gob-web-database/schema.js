@@ -73,5 +73,3 @@ export default new treo.schema()
 			.delIndex('locations')
 			.delIndex('departments')
 			.addIndex('department', 'department')
-			// cannot add an index on `offerings[].day`; iow, we get nested objects _or_ arrays (multiEntry), but not both.
-			// .addIndex('offerings-day', 'offerings.day', {multiEntry: true})
