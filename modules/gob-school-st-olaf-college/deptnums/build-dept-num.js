@@ -9,9 +9,9 @@
  */
 export function buildDeptNum(
 	course: {
-		department: string,
-		number: number,
-		section?: string,
+		+department: string,
+		+number: number,
+		+section?: string,
 	},
 	includeSection?: boolean = false,
 ) {
