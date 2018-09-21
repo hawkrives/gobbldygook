@@ -12,7 +12,10 @@ export {
 	checkForInvalidSemester,
 	checkForTimeConflicts,
 } from './find-course-warnings'
-export type {Warning as WarningType, WarningTypeEnum} from './find-course-warnings'
+export type {
+	Warning as WarningType,
+	WarningTypeEnum,
+} from './find-course-warnings'
 
 export {isCurrentSemester} from './is-current-semester'
 
@@ -53,7 +56,10 @@ export {
 	renameScheduleInStudent,
 	reorderCourseInSchedule,
 } from './student'
+export type {StudentType} from './student'
 
 export {validateSchedule} from './validate-schedule'
 
 export {validateSchedules} from './validate-schedules'
+
+export * from './types'
