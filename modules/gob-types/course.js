@@ -1,11 +1,11 @@
 // @flow
 
-export type Offering = {
+export type Offering = {|
 	day: string,
-	location: string,
+	location?: string,
 	start: string,
 	end: string,
-}
+|}
 
 export type Course = {
 	clbid: string,
