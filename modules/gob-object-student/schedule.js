@@ -6,19 +6,21 @@ import {randomChar} from '@gob/lib'
 import type {Course} from '@gob/types'
 
 export type ScheduleType = {
-	id: string,
-	active: boolean,
-	index: number,
-	title: string,
-	clbids: Array<string>,
-	year: number,
-	semester: number,
-	metadata: Object,
+	+id: string,
+	+active: boolean,
+	+index: number,
+	+title: string,
+	+clbids: Array<string>,
+	+year: number,
+	+semester: number,
+	+metadata: Object,
 }
 
 export type HydratedScheduleType = {
 	...$Exact<ScheduleType>,
 	courses: Array<Course>,
+	conflicts: Array<mixed>,
+	hasConflict: boolean,
 }
 
 type InputSchedule = {
