@@ -1,119 +1,138 @@
-import {Student, Schedule} from '@gob/object-student'
-import groupBy from 'lodash/groupBy'
-import map from 'lodash/map'
-import forEach from 'lodash/forEach'
-import uniq from 'lodash/uniq'
+// @flow
+
+import {
+	Student,
+	Schedule,
+	type AreaQuery,
+	type HydratedStudentType,
+	type FabricationType,
+} from '@gob/object-student'
+import type {Course as CourseType} from '@gob/types'
+import flatten from 'lodash/flatten'
 import fromPairs from 'lodash/fromPairs'
-import filter from 'lodash/filter'
-import uuid from 'uuid/v4'
 
-export function convertStudent({courses, degrees}, getCourse) {
-	return Promise.all([
-		processSchedules(courses, getCourse),
-		processDegrees(degrees),
-	]).then(([schedulesAndFabrications, info]) => {
-		let {schedules, fabrications} = schedulesAndFabrications
+type PartialCourse = {
+	credits: number,
+	number: number,
+	clbid: string,
+	graded: string,
+	department: string,
+	lab: boolean,
+	section: string,
+	name: string,
 
-		return Student(
-			Object.assign({}, info, {
-				schedules,
-				fabrications,
-			}),
-		)
-	})
+	year: number,
+	semester: number,
+	term: number,
+
+	_fabrication?: true,
 }
 
-export function processSchedules(courses, getCourse) {
-	return Promise.all(
-		map(courses, course => {
-			return getCourse(course).then(resolvedCourse => {
-				if (resolvedCourse.error) {
-					course._fabrication = true
-					course.clbid = course.clbid || uuid()
-					return course
-				}
-				return resolvedCourse
-			})
-		}),
-	).then(courses => {
-		let fabrications = fromPairs(
-			map(filter(courses, '_fabrication'), c => [c.clbid, c]),
-		)
+type PartialSchedule = {
+	semester: number,
+	year: number,
+	courses: Array<PartialCourse>,
+}
 
-		let schedules = groupBy(courses, 'term')
-		schedules = map(schedules, (courses, term) => {
-			term = String(term)
-			return Schedule({
-				courses,
-				active: true,
-				clbids: map(courses, c => c.clbid),
-				year: parseInt(term.substr(0, 4), 10),
-				semester: parseInt(term.substr(4, 1), 10),
-			})
+export type PartialStudent = {
+	courses: Array<PartialCourse>,
+	degrees: Array<string>,
+	majors: Array<string>,
+	concentrations: Array<string>,
+	emphases: Array<string>,
+	matriculation: number,
+	graduation: number,
+	advisor: string,
+	name: string,
+	schedules: Array<PartialSchedule>,
+}
+
+type CourseGetter = (
+	{clbid: string, term: number},
+	?{[key: string]: FabricationType},
+) => Promise<CourseType | FabricationType>
+
+export async function convertStudent(
+	student: PartialStudent,
+	getCourse: CourseGetter,
+): HydratedStudentType {
+	let studies = processStudies(student)
+
+	let info
+	{
+		let {name, advisor, graduation, matriculation} = student
+		info = {name, advisor, graduation, matriculation}
+	}
+
+	let {schedules, fabrications} = await processSchedules(
+		student.schedules,
+		getCourse,
+	)
+
+	return Student({...info, schedules, fabrications, studies})
+}
+
+export async function processSchedules(
+	schedules: Array<PartialSchedule>,
+	getCourse: CourseGetter,
+) {
+	let scheds = schedules.map(sched => {
+		let clbids = sched.courses.map(c => c.clbid)
+
+		return Schedule({
+			...sched,
+			clbids,
+			active: true,
 		})
-		schedules = fromPairs(map(schedules, s => [s.id, s]))
-
-		return {schedules, fabrications}
 	})
+
+	let allClbids = flatten(schedules.map(s => s.courses))
+	let promisedCourses = allClbids.map(course => {
+		let {clbid, term} = course
+		return getCourse({clbid, term}).then(resolved => {
+			if ('error' in resolved) {
+				return {
+					...course,
+					_fabrication: true,
+				}
+			}
+			return course
+		})
+	})
+
+	let resolvedCourses = await Promise.all(promisedCourses)
+
+	let fabricationPairs = resolvedCourses
+		.filter(c => c._fabrication)
+		.map(c => [c.clbid, c])
+	let fabrications = fromPairs(fabricationPairs)
+
+	let finalSchedules = fromPairs(scheds.map(s => [s.id, s]))
+
+	return {schedules: finalSchedules, fabrications}
 }
 
-export function processDegrees(degrees) {
-	let singularData = resolveSingularDataPoints(degrees)
-	let studies = []
-
-	for (let {concentrations, emphases, majors, degree} of degrees) {
-		studies.push({name: degree, type: 'degree', revision: 'latest'})
-		studies = studies.concat(
-			majors.map(name => ({name, type: 'major', revision: 'latest'})),
-		)
-		studies = studies.concat(
-			concentrations.map(name => ({
-				name,
-				type: 'concentration',
-				revision: 'latest',
-			})),
-		)
-		studies = studies.concat(
-			emphases.map(name => ({
-				name,
-				type: 'emphasis',
-				revision: 'latest',
-			})),
-		)
-	}
-
-	return Object.assign({}, singularData, {studies})
-}
-
-export function resolveSingularDataPoints(degrees) {
-	let thereShouldOnlyBeOne = {
-		names: map(degrees, d => d.name),
-		advisors: map(degrees, d => d.advisor),
-		matriculations: map(degrees, d => d.matriculation),
-		graduations: map(degrees, d => d.graduation),
-	}
-
-	forEach(thereShouldOnlyBeOne, (group, name) => {
-		const len = uniq(group).length
-		if (len > 1) {
-			throw new Error(
-				`convertStudent: The student has more than one ${name}: ${JSON.stringify(
-					group,
-				)}`,
-			)
-		} else if (len === 0) {
-			throw new Error(
-				`convertStudent: The student has no ${name}: ${JSON.stringify(
-					group,
-				)}`,
-			)
+export function processStudies({
+	majors: m,
+	degrees: d,
+	emphases: e,
+	concentrations: c,
+}: PartialStudent): Array<AreaQuery> {
+	d = d.map(name => {
+		switch (name) {
+			case 'B.A.':
+				return 'Bachelor of Arts'
+			case 'B.M.':
+				return 'Bachelor of Music'
+			default:
+				return name
 		}
 	})
 
-	let name = thereShouldOnlyBeOne.names[0]
-	let advisor = thereShouldOnlyBeOne.advisors[0]
-	let matriculation = parseInt(thereShouldOnlyBeOne.matriculations[0], 10)
-	let graduation = parseInt(thereShouldOnlyBeOne.graduations[0], 10)
-
-	return {name, advisor, matriculation, graduation}
+	return [
+		...d.map(name => ({name, type: 'degree', revision: 'latest'})),
+		...m.map(name => ({name, type: 'major', revision: 'latest'})),
+		...c.map(name => ({name, type: 'concentration', revision: 'latest'})),
+		...e.map(name => ({name, type: 'emphasis', revision: 'latest'})),
+	]
 }
