@@ -82,6 +82,7 @@
     ]
   },
   "resolutions": {
+    "flow-coverage-report/react-dom": "^16",
     "flow-coverage-report/react": "^16"
   },
   "devDependencies": {
