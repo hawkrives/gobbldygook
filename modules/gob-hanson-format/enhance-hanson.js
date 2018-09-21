@@ -1,24 +1,16 @@
 // @flow
 import isRequirementName from '@gob/examine-student/source/is-requirement-name'
-import filter from 'lodash/filter'
-import forEach from 'lodash/forEach'
-import includes from 'lodash/includes'
-import isString from 'lodash/isString'
-import keys from 'lodash/keys'
-import map from 'lodash/map'
-import mapValues from 'lodash/mapValues'
-import some from 'lodash/some'
 import fromPairs from 'lodash/fromPairs'
 import {makeAreaSlug} from './make-area-slug'
 import {parse} from './parse-hanson-string'
 
 const requirementNameRegex = /(.*?) +\(([A-Z-]+)\)$/i
-const none = (arr, pred) => !some(arr, pred)
 const quote = str => `"${str}"`
-const quoteAndJoin = list => list.map(quote).join(', ')
+const quoteAndJoin = list => [...list].map(quote).join(', ')
 
 const baseWhitelist = ['result', 'message', 'declare', 'children share courses']
-const topLevelWhitelist = baseWhitelist.concat([
+const topLevelWhitelist = new Set([
+	...baseWhitelist,
 	'name',
 	'revision',
 	'type',
@@ -29,7 +21,8 @@ const topLevelWhitelist = baseWhitelist.concat([
 	'available through',
 	'_error',
 ])
-const lowerLevelWhitelist = baseWhitelist.concat([
+const lowerLevelWhitelist = new Set([
+	...baseWhitelist,
 	'filter',
 	'message',
 	'description',
@@ -44,8 +37,16 @@ const startRules = {
 
 type StringMap = {[key: string]: string}
 
+type HansonData = {
+	[key: string]: mixed,
+	name?: string,
+	revision?: string,
+	declare?: StringMap,
+	result: mixed,
+}
+
 export function enhanceHanson(
-	data: any,
+	data: HansonData,
 	{
 		topLevel = true,
 		declaredVariables = {},
@@ -63,10 +64,10 @@ export function enhanceHanson(
 	// Ensure that a result, message, or filter key exists.
 	// If filter's the only one, it's going to filter the list of courses
 	// available to the child requirements when this is evaluated.
-	const oneOfTheseKeysMustExist = ['result', 'message', 'filter']
-	if (none(keys(data), key => includes(oneOfTheseKeysMustExist, key))) {
+	const oneOfTheseKeysMustExist = new Set(['result', 'message', 'filter'])
+	if (!Object.keys(data).some(key => oneOfTheseKeysMustExist.has(key))) {
 		let requiredKeys = quoteAndJoin(oneOfTheseKeysMustExist)
-		let existingKeys = quoteAndJoin(keys(data))
+		let existingKeys = quoteAndJoin(Object.keys(data))
 		throw new TypeError(
 			`enhanceHanson(): could not find any of [${requiredKeys}] in [${existingKeys}].`,
 		)
@@ -74,8 +75,8 @@ export function enhanceHanson(
 
 	const whitelist = topLevel ? topLevelWhitelist : lowerLevelWhitelist
 
-	forEach(keys(data), key => {
-		if (!isRequirementName(key) && !includes(whitelist, key)) {
+	Object.keys(data).forEach(key => {
+		if (!isRequirementName(key) && !whitelist.has(key)) {
 			const whitelistStr = quoteAndJoin(whitelist)
 			throw new TypeError(
 				`enhanceHanson: only [${whitelistStr}] keys are allowed, and '${key}' is not one of them. All requirement names must begin with an uppercase letter or a number.`,
@@ -89,13 +90,12 @@ export function enhanceHanson(
 
 		// because this only runs at the top level, we know
 		// that we'll have a name to use
-		data.slug = data.slug || makeAreaSlug(data.name)
+		data.slug = data.slug || makeAreaSlug(data.name || '')
 
 		if (data.revision && typeof data.revision !== 'string') {
+			let rev = data.revision
 			throw new TypeError(
-				`enhanceHanson: "revision" must be a string. Try wrapping it in single quotes. "${
-					data.revision
-				}" is a ${typeof data.revision}.`,
+				`enhanceHanson: "revision" must be a string. Try wrapping it in single quotes. "${rev}" is a ${typeof rev}.`,
 			)
 		}
 	}
@@ -105,18 +105,12 @@ export function enhanceHanson(
 	// abbreviations ("BTS-B") all glommed together into one string ("Biblical
 	// Studies (BTS-B)"), we need a method of splitting those apart so the
 	// PEG's ReferenceExpression can correctly reference them.
-	const requirements = filter(keys(data), isRequirementName)
+	const requirements = Object.keys(data).filter(isRequirementName)
 	const abbreviations = fromPairs(
-		map(requirements, req => [
-			req.replace(requirementNameRegex, '$2'),
-			req,
-		]),
+		requirements.map(req => [req.replace(requirementNameRegex, '$2'), req]),
 	)
 	const titles = fromPairs(
-		map(requirements, req => [
-			req.replace(requirementNameRegex, '$1'),
-			req,
-		]),
+		requirements.map(req => [req.replace(requirementNameRegex, '$1'), req]),
 	)
 
 	// (Variables)
@@ -125,15 +119,15 @@ export function enhanceHanson(
 	// mapping.
 	declaredVariables = data.declare || {}
 
-	const mutated = mapValues(data, (value, key) => {
+	const mutated = Object.entries(data).map(([key: string, value: mixed]) => {
 		if (isRequirementName(key)) {
 			// expand simple strings into {result: string} objects
-			if (isString(value)) {
+			if (typeof value === 'string') {
 				value = {result: value}
 			}
 
 			// then run enhance on the resultant object
-			value = enhanceHanson(value, {
+			value = enhanceHanson((value: any), {
 				topLevel: false,
 				declaredVariables,
 			})
@@ -141,10 +135,14 @@ export function enhanceHanson(
 			// also set $type; the PEG can't do it b/c the spec file is YAML
 			// w/ PEG result strings.
 			value.$type = 'requirement'
-		} else if (key === 'result' || key === 'filter') {
+
+			return [key, value]
+		}
+
+		if (key === 'result' || key === 'filter') {
 			if (typeof value !== 'string') {
 				throw new Error(
-					`value ${value.toString()} should be a string, not a ${typeof value}`,
+					`value ${String(value)} should be a string, not a ${typeof value}`,
 				)
 			}
 
@@ -153,14 +151,18 @@ export function enhanceHanson(
 			// occurrences of the named variables in the value, prefixed with
 			// a $. So, for instance, the variable defined as "math-level-3"
 			// would be referenced via "$math-level-3".
-			forEach(declaredVariables, (contents, name) => {
-				// _we_ know value is a string here
-				let val = ((value: any): string)
-				// istanbul ignore else
-				if (includes(val, '$' + name)) {
-					value = val.split(`$${name}`).join(contents)
+			for (let [name, contents] of Object.entries(declaredVariables)) {
+				if (typeof contents !== 'string') {
+					throw new Error(`value ${String(contents)} should be a string, not a ${typeof contents}`,)
 				}
-			})
+
+				let exprName = `$${name}`
+
+				// istanbul ignore else
+				if (value.includes(exprName)) {
+					value = value.split(exprName).join(contents)
+				}
+			}
 
 			try {
 				value = parse(value, {
@@ -168,6 +170,8 @@ export function enhanceHanson(
 					titles,
 					startRule: startRules[key],
 				})
+
+				return [key, value]
 			} catch (e) {
 				throw new SyntaxError(
 					`enhanceHanson: ${e.message} (in '${value}')`,
@@ -175,8 +179,8 @@ export function enhanceHanson(
 			}
 		}
 
-		return value
+		return [key, value]
 	})
 
-	return mutated
+	return fromPairs(mutated)
 }
