@@ -66,6 +66,7 @@
     "globExcludePatterns": [
       "**/__tests__/**",
       "**/*-cli/**",
+      "modules/gob-hanson-format/parse-hanson-string.js",
       "**/node_modules/**"
     ],
     "reportTypes": [
