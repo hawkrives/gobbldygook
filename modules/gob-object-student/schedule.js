@@ -2,7 +2,7 @@ import isString from 'lodash/isString'
 import uuid from 'uuid/v4'
 import {randomChar} from '@gob/lib'
 
-type ScheduleType = {
+export type ScheduleType = {
 	id: string,
 	active: boolean,
 	index: number,
