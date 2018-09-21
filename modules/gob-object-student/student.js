@@ -4,7 +4,6 @@ import clone from 'lodash/clone'
 import findIndex from 'lodash/findIndex'
 import findKey from 'lodash/findKey'
 import fromPairs from 'lodash/fromPairs'
-import map from 'lodash/map'
 import mapValues from 'lodash/mapValues'
 import omit from 'lodash/omit'
 import reject from 'lodash/reject'
@@ -76,7 +75,7 @@ export function Student(data: IncomingStudent): StudentType {
 		student.schedules = fromPairs(
 			map(student.schedules, s => [
 				String(s.id),
-				Object.assign({}, s, {id: String(s.id)}),
+				{...s, id: String(s.id)},
 			]),
 		)
 	}
@@ -94,14 +93,14 @@ export function changeStudentName(student: StudentType, newName: string) {
 	if (student.name === newName) {
 		return student
 	}
-	return Object.assign({}, student, {name: newName})
+	return {...student, name: newName}
 }
 
 export function changeStudentAdvisor(student: StudentType, newAdvisor: string) {
 	if (student.advisor === newAdvisor) {
 		return student
 	}
-	return Object.assign({}, student, {advisor: newAdvisor})
+	return {...student, advisor: newAdvisor}
 }
 
 export function changeStudentCreditsNeeded(
@@ -111,7 +110,7 @@ export function changeStudentCreditsNeeded(
 	if (student.creditsNeeded === newCreditsNeeded) {
 		return student
 	}
-	return Object.assign({}, student, {creditsNeeded: newCreditsNeeded})
+	return {...student, creditsNeeded: newCreditsNeeded}
 }
 
 export function changeStudentMatriculation(
@@ -121,7 +120,7 @@ export function changeStudentMatriculation(
 	if (student.matriculation === newMatriculation) {
 		return student
 	}
-	return Object.assign({}, student, {matriculation: newMatriculation})
+	return {...student, matriculation: newMatriculation}
 }
 
 export function changeStudentGraduation(
@@ -131,7 +130,7 @@ export function changeStudentGraduation(
 	if (student.graduation === newGraduation) {
 		return student
 	}
-	return Object.assign({}, student, {graduation: newGraduation})
+	return {...student, graduation: newGraduation}
 }
 
 export function changeStudentSetting(
@@ -142,9 +141,7 @@ export function changeStudentSetting(
 	if (student.settings && student.settings[key] === value) {
 		return student
 	}
-	return Object.assign({}, student, {
-		settings: Object.assign({}, student.settings, {[key]: value}),
-	})
+	return {...student, settings: {...student.settings, [key]: value}}
 }
 
 export function addScheduleToStudent(
@@ -157,11 +154,10 @@ export function addScheduleToStudent(
 		)
 	}
 
-	return Object.assign({}, student, {
-		schedules: Object.assign({}, student.schedules, {
-			[newSchedule.id]: newSchedule,
-		}),
-	})
+	return {
+		...student,
+		schedules: {...student.schedules, [newSchedule.id]: newSchedule},
+	}
 }
 
 export function destroyScheduleFromStudent(
@@ -196,15 +192,14 @@ export function destroyScheduleFromStudent(
 
 		/* istanbul ignore else */
 		if (otherSchedKey) {
-			schedules[otherSchedKey] = Object.assign(
-				{},
-				schedules[otherSchedKey],
-				{active: true},
-			)
+			schedules[otherSchedKey] = {
+				...schedules[otherSchedKey],
+				active: true,
+			}
 		}
 	}
 
-	return Object.assign({}, student, {schedules})
+	return {...student, schedules}
 }
 
 export function addCourseToSchedule(
@@ -237,11 +232,10 @@ export function addCourseToSchedule(
 
 	schedule.clbids = [...schedule.clbids, clbid]
 
-	return Object.assign({}, student, {
-		schedules: Object.assign({}, student.schedules, {
-			[schedule.id]: schedule,
-		}),
-	})
+	return {
+		...student,
+		schedules: {...student.schedules, [schedule.id]: schedule},
+	}
 }
 
 export function removeCourseFromSchedule(
@@ -274,13 +268,12 @@ export function removeCourseFromSchedule(
 		}-${schedule.semester}.${schedule.index})`,
 	)
 
-	schedule.clbids = reject(schedule.clbids, id => id === clbid)
+	schedule.clbids = schedule.clbids.filter(id => id !== clbid)
 
-	return Object.assign({}, student, {
-		schedules: Object.assign({}, student.schedules, {
-			[schedule.id]: schedule,
-		}),
-	})
+	return {
+		...student,
+		schedules: {...student.schedules, [schedule.id]: schedule},
+	}
 }
 
 export function moveCourseToSchedule(
@@ -298,25 +291,21 @@ export function moveCourseToSchedule(
 	student = removeCourseFromSchedule(student, fromScheduleId, clbid)
 	student = addCourseToSchedule(student, toScheduleId, clbid)
 
-	return Object.assign({}, student)
+	return {...student}
 }
 
 export function addAreaToStudent(
 	student: StudentType,
 	areaOfStudy: AreaOfStudyType,
 ) {
-	return Object.assign({}, student, {
-		studies: [...student.studies, areaOfStudy],
-	})
+	return {...student, studies: [...student.studies, areaOfStudy]}
 }
 
 export function removeAreaFromStudent(
 	student: StudentType,
 	areaQuery: AreaQuery,
 ) {
-	return Object.assign({}, student, {
-		studies: reject(student.studies, areaQuery),
-	})
+	return {...student, studies: reject(student.studies, areaQuery)}
 }
 
 export function setOverrideOnStudent(
@@ -324,14 +313,12 @@ export function setOverrideOnStudent(
 	key: string,
 	value: OverrideType,
 ) {
-	let overrides = Object.assign({}, student.overrides)
-	overrides[key] = value
-	return Object.assign({}, student, {overrides})
+	return {...student, overrides: {...student.overrides, [key]: value}}
 }
 
 export function removeOverrideFromStudent(student: StudentType, key: string) {
 	let overrides = omit(student.overrides, key)
-	return Object.assign({}, student, {overrides})
+	return {...student, overrides}
 }
 
 export function addFabricationToStudent(
@@ -346,10 +333,11 @@ export function addFabricationToStudent(
 	if (typeof fabrication.clbid !== 'string') {
 		throw new TypeError('addFabricationToStudent: clbid must be a string')
 	}
-	let fabrications = Object.assign({}, student.fabrications, {
+	let fabrications = {
+		...student.fabrications,
 		[fabrication.clbid]: fabrication,
-	})
-	return Object.assign({}, student, {fabrications})
+	}
+	return {...student, fabrications}
 }
 
 export function removeFabricationFromStudent(
@@ -360,23 +348,23 @@ export function removeFabricationFromStudent(
 		throw new TypeError('removeCourseFromSchedule: clbid must be a string')
 	}
 	let fabrications = omit(student.fabrications, fabricationId)
-	return Object.assign({}, student, {fabrications})
+	return {...student, fabrications}
 }
 
 export function moveScheduleInStudent(
 	student: StudentType,
 	scheduleId: string,
-	{year, semester}: {year: number, semester: number} = {},
-) {
+	{year, semester}: {year?: number, semester?: number} = {},
+): StudentType {
 	if (year === undefined && semester === undefined) {
 		throw new RangeError(
 			'moveScheduleInStudent: Either year or semester must be provided.',
 		)
 	}
-	if (typeof year !== 'number') {
+	if (year != null && typeof year !== 'number') {
 		throw new TypeError('moveScheduleInStudent: year must be a number.')
 	}
-	if (typeof semester !== 'number') {
+	if (semester != null && typeof semester !== 'number') {
 		throw new TypeError('moveScheduleInStudent: semester must be a number.')
 	}
 
@@ -386,16 +374,20 @@ export function moveScheduleInStudent(
 		)
 	}
 
-	let schedule = clone(student.schedules[scheduleId])
+	let schedule = {...student.schedules[scheduleId]}
 
-	schedule.year = year
-	schedule.semester = semester
+	if (year != null) {
+		schedule.year = year
+	}
 
-	return Object.assign({}, student, {
-		schedules: Object.assign({}, student.schedules, {
-			[schedule.id]: schedule,
-		}),
-	})
+	if (semester != null) {
+		schedule.semester = semester
+	}
+
+	return {
+		...student,
+		schedules: {...student.schedules, [schedule.id]: schedule},
+	}
 }
 
 export function reorderScheduleInStudent(
@@ -409,14 +401,11 @@ export function reorderScheduleInStudent(
 		)
 	}
 
-	let schedule = Object.assign({}, student.schedules[scheduleId], {
-		index: index,
-	})
-	return Object.assign({}, student, {
-		schedules: Object.assign({}, student.schedules, {
-			[schedule.id]: schedule,
-		}),
-	})
+	let schedule = {...student.schedules[scheduleId], index}
+	return {
+		...student,
+		schedules: {...student.schedules, [schedule.id]: schedule},
+	}
 }
 
 export function renameScheduleInStudent(
@@ -430,14 +419,11 @@ export function renameScheduleInStudent(
 		)
 	}
 
-	let schedule = Object.assign({}, student.schedules[scheduleId], {
-		title: title,
-	})
-	return Object.assign({}, student, {
-		schedules: Object.assign({}, student.schedules, {
-			[schedule.id]: schedule,
-		}),
-	})
+	let schedule = {...student.schedules[scheduleId], title}
+	return {
+		...student,
+		schedules: {...student.schedules, [schedule.id]: schedule},
+	}
 }
 
 export function reorderCourseInSchedule(
@@ -475,9 +461,8 @@ export function reorderCourseInSchedule(
 	schedule.clbids.splice(oldIndex, 1)
 	schedule.clbids.splice(index, 0, clbid)
 
-	return Object.assign({}, student, {
-		schedules: Object.assign({}, student.schedules, {
-			[schedule.id]: schedule,
-		}),
-	})
+	return {
+		...student,
+		schedules: {...student.schedules, [schedule.id]: schedule},
+	}
 }
