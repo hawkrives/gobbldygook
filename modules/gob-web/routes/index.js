@@ -1,3 +1,5 @@
+// @flow
+
 import AppContainer from '../app-container'
 
 export default {
@@ -6,11 +8,11 @@ export default {
 		{
 			path: '/',
 
-			getIndexRoute(location, cb) {
+			getIndexRoute(location: mixed, cb: Function) {
 				cb(null, {
 					content: {
-						getComponents(location, cb) {
-							require.ensure(
+						getComponents(location: mixed, cb: Function) {
+							(require: any).ensure(
 								[],
 								() => {
 									cb(null, {
@@ -25,7 +27,7 @@ export default {
 				})
 			},
 
-			getChildRoutes(state, cb) {
+			getChildRoutes(state: mixed, cb: Function) {
 				cb(null, [
 					require('./edit-area').default, // edit-area
 					require('./degub').default, // degub
