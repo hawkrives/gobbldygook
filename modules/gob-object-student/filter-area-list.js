@@ -1,9 +1,10 @@
-import reject from 'lodash/reject'
+// @flow
+
 import groupBy from 'lodash/groupBy'
 import flatten from 'lodash/flatten'
-import map from 'lodash/map'
-import filter from 'lodash/filter'
 import sortBy from 'lodash/sortBy'
+
+import {type AreaOfStudyType} from './types'
 
 function convertRevisionToYear(rev) {
 	// The +1 is because the year is the beginning of the academic year, but
@@ -26,13 +27,17 @@ function convertRevisionToYear(rev) {
 // You can only enroll in a major if there isn't a newer one, unless your
 // class year is between the previous one and the newest.
 
-export function filterAreaList(areas, {graduation}) {
+export function filterAreaList(
+	areas: Array<AreaOfStudyType>,
+	{graduation}: {graduation: number},
+): Array<AreaOfStudyType> {
 	// Remove all areas that are closed to new class years.
-	let onlyAvailableAreas = reject(
-		areas,
+	let onlyAvailableAreas = areas.filter(
 		area =>
-			area['available through'] &&
-			area['available through'] <= graduation,
+			!(
+				area['available through'] &&
+				area['available through'] <= graduation
+			),
 	)
 
 	// Group them together to filter them down
@@ -41,43 +46,45 @@ export function filterAreaList(areas, {graduation}) {
 		area => `(${area.name}, ${area.type})`,
 	)
 
-	onlyAvailableAreas = flatten(
-		map(groupedAreas, areaSet => {
-			// The newest revision of a major is always available, unless the
-			// 'available through' key is set. (We took care of that up above.)
-			if (areaSet.length === 1) {
-				return areaSet
+	onlyAvailableAreas = Object.values(groupedAreas).map((areaSet: any) => {
+		if (!Array.isArray(areaSet)) {
+			return []
+		}
+
+		;(areaSet: Array<AreaOfStudyType>)
+
+		// The newest revision of a major is always available, unless the
+		// 'available through' key is set. (We took care of that up above.)
+		if (areaSet.length === 1) {
+			return areaSet
+		}
+
+		// You can only enroll in a major if there isn't a newer one, unless
+		// your class year is between the prior revision and the newest revision.
+
+		// We'll start out by sorting them.
+		areaSet = sortBy(areaSet, (a: AreaOfStudyType) => a.revision)
+
+		// Now for the filtering.
+		return areaSet.filter((area: AreaOfStudyType, i, list) => {
+			// Get the year for this area.
+			let revision = convertRevisionToYear(area.revision)
+
+			// If we're not at the end of the list,
+			if (i < areaSet.length - 1) {
+				// grab the next revision, and see if the graduation year
+				// falls between the two revisions.
+				// if it does, then this revision is *available*.
+				let nextAreaRevision = convertRevisionToYear(
+					list[i + 1].revision,
+				)
+				return revision <= graduation && graduation <= nextAreaRevision
+			} else {
+				// the last revision is always available
+				return revision <= graduation
 			}
+		})
+	})
 
-			// You can only enroll in a major if there isn't a newer one, unless
-			// your class year is between the prior revision and the newest revision.
-
-			// We'll start out by sorting them.
-			areaSet = sortBy(areaSet, 'revision')
-
-			// Now for the filtering.
-			return filter(areaSet, (area, i, list) => {
-				// Get the year for this area.
-				let revision = convertRevisionToYear(area.revision)
-
-				// If we're not at the end of the list,
-				if (i < areaSet.length - 1) {
-					// grab the next revision, and see if the graduation year
-					// falls between the two revisions.
-					// if it does, then this revision is *available*.
-					let nextAreaRevision = convertRevisionToYear(
-						list[i + 1].revision,
-					)
-					return (
-						revision <= graduation && graduation <= nextAreaRevision
-					)
-				} else {
-					// the last revision is always available
-					return revision <= graduation
-				}
-			})
-		}),
-	)
-
-	return onlyAvailableAreas
+	return flatten(onlyAvailableAreas)
 }
