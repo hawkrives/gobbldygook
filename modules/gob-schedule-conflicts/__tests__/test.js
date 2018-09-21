@@ -1,6 +1,10 @@
 /* eslint-env jest */
 
-import {findTimeConflicts, checkCoursesForTimeConflicts, removeColon} from '../index'
+import {
+	findTimeConflicts,
+	checkCoursesForTimeConflicts,
+	removeColon,
+} from '../index'
 
 test('times sort properly as strings', () => {
 	expect(removeColon('1:00') < removeColon('14:00')).toBe(true)

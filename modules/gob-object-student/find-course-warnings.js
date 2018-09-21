@@ -12,7 +12,10 @@ import {expandYear, semesterName} from '@gob/school-st-olaf-college'
 import type {Course} from '@gob/types'
 import type {ScheduleType} from './schedule'
 
-export type WarningTypeEnum = 'invalid-semester' | 'invalid-year' | 'time-conflict'
+export type WarningTypeEnum =
+	| 'invalid-semester'
+	| 'invalid-year'
+	| 'time-conflict'
 
 export type Warning = {
 	warning: true,
