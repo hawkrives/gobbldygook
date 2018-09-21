@@ -95,7 +95,7 @@
     "json-loader": "^0.5.7",
     "junk": "^2.1.0",
     "mkdirp": "^0.5.1",
-    "node-sass": "^4.9.2",
+    "node-sass": "^4.9.3",
     "prop-types": "^15.6.2",
     "react-test-renderer": "^16.5.2",
     "redux-freeze": "^0.1.5",
