@@ -10,6 +10,7 @@ import ContentEditable from '../../components/content-editable'
 
 import {getActiveStudentCourses} from '../../helpers/get-active-student-courses'
 import {countCredits} from '@gob/examine-student'
+import {type StudentType} from '@gob/object-student'
 
 import './student-summary.scss'
 
@@ -40,8 +41,6 @@ const welcomeMessages = [
 
 const welcomeMessage = welcomeMessages[2]
 
-type Student = Object
-
 type Props = {
 	onChangeGraduation?: string => any,
 	onChangeMatriculation?: string => any,
@@ -49,7 +48,7 @@ type Props = {
 	randomizeHello?: boolean,
 	showAvatar?: boolean,
 	showMessage?: boolean,
-	student: Student,
+	student: StudentType,
 }
 
 export class StudentSummary extends React.PureComponent<Props> {

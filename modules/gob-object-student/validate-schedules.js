@@ -1,7 +1,11 @@
+// @flow
+
 import mapValues from 'lodash/mapValues'
 import {validateSchedule} from './validate-schedule'
 
-export function validateSchedules(student) {
+import type {StudentType} from './schedule'
+
+export function validateSchedules(student: StudentType) {
 	return new Promise(resolve => {
 		let {schedules} = student
 		schedules = mapValues(schedules, validateSchedule)
