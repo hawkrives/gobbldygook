@@ -1,8 +1,8 @@
 // @flow
 
-import clone from 'lodash/clone'
 import findIndex from 'lodash/findIndex'
 import findKey from 'lodash/findKey'
+import map from 'lodash/map'
 import fromPairs from 'lodash/fromPairs'
 import mapValues from 'lodash/mapValues'
 import omit from 'lodash/omit'
@@ -18,6 +18,7 @@ import type {
 	AreaQuery,
 	OverrideType,
 	FabricationType,
+	FulfillmentType,
 } from './types'
 
 const now = new Date()
@@ -34,13 +35,13 @@ export type StudentType = {
 	dateLastModified: Date,
 	dateCreated: Date,
 
-	studies: Array<{}>,
+	studies: Array<AreaOfStudyType>,
 	schedules: {[key: string]: ScheduleType},
-	overrides: {},
-	fabrications: {},
-	fulfillments: {},
+	overrides: {[key: string]: OverrideType},
+	fabrications: {[key: string]: FabricationType},
+	fulfillments: {[key: string]: FulfillmentType},
 
-	settings: {},
+	settings: {[key: string]: mixed},
 }
 
 type IncomingStudent = {}
@@ -217,7 +218,7 @@ export function addCourseToSchedule(
 		)
 	}
 
-	let schedule = clone(student.schedules[scheduleId])
+	let schedule = {...student.schedules[scheduleId]}
 
 	// If the schedule already has the course we're adding, just return the student
 	if (schedule.clbids.includes(clbid)) {
@@ -255,7 +256,7 @@ export function removeCourseFromSchedule(
 		)
 	}
 
-	let schedule = clone(student.schedules[scheduleId])
+	let schedule = {...student.schedules[scheduleId]}
 
 	// If the schedule doesn't have the course we're removing, just return the student
 	if (!schedule.clbids.includes(clbid)) {
@@ -441,7 +442,7 @@ export function reorderCourseInSchedule(
 		)
 	}
 
-	let schedule = clone(student.schedules[scheduleId])
+	let schedule = {...student.schedules[scheduleId]}
 
 	if (index < 0) {
 		index = 0
