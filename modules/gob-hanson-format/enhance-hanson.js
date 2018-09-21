@@ -142,7 +142,9 @@ export function enhanceHanson(
 		if (key === 'result' || key === 'filter') {
 			if (typeof value !== 'string') {
 				throw new Error(
-					`value ${String(value)} should be a string, not a ${typeof value}`,
+					`value ${String(
+						value,
+					)} should be a string, not a ${typeof value}`,
 				)
 			}
 
@@ -153,7 +155,11 @@ export function enhanceHanson(
 			// would be referenced via "$math-level-3".
 			for (let [name, contents] of Object.entries(declaredVariables)) {
 				if (typeof contents !== 'string') {
-					throw new Error(`value ${String(contents)} should be a string, not a ${typeof contents}`,)
+					throw new Error(
+						`value ${String(
+							contents,
+						)} should be a string, not a ${typeof contents}`,
+					)
 				}
 
 				let exprName = `$${name}`
