@@ -30,7 +30,7 @@ export {
 } from './item-types'
 
 export {Schedule} from './schedule'
-export type {ScheduleType} from './schedule'
+export type {ScheduleType, HydratedScheduleType} from './schedule'
 
 export {sortStudiesByType} from './sort-studies-by-type'
 
