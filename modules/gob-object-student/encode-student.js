@@ -1,7 +1,11 @@
+// @flow
+
 import stringify from 'stabilize'
 import mapValues from 'lodash/mapValues'
 
-export function prepareStudentForSave(initialStudent) {
+import type {HydratedStudentType} from '@gob/object-student'
+
+export function prepareStudentForSave(initialStudent: HydratedStudentType) {
 	// we're going to use object rest/spread to "omit" values from the objects
 
 	let {
@@ -20,6 +24,6 @@ export function prepareStudentForSave(initialStudent) {
 	return student
 }
 
-export function encodeStudent(student) {
+export function encodeStudent(student: HydratedStudentType) {
 	return encodeURIComponent(stringify(prepareStudentForSave(student)))
 }
