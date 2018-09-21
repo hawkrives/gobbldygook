@@ -67,6 +67,7 @@
       "**/__tests__/**",
       "**/*-cli/**",
       "modules/gob-hanson-format/parse-hanson-string.js",
+      "modules/gob-web/icons/ionicons-all.js",
       "**/node_modules/**"
     ],
     "reportTypes": [
