@@ -57,15 +57,14 @@ const ofLookup = {
 	all: 'All of',
 	any: 'Any of',
 	none: 'None of',
-	unknown: '???',
 }
 
 function makeOfExpression({expr, ctx}) {
-	const description =
-		ofLookup[expr.$count.$was || 'unknown'] ||
-		`${expr._counted || 0} of ${humanizeOperator(expr.$count.$operator)} ${
-			expr.$count.$num
-		} from among`
+	const description = expr.$count.$was
+		? ofLookup[expr.$count.$was] || '???'
+		: `${expr._counted || 0} of ${humanizeOperator(
+				expr.$count.$operator,
+		  )} ${expr.$count.$num} from among`
 
 	// const contents = map(orderBy(expr.$of, ['_result'], ['desc']), (ex, i) =>
 	const contents = expr.$of.map((ex, i) => (
