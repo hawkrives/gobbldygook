@@ -32,7 +32,7 @@ export function getCourseFromDatabase(clbid: string) {
 		.store('courses')
 		.index('clbid')
 		.get(clbid)
-		.then(course => course ? course : getCourseFromNetwork(clbid))
+		.then(course => (course ? course : getCourseFromNetwork(clbid)))
 		.then(({profWords: _p, words: _w, sourcePath: _s, ...course}) => course)
 
 	return courseCache[clbid].then(course => {
