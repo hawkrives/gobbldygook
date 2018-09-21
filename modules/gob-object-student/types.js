@@ -1,6 +1,11 @@
 // @flow
 
-export type AreaOfStudyType = {||}
+export type AreaOfStudyType = {|
+	'available through'?: number,
+	name: string,
+	type: string,
+	revision: string,
+|}
 
 export type AreaQuery = {|
 	type: string,
