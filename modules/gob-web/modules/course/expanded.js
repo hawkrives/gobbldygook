@@ -2,12 +2,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import map from 'lodash/map'
-import flatMap from 'lodash/flatMap'
 import oxford from 'listify'
 import {BulletedList, ListItem} from '../../components/list'
 import CourseTitle from './course-title'
 import {semesterName, buildDeptNum} from '@gob/school-st-olaf-college'
 import {to12HourTime} from '@gob/lib'
+import type {Course} from '@gob/types'
 
 const Heading = styled.h2`
 	font-weight: 500;
@@ -50,7 +50,7 @@ const SummaryThing = styled.div`
 
 type Props = {
 	className?: string,
-	course: Object,
+	course: Course,
 }
 
 export default class ExpandedCourse extends React.PureComponent<Props> {
@@ -86,7 +86,7 @@ export default class ExpandedCourse extends React.PureComponent<Props> {
 					</div>
 				)}
 
-				{course.times && (
+				{course.offerings && (
 					<div>
 						<Heading>
 							{course.offerings && course.offerings.length === 1
@@ -94,24 +94,22 @@ export default class ExpandedCourse extends React.PureComponent<Props> {
 								: 'Offerings'}
 						</Heading>
 						<BulletedList>
-							{flatMap(course.offerings, offering =>
-								map(offering.times, time => {
-									const day = offering.day
-									const {start, end} = time
+							{course.offerings.map(
+								({day, start, end, location}) => {
 									return (
 										<ListItem
 											key={`${day}-${start}-${end}`}
 										>
-											{offering.day}
+											{day}
 											{' from '}
-											{to12HourTime(time.start)}
+											{to12HourTime(start)}
 											{' to '}
-											{to12HourTime(time.end)}
+											{to12HourTime(end)}
 											{', in '}
-											{offering.location}
+											{location}
 										</ListItem>
 									)
-								}),
+								},
 							)}
 						</BulletedList>
 					</div>

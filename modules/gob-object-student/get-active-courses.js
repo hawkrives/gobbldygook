@@ -1,11 +1,16 @@
-import uniqBy from 'lodash/uniqBy'
-import filter from 'lodash/filter'
-import flatMap from 'lodash/flatMap'
+// @flow
 
-export function getActiveCourses(student) {
+import filter from 'lodash/filter'
+import uniqBy from 'lodash/uniqBy'
+import flatten from 'lodash/flatten'
+import type {HydratedStudentType} from './student'
+
+export function getActiveCourses(student: HydratedStudentType) {
 	const activeSchedules = filter(student.schedules, s => s.active === true)
-	let courses = flatMap(activeSchedules, s => s.courses)
-	courses = uniqBy(courses.filter(c => c), course => course.clbid)
+
+	let courses = flatten(activeSchedules.map(s => s.courses))
+	courses = courses.filter(c => c)
+	courses = uniqBy(courses, course => course.clbid)
 
 	return courses
 }

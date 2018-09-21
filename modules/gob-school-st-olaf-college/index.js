@@ -1,7 +1,8 @@
+// @flow
+
 export {expandYear, semesterName, toPrettyTerm} from './course-info'
 
 export {
-	buildDeptString,
 	buildDeptNum,
 	deptNumRegex,
 	quacksLikeDeptNum,

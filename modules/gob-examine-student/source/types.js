@@ -1,5 +1,8 @@
 // @flow
 
+import type {Course} from '@gob/types'
+export type {Course}
+
 export type OverridesPath = string[]
 export type OverridesObject = {[key: string]: any}
 export type FulfillmentsPath = OverridesPath
@@ -31,28 +34,6 @@ export type Requirement = {
 	computed: boolean,
 	overridden?: boolean,
 	'children share courses'?: boolean,
-}
-
-export type clbidT = number
-export type crsidT = number
-
-export type CourseType = 'Research' | 'FLAC'
-
-export type Course = {
-	clbid: clbidT,
-	credits: number,
-	crsid: crsidT,
-	department: Array<string>,
-	gereqs: string[],
-	groupid: number,
-	level: number,
-	name: string,
-	number: number,
-	pf: boolean,
-	semester: number,
-	type: CourseType,
-	year: number,
-	_extraKeys?: Array<string>,
 }
 
 export type CounterOperatorEnum = '$gte' | '$lte' | '$eq'
@@ -118,7 +99,7 @@ export type QualificationBooleanValue =
 	| QualificationBooleanOrValue
 	| QualificationBooleanAndValue
 
-type QualificationValue =
+export type QualificationValue =
 	| QualificationFunctionValue
 	| QualificationBooleanValue
 	| QualificationStaticValue
@@ -182,7 +163,7 @@ export type ModifierChildrenWhereExpression = {
 export type ModifierWhereExpression = {
 	...BaseModifierExpression,
 	$from: 'where',
-	$where: Qualifier,
+	$where: Qualification,
 }
 export type ModifierExpression =
 	| ModifierWhereExpression

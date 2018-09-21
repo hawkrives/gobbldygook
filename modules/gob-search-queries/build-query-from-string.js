@@ -1,8 +1,6 @@
 // @flow
 
-import flatMap from 'lodash/flatMap'
 import flatten from 'lodash/flatten'
-import map from 'lodash/map'
 import mapValues from 'lodash/mapValues'
 import toPairs from 'lodash/toPairs'
 import unzip from 'lodash/unzip'
@@ -38,9 +36,10 @@ let semesters = {
 let keywordMappings = {
 	day: 'times',
 	days: 'times',
-	department: 'departments',
-	dept: 'departments',
-	depts: 'departments',
+	department: 'department',
+	departments: 'department',
+	dept: 'department',
+	depts: 'department',
 	ge: 'gereqs',
 	gened: 'gereqs',
 	geneds: 'gereqs',
@@ -63,7 +62,7 @@ let keywordMappings = {
 }
 
 function organizeValues([key, values], words = false, profWords = false) {
-	let organizedValues = flatMap(values, val => {
+	let organizedValues = values.map(val => {
 		// handle $OR and $AND and other boolean operators
 		if (typeof val === 'string' && /^\$/.test(val)) {
 			return val.toUpperCase()
@@ -82,7 +81,7 @@ function organizeValues([key, values], words = false, profWords = false) {
 			case 'crsid':
 				return parseInt(val, 10)
 			// handle the lookup values
-			case 'departments':
+			case 'department':
 				val = val.toLowerCase()
 				return departmentMapping[val] || val.toUpperCase()
 			case 'gereqs':
@@ -122,7 +121,7 @@ function organizeValues([key, values], words = false, profWords = false) {
 		}
 	})
 
-	return [key, organizedValues]
+	return [key, flatten(organizedValues)]
 }
 
 export function buildQueryFromString(
@@ -146,33 +145,31 @@ export function buildQueryFromString(
 
 	// Split apart the string into an array
 	let matches = queryString.split(rex)
+	;(matches: Array<string>)
 
 	// Remove extra whitespace and remove empty strings
-	let cleaned = matches.map(s => s.trim()).filter(s => s.length > 0)
+	let cleaned = matches.map(s => s.trim()).filter(s => s !== '')
 
 	// Grab the keys and values from the lists
 	let [keys, values] = partitionByIndex(cleaned)
+	;(keys: Array<string>)
+	;(values: Array<mixed>)
 
 	if (stringThing && quacksLikeDeptNum(stringThing)) {
-		let {departments, number, section} = splitDeptNum(stringThing, true)
+		let deptnum = splitDeptNum(stringThing, true)
+		if (deptnum) {
+			let {department, number, section} = deptnum
 
-		if (departments.length === 1) {
-			keys.push('departments')
-			values.push(departments[0])
-		} else {
-			keys.push('departments')
-			values.push('$AND')
-			for (let dept of departments) {
-				keys.push('departments')
-				values.push(dept)
+			keys.push('department')
+			values.push(department)
+
+			keys.push('number')
+			values.push(number)
+
+			if (section) {
+				keys.push('section')
+				values.push(section)
 			}
-		}
-
-		keys.push('number')
-		values.push(number)
-		if (section) {
-			keys.push('section')
-			values.push(section)
 		}
 	} else if (stringThing) {
 		keys.push('words')
@@ -180,7 +177,7 @@ export function buildQueryFromString(
 	}
 
 	// Process the keys, to clean them up somewhat
-	keys = map(keys, key => {
+	keys = keys.map(key => {
 		key = key.toLowerCase()
 		/* istanbul ignore else */
 		if (!key.startsWith('_')) {

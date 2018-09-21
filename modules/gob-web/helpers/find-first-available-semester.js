@@ -5,12 +5,7 @@ import map from 'lodash/map'
 import filter from 'lodash/filter'
 import sortBy from 'lodash/sortBy'
 import {findMissingNumber} from '@gob/lib'
-
-type Schedule = {
-	id: any,
-	year: number,
-	semester: number,
-}
+import {type ScheduleType} from '@gob/object-student'
 
 /**
  * Takes a list of schedules and finds the first open semester.
@@ -23,7 +18,7 @@ type Schedule = {
  * @returns {Number} - the first available semester slot
  */
 export function findFirstAvailableSemester(
-	schedules: Schedule[],
+	schedules: Array<ScheduleType>,
 	forYear: number,
 ) {
 	const thisYear = filter(schedules, s => s.year === forYear)

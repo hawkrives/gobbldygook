@@ -60,12 +60,12 @@ rules:
   no-underscore-dangle: off
   no-unmodified-loop-condition: error
   no-unused-labels: error
-  no-unused-vars: ['warn', {args: 'after-used', argsIgnorePattern: '^_'}]
+  no-unused-vars: ['warn', {args: 'after-used', varsIgnorePattern: '^_', argsIgnorePattern: '^_'}]
   no-useless-constructor: error
   no-var: error
   prefer-spread: warn
   quotes: [error, single, avoid-escape]
-  semi: [error, never]
+  semi: [warn, never]
 
   # react rules – https://github.com/yannickcr/eslint-plugin-react
   react/display-name: off

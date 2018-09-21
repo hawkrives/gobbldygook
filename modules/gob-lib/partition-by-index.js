@@ -1,10 +1,7 @@
 // @flow
 
-import reduce from 'lodash/reduce'
-
-export function partitionByIndex<T>(arr: T[]): [T[], T[]] {
-	return reduce(
-		arr,
+export function partitionByIndex<T, U>(arr: Array<T | U>): [T[], U[]] {
+	let reduced = arr.reduce(
 		(acc, val, idx) => {
 			return idx % 2 === 0
 				? [acc[0].concat(val), acc[1]]
@@ -12,4 +9,5 @@ export function partitionByIndex<T>(arr: T[]): [T[], T[]] {
 		},
 		[[], []],
 	)
+	return (reduced: any)
 }

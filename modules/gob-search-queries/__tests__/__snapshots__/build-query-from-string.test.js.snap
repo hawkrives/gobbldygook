@@ -13,7 +13,7 @@ Object {
 
 exports[`buildQueryFromString builds a query string even with somewhat unconventional input 1`] = `
 Object {
-  "departments": Array [
+  "department": Array [
     "AMCON",
   ],
   "name": Array [
@@ -46,7 +46,7 @@ Object {
 
 exports[`buildQueryFromString builds a query string with multiple keys into a query object 1`] = `
 Object {
-  "departments": Array [
+  "department": Array [
     "$AND",
     "CSCI",
     "ASIAN",
@@ -67,7 +67,7 @@ Object {
 
 exports[`buildQueryFromString builds a query string with variable-case keys into a query object 1`] = `
 Object {
-  "departments": Array [
+  "department": Array [
     "$AND",
     "ASIAN",
     "REL",
@@ -91,7 +91,7 @@ Object {
 
 exports[`buildQueryFromString can also search for deptnums even with no keys 1`] = `
 Object {
-  "departments": Array [
+  "department": Array [
     "ASIAN",
   ],
   "number": Array [
@@ -102,10 +102,8 @@ Object {
 
 exports[`buildQueryFromString can also search for deptnums with sections even with no keys 1`] = `
 Object {
-  "departments": Array [
-    "$AND",
-    "ASIAN",
-    "REL",
+  "department": Array [
+    "AS/RE",
   ],
   "number": Array [
     220,
@@ -118,11 +116,10 @@ Object {
 
 exports[`buildQueryFromString conjoins a deptnum and a department key 1`] = `
 Object {
-  "departments": Array [
+  "department": Array [
     "$AND",
     "MUSIC",
-    "ART",
-    "ASIAN",
+    "AR/AS",
   ],
   "number": Array [
     102,
@@ -140,7 +137,7 @@ Object {
 
 exports[`buildQueryFromString handles a single key and no value 1`] = `
 Object {
-  "departments": Array [
+  "department": Array [
     "ENGL",
   ],
   "number": Array [
@@ -176,10 +173,8 @@ exports[`buildQueryFromString handles no arguments as an empty string 1`] = `Obj
 
 exports[`buildQueryFromString ignores subsequent deptnums in a non-keyed query 1`] = `
 Object {
-  "departments": Array [
-    "$AND",
-    "ASIAN",
-    "REL",
+  "department": Array [
+    "AS/RE",
   ],
   "number": Array [
     220,

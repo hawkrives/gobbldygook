@@ -1,4 +1,3 @@
-// @flow
 import {findFirstAvailableSemester} from '../find-first-available-semester'
 
 describe('findFirstAvailableSemester', () => {

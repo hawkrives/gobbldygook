@@ -6,7 +6,7 @@ import map from 'lodash/map'
 import reject from 'lodash/reject'
 import filter from 'lodash/filter'
 import includes from 'lodash/includes'
-import {filterAreaList} from '@gob/object-student'
+import {filterAreaList, type AreaOfStudyType} from '@gob/object-student'
 import {FlatButton} from '../../components/button'
 import List from '../../components/list'
 import {Toolbar} from '../../components/toolbar'
@@ -64,11 +64,10 @@ const AddAreaFilter = styled.input`
 	}
 `
 
-type AreaOfStudy = Object
 type Props = {
-	areaList: AreaOfStudy[],
-	currentAreas: AreaOfStudy[],
-	onAddArea: (AreaOfStudy, Event) => any,
+	areaList: Array<AreaOfStudyType>,
+	currentAreas: Array<AreaOfStudyType>,
+	onAddArea: (AreaOfStudyType, Event) => any,
 	studentGraduation: number,
 	type: AreaOfStudyTypeEnum,
 }

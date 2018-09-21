@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 import {DropTarget} from 'react-dnd'
 import debug from 'debug'
 import styled, {css} from 'styled-components'
@@ -41,7 +41,7 @@ const Box = styled.div`
 
 type Props = {
 	canDrop: boolean, // react-dnd
-	connectDropTarget: (React$Element<*>) => any, // react-dnd
+	connectDropTarget: (React.Element<*>) => any, // react-dnd
 	isOver: boolean, // react-dnd
 	removeCourse: (string, number) => any, // studentId is embedded in the passed function
 }

@@ -26,13 +26,13 @@ if (
 			.then(result => {
 				self.postMessage(JSON.stringify([id, 'result', result]))
 				const taken = round(present() - start)
-				log(`(${student.name}, ${area.name}) took ${taken} ms`)
+				console.log(`(${student.name}, ${area.name}) took ${taken} ms`)
 			})
 			.catch(err => {
 				self.postMessage(
 					JSON.stringify([id, 'error', stringifyError(err)]),
 				)
-				log(`(${student.name}, ${area.name})`, err)
+				console.warn(`(${student.name}, ${area.name})`, err)
 			})
 	})
 }

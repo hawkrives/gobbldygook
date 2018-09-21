@@ -16,6 +16,7 @@ import {
 	removeCourse,
 } from '../../redux/students/actions/courses'
 import * as theme from '../../theme'
+import type {Course as CourseType} from '@gob/types'
 
 const ContainerModal = styled(Modal)`
 	${theme.baseCard};
@@ -76,7 +77,7 @@ const removeFromSemester = ({
 }: {
 	studentId: ?string,
 	removeCourse: Function,
-	clbid: ?number,
+	clbid: ?string,
 	scheduleId: ?string,
 }) => () => {
 	if (studentId && scheduleId && clbid !== null && clbid !== undefined) {
@@ -86,10 +87,10 @@ const removeFromSemester = ({
 
 function ModalCourse(props: {
 	addCourse?: () => any, // redux
-	course: Object, // parent
+	course: CourseType, // parent
 	moveCourse?: () => any, // redux
 	onClose: () => any, // parent
-	removeCourse?: (string, string, number) => any, // redux
+	removeCourse?: (string, string, string) => any, // redux
 	scheduleId?: string, // parent
 	student?: Object, // redux
 	studentId?: string, // parent

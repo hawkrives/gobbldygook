@@ -22,7 +22,7 @@ function resolveArea(areas, query) {
 }
 
 function transform(areaSource) {
-	return enhanceHanson(yaml.safeLoad(areaSource))
+	return enhanceHanson((yaml.safeLoad(areaSource): any))
 }
 
 type AreaQueryType = {

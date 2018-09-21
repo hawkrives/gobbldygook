@@ -1,3 +1,5 @@
+// @flow
+
 export {areaTypeConstants} from './area-types'
 
 export {encodeStudent, prepareStudentForSave} from './encode-student'
@@ -12,6 +14,10 @@ export {
 	checkForInvalidSemester,
 	checkForTimeConflicts,
 } from './find-course-warnings'
+export type {
+	Warning as WarningType,
+	WarningTypeEnum,
+} from './find-course-warnings'
 
 export {isCurrentSemester} from './is-current-semester'
 
@@ -24,6 +30,7 @@ export {
 } from './item-types'
 
 export {Schedule} from './schedule'
+export type {ScheduleType, HydratedScheduleType} from './schedule'
 
 export {sortStudiesByType} from './sort-studies-by-type'
 
@@ -51,7 +58,10 @@ export {
 	renameScheduleInStudent,
 	reorderCourseInSchedule,
 } from './student'
+export type {StudentType, HydratedStudentType} from './student'
 
 export {validateSchedule} from './validate-schedule'
 
 export {validateSchedules} from './validate-schedules'
+
+export * from './types'
