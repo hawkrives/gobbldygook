@@ -145,7 +145,6 @@ export function buildQueryFromString(
 
 	// Split apart the string into an array
 	let matches = queryString.split(rex)
-
 	;(matches: Array<string>)
 
 	// Remove extra whitespace and remove empty strings
