@@ -46,7 +46,7 @@ const icons = {
 }
 
 type Props = {
-	warnings: ?Array<WarningType>,
+	warnings: Array<?WarningType>,
 }
 
 export default class CourseWarnings extends React.Component<Props> {
@@ -55,9 +55,10 @@ export default class CourseWarnings extends React.Component<Props> {
 			return null
 		}
 
-		const warnings = this.props.warnings.filter(
+		// $FlowFixMe at some point, flow should be able to determine that the filter will not return any nullable elements
+		let warnings: Array<WarningType> = (this.props.warnings.filter(
 			w => w && w.warning === true,
-		)
+		): Array<any>)
 
 		if (!warnings.length) {
 			return null

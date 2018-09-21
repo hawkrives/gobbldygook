@@ -10,6 +10,7 @@ import {buildDeptNum} from '@gob/school-st-olaf-college'
 import CourseWarnings from './warnings'
 import {to12HourTime} from '@gob/lib'
 import type {Course} from '@gob/types'
+import type {WarningType} from '@gob/object-student'
 
 export const Container = styled.article`
 	display: block;
@@ -62,19 +63,21 @@ const Prereqs = styled.span``
 
 export type Props = {
 	className?: string,
-	conflicts?: any[],
+	conflicts?: Array<Array<?WarningType>>,
 	course: Course,
 	index?: number,
 	onClick?: Event => any,
 }
 
-export default class CompactCourse extends React.PureComponent<Props> {
+export default class CompactCourse extends React.Component<Props> {
 	render() {
-		const {course, conflicts = [], index, onClick = noop} = this.props
+		const {course, conflicts, index, onClick = noop} = this.props
 
 		return (
 			<Container className={this.props.className} onClick={onClick}>
-				<CourseWarnings warnings={conflicts[index || 0]} />
+				{conflicts && (
+					<CourseWarnings warnings={conflicts[index || 0]} />
+				)}
 
 				<Title
 					title={course.title}

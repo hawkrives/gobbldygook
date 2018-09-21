@@ -3,18 +3,16 @@
 import {findWarnings} from './find-course-warnings'
 import type {HydratedScheduleType} from './schedule'
 
+// Checks to see if the schedule is valid
 export function validateSchedule(schedule: HydratedScheduleType) {
-	// Checks to see if the schedule is valid
-	let courses = schedule.courses
-
 	// only check the courses that have data
-	courses = courses.filter(c => c)
+	let courses = schedule.courses.filter(c => c)
 
-	// Step one: do any times conflict?
-	const conflicts = findWarnings(courses, schedule)
-
-	const warnings = conflicts.map(c => c && c.warning)
-	const hasConflict = warnings.some(w => w === true)
+	// discover any warnings about the course load
+	let conflicts = findWarnings(courses, schedule)
+	let hasConflict = conflicts.some(perCourse =>
+		perCourse.some(w => w && w.warning === true),
+	)
 
 	return {...schedule, hasConflict, conflicts}
 }

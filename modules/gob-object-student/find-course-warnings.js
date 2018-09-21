@@ -3,6 +3,7 @@
 import flatten from 'lodash/flatten'
 import compact from 'lodash/compact'
 import some from 'lodash/some'
+import zip from 'lodash/zip'
 
 import ordinal from 'ord'
 import oxford from 'listify'
@@ -65,6 +66,17 @@ export function checkForInvalidSemester(
 	return null
 }
 
+export function checkForInvalidity(
+	courses: Array<Course>,
+	{year, semester}: {year: number, semester: number},
+): Array<[?Warning, ?Warning]> {
+	return courses.map(course => {
+		let invalidYear = checkForInvalidYear(course, year)
+		let invalidSemester = checkForInvalidSemester(course, semester)
+		return [invalidYear, invalidSemester]
+	})
+}
+
 export function checkForTimeConflicts(courses: Array<Course>): Array<?Warning> {
 	let conflicts = findTimeConflicts(courses)
 
@@ -96,14 +108,18 @@ export function checkForTimeConflicts(courses: Array<Course>): Array<?Warning> {
 export function findWarnings(
 	courses: Array<Course>,
 	schedule: ScheduleType,
-): Array<?Warning> {
-	let warningsOfInvalidity = courses.map(course => {
-		let invalidYear = checkForInvalidYear(course, schedule.year)
-		let invalidSemester = checkForInvalidSemester(course, schedule.semester)
-		return [invalidYear, invalidSemester]
-	})
+): Array<Array<?Warning>> {
+	let {year, semester} = schedule
 
+	let warningsOfInvalidity = checkForInvalidity(courses, {year, semester})
 	let timeConflicts = checkForTimeConflicts(courses)
 
-	return flatten([...warningsOfInvalidity, ...timeConflicts])
+	// $FlowFixMe at some point, flow should be able to automatically upgrade a tuple to an array
+	let nearlyMerged: Array<Array<?Warning>> = (zip(
+		warningsOfInvalidity,
+		timeConflicts,
+	): Array<any>)
+	let allWarnings = nearlyMerged.map(flatten)
+
+	return allWarnings
 }
