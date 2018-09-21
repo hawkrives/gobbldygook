@@ -6,13 +6,13 @@ import some from 'lodash/some'
 
 import ordinal from 'ord'
 import oxford from 'listify'
-import {findScheduleTimeConflicts} from 'sto-sis-time-parser'
+import {findTimeConflicts} from '@gob/schedule-conflicts'
 import {expandYear, semesterName} from '@gob/school-st-olaf-college'
 
 import type {Course} from '@gob/types'
 import type {ScheduleType} from './schedule'
 
-export type WarningTypeEnum = 'invalid-semester' | 'invalid-year'
+export type WarningTypeEnum = 'invalid-semester' | 'invalid-year' | 'time-conflict'
 
 export type Warning = {
 	warning: true,
@@ -63,7 +63,7 @@ export function checkForInvalidSemester(
 }
 
 export function checkForTimeConflicts(courses: Array<Course>): Array<?Warning> {
-	let conflicts = findScheduleTimeConflicts(courses)
+	let conflicts = findTimeConflicts(courses)
 
 	conflicts = conflicts.map(conflictSet => {
 		if (some(conflictSet)) {
