@@ -1,29 +1,22 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-// import CourseExpression from './expression--course'
-import Expression, {makeWhereQualifier} from './expression'
-import map from 'lodash/map'
-import debug from 'debug'
-const log = debug('web:react')
+// @flow
 
-function FilterOf({expr, ctx}) {
+import React from 'react'
+import Expression, {makeWhereQualifier} from './expression'
+
+import type {OfExpression, WhereExpression} from '@gob/examine-student'
+import type {Props} from './expression'
+
+function FilterOf({expr, ctx}: {expr: OfExpression, ctx: mixed}) {
 	return (
 		<div>
-			{map(expr.$of, (ex, i) => {
-				log(ex)
-				return <Expression key={i} expr={ex} ctx={ctx} />
-			})}
+			{expr.$of.map((ex, i) => (
+				<Expression key={i} expr={ex} ctx={ctx} />
+			))}
 		</div>
 	)
 }
-FilterOf.propTypes = {
-	ctx: PropTypes.object,
-	expr: PropTypes.shape({
-		$of: PropTypes.array,
-	}),
-}
 
-function FilterWhere({expr}) {
+function FilterWhere({expr}: {expr: WhereExpression}) {
 	const qualifier = makeWhereQualifier(expr.$where)
 	const description = `only courses where ${qualifier}`
 
@@ -33,23 +26,17 @@ function FilterWhere({expr}) {
 		</div>
 	)
 }
-FilterWhere.propTypes = {
-	ctx: PropTypes.object,
-	expr: PropTypes.shape({
-		$where: PropTypes.object,
-	}),
-}
 
-export default function Filter(props) {
-	if (props.expr.$of) {
-		return <FilterOf {...props} />
-	} else if (props.expr.$where) {
-		return <FilterWhere {...props} />
+export default function Filter(props: Props) {
+	if (!props.expr.$type) {
+		return null
 	}
-	return <div>{JSON.stringify(props, null, 2)}</div>
-}
 
-Filter.propTypes = {
-	ctx: PropTypes.object,
-	expr: PropTypes.object,
+	if (props.expr.$type === 'of') {
+		return <FilterOf {...props} />
+	} else if (props.expr.$type === 'where') {
+		return <FilterWhere {...props} />
+	} else {
+		return <div>{JSON.stringify(props, null, 2)}</div>
+	}
 }
