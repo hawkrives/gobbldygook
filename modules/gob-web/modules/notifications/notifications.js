@@ -8,7 +8,7 @@ import {removeNotification} from './redux/actions'
 import type {Notification as Notif} from './types'
 import Notification from './notification'
 
-const NotificationList = styled.ul`
+const NotificationList = styled('ul')`
 	position: fixed;
 	bottom: 15px;
 	left: 15px;

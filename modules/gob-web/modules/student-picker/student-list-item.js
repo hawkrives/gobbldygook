@@ -11,7 +11,7 @@ import Icon from '../../components/icon'
 import {iosTrashOutline, iosArrowForward} from '../../icons/ionicons'
 import * as theme from '../../theme'
 
-const Container = styled.li`
+const Container = styled('li')`
 	display: flex;
 	flex-flow: row nowrap;
 	align-items: stretch;
@@ -56,27 +56,27 @@ const GoIcon = styled(Icon)`
 	margin-right: 0.5em;
 `
 
-const StudentName = styled.div`
+const StudentName = styled('div')`
 	line-height: 1.5;
 `
 
-const StudentAreas = styled.div`
+const StudentAreas = styled('div')`
 	font-size: 0.8em;
 `
 
-const AreaGrouping = styled.span`
+const AreaGrouping = styled('span')`
 	& + &::before {
 		content: ' | ';
 	}
 `
 
-const AreaName = styled.span`
+const AreaName = styled('span')`
 	& + &::before {
 		content: ' • ';
 	}
 `
 
-const StudentInfo = styled.span`
+const StudentInfo = styled('span')`
 	flex: 1;
 	margin-left: 0.5em;
 `

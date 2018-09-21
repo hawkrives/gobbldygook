@@ -19,7 +19,7 @@ const log = debug('web:react')
 import CourseList from './course-list'
 import styled from 'styled-components'
 
-const Container = styled.div`
+const Container = styled('div')`
 	${theme.card};
 	flex: 1 0;
 	min-width: 16em;
@@ -32,7 +32,7 @@ const Container = styled.div`
 	}
 `
 
-const TitleButton = FlatLinkButton.extend`
+const TitleButton = styled(FlatLinkButton)`
 	${theme.semesterPadding};
 	min-height: 0;
 	font-size: 0.9em;
@@ -46,7 +46,7 @@ const TitleButton = FlatLinkButton.extend`
 	}
 `
 
-const RemoveSemesterButton = TitleButton.extend`
+const RemoveSemesterButton = styled(TitleButton)`
 	&:hover {
 		color: ${theme.red500};
 		border-color: ${theme.red500};
@@ -54,7 +54,7 @@ const RemoveSemesterButton = TitleButton.extend`
 	}
 `
 
-const Header = styled.header`
+const Header = styled('header')`
 	border-bottom: ${theme.materialDivider};
 
 	font-size: 0.85em;
@@ -70,11 +70,11 @@ const Header = styled.header`
 	overflow: hidden;
 `
 
-const InfoList = InlineList.extend`
+const InfoList = styled(InlineList)`
 	font-size: 0.8em;
 `
 
-const InfoItem = InlineListItem.extend`
+const InfoItem = styled(InlineListItem)`
 	font-feature-settings: 'onum';
 
 	& + &::before {
@@ -95,7 +95,7 @@ const Title = styled(Link)`
 	}
 `
 
-const TitleText = styled.h1`
+const TitleText = styled('h1')`
 	${theme.headingNeutral};
 	display: inline-block;
 	color: black;

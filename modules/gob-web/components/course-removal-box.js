@@ -9,7 +9,7 @@ import {IDENT_COURSE} from '@gob/object-student'
 import {BlockIcon} from './icon'
 import {iosTrashOutline} from '../icons/ionicons'
 
-const Box = styled.div`
+const Box = styled('div')`
 	padding: 5em 1em;
 	color: ${theme.gray500};
 	background-color: white;

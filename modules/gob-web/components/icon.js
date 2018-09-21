@@ -2,7 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export const InlineIcon = styled.svg.attrs({
+export const InlineIcon = styled('svg').attrs({
 	xmlns: 'http://www.w3.org/2000/svg',
 	width: '512',
 	height: '512',
@@ -18,7 +18,7 @@ export const InlineIcon = styled.svg.attrs({
 	margin: auto;
 `
 
-export const BlockIcon = InlineIcon.extend`
+export const BlockIcon = styled(InlineIcon)`
 	display: block;
 `
 

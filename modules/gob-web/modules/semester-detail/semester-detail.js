@@ -10,7 +10,7 @@ import debug from 'debug'
 import styled from 'styled-components'
 const log = debug('web:react')
 
-const DetailText = styled.pre`
+const DetailText = styled('pre')`
 	background-color: white;
 	margin: 0;
 `

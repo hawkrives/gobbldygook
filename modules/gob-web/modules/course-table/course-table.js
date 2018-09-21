@@ -31,7 +31,7 @@ const AddYearButton = styled(Button)`
 	}
 `
 
-const Container = styled.div``
+const Container = styled('div')``
 
 type PropTypes = {
 	addSemester: () => any,

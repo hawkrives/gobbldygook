@@ -11,7 +11,7 @@ import CourseWarnings from './warnings'
 import {to12HourTime} from '@gob/lib'
 import type {Course} from '@gob/types'
 
-export const Container = styled.article`
+export const Container = styled('article')`
 	display: block;
 
 	&:hover {
@@ -33,7 +33,7 @@ export const Title = styled(CourseTitle)`
 	${Row};
 `
 
-export const SummaryRow = styled.div`
+export const SummaryRow = styled('div')`
 	${Row};
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -53,12 +53,12 @@ const GeReqItem = styled(InlineListItem)`
 	}
 `
 
-const Identifier = styled.span`
+const Identifier = styled('span')`
 	font-feature-settings: 'tnum';
 `
 
-const Type = styled.span``
-const Prereqs = styled.span``
+const Type = styled('span')``
+const Prereqs = styled('span')``
 
 export type Props = {
 	className?: string,

@@ -2,7 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Rule = styled.hr`
+const Rule = styled('hr')`
     display: flex
     height: 100%;
     align-self: stretch;
@@ -10,15 +10,15 @@ const Rule = styled.hr`
     border-width: 0;
 `
 
-const LineRule = Rule.extend`
+const LineRule = styled(Rule)`
 	border-width: 1px;
 `
 
-const SpacerRule = Rule.extend`
+const SpacerRule = styled(Rule)`
 	padding: 0 0.5em;
 `
 
-const FlexSpacerRule = Rule.extend`
+const FlexSpacerRule = styled(Rule)`
 	flex: ${props => props.flex};
 `
 

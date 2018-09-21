@@ -4,14 +4,14 @@ import styled from 'styled-components'
 import * as theme from '../theme'
 import Spinner from 'react-spinkit'
 
-const Wrapper = styled.figure`
+const Wrapper = styled('figure')`
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-flow: column nowrap;
 `
 
-const Message = styled.figcaption`
+const Message = styled('figcaption')`
 	font-weight: 300;
 	margin-top: 1em;
 	color: ${theme.gray};

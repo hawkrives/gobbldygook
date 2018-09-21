@@ -4,7 +4,7 @@ import Link from 'react-router/lib/Link'
 import styled from 'styled-components'
 import * as theme from '../theme'
 
-const BaseButton = styled.button`
+const BaseButton = styled('button')`
 	cursor: pointer;
 
 	min-height: 3ex;
@@ -37,7 +37,7 @@ const BaseButton = styled.button`
 	-webkit-tap-highlight-color: transparent;
 `
 
-export const RaisedButton = BaseButton.extend`
+export const RaisedButton = styled(BaseButton)`
 	${theme.materialShadow};
 	background-color: ${theme.white};
 
@@ -60,7 +60,7 @@ export const RaisedButton = BaseButton.extend`
 	}
 `
 
-export const FlatButton = BaseButton.extend`
+export const FlatButton = styled(BaseButton)`
 	background-color: transparent;
 
 	&:hover {
@@ -86,11 +86,11 @@ export const FlatButton = BaseButton.extend`
 	}
 `
 
-export const FlatLinkButton = FlatButton.withComponent(Link).extend`
+export const FlatLinkButton = styled(FlatButton.withComponent(Link))`
     ${theme.linkUndecorated}
 `
 
-export const RaisedLinkButton = RaisedButton.withComponent(Link).extend`
+export const RaisedLinkButton = styled(RaisedButton.withComponent(Link))`
     ${theme.linkUndecorated}
 `
 
