@@ -2,7 +2,29 @@ import isString from 'lodash/isString'
 import uuid from 'uuid/v4'
 import {randomChar} from '@gob/lib'
 
-export function Schedule(data = {}) {
+type ScheduleType = {
+	id: string,
+	active: boolean,
+	index: number,
+	title: string,
+	clbids: Array<string>,
+	year: number,
+	semester: number,
+	metadata: Object,
+}
+
+type InputSchedule = {
+	id: mixed,
+	active: boolean,
+	index: number,
+	title: string,
+	clbids: Array<number | string>,
+	year: string | number,
+	semester: string | number,
+	metadata: Object,
+}
+
+export function Schedule(data: InputSchedule = {}): ScheduleType {
 	const baseSchedule = {
 		id: uuid(),
 		active: false,
