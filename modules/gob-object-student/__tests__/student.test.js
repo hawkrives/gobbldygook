@@ -56,6 +56,20 @@ describe('Student', () => {
 		expect(stu.overrides).toEqual(demoStudent.overrides)
 	})
 
+	it('turns an array of schedules into an object', () => {
+		let id = '123'
+		let input = {
+			schedules: [
+				{id: id}
+			]
+		}
+
+		let student = Student(input)
+
+		expect(typeof student.schedules).toBe('object')
+		expect(student.schedules[id].id).toBe(id)
+	})
+
 	it('turns into JSON', () => {
 		const stu = Student()
 		let result = stringify(stu)
