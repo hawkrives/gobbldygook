@@ -1,17 +1,17 @@
 // @flow
 import {db} from './db'
-import omit from 'lodash/omit'
 import {status, json} from '@gob/lib'
+import type {FabricationType} from '@gob/object-student'
 
 const baseUrl = 'https://stodevx.github.io/course-data'
 const networkCache = Object.create(null)
-export function getCourseFromNetwork(clbid: number) {
+export function getCourseFromNetwork(clbid: string) {
 	if (clbid in networkCache) {
 		return networkCache[clbid]
 	}
 
-	const id = clbid.toString().padStart(10, '0')
-	const dir = (Math.floor(clbid / 1000) * 1000).toString()
+	const id = clbid
+	const dir = (Math.floor(parseInt(clbid, 10) / 1000) * 1000).toString()
 
 	const path = `${baseUrl}/courses/${dir}/${id}.json`
 
@@ -23,7 +23,7 @@ export function getCourseFromNetwork(clbid: number) {
 }
 
 const courseCache = Object.create(null)
-export function getCourseFromDatabase(clbid: number) {
+export function getCourseFromDatabase(clbid: string) {
 	if (clbid in courseCache) {
 		return courseCache[clbid]
 	}
@@ -32,7 +32,8 @@ export function getCourseFromDatabase(clbid: number) {
 		.store('courses')
 		.index('clbid')
 		.get(clbid)
-		.then(course => omit(course, ['profWords', 'words', 'sourcePath']))
+		.then(course => course ? course : getCourseFromNetwork(clbid))
+		.then(({profWords: _p, words: _w, sourcePath: _s, ...course}) => course)
 
 	return courseCache[clbid].then(course => {
 		delete courseCache[clbid]
@@ -41,14 +42,9 @@ export function getCourseFromDatabase(clbid: number) {
 }
 
 // Gets a course from the database.
-// @param {Number} clbid - a class/lab ID
-// @param {Number} term - a course term
-// @param {Object} fabrications - a (clbid, course) object of fabrications
-// @returns {Promise} - TreoDatabasePromise
-// @fulfill {Object} - the course object, potentially with an embedded error message.
 export function getCourse(
-	{clbid, term}: {clbid: number, term: number},
-	fabrications: any = {},
+	{clbid, term}: {clbid: string, term: number},
+	fabrications: {[key: string]: FabricationType} = {},
 ) {
 	if (clbid in fabrications) {
 		return fabrications[clbid]
