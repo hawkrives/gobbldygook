@@ -35,7 +35,7 @@ const VerticalSegment = `
     padding: 0 20px;
 `
 
-const BottomToolbar = styled('div')`
+const BottomToolbar = styled.div`
 	${VerticalSegment};
 	border-top: ${theme.materialDivider};
 	margin-top: 0.5em;
@@ -46,7 +46,7 @@ const BottomToolbar = styled('div')`
 	align-items: center;
 `
 
-const RemoveCourseButton = styled(FlatButton)`
+const RemoveCourseButton = FlatButton.extend`
 	color: ${theme.red500};
 	padding-left: 0.5em;
 	padding-right: 0.5em;

@@ -18,7 +18,7 @@ const colorMap = {
 	'under-ten': theme.red300,
 }
 
-const Bar = styled('div')`
+const Bar = styled.div`
 	border: 1px solid currentColor;
 	border-radius: ${theme.baseBorderRadius};
 	background-color: white;
@@ -30,12 +30,12 @@ const Bar = styled('div')`
 			: theme.gray300};
 `
 
-const BarTrack = styled('div')`
+const BarTrack = styled.div`
 	height: 100%;
 	width: 100%;
 `
 
-const BarFill = styled('div')`
+const BarFill = styled.div`
 	background-color: currentColor;
 	max-width: 100%;
 	height: 100%;

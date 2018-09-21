@@ -12,7 +12,7 @@ import {expandYear, semesterName} from '@gob/school-st-olaf-college'
 import * as theme from '../../theme'
 import styled from 'styled-components'
 
-const Container = styled('div')`
+const Container = styled.div`
 	margin-bottom: ${theme.pageEdgePadding};
 `
 
@@ -21,7 +21,7 @@ const row = `
     flex-flow: row wrap;
 `
 
-const Header = styled('header')`
+const Header = styled.header`
 	${theme.noSelect};
 	margin: 0;
 
@@ -37,7 +37,7 @@ const Header = styled('header')`
 	font-size: 0.9em;
 `
 
-const TitleText = styled('h1')`
+const TitleText = styled.h1`
 	${theme.headingNeutral};
 	white-space: nowrap;
 	flex: 1;
@@ -73,7 +73,7 @@ const RemoveYearButton = styled(TitleButton)`
 	}
 `
 
-const SemesterList = styled('div')`
+const SemesterList = styled.div`
 	flex: 1;
 	${row};
 `

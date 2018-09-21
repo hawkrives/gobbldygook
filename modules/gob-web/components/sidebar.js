@@ -39,7 +39,7 @@ const StudentButtonsToolbar = styled(Toolbar)`
 	margin-bottom: 0.5em;
 `
 
-const SidebarElement = styled('aside')`
+const SidebarElement = styled.aside`
 	${theme.contentBlockSpacing};
 	flex: 1;
 

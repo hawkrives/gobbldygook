@@ -13,7 +13,7 @@ import {Toolbar} from '../../components/toolbar'
 import styled from 'styled-components'
 import * as theme from '../../theme'
 
-const AddAreaBlock = styled('div')`
+const AddAreaBlock = styled.div`
 	padding: ${theme.areaEdgePadding};
 	border-top: ${theme.materialDivider};
 `
@@ -22,7 +22,7 @@ const AddAreaToolbar = styled(Toolbar)`
 	margin-bottom: ${theme.areaEdgePadding};
 `
 
-const AreaChoice = styled('li')`
+const AreaChoice = styled.li`
 	display: flex;
 
 	justify-content: space-between;
@@ -33,25 +33,25 @@ const AreaChoice = styled('li')`
 	}
 `
 
-const AreaListing = styled('span')`
+const AreaListing = styled.span`
 	flex: 1;
 	display: flex;
 	flex-flow: column nowrap;
 `
 
-const AreaListingTitle = styled('span')`
+const AreaListingTitle = styled.span`
 	font-weight: 500;
 `
 
-const AreaListingRevision = styled('span')`
+const AreaListingRevision = styled.span`
 	font-size: 0.8em;
 `
 
-const ToggleAreaButton = styled(FlatButton)`
+const ToggleAreaButton = FlatButton.extend`
 	padding: 0.25em 1em;
 `
 
-const AddAreaFilter = styled('input')`
+const AddAreaFilter = styled.input`
 	flex: 1;
 	border: solid 1px ${theme.gray300};
 	padding: 0.25em;

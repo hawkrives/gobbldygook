@@ -14,7 +14,7 @@ type Props = {
 	notification: NotificationType,
 }
 
-let ProgressContainer = styled('div')`
+let ProgressContainer = styled.div`
 	display: flex;
 	flex-flow: row nowrap;
 	align-items: center;
@@ -29,19 +29,19 @@ let ProgressBar = styled(BasicProgressBar)`
 	color: ${theme.gray300};
 `
 
-let Percentage = styled('output')`
+let Percentage = styled.output`
 	color: ${theme.gray300};
 	margin-left: 0.5em;
 	font-feature-settings: 'lnum';
 `
 
-let Message = styled('h1')`
+let Message = styled.h1`
 	font-weight: 500;
 	font-size: 1em;
 	margin: 0;
 `
 
-let Content = styled('div')`
+let Content = styled.div`
 	flex: 1;
 `
 
@@ -55,7 +55,7 @@ let CloseButton = styled(Button)`
 	}
 `
 
-const Capsule = styled('li')`
+const Capsule = styled.li`
 	position: relative;
 
 	display: flex;

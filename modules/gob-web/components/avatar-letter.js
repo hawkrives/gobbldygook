@@ -3,7 +3,7 @@ import React from 'react'
 import isString from 'lodash/isString'
 import styled, {css} from 'styled-components'
 
-const Wrapper = styled('div')`
+const Wrapper = styled.div`
 	font-family: Fira Sans, Helvetica Neue, Helvetica, Arial, sans-serif !important;
 	font-weight: 200;
 	font-style: normal;

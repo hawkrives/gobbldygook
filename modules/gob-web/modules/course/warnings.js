@@ -34,7 +34,7 @@ const WarningIcon = styled(Icon)`
 	flex-shrink: 0;
 `
 
-const WarningMessage = styled('span')`
+const WarningMessage = styled.span`
 	flex: 1;
 	${theme.truncate};
 `

@@ -9,19 +9,19 @@ import {semesterName, buildDeptNum} from '@gob/school-st-olaf-college'
 import {to12HourTime} from '@gob/lib'
 import type {Course} from '@gob/types'
 
-const Heading = styled('h2')`
+const Heading = styled.h2`
 	font-weight: 500;
 	font-feature-settings: 'smcp';
 	font-size: 1em;
 	margin-bottom: 0;
 `
 
-const Description = styled('div')`
+const Description = styled.div`
 	hyphens: auto;
 	margin-bottom: 1em;
 `
 
-const Column = styled('div')`
+const Column = styled.div`
 	flex: 1;
 
 	@media screen and (min-width: 45em) {
@@ -31,11 +31,11 @@ const Column = styled('div')`
 	}
 `
 
-const InfoSegment = styled('div')`
+const InfoSegment = styled.div`
 	padding-bottom: 20px;
 `
 
-const ColumnsWrapper = styled('div')`
+const ColumnsWrapper = styled.div`
 	display: flex;
 	flex-flow: row nowrap;
 
@@ -44,7 +44,7 @@ const ColumnsWrapper = styled('div')`
 	}
 `
 
-const SummaryThing = styled('div')`
+const SummaryThing = styled.div`
 	white-space: normal;
 `
 

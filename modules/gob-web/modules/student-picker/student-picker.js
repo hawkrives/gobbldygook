@@ -15,12 +15,12 @@ import {BlockIcon} from '../../components/icon'
 import StudentList from './student-list'
 import styled from 'styled-components'
 
-const StudentListToolbar = styled(Toolbar)`
+const StudentListToolbar = Toolbar.extend`
 	width: 100%;
 	justify-content: center;
 `
 
-const StudentListButton = styled(FlatLinkButton)`
+const StudentListButton = FlatLinkButton.extend`
 	padding-left: 0.5em !important;
 	padding-right: 0.5em !important;
 	margin: 0 0.125em;
@@ -33,14 +33,14 @@ const StudentListButton = styled(FlatLinkButton)`
 	}
 `
 
-const Overview = styled('div')`
+const Overview = styled.div`
 	display: flex;
 	flex-direction: column;
 	max-width: 45em;
 	margin: 0 auto;
 `
 
-const StudentListToolbarWrapper = styled('div')`
+const StudentListToolbarWrapper = styled.div`
 	display: flex;
 	flex-flow: row wrap;
 	align-items: center;
@@ -48,7 +48,7 @@ const StudentListToolbarWrapper = styled('div')`
 	margin-bottom: 1em;
 `
 
-const AppTitle = styled('header')`
+const AppTitle = styled.header`
 	margin-top: 3em;
 	text-align: center;
 
@@ -69,12 +69,12 @@ const AppTitle = styled('header')`
 	}
 `
 
-const MakeStudentButton = styled(RaisedLinkButton)`
+const MakeStudentButton = RaisedLinkButton.extend`
 	max-width: 10em;
 	margin: 0 auto;
 `
 
-const FilterBox = styled('input')`
+const FilterBox = styled.input`
 	${theme.card};
 	flex: 3 0 auto;
 	align-self: center;

@@ -12,12 +12,12 @@ const BaseList = `
     padding: 0;
 `
 
-export const PlainList = styled('ul')`
+export const PlainList = styled.ul`
 	${BaseList};
 	list-style: none;
 `
 
-export const InlineList = styled('ul')`
+export const InlineList = styled.ul`
 	${BaseList};
 	display: inline-block;
 
@@ -26,17 +26,17 @@ export const InlineList = styled('ul')`
 	}
 `
 
-export const BulletedList = styled('ul')`
+export const BulletedList = styled.ul`
 	${BaseList};
 `
 
-export const NumberedList = styled('ol')`
+export const NumberedList = styled.ol`
 	${BaseList};
 `
 
-export const ListItem = styled('li')``
+export const ListItem = styled.li``
 
-export const InlineListItem = styled('li')`
+export const InlineListItem = styled.li`
 	display: inline-block;
 `
 
