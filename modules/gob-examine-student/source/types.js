@@ -1,5 +1,8 @@
 // @flow
 
+import type {Course} from '@gob/types'
+export type {Course}
+
 export type OverridesPath = string[]
 export type OverridesObject = {[key: string]: any}
 export type FulfillmentsPath = OverridesPath
@@ -31,23 +34,6 @@ export type Requirement = {
 	computed: boolean,
 	overridden?: boolean,
 	'children share courses'?: boolean,
-}
-
-export type Course = {
-	clbid: string,
-	credits: number,
-	crsid: string,
-	department: string,
-	gereqs: string[],
-	groupid: string,
-	level: number,
-	name: string,
-	number: number,
-	pf: boolean,
-	semester: number,
-	type: string,
-	year: number,
-	_extraKeys?: Array<string>,
 }
 
 export type CounterOperatorEnum = '$gte' | '$lte' | '$eq'
