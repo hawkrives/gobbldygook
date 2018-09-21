@@ -1,3 +1,5 @@
+// @flow
+
 export {convertStudent} from './convert-imported-student'
 
 export {

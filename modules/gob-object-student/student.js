@@ -44,6 +44,11 @@ export type StudentType = {
 	settings: {[key: string]: mixed},
 }
 
+export type HydratedStudentType = {
+	...$Exact<StudentType>,
+	canGraduate: boolean,
+}
+
 type IncomingStudent = {}
 
 export function Student(data: IncomingStudent): StudentType {

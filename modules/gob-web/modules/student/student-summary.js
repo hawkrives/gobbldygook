@@ -10,7 +10,7 @@ import ContentEditable from '../../components/content-editable'
 
 import {getActiveStudentCourses} from '../../helpers/get-active-student-courses'
 import {countCredits} from '@gob/examine-student'
-import {type StudentType} from '@gob/object-student'
+import type {HydratedStudentType, AreaOfStudyType} from '@gob/object-student'
 
 import './student-summary.scss'
 
@@ -48,7 +48,7 @@ type Props = {
 	randomizeHello?: boolean,
 	showAvatar?: boolean,
 	showMessage?: boolean,
-	student: StudentType,
+	student: HydratedStudentType,
 }
 
 export class StudentSummary extends React.PureComponent<Props> {
@@ -168,8 +168,8 @@ export class Footer extends React.PureComponent<FooterProps> {
 type DateSummaryProps = {
 	onChangeGraduation?: string => any,
 	onChangeMatriculation?: string => any,
-	matriculation: string,
-	graduation: string,
+	matriculation: number,
+	graduation: number,
 }
 
 export class DateSummary extends React.PureComponent<DateSummaryProps> {
@@ -204,7 +204,7 @@ export class DateSummary extends React.PureComponent<DateSummaryProps> {
 }
 
 type DegreeSummaryProps = {
-	studies: {type: string, name: string}[],
+	studies: Array<AreaOfStudyType>,
 }
 
 export class DegreeSummary extends React.PureComponent<DegreeSummaryProps> {

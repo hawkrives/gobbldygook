@@ -1,3 +1,5 @@
+// @flow
+
 import treo, {Database} from 'treo'
 
 import Promise from 'es6-promise'
@@ -8,5 +10,5 @@ import batchGet from '@gob/treo-plugin-batch-get'
 
 import defaultSchema from './schema'
 
-export const createDatabase = (name = 'gobbldygook', schema = defaultSchema) =>
+export const createDatabase = (name: string = 'gobbldygook', schema: typeof defaultSchema = defaultSchema) =>
 	new Database(name, schema).use(queryTreoDatabase()).use(batchGet())

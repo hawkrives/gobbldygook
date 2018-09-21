@@ -1,3 +1,5 @@
+// @flow
+
 export {areaTypeConstants} from './area-types'
 
 export {encodeStudent, prepareStudentForSave} from './encode-student'
@@ -56,7 +58,7 @@ export {
 	renameScheduleInStudent,
 	reorderCourseInSchedule,
 } from './student'
-export type {StudentType} from './student'
+export type {StudentType, HydratedStudentType} from './student'
 
 export {validateSchedule} from './validate-schedule'
 
