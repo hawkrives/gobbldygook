@@ -6,9 +6,9 @@ exports[`Schedule holds a schedule for a student 1`] = `
 Object {
   "active": true,
   "clbids": Array [
-    "0000000123",
-    "0000000234",
-    "0000000345",
+    "123",
+    "234",
+    "345",
   ],
   "id": "1",
   "index": 2,
