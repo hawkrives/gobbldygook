@@ -4,7 +4,7 @@ export default {
 	path: 'areas(/:type)(/:name)(/:revision)',
 
 	getComponents(location: mixed, cb: Function) {
-		(require: any).ensure(
+		;(require: any).ensure(
 			[],
 			require => {
 				cb(null, {

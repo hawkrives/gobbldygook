@@ -12,7 +12,7 @@ export default {
 				cb(null, {
 					content: {
 						getComponents(location: mixed, cb: Function) {
-							(require: any).ensure(
+							;(require: any).ensure(
 								[],
 								() => {
 									cb(null, {

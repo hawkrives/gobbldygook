@@ -3,7 +3,7 @@
 export default {
 	path: 'degub',
 	getComponents(state: mixed, cb: Function) {
-		(require: any).ensure(
+		;(require: any).ensure(
 			[],
 			() => {
 				cb(null, {

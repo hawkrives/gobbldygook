@@ -3,7 +3,7 @@
 export default {
 	path: 'search',
 	getComponents(state: mixed, cb: Function) {
-		(require: any).ensure(
+		;(require: any).ensure(
 			[],
 			() => {
 				cb(null, {
