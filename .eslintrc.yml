@@ -65,7 +65,7 @@ rules:
   no-var: error
   prefer-spread: warn
   quotes: [error, single, avoid-escape]
-  semi: [error, never]
+  semi: [warn, never]
 
   # react rules – https://github.com/yannickcr/eslint-plugin-react
   react/display-name: off
