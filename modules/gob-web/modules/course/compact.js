@@ -8,6 +8,8 @@ import {InlineList, InlineListItem} from '../../components/list'
 import CourseTitle from './course-title'
 import {buildDeptNum} from '@gob/school-st-olaf-college'
 import CourseWarnings from './warnings'
+import {to12HourTime} from '@gob/lib'
+import type {Course} from '@gob/types'
 
 export const Container = styled.article`
 	display: block;
@@ -61,7 +63,7 @@ const Prereqs = styled.span``
 export type Props = {
 	className?: string,
 	conflicts?: any[],
-	course: Object,
+	course: Course,
 	index?: number,
 	onClick?: Event => any,
 }
@@ -95,8 +97,10 @@ export default class CompactCourse extends React.PureComponent<Props> {
 					)}
 				</SummaryRow>
 				<SummaryRow>
-					{map(course.times, timestring => (
-						<span key={timestring}>{timestring}</span>
+					{(course.offerings || []).map(({day, start, end}, i) => (
+						<span key={i}>
+							{day} {to12HourTime(start)}-{to12HourTime(end)}
+						</span>
 					))}
 				</SummaryRow>
 			</Container>
