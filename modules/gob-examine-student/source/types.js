@@ -33,24 +33,19 @@ export type Requirement = {
 	'children share courses'?: boolean,
 }
 
-export type clbidT = number
-export type crsidT = number
-
-export type CourseType = 'Research' | 'FLAC'
-
 export type Course = {
-	clbid: clbidT,
+	clbid: string,
 	credits: number,
-	crsid: crsidT,
+	crsid: string,
 	department: string,
 	gereqs: string[],
-	groupid: number,
+	groupid: string,
 	level: number,
 	name: string,
 	number: number,
 	pf: boolean,
 	semester: number,
-	type: CourseType,
+	type: string,
 	year: number,
 	_extraKeys?: Array<string>,
 }
