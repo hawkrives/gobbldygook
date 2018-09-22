@@ -17,6 +17,11 @@ plugins:
   - react
   - flowtype
 
+settings:
+  react:
+    version: "16.5"
+    flowVersion: "0.81"
+
 env:
   browser: true
   es6: true

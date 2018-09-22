@@ -167,10 +167,8 @@ class ManualCreationScreen extends React.Component {
 				) : null}
 
 				<div className="intro">
-					Hi! My name is {nameEl}.
-					<br />
-					I matriculated in {matriculationEl}, and I plan to graduate
-					in {graduationEl}.
+					Hi! My name is {nameEl}.<br />I matriculated in{' '}
+					{matriculationEl}, and I plan to graduate in {graduationEl}.
 				</div>
 
 				<div className="areas">

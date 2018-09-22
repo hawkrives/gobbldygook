@@ -384,7 +384,6 @@ export function computeModifier({expr, ctx, courses}: ModifierChunkArgs) {
 		filtered = take(filtered, expr.$count.$num)
 	}
 
-	// eslint-disable-next-line no-confusing-arrow
 	filtered = filtered.map(
 		course => ('$course' in course ? (course: any).$course : course),
 	)

@@ -168,7 +168,6 @@ function evaluateModifier({expr, ctx, courses}) {
 		filtered = filterByWhereClause(filtered, expr.$where)
 	}
 
-	// eslint-disable-next-line no-confusing-arrow
 	filtered = map(
 		filtered,
 		course => ('$course' in course ? course.$course : course),

@@ -9,10 +9,5 @@ export {
 	splitDeptNum,
 } from './deptnums'
 
-export {
-	convertStudent,
-	getStudentInfo,
-	checkIfLoggedIn,
-	ExtensionNotLoadedError,
-	ExtensionTooOldError,
-} from './sis-parser'
+export {convertStudent} from './sis-parser'
+export type {PartialStudent} from './sis-parser'

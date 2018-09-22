@@ -1,6 +1,8 @@
 # CHANGELOG
 
 ## [Unreleased]
+- Removed sto-sis-time-parser, as it's now integrated into the data source
+- Updated SIS import procedure to use server-side code; allowed removal of htmlparser2 and css-select
 
 ## [3.0.0-beta6] - unreleased
 ### Areas of Study

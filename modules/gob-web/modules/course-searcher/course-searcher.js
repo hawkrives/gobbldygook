@@ -94,7 +94,8 @@ export default function CourseSearcher(props: CourseSearcherProps) {
 			<header className="sidebar-heading">
 				<div className="row">
 					<h2>
-						Course Search<br />
+						Course Search
+						<br />
 						{placeholderExtension}
 					</h2>
 					<Button

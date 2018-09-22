@@ -50,7 +50,6 @@ type Props = {
 }
 
 // needs to be a stateful component: otherwise DragDropContext can't assign a ref, which it needs
-// eslint-disable-next-line react/prefer-stateless-function
 export class App extends React.Component<Props> {
 	static defaultProps = {
 		content: <StudentPicker />,

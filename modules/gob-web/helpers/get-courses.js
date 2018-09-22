@@ -2,6 +2,7 @@
 import {db} from './db'
 import {status, json} from '@gob/lib'
 import type {FabricationType} from '@gob/object-student'
+import type {Course as CourseType} from '@gob/types'
 
 const baseUrl = 'https://stodevx.github.io/course-data'
 const networkCache = Object.create(null)
@@ -44,10 +45,10 @@ export function getCourseFromDatabase(clbid: string) {
 // Gets a course from the database.
 export function getCourse(
 	{clbid, term}: {clbid: string, term: number},
-	fabrications: {[key: string]: FabricationType} = {},
-) {
-	if (clbid in fabrications) {
-		return fabrications[clbid]
+	fabrications?: ?{[key: string]: FabricationType} = {},
+): Promise<CourseType | FabricationType> {
+	if (fabrications && clbid in fabrications) {
+		return Promise.resolve(fabrications[clbid])
 	}
 
 	let getCourseFrom = getCourseFromDatabase

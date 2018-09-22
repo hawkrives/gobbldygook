@@ -1,5 +1,4 @@
 /* global module, __dirname */
-/* eslint-disable camelcase */
 // @flow
 'use strict'
 
