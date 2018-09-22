@@ -35,7 +35,6 @@
     "delay": "^2.0.0",
     "fuzzysearch": "^1.0.3",
     "history": "^3.3.0",
-    "invariant": "^2.2.4",
     "js-yaml": "^3.12.0",
     "keymage": "^1.1.3",
     "listify": "^1.0.0",
