@@ -17,9 +17,9 @@
   "dependencies": {
     "@gob/examine-student": "^3.0.0-rc.2",
     "@gob/hanson-format": "^3.0.0-rc.2",
+    "@gob/lib": "^3.0.0-rc.2",
     "@gob/object-student": "^3.0.0-rc.2",
     "@gob/school-st-olaf-college": "^3.0.0-rc.2",
-    "@gob/lib": "^3.0.0-rc.2",
     "chalk": "^2.4.1",
     "esm": "^3.0.84",
     "flow-remove-types": "^1.2.3",
