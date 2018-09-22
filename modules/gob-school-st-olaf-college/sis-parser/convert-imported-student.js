@@ -55,7 +55,7 @@ type CourseGetter = (
 export async function convertStudent(
 	student: PartialStudent,
 	getCourse: CourseGetter,
-): HydratedStudentType {
+): Promise<HydratedStudentType> {
 	let studies = processStudies(student)
 
 	let info
@@ -69,7 +69,9 @@ export async function convertStudent(
 		getCourse,
 	)
 
-	return Student({...info, schedules, fabrications, studies})
+	let filledStudent: any = Student({...info, schedules, fabrications, studies})
+
+	return filledStudent
 }
 
 export async function processSchedules(

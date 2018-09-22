@@ -21,7 +21,7 @@ import debug from 'debug'
 const log = debug('web:react')
 import './method-import.scss'
 
-import type {HydratedStudentType, StudentType} from '@gob/object-student'
+import type {HydratedStudentType, HydratedScheduleType} from '@gob/object-student'
 
 type Props = {
 	+dispatch: Function,
@@ -173,18 +173,19 @@ class SISImportScreen extends React.Component<Props, State> {
 const StudentInfo = ({student}: {student: HydratedStudentType}) => (
 	<div>
 		<StudentSummary student={student} showMessage={false} />
+
 		<ul>
-			{map(groupBy(student.schedules, 'year'), (schedules, year) => (
+			{map(groupBy(student.schedules, s => s.year), (schedules: Array<HydratedScheduleType>, year) => (
 				<li key={year}>
 					{year}:
 					<ul>
-						{map(sortBy(schedules, 'semester'), schedule => (
+						{sortBy(schedules, s => s.semester).map((schedule: HydratedScheduleType) => (
 							<li key={schedule.semester}>
 								{semesterName(schedule.semester)}:
 								<ul>
-									{map(schedule.courses, course => (
-										<li key={course.deptnum}>
-											{course.deptnum} – {course.name}
+									{(schedule.courses || []).map(course => (
+										<li key={course.clbid}>
+											{course.department} {course.number}{course.section} – {course.name}
 										</li>
 									))}
 								</ul>
