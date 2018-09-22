@@ -135,4 +135,7 @@ class UploadFileScreen extends React.Component {
 
 let mapDispatch = dispatch => ({dispatch})
 
-export default connect(undefined, mapDispatch)(withRouter(UploadFileScreen))
+export default connect(
+	undefined,
+	mapDispatch,
+)(withRouter(UploadFileScreen))
