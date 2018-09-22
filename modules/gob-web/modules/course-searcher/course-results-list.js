@@ -91,7 +91,7 @@ function getRowHeight(
 	let course = items[itemIndex]
 	let courseRows = 2
 
-	let hasTimes = course.times && course.times.length
+	let hasTimes = course.offerings && course.offerings.length
 	let hasSubtitle =
 		course.name &&
 		course.title &&
