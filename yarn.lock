@@ -1102,7 +1102,7 @@ babel-code-frame@^6.26.0:
     esutils "^2.0.2"
     js-tokens "^3.0.2"
 
-babel-core@^6.0.0, babel-core@^6.20.0, babel-core@^6.26.0:
+babel-core@^6.0.0, babel-core@^6.26.0:
   version "6.26.3"
   resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-6.26.3.tgz#b2e2f09e342d0f0c88e2f02e067794125e75c207"
   dependencies:
@@ -1251,18 +1251,18 @@ babel-runtime@6.23.0:
     core-js "^2.4.0"
     regenerator-runtime "^0.10.0"
 
-babel-runtime@^6.0.0, babel-runtime@^6.22.0, babel-runtime@^6.26.0:
+babel-runtime@^6.22.0, babel-runtime@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   dependencies:
     core-js "^2.4.0"
     regenerator-runtime "^0.11.0"
 
-babel-stdin@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/babel-stdin/-/babel-stdin-1.1.1.tgz#1ac888481a281ebf6da7a00523ddc495e3e9ba1e"
+babel-stdin@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/babel-stdin/-/babel-stdin-2.0.0.tgz#d4cb9d2ef737bb8d63720b75e6bffc39a10981b3"
   dependencies:
-    babel-core "^6.20.0"
+    "@babel/core" "^7.0.0"
     find-up "^2.1.0"
     get-stdin "^5.0.1"
 
