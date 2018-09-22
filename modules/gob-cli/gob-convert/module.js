@@ -23,7 +23,9 @@ function args() {
 export default async function main() {
 	let {input} = args()
 
-	let data = (input.length ? await loadJsonFile(input[0]) : JSON.parse(await stdin()))
+	let data = input.length
+		? await loadJsonFile(input[0])
+		: JSON.parse(await stdin())
 
 	let hydrated = await convertStudent(data, getCourse)
 

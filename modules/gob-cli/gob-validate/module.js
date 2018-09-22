@@ -9,7 +9,12 @@ import meow from 'meow'
 import stdin from 'get-stdin'
 import loadJsonFile from 'load-json-file'
 import {getCourse} from '../lib'
-import {validateSchedule, type StudentType, type ScheduleType, type HydratedScheduleType} from '@gob/object-student'
+import {
+	validateSchedule,
+	type StudentType,
+	type ScheduleType,
+	type HydratedScheduleType,
+} from '@gob/object-student'
 import {toPrettyTerm, buildDeptNum} from '@gob/school-st-olaf-college'
 const {version} = require('../package.json')
 
@@ -26,12 +31,18 @@ const print = (indent, message) => {
 export default async function main() {
 	let {input} = args()
 
-	let data: StudentType = (input.length ? await loadJsonFile(input[0]) : JSON.parse(await stdin()))
+	let data: StudentType = input.length
+		? await loadJsonFile(input[0])
+		: JSON.parse(await stdin())
 
 	let promises = Object.values(data.schedules).map(async (schedule: any) => {
 		;(schedule: ScheduleType)
 		let term = parseInt(`${schedule.year}${schedule.semester}`)
-		;(schedule: any).courses = await Promise.all(schedule.clbids.map(clbid => getCourse({clbid, term}, data.fabrications)))
+		;(schedule: any).courses = await Promise.all(
+			schedule.clbids.map(clbid =>
+				getCourse({clbid, term}, data.fabrications),
+			),
+		)
 	})
 
 	await Promise.all(promises)

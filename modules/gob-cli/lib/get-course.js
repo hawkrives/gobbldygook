@@ -8,7 +8,7 @@ const Keyv = require('keyv')
 const KeyvFile = require('keyv-file')
 
 const keyv = new Keyv({
-  store: new KeyvFile()
+	store: new KeyvFile(),
 })
 
 type ErrorType = {

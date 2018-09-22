@@ -16,7 +16,7 @@ export function buildDeptNum(
 	},
 	includeSection?: boolean = false,
 ) {
-	let {department, number, section = '', type=null} = course
+	let {department, number, section = '', type = null} = course
 
 	const deptnumString = `${department} ${number}`
 
