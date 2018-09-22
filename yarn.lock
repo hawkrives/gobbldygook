@@ -7591,12 +7591,6 @@ sto-course-related-data@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/sto-course-related-data/-/sto-course-related-data-4.0.2.tgz#27bf1ea3e50d709d17760c73c4d773b2a8e1280e"
 
-sto-sis-time-parser@^2.3.3:
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/sto-sis-time-parser/-/sto-sis-time-parser-2.3.3.tgz#566b663997f6ec6cdd1e585456ecb552af977a47"
-  dependencies:
-    lodash "^4.0.0"
-
 stream-browserify@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/stream-browserify/-/stream-browserify-2.0.1.tgz#66266ee5f9bdb9940a4e4514cafb43bb71e5c9db"
