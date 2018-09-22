@@ -14,6 +14,7 @@
     "stats-dev": "webpack --bail --profile --json > stats.json && echo 'open http://webpack.github.io/analyse/'"
   },
   "dependencies": {
+    "@babel/runtime": "^7.0.0",
     "@gob/colors": "^3.0.0-rc.2",
     "@gob/examine-student": "^3.0.0-rc.2",
     "@gob/hanson-format": "^3.0.0-rc.2",
@@ -26,7 +27,6 @@
     "@gob/webpack-plugin-html": "^1.0.0",
     "@gob/worker-check-student": "^3.0.0-rc.2",
     "@gob/worker-load-data": "^3.0.0-rc.2",
-    "babel-runtime": "^6.26.0",
     "bugsnag-js": "^4.7.3",
     "classnames": "^2.2.6",
     "codemirror": "^5.39.0",
@@ -71,7 +71,7 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "babel-loader": "^7.1.5",
+    "babel-loader": "^8.0.0",
     "case-sensitive-paths-webpack-plugin": "^2.1.2",
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.5.2",
