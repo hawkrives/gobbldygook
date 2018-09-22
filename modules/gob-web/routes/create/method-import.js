@@ -17,8 +17,6 @@ import sortBy from 'lodash/sortBy'
 import {initStudent} from '../../redux/students/actions/init-student'
 import {connect} from 'react-redux'
 import withRouter from 'react-router/lib/withRouter'
-import debug from 'debug'
-const log = debug('web:react')
 import './method-import.scss'
 
 import type {
@@ -69,9 +67,9 @@ class SISImportScreen extends React.Component<Props, State> {
 		try {
 			let student = await convertStudent(parsedStudentText, getCourse)
 			this.setState(() => ({student}))
-		} catch (err) {
-			log(err)
-			this.setState(() => ({error: serializeError(err)}))
+		} catch (error) {
+			console.warn(error)
+			this.setState(() => ({error: serializeError(error)}))
 		}
 	}
 
@@ -93,6 +91,7 @@ class SISImportScreen extends React.Component<Props, State> {
 				try {
 					return {parsedStudentText: JSON.parse(data)}
 				} catch (error) {
+					console.warn(error)
 					return {error}
 				}
 			},
