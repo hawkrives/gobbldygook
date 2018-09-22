@@ -8,15 +8,20 @@ import saveStudentsMiddleware from './middleware/save-students'
 import rootReducer from './reducer'
 import freezingMiddleware from 'redux-freeze'
 
+let middleware = [
+	promiseMiddleware,
+	thunkMiddleware,
+	freezingMiddleware,
+	checkStudentsMiddleware,
+	saveStudentsMiddleware,
+]
+
+if (!global.TESTING) {
+	middleware.push(loggingMiddleware({duration: true, collapsed: true}))
+}
+
 const finalCreateStore = compose(
-	applyMiddleware(
-		promiseMiddleware,
-		thunkMiddleware,
-		freezingMiddleware,
-		checkStudentsMiddleware,
-		saveStudentsMiddleware,
-		loggingMiddleware({duration: true, collapsed: true}),
-	),
+	applyMiddleware(...middleware),
 	window && window.devToolsExtension ? window.devToolsExtension() : f => f,
 )(createStore)
 
