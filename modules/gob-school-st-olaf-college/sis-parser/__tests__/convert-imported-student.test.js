@@ -56,16 +56,19 @@ describe('convertStudent', () => {
 		]
 
 		for (let expected of expectedStudies) {
-			expect(actual.studies).toContainEqual(expect.objectContaining(expected))
+			expect(actual.studies).toContainEqual(
+				expect.objectContaining(expected),
+			)
 		}
-
 	})
 
 	it('contains all of the expected schedules', async () => {
 		let actual = await convertStudent(sample, getCourseMock)
 
 		for (let expected of expectedSchedules) {
-			expect(Object.values(actual.schedules)).toContainEqual(expect.objectContaining(expected))
+			expect(Object.values(actual.schedules)).toContainEqual(
+				expect.objectContaining(expected),
+			)
 		}
 	})
 })

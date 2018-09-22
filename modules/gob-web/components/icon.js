@@ -10,7 +10,8 @@ export const InlineIcon = styled.svg.attrs({
 })`
 	width: 1em;
 	height: 1em;
-	${(props) => props.large ? 'width: 1.5em; height: 1.5em;' : ''}
+
+	${props => (props.large ? 'width: 1.5em; height: 1.5em;' : '')};
 
 	fill: currentColor;
 	display: inline-block;

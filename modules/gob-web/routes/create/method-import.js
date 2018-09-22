@@ -21,7 +21,10 @@ import debug from 'debug'
 const log = debug('web:react')
 import './method-import.scss'
 
-import type {HydratedStudentType, HydratedScheduleType} from '@gob/object-student'
+import type {
+	HydratedStudentType,
+	HydratedScheduleType,
+} from '@gob/object-student'
 
 type Props = {
 	+dispatch: Function,
@@ -85,15 +88,18 @@ class SISImportScreen extends React.Component<Props, State> {
 
 		this.setState(() => ({rawStudentText: data}))
 
-		this.setState(() => {
-			try {
-				return {parsedStudentText: JSON.parse(data)}
-			} catch (error) {
-				return {error}
-			}
-		}, () => {
-			this.handleImportData()
-		})
+		this.setState(
+			() => {
+				try {
+					return {parsedStudentText: JSON.parse(data)}
+				} catch (error) {
+					return {error}
+				}
+			},
+			() => {
+				this.handleImportData()
+			},
+		)
 	}
 
 	render() {
@@ -175,25 +181,35 @@ const StudentInfo = ({student}: {student: HydratedStudentType}) => (
 		<StudentSummary student={student} showMessage={false} />
 
 		<ul>
-			{map(groupBy(student.schedules, s => s.year), (schedules: Array<HydratedScheduleType>, year) => (
-				<li key={year}>
-					{year}:
-					<ul>
-						{sortBy(schedules, s => s.semester).map((schedule: HydratedScheduleType) => (
-							<li key={schedule.semester}>
-								{semesterName(schedule.semester)}:
-								<ul>
-									{(schedule.courses || []).map(course => (
-										<li key={course.clbid}>
-											{course.department} {course.number}{course.section} – {course.name}
-										</li>
-									))}
-								</ul>
-							</li>
-						))}
-					</ul>
-				</li>
-			))}
+			{map(
+				groupBy(student.schedules, s => s.year),
+				(schedules: Array<HydratedScheduleType>, year) => (
+					<li key={year}>
+						{year}:
+						<ul>
+							{sortBy(schedules, s => s.semester).map(
+								(schedule: HydratedScheduleType) => (
+									<li key={schedule.semester}>
+										{semesterName(schedule.semester)}:
+										<ul>
+											{(schedule.courses || []).map(
+												course => (
+													<li key={course.clbid}>
+														{course.department}{' '}
+														{course.number}
+														{course.section} –{' '}
+														{course.name}
+													</li>
+												),
+											)}
+										</ul>
+									</li>
+								),
+							)}
+						</ul>
+					</li>
+				),
+			)}
 		</ul>
 	</div>
 )

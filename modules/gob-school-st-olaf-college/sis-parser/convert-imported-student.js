@@ -69,7 +69,12 @@ export async function convertStudent(
 		getCourse,
 	)
 
-	let filledStudent: any = Student({...info, schedules, fabrications, studies})
+	let filledStudent: any = Student({
+		...info,
+		schedules,
+		fabrications,
+		studies,
+	})
 
 	return filledStudent
 }

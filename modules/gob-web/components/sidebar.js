@@ -73,14 +73,18 @@ function Sidebar(props: PropTypes) {
 					onClick={() => undo(studentId)}
 					disabled={!canUndo}
 				>
-					<BlockIcon large={true}>{!canUndo ? iosUndoOutline : iosUndo}</BlockIcon>
+					<BlockIcon large={true}>
+						{!canUndo ? iosUndoOutline : iosUndo}
+					</BlockIcon>
 				</ToolbarButton>
 				<ToolbarButton
 					title="Redo"
 					onClick={() => redo(studentId)}
 					disabled={!canRedo}
 				>
-					<BlockIcon large={true}>{!canRedo ? iosRedoOutline : iosRedo}</BlockIcon>
+					<BlockIcon large={true}>
+						{!canRedo ? iosRedoOutline : iosRedo}
+					</BlockIcon>
 				</ToolbarButton>
 
 				<Separator type="spacer" />
