@@ -14,7 +14,16 @@
     "useTabs": true,
     "singleQuote": true,
     "semi": false,
-    "bracketSpacing": false
+    "bracketSpacing": false,
+    "overrides": [
+      {
+        "files": "**/package.json",
+        "options": {
+          "useTabs": false,
+          "tabWidth": 2
+        }
+      }
+    ]
   },
   "dependencies": {
     "@gob/examine-student": "^3.0.0-rc.2",
