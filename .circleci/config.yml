@@ -8,6 +8,12 @@ x-config:
     paths: [~/.cache/yarn]
   - &restore-cache-yarn
     key: 'v1-yarn-dependencies-{{ arch }}-{{ checksum "yarn.lock" }}'
+x-workspace:
+  - &persist-workspace-node_modules
+    root: ./node_modules
+    paths: [./*]
+  - &attach-workspace-node_modules
+    at: ./node_modules
 
 workflows:
   version: 2
@@ -29,6 +35,7 @@ jobs:
       - run: yarn install
       - run: yarn --version
       - save_cache: *save-cache-yarn
+      - persist_to_workspace: *persist-workspace-node_modules
 
   flow:
     docker: *image
@@ -36,9 +43,7 @@ jobs:
       task: flow
     steps:
       - checkout
-      - restore_cache: *restore-cache-yarn
-      - run: yarn install
-      - save_cache: *save-cache-yarn
+      - attach_workspace: *attach-workspace-node_modules
       - run: yarn run --silent flow check --quiet
 
   flow-coverage:
@@ -47,9 +52,7 @@ jobs:
       task: flow
     steps:
       - checkout
-      - restore_cache: *restore-cache-yarn
-      - run: yarn install
-      - save_cache: *save-cache-yarn
+      - attach_workspace: *attach-workspace-node_modules
       - run: yarn run --silent flow-check-coverage
 
   jest:
@@ -59,9 +62,7 @@ jobs:
       JEST_JUNIT_OUTPUT: ./test-results/jest/junit.xml
     steps:
       - checkout
-      - restore_cache: *restore-cache-yarn
-      - run: yarn install
-      - save_cache: *save-cache-yarn
+      - attach_workspace: *attach-workspace-node_modules
       - run: yarn run --silent test --coverage
       - run:
           name: coveralls
@@ -78,9 +79,7 @@ jobs:
       task: prettier
     steps:
       - checkout
-      - restore_cache: *restore-cache-yarn
-      - run: yarn install
-      - save_cache: *save-cache-yarn
+      - attach_workspace: *attach-workspace-node_modules
       - run: yarn run pretty
       - run: git diff --exit-code
 
@@ -90,9 +89,7 @@ jobs:
       task: lint
     steps:
       - checkout
-      - restore_cache: *restore-cache-yarn
-      - run: yarn install
-      - save_cache: *save-cache-yarn
+      - attach_workspace: *attach-workspace-node_modules
       - run: mkdir -p test-results/eslint/
       - run: yarn run --silent lint
       - run: yarn run --silent lint --format junit > test-results/eslint/junit.xml
@@ -105,9 +102,7 @@ jobs:
       task: build
     steps:
       - checkout
-      - restore_cache: *restore-cache-yarn
-      - run: yarn install
-      - save_cache: *save-cache-yarn
+      - attach_workspace: *attach-workspace-node_modules
       - run: yarn run --silent build
       - run: node scripts/rearrange-for-circle.js
       - store_artifacts:
