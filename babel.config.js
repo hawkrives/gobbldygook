@@ -1,9 +1,9 @@
 module.exports = {
 	presets: [
-		'react',
-		'flow',
+		'@babel/preset-react',
+		'@babel/preset-flow',
 		[
-			'env',
+			'@babel/preset-env',
 			{
 				modules: false,
 				targets: {
@@ -17,20 +17,20 @@ module.exports = {
 		],
 	],
 	plugins: [
-		'transform-class-properties',
-		'transform-object-rest-spread',
-		'transform-react-display-name',
+		'@babel/plugin-proposal-class-properties',
+		'@babel/plugin-proposal-object-rest-spread',
+		'@babel/plugin-transform-react-display-name',
 		'babel-plugin-styled-components',
-		['transform-runtime', {polyfill: false, regenerator: false}],
+		['@babel/plugin-transform-runtime', {regenerator: false}],
 		// turns `import {sum} from 'lodash'`
 		// into `import sum from 'lodash/sum'`
-		// "lodash",
+		// "babel-plugin-lodash",
 	],
 	env: {
 		test: {
 			presets: [
 				[
-					'env',
+					'@babel/preset-env',
 					{
 						targets: {node: true},
 						modules: 'commonjs',
