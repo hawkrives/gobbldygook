@@ -3,7 +3,6 @@
 import React, {Component} from 'react'
 import ScreenToolbar from './screen-toolbar'
 
-// eslint-disable-next-line react/prefer-stateless-function
 export default class DriveLinkScreen extends Component<void> {
 	render() {
 		return (

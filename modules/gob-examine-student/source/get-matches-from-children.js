@@ -35,7 +35,6 @@ export default function getMatchesFromChildren(
 
 	// either use all of the child requirements in the computation,
 	if (expr.$children === '$all') {
-		// eslint-disable-line no-empty
 		// do nothing; the default case.
 	} else if (Array.isArray(expr.$children)) {
 		// or just use some of them (those listed in expr.$children)

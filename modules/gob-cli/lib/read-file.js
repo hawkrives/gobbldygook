@@ -40,7 +40,7 @@ module.exports.tryReadFile = tryReadFile
 function tryReadFile(path) {
 	try {
 		return fs.readFileSync(path, {encoding: 'utf-8'})
-	} catch (err) {} // eslint-disable-line brace-style, no-empty
+	} catch (err) {} // eslint-disable-line no-empty
 
 	return false
 }
@@ -49,7 +49,7 @@ module.exports.tryReadJsonFile = tryReadJsonFile
 function tryReadJsonFile(path) {
 	try {
 		return JSON.parse(fs.readFileSync(path, {encoding: 'utf-8'}))
-	} catch (err) {} // eslint-disable-line brace-style, no-empty
+	} catch (err) {} // eslint-disable-line no-empty
 
 	return false
 }
