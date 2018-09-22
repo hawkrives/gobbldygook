@@ -5,7 +5,6 @@ import CourseExpression from './expression--course'
 import ResultIndicator from './result-indicator'
 
 import type {
-	Expression as ExpressionType,
 	Qualifier,
 	Qualification,
 	QualificationValue,
@@ -66,7 +65,6 @@ function makeOfExpression({expr, ctx}) {
 				expr.$count.$operator,
 		  )} ${expr.$count.$num} from among`
 
-	// const contents = map(orderBy(expr.$of, ['_result'], ['desc']), (ex, i) =>
 	const contents = expr.$of.map((ex, i) => (
 		<Expression key={i} expr={ex} ctx={ctx} />
 	))
