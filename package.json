@@ -15,7 +15,7 @@
     "flow": "flow",
     "lint": "eslint --cache --report-unused-disable-directives --max-warnings=0 modules/",
     "netlify": "npm run build -- -- --no-progress && npm run bugsnag",
-    "pretty": "prettier --write 'config/**/*.js' 'modules/**/*.{js,scss}'",
+    "pretty": "prettier --write '{*,.*,{.circleci,modules,config,scripts}/**/*}.{js,json,scss,yml,yaml}'",
     "p": "pretty-quick",
     "start": "cd modules/gob-web && npm start",
     "test": "jest",
@@ -27,7 +27,16 @@
     "useTabs": true,
     "singleQuote": true,
     "semi": false,
-    "bracketSpacing": false
+    "bracketSpacing": false,
+    "overrides": [
+      {
+        "files": "**/package.json",
+        "options": {
+          "useTabs": false,
+          "tabWidth": 2
+        }
+      }
+    ]
   },
   "jest": {
     "collectCoverageFrom": [
