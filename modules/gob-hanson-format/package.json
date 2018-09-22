@@ -6,7 +6,7 @@
   "author": "Hawken MacKay Rives",
   "license": "MIT",
   "scripts": {
-    "build": "pegjs --allowed-start-rules Result,Filter < ./parse-hanson-string.pegjs | babel-stdin > ./parse-hanson-string.js && prettier --write ./parse-hanson-string.js"
+    "build": "pegjs --allowed-start-rules Result,Filter < ./parse-hanson-string.pegjs | babel-stdin | prettier --parser babylon > ./parse-hanson-string.js"
   },
   "dependencies": {
     "@gob/examine-student": "^3.0.0-rc.2",
