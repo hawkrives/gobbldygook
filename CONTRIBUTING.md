@@ -2,17 +2,17 @@
 
 We're using [conventional-changelog](https://github.com/bcoe/conventional-changelog-standard/blob/master/convention.md) to automatically generate the changelogs. What that means is that there's a specified format for a commit:
 
-	fix: stop graphite breaking when width < 0.1
+    fix: stop graphite breaking when width < 0.1
 
-	Closes #28
+    Closes #28
 
 In short,
 
-	<type>(<scope>): <subject>
-	<BLANK LINE>
-	<optional body>
-	<BLANK LINE>
-	<optional footer>
+    <type>(<scope>): <subject>
+    <BLANK LINE>
+    <optional body>
+    <BLANK LINE>
+    <optional footer>
 
 The subject contains succinct description of the change:
 
