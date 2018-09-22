@@ -1,6 +1,6 @@
 branches:
-  only:
-    - master
+    only:
+        - master
 
 sudo: false
 dist: trusty
@@ -8,14 +8,14 @@ language: node_js
 node_js: 10
 
 stages:
-  - name: Greenkeeper
-    if: branch =~ ^greenkeeper\/
+    - name: Greenkeeper
+      if: branch =~ ^greenkeeper\/
 
 jobs:
-  include:
-    # Run greenkeeper stuff
-    - stage: Greenkeeper
-      env: [EXEC=greenkeeper]
-      install: npm install -g greenkeeper-lockfile@1
-      script: greenkeeper-lockfile-update
-      after_script: greenkeeper-lockfile-upload
+    include:
+        # Run greenkeeper stuff
+        - stage: Greenkeeper
+          env: [EXEC=greenkeeper]
+          install: npm install -g greenkeeper-lockfile@1
+          script: greenkeeper-lockfile-update
+          after_script: greenkeeper-lockfile-upload

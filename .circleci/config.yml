@@ -1,115 +1,114 @@
----
 version: 2
 
 x-config:
-  - &image [{image: 'circleci/node:10'}]
-  - &save-cache-yarn
-    key: 'v1-yarn-dependencies-{{ arch }}-{{ checksum "yarn.lock" }}'
-    paths: [~/.cache/yarn]
-  - &restore-cache-yarn
-    key: 'v1-yarn-dependencies-{{ arch }}-{{ checksum "yarn.lock" }}'
+    - &image [{image: 'circleci/node:10'}]
+    - &save-cache-yarn
+      key: 'v1-yarn-dependencies-{{ arch }}-{{ checksum "yarn.lock" }}'
+      paths: [~/.cache/yarn]
+    - &restore-cache-yarn
+      key: 'v1-yarn-dependencies-{{ arch }}-{{ checksum "yarn.lock" }}'
 x-workspace:
-  - &persist-workspace-node_modules
-    root: ./node_modules
-    paths: [./*]
-  - &attach-workspace-node_modules
-    at: ./node_modules
+    - &persist-workspace-node_modules
+      root: ./node_modules
+      paths: [./*]
+    - &attach-workspace-node_modules
+      at: ./node_modules
 
 workflows:
-  version: 2
-  build:
-    jobs:
-      - cache-yarn
-      - flow: {requires: [cache-yarn]}
-      - jest: {requires: [cache-yarn]}
-      - prettier: {requires: [cache-yarn]}
-      - eslint: {requires: [cache-yarn]}
-      - build: {requires: [cache-yarn]}
+    version: 2
+    build:
+        jobs:
+            - cache-yarn
+            - flow: {requires: [cache-yarn]}
+            - jest: {requires: [cache-yarn]}
+            - prettier: {requires: [cache-yarn]}
+            - eslint: {requires: [cache-yarn]}
+            - build: {requires: [cache-yarn]}
 
 jobs:
-  cache-yarn:
-    docker: *image
-    steps:
-      - checkout
-      - restore_cache: *restore-cache-yarn
-      - run: yarn install
-      - run: yarn --version
-      - save_cache: *save-cache-yarn
-      - persist_to_workspace: *persist-workspace-node_modules
+    cache-yarn:
+        docker: *image
+        steps:
+            - checkout
+            - restore_cache: *restore-cache-yarn
+            - run: yarn install
+            - run: yarn --version
+            - save_cache: *save-cache-yarn
+            - persist_to_workspace: *persist-workspace-node_modules
 
-  flow:
-    docker: *image
-    environment:
-      task: flow
-    steps:
-      - checkout
-      - attach_workspace: *attach-workspace-node_modules
-      - run: yarn run --silent flow check --quiet
+    flow:
+        docker: *image
+        environment:
+            task: flow
+        steps:
+            - checkout
+            - attach_workspace: *attach-workspace-node_modules
+            - run: yarn run --silent flow check --quiet
 
-  flow-coverage:
-    docker: *image
-    environment:
-      task: flow
-    steps:
-      - checkout
-      - attach_workspace: *attach-workspace-node_modules
-      - run: yarn run --silent flow-check-coverage
+    flow-coverage:
+        docker: *image
+        environment:
+            task: flow
+        steps:
+            - checkout
+            - attach_workspace: *attach-workspace-node_modules
+            - run: yarn run --silent flow-check-coverage
 
-  jest:
-    docker: *image
-    environment:
-      task: jest
-      JEST_JUNIT_OUTPUT: ./test-results/jest/junit.xml
-    steps:
-      - checkout
-      - attach_workspace: *attach-workspace-node_modules
-      - run: yarn run --silent test --coverage
-      - run:
-          name: coveralls
-          command: |
-            export PATH=$PATH:$(yarn global bin)
-            export COVERALLS_SERVICE_NAME=CircleCI
-            export COVERALLS_SERVICE_JOB_ID=$CIRCLE_BUILD_NUM
-            yarn global add coveralls
-            coveralls < ./coverage/lcov.info
+    jest:
+        docker: *image
+        environment:
+            task: jest
+            JEST_JUNIT_OUTPUT: ./test-results/jest/junit.xml
+        steps:
+            - checkout
+            - attach_workspace: *attach-workspace-node_modules
+            - run: yarn run --silent test --coverage
+            - run:
+                  name: coveralls
+                  command: |
+                      export PATH=$PATH:$(yarn global bin)
+                      export COVERALLS_SERVICE_NAME=CircleCI
+                      export COVERALLS_SERVICE_JOB_ID=$CIRCLE_BUILD_NUM
+                      yarn global add coveralls
+                      coveralls < ./coverage/lcov.info
 
-  prettier:
-    docker: *image
-    environment:
-      task: prettier
-    steps:
-      - checkout
-      - attach_workspace: *attach-workspace-node_modules
-      - run: yarn run pretty
-      - run: git diff --exit-code
+    prettier:
+        docker: *image
+        environment:
+            task: prettier
+        steps:
+            - checkout
+            - attach_workspace: *attach-workspace-node_modules
+            - run: yarn run pretty
+            - run: git diff --exit-code
 
-  eslint:
-    docker: *image
-    environment:
-      task: lint
-    steps:
-      - checkout
-      - attach_workspace: *attach-workspace-node_modules
-      - run: mkdir -p test-results/eslint/
-      - run:
-          name: yarn run lint
-          command: yarn run --silent lint
-          when: always
-      - run:
-          name: yarn run lint --junit
-          command: yarn run --silent lint --format junit > test-results/eslint/junit.xml
-          when: always
-      - store_test_results:
-          path: ./test-results
+    eslint:
+        docker: *image
+        environment:
+            task: lint
+        steps:
+            - checkout
+            - attach_workspace: *attach-workspace-node_modules
+            - run: mkdir -p test-results/eslint/
+            - run:
+                  name: yarn run lint
+                  command: yarn run --silent lint
+                  when: always
+            - run:
+                  name: yarn run lint --junit
+                  command: yarn run --silent lint --format junit > test-results/eslint/junit.xml
+                  when: always
+            - store_test_results:
+                  path: ./test-results
 
-  build:
-    docker: *image
-    environment:
-      task: build
-    steps:
-      - checkout
-      - attach_workspace: *attach-workspace-node_modules
-      - run: yarn run --silent build
-      - run: node scripts/rearrange-for-circle.js
-      - store_artifacts:
-          path: ./modules/gob-web/build
+    build:
+        docker: *image
+        environment:
+            task: build
+        steps:
+            - checkout
+            - attach_workspace: *attach-workspace-node_modules
+            - run: yarn run --silent build
+            - run: node scripts/rearrange-for-circle.js
+            - store_artifacts:
+                  path: ./modules/gob-web/build
