@@ -1,4 +1,3 @@
 modules/gob-web/styles/normalize.scss
-*.md
 flow-typed/
 build/

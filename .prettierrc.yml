@@ -9,6 +9,9 @@ overrides:
   - files: '{.*,*}.{yml,yaml}'
     options:
       tabWidth: 2
+  - files: '*.md'
+    options:
+      tabWidth: 2
   - files: '**/package.json'
     options:
       useTabs: false
