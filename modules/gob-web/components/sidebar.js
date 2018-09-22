@@ -60,10 +60,10 @@ function Sidebar(props: PropTypes) {
 		<SidebarElement>
 			<StudentButtonsToolbar>
 				<ToolbarButton to="/" title="Students">
-					<BlockIcon>{iosPeopleOutline}</BlockIcon>
+					<BlockIcon large={true}>{iosPeopleOutline}</BlockIcon>
 				</ToolbarButton>
 				<ToolbarButton to={`/s/${studentId}/search`} title="Search">
-					<BlockIcon>{iosSearch}</BlockIcon>
+					<BlockIcon large={true}>{iosSearch}</BlockIcon>
 				</ToolbarButton>
 
 				<Separator type="spacer" />
@@ -73,20 +73,20 @@ function Sidebar(props: PropTypes) {
 					onClick={() => undo(studentId)}
 					disabled={!canUndo}
 				>
-					<BlockIcon>{!canUndo ? iosUndoOutline : iosUndo}</BlockIcon>
+					<BlockIcon large={true}>{!canUndo ? iosUndoOutline : iosUndo}</BlockIcon>
 				</ToolbarButton>
 				<ToolbarButton
 					title="Redo"
 					onClick={() => redo(studentId)}
 					disabled={!canRedo}
 				>
-					<BlockIcon>{!canRedo ? iosRedoOutline : iosRedo}</BlockIcon>
+					<BlockIcon large={true}>{!canRedo ? iosRedoOutline : iosRedo}</BlockIcon>
 				</ToolbarButton>
 
 				<Separator type="spacer" />
 
 				<ToolbarButton to={`/s/${studentId}/share`} title="Share">
-					<BlockIcon>{iosUploadOutline}</BlockIcon>
+					<BlockIcon large={true}>{iosUploadOutline}</BlockIcon>
 				</ToolbarButton>
 			</StudentButtonsToolbar>
 
