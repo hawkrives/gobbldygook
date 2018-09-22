@@ -1,18 +1,20 @@
 {
-    "areas": [{"type": "major", "name": "Asian Studies", "revision": "2011-12"}],
-    "courses": [
-        {"department": ["JAPAN"], "number": 111, "crsid": 1},
-        {"department": ["JAPAN"], "number": 112, "crsid": 2},
-        {"department": ["JAPAN"], "number": 231, "crsid": 3},
-        {"department": ["JAPAN"], "number": 232, "crsid": 4},
-        {"department": ["ASIAN"], "number": 275, "crsid": 5},
-        {"department": ["ASIAN"], "number": 210, "crsid": 6},
-        {"department": ["ASIAN"], "number": 215, "crsid": 7},
-        {"department": ["ASIAN"], "number": 220, "crsid": 8},
-        {"department": ["ASIAN"], "number": 268, "crsid": 9},
-        {"department": ["ASIAN"], "number": 130, "crsid": 10},
-        {"department": ["ASIAN"], "number": 230, "crsid": 11},
-        {"department": ["ASIAN"], "number": 397, "crsid": 12},
-        {"department": ["ASIAN"], "number": 121, "crsid": 13}
-    ]
+	"areas": [
+		{"type": "major", "name": "Asian Studies", "revision": "2011-12"}
+	],
+	"courses": [
+		{"department": ["JAPAN"], "number": 111, "crsid": 1},
+		{"department": ["JAPAN"], "number": 112, "crsid": 2},
+		{"department": ["JAPAN"], "number": 231, "crsid": 3},
+		{"department": ["JAPAN"], "number": 232, "crsid": 4},
+		{"department": ["ASIAN"], "number": 275, "crsid": 5},
+		{"department": ["ASIAN"], "number": 210, "crsid": 6},
+		{"department": ["ASIAN"], "number": 215, "crsid": 7},
+		{"department": ["ASIAN"], "number": 220, "crsid": 8},
+		{"department": ["ASIAN"], "number": 268, "crsid": 9},
+		{"department": ["ASIAN"], "number": 130, "crsid": 10},
+		{"department": ["ASIAN"], "number": 230, "crsid": 11},
+		{"department": ["ASIAN"], "number": 397, "crsid": 12},
+		{"department": ["ASIAN"], "number": 121, "crsid": 13}
+	]
 }

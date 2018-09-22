@@ -1,18 +1,32 @@
 {
-    "areas": [{"type": "major", "name": "Computer Science", "revision": "2014-15"}],
-    "courses": [
-        {"department": ["CSCI"], "number": 125, "crsid": 1},
-        {"department": ["CSCI"], "number": 241, "crsid": 2},
-        {"department": ["CSCI"], "number": 251, "crsid": 3},
-        {"department": ["CSCI"], "number": 252, "crsid": 4},
-        {"department": ["CSCI"], "number": 253, "crsid": 5},
-        {"department": ["CSCI"], "number": 263, "crsid": 6},
-        {"department": ["CSCI"], "number": 273, "crsid": 7, "year": 2015},
-        {"department": ["CSCI"], "number": 276, "crsid": 8},
-        {"department": ["CSCI"], "number": 284, "crsid": 9},
-        {"department": ["CSCI"], "number": 300, "crsid": 10, "year": 2014, "semester": 1},
-        {"department": ["CSCI"], "number": 390, "crsid": 11},
-        {"department": ["MATH"], "number": 220, "crsid": 12},
-        {"department": ["MATH"], "number": 282, "crsid": 13, "year": 2014, "semester": 1}
-    ]
+	"areas": [
+		{"type": "major", "name": "Computer Science", "revision": "2014-15"}
+	],
+	"courses": [
+		{"department": ["CSCI"], "number": 125, "crsid": 1},
+		{"department": ["CSCI"], "number": 241, "crsid": 2},
+		{"department": ["CSCI"], "number": 251, "crsid": 3},
+		{"department": ["CSCI"], "number": 252, "crsid": 4},
+		{"department": ["CSCI"], "number": 253, "crsid": 5},
+		{"department": ["CSCI"], "number": 263, "crsid": 6},
+		{"department": ["CSCI"], "number": 273, "crsid": 7, "year": 2015},
+		{"department": ["CSCI"], "number": 276, "crsid": 8},
+		{"department": ["CSCI"], "number": 284, "crsid": 9},
+		{
+			"department": ["CSCI"],
+			"number": 300,
+			"crsid": 10,
+			"year": 2014,
+			"semester": 1
+		},
+		{"department": ["CSCI"], "number": 390, "crsid": 11},
+		{"department": ["MATH"], "number": 220, "crsid": 12},
+		{
+			"department": ["MATH"],
+			"number": 282,
+			"crsid": 13,
+			"year": 2014,
+			"semester": 1
+		}
+	]
 }
