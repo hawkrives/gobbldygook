@@ -17,8 +17,6 @@ import sortBy from 'lodash/sortBy'
 import {initStudent} from '../../redux/students/actions/init-student'
 import {connect} from 'react-redux'
 import withRouter from 'react-router/lib/withRouter'
-import debug from 'debug'
-const log = debug('web:react')
 import './method-import.scss'
 
 import type {
