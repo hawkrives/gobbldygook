@@ -1,11 +1,12 @@
-import nomnom from 'nomnom'
-import fs from 'graceful-fs'
+import meow from 'meow'
+import stdin from 'get-stdin'
+import loadJsonFile from 'load-json-file'
 import {
 	isRequirementName,
 	humanizeOperator,
 	evaluate,
 } from '@gob/examine-student'
-import loadArea from '@gob/cli/lib/load-area'
+import loadArea from '../lib/load-area'
 import yaml from 'js-yaml'
 import get from 'lodash/get'
 import toPairs from 'lodash/toPairs'
@@ -14,14 +15,14 @@ import filter from 'lodash/filter'
 import repeat from 'lodash/repeat'
 import some from 'lodash/some'
 import keys from 'lodash/keys'
-import sortBy from 'lodash/sortBy'
 import plur from 'plur'
 import chalk from 'chalk'
+import {getAllCourses} from '../lib/get-all-courses'
 
 function condenseCourse(course) {
 	const num =
 		'number' in course ? course.number : `${String(course.level)[0]}XX`
-	return `${sortBy(course.department).join('/')} ${num}`
+	return `${course.department} ${num}`
 }
 
 function summarize(requirement, name, path, depth = 0) {
@@ -37,7 +38,9 @@ function summarize(requirement, name, path, depth = 0) {
 			}).join('\n')
 	}
 
-	return `${repeat(' ', depth * 2)}${name}: ${requirement.computed}${prose}`
+	return `${repeat(' ', depth * 2)}${name}: ${String(
+		requirement.computed,
+	)}${prose}`
 }
 
 function stringifyChunk(expr) {
@@ -70,8 +73,9 @@ function stringifyChunk(expr) {
 
 	if ('_result' in expr) {
 		const color = expr._result ? chalk.green : chalk.red
-		return color(`${resultString}: ${expr._result}`)
+		return color(`${String(resultString)}: ${String(expr._result)}`)
 	}
+
 	return resultString
 }
 
@@ -80,10 +84,10 @@ const OR = chalk.bold('OR')
 
 function stringifyBoolean(expr) {
 	if ('$or' in expr) {
-		const str = map(expr.$or, req => stringifyChunk(req)).join(` ${OR} `)
+		const str = expr.$or.map(req => stringifyChunk(req)).join(` ${OR} `)
 		return `(${str})`
 	} else if ('$and' in expr) {
-		const str = map(expr.$and, req => stringifyChunk(req)).join(` ${AND} `)
+		const str = expr.$and.map(req => stringifyChunk(req)).join(` ${AND} `)
 		return `(${str})`
 	}
 }
@@ -267,9 +271,10 @@ function proseify(requirement, name, path, depth = 0) {
 	return indent(depth ? '  ' : '', `${resultString}${prose}`)
 }
 
-const checkAgainstArea = ({courses, overrides}, args) => areaData => {
+const checkAgainstArea = ({courses, overrides}, args, areaData) => {
 	let result = {}
 	let path = []
+
 	if (args.path) {
 		path = [areaData.type, areaData.name].concat(args.path.split('.'))
 		result = evaluate(get(areaData, args.path), {
@@ -293,51 +298,45 @@ const checkAgainstArea = ({courses, overrides}, args) => areaData => {
 	}
 
 	if (!result.computed) {
+		if (!args.status) {
+			console.log(`[${areaData.type}] ${areaData.name}: failure`)
+		}
 		process.exit(1)
+	} else {
+		if (!args.status) {
+			console.log(`[${areaData.type}] ${areaData.name}: success`)
+		}
 	}
 }
 
-function run({courses, overrides, areas}, args) {
-	Promise.all(areas.map(loadArea)).then(areaData => {
-		for (const area of areaData) {
-			checkAgainstArea({courses, overrides}, args)(area)
-		}
-	})
+async function run({overrides, studies, schedules, fabrications}, args) {
+	let areaData = await Promise.all(studies.map(loadArea))
+	let courses = await getAllCourses({schedules, fabrications})
+
+	for (const area of areaData) {
+		checkAgainstArea({courses, overrides}, args, area)
+	}
 }
 
-export function cli() {
-	const args = nomnom()
-		.option('json', {
-			flag: true,
-			help: 'print raw json output',
-		})
-		.option('yaml', {
-			flag: true,
-			help: 'print yaml-formatted json output',
-		})
-		.option('prose', {
-			flag: true,
-			help: 'print prose output',
-		})
-		.option('summary', {
-			flag: true,
-			help: 'print summarized output',
-		})
-		.option('status', {
-			flag: true,
-			help: 'no output; only use exit code',
-		})
-		.option('path', {
-			type: 'text',
-			help: 'change the root of the evaluation',
-		})
-		.option('studentFile', {
-			required: true,
-			metavar: 'FILE',
-			help: 'The file to process',
-			position: 0,
-		})
-		.parse()
+export default async function main() {
+	const args = meow(`
+		usage: gob-examine <FILE>
 
-	run(JSON.parse(fs.readFileSync(args.studentFile, 'utf-8')), args)
+		FILE: the file to process
+
+		--json: print raw json output
+		--yaml: print yaml-formatted json output
+		--prose: print prose output
+		--summary: print summarized output
+		--status: no output; only use exit code
+		--path: change the root of the evaluation
+	`)
+
+	let {input, flags} = args
+
+	let data = input.length
+		? await loadJsonFile(input[0])
+		: JSON.parse(await stdin())
+
+	run(data, flags)
 }

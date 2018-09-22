@@ -4,7 +4,9 @@ import {findWarnings} from './find-course-warnings'
 import type {HydratedScheduleType} from './schedule'
 
 // Checks to see if the schedule is valid
-export function validateSchedule(schedule: HydratedScheduleType) {
+export function validateSchedule(
+	schedule: HydratedScheduleType,
+): HydratedScheduleType {
 	// only check the courses that have data
 	let courses = schedule.courses.filter(c => c)
 

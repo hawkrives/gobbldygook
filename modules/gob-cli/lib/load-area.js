@@ -1,57 +1,63 @@
-'use strict'
-const pify = require('pify')
-const yaml = require('js-yaml')
-const {enhanceHanson: enhance} = require('@gob/hanson-format')
+import yaml from 'js-yaml'
+import {enhanceHanson as enhance} from '@gob/hanson-format'
+import maxBy from 'lodash/maxBy'
+import got from 'got'
 
-const map = require('lodash/map')
-const filter = require('lodash/filter')
-const find = require('lodash/find')
-const maxBy = require('lodash/maxBy')
+const BASE = 'https://hawkrives.github.io/gobbldygook-area-data'
 
-const findAreas = require('./find-areas')
-const fs = pify(require('graceful-fs'))
+const getInfoFile = () =>
+	got(`${BASE}/info.json`, {json: true}).then(r => r.body)
 
-async function getArea({name, type, revision}) {
+async function findArea({name, type, revision}) {
 	type = type.toLowerCase()
 	name = name.toLowerCase()
 
-	const root = 'area-data/'
-	const areaFiles = findAreas(root)
-	let areaData = map(areaFiles, f => fs.readFileAsync(f, 'utf-8'))
-	areaData = await Promise.all(areaData)
+	let info = await getInfoFile()
 
-	const areas = map(areaData, yaml.safeLoad)
-
-	const filteredAreas = filter(
-		areas,
+	let matches = info.files.filter(
 		area =>
 			area.type.toLowerCase() === type &&
 			area.name.toLowerCase() === name,
 	)
 
-	if (!revision) {
-		// maxBy returns the entire object that it matched
-		return maxBy(filteredAreas, area => Number(area.revision.split('-')[0]))
+	if (!matches.length) {
+		throw new Error('could not find area matching', {name, type, revision})
 	}
 
-	return find(filteredAreas, {revision})
+	if (!revision || revision === 'latest') {
+		// maxBy returns the entire object that it matched
+		return maxBy(matches, area => Number(area.revision.split('-')[0]))
+	}
+
+	return matches.find(a => a.revision === revision)
+}
+
+function getArea({path}) {
+	return got(`${BASE}/${path}`).then(r => yaml.safeLoad(r.body))
 }
 
 async function loadArea({name, type, revision, source, isCustom}) {
-	let obj = isCustom
-		? yaml.safeLoad(source)
-		: await getArea({name, type, revision})
+	let obj
 
-	let result
+	if (isCustom) {
+		obj = yaml.safeLoad(source)
+	} else {
+		let foundArea = await findArea({name, type, revision})
+		if (!foundArea) {
+			throw new Error('could not find area matching', {
+				name,
+				type,
+				revision,
+			})
+		}
+		obj = await getArea(foundArea)
+	}
+
 	try {
-		// console.log(obj)
-		result = enhance(obj)
+		return enhance(obj)
 	} catch (err) {
 		console.error(`Problem enhancing area "${name}"`, err)
 	}
-
-	return result
 }
 
-module.exports = loadArea
-module.exports.getArea = getArea
+export default loadArea
