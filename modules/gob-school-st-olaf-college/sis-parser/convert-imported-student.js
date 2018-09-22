@@ -50,7 +50,11 @@ export type PartialStudent = {
 type CourseGetter = (
 	{clbid: string, term: number},
 	?{[key: string]: FabricationType},
-) => Promise<CourseType | FabricationType>
+) => Promise<
+	| CourseType
+	| FabricationType
+	| {+clbid: string, +term: number, error: string},
+>
 
 export async function convertStudent(
 	student: PartialStudent,
