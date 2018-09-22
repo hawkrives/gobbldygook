@@ -116,13 +116,13 @@ class UploadFileScreen extends React.Component {
 								</li>
 							) : (
 								<li key={stu.name}>
-									{stu.name} returned the error "
-									{stu.error}
-									"
+									{stu.name} returned the error "{stu.error}"
 								</li>
 							),
 					)}
-					{files.map(file => <li key={file.name}>{file.name}</li>)}
+					{files.map(file => (
+						<li key={file.name}>{file.name}</li>
+					))}
 				</List>
 
 				<Button onClick={this.handleImportStudents}>

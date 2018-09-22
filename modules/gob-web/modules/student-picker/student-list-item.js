@@ -133,7 +133,9 @@ export default function StudentListItem(props: PropTypes) {
 
 	const areas = map(groupedStudies, (group, type) => (
 		<AreaGrouping key={type}>
-			{group.map(s => <AreaName key={s.name}>{s.name}</AreaName>)}
+			{group.map(s => (
+				<AreaName key={s.name}>{s.name}</AreaName>
+			))}
 		</AreaGrouping>
 	))
 
