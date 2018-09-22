@@ -3,6 +3,7 @@
 import uuid from 'uuid/v4'
 import {randomChar} from '@gob/lib'
 
+import type {Warning} from './find-course-warnings'
 import type {Course} from '@gob/types'
 
 export type ScheduleType = {
@@ -19,7 +20,7 @@ export type ScheduleType = {
 export type HydratedScheduleType = {
 	...$Exact<ScheduleType>,
 	courses: Array<Course>,
-	conflicts: Array<mixed>,
+	conflicts: Array<Array<?Warning>>,
 	hasConflict: boolean,
 }
 
