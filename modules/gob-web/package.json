@@ -31,7 +31,6 @@
     "classnames": "^2.2.6",
     "codemirror": "^5.39.0",
     "debug": "^4.0.1",
-    "dedent": "^0.7.0",
     "delay": "^2.0.0",
     "fuzzysearch": "^1.0.3",
     "history": "^3.3.0",
