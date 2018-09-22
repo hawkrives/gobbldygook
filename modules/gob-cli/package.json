@@ -15,8 +15,12 @@
   "author": "Hawken MacKay Rives",
   "license": "MIT",
   "dependencies": {
+    "@gob/examine-student": "^3.0.0-rc.2",
     "@gob/hanson-format": "^3.0.0-rc.2",
+    "@gob/object-student": "^3.0.0-rc.2",
+    "@gob/school-st-olaf-college": "^3.0.0-rc.2",
     "@gob/lib": "^3.0.0-rc.2",
+    "chalk": "^2.4.1",
     "esm": "^3.0.84",
     "flow-remove-types": "^1.2.3",
     "get-stdin": "^6.0.0",
@@ -24,6 +28,10 @@
     "js-yaml": "^3.12.0",
     "keyv": "^3.1.0",
     "keyv-file": "^0.1.7",
-    "meow": "^5.0.0"
+    "lodash": "^4.17.11",
+    "meow": "^5.0.0",
+    "pify": "^3.0.0",
+    "plur": "^3.0.1",
+    "sparkly": "^4.0.0"
   }
 }

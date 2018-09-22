@@ -3,6 +3,6 @@
 
 require = require('esm')(module /*, options*/)
 
-require('flow-remove-types/register')
+require('flow-remove-types/register')({excludes: null})
 
 require('./module.js').default()

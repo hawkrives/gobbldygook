@@ -220,10 +220,6 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
-ansi-256-colors@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/ansi-256-colors/-/ansi-256-colors-1.1.0.tgz#910de50efcc7c09e3d82f2f87abd6b700c18818a"
-
 ansi-escapes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-3.0.0.tgz#ec3e8b4e9f8064fc02c3ac9b65f1c275bda8ef92"
@@ -7697,12 +7693,11 @@ source-map@^0.6.0, source-map@^0.6.1, source-map@~0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
 
-sparkly@^3.1.2:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/sparkly/-/sparkly-3.1.2.tgz#d42092d519e9f69ca92b29a51d594e1b5c61d17b"
+sparkly@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/sparkly/-/sparkly-4.0.0.tgz#74b4613e8b6e10ea5411869cd951d114150548a3"
   dependencies:
-    ansi-256-colors "^1.1.0"
-    is-finite "^1.0.0"
+    chalk "^2.4.1"
 
 spdx-correct@~1.0.0:
   version "1.0.2"
