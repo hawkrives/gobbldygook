@@ -1,4 +1,5 @@
 import React from 'react'
+import {findDOMNode} from 'react-dom'
 import styled from 'styled-components'
 import {DragSource} from 'react-dnd'
 import cx from 'classnames'
@@ -24,10 +25,15 @@ class DraggableCourse extends React.PureComponent<Props> {
 			'is-dragging': this.props.isDragging,
 		})
 
-		return this.props.connectDragSource(
-			<div style={this.props.style}>
-				<Draggable className={classSet} {...this.props} />
-			</div>,
+		return (
+			<Draggable
+				ref={ref => {
+					this.props.connectDragSource(findDOMNode(ref))
+				}}
+				style={this.props.style}
+				className={classSet}
+				{...this.props}
+			/>
 		)
 	}
 }
