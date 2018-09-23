@@ -4,7 +4,7 @@ import debug from 'debug'
 import * as notificationActions from '../modules/notifications/redux/actions'
 import * as courseActions from '../redux/courses/actions'
 import * as areaActions from '../redux/areas/actions'
-import LoadDataWorker from '@gob/worker-load-data'
+import LoadDataWorker from './load-data.worker'
 
 const log = debug('worker:load-data')
 
