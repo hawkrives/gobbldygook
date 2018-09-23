@@ -9,7 +9,7 @@ import {IDENT_COURSE} from '@gob/object-student'
 import {Icon} from './icon'
 import {iosTrashOutline} from '../icons/ionicons'
 
-const Box = styled.div`
+const Box: any = styled.div`
 	padding: 5em 1em;
 	color: ${theme.gray500};
 	background-color: white;
@@ -48,7 +48,7 @@ type Props = {
 function CourseRemovalBox(props: Props) {
 	return (
 		<Box
-			ref={ref => props.connectDropTarget(ref)}
+			ref={(ref: any) => props.connectDropTarget(ref)}
 			isOver={props.isOver}
 			canDrop={props.canDrop}
 		>
