@@ -9,7 +9,7 @@ import Semester from './semester-container'
 
 import {findFirstAvailableSemester} from '../../helpers/find-first-available-semester'
 import {expandYear, semesterName} from '@gob/school-st-olaf-college'
-import type {HydratedStudentType} from '@gob/object-student'
+import type {HydratedStudentType, ScheduleType} from '@gob/object-student'
 import * as theme from '../../theme'
 import styled from 'styled-components'
 
@@ -102,7 +102,10 @@ export default class Year extends React.PureComponent<Props> {
 
 		let niceYear = expandYear(year)
 
-		let nextSemester = findFirstAvailableSemester(valid, year)
+		let nextSemester = findFirstAvailableSemester(
+			((valid: Array<any>): Array<ScheduleType>),
+			year,
+		)
 		let isAddSemesterDisabled = !canAddSemester(nextSemester)
 
 		return (
