@@ -18,10 +18,13 @@ module.exports = {
 		'@babel/plugin-proposal-class-properties',
 		'@babel/plugin-proposal-object-rest-spread',
 		'@babel/plugin-transform-react-display-name',
-		['@babel/plugin-transform-runtime', {
-			regenerator: false,
-			useESModules: true,
-		}],
+		[
+			'@babel/plugin-transform-runtime',
+			{
+				regenerator: false,
+				useESModules: true,
+			},
+		],
 		'babel-plugin-styled-components',
 		// turns `import {sum} from 'lodash'`
 		// into `import sum from 'lodash/sum'`
