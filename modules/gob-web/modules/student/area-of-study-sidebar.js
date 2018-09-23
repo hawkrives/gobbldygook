@@ -64,17 +64,19 @@ class AreaOfStudySidebarComponent extends React.PureComponent<Props, State> {
 		)
 
 		// pull out the results
-		const studyResults = student.areas ? mapValues(groupedStudies, group =>
-			group.map(
-				area =>
-					student.areas.find(
-						a =>
-							a.name === area.name &&
-							a.type === area.type &&
-							a.revision === area.revision,
-					) || area,
-			),
-		) : {}
+		const studyResults = student.areas
+			? mapValues(groupedStudies, group =>
+					group.map(
+						area =>
+							student.areas.find(
+								a =>
+									a.name === area.name &&
+									a.type === area.type &&
+									a.revision === area.revision,
+							) || area,
+					),
+			  )
+			: {}
 
 		// and then render them
 		const sections = map(studyResults, (areas, areaType) => (

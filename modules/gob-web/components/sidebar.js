@@ -67,9 +67,15 @@ function Sidebar(props: Prop) {
 		<SidebarElement>
 			<StudentButtonsToolbar>
 				<ToolbarButton as={Link} to="/" title="Students">
-					<Icon block large>{iosPeopleOutline}</Icon>
+					<Icon block large>
+						{iosPeopleOutline}
+					</Icon>
 				</ToolbarButton>
-				<ToolbarButton as={Link} to={`/s/${studentId}/search`} title="Search">
+				<ToolbarButton
+					as={Link}
+					to={`/s/${studentId}/search`}
+					title="Search"
+				>
 					<Icon block large>
 						{iosSearch}
 					</Icon>
@@ -98,7 +104,11 @@ function Sidebar(props: Prop) {
 
 				<Separator type="spacer" />
 
-				<ToolbarButton as={Link} to={`/s/${studentId}/share`} title="Share">
+				<ToolbarButton
+					as={Link}
+					to={`/s/${studentId}/share`}
+					title="Share"
+				>
 					<Icon block large>
 						{iosUploadOutline}
 					</Icon>

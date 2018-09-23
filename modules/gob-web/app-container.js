@@ -62,7 +62,7 @@ export class App extends React.Component<Props> {
 				<div id="gateway-wrapper">
 					<div id="content-wrapper">{content}</div>
 					{overlay}
-                    <GlobalStyle/>
+					<GlobalStyle />
 				</div>
 			</DocumentTitle>
 		)
