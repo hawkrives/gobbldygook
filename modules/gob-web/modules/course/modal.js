@@ -46,7 +46,7 @@ const BottomToolbar = styled.div`
 	align-items: center;
 `
 
-const RemoveCourseButton = FlatButton.extend`
+const RemoveCourseButton = styled(FlatButton)`
 	color: ${theme.red500};
 	padding-left: 0.5em;
 	padding-right: 0.5em;

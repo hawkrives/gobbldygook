@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import DropZone from 'react-dropzone'
-import Button from '../../components/button'
+import {FlatButton} from '../../components/button'
 import List from '../../components/list'
 import {StudentSummary} from '../../modules/student/student-summary'
 import {initStudent} from '../../redux/students/actions/init-student'
@@ -81,7 +81,7 @@ class UploadFileScreen extends React.Component {
 		let files = this.state.files.slice(actions.length)
 
 		return (
-			<div>
+			<>
 				<header className="header">
 					<h1>Upload a File</h1>
 				</header>
@@ -125,10 +125,10 @@ class UploadFileScreen extends React.Component {
 					))}
 				</List>
 
-				<Button onClick={this.handleImportStudents}>
+				<FlatButton onClick={this.handleImportStudents}>
 					Import Students
-				</Button>
-			</div>
+				</FlatButton>
+			</>
 		)
 	}
 }

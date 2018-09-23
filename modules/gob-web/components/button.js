@@ -1,10 +1,9 @@
 // @flow
-import * as React from 'react'
-import Link from 'react-router/lib/Link'
+
 import styled from 'styled-components'
 import * as theme from '../theme'
 
-const BaseButton = styled.button`
+const BaseButton = styled.button.attrs({type: 'button'})`
 	cursor: pointer;
 
 	min-height: 3ex;
@@ -21,7 +20,7 @@ const BaseButton = styled.button`
 	border: solid 1px transparent;
 
 	transition: all 0.2s ease-out;
-	border-radius: ${theme.baseBorderRadius};
+	border-radius: var(--base-border-radius);
 	line-height: normal;
 
 	text-align: center;
@@ -37,45 +36,49 @@ const BaseButton = styled.button`
 	-webkit-tap-highlight-color: transparent;
 `
 
-export const RaisedButton = BaseButton.extend`
+export const RaisedButton = styled(BaseButton)`
+	${theme.linkUndecorated};
 	${theme.materialShadow};
-	background-color: ${theme.white};
+
+	background-color: var(--white);
 
 	&:hover {
-		background-color: ${theme.white};
+		background-color: var(--white);
 	}
 	&:focus {
-		background-color: ${theme.blue50};
-		border-color: ${theme.blue300};
+		background-color: var(--blue-50);
+		border-color: var(--blue-300);
 	}
 
 	&:active {
 		${theme.materialShadow};
-		background-color: ${theme.white};
+		background-color: var(--white);
 	}
 
 	&[disabled] {
 		cursor: default;
-		color: ${theme.gray500};
+		color: var(--gray-500);
 	}
 `
 
-export const FlatButton = BaseButton.extend`
+export const FlatButton = styled(BaseButton)`
+	${theme.linkUndecorated};
+
 	background-color: transparent;
 
 	&:hover {
-		background-color: ${theme.gray100};
-		border-color: ${theme.gray400};
+		background-color: var(--gray-100);
+		border-color: var(--gray-400);
 	}
 
 	&:focus {
-		background-color: ${theme.blue50};
-		border-color: ${theme.blue300};
+		background-color: var(--blue-50);
+		border-color: var(--blue-300);
 	}
 
 	&[disabled] {
 		cursor: default;
-		color: ${theme.disabledForegroundLight};
+		color: var(--disabled-foreground--light);
 
 		&:hover,
 		&:focus,
@@ -85,64 +88,3 @@ export const FlatButton = BaseButton.extend`
 		}
 	}
 `
-
-export const FlatLinkButton = FlatButton.withComponent(Link).extend`
-    ${theme.linkUndecorated}
-`
-
-export const RaisedLinkButton = RaisedButton.withComponent(Link).extend`
-    ${theme.linkUndecorated}
-`
-
-type Props = {
-	children?: any,
-	className?: string,
-	disabled?: boolean,
-	link?: boolean,
-	onClick?: Event => any,
-	style?: Object,
-	title?: string,
-	to?: string | Object,
-	type: 'flat' | 'raised',
-}
-
-export default class Button extends React.Component<Props> {
-	static defaultProps = {
-		type: 'flat',
-	}
-
-	render() {
-		const {
-			className,
-			disabled,
-			onClick,
-			style,
-			title,
-			to,
-			link,
-			type,
-		} = this.props
-
-		const Tag = link
-			? type === 'flat'
-				? FlatLinkButton
-				: RaisedLinkButton
-			: type === 'flat'
-				? FlatButton
-				: RaisedButton
-
-		return (
-			<Tag
-				type="button"
-				className={className}
-				disabled={disabled}
-				onClick={onClick}
-				style={style}
-				title={title}
-				to={to}
-			>
-				{this.props.children}
-			</Tag>
-		)
-	}
-}

@@ -3,7 +3,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import {PlainList, ListItem} from '../../components/list'
-import Icon from '../../components/icon'
+import {Icon} from '../../components/icon'
 import {
 	iosClockOutline,
 	iosCalendarOutline,
@@ -14,7 +14,7 @@ import type {WarningType} from '@gob/object-student'
 
 const WarningList = styled(PlainList)`
 	font-size: 0.85em;
-	font-feature-settings: 'onum';
+	font-variant-numeric: oldstyle-nums;
 	display: flex;
 	flex-flow: row wrap;
 `
@@ -29,7 +29,7 @@ const WarningItem = styled(ListItem)`
 	padding: 0.125em 0.35em;
 	margin-bottom: 0.1em;
 	border-radius: 0.25em;
-	background-color: ${theme.amber200};
+	background-color: var(--amber-200);
 `
 
 const WarningIcon = styled(Icon)`

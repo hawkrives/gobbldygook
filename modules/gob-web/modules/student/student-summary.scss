@@ -6,7 +6,7 @@
 
 	text-align: center;
 	hyphens: auto;
-	font-feature-settings: 'onum', 'tnum';
+	font-variant-numeric: oldstyle-nums tabular-nums;
 	text-shadow: 0 1px rgba(white, 0.5);
 
 	&.cannot-graduate .graduation-message {

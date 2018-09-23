@@ -1,4 +1,5 @@
 // @flow
+
 import React from 'react'
 import range from 'lodash/range'
 import styled, {css} from 'styled-components'
@@ -6,15 +7,14 @@ import {DraggableCourse} from '../course'
 import {PlainList, ListItem} from '../../components/list'
 import MissingCourse from './missing-course'
 import EmptyCourseSlot from './empty-course-slot'
-import * as theme from '../../theme'
 import type {WarningType, HydratedScheduleType} from '@gob/object-student'
-import type {Course as CourseType} from '@gob/types'
+import type {Course as CourseType, CourseError} from '@gob/types'
 
 const courseStyles = css`
-	${theme.semesterPadding};
+	padding: var(--block-edge-padding) var(--semester-side-padding);
 
 	&:hover {
-		background-color: ${theme.gray100};
+		background-color: var(--gray-100);
 	}
 `
 
@@ -44,7 +44,7 @@ const Empty = styled(EmptyCourseSlot)`
 `
 
 type Props = {
-	courses: Array<CourseType | {error: string | Error, clbid: string}>,
+	courses: Array<CourseType | CourseError>,
 	usedSlots: number,
 	conflicts: Array<Array<?WarningType>>,
 	maxSlots: number,

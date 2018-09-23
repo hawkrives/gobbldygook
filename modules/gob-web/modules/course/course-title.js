@@ -1,23 +1,22 @@
 // @flow
 import React from 'react'
-import styled from 'styled-components'
+import styled, {css} from 'styled-components'
 
-const Base = `
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+const Base = css`
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 1.2;
-    padding: 0 0 1px;
-    font-size: 1em;
-    font-weight: 500;
+	margin-top: 0;
+	margin-bottom: 0;
+	line-height: 1.2;
+	padding: 0 0 1px;
+	font-size: 1em;
+	font-weight: 500;
 `
 
 const Title = styled.h1`
 	${Base};
-	font-feature-settings: 'onum';
 `
 
 const Subtitle = styled.h2`

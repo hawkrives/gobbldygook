@@ -10,7 +10,7 @@ import oxford from 'listify'
 import {findTimeConflicts} from '@gob/schedule-conflicts'
 import {expandYear, semesterName} from '@gob/school-st-olaf-college'
 
-import type {Course} from '@gob/types'
+import type {Course, CourseError} from '@gob/types'
 import type {ScheduleType} from './schedule'
 
 export type WarningTypeEnum =
@@ -106,13 +106,17 @@ export function checkForTimeConflicts(courses: Array<Course>): Array<?Warning> {
 }
 
 export function findWarnings(
-	courses: Array<Course>,
+	courses: Array<Course | CourseError>,
 	schedule: ScheduleType,
 ): Array<Array<?Warning>> {
 	let {year, semester} = schedule
 
-	let warningsOfInvalidity = checkForInvalidity(courses, {year, semester})
-	let timeConflicts = checkForTimeConflicts(courses)
+	let onlyCourses: Array<Course> = (courses.filter(
+		(c: any) => !c.error,
+	): Array<any>)
+
+	let warningsOfInvalidity = checkForInvalidity(onlyCourses, {year, semester})
+	let timeConflicts = checkForTimeConflicts(onlyCourses)
 
 	// $FlowFixMe at some point, flow should be able to automatically upgrade a tuple to an array
 	let nearlyMerged: Array<Array<?Warning>> = (zip(

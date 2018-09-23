@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import Icon from '../../components/icon'
+import {Icon} from '../../components/icon'
 import {checkmark, close} from '../../icons/ionicons'
 
 export default function ResultIndicator({result}: {result?: boolean}) {

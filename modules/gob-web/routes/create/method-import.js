@@ -1,9 +1,8 @@
 // @flow
 
 import React from 'react'
-import PropTypes from 'prop-types'
 import serializeError from 'serialize-error'
-import Button from '../../components/button'
+import {RaisedButton} from '../../components/button'
 import {
 	convertStudent,
 	semesterName,
@@ -11,12 +10,13 @@ import {
 } from '@gob/school-st-olaf-college'
 import {getCourse} from '../../helpers/get-courses'
 import {StudentSummary} from '../../modules/student/student-summary'
-import map from 'lodash/map'
+import toPairs from 'lodash/toPairs'
 import groupBy from 'lodash/groupBy'
 import sortBy from 'lodash/sortBy'
 import {initStudent} from '../../redux/students/actions/init-student'
 import {connect} from 'react-redux'
 import withRouter from 'react-router/lib/withRouter'
+import type {Course as CourseType, CourseError} from '@gob/types'
 import './method-import.scss'
 
 import type {
@@ -25,7 +25,7 @@ import type {
 } from '@gob/object-student'
 
 type Props = {
-	+dispatch: Function,
+	+dispatch: Function, // redux
 	+router: Object,
 }
 
@@ -40,11 +40,6 @@ type State = {
 }
 
 class SISImportScreen extends React.Component<Props, State> {
-	static propTypes = {
-		dispatch: PropTypes.func.isRequired, // redux
-		router: PropTypes.object.isRequired,
-	}
-
 	state = {
 		status: 'pending',
 		error: null,
@@ -105,7 +100,7 @@ class SISImportScreen extends React.Component<Props, State> {
 		let {student, error, parsedStudentText} = this.state
 
 		return (
-			<div>
+			<>
 				<header className="header">
 					<h1>Import from the SIS</h1>
 				</header>
@@ -152,66 +147,78 @@ class SISImportScreen extends React.Component<Props, State> {
 					</details>
 				)}
 
-				{error ? (
+				{error && (
 					<details className="error-spot">
 						<summary>
 							<strong>{error.name}</strong>: {error.message}
 						</summary>
 						<pre className="error-stack">{error.stack}</pre>
 					</details>
-				) : null}
+				)}
 
-				{student ? <StudentInfo student={student} /> : null}
+				{student && <StudentInfo student={student} />}
 
-				<div>
-					{student && (
-						<Button onClick={this.handleCreateStudent}>
-							Import Student
-						</Button>
-					)}
-				</div>
-			</div>
+				{student && (
+					<RaisedButton onClick={this.handleCreateStudent}>
+						Import Student
+					</RaisedButton>
+				)}
+			</>
 		)
 	}
 }
 
 const StudentInfo = ({student}: {student: HydratedStudentType}) => (
-	<div>
+	<>
 		<StudentSummary student={student} showMessage={false} />
 
 		<ul>
-			{map(
-				groupBy(student.schedules, s => s.year),
-				(schedules: Array<HydratedScheduleType>, year) => (
+			{toPairs(groupBy(student.schedules, s => s.year)).map(
+				([year, schedules]) => (
 					<li key={year}>
-						{year}:
-						<ul>
-							{sortBy(schedules, s => s.semester).map(
-								(schedule: HydratedScheduleType) => (
-									<li key={schedule.semester}>
-										{semesterName(schedule.semester)}:
-										<ul>
-											{(schedule.courses || []).map(
-												course => (
-													<li key={course.clbid}>
-														{course.department}{' '}
-														{course.number}
-														{course.section} –{' '}
-														{course.name}
-													</li>
-												),
-											)}
-										</ul>
-									</li>
-								),
-							)}
-						</ul>
+						{year}:<ScheduleListing schedules={schedules} />
 					</li>
 				),
 			)}
 		</ul>
-	</div>
+	</>
 )
+
+const ScheduleListing = (props: {schedules: Array<HydratedScheduleType>}) => {
+	let {schedules = []} = props
+
+	return (
+		<ul>
+			{sortBy(schedules, s => s.semester).map(schedule => (
+				<li key={schedule.semester}>
+					{semesterName(schedule.semester)}:
+					<AbbreviatedCourseListing courses={schedule.courses} />
+				</li>
+			))}
+		</ul>
+	)
+}
+
+const AbbreviatedCourseListing = (props: {
+	courses: Array<CourseType | CourseError>,
+}) => {
+	let {courses = []} = props
+
+	let onlyCourses: Array<CourseType> = (courses.filter(
+		(c: any) => c && !c.error,
+	): Array<any>)
+
+	return (
+		<ul>
+			{onlyCourses.map(course => (
+				<li key={course.clbid}>
+					{course.department} {course.number}
+					{course.section} – {course.name}
+				</li>
+			))}
+		</ul>
+	)
+}
 
 let mapDispatch = dispatch => ({dispatch})
 

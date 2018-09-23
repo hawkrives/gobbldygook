@@ -6,12 +6,12 @@ import groupBy from 'lodash/groupBy'
 import map from 'lodash/map'
 import {sortStudiesByType} from '@gob/object-student'
 import styled from 'styled-components'
-import Button from '../../components/button'
-import Icon from '../../components/icon'
+import {FlatButton} from '../../components/button'
+import {Icon} from '../../components/icon'
 import {iosTrashOutline, iosArrowForward} from '../../icons/ionicons'
 import * as theme from '../../theme'
 
-const Container = styled.li`
+const Container = styled.div`
 	display: flex;
 	flex-flow: row nowrap;
 	align-items: stretch;
@@ -32,7 +32,7 @@ const Container = styled.li`
 	}
 `
 
-const DeleteButton = styled(Button)`
+const DeleteButton = styled(FlatButton)`
 	flex-direction: column;
 	padding: 0.5em 1em;
 	font-size: 0.9em;
@@ -107,14 +107,15 @@ const ListItemLink = styled(Link)`
 	}
 `
 
-type PropTypes = {
+type Props = {
 	destroyStudent: string => any,
 	isEditing: boolean,
 	student: Object,
+	as?: string,
 }
 
-export default function StudentListItem(props: PropTypes) {
-	const {student, isEditing, destroyStudent} = props
+export default function StudentListItem(props: Props) {
+	const {student, isEditing, destroyStudent, as} = props
 
 	const isLoading =
 		student.isLoading ||
@@ -122,7 +123,7 @@ export default function StudentListItem(props: PropTypes) {
 		student.isValdiating ||
 		student.isChecking
 
-	const classes: any = {loading: isLoading}
+	const classes: Object = {loading: isLoading}
 	if (!isLoading) {
 		classes['can-graduate'] = student.data.present.canGraduate
 		classes['cannot-graduate'] = !student.data.present.canGraduate
@@ -140,16 +141,16 @@ export default function StudentListItem(props: PropTypes) {
 	))
 
 	return (
-		<Container className={cx(classes)}>
+		<Container as={as} className={cx(classes)}>
 			{isEditing && (
 				<DeleteButton
-					type="flat"
 					onClick={() => destroyStudent(student.data.present.id)}
 				>
 					<Icon>{iosTrashOutline}</Icon>
 					Delete
 				</DeleteButton>
 			)}
+
 			<ListItemLink to={`/s/${student.data.present.id}/`}>
 				<StudentInfo>
 					<StudentName>

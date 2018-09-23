@@ -1,6 +1,6 @@
 // @flow
 import React from 'react'
-import size from 'lodash/size'
+import Link from 'react-router/lib/Link'
 import * as theme from '../../theme'
 import {
 	androidSearch,
@@ -10,24 +10,24 @@ import {
 	androidAdd,
 } from '../../icons/ionicons'
 import {Toolbar} from '../../components/toolbar'
-import {FlatLinkButton, RaisedLinkButton} from '../../components/button'
-import {BlockIcon} from '../../components/icon'
+import {FlatButton, RaisedButton} from '../../components/button'
+import {Icon} from '../../components/icon'
 import StudentList from './student-list'
 import styled from 'styled-components'
 
-const StudentListToolbar = Toolbar.extend`
+const StudentListToolbar = styled(Toolbar)`
 	width: 100%;
 	justify-content: center;
 `
 
-const StudentListButton = FlatLinkButton.extend`
+const StudentListButton = styled(FlatButton)`
 	padding-left: 0.5em !important;
 	padding-right: 0.5em !important;
 	margin: 0 0.125em;
 	flex-direction: column;
 	flex: 0 1 auto !important;
 
-	${BlockIcon} {
+	${Icon} {
 		font-size: 1.5em;
 		margin-bottom: 0.25em;
 	}
@@ -55,7 +55,7 @@ const AppTitle = styled.header`
 	& h1,
 	& h2 {
 		margin: 0;
-		font-feature-settings: 'smcp';
+		font-variant-caps: small-caps;
 	}
 
 	& h1 {
@@ -69,7 +69,7 @@ const AppTitle = styled.header`
 	}
 `
 
-const MakeStudentButton = RaisedLinkButton.extend`
+const MakeStudentButton = styled(RaisedButton)`
 	max-width: 10em;
 	margin: 0 auto;
 `
@@ -83,9 +83,9 @@ const FilterBox = styled.input`
 	margin-left: 1em; /* only for the search button */
 
 	&:focus {
-		color: ${theme.blue900};
-		border-color: ${theme.blue500};
-		background-color: ${theme.blue50};
+		color: var(--blue-900);
+		border-color: var(--blue-500);
+		background-color: var(--blue-50);
 		outline: none;
 	}
 `
@@ -135,8 +135,8 @@ export default function StudentPicker(props: PropTypes) {
 
 			<StudentListToolbarWrapper>
 				<StudentListToolbar>
-					<StudentListButton to="search/">
-						<BlockIcon>{androidSearch}</BlockIcon>
+					<StudentListButton as={Link} to="search/">
+						<Icon block>{androidSearch}</Icon>
 						Courses
 					</StudentListButton>
 
@@ -147,23 +147,27 @@ export default function StudentPicker(props: PropTypes) {
 						onChange={onFilterChange}
 					/>
 
-					<StudentListButton onClick={onSortChange}>
-						<BlockIcon>{funnel}</BlockIcon>
+					<StudentListButton as={Link} onClick={onSortChange}>
+						<Icon block>{funnel}</Icon>
 						Sort
 					</StudentListButton>
 
-					<StudentListButton disabled onClick={onGroupChange}>
-						<BlockIcon>{androidApps}</BlockIcon>
+					<StudentListButton
+						as={Link}
+						disabled
+						onClick={onGroupChange}
+					>
+						<Icon block>{androidApps}</Icon>
 						Group
 					</StudentListButton>
 
-					<StudentListButton onClick={onToggleEditing}>
-						<BlockIcon>{androidMenu}</BlockIcon>
+					<StudentListButton as={Link} onClick={onToggleEditing}>
+						<Icon block>{androidMenu}</Icon>
 						Edit
 					</StudentListButton>
 
-					<StudentListButton to="create/">
-						<BlockIcon>{androidAdd}</BlockIcon>
+					<StudentListButton as={Link} to="create/">
+						<Icon block>{androidAdd}</Icon>
 						New
 					</StudentListButton>
 				</StudentListToolbar>
@@ -178,7 +182,7 @@ export default function StudentPicker(props: PropTypes) {
 				</div>
 			</StudentListToolbarWrapper>
 
-			{size(students) > 0 ? (
+			{Object.keys(students).length > 0 ? (
 				<StudentList
 					destroyStudent={destroyStudent}
 					filter={filterText}
@@ -188,7 +192,7 @@ export default function StudentPicker(props: PropTypes) {
 					students={students}
 				/>
 			) : (
-				<MakeStudentButton to="/create">
+				<MakeStudentButton as={Link} to="/create">
 					Add a Student
 				</MakeStudentButton>
 			)}

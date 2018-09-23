@@ -60,7 +60,7 @@ export default async function main() {
 			print(0, `${toPrettyTerm(term)}`)
 
 			courses.forEach((course, i) => {
-				print(1, buildDeptNum(course))
+				print(1, buildDeptNum((course: any)))
 
 				let courseHasConflict = conflicts[i].some(c => c)
 

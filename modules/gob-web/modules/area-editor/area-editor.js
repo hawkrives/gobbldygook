@@ -5,9 +5,10 @@ import styled from 'styled-components'
 import {Controlled as CodeMirror} from 'react-codemirror2'
 import 'codemirror/mode/yaml/yaml'
 import {Toolbar} from '../../components/toolbar'
-import {FlatButton, FlatLinkButton} from '../../components/button'
-import Icon from '../../components/icon'
+import {FlatButton} from '../../components/button'
+import {Icon} from '../../components/icon'
 import Separator from '../../components/separator'
+import Link from 'react-router/lib/Link'
 
 import {
 	iosArrowLeft,
@@ -29,11 +30,11 @@ type Props = {
 
 export default function AreaEditor(props: Props) {
 	return (
-		<div>
+		<>
 			<TopToolbar>
-				<FlatLinkButton to="/areas">
+				<FlatButton as={Link} to="/areas">
 					<Icon>{iosArrowLeft}</Icon> Back
-				</FlatLinkButton>
+				</FlatButton>
 
 				<Separator type="flex-spacer" />
 
@@ -63,6 +64,6 @@ export default function AreaEditor(props: Props) {
 				}}
 				onFocusChange={props.onFocusChange}
 			/>
-		</div>
+		</>
 	)
 }

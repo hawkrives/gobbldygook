@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 
 import {FlatButton} from '../../components/button'
-import Icon from '../../components/icon'
+import {Icon} from '../../components/icon'
 import Requirement from './requirement'
 import ProgressBar from '../../components/progress-bar'
 import {compareProps} from '@gob/lib'

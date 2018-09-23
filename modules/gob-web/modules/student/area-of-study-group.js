@@ -1,24 +1,24 @@
 // @flow
+
 import React from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import map from 'lodash/map'
 import {pluralizeArea} from '@gob/examine-student'
 import capitalize from 'lodash/capitalize'
 import type {AreaOfStudyTypeEnum} from '@gob/examine-student'
 import {addArea, removeArea} from '../../redux/students/actions/areas'
 import AreaOfStudy from '../area-of-study'
 import AreaPicker from './area-picker'
-import Button from '../../components/button'
+import {FlatButton} from '../../components/button'
+import type {HydratedStudentType, AreaOfStudyType} from '@gob/object-student'
 
 import './area-of-study-group.scss'
 
-type AreaOfStudyType = Object
-type Student = Object
+type Student = HydratedStudentType
 type Props = {
 	addArea: (string, AreaOfStudyType) => any,
-	allAreasOfType: AreaOfStudyType[],
-	areas: AreaOfStudyType[],
+	allAreasOfType: Array<AreaOfStudyType>,
+	areas: Array<AreaOfStudyType>,
 	onEndAddArea: (string, Event) => any,
 	onInitiateAddArea: (string, Event) => any,
 	removeArea: (string, Object) => any,
@@ -51,13 +51,12 @@ class AreaOfStudyGroup extends React.PureComponent<Props> {
 			<section className="area-of-study-group">
 				<h1 className="area-type-heading">
 					{capitalize(pluralizeArea(props.type))}
-					<Button
+					<FlatButton
 						className="add-area-of-study"
-						type="flat"
 						onClick={ev => showOrHidePicker(props.type, ev)}
 					>
 						{showAreaPicker ? 'Close' : 'Add ∙ Edit'}
-					</Button>
+					</FlatButton>
 				</h1>
 
 				{showAreaPicker ? (
@@ -70,7 +69,7 @@ class AreaOfStudyGroup extends React.PureComponent<Props> {
 					/>
 				) : null}
 
-				{map(props.areas, (area, i) => (
+				{props.areas.map((area, i) => (
 					<AreaOfStudy
 						area={area}
 						key={i + area.name ? area.name : ''}

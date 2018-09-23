@@ -55,7 +55,7 @@ const GeReqItem = styled(InlineListItem)`
 `
 
 const Identifier = styled.span`
-	font-feature-settings: 'tnum';
+	font-variant-numeric: tabular-nums;
 `
 
 const Type = styled.span``

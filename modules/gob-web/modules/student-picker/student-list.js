@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import filter from 'lodash/filter'
-import map from 'lodash/map'
 import sortBy from 'lodash/sortBy'
 import fuzzysearch from 'fuzzysearch'
 import styled from 'styled-components'
@@ -27,20 +26,15 @@ export default function StudentList(props) {
 	} = props
 
 	filterText = filterText.toLowerCase()
+	let filtered = filter(students, s =>
+		fuzzysearch(filterText, (s.data.present.name || '').toLowerCase()),
+	)
 
-	const studentObjects = map(
-		sortBy(
-			filter(students, s =>
-				fuzzysearch(
-					filterText,
-					(s.data.present.name || '').toLowerCase(),
-				),
-			),
-			s => s.data.present[sortByKey],
-		),
+	const studentObjects = sortBy(filtered, s => s.data.present[sortByKey]).map(
 		(student, i) => (
 			<StudentListItem
 				key={student.data.present.id || i}
+				as="li"
 				student={student}
 				destroyStudent={destroyStudent}
 				isEditing={isEditing}

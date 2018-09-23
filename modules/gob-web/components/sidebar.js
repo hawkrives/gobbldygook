@@ -1,8 +1,10 @@
 // @flow
+
 import * as React from 'react'
+import Link from 'react-router/lib/Link'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {BlockIcon} from './icon'
+import {Icon} from './icon'
 import {Toolbar, ToolbarButton} from './toolbar'
 import Separator from './separator'
 import CourseRemovalBox from './course-removal-box'
@@ -19,17 +21,17 @@ import {
 } from '../icons/ionicons'
 import * as theme from '../theme'
 import styled from 'styled-components'
+import type {HydratedStudentType} from '@gob/object-student'
 
-type StudentType = Object
-type PropTypes = {
+type Prop = {
 	children: React.Node,
 	redo: string => any,
 	removeCourse: Function,
 	student: {
 		data: {
-			past: StudentType[],
-			present: StudentType,
-			future: StudentType[],
+			past: Array<HydratedStudentType>,
+			present: HydratedStudentType,
+			future: Array<HydratedStudentType>,
 		},
 	},
 	undo: string => any,
@@ -37,6 +39,8 @@ type PropTypes = {
 
 const StudentButtonsToolbar = styled(Toolbar)`
 	margin-bottom: 0.5em;
+
+	flex-shrink: 0;
 `
 
 const SidebarElement = styled.aside`
@@ -53,7 +57,7 @@ const SidebarElement = styled.aside`
 	}
 `
 
-function Sidebar(props: PropTypes) {
+function Sidebar(props: Prop) {
 	const {undo, redo} = props
 	const studentId = props.student.data.present.id
 	const canUndo = props.student.data.past.length > 0
@@ -62,11 +66,19 @@ function Sidebar(props: PropTypes) {
 	return (
 		<SidebarElement>
 			<StudentButtonsToolbar>
-				<ToolbarButton to="/" title="Students">
-					<BlockIcon large={true}>{iosPeopleOutline}</BlockIcon>
+				<ToolbarButton as={Link} to="/" title="Students">
+					<Icon block large>
+						{iosPeopleOutline}
+					</Icon>
 				</ToolbarButton>
-				<ToolbarButton to={`/s/${studentId}/search`} title="Search">
-					<BlockIcon large={true}>{iosSearch}</BlockIcon>
+				<ToolbarButton
+					as={Link}
+					to={`/s/${studentId}/search`}
+					title="Search"
+				>
+					<Icon block large>
+						{iosSearch}
+					</Icon>
 				</ToolbarButton>
 
 				<Separator type="spacer" />
@@ -76,24 +88,30 @@ function Sidebar(props: PropTypes) {
 					onClick={() => undo(studentId)}
 					disabled={!canUndo}
 				>
-					<BlockIcon large={true}>
+					<Icon block large>
 						{!canUndo ? iosUndoOutline : iosUndo}
-					</BlockIcon>
+					</Icon>
 				</ToolbarButton>
 				<ToolbarButton
 					title="Redo"
 					onClick={() => redo(studentId)}
 					disabled={!canRedo}
 				>
-					<BlockIcon large={true}>
+					<Icon block large>
 						{!canRedo ? iosRedoOutline : iosRedo}
-					</BlockIcon>
+					</Icon>
 				</ToolbarButton>
 
 				<Separator type="spacer" />
 
-				<ToolbarButton to={`/s/${studentId}/share`} title="Share">
-					<BlockIcon large={true}>{iosUploadOutline}</BlockIcon>
+				<ToolbarButton
+					as={Link}
+					to={`/s/${studentId}/share`}
+					title="Share"
+				>
+					<Icon block large>
+						{iosUploadOutline}
+					</Icon>
 				</ToolbarButton>
 			</StudentButtonsToolbar>
 

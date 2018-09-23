@@ -1,156 +1,345 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Year can add a semester 1`] = `
-<year__Container>
-  <year__Header>
-    <year__TitleText>
+<ForwardRef>
+  <ForwardRef>
+    <ForwardRef>
       2016—2017
-    </year__TitleText>
-    <span>
-      <year__TitleButton
-        onClick={[Function]}
-        title="Add Semester"
-        type="flat"
-      >
-        Add ‘
-        Fall
-        ’
-      </year__TitleButton>
-      <year__RemoveYearButton
-        onClick={[Function]}
-        title="Remove the year 2016—2017"
-        type="flat"
-      >
-        Remove Year
-      </year__RemoveYearButton>
-    </span>
-  </year__Header>
-  <year__SemesterList />
-</year__Container>
+    </ForwardRef>
+    <ForwardRef
+      onClick={[Function]}
+      title="Add Semester"
+      type="flat"
+    >
+      Add ‘
+      Fall
+      ’
+    </ForwardRef>
+    <ForwardRef
+      onClick={[Function]}
+      title="Remove the year 2016—2017"
+      type="flat"
+    >
+      Remove Year
+    </ForwardRef>
+  </ForwardRef>
+  <ForwardRef />
+</ForwardRef>
 `;
 
 exports[`Year can add a semester 2`] = `
-<year__Container>
-  <year__Header>
-    <year__TitleText>
+<ForwardRef>
+  <ForwardRef>
+    <ForwardRef>
       2016—2017
-    </year__TitleText>
-    <span>
-      <year__TitleButton
-        onClick={[Function]}
-        title="Add Semester"
-        type="flat"
-      >
-        Add ‘
-        Fall
-        ’
-      </year__TitleButton>
-      <year__RemoveYearButton
-        onClick={[Function]}
-        title="Remove the year 2016—2017"
-        type="flat"
-      >
-        Remove Year
-      </year__RemoveYearButton>
-    </span>
-  </year__Header>
-  <year__SemesterList />
-</year__Container>
+    </ForwardRef>
+    <ForwardRef
+      onClick={[Function]}
+      title="Add Semester"
+      type="flat"
+    >
+      Add ‘
+      Fall
+      ’
+    </ForwardRef>
+    <ForwardRef
+      onClick={[Function]}
+      title="Remove the year 2016—2017"
+      type="flat"
+    >
+      Remove Year
+    </ForwardRef>
+  </ForwardRef>
+  <ForwardRef />
+</ForwardRef>
 `;
 
 exports[`Year can remove a semester 1`] = `
-<year__Container>
-  <year__Header>
-    <year__TitleText>
+<ForwardRef>
+  <ForwardRef>
+    <ForwardRef>
       2016—2017
-    </year__TitleText>
-    <span>
-      <year__TitleButton
-        onClick={[Function]}
-        title="Add Semester"
-        type="flat"
-      >
-        Add ‘
-        Fall
-        ’
-      </year__TitleButton>
-      <year__RemoveYearButton
-        onClick={[Function]}
-        title="Remove the year 2016—2017"
-        type="flat"
-      >
-        Remove Year
-      </year__RemoveYearButton>
-    </span>
-  </year__Header>
-  <year__SemesterList />
-</year__Container>
+    </ForwardRef>
+    <ForwardRef
+      onClick={[Function]}
+      title="Add Semester"
+      type="flat"
+    >
+      Add ‘
+      Fall
+      ’
+    </ForwardRef>
+    <ForwardRef
+      onClick={[Function]}
+      title="Remove the year 2016—2017"
+      type="flat"
+    >
+      Remove Year
+    </ForwardRef>
+  </ForwardRef>
+  <ForwardRef />
+</ForwardRef>
 `;
 
 exports[`Year can remove a semester 2`] = `
-<year__Container>
-  <year__Header>
-    <year__TitleText>
+<ForwardRef>
+  <ForwardRef>
+    <ForwardRef>
       2016—2017
-    </year__TitleText>
-    <span>
-      <year__TitleButton
-        onClick={[Function]}
-        title="Add Semester"
-        type="flat"
-      >
-        Add ‘
-        Fall
-        ’
-      </year__TitleButton>
-      <year__RemoveYearButton
-        onClick={[Function]}
-        title="Remove the year 2016—2017"
-        type="flat"
-      >
-        Remove Year
-      </year__RemoveYearButton>
-    </span>
-  </year__Header>
-  <year__SemesterList />
-</year__Container>
+    </ForwardRef>
+    <ForwardRef
+      onClick={[Function]}
+      title="Add Semester"
+      type="flat"
+    >
+      Add ‘
+      Fall
+      ’
+    </ForwardRef>
+    <ForwardRef
+      onClick={[Function]}
+      title="Remove the year 2016—2017"
+      type="flat"
+    >
+      Remove Year
+    </ForwardRef>
+  </ForwardRef>
+  <ForwardRef />
+</ForwardRef>
 `;
 
 exports[`Year renders shallowly 1`] = `
+.c0 {
+  margin-bottom: var(--page-edge-padding);
+}
+
+.c1 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+  margin: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+  -ms-flex-flow: row nowrap;
+  flex-flow: row nowrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-variant-numeric: tabular-nums;
+  line-height: 1em;
+  font-weight: 500;
+  font-size: 0.9em;
+}
+
+.c2 {
+  font-size: inherit;
+  font-weight: inherit;
+  margin-top: 0;
+  margin-bottom: 0;
+  white-space: nowrap;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin-left: calc(var(--semester-spacing) + var(--semester-side-padding));
+}
+
+.c3 {
+  cursor: pointer;
+  min-height: 3ex;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  white-space: pre;
+  padding: 0.5em 0.5em;
+  border: solid 1px transparent;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  border-radius: var(--base-border-radius);
+  line-height: normal;
+  text-align: center;
+  text-transform: uppercase;
+  outline: 0;
+  color: currentColor;
+  -webkit-appearance: initial !important;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: inherit;
+  background-color: transparent;
+  -webkit-transition: 0.15s;
+  transition: 0.15s;
+  min-height: 0;
+  padding: 0 0.5em;
+  text-transform: none;
+  font-variant-caps: small-caps;
+  font-weight: 400;
+  color: var(--gray-500);
+}
+
+.c3:hover {
+  background-color: var(--gray-100);
+  border-color: var(--gray-400);
+}
+
+.c3:focus {
+  background-color: var(--blue-50);
+  border-color: var(--blue-300);
+}
+
+.c3[disabled] {
+  cursor: default;
+  color: var(--disabled-foreground--light);
+}
+
+.c3[disabled]:hover,
+.c3[disabled]:focus,
+.c3[disabled]:active {
+  border-color: transparent;
+  background-color: transparent;
+}
+
+.c3 + .c3 {
+  margin-left: 0.1em;
+}
+
+.c4 {
+  cursor: pointer;
+  min-height: 3ex;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  white-space: pre;
+  padding: 0.5em 0.5em;
+  border: solid 1px transparent;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  border-radius: var(--base-border-radius);
+  line-height: normal;
+  text-align: center;
+  text-transform: uppercase;
+  outline: 0;
+  color: currentColor;
+  -webkit-appearance: initial !important;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: inherit;
+  background-color: transparent;
+  -webkit-transition: 0.15s;
+  transition: 0.15s;
+  min-height: 0;
+  padding: 0 0.5em;
+  text-transform: none;
+  font-variant-caps: small-caps;
+  font-weight: 400;
+  color: var(--gray-500);
+}
+
+.c4:hover {
+  background-color: var(--gray-100);
+  border-color: var(--gray-400);
+}
+
+.c4:focus {
+  background-color: var(--blue-50);
+  border-color: var(--blue-300);
+}
+
+.c4[disabled] {
+  cursor: default;
+  color: var(--disabled-foreground--light);
+}
+
+.c4[disabled]:hover,
+.c4[disabled]:focus,
+.c4[disabled]:active {
+  border-color: transparent;
+  background-color: transparent;
+}
+
+.c4 + .c4 {
+  margin-left: 0.1em;
+}
+
+.c4:hover {
+  color: var(--red-500);
+  background-color: var(--red-50);
+  border: solid 1px var(--red-500);
+}
+
+.c5 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+}
+
 <div
-  className="year__Container-egxAsM eRrGhm"
+  className="c0"
 >
   <header
-    className="year__Header-knveQC kmyYJU"
+    className="c1"
   >
     <h1
-      className="year__TitleText-fHSGp istJGj"
+      className="c2"
     >
       2016—2017
     </h1>
-    <span>
-      <button
-        className="year__TitleButton-jBlQpr cGPKzX button__BaseButton-kfpwnX dVOzbX"
-        onClick={[Function]}
-        title="Add Semester"
-        type="button"
-      >
-        Add ‘
-        Fall
-        ’
-      </button>
-      <button
-        className="year__RemoveYearButton-hGQXvs dQSlRw year__TitleButton-jBlQpr cGPKzX button__BaseButton-kfpwnX dVOzbX"
-        onClick={[Function]}
-        title="Remove the year 2016—2017"
-        type="button"
-      >
-        Remove Year
-      </button>
-    </span>
+    <button
+      className="c3"
+      onClick={[Function]}
+      title="Add Semester"
+      type="flat"
+    >
+      Add ‘
+      Fall
+      ’
+    </button>
+    <button
+      className="c4"
+      onClick={[Function]}
+      title="Remove the year 2016—2017"
+      type="flat"
+    >
+      Remove Year
+    </button>
   </header>
   <div
-    className="year__SemesterList-ghmIqd isKUoa"
+    className="c5"
   />
 </div>
 `;

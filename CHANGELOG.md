@@ -10,6 +10,8 @@
 - make the `<script>` import `[async]` in the initial html
 - drop support for browsers that don't support modules
 - replace `require.ensure` with `import()`
+- update to styled-components v4
+- replace pointless divs with React.Fragment
 
 ## [3.0.0-beta6] - unreleased
 

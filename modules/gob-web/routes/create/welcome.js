@@ -1,11 +1,12 @@
 // @flow
 
-import React from 'react'
-import {RaisedLinkButton} from '../../components/button'
+import * as React from 'react'
+import Link from 'react-router/lib/Link'
+import {RaisedButton} from '../../components/button'
 
 export default function WelcomeScreen() {
 	return (
-		<div>
+		<>
 			<header className="header">
 				<h1>Hi there!</h1>
 				<h2>I don't know anything about you. Care to enlighten me?</h2>
@@ -26,23 +27,24 @@ export default function WelcomeScreen() {
 				</p>
 			</section>
 			<section className="choices">
-				<RaisedLinkButton to="/create/sis">
+				<RaisedButton as={Link} to="/create/sis">
 					Import from the SIS
-				</RaisedLinkButton>
-				<RaisedLinkButton
+				</RaisedButton>
+				<RaisedButton
+					as={Link}
 					disabled
 					to="/create/drive"
 					onClick={ev => ev.preventDefault()}
 				>
 					Link to Google Drive
-				</RaisedLinkButton>
-				<RaisedLinkButton to="/create/upload">
+				</RaisedButton>
+				<RaisedButton as={Link} to="/create/upload">
 					Upload a File
-				</RaisedLinkButton>
-				<RaisedLinkButton to="/create/manual">
+				</RaisedButton>
+				<RaisedButton as={Link} to="/create/manual">
 					Create Manually
-				</RaisedLinkButton>
+				</RaisedButton>
 			</section>
-		</div>
+		</>
 	)
 }

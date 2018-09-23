@@ -11,7 +11,7 @@ import type {Course} from '@gob/types'
 
 const Heading = styled.h2`
 	font-weight: 500;
-	font-feature-settings: 'smcp';
+	font-variant-caps: small-caps;
 	font-size: 1em;
 	margin-bottom: 0;
 `

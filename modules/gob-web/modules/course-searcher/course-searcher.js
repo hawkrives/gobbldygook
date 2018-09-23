@@ -4,8 +4,8 @@ import React from 'react'
 import {toPrettyTerm} from '@gob/school-st-olaf-college'
 
 import {LabelledSelect} from './labelled-select'
-import Button from '../../components/button'
-import Icon from '../../components/icon'
+import {FlatButton} from '../../components/button'
+import {Icon} from '../../components/icon'
 import Loading from '../../components/loading'
 import CourseResultsList from './course-results-list'
 import {androidArrowForward} from '../../icons/ionicons'
@@ -32,11 +32,11 @@ const Loader = styled(Loading)`
 	${Card};
 `
 
-const NoResults = styled('div')`
+const NoResults = styled.div`
 	${Card};
 `
 
-const ResultsError = styled('div')`
+const ResultsError = styled.div`
 	${Card};
 `
 
@@ -118,14 +118,13 @@ export default function CourseSearcher(props: CourseSearcherProps) {
 						<br />
 						{placeholderExtension}
 					</h2>
-					<Button
+					<FlatButton
 						className="close-sidebar"
 						title="Close Search"
-						type="flat"
 						onClick={onCloseSearcher}
 					>
 						Close
-					</Button>
+					</FlatButton>
 				</div>
 
 				<div className="row">
@@ -141,10 +140,9 @@ export default function CourseSearcher(props: CourseSearcherProps) {
 				</div>
 
 				<div className="row submit">
-					<Button
+					<FlatButton
 						className="submit-search-query"
 						title="Search"
-						type="flat"
 						onClick={onQuerySubmit}
 						disabled={inProgress}
 					>
@@ -156,7 +154,7 @@ export default function CourseSearcher(props: CourseSearcherProps) {
 								<Icon>{androidArrowForward}</Icon>
 							</React.Fragment>
 						)}
-					</Button>
+					</FlatButton>
 				</div>
 
 				{hasQueried && (

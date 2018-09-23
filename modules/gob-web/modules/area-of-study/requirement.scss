@@ -5,7 +5,7 @@
 .requirement {
 	margin: 0.25em;
 	box-sizing: border-box;
-	font-feature-settings: 'onum';
+	font-variant-numeric: oldstyle-nums;
 }
 
 .requirement.is-closed > *:not(.heading) {
@@ -123,7 +123,7 @@
 	padding-left: $area-edge-padding;
 	padding-right: $area-edge-padding;
 
-	font-feature-settings: 'onum';
+	font-variant-numeric: oldstyle-nums;
 }
 
 .message,

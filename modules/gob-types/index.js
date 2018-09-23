@@ -1,3 +1,3 @@
 // @flow
 
-export {Course, Offering} from './course'
+export {Course, CourseError, Offering} from './course'

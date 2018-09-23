@@ -4,11 +4,11 @@ import DocumentTitle from 'react-document-title'
 import HTML5Backend from 'react-dnd-html5-backend'
 import * as React from 'react'
 import {DragDropContext} from 'react-dnd'
-import {injectGlobal} from 'styled-components'
+import {createGlobalStyle} from 'styled-components'
 import StudentPicker from './modules/student-picker'
 import * as v from './theme/variables'
 
-injectGlobal`
+let GlobalStyle = createGlobalStyle`
     *, *::before, *::after {
         box-sizing: inherit;
     }
@@ -24,7 +24,7 @@ injectGlobal`
 
         line-height: 1.4;
 
-        font-feature-settings: 'liga', 'calt', 'kern';
+        font-variant-ligatures: common-ligatures;
         hyphens: auto;
     }
 
@@ -62,6 +62,7 @@ export class App extends React.Component<Props> {
 				<div id="gateway-wrapper">
 					<div id="content-wrapper">{content}</div>
 					{overlay}
+					<GlobalStyle />
 				</div>
 			</DocumentTitle>
 		)

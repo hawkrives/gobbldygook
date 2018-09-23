@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 
 import {isRequirementName} from '@gob/examine-student'
 
-import Icon from '../../components/icon'
+import {Icon} from '../../components/icon'
 import {iosBoltOutline, iosBolt} from '../../icons/ionicons'
 import Filter from './expression--filter'
 import Expression from './expression'

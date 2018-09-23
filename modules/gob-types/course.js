@@ -8,6 +8,7 @@ export type Offering = {|
 |}
 
 export type Course = {
+	+type: 'course',
 	+clbid: string,
 	+credits: number,
 	+crsid: string,
@@ -30,8 +31,14 @@ export type Course = {
 	+type: string,
 	+year: number,
 	+offerings?: Array<Offering>,
-	+revisions: {
-		...Course,
-		_updated: string,
-	},
+	+revisions: Array<{|
+		...$Exact<Course>,
+		+_updated: string,
+	|}>,
 }
+
+export type CourseError = {|
+	+type: 'error',
+	+error: string | Error,
+	+clbid: string,
+|}

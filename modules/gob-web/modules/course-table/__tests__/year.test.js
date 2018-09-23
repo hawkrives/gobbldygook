@@ -1,3 +1,4 @@
+import 'jest-styled-components'
 import React from 'react'
 import Year from '../year'
 import {Student} from '@gob/object-student'

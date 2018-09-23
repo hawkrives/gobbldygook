@@ -52,7 +52,7 @@ export type HydratedStudentType = {
 	...$Exact<StudentType>,
 	schedules: {[key: string]: HydratedScheduleType},
 	canGraduate: boolean,
-	areas: AreaOfStudyType,
+	areas: Array<AreaOfStudyType>,
 	fulfilled: mixed,
 }
 
