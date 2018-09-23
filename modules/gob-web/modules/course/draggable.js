@@ -28,6 +28,7 @@ class DraggableCourse extends React.PureComponent<Props> {
 		return (
 			<Draggable
 				ref={ref => {
+					// eslint-disable-next-line react/no-find-dom-node
 					this.props.connectDragSource(findDOMNode(ref))
 				}}
 				style={this.props.style}

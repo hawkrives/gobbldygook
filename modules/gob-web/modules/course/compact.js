@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import noop from 'lodash/noop'
-import styled from 'styled-components'
+import styled, {css} from 'styled-components'
 import * as theme from '../../theme'
 import {InlineList, InlineListItem} from '../../components/list'
 import CourseTitle from './course-title'
@@ -24,9 +24,9 @@ export const Container = styled.article`
 	}
 `
 
-const Row = `
-    overflow: hidden;
-    line-height: 1.5;
+const Row = css`
+	overflow: hidden;
+	line-height: 1.35;
 `
 
 export const Title = styled(CourseTitle)`
@@ -35,6 +35,7 @@ export const Title = styled(CourseTitle)`
 
 export const SummaryRow = styled.div`
 	${Row};
+
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
@@ -66,14 +67,22 @@ export type Props = {
 	course: Course,
 	index?: number,
 	onClick?: Event => any,
+	style?: Object,
 }
 
 export default class CompactCourse extends React.Component<Props> {
 	render() {
-		const {course, conflicts, index, onClick = noop} = this.props
+		let {
+			course,
+			conflicts,
+			index,
+			onClick = noop,
+			style,
+			className,
+		} = this.props
 
 		return (
-			<Container className={this.props.className} onClick={onClick}>
+			<Container className={className} onClick={onClick} style={style}>
 				{conflicts && (
 					<CourseWarnings warnings={conflicts[index || 0]} />
 				)}
