@@ -33,7 +33,7 @@ function main({data}) {
 }
 
 if (IS_WORKER) {
-	// $FlowFixMe {data} is not in event… except that it is
+	// $FlowFixMe {data} is not in event… except that it is
 	self.addEventListener('message', main)
 }
 
