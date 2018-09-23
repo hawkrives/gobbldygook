@@ -41,6 +41,13 @@ module.exports = {
 					},
 				],
 			],
+			plugins: [
+				['@babel/plugin-transform-runtime',
+				{
+					regenerator: false,
+					useESModules: false,
+				}],
+			],
 		},
 	},
 }
