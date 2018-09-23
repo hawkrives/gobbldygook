@@ -1,8 +1,8 @@
 // @flow
 import React from 'react'
-import styled from 'styled-components'
+import styled, {css} from 'styled-components'
 
-const Base = `
+const Base = css`
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
