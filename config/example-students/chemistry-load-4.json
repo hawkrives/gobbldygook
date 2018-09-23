@@ -1,32 +1,72 @@
 {
-    "areas": [{"type": "major", "name": "Chemistry", "revision": "2013-14"}],
-    "courses": [
-        {"department": ["CHEM"], "number": 121, "name": "Gen Chemistry/Lab", "type": "Lab"},
-        {"department": ["CHEM"], "number": 121, "name": "General Chemistry"},
-        {"department": ["CHEM"], "number": 123, "name": "Atom/Molec Structure"},
-        {"department": ["CHEM"], "number": 126, "name": "Chem Reactions/Lab", "type": "Lab"},
-        {"department": ["CHEM"], "number": 126, "name": "Chemical Reactions"},
-        {"department": ["CHEM"], "number": 247, "name": "Organic Chemistry I"},
-        {"department": ["CHEM"], "number": 248, "name": "Organic Chemistry II"},
-        {"department": ["CHEM"], "number": 252, "name": "Organometallic Chem"},
-        {"department": ["CHEM"], "number": 253, "name": "Synthesis Lab I", "type": "Lab"},
-        {"department": ["CHEM"], "number": 254, "name": "Synthesis Lab II", "type": "Lab"},
-        {"department": ["CHEM"], "number": 255, "name": "Analytical Chem"},
-        {"department": ["CHEM"], "number": 255, "name": "Analytical Chem"},
-        {"department": ["CHEM"], "number": 256, "name": "Analytical Lab", "type": "Lab"},
-        {"department": ["CHEM"], "number": 357, "name": "Physical Lab", "type": "Lab"},
-        {"department": ["CHEM"], "number": 371, "name": "Physical Chemistry"},
-        {"department": ["CHEM"], "number": 379, "name": "Biochemistry I"},
-        {"department": ["CHEM"], "number": 398, "name": "IR/"},
-        {"department": ["MATH"], "number": 120, "name": "Calculus I"},
-        {"department": ["MATH"], "number": 126, "name": "Calculus II"},
-        {"department": ["PHYS"], "number": 124, "name": "Principles Physics I"},
-        {"department": ["PHYS"], "number": 124, "name": "Prin Physics I/Lab", "type": "Lab"},
-        {"department": ["PHYS"], "number": 125, "name": "Prin Physics II/Lab", "type": "Lab"},
-        {"department": ["PHYS"], "number": 125, "name": "Principles Physics II"}
-    ],
-    "overrides": {
-        "major.chemistry.seminars": true,
-        "major.chemistry.introductory sequence.first year 1": true
-    }
+	"areas": [{"type": "major", "name": "Chemistry", "revision": "2013-14"}],
+	"courses": [
+		{
+			"department": ["CHEM"],
+			"number": 121,
+			"name": "Gen Chemistry/Lab",
+			"type": "Lab"
+		},
+		{"department": ["CHEM"], "number": 121, "name": "General Chemistry"},
+		{"department": ["CHEM"], "number": 123, "name": "Atom/Molec Structure"},
+		{
+			"department": ["CHEM"],
+			"number": 126,
+			"name": "Chem Reactions/Lab",
+			"type": "Lab"
+		},
+		{"department": ["CHEM"], "number": 126, "name": "Chemical Reactions"},
+		{"department": ["CHEM"], "number": 247, "name": "Organic Chemistry I"},
+		{"department": ["CHEM"], "number": 248, "name": "Organic Chemistry II"},
+		{"department": ["CHEM"], "number": 252, "name": "Organometallic Chem"},
+		{
+			"department": ["CHEM"],
+			"number": 253,
+			"name": "Synthesis Lab I",
+			"type": "Lab"
+		},
+		{
+			"department": ["CHEM"],
+			"number": 254,
+			"name": "Synthesis Lab II",
+			"type": "Lab"
+		},
+		{"department": ["CHEM"], "number": 255, "name": "Analytical Chem"},
+		{"department": ["CHEM"], "number": 255, "name": "Analytical Chem"},
+		{
+			"department": ["CHEM"],
+			"number": 256,
+			"name": "Analytical Lab",
+			"type": "Lab"
+		},
+		{
+			"department": ["CHEM"],
+			"number": 357,
+			"name": "Physical Lab",
+			"type": "Lab"
+		},
+		{"department": ["CHEM"], "number": 371, "name": "Physical Chemistry"},
+		{"department": ["CHEM"], "number": 379, "name": "Biochemistry I"},
+		{"department": ["CHEM"], "number": 398, "name": "IR/"},
+		{"department": ["MATH"], "number": 120, "name": "Calculus I"},
+		{"department": ["MATH"], "number": 126, "name": "Calculus II"},
+		{"department": ["PHYS"], "number": 124, "name": "Principles Physics I"},
+		{
+			"department": ["PHYS"],
+			"number": 124,
+			"name": "Prin Physics I/Lab",
+			"type": "Lab"
+		},
+		{
+			"department": ["PHYS"],
+			"number": 125,
+			"name": "Prin Physics II/Lab",
+			"type": "Lab"
+		},
+		{"department": ["PHYS"], "number": 125, "name": "Principles Physics II"}
+	],
+	"overrides": {
+		"major.chemistry.seminars": true,
+		"major.chemistry.introductory sequence.first year 1": true
+	}
 }

@@ -19,8 +19,8 @@ plugins:
 
 settings:
   react:
-    version: "16.5"
-    flowVersion: "0.81"
+    version: '16.5'
+    flowVersion: '0.81'
 
 env:
   browser: true
@@ -65,7 +65,11 @@ rules:
   no-underscore-dangle: off
   no-unmodified-loop-condition: error
   no-unused-labels: error
-  no-unused-vars: ['warn', {args: 'after-used', varsIgnorePattern: '^_', argsIgnorePattern: '^_'}]
+  no-unused-vars:
+    - 'warn'
+    - args: 'after-used'
+      varsIgnorePattern: '^_'
+      argsIgnorePattern: '^_'
   no-useless-constructor: error
   no-var: error
   prefer-spread: warn
@@ -76,8 +80,8 @@ rules:
   react/display-name: off
   react/no-did-mount-set-state: warn
   react/no-did-update-set-state: warn
-  react/no-multi-comp: off  # prevent multiple component definition per file
-  react/self-closing-comp: warn  # prevent extra closing tags for components without children
+  react/no-multi-comp: off # prevent multiple component definition per file
+  react/self-closing-comp: warn # prevent extra closing tags for components without children
   # react/sort-comp: warn
   react/sort-prop-types: warn
   react/wrap-multilines: off

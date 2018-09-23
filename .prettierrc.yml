@@ -1,0 +1,18 @@
+trailingComma: 'all'
+tabWidth: 4
+useTabs: true
+singleQuote: true
+semi: false
+bracketSpacing: false
+
+overrides:
+  - files: '{.*,*}.{yml,yaml}'
+    options:
+      tabWidth: 2
+  - files: '*.md'
+    options:
+      tabWidth: 2
+  - files: '**/package.json'
+    options:
+      useTabs: false
+      tabWidth: 2

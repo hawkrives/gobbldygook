@@ -1,32 +1,146 @@
 {
-    "areas": [{"type": "degree", "name": "Bachelor of Arts", "revision": "2014-15"}],
+	"areas": [
+		{"type": "degree", "name": "Bachelor of Arts", "revision": "2014-15"}
+	],
 
-    "expectation": false,
+	"expectation": false,
 
-    "courses": [
-        {"gereqs": ["FYW"], "department": ["ART"], "number": 102, "credits": 1.0},
-        {"gereqs": ["FOL-J"], "department": ["ART"], "number": 103, "credits": 1.0},
-        {"gereqs": ["AQR"], "department": ["ART"], "number": 104, "credits": 1.0},
-        {"gereqs": ["WRI", "ORC"], "department": ["ART"], "number": 106, "credits": 1.0},
-        {"gereqs": ["WRI"], "department": ["ART"], "number": 205, "credits": 1.0},
-        {"gereqs": ["WRI"], "department": ["ART"], "number": 207, "credits": 1.0},
-        {"gereqs": ["WRI"], "department": ["ART"], "number": 221, "credits": 1.0},
-        {"gereqs": ["SPM"], "department": ["ART"], "number": 222, "credits": 1.0},
-        {"gereqs": ["HWC"], "department": ["ART"], "number": 223, "credits": 1.0},
-        {"gereqs": ["MCD"], "department": ["ART"], "number": 224, "credits": 1.0},
-        {"gereqs": ["SPM", "HWC"], "department": ["ART"], "number": 225, "credits": 1.0},
-        {"gereqs": ["MCG"], "department": ["ART"], "number": 226, "credits": 1.0},
-        {"gereqs": ["ALS-A"], "department": ["ART"], "number": 227, "credits": 1.0},
-        {"gereqs": ["ALS-L"], "department": ["ART"], "number": 228, "credits": 1.0},
-        {"gereqs": ["BTS-B"], "department": ["ART"], "number": 229, "credits": 1.0},
-        {"gereqs": ["BTS-T"], "year": 2015, "department": ["ART"], "number": 232, "credits": 1.0},
-        {"gereqs": ["EIN"], "year": 2014, "department": ["ART"], "number": 233, "credits": 1.0},
-        {"gereqs": ["SED"], "department": ["ART"], "number": 234, "credits": 1.0},
-        {"gereqs": ["IST"], "department": ["ART"], "number": 236, "credits": 1.0},
-        {"gereqs": ["HBS"], "department": ["ART"], "number": 238, "credits": 1.0},
-        {"gereqs": [""], "department": ["ART"], "number": 343, "credits": 1.0},
-        {"gereqs": [""], "department": ["ART"], "number": 398, "credits": 1.0},
-        {"gereqs": [""], "department": ["ART", "ASIAN"], "number": 259, "credits": 1.0},
-        {"gereqs": ["HBS"], "department": ["CSCI"], "number": 241, "credits": 1.0}
-    ]
+	"courses": [
+		{
+			"gereqs": ["FYW"],
+			"department": ["ART"],
+			"number": 102,
+			"credits": 1.0
+		},
+		{
+			"gereqs": ["FOL-J"],
+			"department": ["ART"],
+			"number": 103,
+			"credits": 1.0
+		},
+		{
+			"gereqs": ["AQR"],
+			"department": ["ART"],
+			"number": 104,
+			"credits": 1.0
+		},
+		{
+			"gereqs": ["WRI", "ORC"],
+			"department": ["ART"],
+			"number": 106,
+			"credits": 1.0
+		},
+		{
+			"gereqs": ["WRI"],
+			"department": ["ART"],
+			"number": 205,
+			"credits": 1.0
+		},
+		{
+			"gereqs": ["WRI"],
+			"department": ["ART"],
+			"number": 207,
+			"credits": 1.0
+		},
+		{
+			"gereqs": ["WRI"],
+			"department": ["ART"],
+			"number": 221,
+			"credits": 1.0
+		},
+		{
+			"gereqs": ["SPM"],
+			"department": ["ART"],
+			"number": 222,
+			"credits": 1.0
+		},
+		{
+			"gereqs": ["HWC"],
+			"department": ["ART"],
+			"number": 223,
+			"credits": 1.0
+		},
+		{
+			"gereqs": ["MCD"],
+			"department": ["ART"],
+			"number": 224,
+			"credits": 1.0
+		},
+		{
+			"gereqs": ["SPM", "HWC"],
+			"department": ["ART"],
+			"number": 225,
+			"credits": 1.0
+		},
+		{
+			"gereqs": ["MCG"],
+			"department": ["ART"],
+			"number": 226,
+			"credits": 1.0
+		},
+		{
+			"gereqs": ["ALS-A"],
+			"department": ["ART"],
+			"number": 227,
+			"credits": 1.0
+		},
+		{
+			"gereqs": ["ALS-L"],
+			"department": ["ART"],
+			"number": 228,
+			"credits": 1.0
+		},
+		{
+			"gereqs": ["BTS-B"],
+			"department": ["ART"],
+			"number": 229,
+			"credits": 1.0
+		},
+		{
+			"gereqs": ["BTS-T"],
+			"year": 2015,
+			"department": ["ART"],
+			"number": 232,
+			"credits": 1.0
+		},
+		{
+			"gereqs": ["EIN"],
+			"year": 2014,
+			"department": ["ART"],
+			"number": 233,
+			"credits": 1.0
+		},
+		{
+			"gereqs": ["SED"],
+			"department": ["ART"],
+			"number": 234,
+			"credits": 1.0
+		},
+		{
+			"gereqs": ["IST"],
+			"department": ["ART"],
+			"number": 236,
+			"credits": 1.0
+		},
+		{
+			"gereqs": ["HBS"],
+			"department": ["ART"],
+			"number": 238,
+			"credits": 1.0
+		},
+		{"gereqs": [""], "department": ["ART"], "number": 343, "credits": 1.0},
+		{"gereqs": [""], "department": ["ART"], "number": 398, "credits": 1.0},
+		{
+			"gereqs": [""],
+			"department": ["ART", "ASIAN"],
+			"number": 259,
+			"credits": 1.0
+		},
+		{
+			"gereqs": ["HBS"],
+			"department": ["CSCI"],
+			"number": 241,
+			"credits": 1.0
+		}
+	]
 }

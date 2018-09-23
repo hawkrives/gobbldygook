@@ -2,7 +2,7 @@
 import isRequirementName from '@gob/examine-student/source/is-requirement-name'
 import fromPairs from 'lodash/fromPairs'
 import {makeAreaSlug} from './make-area-slug'
-import {parse} from './parse-hanson-string'
+const {parse} = require('./parse-hanson-string')
 
 const requirementNameRegex = /(.*?) +\(([A-Z-]+)\)$/i
 const quote = str => `"${str}"`

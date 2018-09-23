@@ -1,30 +1,91 @@
 {
-    "areas": [{"type": "major", "name": "Chemistry", "revision": "2013-14"}],
-    "courses": [
-        {"department": ["CHEM", "BIO"], "number": 125, "name": "Integrated Chem/Bio I Lab", "lab": true},
-        {"department": ["CHEM", "BIO"], "number": 125, "name": "Integrated Chem/Bio I"},
-        {"department": ["CHEM", "BIO"], "number": 126, "name": "Integrate Chem/Bio II Lab", "lab": true},
-        {"department": ["CHEM", "BIO"], "number": 126, "name": "Integrated Chem/Bio II"},
-        {"department": ["CHEM", "BIO"], "number": 127, "name": "Integrated Chem/Bio III"},
-        {"department": ["CHEM", "BIO"], "number": 127, "name": "Integr Chem/Bio III Lab", "lab": true},
-        {"department": ["CHEM"], "number": 247, "name": "Organic Chemistry I"},
-        {"department": ["CHEM"], "number": 248, "name": "Organic Chemistry II"},
-        {"department": ["CHEM"], "number": 253, "name": "Synthesis Lab I", "lab": true},
-        {"department": ["CHEM"], "number": 254, "name": "Synthesis Lab II", "lab": true},
-        {"department": ["CHEM"], "number": 255, "name": "Analytical Chem"},
-        {"department": ["CHEM"], "number": 256, "name": "Analytical Lab", "lab": true},
-        {"department": ["CHEM"], "number": 357, "name": "Physical Lab", "lab": true},
-        {"department": ["CHEM"], "number": 371, "name": "Physical Chemistry"},
-        {"department": ["CHEM"], "number": 373, "name": "Experimental Biochem"},
-        {"department": ["CHEM"], "number": 379, "name": "Biochemistry I"},
-        {"department": ["MATH"], "number": 999, "name": "AP Calculus I and II"},
-        {"department": ["PHYS"], "number": 124, "name": "Prin Physics I/Lab", "lab": true},
-        {"department": ["PHYS"], "number": 124, "name": "Principles Physics I"},
-        {"department": ["PHYS"], "number": 125, "name": "Principles Physics II"},
-        {"department": ["PHYS"], "number": 125, "name": "Prin Physics II/Lab", "lab": true}
-    ],
-    "overrides": {
-        "major.chemistry.seminars": true,
-        "major.chemistry.calculus": true
-    }
+	"areas": [{"type": "major", "name": "Chemistry", "revision": "2013-14"}],
+	"courses": [
+		{
+			"department": ["CHEM", "BIO"],
+			"number": 125,
+			"name": "Integrated Chem/Bio I Lab",
+			"lab": true
+		},
+		{
+			"department": ["CHEM", "BIO"],
+			"number": 125,
+			"name": "Integrated Chem/Bio I"
+		},
+		{
+			"department": ["CHEM", "BIO"],
+			"number": 126,
+			"name": "Integrate Chem/Bio II Lab",
+			"lab": true
+		},
+		{
+			"department": ["CHEM", "BIO"],
+			"number": 126,
+			"name": "Integrated Chem/Bio II"
+		},
+		{
+			"department": ["CHEM", "BIO"],
+			"number": 127,
+			"name": "Integrated Chem/Bio III"
+		},
+		{
+			"department": ["CHEM", "BIO"],
+			"number": 127,
+			"name": "Integr Chem/Bio III Lab",
+			"lab": true
+		},
+		{"department": ["CHEM"], "number": 247, "name": "Organic Chemistry I"},
+		{"department": ["CHEM"], "number": 248, "name": "Organic Chemistry II"},
+		{
+			"department": ["CHEM"],
+			"number": 253,
+			"name": "Synthesis Lab I",
+			"lab": true
+		},
+		{
+			"department": ["CHEM"],
+			"number": 254,
+			"name": "Synthesis Lab II",
+			"lab": true
+		},
+		{"department": ["CHEM"], "number": 255, "name": "Analytical Chem"},
+		{
+			"department": ["CHEM"],
+			"number": 256,
+			"name": "Analytical Lab",
+			"lab": true
+		},
+		{
+			"department": ["CHEM"],
+			"number": 357,
+			"name": "Physical Lab",
+			"lab": true
+		},
+		{"department": ["CHEM"], "number": 371, "name": "Physical Chemistry"},
+		{"department": ["CHEM"], "number": 373, "name": "Experimental Biochem"},
+		{"department": ["CHEM"], "number": 379, "name": "Biochemistry I"},
+		{"department": ["MATH"], "number": 999, "name": "AP Calculus I and II"},
+		{
+			"department": ["PHYS"],
+			"number": 124,
+			"name": "Prin Physics I/Lab",
+			"lab": true
+		},
+		{"department": ["PHYS"], "number": 124, "name": "Principles Physics I"},
+		{
+			"department": ["PHYS"],
+			"number": 125,
+			"name": "Principles Physics II"
+		},
+		{
+			"department": ["PHYS"],
+			"number": 125,
+			"name": "Prin Physics II/Lab",
+			"lab": true
+		}
+	],
+	"overrides": {
+		"major.chemistry.seminars": true,
+		"major.chemistry.calculus": true
+	}
 }
