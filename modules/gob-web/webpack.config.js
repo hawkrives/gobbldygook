@@ -110,7 +110,7 @@ function config() {
                 ${cssLink ? cssLink : ''}
 
                 <main id="gobbldygook"></main>
-                <script module src="${publicPath}${context.main}"></script>
+                <script async type="module" src="${publicPath}${context.main}"></script>
                 </html>
             `
 		}),
