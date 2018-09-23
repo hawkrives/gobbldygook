@@ -1,13 +1,15 @@
 // @flow
 import * as React from 'react'
-import sumBy from 'lodash/sumBy'
-import {List, AutoSizer} from 'react-virtualized'
+import {VariableSizeList as List} from 'react-window'
+import AutoSizer from 'react-virtualized-auto-sizer'
 import {DraggableCourse} from '../course'
 import {
 	toPrettyTerm,
 	expandYear,
 	semesterName,
 } from '@gob/school-st-olaf-college'
+import styled from 'styled-components'
+import {type Course as CourseType} from '@gob/types'
 
 const GROUP_BY_TO_TITLE = {
 	'Day of Week': days => days,
@@ -20,7 +22,7 @@ const GROUP_BY_TO_TITLE = {
 	None: () => '',
 }
 
-type Results = Array<[string, Array<any>]>
+type Results = Array<string | CourseType>
 
 type Props = {
 	groupBy: string,
@@ -29,196 +31,140 @@ type Props = {
 	studentId?: string,
 }
 
-type State = {
-	itemCount: number,
-}
+const TermList = styled(List)`
+	margin: 0;
+	padding: 0;
+	list-style: none;
+`
 
-// method borrowed from https://github.com/lucasferreira/react-virtualized-sectionlist/blob/1ed9437c76dbc9b3fcf01dd9c5b50c96d9dc211c/source/index.js#L100-L123
-type ExtractArgs = {
-	title: ?string,
-	items: Array<any>,
-	itemIndex: ?number,
-	sectionIndex: ?number,
-	isHeader: boolean,
-}
-function extractItemAtIndex(index: number, results: Results): ExtractArgs {
-	let itemIndex = index
+const ResultsListSizer = styled('div')`
+	flex: 1;
 
-	for (let i = 0; i < results.length; i++) {
-		let [title, items] = results[i]
+	background-color: white;
+	border-radius: var(--base-border-radius);
+	border: 1px solid;
+	border-color: #e5e6e9 #dfe0e4 #d0d1d5;
 
-		// The section adds an item for the header
-		itemIndex -= 1
+	overflow: hidden;
+`
 
-		if (itemIndex >= items.length) {
-			itemIndex -= items.length
-			continue
-		}
+const CourseGroupTitle = styled('h3')`
+	margin: 0;
+	font-size: 1em;
+	font-weight: 400;
 
-		let isHeader = itemIndex === -1
+	padding: 0 0.5em;
 
-		return {
-			title,
-			items,
-			itemIndex: isHeader ? null : itemIndex,
-			sectionIndex: i,
-			isHeader: isHeader,
-		}
+	display: flex;
+	align-items: center;
+	& > span {
+		text-align: center;
+		flex: 1;
+
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+`
+
+const CourseListItem = styled(DraggableCourse)`
+	padding: 0 0.5em;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+`
+
+function getRowHeight(item: string | CourseType) {
+	if (typeof item === 'string') {
+		// heading
+		return 45
 	}
 
-	return {
-		title: null,
-		items: [],
-		itemIndex: null,
-		sectionIndex: null,
-		isHeader: false,
-	}
-}
+	let firstRowHeight = 20
+	let subtitleHeight = 15
+	let rowHeight = 16
+	let verticalPadding = 4
 
-function getRowHeight(
-	isHeader: boolean,
-	itemIndex: ?number,
-	items: Array<any>,
-) {
-	if (isHeader) {
-		return 35
-	}
+	let height = firstRowHeight + rowHeight
 
-	if (itemIndex == null || !items[itemIndex]) {
-		return 0
-	}
-
-	let course = items[itemIndex]
-	let courseRows = 2
-
-	let hasTimes = course.offerings && course.offerings.length
+	let hasTimes = item.offerings && item.offerings.length
 	let hasSubtitle =
-		course.name &&
-		course.title &&
-		(course.type === 'Seminar' || course.type === 'Topic')
+		item.name &&
+		item.title &&
+		(item.type === 'Seminar' || item.type === 'Topic')
 
 	if (hasTimes) {
-		courseRows += 1
+		height += rowHeight
 	}
+
 	if (hasSubtitle) {
-		courseRows += 1
+		height += subtitleHeight
 	}
 
-	if (courseRows === 2) {
-		return 38
-	} else if (courseRows === 3) {
-		return 56
-	} else if (courseRows === 4) {
-		return 71
-	}
-
-	return 0
+	return height + verticalPadding * 2
 }
 
-export default class CourseResultsList extends React.Component<Props, State> {
-	state = {
-		itemCount: 0,
+export default class CourseResultsList extends React.Component<Props> {
+	getRowHeight = (index: number) => {
+		let item = this.props.results[index]
+
+		if (!item) {
+			return null
+		}
+
+		return getRowHeight(item)
 	}
 
-	static getDerivedStateFromProps = (props: Props) => {
-		// add 1 for the section heading
-		let itemCount = sumBy(props.results, ([_, items]) => items.length + 1)
-		return {itemCount}
-	}
-
-	getRowHeight = ({index}: {|index: number|}) => {
-		let results = this.props.results
-		let {isHeader, itemIndex, items} = extractItemAtIndex(index, results)
-
-		return getRowHeight(isHeader, itemIndex, items)
-	}
-
-	renderHeader = (args: {title: ?string, key: string, style: any}) => {
-		let {title: groupTitle, key, style} = args
+	renderHeader = (groupTitle: string, {style}: {style: Object}) => {
 		if (!groupTitle) {
 			return null
 		}
 
 		const title = GROUP_BY_TO_TITLE[this.props.groupBy](groupTitle)
 		return (
-			<div style={style} key={key} className="course-group-title">
-				{title}
-			</div>
+			<CourseGroupTitle style={style} title={title}>
+				<span>{title}</span>
+			</CourseGroupTitle>
 		)
 	}
 
-	renderRow = (args: {index: number, style: Object, key: string}) => {
-		let {index, style, key} = args
-		let {isHeader, itemIndex, items, title} = extractItemAtIndex(
-			index,
-			this.props.results,
-		)
+	renderRow = (args: {index: number, style: Object}) => {
+		let {index, style} = args
+		let item = this.props.results[index]
 
-		if (isHeader) {
-			return this.renderHeader({title, key, style})
-		}
-
-		if (itemIndex == null || !items[itemIndex]) {
+		if (!item) {
 			return null
 		}
 
-		let course = items[itemIndex]
+		if (typeof item === 'string') {
+			return this.renderHeader(item, {style})
+		}
 
-		return (
-			<DraggableCourse
-				key={key}
-				style={style}
-				course={course}
-				studentId={this.props.studentId}
-			/>
-		)
+		let {studentId: id} = this.props
+
+		return <CourseListItem style={style} course={item} studentId={id} />
 	}
 
 	render() {
+		console.log(this.props.results)
+
 		return (
-			<div className="results-list-sizer">
+			<ResultsListSizer>
 				<AutoSizer>
 					{({height, width}) => (
-						<List
-							className="term-list"
+						<TermList
+							key={this.props.groupBy}
 							height={height}
-							rowCount={this.state.itemCount}
-							rowHeight={this.getRowHeight}
-							rowRenderer={this.renderRow}
+							itemCount={this.props.results.length}
+							itemSize={this.getRowHeight}
 							width={width}
-						/>
+						>
+							{this.renderRow}
+						</TermList>
 					)}
 				</AutoSizer>
-			</div>
-		)
-	}
-
-	renderAllAtOnce = () => {
-		const {results, groupBy: groupByValue, studentId} = this.props
-
-		return (
-			<ul className="term-list">
-				{results.map(([groupTitle, courses]) => {
-					const title = GROUP_BY_TO_TITLE[groupByValue](groupTitle)
-					return (
-						<li key={groupTitle} className="course-group">
-							{title && (
-								<p className="course-group-title">{title}</p>
-							)}
-							<ul className="course-list">
-								{courses.map((course, index) => (
-									<li key={index}>
-										<DraggableCourse
-											course={course}
-											studentId={studentId}
-										/>
-									</li>
-								))}
-							</ul>
-						</li>
-					)
-				})}
-			</ul>
+			</ResultsListSizer>
 		)
 	}
 }
