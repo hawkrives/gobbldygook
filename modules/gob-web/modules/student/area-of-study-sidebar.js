@@ -18,7 +18,7 @@ import uniq from 'lodash/uniq'
 import values from 'lodash/values'
 
 import AreaOfStudyGroup from './area-of-study-group'
-import Button from '../../components/button'
+import {FlatButton} from '../../components/button'
 import {sortStudiesByType} from '@gob/object-student/sort-studies-by-type'
 import {areaTypeConstants} from '@gob/object-student/area-types'
 
@@ -107,14 +107,13 @@ class AreaOfStudySidebarComponent extends React.PureComponent<Props, State> {
 				<span className="unused-areas-title">Add: </span>
 				<span className="unused-areas-buttons">
 					{unusedTypes.map(type => (
-						<Button
+						<FlatButton
 							key={type}
 							className="add-unused-area-of-study"
 							onClick={ev => this.showAreaPicker(type, ev)}
-							type="flat"
 						>
 							{type}
-						</Button>
+						</FlatButton>
 					))}
 				</span>
 			</section>

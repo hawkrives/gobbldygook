@@ -1,5 +1,6 @@
+// @flow
+
 import React from 'react'
-import PropTypes from 'prop-types'
 import cx from 'classnames'
 import Link from 'react-router/lib/Link'
 import {semesterName} from '@gob/school-st-olaf-college'
@@ -8,13 +9,10 @@ import {IDENT_COURSE} from '@gob/object-student'
 import {DropTarget} from 'react-dnd'
 import includes from 'lodash/includes'
 import * as theme from '../../theme'
-import {FlatLinkButton} from '../../components/button'
-import Icon from '../../components/icon'
+import {FlatButton} from '../../components/button'
+import {Icon} from '../../components/icon'
 import {InlineList, InlineListItem} from '../../components/list'
 import {close, search} from '../../icons/ionicons'
-
-import debug from 'debug'
-const log = debug('web:react')
 import type {HydratedScheduleType} from '@gob/object-student'
 import type {Course as CourseType} from '@gob/types'
 
@@ -25,17 +23,17 @@ const Container = styled.div`
 	${theme.card};
 	flex: 1 0;
 	min-width: 16em;
-	margin: ${theme.semesterSpacing};
+	margin: var(--semester-spacing);
 
 	&.can-drop {
 		cursor: copy;
-		box-shadow: 0 0 4px ${theme.gray500};
+		box-shadow: 0 0 4px var(--gray-500);
 		z-index: 10;
 	}
 `
 
-const TitleButton = FlatLinkButton.extend`
-	${theme.semesterPadding};
+const TitleButton = styled(FlatButton)`
+	padding: var(--block-edge-padding) var(--semester-side-padding);
 	min-height: 0;
 	font-size: 0.9em;
 
@@ -48,11 +46,11 @@ const TitleButton = FlatLinkButton.extend`
 	}
 `
 
-const RemoveSemesterButton = TitleButton.extend`
+const RemoveSemesterButton = styled(TitleButton)`
 	&:hover {
-		color: ${theme.red500};
-		border-color: ${theme.red500};
-		background-color: ${theme.red50};
+		color: var(--red-500);
+		border-color: var(--red-500);
+		background-color: var(--red-50);
 	}
 `
 
@@ -66,17 +64,17 @@ const Header = styled.header`
 	align-items: stretch;
 	border-top-right-radius: 2px;
 	border-top-left-radius: 2px;
-	color: ${theme.gray500};
+	color: var(--gray-500);
 
 	overflow: hidden;
 `
 
-const InfoList = InlineList.extend`
+const InfoList = styled(InlineList)`
 	font-size: 0.8em;
 `
 
-const InfoItem = InlineListItem.extend`
-	font-feature-settings: 'onum';
+const InfoItem = styled(InlineListItem)`
+	font-variant-numeric: oldstyle-nums;
 
 	& + &::before {
 		content: ' – ';
@@ -89,7 +87,7 @@ const Title = styled(Link)`
 	flex: 1;
 	display: flex;
 	flex-direction: column;
-	${theme.semesterPadding};
+	padding: var(--block-edge-padding) var(--semester-side-padding);
 
 	&:hover {
 		text-decoration: underline;
@@ -102,9 +100,23 @@ const TitleText = styled.h1`
 	color: black;
 `
 
-function Semester(props) {
-	const {studentId, semester, year, canDrop, schedule} = props
-	const {courses, conflicts, hasConflict} = schedule
+// TODO: fix up types here
+type Props = {
+	addCourse: Function, // redux
+	canDrop: boolean,
+	connectDropTarget: Function,
+	isOver: boolean,
+	moveCourse: Function, // redux
+	removeSemester: Function,
+	schedule: HydratedScheduleType,
+	semester: number,
+	studentId: string,
+	year: number,
+}
+
+function Semester(props: Props) {
+	let {studentId, semester, year, canDrop, schedule} = props
+	let {courses, conflicts, hasConflict} = schedule
 
 	// `recommendedCredits` is 4 for fall/spring and 1 for everything else
 	let creditsPerCourse = 1
@@ -142,7 +154,7 @@ function Semester(props) {
 	return (
 		<Container
 			className={className}
-			innerRef={ref => props.connectDropTarget(ref)}
+			ref={ref => props.connectDropTarget(ref)}
 		>
 			<Header>
 				<Title to={`/s/${studentId}/semester/${year}/${semester}`}>
@@ -151,6 +163,7 @@ function Semester(props) {
 				</Title>
 
 				<TitleButton
+					as={Link}
 					to={`/s/${studentId}/search/${year}/${semester}`}
 					title="Search for courses"
 				>
@@ -165,7 +178,7 @@ function Semester(props) {
 				</RemoveSemesterButton>
 			</Header>
 
-			{schedule ? (
+			{schedule && (
 				<CourseList
 					courses={courses || []}
 					usedSlots={currentCredits / creditsPerCourse}
@@ -174,28 +187,14 @@ function Semester(props) {
 					schedule={schedule}
 					conflicts={conflicts || []}
 				/>
-			) : null}
+			)}
 		</Container>
 	)
-}
-
-Semester.propTypes = {
-	addCourse: PropTypes.func.isRequired, // redux
-	canDrop: PropTypes.bool.isRequired,
-	connectDropTarget: PropTypes.func.isRequired,
-	isOver: PropTypes.bool.isRequired,
-	moveCourse: PropTypes.func.isRequired, // redux
-	removeSemester: PropTypes.func.isRequired,
-	schedule: PropTypes.object.isRequired,
-	semester: PropTypes.number.isRequired,
-	studentId: PropTypes.string.isRequired,
-	year: PropTypes.number.isRequired,
 }
 
 // Implements the drag source contract.
 const semesterTarget = {
 	drop(props, monitor) {
-		log('dropped course')
 		const item = monitor.getItem()
 		const {clbid, fromScheduleId, isFromSchedule} = item
 		const toSchedule = props.schedule

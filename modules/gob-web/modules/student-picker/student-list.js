@@ -41,6 +41,7 @@ export default function StudentList(props) {
 		(student, i) => (
 			<StudentListItem
 				key={student.data.present.id || i}
+				as="li"
 				student={student}
 				destroyStudent={destroyStudent}
 				isEditing={isEditing}

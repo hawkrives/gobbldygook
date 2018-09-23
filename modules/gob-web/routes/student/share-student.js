@@ -2,7 +2,7 @@
 import React from 'react'
 import * as theme from '../../theme'
 import {FlatButton} from '../../components/button'
-import {InlineIcon} from '../../components/icon'
+import {Icon} from '../../components/icon'
 import {Toolbar} from '../../components/toolbar'
 import Modal from '../../components/modal'
 import List from '../../components/list'
@@ -47,7 +47,7 @@ export function ShareSheet(props: PropTypes) {
 			<ShareModal onClose={boundCloseModal} contentLabel="Share">
 				<WindowTools>
 					<CloseModal onClick={boundCloseModal}>
-						<InlineIcon>{close}</InlineIcon>
+						<Icon>{close}</Icon>
 					</CloseModal>
 				</WindowTools>
 
@@ -63,7 +63,7 @@ export function ShareSheet(props: PropTypes) {
 		<ShareModal onClose={boundCloseModal} contentLabel="Share">
 			<WindowTools>
 				<CloseModal onClick={boundCloseModal}>
-					<InlineIcon>{close}</InlineIcon>
+					<Icon>{close}</Icon>
 				</CloseModal>
 			</WindowTools>
 

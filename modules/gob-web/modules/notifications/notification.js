@@ -1,13 +1,10 @@
 // @flow
 import React from 'react'
 import round from 'lodash/round'
-import Button from '../../components/button'
+import {FlatButton} from '../../components/button'
 import BasicProgressBar from '../../components/progress-bar'
 import styled from 'styled-components'
-import debug from 'debug'
-const log = debug('web:react')
 import {type Notification as NotificationType} from './types'
-import * as theme from '../../theme'
 
 type Props = {
 	onClose: () => any,
@@ -24,13 +21,13 @@ let ProgressBar = styled(BasicProgressBar)`
 	flex: 1;
 	height: 10px;
 	overflow: hidden;
-	border: solid 1px ${theme.gray300};
+	border: solid 1px var(--gray-300);
 	background-color: transparent;
-	color: ${theme.gray300};
+	color: var(--gray-300);
 `
 
 let Percentage = styled.output`
-	color: ${theme.gray300};
+	color: var(--gray-300);
 	margin-left: 0.5em;
 	font-variant-numeric: lining-nums;
 `
@@ -45,13 +42,13 @@ let Content = styled.div`
 	flex: 1;
 `
 
-let CloseButton = styled(Button)`
+let CloseButton = styled(FlatButton)`
 	margin-left: 0.9em;
 	padding: 2px 6px 1px;
 
 	&:hover {
-		background-color: ${theme.white};
-		color: ${theme.black};
+		background-color: var(--white);
+		color: var(--black);
 	}
 `
 
@@ -62,8 +59,8 @@ const Capsule = styled.li`
 	flex-flow: row nowrap;
 	align-items: center;
 
-	background: ${theme.black};
-	color: ${theme.gray300};
+	background: var(--black);
+	color: var(--gray-300);
 
 	font-size: 0.9em;
 
@@ -73,7 +70,7 @@ const Capsule = styled.li`
 
 	padding: 0.9em;
 
-	box-shadow: 0 2px 6px ${theme.gray700};
+	box-shadow: 0 2px 6px var(--gray-700);
 	border-radius: 2px;
 
 	& + & {
@@ -82,12 +79,12 @@ const Capsule = styled.li`
 `
 
 const ErrorCapsule = styled(Capsule)`
-	background: ${theme.red};
-	color: ${theme.white};
+	background: var(--red);
+	color: var(--white);
 
 	${CloseButton}:hover {
-		border-color: ${theme.red900};
-		color: ${theme.red900};
+		border-color: var(--red-900);
+		color: var(--red-900);
 	}
 `
 
@@ -95,7 +92,6 @@ export default function Notification(props: Props) {
 	const {notification, onClose} = props
 	const {type, value, hideButton, max, message} = notification
 
-	log('Notification#render')
 	const progressBar = type === 'progress' && (
 		<ProgressContainer>
 			<ProgressBar value={value} max={max} />

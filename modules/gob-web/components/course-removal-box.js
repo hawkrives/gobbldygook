@@ -6,7 +6,7 @@ import styled, {css} from 'styled-components'
 const log = debug('web:courses')
 import * as theme from '../theme'
 import {IDENT_COURSE} from '@gob/object-student'
-import {BlockIcon} from './icon'
+import {Icon} from './icon'
 import {iosTrashOutline} from '../icons/ionicons'
 
 const Box = styled.div`
@@ -46,16 +46,17 @@ type Props = {
 	removeCourse: (string, number) => any, // studentId is embedded in the passed function
 }
 function CourseRemovalBox(props: Props) {
-	// we have to return an actual <div> here for ReactDnD
-	return props.connectDropTarget(
-		<div>
-			<Box isOver={props.isOver} canDrop={props.canDrop}>
-				<BlockIcon style={{fontSize: '3em', textAlign: 'center'}}>
-					{iosTrashOutline}
-				</BlockIcon>
-				Drop a course here to remove it.
-			</Box>
-		</div>,
+	return (
+		<Box
+			ref={ref => props.connectDropTarget(ref)}
+			isOver={props.isOver}
+			canDrop={props.canDrop}
+		>
+			<Icon block style={{fontSize: '3em', textAlign: 'center'}}>
+				{iosTrashOutline}
+			</Icon>
+			Drop a course here to remove it.
+		</Box>
 	)
 }
 

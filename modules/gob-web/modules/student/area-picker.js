@@ -47,7 +47,7 @@ const AreaListingRevision = styled.span`
 	font-size: 0.8em;
 `
 
-const ToggleAreaButton = FlatButton.extend`
+const ToggleAreaButton = styled(FlatButton)`
 	padding: 0.25em 1em;
 `
 
