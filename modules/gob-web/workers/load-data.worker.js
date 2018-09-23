@@ -6,8 +6,11 @@ import {loadFiles} from '@gob/worker-load-data'
 import {IS_WORKER} from './lib'
 const log = debug('worker:load-data:listener')
 
+declare var self: DedicatedWorkerGlobalScope
+const CHECK_IDB_IN_WORKER_SUPPORT = '__check-idb-worker-support'
+
 function checkIdbInWorkerSupport() {
-	if (self.IDBCursor) {
+	if ((self: any).IDBCursor) {
 		return Promise.resolve(true)
 	}
 	return Promise.resolve(false)
@@ -29,10 +32,15 @@ function main({data}) {
 		.catch(err => self.postMessage([id, 'error', serializeError(err)]))
 }
 
-const CHECK_IDB_IN_WORKER_SUPPORT = '__check-idb-worker-support'
-
 if (IS_WORKER) {
+	// $FlowFixMe {data} is not in event… except that it is
 	self.addEventListener('message', main)
 }
 
-export default class {}
+class PointlessExportForTestingAndFlow {
+	addEventListener(_1: string, _2: Function) {}
+	removeEventListener(_1: string, _2: Function) {}
+	postMessage(_: string) {}
+}
+
+export default PointlessExportForTestingAndFlow
