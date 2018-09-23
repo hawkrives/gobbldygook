@@ -1,7 +1,6 @@
 // @flow
 
 import styled from 'styled-components'
-import Link from 'react-router/lib/Link'
 import {FlatButton} from './button'
 import {Icon} from './icon'
 
