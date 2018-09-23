@@ -1,39 +1,36 @@
-import filter from 'lodash/filter'
-import size from 'lodash/size'
-import map from 'lodash/map'
+// @flow
 
-import {checkStudentAgainstArea} from './worker-check-student'
+import {checkStudentAgainstArea} from '../workers/check-student'
 import {countCredits} from '@gob/examine-student'
-import {getActiveStudentCourses} from './get-active-student-courses'
+import {getActiveCourses} from '@gob/object-student'
 
-/**
- * Checks a student objects graduation possibilities against all of its areas of study.
- *
- * @param {Student} student - the student object, already loaded with courses and areas from the db
- * @returns {Promise} - the promise of knowledge
- * @promise GraduatabilityPromise
- * @fulfill {Object} - The details of the students graduation prospects.
- *    {boolean} canGraduate
- *    {object} details
- */
-export function checkStudentGraduatability(student) {
-	const areaPromises = map(student.areas, checkStudentAgainstArea(student))
-	return Promise.all(areaPromises).then(areaDetails => {
-		const goodAreas = filter(
-			areaDetails,
-			area => area._area && area._area.computed === true,
-		)
-		const allAreasPass = size(goodAreas) === size(areaDetails)
+import type {HydratedStudentType} from '@gob/object-student'
 
-		const currentCredits = countCredits(getActiveStudentCourses(student))
-		const hasEnoughCredits = currentCredits >= student.creditsNeeded
+// Checks a student objects graduation possibilities against all of its areas of study.
+export async function checkStudentGraduatability(
+	student: HydratedStudentType,
+): Promise<HydratedStudentType> {
+	let areaPromises = student.areas.map(area =>
+		checkStudentAgainstArea(student, area),
+	)
 
-		const graduatability = allAreasPass && hasEnoughCredits
+	let areaDetails = await Promise.all(areaPromises)
 
-		return {
-			...student,
-			canGraduate: graduatability,
-			areas: areaDetails,
-		}
-	})
+	let goodAreas = areaDetails.filter(
+		(area: any) => area._area && area._area.computed === true,
+	)
+	let allAreasPass = goodAreas.length === areaDetails.length
+
+	let currentCredits = countCredits(getActiveCourses(student))
+	let hasEnoughCredits = currentCredits >= student.creditsNeeded
+
+	let graduatability = allAreasPass && hasEnoughCredits
+
+	let result = {
+		...student,
+		canGraduate: graduatability,
+		areas: areaDetails,
+	}
+
+	return (result: any)
 }
