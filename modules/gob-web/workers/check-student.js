@@ -13,9 +13,6 @@ import type {
 
 const log = debug('worker:check-student:main')
 
-// flow thinks that a `new Worker` needs an URL… which is true, except that
-// Webpack does that for us
-// $FlowFixMe
 const worker = new CheckStudentWorker()
 
 worker.addEventListener('error', function(event: Event) {

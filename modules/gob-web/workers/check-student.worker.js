@@ -37,6 +37,10 @@ if (IS_WORKER) {
 	self.addEventListener('message', main)
 }
 
-const PointlessExportForFlowAndWebpack: Class<Worker> = (null: any)
+class PointlessExportForTestingAndFlow {
+	addEventListener(_1: string, _2: Function) {}
+	removeEventListener(_1: string, _2: Function) {}
+	postMessage(_: string) {}
+}
 
-export default PointlessExportForFlowAndWebpack
+export default PointlessExportForTestingAndFlow
