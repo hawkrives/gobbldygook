@@ -2,18 +2,21 @@
 
 import serializeError from 'serialize-error'
 import debug from 'debug'
-import loadFiles from './source/load-files'
+import {loadFiles} from '@gob/worker-load-data'
+import {IS_WORKER} from './lib'
 const log = debug('worker:load-data:listener')
 
+declare var self: DedicatedWorkerGlobalScope
+const CHECK_IDB_IN_WORKER_SUPPORT = '__check-idb-worker-support'
+
 function checkIdbInWorkerSupport() {
-	if (self.IDBCursor) {
+	if ((self: any).IDBCursor) {
 		return Promise.resolve(true)
 	}
 	return Promise.resolve(false)
 }
 
-const CHECK_IDB_IN_WORKER_SUPPORT = '__check-idb-worker-support'
-self.addEventListener('message', ({data}) => {
+function main({data}) {
 	const [id, ...args] = data
 	log('received message:', ...args)
 
@@ -27,6 +30,17 @@ self.addEventListener('message', ({data}) => {
 	loadFiles(...args)
 		.then(result => self.postMessage([id, 'result', result]))
 		.catch(err => self.postMessage([id, 'error', serializeError(err)]))
-})
+}
 
-export default class {}
+if (IS_WORKER) {
+	// $FlowFixMe {data} is not in event… except that it is
+	self.addEventListener('message', main)
+}
+
+class PointlessExportForTestingAndFlow {
+	addEventListener(_1: string, _2: Function) {}
+	removeEventListener(_1: string, _2: Function) {}
+	postMessage(_: string) {}
+}
+
+export default PointlessExportForTestingAndFlow

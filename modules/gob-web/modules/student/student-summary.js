@@ -8,7 +8,7 @@ import sample from 'lodash/sample'
 import {AvatarLetter} from '../../components/avatar-letter'
 import ContentEditable from '../../components/content-editable'
 
-import {getActiveStudentCourses} from '../../helpers/get-active-student-courses'
+import {getActiveCourses} from '@gob/object-student'
 import {countCredits} from '@gob/examine-student'
 import type {HydratedStudentType, AreaQuery} from '@gob/object-student'
 
@@ -64,7 +64,7 @@ export class StudentSummary extends React.PureComponent<Props> {
 
 		const className = canGraduate ? 'can-graduate' : 'cannot-graduate'
 
-		const currentCredits = countCredits(getActiveStudentCourses(student))
+		const currentCredits = countCredits(getActiveCourses(student))
 		const neededCredits = student.creditsNeeded
 
 		const message = randomizeHello

@@ -210,10 +210,30 @@ function config() {
 				exclude: /node_modules/,
 				use: [babelLoader],
 			},
+			// {
+			// 	test: /\.worker\.js$/,
+			// 	exclude: /node_modules/,
+			// 	use: ['worker-loader', babelLoader],
+			// },
 			{
-				test: /\.worker\.js$/,
-				exclude: /node_modules/,
-				use: ['worker-loader', babelLoader],
+				test: /check-student\.worker\.js$/,
+				use: [
+					{
+						loader: 'worker-loader',
+						options: {name: 'worker.check-student.[hash].js'},
+					},
+					babelLoader,
+				],
+			},
+			{
+				test: /load-data\.worker\.js$/,
+				use: [
+					{
+						loader: 'worker-loader',
+						options: {name: 'worker.load-data.[hash].js'},
+					},
+					babelLoader,
+				],
 			},
 			{
 				test: /\.json$/,

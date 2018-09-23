@@ -7,6 +7,21 @@ export type AreaOfStudyType = {|
 	revision: string,
 |}
 
+export type HydratedAreaOfStudyType = {|
+	...$Exact<AreaOfStudyType>,
+	// TODO: properly type _area
+	_area: {
+		result: {$type: 'of', $of: Array<string>},
+	},
+	_error: false,
+	_checked: boolean,
+	_progress: {at: number, of: number},
+|}
+
+export type AreaOfStudyEvaluationError = {|
+	_error: string,
+|}
+
 export type AreaQuery = {|
 	+type: string,
 	+name: string,

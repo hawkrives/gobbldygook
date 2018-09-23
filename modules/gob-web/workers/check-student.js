@@ -1,23 +1,31 @@
+// @flow
+
 import uniqueId from 'lodash/uniqueId'
 import debug from 'debug'
-import CheckStudentWorker from '@gob/worker-check-student'
+import CheckStudentWorker from './check-student.worker'
+
+import type {
+	HydratedAreaOfStudyType,
+	AreaOfStudyEvaluationError,
+	AreaOfStudyType,
+	HydratedStudentType,
+} from '@gob/object-student'
 
 const log = debug('worker:check-student:main')
 
 const worker = new CheckStudentWorker()
 
-worker.onerror = msg => log('received error from check-student worker:', msg)
+worker.addEventListener('error', function(event: Event) {
+	log('received error from check-student worker:', event)
+})
 
-/**
- * Checks a student object against an area of study.
- *
- * @param {Object} student - the student to check
- * @param {Object} area - the area to check against
- * @returns {Promise} - the promise for a result
- * @promise ResultsPromise
- * @fulfill {Object} - The details of the area check.
- */
-export const checkStudentAgainstArea = student => area => {
+type Result = HydratedAreaOfStudyType | AreaOfStudyEvaluationError
+
+// Checks a student object against an area of study.
+export function checkStudentAgainstArea(
+	student: HydratedStudentType,
+	area: AreaOfStudyType,
+): Promise<Result> {
 	return new Promise(resolve => {
 		const sourceId = uniqueId()
 
@@ -26,6 +34,7 @@ export const checkStudentAgainstArea = student => area => {
 			const [resultId, type, contents] = JSON.parse(data)
 
 			if (resultId === sourceId) {
+				// $FlowFixMe flow doesn't like … unbinding this?
 				worker.removeEventListener('message', onMessage)
 
 				if (type === 'result') {
