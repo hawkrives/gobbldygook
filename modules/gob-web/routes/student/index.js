@@ -12,43 +12,24 @@ export default {
 			{
 				path: 'search(/:year)(/:semester)',
 				getComponents(location, cb) {
-					require.ensure(
-						[],
-						() => {
-							cb(null, {
-								sidebar: require('./search-sidebar').default,
-							})
-						},
-						'search-sidebar.components',
+					import(/* webpackChunkName: 'search-sidebar.components' */ './search-sidebar').then(
+						mod => cb(null, {content: mod.default}),
 					)
 				},
 			},
 			{
 				path: 'share',
 				getComponents(location, cb) {
-					require.ensure(
-						[],
-						() => {
-							cb(null, {
-								overlay: require('./share-student').default,
-							})
-						},
-						'share-student.components',
+					import(/* webpackChunkName: 'share-student.components' */ './share-student').then(
+						mod => cb(null, {content: mod.default}),
 					)
 				},
 			},
 			{
 				path: 'semester/:year/:semester',
 				getComponents(location, cb) {
-					require.ensure(
-						[],
-						() => {
-							cb(null, {
-								content: require('../../modules/semester-detail')
-									.default,
-							})
-						},
-						'semester-detail.components',
+					import(/* webpackChunkName: 'semester-detail.components' */ '../../modules/semester-detail').then(
+						mod => cb(null, {content: mod.default}),
 					)
 				},
 			},
@@ -56,12 +37,8 @@ export default {
 	},
 
 	getComponents(location, cb) {
-		require.ensure(
-			[],
-			() => {
-				cb(null, {content: require('../../modules/student').default})
-			},
-			'student.components',
+		import(/* webpackChunkName: 'student.components' */ '../../modules/student').then(
+			mod => cb(null, {content: mod.default}),
 		)
 	},
 }
