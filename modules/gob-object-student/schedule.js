@@ -4,22 +4,22 @@ import uuid from 'uuid/v4'
 import {randomChar} from '@gob/lib'
 
 import type {Warning} from './find-course-warnings'
-import type {Course} from '@gob/types'
+import type {Course, CourseError} from '@gob/types'
 
 export type ScheduleType = {
-	+id: string,
-	+active: boolean,
-	+index: number,
-	+title: string,
-	+clbids: Array<string>,
-	+year: number,
-	+semester: number,
-	+metadata: Object,
+	id: string,
+	active: boolean,
+	index: number,
+	title: string,
+	clbids: Array<string>,
+	year: number,
+	semester: number,
+	metadata: Object,
 }
 
 export type HydratedScheduleType = {
 	...$Exact<ScheduleType>,
-	courses: Array<Course>,
+	courses: Array<Course | CourseError>,
 	conflicts: Array<Array<?Warning>>,
 	hasConflict: boolean,
 }

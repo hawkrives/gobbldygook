@@ -17,6 +17,7 @@ import sortBy from 'lodash/sortBy'
 import {initStudent} from '../../redux/students/actions/init-student'
 import {connect} from 'react-redux'
 import withRouter from 'react-router/lib/withRouter'
+import type {Course as CourseType, CourseError} from '@gob/types'
 import './method-import.scss'
 
 import type {
@@ -176,42 +177,56 @@ class SISImportScreen extends React.Component<Props, State> {
 }
 
 const StudentInfo = ({student}: {student: HydratedStudentType}) => (
-	<div>
+	<>
 		<StudentSummary student={student} showMessage={false} />
 
 		<ul>
-			{map(
-				groupBy(student.schedules, s => s.year),
-				(schedules: Array<HydratedScheduleType>, year) => (
+			{toPairs(groupBy(student.schedules, s => s.year)).map(
+				([year, schedules]) => (
 					<li key={year}>
-						{year}:
-						<ul>
-							{sortBy(schedules, s => s.semester).map(
-								(schedule: HydratedScheduleType) => (
-									<li key={schedule.semester}>
-										{semesterName(schedule.semester)}:
-										<ul>
-											{(schedule.courses || []).map(
-												course => (
-													<li key={course.clbid}>
-														{course.department}{' '}
-														{course.number}
-														{course.section} –{' '}
-														{course.name}
-													</li>
-												),
-											)}
-										</ul>
-									</li>
-								),
-							)}
-						</ul>
+						{year}:<ScheduleListing schedules={schedules} />
 					</li>
 				),
 			)}
 		</ul>
-	</div>
+	</>
 )
+
+const ScheduleListing = (props: {schedules: Array<HydratedScheduleType>}) => {
+	let {schedules = []} = props
+
+	return (
+		<ul>
+			{sortBy(schedules, s => s.semester).map(schedule => (
+				<li key={schedule.semester}>
+					{semesterName(schedule.semester)}:
+					<AbbreviatedCourseListing courses={schedule.courses} />
+				</li>
+			))}
+		</ul>
+	)
+}
+
+const AbbreviatedCourseListing = (props: {
+	courses: Array<CourseType | CourseError>,
+}) => {
+	let {courses = []} = props
+
+	let onlyCourses: Array<CourseType> = (courses.filter(
+		(c: any) => c && !c.error,
+	): Array<any>)
+
+	return (
+		<ul>
+			{onlyCourses.map(course => (
+				<li key={course.clbid}>
+					{course.department} {course.number}
+					{course.section} – {course.name}
+				</li>
+			))}
+		</ul>
+	)
+}
 
 let mapDispatch = dispatch => ({dispatch})
 

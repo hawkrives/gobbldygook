@@ -15,6 +15,8 @@ import {close, search} from '../../icons/ionicons'
 
 import debug from 'debug'
 const log = debug('web:react')
+import type {HydratedScheduleType} from '@gob/object-student'
+import type {Course as CourseType} from '@gob/types'
 
 import CourseList from './course-list'
 import styled from 'styled-components'
@@ -106,10 +108,14 @@ function Semester(props) {
 	const {courses, conflicts, hasConflict} = schedule
 
 	// `recommendedCredits` is 4 for fall/spring and 1 for everything else
-	const creditsPerCourse = 1
+	let creditsPerCourse = 1
 	let recommendedCredits = semester === 1 || semester === 3 ? 4 : 1
 	let recommendedSlots = creditsPerCourse * recommendedCredits
-	const currentCredits = countCredits(courses || [])
+
+	let onlyCourses: Array<CourseType> = ((courses || []).filter(
+		(c: any) => c && !c.error,
+	): Array<any>)
+	let currentCredits = countCredits(onlyCourses)
 
 	const infoBar = []
 	if (schedule && courses && courses.length) {
