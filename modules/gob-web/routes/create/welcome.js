@@ -5,7 +5,7 @@ import {RaisedLinkButton} from '../../components/button'
 
 export default function WelcomeScreen() {
 	return (
-		<div>
+		<>
 			<header className="header">
 				<h1>Hi there!</h1>
 				<h2>I don't know anything about you. Care to enlighten me?</h2>
@@ -43,6 +43,6 @@ export default function WelcomeScreen() {
 					Create Manually
 				</RaisedLinkButton>
 			</section>
-		</div>
+		</>
 	)
 }

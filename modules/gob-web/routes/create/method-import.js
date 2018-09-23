@@ -1,9 +1,8 @@
 // @flow
 
 import React from 'react'
-import PropTypes from 'prop-types'
 import serializeError from 'serialize-error'
-import Button from '../../components/button'
+import {RaisedButton} from '../../components/button'
 import {
 	convertStudent,
 	semesterName,
@@ -11,7 +10,7 @@ import {
 } from '@gob/school-st-olaf-college'
 import {getCourse} from '../../helpers/get-courses'
 import {StudentSummary} from '../../modules/student/student-summary'
-import map from 'lodash/map'
+import toPairs from 'lodash/toPairs'
 import groupBy from 'lodash/groupBy'
 import sortBy from 'lodash/sortBy'
 import {initStudent} from '../../redux/students/actions/init-student'
@@ -26,7 +25,7 @@ import type {
 } from '@gob/object-student'
 
 type Props = {
-	+dispatch: Function,
+	+dispatch: Function, // redux
 	+router: Object,
 }
 
@@ -41,11 +40,6 @@ type State = {
 }
 
 class SISImportScreen extends React.Component<Props, State> {
-	static propTypes = {
-		dispatch: PropTypes.func.isRequired, // redux
-		router: PropTypes.object.isRequired,
-	}
-
 	state = {
 		status: 'pending',
 		error: null,
@@ -106,7 +100,7 @@ class SISImportScreen extends React.Component<Props, State> {
 		let {student, error, parsedStudentText} = this.state
 
 		return (
-			<div>
+			<>
 				<header className="header">
 					<h1>Import from the SIS</h1>
 				</header>
@@ -153,25 +147,23 @@ class SISImportScreen extends React.Component<Props, State> {
 					</details>
 				)}
 
-				{error ? (
+				{error && (
 					<details className="error-spot">
 						<summary>
 							<strong>{error.name}</strong>: {error.message}
 						</summary>
 						<pre className="error-stack">{error.stack}</pre>
 					</details>
-				) : null}
+				)}
 
-				{student ? <StudentInfo student={student} /> : null}
+				{student && <StudentInfo student={student} />}
 
-				<div>
-					{student && (
-						<Button onClick={this.handleCreateStudent}>
-							Import Student
-						</Button>
-					)}
-				</div>
-			</div>
+				{student && (
+					<RaisedButton onClick={this.handleCreateStudent}>
+						Import Student
+					</RaisedButton>
+				)}
+			</>
 		)
 	}
 }

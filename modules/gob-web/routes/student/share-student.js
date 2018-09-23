@@ -67,7 +67,7 @@ export function ShareSheet(props: PropTypes) {
 				</CloseModal>
 			</WindowTools>
 
-			<div>
+			<>
 				Share "{student.name}" via:
 				<List type="bullet">
 					<li>Google Drive (not implemented)</li>
@@ -80,7 +80,7 @@ export function ShareSheet(props: PropTypes) {
 						</a>
 					</li>
 				</List>
-			</div>
+			</>
 		</ShareModal>
 	)
 }
