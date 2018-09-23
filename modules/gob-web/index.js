@@ -1,5 +1,7 @@
 // @flow
 
+import '@babel/polyfill'
+
 import 'typeface-fira-sans'
 import './styles/normalize.scss'
 

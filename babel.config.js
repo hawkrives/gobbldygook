@@ -6,12 +6,9 @@ module.exports = {
 			'@babel/preset-env',
 			{
 				modules: false,
+				useBuiltIns: 'entry',
 				targets: {
-					browsers: [
-						'last 2 versions',
-						'not android > 0',
-						'not ie > 0',
-					],
+					esmodules: true,
 				},
 			},
 		],

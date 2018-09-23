@@ -97,9 +97,6 @@ function config() {
 			let cssLink = context.css
 				? `<link rel="stylesheet" href="${publicPath}${context.css}">`
 				: null
-			let polyfills = isProduction
-				? '<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>'
-				: ''
 
 			return `
                 <!DOCTYPE html>
@@ -110,11 +107,10 @@ function config() {
 
                 <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/nhhpgddphdimipafjfiggjnbbmcoklld">
 
-                ${polyfills}
                 ${cssLink ? cssLink : ''}
 
                 <main id="gobbldygook"></main>
-                <script src="${publicPath}${context.main}"></script>
+                <script module src="${publicPath}${context.main}"></script>
                 </html>
             `
 		}),
