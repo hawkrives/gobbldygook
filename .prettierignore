@@ -1,3 +1,4 @@
 modules/gob-web/styles/normalize.scss
+modules/gob-web/stats*.json
 flow-typed/
-build/
+build*/
