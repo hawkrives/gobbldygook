@@ -5,6 +5,11 @@
 - Removed sto-sis-time-parser, as it's now integrated into the data source
 - Updated SIS import procedure to use server-side code; allowed removal of htmlparser2 and css-select
 - remove and begin redoing the `gob` cli
+- upgrade to babel 7
+- run prettier on JSON, YAML, and more JS files
+- make the `<script>` import `[async]` in the initial html
+- drop support for browsers that don't support modules
+- replace `require.ensure` with `import()`
 
 ## [3.0.0-beta6] - unreleased
 
