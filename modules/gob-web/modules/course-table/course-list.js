@@ -6,15 +6,14 @@ import {DraggableCourse} from '../course'
 import {PlainList, ListItem} from '../../components/list'
 import MissingCourse from './missing-course'
 import EmptyCourseSlot from './empty-course-slot'
-import * as theme from '../../theme'
 import type {WarningType, HydratedScheduleType} from '@gob/object-student'
 import type {Course as CourseType} from '@gob/types'
 
 const courseStyles = css`
-	${theme.semesterPadding};
+	padding: var(--block-edge-padding) var(--semester-side-padding);
 
 	&:hover {
-		background-color: ${theme.gray100};
+		background-color: var(--gray-100);
 	}
 `
 
