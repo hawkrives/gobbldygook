@@ -1,4 +1,5 @@
 // @flow
+
 import {css} from 'styled-components'
 
 // colors
@@ -30,13 +31,8 @@ export const sidebarWidth = '270px'
 // semesters
 export const semesterSpacing = '4px'
 
-export const semesterTopPadding = css`
-	${blockEdgePadding};
-`
-export const semesterSidePadding = css`
-    calc(${blockEdgePadding} * 1.5);
-`
+export const semesterSidePadding = `calc(${blockEdgePadding} * 1.5);`
 
 export const semesterPadding = css`
-	padding: ${semesterTopPadding} ${semesterSidePadding};
+	padding: ${blockEdgePadding} ${semesterSidePadding};
 `

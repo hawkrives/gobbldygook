@@ -1,7 +1,9 @@
 {
-    "areas": [{"type": "degree", "name": "Bachelor of Arts", "revision": "2014-15"}],
+	"areas": [
+		{"type": "degree", "name": "Bachelor of Arts", "revision": "2014-15"}
+	],
 
-    "overrides": {
-        "degree.bachelor of arts": true
-    }
+	"overrides": {
+		"degree.bachelor of arts": true
+	}
 }

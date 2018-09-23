@@ -3,14 +3,14 @@
 import {deptNumRegex} from './dept-num-regex'
 
 export type DeptNum = {
-	departments: Array<string>,
+	department: string,
 	number: number,
 	section?: string,
 }
 
 /**
  * Splits a deptnum string (like "AS/RE 230A") into its components,
- * like {departments: ['AS', 'RE'], number: 230, section: 'A'}.
+ * like {department: 'AS/RE', number: 230, section: 'A'}.
  *
  * @param {String} deptNumString - the deptnum to split
  * @param {Boolean} includeSection - include the section in the result?
@@ -21,7 +21,7 @@ export function splitDeptNum(
 	includeSection?: boolean = false,
 ): ?DeptNum {
 	// "AS/RE 230A" -> ["AS/RE 230A", "AS/RE", "AS", "RE", "230", "A"]
-	// -> {departments: ['AS', 'RE'], number: 230}
+	// -> {department: 'AS/RE', number: 230}
 	let matches = deptNumRegex.exec(deptNumString)
 
 	if (!matches) {
@@ -29,9 +29,9 @@ export function splitDeptNum(
 	}
 
 	let deptNum: DeptNum = {
-		departments: matches[1].includes('/')
-			? [matches[2], matches[3]]
-			: [matches[1]],
+		department: matches[1].includes('/')
+			? [matches[2], matches[3]].join('/')
+			: matches[1],
 		number: parseInt(matches[4], 10),
 	}
 

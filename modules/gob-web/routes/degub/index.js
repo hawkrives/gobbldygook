@@ -1,7 +1,9 @@
+// @flow
+
 export default {
 	path: 'degub',
-	getComponents(state, cb) {
-		require.ensure(
+	getComponents(state: mixed, cb: Function) {
+		;(require: any).ensure(
 			[],
 			() => {
 				cb(null, {

@@ -10,53 +10,33 @@ export default {
 			{
 				path: 'sis',
 				getComponent(location, cb) {
-					require.ensure(
-						[],
-						() => {
-							cb(null, require('./method-import').default)
-						},
-						err => {
-							console.error('yikes')
-							console.error(err)
-							throw err
-						},
-						'new-student.import.component',
+					import(/* webpackChunkName: 'new-student.import.component' */ './method-import').then(
+						mod => cb(null, mod.default),
 					)
 				},
 			},
 			{
 				path: 'manual',
 				getComponent(location, cb) {
-					require.ensure(
-						[],
-						() => {
-							cb(null, require('./method-manual').default)
-						},
-						'new-student.manual.component',
+					console.log('hi')
+					import(/* webpackChunkName: 'new-student.manual.component' */ './method-manual').then(
+						mod => cb(null, mod.default),
 					)
 				},
 			},
 			{
 				path: 'drive',
 				getComponent(location, cb) {
-					require.ensure(
-						[],
-						() => {
-							cb(null, require('./method-drive').default)
-						},
-						'new-student.drive.component',
+					import(/* webpackChunkName: 'new-student.drive.component' */ './method-drive').then(
+						mod => cb(null, mod.default),
 					)
 				},
 			},
 			{
 				path: 'upload',
 				getComponent(location, cb) {
-					require.ensure(
-						[],
-						() => {
-							cb(null, require('./method-upload').default)
-						},
-						'new-student.upload.component',
+					import(/* webpackChunkName: 'new-student.upload.component' */ './method-upload').then(
+						mod => cb(null, mod.default),
 					)
 				},
 			},

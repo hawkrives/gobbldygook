@@ -1,9 +1,10 @@
+// @flow
+
 import React from 'react'
-import PropTypes from 'prop-types'
 import Icon from '../../components/icon'
 import {checkmark, close} from '../../icons/ionicons'
 
-export default function ResultIndicator({result}) {
+export default function ResultIndicator({result}: {result?: boolean}) {
 	return (
 		<Icon
 			className={`result-indicator ${
@@ -15,8 +16,4 @@ export default function ResultIndicator({result}) {
 			{result ? checkmark : close}
 		</Icon>
 	)
-}
-
-ResultIndicator.propTypes = {
-	result: PropTypes.bool,
 }

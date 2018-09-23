@@ -1,4 +1,3 @@
-/* eslint-env jest */
 // @flow
 
 import treo from 'treo'

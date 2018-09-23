@@ -292,7 +292,7 @@ export function computeCourse({
 
 	const keysNotFromQuery = xor(keys(expr.$course), keys(foundCourse))
 	if (keysNotFromQuery.length) {
-		expr.$course._extraKeys = keysNotFromQuery
+		;(expr.$course: any)._extraKeys = keysNotFromQuery
 	}
 
 	expr._request = expr.$course
@@ -384,7 +384,6 @@ export function computeModifier({expr, ctx, courses}: ModifierChunkArgs) {
 		filtered = take(filtered, expr.$count.$num)
 	}
 
-	// eslint-disable-next-line no-confusing-arrow
 	filtered = filtered.map(
 		course => ('$course' in course ? (course: any).$course : course),
 	)

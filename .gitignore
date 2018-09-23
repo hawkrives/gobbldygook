@@ -19,3 +19,4 @@ node_modules/
 # The build artifacts
 build*/
 coverage/
+flow-coverage*/

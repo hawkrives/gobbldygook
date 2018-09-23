@@ -1,8 +1,10 @@
+// @flow
+
 export default {
 	path: 'areas(/:type)(/:name)(/:revision)',
 
-	getComponents(location, cb) {
-		require.ensure(
+	getComponents(location: mixed, cb: Function) {
+		;(require: any).ensure(
 			[],
 			require => {
 				cb(null, {

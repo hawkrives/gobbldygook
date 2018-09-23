@@ -1,7 +1,5 @@
 // @flow
 
-import has from 'lodash/has'
-
 const SEMESTERS = {
 	'0': 'Abroad',
 	'1': 'Fall',
@@ -17,7 +15,8 @@ export function semesterName(semester: string | number): string {
 	if (typeof semester === 'number') {
 		semester = String(semester)
 	}
-	return has(SEMESTERS, semester)
+
+	return SEMESTERS.hasOwnProperty(semester)
 		? SEMESTERS[semester]
 		: `Unknown (${semester})`
 }

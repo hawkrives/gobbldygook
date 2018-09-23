@@ -1,12 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+// @flow
+
+import * as React from 'react'
 
 import './new-student.scss'
 
-export default function NewStudent(props) {
+export default function NewStudent(props: {children: React.Node}) {
 	return <div className="new-student">{props.children}</div>
-}
-
-NewStudent.propTypes = {
-	children: PropTypes.node.isRequired,
 }

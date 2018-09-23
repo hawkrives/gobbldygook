@@ -6,7 +6,7 @@
   "dependencies": {
     "@gob/treo-plugin-batch-get": "^3.0.0-rc.2",
     "@gob/treo-plugin-query": "^3.0.0-rc.2",
-    "es6-promise": "^4.2.4",
+    "es6-promise": "^4.2.5",
     "treo": "^0.6.0-rc2"
   },
   "devDependencies": {

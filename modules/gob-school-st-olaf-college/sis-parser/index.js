@@ -1,8 +1,4 @@
-export {convertStudent} from './convert-imported-student'
+// @flow
 
-export {
-	getStudentInfo,
-	checkIfLoggedIn,
-	ExtensionNotLoadedError,
-	ExtensionTooOldError,
-} from './import-student'
+export {convertStudent} from './convert-imported-student'
+export type {PartialStudent} from './convert-imported-student'

@@ -1,7 +1,11 @@
 {
 	"pending": true,
-    "areas": [{"type": "concentration", "name": "Women's and Gender Studies", "revision": "2014-15"}],
-    "courses": [
-        {"department": ["WMGST"], "number": 121}
-    ]
+	"areas": [
+		{
+			"type": "concentration",
+			"name": "Women's and Gender Studies",
+			"revision": "2014-15"
+		}
+	],
+	"courses": [{"department": ["WMGST"], "number": 121}]
 }

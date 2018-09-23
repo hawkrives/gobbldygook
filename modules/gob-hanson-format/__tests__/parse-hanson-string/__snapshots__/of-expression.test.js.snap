@@ -173,9 +173,7 @@ Object {
   "$of": Array [
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 121,
       },
       "$type": "course",
@@ -244,18 +242,14 @@ Object {
         "$operator": "$gte",
       },
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 121,
       },
       "$type": "occurrence",
     },
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 308,
       },
       "$type": "course",
@@ -274,9 +268,7 @@ Object {
   "$of": Array [
     Object {
       "$course": Object {
-        "department": Array [
-          "CHEM",
-        ],
+        "department": "CHEM",
         "number": 121,
       },
       "$type": "course",
@@ -341,9 +333,7 @@ Object {
   "$of": Array [
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 121,
       },
       "$type": "course",

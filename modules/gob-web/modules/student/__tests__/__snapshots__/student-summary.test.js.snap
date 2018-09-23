@@ -897,7 +897,7 @@ exports[`Header allows editing the name if onChangeName is given 1`] = `
 <header
   className="student-summary--header"
 >
-  <Component
+  <AvatarLetter
     className="student-letter cannot-graduate"
     value="Natasha"
   />
@@ -922,7 +922,7 @@ exports[`Header calls onChangeName when the name is changed 1`] = `
 <header
   className="student-summary--header"
 >
-  <Component
+  <AvatarLetter
     className="student-letter cannot-graduate"
     value="Natasha"
   />
@@ -947,7 +947,7 @@ exports[`Header disables editing the name if onChangeName is not given 1`] = `
 <header
   className="student-summary--header"
 >
-  <Component
+  <AvatarLetter
     className="student-letter cannot-graduate"
     value="Natasha"
   />
@@ -971,7 +971,7 @@ exports[`Header renders 1`] = `
 <header
   className="student-summary--header"
 >
-  <Component
+  <AvatarLetter
     className="student-letter can-graduate"
     value="Susan"
   />
@@ -995,7 +995,7 @@ exports[`Header with an avatar handles the "can graduate" status 1`] = `
 <header
   className="student-summary--header"
 >
-  <Component
+  <AvatarLetter
     className="student-letter can-graduate"
     value="Susan"
   />
@@ -1019,7 +1019,7 @@ exports[`Header with an avatar handles the "cannot graduate" status 1`] = `
 <header
   className="student-summary--header"
 >
-  <Component
+  <AvatarLetter
     className="student-letter cannot-graduate"
     value="Susan"
   />

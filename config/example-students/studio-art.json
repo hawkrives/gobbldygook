@@ -1,35 +1,35 @@
 {
-    "areas": [{"type": "major", "name": "Studio Art", "revision": "2014-15"}],
+	"areas": [{"type": "major", "name": "Studio Art", "revision": "2014-15"}],
 
-    "courses": [
-        {"department": ["ART"], "number": 102, "credits": 1.0},
-        {"department": ["ART"], "number": 103, "credits": 1.0},
-        {"department": ["ART"], "number": 104, "credits": 1.0},
-        {"department": ["ART"], "number": 106, "credits": 1.0},
-        {"department": ["ART"], "number": 205, "credits": 1.0},
-        {"department": ["ART"], "number": 207, "credits": 1.0},
-        {"department": ["ART"], "number": 221, "credits": 1.0},
-        {"department": ["ART"], "number": 222, "credits": 1.0},
-        {"department": ["ART"], "number": 223, "credits": 1.0},
-        {"department": ["ART"], "number": 224, "credits": 1.0},
-        {"department": ["ART"], "number": 225, "credits": 1.0},
-        {"department": ["ART"], "number": 226, "credits": 1.0},
-        {"department": ["ART"], "number": 227, "credits": 1.0},
-        {"department": ["ART"], "number": 228, "credits": 1.0},
-        {"department": ["ART"], "number": 229, "credits": 1.0},
-        {"department": ["ART"], "number": 232, "credits": 1.0},
-        {"department": ["ART"], "number": 233, "credits": 1.0},
-        {"department": ["ART"], "number": 234, "credits": 1.0},
-        {"department": ["ART"], "number": 236, "credits": 1.0},
-        {"department": ["ART"], "number": 238, "credits": 1.0},
-        {"department": ["ART"], "number": 343, "credits": 1.0},
-        {"department": ["ART"], "number": 398, "credits": 1.0},
-        {"department": ["ART", "ASIAN"], "number": 259, "credits": 1.0},
-        {"department": ["ART", "ASIAN"], "number": 260, "credits": 1.0},
-        {"department": ["CSCI"], "number": 241, "credits": 1.0}
-    ],
+	"courses": [
+		{"department": ["ART"], "number": 102, "credits": 1.0},
+		{"department": ["ART"], "number": 103, "credits": 1.0},
+		{"department": ["ART"], "number": 104, "credits": 1.0},
+		{"department": ["ART"], "number": 106, "credits": 1.0},
+		{"department": ["ART"], "number": 205, "credits": 1.0},
+		{"department": ["ART"], "number": 207, "credits": 1.0},
+		{"department": ["ART"], "number": 221, "credits": 1.0},
+		{"department": ["ART"], "number": 222, "credits": 1.0},
+		{"department": ["ART"], "number": 223, "credits": 1.0},
+		{"department": ["ART"], "number": 224, "credits": 1.0},
+		{"department": ["ART"], "number": 225, "credits": 1.0},
+		{"department": ["ART"], "number": 226, "credits": 1.0},
+		{"department": ["ART"], "number": 227, "credits": 1.0},
+		{"department": ["ART"], "number": 228, "credits": 1.0},
+		{"department": ["ART"], "number": 229, "credits": 1.0},
+		{"department": ["ART"], "number": 232, "credits": 1.0},
+		{"department": ["ART"], "number": 233, "credits": 1.0},
+		{"department": ["ART"], "number": 234, "credits": 1.0},
+		{"department": ["ART"], "number": 236, "credits": 1.0},
+		{"department": ["ART"], "number": 238, "credits": 1.0},
+		{"department": ["ART"], "number": 343, "credits": 1.0},
+		{"department": ["ART"], "number": 398, "credits": 1.0},
+		{"department": ["ART", "ASIAN"], "number": 259, "credits": 1.0},
+		{"department": ["ART", "ASIAN"], "number": 260, "credits": 1.0},
+		{"department": ["CSCI"], "number": 241, "credits": 1.0}
+	],
 
-    "overrides": {
-        "major.studio art.studio art.juried show": true
-    }
+	"overrides": {
+		"major.studio art.studio art.juried show": true
+	}
 }

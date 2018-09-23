@@ -1,3 +1,5 @@
+// @flow
+
 export {compareProps} from './compare-props'
 export {AuthError, NetworkError} from './errors'
 export {status, classifyFetchErrors, json, text} from './fetch-helpers'

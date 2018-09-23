@@ -1,5 +1,4 @@
-PRIVACY POLICY
-==============
+# PRIVACY POLICY
 
 Your personal data does not leave your web browser, unless you explicitly export
 it as a file.

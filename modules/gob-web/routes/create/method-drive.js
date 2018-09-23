@@ -1,8 +1,9 @@
+// @flow
+
 import React, {Component} from 'react'
 import ScreenToolbar from './screen-toolbar'
 
-// eslint-disable-next-line react/prefer-stateless-function
-export default class DriveLinkScreen extends Component {
+export default class DriveLinkScreen extends Component<void> {
 	render() {
 		return (
 			<div>
@@ -12,7 +13,7 @@ export default class DriveLinkScreen extends Component {
 
 				<p>Unfortunately, this functionality has not yet been built.</p>
 
-				<ScreenToolbar />
+				<ScreenToolbar onBack={() => {}} onNext={() => {}} />
 			</div>
 		)
 	}

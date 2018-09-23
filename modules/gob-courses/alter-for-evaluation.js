@@ -1,5 +1,10 @@
+// @flow
+
 import toPairs from 'lodash/toPairs'
 import fromPairs from 'lodash/fromPairs'
+
+import type {Course} from '@gob/types'
+import type {Course as TrimmedCourse} from '@gob/examine-student'
 
 const whitelist = new Set([
 	'clbid',
@@ -17,9 +22,9 @@ const whitelist = new Set([
 	'year',
 ])
 
-const mapping = new Map([['departments', 'department']])
+const mapping = new Map([])
 
-export function alterForEvaluation(course) {
+export function alterForEvaluation(course: Course): TrimmedCourse {
 	course = {...course}
 
 	for (let [fromKey, toKey] of mapping.entries()) {
@@ -29,5 +34,5 @@ export function alterForEvaluation(course) {
 	}
 
 	let pairs = toPairs(course).filter(([key]) => whitelist.has(key))
-	return fromPairs(pairs)
+	return (fromPairs(pairs): any)
 }

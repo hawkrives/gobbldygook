@@ -1,5 +1,5 @@
 // @flow
-export {buildDeptString} from './build-dept'
+
 export {buildDeptNum} from './build-dept-num'
 export {deptNumRegex} from './dept-num-regex'
 export {quacksLikeDeptNum} from './quacks-like-dept-num'

@@ -1,12 +1,18 @@
----
 version: 2
 
 x-config:
+  - &image [{image: 'circleci/node:10'}]
   - &save-cache-yarn
     key: 'v1-yarn-dependencies-{{ arch }}-{{ checksum "yarn.lock" }}'
     paths: [~/.cache/yarn]
   - &restore-cache-yarn
     key: 'v1-yarn-dependencies-{{ arch }}-{{ checksum "yarn.lock" }}'
+x-workspace:
+  - &persist-workspace-node_modules
+    root: ./node_modules
+    paths: [./*]
+  - &attach-workspace-node_modules
+    at: ./node_modules
 
 workflows:
   version: 2
@@ -21,35 +27,41 @@ workflows:
 
 jobs:
   cache-yarn:
-    docker: [{image: 'circleci/node:10'}]
+    docker: *image
     steps:
       - checkout
       - restore_cache: *restore-cache-yarn
       - run: yarn install
       - run: yarn --version
       - save_cache: *save-cache-yarn
+      - persist_to_workspace: *persist-workspace-node_modules
 
   flow:
-    docker: [{image: 'circleci/node:10'}]
+    docker: *image
     environment:
       task: flow
     steps:
       - checkout
-      - restore_cache: *restore-cache-yarn
-      - run: yarn install
-      - save_cache: *save-cache-yarn
+      - attach_workspace: *attach-workspace-node_modules
       - run: yarn run --silent flow check --quiet
 
+  flow-coverage:
+    docker: *image
+    environment:
+      task: flow
+    steps:
+      - checkout
+      - attach_workspace: *attach-workspace-node_modules
+      - run: yarn run --silent flow-check-coverage
+
   jest:
-    docker: [{image: 'circleci/node:10'}]
+    docker: *image
     environment:
       task: jest
       JEST_JUNIT_OUTPUT: ./test-results/jest/junit.xml
     steps:
       - checkout
-      - restore_cache: *restore-cache-yarn
-      - run: yarn install
-      - save_cache: *save-cache-yarn
+      - attach_workspace: *attach-workspace-node_modules
       - run: yarn run --silent test --coverage
       - run:
           name: coveralls
@@ -61,41 +73,41 @@ jobs:
             coveralls < ./coverage/lcov.info
 
   prettier:
-    docker: [{image: 'circleci/node:10'}]
+    docker: *image
     environment:
       task: prettier
     steps:
       - checkout
-      - restore_cache: *restore-cache-yarn
-      - run: yarn install
-      - save_cache: *save-cache-yarn
+      - attach_workspace: *attach-workspace-node_modules
       - run: yarn run pretty
-      - run: git diff modules/
+      - run: git diff --exit-code
 
   eslint:
-    docker: [{image: 'circleci/node:10'}]
+    docker: *image
     environment:
       task: lint
     steps:
       - checkout
-      - restore_cache: *restore-cache-yarn
-      - run: yarn install
-      - save_cache: *save-cache-yarn
+      - attach_workspace: *attach-workspace-node_modules
       - run: mkdir -p test-results/eslint/
-      - run: yarn run --silent lint
-      - run: yarn run --silent lint --format junit > test-results/eslint/junit.xml
+      - run:
+          name: yarn run lint
+          command: yarn run --silent lint
+          when: always
+      - run:
+          name: yarn run lint --junit
+          command: yarn run --silent lint --format junit > test-results/eslint/junit.xml
+          when: always
       - store_test_results:
           path: ./test-results
 
   build:
-    docker: [{image: 'circleci/node:10'}]
+    docker: *image
     environment:
       task: build
     steps:
       - checkout
-      - restore_cache: *restore-cache-yarn
-      - run: yarn install
-      - save_cache: *save-cache-yarn
+      - attach_workspace: *attach-workspace-node_modules
       - run: yarn run --silent build
       - run: node scripts/rearrange-for-circle.js
       - store_artifacts:

@@ -1,12 +1,28 @@
+// @flow
+
 import React from 'react'
-import PropTypes from 'prop-types'
 import cx from 'classnames'
-import {semesterName, buildDeptString} from '@gob/school-st-olaf-college'
+import {semesterName} from '@gob/school-st-olaf-college'
 
 import './expression--course.scss'
 
-export default function CourseExpression(props) {
-	const department = buildDeptString(props.department)
+type Props = {
+	_result?: boolean,
+	_taken?: boolean,
+	department: string,
+	international?: boolean,
+	lab?: boolean,
+	level?: number,
+	number?: number,
+	section?: string,
+	semester?: number,
+	style?: Object,
+	type?: string,
+	year?: number,
+}
+
+export default function CourseExpression(props: Props) {
+	const department = props.department
 
 	const international = props.international && (
 		<span className="course--international">I</span>
@@ -61,19 +77,4 @@ export default function CourseExpression(props) {
 			{temporalIdentifiers}
 		</span>
 	)
-}
-
-CourseExpression.propTypes = {
-	_result: PropTypes.bool,
-	_taken: PropTypes.bool,
-	department: PropTypes.arrayOf(PropTypes.string).isRequired,
-	international: PropTypes.bool,
-	lab: PropTypes.bool,
-	level: PropTypes.number,
-	number: PropTypes.number,
-	section: PropTypes.string,
-	semester: PropTypes.number,
-	style: PropTypes.object,
-	type: PropTypes.string,
-	year: PropTypes.number,
 }

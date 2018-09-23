@@ -10,14 +10,18 @@ import {
 	alertCircled,
 } from '../../icons/ionicons'
 import * as theme from '../../theme'
+import type {WarningType} from '@gob/object-student'
 
 const WarningList = styled(PlainList)`
 	font-size: 0.85em;
 	font-feature-settings: 'onum';
+	display: flex;
+	flex-flow: row wrap;
 `
 
 const WarningItem = styled(ListItem)`
 	display: inline-flex;
+	flex: 1;
 	flex-flow: row nowrap;
 	align-items: center;
 	max-width: 100%;
@@ -44,25 +48,20 @@ const icons = {
 	'invalid-year': alertCircled,
 }
 
-type WarningType = {
-	type: string,
-	msg: string,
-	warning: boolean,
-}
-
 type Props = {
-	warnings: ?Array<WarningType>,
+	warnings: Array<?WarningType>,
 }
 
-export default class CourseWarnings extends React.PureComponent<Props> {
+export default class CourseWarnings extends React.Component<Props> {
 	render() {
 		if (!this.props.warnings) {
 			return null
 		}
 
-		const warnings = this.props.warnings.filter(
+		// $FlowFixMe at some point, flow should be able to determine that the filter will not return any nullable elements
+		let warnings: Array<WarningType> = (this.props.warnings.filter(
 			w => w && w.warning === true,
-		)
+		): Array<any>)
 
 		if (!warnings.length) {
 			return null

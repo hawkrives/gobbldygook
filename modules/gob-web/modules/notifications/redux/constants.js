@@ -1,3 +1,5 @@
+// @flow
+
 export const REMOVE_NOTIFICATION =
 	'gobbldygook/notifications/REMOVE_NOTIFICATION'
 export const LOG_MESSAGE = 'gobbldygook/notifications/LOG_MESSAGE'

@@ -8,7 +8,7 @@
     "@gob/examine-student": "^3.0.0-rc.2",
     "@gob/lib": "^3.0.0-rc.2",
     "@gob/object-student": "^3.0.0-rc.2",
-    "debug": "^3.1.0",
-    "lodash": "^4.17.10"
+    "debug": "^4.0.1",
+    "lodash": "^4.17.11"
   }
 }

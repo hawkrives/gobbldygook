@@ -7,6 +7,8 @@ import {PlainList, ListItem} from '../../components/list'
 import MissingCourse from './missing-course'
 import EmptyCourseSlot from './empty-course-slot'
 import * as theme from '../../theme'
+import type {WarningType, HydratedScheduleType} from '@gob/object-student'
+import type {Course as CourseType} from '@gob/types'
 
 const courseStyles = css`
 	${theme.semesterPadding};
@@ -42,11 +44,11 @@ const Empty = styled(EmptyCourseSlot)`
 `
 
 type Props = {
-	courses: Array<Object>,
+	courses: Array<CourseType | {error: string | Error, clbid: string}>,
 	usedSlots: number,
-	conflicts: Object[],
+	conflicts: Array<Array<?WarningType>>,
 	maxSlots: number,
-	schedule: Object,
+	schedule: HydratedScheduleType,
 	studentId: string,
 }
 
@@ -54,9 +56,10 @@ export default function CourseList(props: Props) {
 	const courseObjects = props.courses.map(
 		(course, i) =>
 			course.error ? (
-				<Missing clbid={course.clbid} error={course.error} />
+				<Missing key={i} clbid={course.clbid} error={course.error} />
 			) : (
 				<Course
+					key={i}
 					index={i}
 					course={course}
 					conflicts={props.conflicts}

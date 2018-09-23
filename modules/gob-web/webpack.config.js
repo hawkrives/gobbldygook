@@ -1,11 +1,12 @@
 /* global module, __dirname */
-/* eslint-disable camelcase */
 // @flow
 'use strict'
 
 const pkg = require('./package.json')
 const webpack = require('webpack')
 const Stylish = require('webpack-stylish')
+
+const babelConfig = require('../../babel.config.js')
 
 const {
 	DefinePlugin,
@@ -96,9 +97,7 @@ function config() {
 			let cssLink = context.css
 				? `<link rel="stylesheet" href="${publicPath}${context.css}">`
 				: null
-			let polyfills = isProduction
-				? '<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>'
-				: ''
+			let scriptSrc = `${publicPath}${context.main}`
 
 			return `
                 <!DOCTYPE html>
@@ -109,11 +108,10 @@ function config() {
 
                 <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/nhhpgddphdimipafjfiggjnbbmcoklld">
 
-                ${polyfills}
                 ${cssLink ? cssLink : ''}
 
                 <main id="gobbldygook"></main>
-                <script src="${publicPath}${context.main}"></script>
+                <script async type="module" src="${scriptSrc}"></script>
                 </html>
             `
 		}),
@@ -191,8 +189,12 @@ function config() {
 
 	const babelLoader = {
 		loader: 'babel-loader',
-		options: {cacheDirectory: !isCI},
+		options: {
+			cacheDirectory: !isCI,
+			...babelConfig,
+		},
 	}
+
 	const urlLoader = {loader: 'url-loader', options: {limit: 10000}}
 	const cssLoader = isProduction
 		? ExtractTextPlugin.extract({

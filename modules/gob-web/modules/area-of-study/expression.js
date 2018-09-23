@@ -1,20 +1,29 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+// @flow
+
+import * as React from 'react'
 import CourseExpression from './expression--course'
 import ResultIndicator from './result-indicator'
 
+import type {
+	Qualifier,
+	Qualification,
+	QualificationValue,
+} from '@gob/examine-student'
+
 import has from 'lodash/has'
-import map from 'lodash/map'
 import plur from 'plur'
 import {humanizeOperator} from '@gob/examine-student'
 import debug from 'debug'
 const log = debug('web:react')
+
+import type {Course} from '@gob/types'
 
 import './expression.scss'
 
 const JOINERS = {
 	$and: 'AND',
 	$or: 'OR',
+	$invalid: 'INVALID',
 }
 
 function makeBooleanExpression({expr, ctx}) {
@@ -50,14 +59,13 @@ const ofLookup = {
 }
 
 function makeOfExpression({expr, ctx}) {
-	const description =
-		ofLookup[expr.$count.$was] ||
-		`${expr._counted || 0} of ${humanizeOperator(expr.$count.$operator)} ${
-			expr.$count.$num
-		} from among`
+	const description = expr.$count.$was
+		? ofLookup[expr.$count.$was] || '???'
+		: `${expr._counted || 0} of ${humanizeOperator(
+				expr.$count.$operator,
+		  )} ${expr.$count.$num} from among`
 
-	// const contents = map(orderBy(expr.$of, ['_result'], ['desc']), (ex, i) =>
-	const contents = map(expr.$of, (ex, i) => (
+	const contents = expr.$of.map((ex, i) => (
 		<Expression key={i} expr={ex} ctx={ctx} />
 	))
 
@@ -72,7 +80,7 @@ function makeModifierExpression({expr}) {
 	if (expr.$from === 'where') {
 		from = 'courses where ' + makeWhereQualifier(expr.$where)
 	}
-	const description = `${expr._counted} of ${needs} from ${from}`
+	const description = `${expr._counted || 0} of ${needs} from ${from}`
 	return {description}
 }
 
@@ -80,35 +88,78 @@ let operators = {
 	$lte: '<=',
 	$gte: '>=',
 	$eq: 'is',
+	$ne: '!=',
+	$gt: '>',
+	$lt: '<',
+	other: '?',
 }
 let keys = {
 	gereqs: 'G.E.',
 }
-export function makeWhereQualifier(where) {
-	let operator = operators[where.$operator] || '?'
-	let key = keys[where.$key] || where.$key
-	return `${key} ${operator} ${where.$value}`
+
+function stringifyWhereValue(value: QualificationValue): string {
+	if (typeof value === 'number') {
+		return String(value)
+	}
+
+	if (typeof value === 'string') {
+		return value
+	}
+
+	if (value.$type === 'function') {
+		return value['$computed-value']
+	}
+
+	if (value.$type === 'boolean') {
+		if (value.$booleanType === 'or') {
+			return value.$or.join(' OR ')
+		} else if (value.$booleanType === 'and') {
+			return value.$and.join(' AND ')
+		}
+	}
+
+	return 'Unknown'
 }
 
-export function makeWhereExpression({expr}) {
+export function makeWhereQualifier(where: Qualifier | Qualification): string {
+	if (where.$type === 'boolean') {
+		if (where.$booleanType === 'and') {
+			return where.$and.map(makeWhereQualifier).join(' AND ')
+		} else if (where.$booleanType === 'or') {
+			return where.$or.map(makeWhereQualifier).join(' OR ')
+		}
+	}
+
+	if (where.$type !== 'qualification') {
+		return 'unknown'
+	}
+
+	let operator = operators[where.$operator || 'other']
+	let key = keys[where.$key] || where.$key
+	let value = stringifyWhereValue(where.$value)
+	return `${key} ${operator} ${value}`
+}
+
+function makeWhereExpression({expr}) {
 	const op = humanizeOperator(expr.$count.$operator)
 	const num = expr.$count.$num
 	const needs = `${op} ${num}`
 	const qualifier = makeWhereQualifier(expr.$where)
 	const distinct = expr.$distinct ? 'distinct ' : ''
 	const word = expr.$count.$num === 1 ? 'course' : 'courses'
-	const counted = expr._counted
+	const counted = expr._counted || 0
 	const description = `${counted} of ${needs} ${distinct}${word} from courses where ${qualifier}`
 
-	let contents = map(expr._matches, (course, i) => (
+	let matches = expr._matches || []
+	let contents: ?Array<React.Node> = matches.map((course: Course, i) => (
 		<Expression
 			key={i}
 			expr={{$type: 'course', $course: course}}
-			hideIndicator
+			hideIndicator={true}
 		/>
 	))
 
-	if (!contents.length) {
+	if (contents && !contents.length) {
 		contents = null
 	}
 
@@ -119,14 +170,21 @@ function makeOccurrenceExpression({expr}) {
 	const op = humanizeOperator(expr.$count.$operator)
 	const word = expr.$count.$num === 1 ? 'occurrence' : 'occurrences'
 	const num = expr.$count.$num
-	const description = `${expr._counted} of ${op} ${num} ${word} of `
+	const description = `${expr._counted || 0} of ${op} ${num} ${word} of `
 
 	const contents = <Expression expr={{...expr, type: 'course'}} />
 
 	return {description, contents}
 }
 
-export default function Expression(props) {
+export type Props = {
+	// $FlowFixMe TODO rives
+	expr: any,
+	hideIndicator?: boolean,
+	ctx?: mixed,
+}
+
+export default function Expression(props: Props) {
 	const {expr} = props
 	const {$type} = expr
 
@@ -199,15 +257,4 @@ export default function Expression(props) {
 			)}
 		</span>
 	)
-}
-
-Expression.propTypes = {
-	ctx: PropTypes.object,
-	expr: PropTypes.shape({
-		_isFulfillment: PropTypes.bool,
-		_checked: PropTypes.bool,
-		_result: PropTypes.bool,
-		$type: PropTypes.string,
-	}).isRequired,
-	hideIndicator: PropTypes.bool,
 }

@@ -1,0 +1,6 @@
+{
+  "name": "@gob/types",
+  "version": "3.0.0-rc.2",
+  "main": "index.js",
+  "license": "MIT"
+}

@@ -1,5 +1,5 @@
 {
-  let globalLastDept
+  var globalLastDept
 
   function storeDept(dept) {
     globalLastDept = dept
@@ -9,14 +9,8 @@
     return globalLastDept
   }
 
-  const flatten = require('lodash/flatten')
-  const assign = require('lodash/assign')
-  let normalizeDepartment
-  try {
-    normalizeDepartment = require('./convert-department').normalizeDepartment
-  } catch (e) {
-    normalizeDepartment = x => x
-  }
+  var flatten = require('lodash/flatten')
+  var assign = require('lodash/assign')
 }
 
 
@@ -387,35 +381,15 @@ Course
   {
     return {
       $type: 'course',
-      $course: assign({},
-        details,
-        (dept || fetchDept()),
-        num
-      ),
+      $course: assign({}, details, (dept || fetchDept()), num),
     }
   }
 
 
 CourseDepartment
-  = dept1:(c1:UppercaseLetter c2:UppercaseLetter { return c1 + c2 })
-    part2:(
-      '/' l1:UppercaseLetter l2:UppercaseLetter
-          { return {dept: l1 + l2, type: 'separate'} }
-      / chars:UppercaseLetter*
-          { return {dept: chars.join(''), type: 'joined'} }
-    )
+  = dept:[A-Z/]+
     {
-      let {type, dept: dept2} = part2
-      let department
-      if (type === 'joined') {
-        department = {department: [dept1 + dept2]}
-      }
-      else if (type === 'separate') {
-        department = {department: [
-          normalizeDepartment(dept1),
-          normalizeDepartment(dept2),
-        ]}
-      }
+      let department = {department: dept.join('')}
       storeDept(department)
       return department
     }

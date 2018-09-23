@@ -1,27 +1,75 @@
 {
-    "areas": [{"type": "major", "name": "Chemistry", "revision": "2013-14"}],
-    "courses": [
-        {"department": ["CHEM"], "number": 125, "name": "Struct Chem & Equilib Lab", "lab": true},
-        {"department": ["CHEM"], "number": 125, "name": "Struct Chem & Equilib"},
-        {"department": ["CHEM"], "number": 126, "name": "Chemical Reactions"},
-        {"department": ["CHEM"], "number": 126, "name": "Chem Reactions/Lab", "lab": true},
-        {"department": ["CHEM"], "number": 247, "name": "Organic Chemistry I"},
-        {"department": ["CHEM"], "number": 248, "name": "Organic Chemistry II"},
-        {"department": ["CHEM"], "number": 253, "name": "Synthesis Lab I", "lab": true},
-        {"department": ["CHEM"], "number": 254, "name": "Synthesis Lab II", "lab": true},
-        {"department": ["CHEM"], "number": 255, "name": "Analytical Chem"},
-        {"department": ["CHEM"], "number": 256, "name": "Analytical Lab", "lab": true},
-        {"department": ["CHEM"], "number": 357, "name": "Physical Lab", "lab": true},
-        {"department": ["CHEM"], "number": 371, "name": "Physical Chemistry"},
-        {"department": ["CHEM"], "number": 379, "name": "Biochemistry I"},
-        {"department": ["MATH"], "number": 999, "name": "AP Calculus I"},
-        {"department": ["MATH"], "number": 128, "name": "Honors Calculus II"},
-        {"department": ["PHYS"], "number": 124, "name": "Prin Physics I/Lab", "lab": true},
-        {"department": ["PHYS"], "number": 124, "name": "Principles Physics I"},
-        {"department": ["PHYS"], "number": 125, "name": "Principles Physics II"},
-        {"department": ["PHYS"], "number": 125, "name": "Prin Physics II/Lab", "lab": true}
-    ],
-    "overrides": {
-        "major.chemistry.seminars": true
-    }
+	"areas": [{"type": "major", "name": "Chemistry", "revision": "2013-14"}],
+	"courses": [
+		{
+			"department": ["CHEM"],
+			"number": 125,
+			"name": "Struct Chem & Equilib Lab",
+			"lab": true
+		},
+		{
+			"department": ["CHEM"],
+			"number": 125,
+			"name": "Struct Chem & Equilib"
+		},
+		{"department": ["CHEM"], "number": 126, "name": "Chemical Reactions"},
+		{
+			"department": ["CHEM"],
+			"number": 126,
+			"name": "Chem Reactions/Lab",
+			"lab": true
+		},
+		{"department": ["CHEM"], "number": 247, "name": "Organic Chemistry I"},
+		{"department": ["CHEM"], "number": 248, "name": "Organic Chemistry II"},
+		{
+			"department": ["CHEM"],
+			"number": 253,
+			"name": "Synthesis Lab I",
+			"lab": true
+		},
+		{
+			"department": ["CHEM"],
+			"number": 254,
+			"name": "Synthesis Lab II",
+			"lab": true
+		},
+		{"department": ["CHEM"], "number": 255, "name": "Analytical Chem"},
+		{
+			"department": ["CHEM"],
+			"number": 256,
+			"name": "Analytical Lab",
+			"lab": true
+		},
+		{
+			"department": ["CHEM"],
+			"number": 357,
+			"name": "Physical Lab",
+			"lab": true
+		},
+		{"department": ["CHEM"], "number": 371, "name": "Physical Chemistry"},
+		{"department": ["CHEM"], "number": 379, "name": "Biochemistry I"},
+		{"department": ["MATH"], "number": 999, "name": "AP Calculus I"},
+		{"department": ["MATH"], "number": 128, "name": "Honors Calculus II"},
+		{
+			"department": ["PHYS"],
+			"number": 124,
+			"name": "Prin Physics I/Lab",
+			"lab": true
+		},
+		{"department": ["PHYS"], "number": 124, "name": "Principles Physics I"},
+		{
+			"department": ["PHYS"],
+			"number": 125,
+			"name": "Principles Physics II"
+		},
+		{
+			"department": ["PHYS"],
+			"number": 125,
+			"name": "Prin Physics II/Lab",
+			"lab": true
+		}
+	],
+	"overrides": {
+		"major.chemistry.seminars": true
+	}
 }

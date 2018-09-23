@@ -1,20 +1,16 @@
-import React, {cloneElement} from 'react'
-import PropTypes from 'prop-types'
+// @flow
+
+import * as React from 'react'
 import {Provider} from 'react-redux'
 import Notifications from './modules/notifications'
 
-const ReduxWrapper = props => (
+const ReduxWrapper = (props: {children: React.Element<*>, store: Object}) => (
 	<Provider store={props.store}>
 		<div id="app-wrapper">
-			{cloneElement(props.children)}
+			{React.cloneElement(props.children)}
 			<Notifications />
 		</div>
 	</Provider>
 )
-
-ReduxWrapper.propTypes = {
-	children: PropTypes.node,
-	store: PropTypes.object.isRequired,
-}
 
 export default ReduxWrapper

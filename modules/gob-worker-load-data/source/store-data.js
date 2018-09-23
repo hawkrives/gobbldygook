@@ -1,6 +1,5 @@
 // @flow
 
-import map from 'lodash/map'
 import round from 'lodash/round'
 import present from 'present'
 import debug from 'debug'
@@ -14,10 +13,10 @@ const areasLog = debug('worker:load-data:store-data:areas')
 type BasicCourse = Object
 type BasicArea = {type: string}
 
-export function storeCourses(path: string, data: BasicCourse[]) {
+export function storeCourses(path: string, data: Array<BasicCourse>) {
 	coursesLog(path)
 
-	let coursesToStore = map(data, course => ({
+	let coursesToStore = data.map(course => ({
 		...course,
 		...prepareCourse(course),
 		sourcePath: path,
