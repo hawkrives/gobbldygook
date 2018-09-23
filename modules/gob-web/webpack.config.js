@@ -97,6 +97,7 @@ function config() {
 			let cssLink = context.css
 				? `<link rel="stylesheet" href="${publicPath}${context.css}">`
 				: null
+			let scriptSrc = `${publicPath}${context.main}`
 
 			return `
                 <!DOCTYPE html>
@@ -110,7 +111,7 @@ function config() {
                 ${cssLink ? cssLink : ''}
 
                 <main id="gobbldygook"></main>
-                <script async type="module" src="${publicPath}${context.main}"></script>
+                <script async type="module" src="${scriptSrc}"></script>
                 </html>
             `
 		}),
