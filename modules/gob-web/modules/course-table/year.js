@@ -30,7 +30,7 @@ const Header = styled.header`
 	justify-content: space-between;
 	align-items: center;
 
-	font-feature-settings: 'tnum';
+	font-variant-numeric: tabular-nums;
 
 	line-height: 1em;
 	font-weight: 500;
@@ -55,7 +55,7 @@ const TitleButton = styled(Button)`
 	padding: 0 0.5em;
 
 	text-transform: none;
-	font-feature-settings: 'smcp';
+	font-variant-caps: small-caps;
 	font-weight: 400;
 
 	color: ${theme.gray500};

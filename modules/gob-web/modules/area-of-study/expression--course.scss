@@ -7,7 +7,7 @@
 .expression .course {
 	display: flex;
 	cursor: inherit;
-	font-feature-settings: 'lnum';
+	font-variant-numeric: lining-nums;
 
 	font-size: 0.9em;
 

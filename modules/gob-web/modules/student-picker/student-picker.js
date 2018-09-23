@@ -55,7 +55,7 @@ const AppTitle = styled.header`
 	& h1,
 	& h2 {
 		margin: 0;
-		font-feature-settings: 'smcp';
+		font-variant-caps: small-caps;
 	}
 
 	& h1 {

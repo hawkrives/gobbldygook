@@ -24,7 +24,7 @@ injectGlobal`
 
         line-height: 1.4;
 
-        font-feature-settings: 'liga', 'calt', 'kern';
+        font-variant-ligatures: common-ligatures;
         hyphens: auto;
     }
 

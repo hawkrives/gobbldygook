@@ -32,7 +32,7 @@ let ProgressBar = styled(BasicProgressBar)`
 let Percentage = styled.output`
 	color: ${theme.gray300};
 	margin-left: 0.5em;
-	font-feature-settings: 'lnum';
+	font-variant-numeric: lining-nums;
 `
 
 let Message = styled.h1`

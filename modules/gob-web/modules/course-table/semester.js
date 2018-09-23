@@ -64,7 +64,6 @@ const Header = styled.header`
 	display: flex;
 	flex-flow: row nowrap;
 	align-items: stretch;
-	font-feature-settings: 'smcp';
 	border-top-right-radius: 2px;
 	border-top-left-radius: 2px;
 	color: ${theme.gray500};

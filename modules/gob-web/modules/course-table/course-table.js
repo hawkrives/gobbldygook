@@ -11,10 +11,7 @@ import Button from '../../components/button'
 import Year from './year'
 
 const AddYearButton = styled(Button)`
-	font-feature-settings: 'smcp';
-
 	display: block;
-	text-transform: none;
 
 	text-align: left;
 

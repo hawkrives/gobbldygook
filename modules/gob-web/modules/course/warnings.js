@@ -14,7 +14,7 @@ import type {WarningType} from '@gob/object-student'
 
 const WarningList = styled(PlainList)`
 	font-size: 0.85em;
-	font-feature-settings: 'onum';
+	font-variant-numeric: oldstyle-nums;
 	display: flex;
 	flex-flow: row wrap;
 `
