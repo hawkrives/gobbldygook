@@ -4,28 +4,25 @@ import {connect} from 'react-redux'
 
 import difference from 'lodash/difference'
 import filter from 'lodash/filter'
-import find from 'lodash/find'
 import groupBy from 'lodash/groupBy'
 import includes from 'lodash/includes'
 import keys from 'lodash/keys'
 import map from 'lodash/map'
 import mapValues from 'lodash/mapValues'
-import pick from 'lodash/pick'
 import pickBy from 'lodash/pickBy'
 import toPairs from 'lodash/toPairs'
 import union from 'lodash/union'
-import uniq from 'lodash/uniq'
 import values from 'lodash/values'
 
 import AreaOfStudyGroup from './area-of-study-group'
 import {FlatButton} from '../../components/button'
 import {sortStudiesByType} from '@gob/object-student/sort-studies-by-type'
 import {areaTypeConstants} from '@gob/object-student/area-types'
+import type {HydratedStudentType, AreaOfStudyType} from '@gob/object-student'
 
-type AreaOfStudy = Object
-type Student = Object
+type Student = HydratedStudentType
 type Props = {
-	allAreas: AreaOfStudy[],
+	allAreas: Array<AreaOfStudyType>,
 	student: Student,
 }
 type State = {
@@ -67,16 +64,17 @@ class AreaOfStudySidebarComponent extends React.PureComponent<Props, State> {
 		)
 
 		// pull out the results
-		const studyResults = mapValues(groupedStudies, group =>
-			map(
-				group,
+		const studyResults = student.areas ? mapValues(groupedStudies, group =>
+			group.map(
 				area =>
-					find(
-						student.areas,
-						pick(area, ['name', 'type', 'revision']),
+					student.areas.find(
+						a =>
+							a.name === area.name &&
+							a.type === area.type &&
+							a.revision === area.revision,
 					) || area,
 			),
-		)
+		) : {}
 
 		// and then render them
 		const sections = map(studyResults, (areas, areaType) => (
@@ -93,7 +91,7 @@ class AreaOfStudySidebarComponent extends React.PureComponent<Props, State> {
 		))
 
 		const allAreaTypes = values(areaTypeConstants)
-		const usedAreaTypes = uniq(map(student.studies, s => s.type))
+		const usedAreaTypes = [...new Set(student.studies.map(s => s.type))]
 
 		const areaTypesToShowButtonsFor = union(
 			usedAreaTypes,
@@ -151,7 +149,7 @@ class AreaOfStudySidebarComponent extends React.PureComponent<Props, State> {
 	}
 }
 
-const mapState = (state): {allAreas: Array<AreaOfStudy>} => ({
+const mapState = (state): {allAreas: Array<AreaOfStudyType>} => ({
 	allAreas: state.areas.data,
 })
 
