@@ -5,7 +5,7 @@ import map from 'lodash/map'
 import filter from 'lodash/filter'
 import sortBy from 'lodash/sortBy'
 import {findMissingNumber} from '@gob/lib'
-import {type ScheduleType} from '@gob/object-student'
+import type {ScheduleType} from '@gob/object-student'
 
 /**
  * Takes a list of schedules and finds the first open semester.
