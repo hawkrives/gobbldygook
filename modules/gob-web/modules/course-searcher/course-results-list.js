@@ -147,8 +147,6 @@ export default class CourseResultsList extends React.Component<Props> {
 	}
 
 	render() {
-		console.log(this.props.results)
-
 		return (
 			<ResultsListSizer>
 				<AutoSizer>
