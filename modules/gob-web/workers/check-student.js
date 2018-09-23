@@ -4,7 +4,12 @@ import uniqueId from 'lodash/uniqueId'
 import debug from 'debug'
 import CheckStudentWorker from './check-student.worker'
 
-import type {HydratedAreaOfStudyType, AreaOfStudyEvaluationError, AreaOfStudyType, HydratedStudentType} from '@gob/object-student'
+import type {
+	HydratedAreaOfStudyType,
+	AreaOfStudyEvaluationError,
+	AreaOfStudyType,
+	HydratedStudentType,
+} from '@gob/object-student'
 
 const log = debug('worker:check-student:main')
 

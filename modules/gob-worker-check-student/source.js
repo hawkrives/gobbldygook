@@ -6,7 +6,12 @@ import debug from 'debug'
 import {evaluate} from '@gob/examine-student'
 import {getActiveCourses} from '@gob/object-student'
 import {alterForEvaluation as alterCourse} from '@gob/courses'
-import type {AreaOfStudyType, HydratedAreaOfStudyType, AreaOfStudyEvaluationError, HydratedStudentType} from '@gob/object-student'
+import type {
+	AreaOfStudyType,
+	HydratedAreaOfStudyType,
+	AreaOfStudyEvaluationError,
+	HydratedStudentType,
+} from '@gob/object-student'
 const log = debug('worker:check-student:worker')
 
 function tryEvaluate(student, area): any {
@@ -18,8 +23,11 @@ function tryEvaluate(student, area): any {
 	}
 }
 
-function doWork(student: HydratedStudentType, area: AreaOfStudyType): HydratedAreaOfStudyType | AreaOfStudyEvaluationError {
-	(student: any).courses = getActiveCourses(student).map(alterCourse)
+function doWork(
+	student: HydratedStudentType,
+	area: AreaOfStudyType,
+): HydratedAreaOfStudyType | AreaOfStudyEvaluationError {
+	;(student: any).courses = getActiveCourses(student).map(alterCourse)
 
 	let details = tryEvaluate(student, (area: any)._area)
 	if (details._error) {

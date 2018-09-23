@@ -11,8 +11,7 @@ export type HydratedAreaOfStudyType = {|
 	...$Exact<AreaOfStudyType>,
 	// TODO: properly type _area
 	_area: {
-		result:
-			|{$type: 'of', $of: Array<string>},
+		result: {$type: 'of', $of: Array<string>},
 	},
 	_error: false,
 	_checked: boolean,
