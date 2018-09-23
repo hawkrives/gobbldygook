@@ -2,14 +2,8 @@ export default {
 	path: 's/:studentId',
 
 	getIndexRoute(location, cb) {
-		require.ensure(
-			[],
-			() => {
-				cb(null, {
-					content: require('../../modules/course-table').default,
-				})
-			},
-			'course-table.components',
+		import(/* webpackChunkName: 'course-table.components' */ '../../modules/course-table').then(
+			mod => cb(null, {content: mod.default}),
 		)
 	},
 
