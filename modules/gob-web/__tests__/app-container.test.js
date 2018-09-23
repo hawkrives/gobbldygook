@@ -2,6 +2,7 @@
 
 import React from 'react'
 import {mount} from 'enzyme'
+import 'jest-styled-components'
 
 import configureStore from '../redux'
 import ReduxWrapper from '../redux-wrapper'

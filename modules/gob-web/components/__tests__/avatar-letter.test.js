@@ -1,3 +1,4 @@
+import 'jest-styled-components'
 import React from 'react'
 import {mount} from 'enzyme'
 import {AvatarLetter} from '../avatar-letter'
