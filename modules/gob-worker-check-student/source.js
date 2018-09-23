@@ -1,5 +1,5 @@
 // @flow
-import map from 'lodash/map'
+
 import filter from 'lodash/filter'
 import debug from 'debug'
 
@@ -18,7 +18,7 @@ function tryEvaluate(student, area) {
 }
 
 function doWork(student: any, area: any) {
-	student.courses = map(getActiveCourses(student), alterCourse)
+	student.courses = getActiveCourses(student).map(alterCourse)
 
 	let details = tryEvaluate(student, area._area)
 	if ('_error' in details) {
