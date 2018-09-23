@@ -5,6 +5,7 @@ import * as theme from '../theme'
 import Spinner from 'react-spinkit'
 
 const Wrapper = styled.figure`
+	margin: 0;
 	display: flex;
 	justify-content: center;
 	align-items: center;
