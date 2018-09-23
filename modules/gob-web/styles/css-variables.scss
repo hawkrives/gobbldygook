@@ -1,0 +1,29 @@
+@import './variables.scss';
+
+:root {
+	/* colors */
+	--background: #{$background};
+	--text-color: #{$text-color};
+
+	/* fonts */
+	--sans-font-stack: #{$sans-font-stack};
+	--body-font-stack: #{$body-font-stack};
+	--heading-font-stack: #{$heading-font-stack};
+
+	/* spacing */
+	--page-edge-padding: #{$page-edge-padding};
+	--block-edge-padding: #{$block-edge-padding};
+	--area-edge-padding: #{$area-edge-padding};
+
+	/* z-indices */
+	--z-sidebar: #{$z-sidebar};
+	--z-floating-button: #{$z-floating-button};
+
+	/* media queries */
+	--single-column-width: #{$single-column-width};
+	--year-collapse-width: #{$year-collapse-width};
+
+	--material-divider: #{$material-divider};
+	--base-border-radius: #{$base-border-radius};
+	--sidebar-width: #{$sidebar-width};
+}

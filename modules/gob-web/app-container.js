@@ -39,7 +39,7 @@ injectGlobal`
 
     .content {
         padding-top: ${v.pageEdgePadding};
-        padding-bottom: 15vh;
+        padding-bottom: ${v.pageEdgePadding};
         overflow-y: scroll;
     }
 `

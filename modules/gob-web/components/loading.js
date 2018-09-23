@@ -5,6 +5,7 @@ import * as theme from '../theme'
 import Spinner from 'react-spinkit'
 
 const Wrapper = styled.figure`
+	margin: 0;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -14,16 +15,16 @@ const Wrapper = styled.figure`
 const Message = styled.figcaption`
 	font-weight: 300;
 	margin-top: 1em;
-	color: ${theme.gray};
+	color: var(--gray);
 
 	&.info {
-		color: ${theme.green};
+		color: var(--green);
 	}
 	&.warning {
-		color: ${theme.orange};
+		color: var(--orange);
 	}
 	&.error {
-		color: ${theme.red};
+		color: var(--red);
 	}
 `
 
@@ -34,9 +35,9 @@ type LoadingProps = {
 
 export default function Loading({className, children}: LoadingProps) {
 	return (
-		<Wrapper>
+		<Wrapper className={className}>
 			<Spinner name="wave" color={theme.gray600} fadeIn="none" />
-			<Message className={className}>{children}</Message>
+			<Message>{children}</Message>
 		</Wrapper>
 	)
 }

@@ -9,10 +9,36 @@ import Icon from '../../components/icon'
 import Loading from '../../components/loading'
 import CourseResultsList from './course-results-list'
 import {androidArrowForward} from '../../icons/ionicons'
+import styled, {css} from 'styled-components'
 
 import {sortByOptions, groupByOptions} from './course-searcher-options'
 
 import './course-searcher.scss'
+
+const Card = css`
+	background-color: white;
+	border-radius: var(--base-border-radius);
+	border: 1px solid;
+	border-color: #e5e6e9 #dfe0e4 #d0d1d5;
+
+	flex: 1;
+	margin-top: 1em;
+	text-align: center;
+	color: var(--gray-500);
+	font-size: 0.9em;
+`
+
+const Loader = styled(Loading)`
+	${Card};
+`
+
+const NoResults = styled('div')`
+	${Card};
+`
+
+const ResultsError = styled('div')`
+	${Card};
+`
 
 type CourseSearcherProps = {
 	error?: string,
@@ -54,18 +80,12 @@ export default function CourseSearcher(props: CourseSearcherProps) {
 	const showNoResults = results.length === 0 && hasQueried
 	const showIndicator = inProgress
 
-	let contents = (
-		<div className="no-results course-group">No Results Found</div>
-	)
+	let contents = <NoResults>No Results Found</NoResults>
 
 	if (error) {
-		contents = <div className="error course-group">Something broke :-(</div>
+		contents = <ResultsError>Something broke :-(</ResultsError>
 	} else if (showIndicator) {
-		contents = (
-			<div className="loading course-group">
-				<Loading>Searching…</Loading>
-			</div>
-		)
+		contents = <Loader>Searching…</Loader>
 	} else if (!showNoResults) {
 		contents = (
 			<CourseResultsList
@@ -140,9 +160,8 @@ export default function CourseSearcher(props: CourseSearcherProps) {
 				</div>
 
 				{hasQueried && (
-					<div className="row search-filters">
+					<div className="search-filters">
 						<LabelledSelect
-							className="filter"
 							label="Sort by:"
 							options={sortByOptions}
 							onChange={onSortChange}
@@ -150,7 +169,6 @@ export default function CourseSearcher(props: CourseSearcherProps) {
 						/>
 
 						<LabelledSelect
-							className="filter"
 							label="Group by:"
 							options={groupByOptions}
 							onChange={onGroupByChange}

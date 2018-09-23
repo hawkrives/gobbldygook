@@ -1,12 +1,14 @@
 import React from 'react'
+import {findDOMNode} from 'react-dom'
 import styled from 'styled-components'
 import {DragSource} from 'react-dnd'
 import cx from 'classnames'
 import {IDENT_COURSE} from '@gob/object-student'
 import CourseWithModal from './with-modal'
 
-type PropTypes = {
+type Props = {
 	className?: string,
+	style?: any,
 	connectDragSource: () => any, // react-dnd
 	isDragging: boolean, // react-dnd
 }
@@ -17,18 +19,22 @@ const Draggable = styled(CourseWithModal)`
 	}
 `
 
-class DraggableCourse extends React.PureComponent {
-	props: PropTypes
-
+class DraggableCourse extends React.PureComponent<Props> {
 	render() {
 		const classSet = cx(this.props.className, {
 			'is-dragging': this.props.isDragging,
 		})
 
-		return this.props.connectDragSource(
-			<div>
-				<Draggable className={classSet} {...this.props} />
-			</div>,
+		return (
+			<Draggable
+				ref={ref => {
+					// eslint-disable-next-line react/no-find-dom-node
+					this.props.connectDragSource(findDOMNode(ref))
+				}}
+				style={this.props.style}
+				className={classSet}
+				{...this.props}
+			/>
 		)
 	}
 }

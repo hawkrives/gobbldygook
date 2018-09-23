@@ -8,13 +8,12 @@ export function LabelledSelect(props: {
 	value: string,
 	label: string,
 	options: Array<string>,
-	className: string,
 }) {
-	let {className, onChange, value, label, options} = props
+	let {onChange, value, label, options} = props
 	let id = `labelled-select-${uniqueId()}`
 
 	return (
-		<span className={className}>
+		<React.Fragment>
 			<label htmlFor={id}>{label}</label>
 
 			<select id={id} value={value} onChange={onChange}>
@@ -24,6 +23,6 @@ export function LabelledSelect(props: {
 					</option>
 				))}
 			</select>
-		</span>
+		</React.Fragment>
 	)
 }
