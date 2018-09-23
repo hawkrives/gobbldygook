@@ -13,7 +13,7 @@ export default {
 				path: 'search(/:year)(/:semester)',
 				getComponents(location, cb) {
 					import(/* webpackChunkName: 'search-sidebar.components' */ './search-sidebar').then(
-						mod => cb(null, {content: mod.default}),
+						mod => cb(null, {sidebar: mod.default}),
 					)
 				},
 			},
@@ -21,7 +21,7 @@ export default {
 				path: 'share',
 				getComponents(location, cb) {
 					import(/* webpackChunkName: 'share-student.components' */ './share-student').then(
-						mod => cb(null, {content: mod.default}),
+						mod => cb(null, {overlay: mod.default}),
 					)
 				},
 			},
