@@ -1,24 +1,20 @@
+// @flow
+
 import React from 'react'
-import PropTypes from 'prop-types'
 import filter from 'lodash/filter'
 import sortBy from 'lodash/sortBy'
-import map from 'lodash/map'
 
-import Button from '../../components/button'
+import {FlatButton} from '../../components/button'
 import Semester from './semester-container'
 
 import {findFirstAvailableSemester} from '../../helpers/find-first-available-semester'
 import {expandYear, semesterName} from '@gob/school-st-olaf-college'
+import type {HydratedStudentType} from '@gob/object-student'
 import * as theme from '../../theme'
 import styled from 'styled-components'
 
 const Container = styled.div`
-	margin-bottom: ${theme.pageEdgePadding};
-`
-
-const row = `
-    display: flex;
-    flex-flow: row wrap;
+	margin-bottom: var(--page-edge-padding);
 `
 
 const Header = styled.header`
@@ -42,13 +38,10 @@ const TitleText = styled.h1`
 	white-space: nowrap;
 	flex: 1;
 
-	/* 4px is the semester edge padding */
-	/* 7.5px is the internal semester padding */
-	/* TODO: replace this with variable references */
-	margin-left: 4px + 7.5px;
+	margin-left: calc(var(--semester-spacing) + var(--semester-side-padding));
 `
 
-const TitleButton = styled(Button)`
+const TitleButton = styled(FlatButton)`
 	transition: 0.15s;
 
 	min-height: 0;
@@ -58,7 +51,7 @@ const TitleButton = styled(Button)`
 	font-variant-caps: small-caps;
 	font-weight: 400;
 
-	color: ${theme.gray500};
+	color: var(--gray-500);
 
 	& + & {
 		margin-left: 0.1em;
@@ -67,29 +60,31 @@ const TitleButton = styled(Button)`
 
 const RemoveYearButton = styled(TitleButton)`
 	&:hover {
-		color: ${theme.red500};
-		background-color: ${theme.red50};
-		border: solid 1px ${theme.red500};
+		color: var(--red-500);
+		background-color: var(--red-50);
+		border: solid 1px var(--red-500);
 	}
 `
 
 const SemesterList = styled.div`
 	flex: 1;
-	${row};
+
+	display: flex;
+	flex-flow: row wrap;
 `
 
-const canAddSemester = (schedules, year) =>
-	findFirstAvailableSemester(schedules, year) <= 5
+const canAddSemester = (nextAvailableSemester?: number) => {
+	return nextAvailableSemester != null && nextAvailableSemester <= 5
+}
 
-export default class Year extends React.PureComponent {
-	// props: PropTypes;
-	static propTypes = {
-		addSemester: PropTypes.func.isRequired,
-		removeYear: PropTypes.func.isRequired,
-		student: PropTypes.object.isRequired,
-		year: PropTypes.number.isRequired,
-	}
+type Props = {
+	addSemester: Function,
+	removeYear: Function,
+	student: HydratedStudentType,
+	year: number,
+}
 
+export default class Year extends React.PureComponent<Props> {
 	addSemester = () => {
 		this.props.addSemester(this.props.year)
 	}
@@ -99,43 +94,32 @@ export default class Year extends React.PureComponent {
 	}
 
 	render() {
-		const {student, year} = this.props
-		const {schedules} = student
+		let {student, year} = this.props
+		let {schedules} = student
 
-		let valid = filter(schedules, {active: true, year: year})
-		let sorted = sortBy(valid, 'semester')
-		let terms = map(sorted, schedule => (
-			<Semester
-				key={`${schedule.year}-${schedule.semester}-${schedule.id}`}
-				student={student}
-				semester={schedule.semester}
-				year={year}
-			/>
-		))
+		let valid = filter(schedules, s => s.active === true && s.year === year)
+		let sorted = sortBy(valid, s => s.semester)
 
-		const niceYear = expandYear(year)
+		let niceYear = expandYear(year)
 
-		const nextAvailableSemester = findFirstAvailableSemester(
-			schedules,
-			year,
-		)
-		const isAddSemesterDisabled = !canAddSemester(schedules, year)
+		let nextSemester = findFirstAvailableSemester(valid, year)
+		let isAddSemesterDisabled = !canAddSemester(nextSemester)
 
 		return (
 			<Container>
 				<Header>
 					<TitleText>{niceYear}</TitleText>
-
-					<span>
-						{!isAddSemesterDisabled && (
-							<TitleButton
-								type="flat"
-								title="Add Semester"
-								onClick={this.addSemester}
-							>
-								Add ‘{semesterName(nextAvailableSemester)}’
-							</TitleButton>
-						)}
+					<>
+						{!isAddSemesterDisabled &&
+							nextSemester != null && (
+								<TitleButton
+									type="flat"
+									title="Add Semester"
+									onClick={this.addSemester}
+								>
+									Add ‘{semesterName(nextSemester)}’
+								</TitleButton>
+							)}
 						<RemoveYearButton
 							type="flat"
 							title={`Remove the year ${niceYear}`}
@@ -143,9 +127,19 @@ export default class Year extends React.PureComponent {
 						>
 							Remove Year
 						</RemoveYearButton>
-					</span>
+					</>
 				</Header>
-				<SemesterList>{terms}</SemesterList>
+
+				<SemesterList>
+					{sorted.map(schedule => (
+						<Semester
+							key={schedule.id}
+							student={student}
+							semester={schedule.semester}
+							year={year}
+						/>
+					))}
+				</SemesterList>
 			</Container>
 		)
 	}

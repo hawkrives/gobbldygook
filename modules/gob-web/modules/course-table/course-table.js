@@ -1,16 +1,17 @@
+// @flow
+
 import React from 'react'
 import styled from 'styled-components'
 import {expandYear} from '@gob/school-st-olaf-college'
-import * as theme from '../../theme'
 import {findFirstAvailableYear} from '../../helpers/find-first-available-year'
 import map from 'lodash/map'
 import sortBy from 'lodash/sortBy'
 import groupBy from 'lodash/groupBy'
 
-import Button from '../../components/button'
+import {FlatButton} from '../../components/button'
 import Year from './year'
 
-const AddYearButton = styled(Button)`
+const AddYearButton = styled(FlatButton)`
 	display: block;
 
 	text-align: left;
@@ -20,8 +21,8 @@ const AddYearButton = styled(Button)`
 
 	// 4px is the semester edge padding
 	// 7.5px is the internal semester padding
-	margin: 0 4px ${theme.pageEdgePadding};
-	padding-left: 7.5px;
+	margin: 0 var(--semester-spacing) var(--block-edge-padding);
+	padding-left: var(--semester-side-padding);
 
 	&[disabled] {
 		text-decoration: line-through;
@@ -39,25 +40,25 @@ type PropTypes = {
 }
 
 export default function CourseTable(props: PropTypes) {
-	const {student} = props
-	const {schedules, matriculation} = student
+	let {student} = props
+	let {schedules, matriculation} = student
 
-	const nextAvailableYear = findFirstAvailableYear(schedules, matriculation)
-	const canAddYear = true // graduation > nextAvailableYear
+	let nextAvailableYear = findFirstAvailableYear(schedules, matriculation)
+	let canAddYear = nextAvailableYear != null // graduation > nextAvailableYear
 
-	const nextYearButton = canAddYear && (
-		<AddYearButton
-			key="add-year"
-			type="flat"
-			title="Add Year"
-			onClick={props.addYear}
-		>
-			Add {expandYear(nextAvailableYear, false, '–')}
-		</AddYearButton>
-	)
+	let nextYearButton = canAddYear &&
+		nextAvailableYear != null && (
+			<AddYearButton
+				key="add-year"
+				title="Add Year"
+				onClick={props.addYear}
+			>
+				Add {expandYear(nextAvailableYear, false, '–')}
+			</AddYearButton>
+		)
 
-	let sorted = sortBy(schedules, 'year')
-	let grouped = groupBy(sorted, 'year')
+	let sorted = sortBy(schedules, s => s.year)
+	let grouped = groupBy(sorted, s => s.year)
 
 	let years = map(grouped, (schedules, year) => (
 		<Year
@@ -68,7 +69,10 @@ export default function CourseTable(props: PropTypes) {
 			removeYear={props.removeYear}
 		/>
 	))
-	years.splice(nextAvailableYear - matriculation + 1, 0, nextYearButton)
+
+	if (nextAvailableYear != null) {
+		years.splice(nextAvailableYear - matriculation + 1, 0, nextYearButton)
+	}
 
 	return <Container className={props.className}>{years}</Container>
 }
