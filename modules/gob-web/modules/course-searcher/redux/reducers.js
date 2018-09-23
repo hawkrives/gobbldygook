@@ -10,43 +10,45 @@ import {
 
 import groupBy from 'lodash/groupBy'
 import sortBy from 'lodash/sortBy'
+import flatten from 'lodash/flatten'
+import toPairs from 'lodash/toPairs'
+import round from 'lodash/round'
+import oxford from 'listify'
+import present from 'present'
 
 import {
 	SORT_BY,
 	GROUP_BY,
 } from '../../../modules/course-searcher/course-searcher-options'
 
-import uniq from 'lodash/uniq'
-import flatMap from 'lodash/flatMap'
-import toPairs from 'lodash/toPairs'
-import round from 'lodash/round'
-import oxford from 'listify'
-import present from 'present'
-import debug from 'debug'
-const log = debug('web:redux:search')
-
 import {to12HourTime as to12} from '@gob/lib'
 const REVERSE_ORDER = new Set(['Year', 'Term', 'Semester'])
 
 const TITLE = course => course.title || course.name
 
-const DAY_OF_WEEK = course =>
-	course.offerings && course.offerings.length
-		? (course.offerings || []).map(offer => offer.day).join('/')
-		: 'No Days Listed'
+const ALL_DAYS = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']
 
-const TIME_OF_DAY = course =>
-	course.offerings && course.offerings.length
-		? oxford(
-				sortBy(
-					uniq(
-						flatMap(course.offerings, offer => offer.times).map(
-							time => `${to12(time.start)}-${to12(time.end)}`,
-						),
-					),
-				),
-		  )
-		: 'No Times Listed'
+const DAY_OF_WEEK = course => {
+	if (!course.offerings) {
+		return 'No Days Listed'
+	}
+
+	let days = [...new Set((course.offerings || []).map(offer => offer.day))]
+	let sorted = sortBy(days, day => ALL_DAYS.indexOf(day))
+	return sorted.join('/')
+}
+
+const TIME_OF_DAY = course => {
+	if (!course.offerings) {
+		return 'No Times Listed'
+	}
+
+	let times = course.offerings.map(
+		time => `${to12(time.start)}-${to12(time.end)}`,
+	)
+
+	return oxford(sortBy([...new Set(times)]))
+}
 
 const DEPARTMENT = course =>
 	course.department ? course.department : 'No Department'
@@ -99,9 +101,9 @@ function sortAndGroup({sortBy: sorting, groupBy: grouping, rawResults}) {
 		processed.reverse()
 	}
 
-	log('grouping/sorting took', round(present() - start, 2), 'ms')
+	console.info('grouping/sorting took', round(present() - start, 2), 'ms')
 
-	return processed
+	return flatten(flatten(processed))
 }
 
 const initialState = {
