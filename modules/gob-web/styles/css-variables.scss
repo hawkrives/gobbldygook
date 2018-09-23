@@ -26,4 +26,8 @@
 	--material-divider: #{$material-divider};
 	--base-border-radius: #{$base-border-radius};
 	--sidebar-width: #{$sidebar-width};
+
+	--semester-spacing: 4px;
+	--semester-side-padding: calc(var(--block-edge-padding) * 1.5);
+	--semester-padding: var(--block-edge-padding) var(--semester-side-padding);
 }
