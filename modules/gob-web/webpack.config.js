@@ -10,23 +10,38 @@ const babelConfig = require('../../babel.config.js')
 
 const {
 	DefinePlugin,
-	// HotModuleReplacementPlugin,
 	LoaderOptionsPlugin,
 	NormalModuleReplacementPlugin,
-	NamedModulesPlugin,
-	optimize: {CommonsChunkPlugin},
 } = webpack
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlPlugin = require('@gob/webpack-plugin-html')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const isCI = Boolean(process.env.CI)
 const outputFolder = __dirname + '/build/'
+
+const html = ({cssHref, scriptSrc}) => {
+	let cssLink = cssHref ? `<link rel="stylesheet" href="${cssHref}">` : ''
+
+	return `
+<!DOCTYPE html>
+<html lang="en-US">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gobbldygook</title>
+${cssLink}
+<script async type="module" src="${scriptSrc}"></script>
+
+<main id="gobbldygook"></main>
+</html>
+`.trim()
+}
+
+const entryPointName = 'main'
 
 function config() {
 	const isProduction = process.env.NODE_ENV === 'production'
@@ -41,16 +56,12 @@ function config() {
 	}
 
 	const entry = {
-		main: ['./index.js'],
+		[entryPointName]: ['./index.js'],
 	}
 
 	if (isDevelopment) {
-		// add dev server and hotloading clientside code
-		entry.main.unshift(
-			// 'react-hot-loader/patch',
-			'webpack-dev-server/client?/',
-			// 'webpack/hot/only-dev-server',
-		)
+		// add dev server client-side code
+		entry[entryPointName].unshift('webpack-dev-server/client?/')
 	}
 
 	const output = {
@@ -82,10 +93,6 @@ function config() {
 		// webpack-dev-server, so GET / and GET /s/1234 both get the index
 		// page.
 		historyApiFallback: true,
-
-		// We also do the manual entry above and the manual adding of the hot
-		// module replacment plugin below.
-		// hot: true,
 	}
 
 	let plugins = [
@@ -93,27 +100,17 @@ function config() {
 		new CleanWebpackPlugin([outputFolder]),
 
 		// Generates an index.html for us.
-		new HtmlPlugin(context => {
-			let cssLink = context.css
-				? `<link rel="stylesheet" href="${publicPath}${context.css}">`
+		new HtmlPlugin(entryPointName, context => {
+			let cssHref = context.htmlPluginCss
+				? `${publicPath}${context.htmlPluginCss}`
 				: null
-			let scriptSrc = `${publicPath}${context.main}`
+			let scriptSrc = `${publicPath}${context.htmlPluginJs}`
 
-			return `
-                <!DOCTYPE html>
-                <html lang="en-US">
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <title>Gobbldygook</title>
+			if (isDevelopment && !context.htmlPluginJs) {
+				scriptSrc = `${publicPath}app.js`
+			}
 
-                <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/nhhpgddphdimipafjfiggjnbbmcoklld">
-
-                ${cssLink ? cssLink : ''}
-
-                <main id="gobbldygook"></main>
-                <script async type="module" src="${scriptSrc}"></script>
-                </html>
-            `
+			return html({cssHref, scriptSrc})
 		}),
 
 		// Ignore the "full" schema in js-yaml's module, because it brings in esprima
@@ -138,19 +135,9 @@ function config() {
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 		}),
 
-		// Extract the common libraries into a single file so that the chunks
-		// don't need to individually bundle them.
-		new CommonsChunkPlugin({
-			name: 'commons',
-			filename: '[name].js',
-			children: true,
-		}),
-
 		// Watcher doesn't work well if you mistype casing in a path so we use
 		// a plugin that prints an error when you attempt to do this.
 		new CaseSensitivePathsPlugin(),
-
-		new NamedModulesPlugin(),
 
 		// copy files – into the webpack {output} directory
 		new CopyWebpackPlugin([{from: './static/*', flatten: true}]),
@@ -159,32 +146,17 @@ function config() {
 	]
 
 	if (isProduction) {
-		// minify in production
 		plugins = [
 			...plugins,
-			new UglifyJsPlugin({
-				cache: true,
-				parallel: true,
-				sourceMap: true,
-				uglifyOptions: {
-					ecma: 8,
-					warnings: false,
-				},
-			}),
-			new ExtractTextPlugin({
+			new MiniCssExtractPlugin({
 				filename: isDevelopment ? 'app.css' : 'app.[contenthash].css',
-				allChunks: true,
+				chunkFilename: 'chunk.[name].[chunkhash].css',
 			}),
 			new LoaderOptionsPlugin({
 				minimize: true,
 			}),
 			new DuplicatePackageCheckerPlugin(),
 		]
-	}
-
-	if (isDevelopment) {
-		// add dev plugins
-		// plugins = [...plugins, new HotModuleReplacementPlugin()]
 	}
 
 	const babelLoader = {
@@ -196,12 +168,6 @@ function config() {
 	}
 
 	const urlLoader = {loader: 'url-loader', options: {limit: 10000}}
-	const cssLoader = isProduction
-		? ExtractTextPlugin.extract({
-				fallback: 'style-loader',
-				use: ['css-loader', 'sass-loader'],
-		  })
-		: ['style-loader', 'css-loader', 'sass-loader']
 
 	const module = {
 		rules: [
@@ -236,10 +202,6 @@ function config() {
 				],
 			},
 			{
-				test: /\.json$/,
-				use: ['json-loader'],
-			},
-			{
 				test: /\.otf|eot|ttf|woff2?$/,
 				use: [urlLoader],
 			},
@@ -249,12 +211,17 @@ function config() {
 			},
 			{
 				test: /\.s?css$/,
-				use: cssLoader,
+				use: [
+					isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+					'css-loader',
+					'sass-loader',
+				],
 			},
 		],
 	}
 
 	return {
+		mode: isProduction ? 'production' : 'development',
 		target: 'web',
 		devtool,
 		stats,
