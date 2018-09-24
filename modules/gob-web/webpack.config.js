@@ -41,6 +41,8 @@ ${cssLink}
 `.trim()
 }
 
+const entryPointName = 'main'
+
 function config() {
 	const isProduction = process.env.NODE_ENV === 'production'
 	const isDevelopment = !isProduction
@@ -54,12 +56,12 @@ function config() {
 	}
 
 	const entry = {
-		main: ['./index.js'],
+		[entryPointName]: ['./index.js'],
 	}
 
 	if (isDevelopment) {
 		// add dev server client-side code
-		entry.main.unshift('webpack-dev-server/client?/')
+		entry[entryPointName].unshift('webpack-dev-server/client?/')
 	}
 
 	const output = {
@@ -98,9 +100,11 @@ function config() {
 		new CleanWebpackPlugin([outputFolder]),
 
 		// Generates an index.html for us.
-		new HtmlPlugin(context => {
-			let cssHref = context.css ? `${publicPath}${context.css}` : null
-			let scriptSrc = `${publicPath}${context.main}`
+		new HtmlPlugin(entryPointName, context => {
+			let cssHref = context.htmlPluginCss
+				? `${publicPath}${context.htmlPluginCss}`
+				: null
+			let scriptSrc = `${publicPath}${context.htmlPluginJs}`
 
 			return html({cssHref, scriptSrc})
 		}),
