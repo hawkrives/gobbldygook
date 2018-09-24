@@ -1,8 +1,6 @@
 /* global module */
 'use strict'
 
-const forEach = require('lodash/forEach')
-
 // Main export
 function HJSPlugin(renderFunc) {
 	this.render = renderFunc
@@ -50,7 +48,7 @@ HJSPlugin.prototype.addAssets = function(compiler, data) {
 		)
 	}
 
-	forEach(pages, (asset, name) => {
+	Object.entries(pages).forEach(([name, asset]) => {
 		compiler.assets[name] = {
 			source: () => asset,
 			size: () => asset.length,
@@ -61,7 +59,7 @@ HJSPlugin.prototype.addAssets = function(compiler, data) {
 HJSPlugin.prototype.getAssets = function() {
 	const assets = (this.assets = {})
 
-	forEach(this.stats.assetsByChunkName, (value, chunk) => {
+	Object.entries(this.stats.assetsByChunkName).forEach(([chunk, value]) => {
 		// Webpack outputs an array for each chunk when using sourcemaps
 		if (value instanceof Array) {
 			// if we've got a CSS file add it here
