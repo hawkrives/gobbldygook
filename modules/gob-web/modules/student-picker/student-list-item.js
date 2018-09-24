@@ -146,7 +146,7 @@ export default function StudentListItem(props: Props) {
 				<DeleteButton
 					onClick={() => destroyStudent(student.data.present.id)}
 				>
-					<Icon>{iosTrashOutline}</Icon>
+					<Icon large>{iosTrashOutline}</Icon>
 					Delete
 				</DeleteButton>
 			)}
