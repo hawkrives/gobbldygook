@@ -55,14 +55,6 @@ const RemoveCourseButton = styled(FlatButton)`
 		background-color: ${theme.red50};
 		border-color: ${theme.red500};
 	}
-
-	&[disabled] {
-		color: ${theme.gray500};
-	}
-	&[disabled]:hover {
-		background-color: transparent;
-		border-color: transparent;
-	}
 `
 
 const Course = styled(ExpandedCourse)`
@@ -106,6 +98,8 @@ function ModalCourse(props: {
 		onClose,
 	} = props
 
+	const showSemesterButtons = scheduleId || student
+
 	return (
 		<ContainerModal onClose={onClose} contentLabel="Course">
 			<Toolbar>
@@ -116,25 +110,28 @@ function ModalCourse(props: {
 			<Course course={course} />
 
 			<BottomToolbar>
-				<SemesterSelector
-					scheduleId={scheduleId}
-					student={student}
-					moveCourse={moveCourse}
-					addCourse={addCourse}
-					removeCourse={removeCourse}
-					clbid={course.clbid}
-				/>
-				<RemoveCourseButton
-					onClick={removeFromSemester({
-						studentId,
-						removeCourse,
-						clbid: course.clbid,
-						scheduleId,
-					})}
-					disabled={!scheduleId || !student}
-				>
-					Remove Course
-				</RemoveCourseButton>
+				{showSemesterButtons ? (
+					<SemesterSelector
+						scheduleId={scheduleId}
+						student={student}
+						moveCourse={moveCourse}
+						addCourse={addCourse}
+						removeCourse={removeCourse}
+						clbid={course.clbid}
+					/>
+				) : null}
+				{showSemesterButtons ? (
+					<RemoveCourseButton
+						onClick={removeFromSemester({
+							studentId,
+							removeCourse,
+							clbid: course.clbid,
+							scheduleId,
+						})}
+					>
+						Remove Course
+					</RemoveCourseButton>
+				) : null}
 			</BottomToolbar>
 		</ContainerModal>
 	)
