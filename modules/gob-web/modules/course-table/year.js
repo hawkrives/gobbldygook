@@ -48,7 +48,6 @@ const TitleButton = styled(FlatButton)`
 	padding: 0 0.5em;
 
 	text-transform: none;
-	font-variant-caps: small-caps;
 	font-weight: 400;
 
 	color: var(--gray-500);
