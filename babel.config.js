@@ -31,6 +31,9 @@ module.exports = {
 		// "babel-plugin-lodash",
 	],
 	env: {
+		production: {
+			plugins: ['babel-plugin-transform-react-remove-prop-types'],
+		},
 		test: {
 			presets: [
 				[
