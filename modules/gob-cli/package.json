@@ -30,8 +30,11 @@
     "keyv-file": "^0.1.7",
     "lodash": "^4.17.11",
     "meow": "^5.0.0",
+    "p-map": "^2.0.0",
     "pify": "^3.0.0",
     "plur": "^3.0.1",
-    "sparkly": "^4.0.0"
+    "present": "^1.0.0",
+    "sparkly": "^4.0.0",
+    "write-json-file": "^3.0.2"
   }
 }
