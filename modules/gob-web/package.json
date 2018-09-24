@@ -75,7 +75,6 @@
   },
   "devDependencies": {
     "babel-loader": "^8.0.0",
-    "babel-plugin-styled-components": "^1.7.1",
     "case-sensitive-paths-webpack-plugin": "^2.1.2",
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.5.2",
