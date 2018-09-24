@@ -4,14 +4,8 @@ export default {
 	path: 'areas(/:type)(/:name)(/:revision)',
 
 	getComponents(location: mixed, cb: Function) {
-		;(require: any).ensure(
-			[],
-			require => {
-				cb(null, {
-					content: require('../../modules/area-editor').default,
-				})
-			},
-			'area-editor.components',
+		import(/* webpackChunkName: 'area-editor.components' */ '../../modules/area-editor').then(
+			mod => cb(null, {content: mod.default}),
 		)
 	},
 }

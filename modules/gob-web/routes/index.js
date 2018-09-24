@@ -12,15 +12,8 @@ export default {
 				cb(null, {
 					content: {
 						getComponents(location: mixed, cb: Function) {
-							;(require: any).ensure(
-								[],
-								() => {
-									cb(null, {
-										content: require('../modules/student-picker')
-											.default,
-									})
-								},
-								'student-picker.components',
+							import(/* webpackChunkName: 'student-picker.components' */ '../modules/student-picker').then(
+								mod => cb(null, {content: mod.default}),
 							)
 						},
 					},
