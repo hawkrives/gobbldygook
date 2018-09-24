@@ -106,6 +106,10 @@ function config() {
 				: null
 			let scriptSrc = `${publicPath}${context.htmlPluginJs}`
 
+			if (isDevelopment && !context.htmlPluginJs) {
+				scriptSrc = `${publicPath}app.js`
+			}
+
 			return html({cssHref, scriptSrc})
 		}),
 
