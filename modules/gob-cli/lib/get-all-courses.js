@@ -1,5 +1,6 @@
 import {getCourse} from './get-course'
 import flatten from 'lodash/flatten'
+import present from 'present'
 
 export async function getAllCourses({schedules, fabrications}) {
 	let promises = flatten(
@@ -11,5 +12,9 @@ export async function getAllCourses({schedules, fabrications}) {
 		}),
 	)
 
-	return await Promise.all(promises)
+	// let start = present()
+	let data = await Promise.all(promises)
+	// let end = present()
+	// console.log('fetched', promises.length, 'courses in', end - start, 'ms')
+	return data
 }

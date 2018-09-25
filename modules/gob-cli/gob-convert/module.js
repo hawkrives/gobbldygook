@@ -37,7 +37,9 @@ async function convertFile(filename) {
 	let start = present()
 	try {
 		let data = await convert(await loadJsonFile(filename))
-		await writeJsonFile(filename.replace('.json', '.gbstudent'), data, {indent: null})
+		await writeJsonFile(filename.replace('.json', '.gbstudent'), data, {
+			indent: null,
+		})
 		console.log(filename, 'in', present() - start, 'ms')
 	} catch (error) {
 		console.error(filename)
@@ -53,7 +55,7 @@ export default async function main() {
 		: JSON.parse(await stdin())
 
 	if (input.length > 1) {
-		pMap(input, convertFile, {concurrency: 8})
+		await pMap(input, convertFile, {concurrency: 1})
 	} else {
 		console.log(JSON.stringify(await convert(data)))
 	}

@@ -3,10 +3,19 @@ import {enhanceHanson as enhance} from '@gob/hanson-format'
 import maxBy from 'lodash/maxBy'
 import got from 'got'
 
+const Keyv = require('keyv')
+const KeyvFile = require('keyv-file')
+
+const keyv = new Keyv({
+	store: new KeyvFile(),
+})
+
 const BASE = 'https://hawkrives.github.io/gobbldygook-area-data'
 
-const getInfoFile = () =>
-	got(`${BASE}/info.json`, {json: true}).then(r => r.body)
+const getInfoFile = async () => {
+	let url = `${BASE}/info.json`
+	return (await got(url, {json: true, cache: keyv})).body
+}
 
 async function findArea({name, type, revision}) {
 	type = type.toLowerCase()
@@ -21,7 +30,12 @@ async function findArea({name, type, revision}) {
 	)
 
 	if (!matches.length) {
-		throw new Error('could not find area matching', {name, type, revision})
+		let msg = `could not find area matching ${JSON.stringify({
+			name,
+			type,
+			revision,
+		})}`
+		throw new Error(msg)
 	}
 
 	if (!revision || revision === 'latest') {
@@ -32,8 +46,9 @@ async function findArea({name, type, revision}) {
 	return matches.find(a => a.revision === revision)
 }
 
-function getArea({path}) {
-	return got(`${BASE}/${path}`).then(r => yaml.safeLoad(r.body))
+async function getArea({path}) {
+	let url = `${BASE}/${path}`
+	return yaml.safeLoad((await got(url, {cache: keyv})).body)
 }
 
 async function loadArea({name, type, revision, source, isCustom}) {
@@ -42,13 +57,12 @@ async function loadArea({name, type, revision, source, isCustom}) {
 	if (isCustom) {
 		obj = yaml.safeLoad(source)
 	} else {
-		let foundArea = await findArea({name, type, revision})
-		if (!foundArea) {
-			throw new Error('could not find area matching', {
-				name,
-				type,
-				revision,
-			})
+		let foundArea
+		try {
+			foundArea = await findArea({name, type, revision})
+		} catch (error) {
+			console.error(error.message)
+			return null
 		}
 		obj = await getArea(foundArea)
 	}
@@ -56,7 +70,8 @@ async function loadArea({name, type, revision, source, isCustom}) {
 	try {
 		return enhance(obj)
 	} catch (err) {
-		console.error(`Problem enhancing area "${name}"`, err)
+		console.error(`Problem enhancing area "${name}": ${err.message}`)
+		return null
 	}
 }
 
