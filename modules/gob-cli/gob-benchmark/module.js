@@ -77,7 +77,7 @@ async function benchmark({files}) {
 
 	let validCount = validFiles.length
 	let areaCount = sumBy(validFiles, f => f.areas.length)
-	console.log(`evaluating ${validCount} files, and ${areaCount} areas`)
+	console.log(`evaluating ${validCount} files and ${areaCount} areas`)
 
 	console.log('timing')
 	let start = present()
@@ -149,7 +149,50 @@ async function realWorldBenchmark({files}) {
 
 	let validCount = validFiles.length
 	let areaCount = sumBy(validFiles, f => f.areas.length)
-	console.log(`evaluating ${validCount} files, and ${areaCount} areas`)
+	console.log(`evaluating ${validCount} files and ${areaCount} areas`)
+
+	let bench = new Benchmark({
+		fn: () => {
+			for (let {areas, courses, overrides} of validFiles) {
+				for (let area of areas) {
+					evaluate({courses, overrides}, area)
+				}
+			}
+		},
+	})
+
+	bench.run()
+
+	console.log(bench.stats)
+
+	console.log(
+		`ran ${
+			bench.hz
+		} evaluations over ${areaCount} student/area combinations`,
+	)
+
+	console.log(`evaluation took around ${ms(bench.stats.mean)} per area`)
+
+	let sorted = sortBy(bench.stats.sample)
+	console.log(`graph: ${sparkly(sorted, {min: 0})}`)
+
+	let min = Math.min(...sorted)
+	let max = Math.max(...sorted)
+	console.log(`min: ${ms(min)}, max: ${ms(max)}`)
+}
+
+async function realWorldRun({files}) {
+	console.log('loading...')
+	let loadStart = present()
+	let loadedFiles = await pMap(files, f => load(f, {cache: false}), {
+		concurrency: 4,
+	})
+	let validFiles = loadedFiles.filter(f => Boolean(f))
+	console.log('loaded in', ms(present() - loadStart))
+
+	let validCount = validFiles.length
+	let areaCount = sumBy(validFiles, f => f.areas.length)
+	console.log(`evaluating ${validCount} files and ${areaCount} areas`)
 
 	console.log('timing')
 	let start = present()
@@ -200,6 +243,7 @@ export default async function main() {
 
 		arguments:
 			--real [default: false]
+			--run [default: false]
 			--debug
 	`)
 
@@ -208,10 +252,12 @@ export default async function main() {
 	}
 
 	let files = args.input
-	let {real} = args.flags
+	let {real = false, run = false} = args.flags
 
 	if (real) {
 		await realWorldBenchmark({files})
+	} else if (run) {
+		await realWorldRun({files})
 	} else {
 		await benchmark({files})
 	}
