@@ -163,17 +163,16 @@ async function realWorldBenchmark({files}) {
 
 	bench.run()
 
-	console.log(bench.stats)
-
+	let count = bench.stats.sample.length
 	console.log(
-		`ran ${
-			bench.hz
-		} evaluations over ${areaCount} student/area combinations`,
+		`ran ${count} evaluations over ${areaCount} student/area combinations`,
 	)
 
-	console.log(`evaluation took around ${ms(bench.stats.mean)} per area`)
+	console.log(
+		`evaluation took around ${ms(bench.stats.mean * 1000)} per iteration`,
+	)
 
-	let sorted = sortBy(bench.stats.sample)
+	let sorted = sortBy(bench.stats.sample.map(t => t * 1000))
 	console.log(`graph: ${sparkly(sorted, {min: 0})}`)
 
 	let min = Math.min(...sorted)
