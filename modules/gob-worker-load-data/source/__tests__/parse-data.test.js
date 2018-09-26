@@ -12,7 +12,7 @@ test('parseData can parse yaml', () => {
 })
 
 test("parseData returns a blank object if it can't parse", () => {
-	// $FlowFixMe
+	// $FlowExpectedError
 	expect(parseData('foo: 2', 'other')).toMatchSnapshot()
 	expect(parseData('invalid', 'courses')).toMatchSnapshot()
 	expect(parseData('- invalid: yaml:', 'areas')).toMatchSnapshot()

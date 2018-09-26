@@ -10,7 +10,7 @@ if (typeof global.indexedDB === 'undefined') {
 	global.IDBObjectStore = require('fake-indexeddb/lib/FDBObjectStore')
 }
 
-// $FlowFixMe
+// $FlowExpectedError
 const {createDatabase} = require.requireActual('../index')
 
 treo.Database.prototype.__clear = function clearDatabase() {
