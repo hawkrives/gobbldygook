@@ -14,6 +14,7 @@ type ModalProps = {
 	children?: any,
 	className?: string,
 	onClose: () => any,
+	inheritStyles?: boolean,
 }
 
 export default function Modal(props: ModalProps) {
@@ -23,7 +24,11 @@ export default function Modal(props: ModalProps) {
 			isOpen={true}
 			{...props}
 			overlayClassName={cx('modal--backdrop', props.backdropClassName)}
-			className={cx('modal--content', props.className)}
+			className={
+				props.inheritStyles
+					? cx('modal--content', props.className)
+					: props.className
+			}
 		>
 			{props.children}
 		</ReactModal>
