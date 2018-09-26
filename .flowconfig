@@ -7,8 +7,16 @@
 [libs]
 ./config/decls
 
+[lints]
+# all=off by default
+; all=warn
+; untyped-type-import=error
+; sketchy-null-bool=off
+; sketchy-number=error
+
 [options]
 emoji=true
+; include_warnings=true
 
 ; allow requiring non-js files (like webpack does)
 module.name_mapper.extension='css' -> '<PROJECT_ROOT>/config/flow/css'
