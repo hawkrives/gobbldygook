@@ -4,8 +4,8 @@ describe('compareCourseToCourse', () => {
 	it('compares select keys of courses', () => {
 		expect(
 			compareCourseToCourse(
-				{department: ['ART'], number: 310},
-				{department: ['ART'], number: 310},
+				{department: 'ART', number: 310},
+				{department: 'ART', number: 310},
 			),
 		).toBe(true)
 	})
@@ -18,8 +18,8 @@ describe('compareCourseToCourse', () => {
 		it('the same department is equal to itself', () => {
 			expect(
 				compareCourseToCourse(
-					{department: ['ART']},
-					{department: ['ART']},
+					{department: 'ART'},
+					{department: 'ART'},
 				),
 			).toBe(true)
 		})
@@ -27,8 +27,8 @@ describe('compareCourseToCourse', () => {
 		it('multiple departments are not the same as a single department', () => {
 			expect(
 				compareCourseToCourse(
-					{department: ['ART']},
-					{department: ['ART', 'ASIAN']},
+					{department: 'ART'},
+					{department: 'AR/AS'},
 				),
 			).toBe(false)
 		})
@@ -36,17 +36,8 @@ describe('compareCourseToCourse', () => {
 		it('different departments are not equal', () => {
 			expect(
 				compareCourseToCourse(
-					{department: ['ASIAN']},
-					{department: ['ART']},
-				),
-			).toBe(false)
-		})
-
-		it('order is significant', () => {
-			expect(
-				compareCourseToCourse(
-					{department: ['CHEM', 'BIO']},
-					{department: ['BIO', 'CHEM']},
+					{department: 'ASIAN'},
+					{department: 'ART'},
 				),
 			).toBe(false)
 		})
@@ -181,8 +172,8 @@ describe('compareCourseToCourse', () => {
 	it('returns false if the query is more specific than the possibility', () => {
 		expect(
 			compareCourseToCourse(
-				{department: ['ASIAN'], number: 310, section: 'A'},
-				{department: ['ASIAN'], number: 310},
+				{department: 'ASIAN', number: 310, section: 'A'},
+				{department: 'ASIAN', number: 310},
 			),
 		).toBe(false)
 	})
@@ -190,8 +181,8 @@ describe('compareCourseToCourse', () => {
 	it('returns true if the query is less specific than the possibility', () => {
 		expect(
 			compareCourseToCourse(
-				{department: ['ASIAN'], number: 310},
-				{department: ['ASIAN'], number: 310, section: 'A'},
+				{department: 'ASIAN', number: 310},
+				{department: 'ASIAN', number: 310, section: 'A'},
 			),
 		).toBe(true)
 	})

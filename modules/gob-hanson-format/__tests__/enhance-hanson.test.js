@@ -1,34 +1,58 @@
-import {enhanceHanson} from '../enhance-hanson'
+// @flow
+
+import {enhanceHanson, enhanceHansonRequirement} from '../enhance-hanson'
+
+const basicFile = () => ({
+	name: 'test',
+	type: 'test',
+	revision: 'test',
+	requirements: {},
+	result: 'CSCI 121',
+})
 
 describe('enhanceHanson', () => {
 	it('adds a "slug" key to the top-level', () => {
 		const actual = enhanceHanson({
 			name: 'test',
-			message: 'have a nice day',
+			type: 'test',
+			revision: 'test',
+			requirements: {},
+			result: 'CSCI 121',
 		})
-		expect(actual).toMatchSnapshot()
+
+		expect(actual).toMatchInlineSnapshot(`
+Object {
+  "name": "test",
+  "requirements": Object {},
+  "result": Object {
+    "$type": "course",
+    "department": "CSCI",
+    "number": 121,
+  },
+  "revision": "test",
+  "slug": "test",
+  "type": "test",
+}
+`)
 		expect(actual.slug).toBe('test')
 	})
 
-	it('marks the top-level as a "requirement"', () => {
-		const actual = enhanceHanson({
-			message: 'have a nice day',
-		})
-		expect(actual).toMatchSnapshot()
-		expect(actual.$type).toBe('requirement')
-	})
-
 	it('requires the top-level to have certain keys', () => {
-		expect(() => enhanceHanson({$type: 'a', slug: 'nope'})).toThrowError(
-			'enhanceHanson(): could not find any of ["result", "message", "filter"] in ["$type", "slug"].',
+		// $FlowExpectedError
+		expect(() => enhanceHanson({slug: 'nope'})).toThrowError(
+			'enhanceHanson(): "name" is missing in ["slug"] (need all of ["name", "requirements", "result", "revision", "type"]).',
 		)
 
-		expect(() => enhanceHanson({message: 'have a nice day'})).not.toThrow()
+		// $FlowExpectedError
+		expect(() => enhanceHanson({name: 'have a nice day'})).toThrowError(
+			'enhanceHanson(): "requirements" is missing in ["name"] (need all of ["name", "requirements", "result", "revision", "type"]).',
+		)
 
-		expect(() => enhanceHanson({result: 'CSCI 121'})).not.toThrow()
+		expect(() => enhanceHanson({...basicFile()})).not.toThrow()
 	})
 
 	it('requires its input to be an object', () => {
+		// $FlowExpectedError
 		expect(() => enhanceHanson('')).toThrowError(
 			'enhanceHanson: data was not an object!',
 		)
@@ -36,18 +60,19 @@ describe('enhanceHanson', () => {
 
 	it('requires "revision" to be a string, if present', () => {
 		expect(() =>
-			enhanceHanson({revision: 2, result: 'CSCI 121'}),
+			// $FlowExpectedError
+			enhanceHanson({...basicFile(), revision: 2}),
 		).toThrowError(
 			'enhanceHanson: "revision" must be a string. Try wrapping it in single quotes.',
 		)
 
 		expect(() =>
-			enhanceHanson({revision: '2', result: 'CSCI 121'}),
+			enhanceHanson({...basicFile(), revision: '2'}),
 		).not.toThrow()
 	})
 
 	it('enforces a whitelist of keys at the top-level', () => {
-		expect(() => enhanceHanson({result: '', xxx: 'yyy'})).toThrowError(
+		expect(() => enhanceHanson({...basicFile(), xxx: 'yyy'})).toThrowError(
 			/only \[.*\] keys are allowed/,
 		)
 	})
@@ -55,79 +80,199 @@ describe('enhanceHanson', () => {
 	it('assumes that keys starting with a capital letter are requirements', () => {
 		expect(() =>
 			enhanceHanson({
+				...basicFile(),
 				result: 'Req',
-				Req: 'CSCI 121',
+				requirements: {
+					Req: 'CSCI 121',
+				},
 			}),
 		).not.toThrow()
 	})
 
 	it('enforces a whitelist of keys at lower levels', () => {
 		expect(() =>
-			enhanceHanson({result: '', innerbad: 'zzzz'}, {topLevel: false}),
+			enhanceHansonRequirement({result: '', innerbad: 'zzzz'}),
 		).toThrow(/only \[.*\] keys are allowed/)
 	})
 
 	it('expands string-only keys into objects with a "result" key', () => {
 		const actual = enhanceHanson({
+			...basicFile(),
 			result: 'Requirement',
-			Requirement: 'CSCI 121',
+			requirements: {
+				Requirement: 'CSCI 121',
+			},
 		})
-		expect(actual).toMatchSnapshot()
+		expect(actual).toMatchInlineSnapshot(`
+Object {
+  "name": "test",
+  "requirements": Object {
+    "Requirement": Object {
+      "$type": "requirement",
+      "result": Object {
+        "$type": "course",
+        "department": "CSCI",
+        "number": 121,
+      },
+    },
+  },
+  "result": Object {
+    "$requirement": "Requirement",
+    "$type": "reference",
+  },
+  "revision": "test",
+  "slug": "test",
+  "type": "test",
+}
+`)
 	})
 
 	it('parses "result" strings with the Result PEG rule', () => {
 		expect(() =>
 			enhanceHanson({
+				...basicFile(),
 				result: 'Req',
-				Req: {
-					result: 'only courses from (CSCI 121)',
+				requirements: {
+					Req: {
+						result: 'only courses from (CSCI 121)',
+					},
 				},
 			}),
 		).toThrowError('enhanceHanson: Expected expression but "o" found.')
 
 		expect(() =>
 			enhanceHanson({
+				...basicFile(),
 				result: 'Req',
-				Req: {
-					result: 'one of (CSCI 121)',
+				requirements: {
+					Req: {
+						result: 'one of (CSCI 121)',
+					},
 				},
 			}),
 		).not.toThrow()
 
 		expect(
 			enhanceHanson({
+				...basicFile(),
 				result: 'Req',
-				Req: {
-					result: 'one of (CSCI 121)',
+				requirements: {
+					Req: {
+						result: 'one of (CSCI 121)',
+					},
 				},
 			}),
-		).toMatchSnapshot()
+		).toMatchInlineSnapshot(`
+Object {
+  "name": "test",
+  "requirements": Object {
+    "Req": Object {
+      "$type": "requirement",
+      "result": Object {
+        "$count": Object {
+          "$num": 1,
+          "$operator": "$gte",
+        },
+        "$of": Array [
+          Object {
+            "$type": "course",
+            "department": "CSCI",
+            "number": 121,
+          },
+        ],
+        "$type": "of",
+      },
+    },
+  },
+  "result": Object {
+    "$requirement": "Req",
+    "$type": "reference",
+  },
+  "revision": "test",
+  "slug": "test",
+  "type": "test",
+}
+`)
 	})
 
 	it('parses "filter" strings with the Filter PEG rule', () => {
 		expect(() =>
 			enhanceHanson({
+				...basicFile(),
 				result: 'Req',
-				Req: {
-					filter: 'only courses from (CSCI 121)',
+				requirements: {
+					Req: {
+						filter: 'only courses from (CSCI 121)',
+						result: 'any of (Req)',
+					},
 				},
 			}),
 		).not.toThrow()
 
 		expect(
 			enhanceHanson({
+				...basicFile(),
 				result: 'Req',
-				Req: {
-					filter: 'only courses from (CSCI 121)',
+				requirements: {
+					Req: {
+						filter: 'only courses from (CSCI 121)',
+						result: 'any of (Req)',
+					},
 				},
 			}),
-		).toMatchSnapshot()
+		).toMatchInlineSnapshot(`
+Object {
+  "name": "test",
+  "requirements": Object {
+    "Req": Object {
+      "$type": "requirement",
+      "filter": Object {
+        "$distinct": false,
+        "$filterType": "of",
+        "$of": Array [
+          Object {
+            "$type": "course",
+            "department": "CSCI",
+            "number": 121,
+          },
+        ],
+        "$type": "filter",
+      },
+      "result": Object {
+        "$count": Object {
+          "$num": 1,
+          "$operator": "$gte",
+          "$was": "any",
+        },
+        "$of": Array [
+          Object {
+            "$requirement": "Req",
+            "$type": "reference",
+          },
+        ],
+        "$type": "of",
+      },
+    },
+  },
+  "result": Object {
+    "$requirement": "Req",
+    "$type": "reference",
+  },
+  "revision": "test",
+  "slug": "test",
+  "type": "test",
+}
+`)
 
 		expect(() =>
 			enhanceHanson({
+				...basicFile(),
 				result: 'Req',
-				Req: {
-					filter: 'one of (CSCI 121)',
+				requirements: {
+					Req: {
+						filter: 'one of (CSCI 121)',
+						result: 'Req',
+					},
 				},
 			}),
 		).toThrowError('enhanceHanson: Expected "only" but "o" found.')
@@ -135,51 +280,144 @@ describe('enhanceHanson', () => {
 
 	it('allows defining variables in result', () => {
 		const input = {
+			...basicFile(),
 			result: 'Req',
-			Req: {
-				declare: {
-					'math-level-3':
-						'MATH 330, 340, 344, 348, 351, 356, 364, 382, 384',
+			requirements: {
+				Req: {
+					declare: {
+						'math-level-3': 'MATH 330, 340, 344',
+					},
+					result: 'one of ($math-level-3)',
 				},
-				result: 'one of ($math-level-3)',
 			},
 		}
+
 		const output = enhanceHanson(input)
 
-		expect(output.Req.result.$of.length).toBe(9)
+		// $FlowExpectedError
+		expect(output.requirements.Req.result.$of.length).toBe(3)
 
-		expect(output).toMatchSnapshot()
+		expect(output).toMatchInlineSnapshot(`
+Object {
+  "name": "test",
+  "requirements": Object {
+    "Req": Object {
+      "$type": "requirement",
+      "result": Object {
+        "$count": Object {
+          "$num": 1,
+          "$operator": "$gte",
+        },
+        "$of": Array [
+          Object {
+            "$type": "course",
+            "department": "MATH",
+            "number": 330,
+          },
+          Object {
+            "$type": "course",
+            "department": "MATH",
+            "number": 340,
+          },
+          Object {
+            "$type": "course",
+            "department": "MATH",
+            "number": 344,
+          },
+        ],
+        "$type": "of",
+      },
+    },
+  },
+  "result": Object {
+    "$requirement": "Req",
+    "$type": "reference",
+  },
+  "revision": "test",
+  "slug": "test",
+  "type": "test",
+}
+`)
 	})
 
 	it('allows using variables in the filter', () => {
 		const input = {
+			...basicFile(),
 			result: 'Req',
-			Req: {
-				declare: {
-					'math-level-3':
-						'MATH 330, 340, 344, 348, 351, 356, 364, 382, 384',
+			requirements: {
+				Req: {
+					declare: {
+						'math-level-3': 'MATH 330, 340, 344',
+					},
+					filter: 'only courses from ($math-level-3)',
+					result: 'Req',
 				},
-				filter: 'only courses from ($math-level-3)',
 			},
 		}
+
 		const output = enhanceHanson(input)
 
-		expect(output.Req.filter.$of.length).toBe(9)
-		expect(output).toMatchSnapshot()
+		// $FlowExpectedError
+		expect(output.requirements.Req.filter.$of.length).toBe(3)
+		expect(output).toMatchInlineSnapshot(`
+Object {
+  "name": "test",
+  "requirements": Object {
+    "Req": Object {
+      "$type": "requirement",
+      "filter": Object {
+        "$distinct": false,
+        "$filterType": "of",
+        "$of": Array [
+          Object {
+            "$type": "course",
+            "department": "MATH",
+            "number": 330,
+          },
+          Object {
+            "$type": "course",
+            "department": "MATH",
+            "number": 340,
+          },
+          Object {
+            "$type": "course",
+            "department": "MATH",
+            "number": 344,
+          },
+        ],
+        "$type": "filter",
+      },
+      "result": Object {
+        "$requirement": "Req",
+        "$type": "reference",
+      },
+    },
+  },
+  "result": Object {
+    "$requirement": "Req",
+    "$type": "reference",
+  },
+  "revision": "test",
+  "slug": "test",
+  "type": "test",
+}
+`)
 	})
 
 	it('only allows the variables to be used where they are declared', () => {
 		const input = {
-			result: 'Req',
-			Parent: {
-				declare: {
-					'math-level-3':
-						'MATH 330, 340, 344, 348, 351, 356, 364, 382, 384',
+			...basicFile(),
+			result: 'Parent',
+			requirements: {
+				Parent: {
+					declare: {
+						'math-level-3': 'MATH 330, 340, 344',
+					},
+					Req: {
+						result: 'one of ($math-level-3)',
+					},
+					result: 'Req',
 				},
-				Req: {
-					result: 'one of ($math-level-3)',
-				},
-				result: 'Req',
 			},
 		}
 

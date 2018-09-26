@@ -7,6 +7,7 @@ Object {
     "$operator": "$gte",
   },
   "$course": Object {
+    "$type": "course",
     "department": "CSCI",
     "number": 121,
   },

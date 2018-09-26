@@ -3,16 +3,11 @@
 exports[`applyFilter filters a list of courses 1`] = `
 Array [
   Object {
-    "department": Array [
-      "CSCI",
-    ],
+    "department": "CSCI",
     "number": 121,
   },
   Object {
-    "department": Array [
-      "ART",
-      "ASIAN",
-    ],
+    "department": "AR/AS",
     "number": 121,
   },
 ]
@@ -22,9 +17,7 @@ exports[`applyFilter filters by list-of-valid-courses queries 1`] = `
 Array [
   Object {
     "$type": "course",
-    "department": Array [
-      "CSCI",
-    ],
+    "department": "CSCI",
     "number": 121,
   },
 ]
@@ -33,16 +26,11 @@ Array [
 exports[`applyFilter filters by where-style queries 1`] = `
 Array [
   Object {
-    "department": Array [
-      "CSCI",
-    ],
+    "department": "CSCI",
     "number": 121,
   },
   Object {
-    "department": Array [
-      "ART",
-      "ASIAN",
-    ],
+    "department": "AR/AS",
     "number": 121,
   },
 ]
@@ -53,16 +41,11 @@ exports[`applyFilter returns an empty list when not presented with a filter 1`] 
 exports[`applyFilter returns the matches on the expression 1`] = `
 Array [
   Object {
-    "department": Array [
-      "CSCI",
-    ],
+    "department": "CSCI",
     "number": 121,
   },
   Object {
-    "department": Array [
-      "ART",
-      "ASIAN",
-    ],
+    "department": "AR/AS",
     "number": 121,
   },
 ]
@@ -71,16 +54,11 @@ Array [
 exports[`applyFilter returns the matches on the expression 2`] = `
 Array [
   Object {
-    "department": Array [
-      "CSCI",
-    ],
+    "department": "CSCI",
     "number": 121,
   },
   Object {
-    "department": Array [
-      "ART",
-      "ASIAN",
-    ],
+    "department": "AR/AS",
     "number": 121,
   },
 ]

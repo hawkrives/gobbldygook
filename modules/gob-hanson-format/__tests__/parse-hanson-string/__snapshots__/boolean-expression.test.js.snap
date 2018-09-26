@@ -7,29 +7,23 @@ Object {
     Object {
       "$and": Array [
         Object {
-          "$course": Object {
-            "department": "CSCI",
-            "number": 121,
-          },
           "$type": "course",
+          "department": "CSCI",
+          "number": 121,
         },
         Object {
-          "$course": Object {
-            "department": "CSCI",
-            "number": 122,
-          },
           "$type": "course",
+          "department": "CSCI",
+          "number": 122,
         },
       ],
       "$booleanType": "and",
       "$type": "boolean",
     },
     Object {
-      "$course": Object {
-        "department": "CSCI",
-        "number": 123,
-      },
       "$type": "course",
+      "department": "CSCI",
+      "number": 123,
     },
   ],
   "$type": "boolean",
@@ -41,27 +35,21 @@ Object {
   "$booleanType": "or",
   "$or": Array [
     Object {
-      "$course": Object {
-        "department": "CSCI",
-        "number": 121,
-      },
       "$type": "course",
+      "department": "CSCI",
+      "number": 121,
     },
     Object {
       "$and": Array [
         Object {
-          "$course": Object {
-            "department": "CSCI",
-            "number": 122,
-          },
           "$type": "course",
+          "department": "CSCI",
+          "number": 122,
         },
         Object {
-          "$course": Object {
-            "department": "CSCI",
-            "number": 123,
-          },
           "$type": "course",
+          "department": "CSCI",
+          "number": 123,
         },
       ],
       "$booleanType": "and",
@@ -76,32 +64,24 @@ exports[`BooleanExpression allows several &-d courses in a row 1`] = `
 Object {
   "$and": Array [
     Object {
-      "$course": Object {
-        "department": "CSCI",
-        "number": 121,
-      },
       "$type": "course",
+      "department": "CSCI",
+      "number": 121,
     },
     Object {
-      "$course": Object {
-        "department": "CSCI",
-        "number": 125,
-      },
       "$type": "course",
+      "department": "CSCI",
+      "number": 125,
     },
     Object {
-      "$course": Object {
-        "department": "CSCI",
-        "number": 126,
-      },
       "$type": "course",
+      "department": "CSCI",
+      "number": 126,
     },
     Object {
-      "$course": Object {
-        "department": "CSCI",
-        "number": 123,
-      },
       "$type": "course",
+      "department": "CSCI",
+      "number": 123,
     },
   ],
   "$booleanType": "and",
@@ -114,32 +94,24 @@ Object {
   "$booleanType": "or",
   "$or": Array [
     Object {
-      "$course": Object {
-        "department": "CSCI",
-        "number": 121,
-      },
       "$type": "course",
+      "department": "CSCI",
+      "number": 121,
     },
     Object {
-      "$course": Object {
-        "department": "CSCI",
-        "number": 125,
-      },
       "$type": "course",
+      "department": "CSCI",
+      "number": 125,
     },
     Object {
-      "$course": Object {
-        "department": "CSCI",
-        "number": 126,
-      },
       "$type": "course",
+      "department": "CSCI",
+      "number": 126,
     },
     Object {
-      "$course": Object {
-        "department": "CSCI",
-        "number": 123,
-      },
       "$type": "course",
+      "department": "CSCI",
+      "number": 123,
     },
   ],
   "$type": "boolean",
@@ -151,18 +123,14 @@ Object {
   "$booleanType": "or",
   "$or": Array [
     Object {
-      "$course": Object {
-        "department": "CSCI",
-        "number": 121,
-      },
       "$type": "course",
+      "department": "CSCI",
+      "number": 121,
     },
     Object {
-      "$course": Object {
-        "department": "PSCI",
-        "number": 125,
-      },
       "$type": "course",
+      "department": "PSCI",
+      "number": 125,
     },
   ],
   "$type": "boolean",
@@ -174,25 +142,19 @@ Object {
   "$booleanType": "or",
   "$or": Array [
     Object {
-      "$course": Object {
-        "department": "CSCI",
-        "number": 121,
-      },
       "$type": "course",
+      "department": "CSCI",
+      "number": 121,
     },
     Object {
-      "$course": Object {
-        "department": "CSCI",
-        "number": 121,
-      },
       "$type": "course",
+      "department": "CSCI",
+      "number": 121,
     },
     Object {
-      "$course": Object {
-        "department": "CSCI",
-        "number": 125,
-      },
       "$type": "course",
+      "department": "CSCI",
+      "number": 125,
     },
   ],
   "$type": "boolean",
@@ -203,18 +165,14 @@ exports[`BooleanExpression parses courses separated by & as being and-d 1`] = `
 Object {
   "$and": Array [
     Object {
-      "$course": Object {
-        "department": "CSCI",
-        "number": 121,
-      },
       "$type": "course",
+      "department": "CSCI",
+      "number": 121,
     },
     Object {
-      "$course": Object {
-        "department": "CSCI",
-        "number": 125,
-      },
       "$type": "course",
+      "department": "CSCI",
+      "number": 125,
     },
   ],
   "$booleanType": "and",
@@ -227,18 +185,14 @@ Object {
   "$booleanType": "or",
   "$or": Array [
     Object {
-      "$course": Object {
-        "department": "CSCI",
-        "number": 121,
-      },
       "$type": "course",
+      "department": "CSCI",
+      "number": 121,
     },
     Object {
-      "$course": Object {
-        "department": "CSCI",
-        "number": 125,
-      },
       "$type": "course",
+      "department": "CSCI",
+      "number": 125,
     },
   ],
   "$type": "boolean",
@@ -250,18 +204,14 @@ Object {
   "$booleanType": "or",
   "$or": Array [
     Object {
-      "$course": Object {
-        "department": "CSCI",
-        "number": 121,
-      },
       "$type": "course",
+      "department": "CSCI",
+      "number": 121,
     },
     Object {
-      "$course": Object {
-        "department": "CSCI",
-        "number": 125,
-      },
       "$type": "course",
+      "department": "CSCI",
+      "number": 125,
     },
   ],
   "$type": "boolean",
@@ -275,28 +225,22 @@ Object {
       "$booleanType": "or",
       "$or": Array [
         Object {
-          "$course": Object {
-            "department": "CSCI",
-            "number": 121,
-          },
           "$type": "course",
+          "department": "CSCI",
+          "number": 121,
         },
         Object {
-          "$course": Object {
-            "department": "CSCI",
-            "number": 122,
-          },
           "$type": "course",
+          "department": "CSCI",
+          "number": 122,
         },
       ],
       "$type": "boolean",
     },
     Object {
-      "$course": Object {
-        "department": "CSCI",
-        "number": 123,
-      },
       "$type": "course",
+      "department": "CSCI",
+      "number": 123,
     },
   ],
   "$booleanType": "and",

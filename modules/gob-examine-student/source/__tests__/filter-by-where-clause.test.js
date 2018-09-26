@@ -11,26 +11,26 @@ describe('filterByWhereClause', () => {
 
 		const courses = [
 			{
-				department: ['ART', 'ASIAN'],
+				department: 'AR/AS',
 				number: 310,
 				lab: true,
 				year: 2012,
 			},
-			{department: ['ASIAN'], number: 155, gereqs: ['EIN'], year: 2016},
-			{department: ['CSCI'], number: 375, gereqs: ['EIN'], year: 2015},
+			{department: 'ASIAN', number: 155, gereqs: ['EIN'], year: 2016},
+			{department: 'CSCI', number: 375, gereqs: ['EIN'], year: 2015},
 			{
-				department: ['REL'],
+				department: 'REL',
 				number: 111,
 				section: 'C',
 				gereqs: ['BTS-T'],
 				year: 2012,
 			},
-			{department: ['REL'], number: 115, gereqs: ['BTS-T'], year: 2015},
+			{department: 'REL', number: 115, gereqs: ['BTS-T'], year: 2015},
 		]
 
 		expect(filterByWhereClause(courses, clause)).toEqual([
-			{department: ['ASIAN'], number: 155, gereqs: ['EIN'], year: 2016},
-			{department: ['CSCI'], number: 375, gereqs: ['EIN'], year: 2015},
+			{department: 'ASIAN', number: 155, gereqs: ['EIN'], year: 2016},
+			{department: 'CSCI', number: 375, gereqs: ['EIN'], year: 2015},
 		])
 	})
 
@@ -72,25 +72,25 @@ describe('filterByWhereClause', () => {
 
 		const courses = [
 			{
-				department: ['ART', 'ASIAN'],
+				department: 'AR/AS',
 				number: 310,
 				lab: true,
 				year: 2012,
 			},
-			{department: ['ASIAN'], number: 155, gereqs: ['EIN'], year: 2012},
-			{department: ['CSCI'], number: 375, gereqs: ['EIN'], year: 2015},
+			{department: 'ASIAN', number: 155, gereqs: ['EIN'], year: 2012},
+			{department: 'CSCI', number: 375, gereqs: ['EIN'], year: 2015},
 			{
-				department: ['REL'],
+				department: 'REL',
 				number: 111,
 				section: 'C',
 				gereqs: ['BTS-T'],
 				year: 2013,
 			},
-			{department: ['REL'], number: 115, gereqs: ['BTS-T'], year: 2015},
+			{department: 'REL', number: 115, gereqs: ['BTS-T'], year: 2015},
 		]
 
 		expect(filterByWhereClause(courses, clause)).toEqual([
-			{department: ['CSCI'], number: 375, gereqs: ['EIN'], year: 2015},
+			{department: 'CSCI', number: 375, gereqs: ['EIN'], year: 2015},
 		])
 	})
 
@@ -116,34 +116,34 @@ describe('filterByWhereClause', () => {
 
 		const courses = [
 			{
-				department: ['ART', 'ASIAN'],
+				department: 'AR/AS',
 				number: 310,
 				lab: true,
 				year: 2012,
 			},
-			{department: ['ASIAN'], number: 155, gereqs: ['EIN'], year: 2016},
-			{department: ['CSCI'], number: 375, gereqs: ['EIN'], year: 2015},
+			{department: 'ASIAN', number: 155, gereqs: ['EIN'], year: 2016},
+			{department: 'CSCI', number: 375, gereqs: ['EIN'], year: 2015},
 			{
-				department: ['REL'],
+				department: 'REL',
 				number: 111,
 				section: 'C',
 				gereqs: ['BTS-T'],
 				year: 2012,
 			},
-			{department: ['REL'], number: 115, gereqs: ['BTS-T'], year: 2015},
+			{department: 'REL', number: 115, gereqs: ['BTS-T'], year: 2015},
 		]
 
 		expect(filterByWhereClause(courses, clause)).toEqual([
-			{department: ['ASIAN'], number: 155, gereqs: ['EIN'], year: 2016},
-			{department: ['CSCI'], number: 375, gereqs: ['EIN'], year: 2015},
+			{department: 'ASIAN', number: 155, gereqs: ['EIN'], year: 2016},
+			{department: 'CSCI', number: 375, gereqs: ['EIN'], year: 2015},
 			{
-				department: ['ART', 'ASIAN'],
+				department: 'AR/AS',
 				number: 310,
 				lab: true,
 				year: 2012,
 			},
 			{
-				department: ['REL'],
+				department: 'REL',
 				number: 111,
 				section: 'C',
 				gereqs: ['BTS-T'],
@@ -161,7 +161,7 @@ describe('filterByWhereClause', () => {
 
 		const courses = [
 			{
-				department: ['ART', 'ASIAN'],
+				department: 'AR/AS',
 				number: 310,
 				lab: true,
 				year: 2012,
@@ -180,8 +180,8 @@ describe('filterByWhereClause', () => {
 		}
 
 		const courses = [
-			{department: ['ESTH'], number: 182, year: 2012, gereqs: ['SPM']},
-			{department: ['ESTH'], number: 182, year: 2013, gereqs: ['SPM']},
+			{department: 'ESTH', number: 182, year: 2012, gereqs: ['SPM']},
+			{department: 'ESTH', number: 182, year: 2013, gereqs: ['SPM']},
 		]
 
 		const expected = [courses[0]]
@@ -199,8 +199,8 @@ describe('filterByWhereClause', () => {
 		}
 
 		const courses = [
-			{department: ['ESTH'], number: 182, year: 2012, gereqs: ['FYW']},
-			{department: ['ESTH'], number: 182, year: 2013, gereqs: ['SPM']},
+			{department: 'ESTH', number: 182, year: 2012, gereqs: ['FYW']},
+			{department: 'ESTH', number: 182, year: 2013, gereqs: ['SPM']},
 		]
 
 		const expected = [courses[1]]

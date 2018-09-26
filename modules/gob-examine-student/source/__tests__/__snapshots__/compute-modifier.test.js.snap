@@ -7,10 +7,7 @@ Array [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
-      "CHEM",
-      "BIO",
-    ],
+    "department": "CH/BI",
     "number": 111,
   },
   Object {
@@ -18,10 +15,7 @@ Array [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
-      "CHEM",
-      "BIO",
-    ],
+    "department": "CH/BI",
     "number": 112,
   },
 ]
@@ -34,10 +28,7 @@ Array [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
-      "CHEM",
-      "BIO",
-    ],
+    "department": "CH/BI",
     "number": 111,
   },
   Object {
@@ -45,10 +36,7 @@ Array [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
-      "CHEM",
-      "BIO",
-    ],
+    "department": "CH/BI",
     "number": 112,
   },
 ]
@@ -57,9 +45,7 @@ Array [
 exports[`computeModifier checks for <things> from all children 1`] = `
 Array [
   Object {
-    "department": Array [
-      "REL",
-    ],
+    "department": "REL",
     "number": 111,
   },
 ]
@@ -81,9 +67,7 @@ Object {
 exports[`computeModifier checks for <things> from specified children 1`] = `
 Array [
   Object {
-    "department": Array [
-      "REL",
-    ],
+    "department": "REL",
     "number": 111,
   },
 ]
@@ -110,15 +94,11 @@ Object {
 exports[`computeModifier checks for <things> from the filter 1`] = `
 Array [
   Object {
-    "department": Array [
-      "REL",
-    ],
+    "department": "REL",
     "number": 111,
   },
   Object {
-    "department": Array [
-      "REL",
-    ],
+    "department": "REL",
     "number": 112,
   },
 ]
@@ -139,15 +119,11 @@ Object {
 exports[`computeModifier checks for <things> from the given where-clause 1`] = `
 Array [
   Object {
-    "department": Array [
-      "REL",
-    ],
+    "department": "REL",
     "number": 111,
   },
   Object {
-    "department": Array [
-      "REL",
-    ],
+    "department": "REL",
     "number": 112,
   },
 ]
@@ -178,9 +154,7 @@ Array [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
-      "REL",
-    ],
+    "department": "REL",
     "number": 111,
   },
   Object {
@@ -188,9 +162,7 @@ Array [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
-      "REL",
-    ],
+    "department": "REL",
     "number": 112,
   },
   Object {
@@ -198,9 +170,7 @@ Array [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
-      "CSCI",
-    ],
+    "department": "CSCI",
     "number": 251,
   },
 ]
@@ -226,9 +196,7 @@ Array [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
-      "REL",
-    ],
+    "department": "REL",
     "number": 111,
   },
   Object {
@@ -236,9 +204,7 @@ Array [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
-      "CSCI",
-    ],
+    "department": "CSCI",
     "number": 251,
   },
 ]
@@ -264,10 +230,7 @@ Array [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
-      "CHEM",
-      "BIO",
-    ],
+    "department": "CH/BI",
     "number": 111,
   },
   Object {
@@ -275,10 +238,7 @@ Array [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
-      "CHEM",
-      "BIO",
-    ],
+    "department": "CH/BI",
     "number": 112,
   },
   Object {
@@ -286,9 +246,7 @@ Array [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
-      "CSCI",
-    ],
+    "department": "CSCI",
     "number": 251,
   },
 ]

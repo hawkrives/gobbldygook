@@ -8,9 +8,7 @@ Set {
 
 exports[`computeCourse checks if a course exists in the list of courses 1`] = `
 Object {
-  "department": Array [
-    "ART",
-  ],
+  "department": "ART",
   "number": 250,
 }
 `;
@@ -23,18 +21,14 @@ Object {
     "crsid",
   ],
   "crsid": 20951,
-  "department": Array [
-    "ART",
-  ],
+  "department": "ART",
   "number": 250,
 }
 `;
 
 exports[`computeCourse returns false if the course is in the dirty set 1`] = `
 Object {
-  "department": Array [
-    "ART",
-  ],
+  "department": "ART",
   "number": 130,
   "type": "Research",
 }

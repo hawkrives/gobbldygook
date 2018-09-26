@@ -6,18 +6,14 @@ Object {
   "$filterType": "of",
   "$of": Array [
     Object {
-      "$course": Object {
-        "department": "CSCI",
-        "number": 121,
-      },
       "$type": "course",
+      "department": "CSCI",
+      "number": 121,
     },
     Object {
-      "$course": Object {
-        "department": "CSCI",
-        "number": 125,
-      },
       "$type": "course",
+      "department": "CSCI",
+      "number": 125,
     },
   ],
   "$type": "filter",
@@ -30,18 +26,14 @@ Object {
   "$filterType": "of",
   "$of": Array [
     Object {
-      "$course": Object {
-        "department": "CSCI",
-        "number": 121,
-      },
       "$type": "course",
+      "department": "CSCI",
+      "number": 121,
     },
     Object {
-      "$course": Object {
-        "department": "CSCI",
-        "number": 125,
-      },
       "$type": "course",
+      "department": "CSCI",
+      "number": 125,
     },
   ],
   "$type": "filter",

@@ -5,7 +5,7 @@ describe('collectTakenCourses', () => {
 		const obj = {
 			$type: 'course',
 			$course: {
-				department: ['ASIAN'],
+				department: 'ASIAN',
 				number: 120,
 			},
 			_taken: true,
@@ -22,7 +22,7 @@ describe('collectTakenCourses', () => {
 				{
 					$type: 'course',
 					$course: {
-						department: ['ASIAN'],
+						department: 'ASIAN',
 						number: 120,
 					},
 					_taken: true,
@@ -30,7 +30,7 @@ describe('collectTakenCourses', () => {
 				{
 					$type: 'course',
 					$course: {
-						department: ['ASIAN'],
+						department: 'ASIAN',
 						number: 120,
 					},
 				},
@@ -50,16 +50,16 @@ describe('collectTakenCourses', () => {
 					$count: {$operator: '$gte', $num: 1},
 					$of: [
 						{
-							$course: {department: ['CSCI'], number: 120},
+							$course: {department: 'CSCI', number: 120},
 							$type: 'course',
 						},
 						{
-							$course: {department: ['CSCI'], number: 121},
+							$course: {department: 'CSCI', number: 121},
 							$type: 'course',
 							_taken: true,
 						},
 						{
-							$course: {department: ['CSCI'], number: 122},
+							$course: {department: 'CSCI', number: 122},
 							$type: 'course',
 						},
 					],
@@ -77,7 +77,7 @@ describe('collectTakenCourses', () => {
 				{
 					$type: 'occurrence',
 					$count: {$operator: '$gte', $num: 2},
-					$course: {department: ['CHEM'], number: 121},
+					$course: {department: 'CHEM', number: 121},
 				},
 				{
 					$type: 'of',
@@ -85,7 +85,7 @@ describe('collectTakenCourses', () => {
 					$of: [
 						{
 							$course: {
-								department: ['ART', 'ASIAN'],
+								department: 'AR/AS',
 								number: 170,
 							},
 							$type: 'course',
@@ -93,7 +93,7 @@ describe('collectTakenCourses', () => {
 						},
 						{
 							$course: {
-								department: ['ART', 'ASIAN'],
+								department: 'AR/AS',
 								number: 175,
 							},
 							$type: 'course',
@@ -101,14 +101,14 @@ describe('collectTakenCourses', () => {
 						},
 						{
 							$course: {
-								department: ['ART', 'ASIAN'],
+								department: 'AR/AS',
 								number: 180,
 							},
 							$type: 'course',
 						},
 						{
 							$course: {
-								department: ['ART', 'ASIAN'],
+								department: 'AR/AS',
 								number: 190,
 							},
 							$type: 'course',
@@ -121,17 +121,17 @@ describe('collectTakenCourses', () => {
 					$count: {$operator: '$gte', $num: 3},
 					$of: [
 						{
-							$course: {department: ['ASIAN'], number: 210},
+							$course: {department: 'ASIAN', number: 210},
 							$type: 'course',
 							_taken: true,
 						},
 						{
-							$course: {department: ['ASIAN'], number: 215},
+							$course: {department: 'ASIAN', number: 215},
 							$type: 'course',
 							_taken: true,
 						},
 						{
-							$course: {department: ['ASIAN'], number: 220},
+							$course: {department: 'ASIAN', number: 220},
 							$type: 'course',
 							_taken: true,
 						},

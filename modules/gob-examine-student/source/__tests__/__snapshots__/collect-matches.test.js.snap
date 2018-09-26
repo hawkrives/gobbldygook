@@ -3,15 +3,11 @@
 exports[`collectMatches collects matches from "courses" modifiers 1`] = `
 Array [
   Object {
-    "department": Array [
-      "ASIAN",
-    ],
+    "department": "ASIAN",
     "number": 121,
   },
   Object {
-    "department": Array [
-      "CSCI",
-    ],
+    "department": "CSCI",
     "number": 121,
   },
 ]
@@ -20,15 +16,13 @@ Array [
 exports[`collectMatches collects matches from boolean expressions 1`] = `
 Array [
   Object {
-    "department": Array [
-      "ASIAN",
-    ],
+    "$type": "course",
+    "_result": true,
+    "department": "ASIAN",
     "number": 121,
   },
   Object {
-    "department": Array [
-      "CSCI",
-    ],
+    "department": "CSCI",
     "number": 121,
   },
 ]
@@ -37,15 +31,11 @@ Array [
 exports[`collectMatches collects matches from child requirements 1`] = `
 Array [
   Object {
-    "department": Array [
-      "ASIAN",
-    ],
+    "department": "ASIAN",
     "number": 121,
   },
   Object {
-    "department": Array [
-      "CSCI",
-    ],
+    "department": "CSCI",
     "number": 121,
   },
 ]
@@ -54,9 +44,7 @@ Array [
 exports[`collectMatches collects matches from course expressions 1`] = `
 Array [
   Object {
-    "department": Array [
-      "ASIAN",
-    ],
+    "department": "ASIAN",
     "number": 121,
   },
 ]
@@ -65,16 +53,12 @@ Array [
 exports[`collectMatches collects matches from occurrences 1`] = `
 Array [
   Object {
-    "department": Array [
-      "ASIAN",
-    ],
+    "department": "ASIAN",
     "number": 121,
     "year": 2014,
   },
   Object {
-    "department": Array [
-      "ASIAN",
-    ],
+    "department": "ASIAN",
     "number": 121,
     "year": 2015,
   },
@@ -84,27 +68,19 @@ Array [
 exports[`collectMatches collects matches from of-expressions 1`] = `
 Array [
   Object {
-    "department": Array [
-      "ASIAN",
-    ],
+    "department": "ASIAN",
     "number": 121,
   },
   Object {
-    "department": Array [
-      "CSCI",
-    ],
+    "department": "CSCI",
     "number": 121,
   },
   Object {
-    "department": Array [
-      "MUSIC",
-    ],
+    "department": "MUSIC",
     "number": 121,
   },
   Object {
-    "department": Array [
-      "ESTH",
-    ],
+    "department": "ESTH",
     "number": 121,
   },
 ]
@@ -113,9 +89,7 @@ Array [
 exports[`collectMatches collects matches from requirement references 1`] = `
 Array [
   Object {
-    "department": Array [
-      "ASIAN",
-    ],
+    "department": "ASIAN",
     "number": 121,
   },
 ]
@@ -124,15 +98,11 @@ Array [
 exports[`collectMatches collects matches from where-expressions 1`] = `
 Array [
   Object {
-    "department": Array [
-      "ASIAN",
-    ],
+    "department": "ASIAN",
     "number": 121,
   },
   Object {
-    "department": Array [
-      "CSCI",
-    ],
+    "department": "CSCI",
     "number": 121,
   },
 ]

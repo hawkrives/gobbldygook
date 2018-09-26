@@ -8,6 +8,6 @@ describe('countDepartments', () => {
 			{department: 'AR/AS'},
 			{department: 'CH/BI'},
 		]
-		expect(countDepartments(courses)).toBe(3)
+		expect(countDepartments(courses)).toBe(4)
 	})
 })
