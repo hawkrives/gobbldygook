@@ -20,6 +20,7 @@ const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
 
 const isCI = Boolean(process.env.CI)
 const outputFolder = __dirname + '/build/'
@@ -141,6 +142,9 @@ function config() {
 
 		// copy files – into the webpack {output} directory
 		new CopyWebpackPlugin([{from: './static/*', flatten: true}]),
+
+		// minimize the bundle impact of the Monaco editor
+		new MonacoWebpackPlugin({languages: ['json', 'yaml']}),
 
 		new Stylish(),
 	]
