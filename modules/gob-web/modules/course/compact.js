@@ -2,7 +2,6 @@
 import React from 'react'
 import noop from 'lodash/noop'
 import styled, {css} from 'styled-components'
-import * as theme from '../../theme'
 import {InlineList, InlineListItem} from '../../components/list'
 import CourseTitle from './course-title'
 import {buildDeptNum} from '@gob/school-st-olaf-college'
@@ -14,10 +13,14 @@ import type {WarningType} from '@gob/object-student'
 export const Container = styled.article`
 	display: block;
 
-	&:hover {
-		cursor: pointer;
-		background-color: ${theme.gray100};
-	}
+	${({onClick}) =>
+		onClick &&
+		css`
+			&:hover {
+				cursor: pointer;
+				background-color: var(--ray-100);
+			}
+		`};
 
 	&.is-dragging {
 		opacity: 0.5;
