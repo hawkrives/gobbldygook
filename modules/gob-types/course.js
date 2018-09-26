@@ -21,6 +21,7 @@ export type Course = {
 	+level: number,
 	+max: number,
 	+name: string,
+	+notes?: Array<string>,
 	+number: number,
 	+pf: boolean,
 	+prerequisites: false | string,
