@@ -6,9 +6,9 @@ import {InlineList, InlineListItem} from '../../components/list'
 import CourseTitle from './course-title'
 import {buildDeptNum} from '@gob/school-st-olaf-college'
 import CourseWarnings from './warnings'
-import {to12HourTime} from '@gob/lib'
 import type {Course} from '@gob/types'
 import type {WarningType} from '@gob/object-student'
+import {consolidateOfferings} from './offerings'
 
 export const Container = styled.article`
 	display: block;
@@ -111,11 +111,11 @@ export default class CompactCourse extends React.Component<Props> {
 					)}
 				</SummaryRow>
 				<SummaryRow>
-					{(course.offerings || []).map(({day, start, end}, i) => (
-						<span key={i}>
-							{day} {to12HourTime(start)}-{to12HourTime(end)}
-						</span>
-					))}
+					{consolidateOfferings(course.offerings || []).map(
+						offering => (
+							<span key={offering}>{offering}</span>
+						),
+					)}
 				</SummaryRow>
 			</Container>
 		)
