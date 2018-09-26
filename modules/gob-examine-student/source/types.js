@@ -69,12 +69,10 @@ export type AndExpression = {
 }
 export type BooleanExpression = OrExpression | AndExpression
 
-export type CourseExpression = {
-	...BaseExpression,
+export type CourseExpression = BaseExpression & Course & {
 	_request?: Course,
 	_taken?: boolean,
 	$type: 'course',
-	$course: Course,
 }
 
 export type QualificationFunctionValue = {

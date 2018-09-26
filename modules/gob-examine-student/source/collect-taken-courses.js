@@ -1,5 +1,4 @@
 // @flow
-import isPlainObject from 'lodash/isPlainObject'
 import flattenDeep from 'lodash/flattenDeep'
 import uniq from 'lodash/uniq'
 import values from 'lodash/values'
@@ -11,18 +10,18 @@ export default function collectTakenCourses(expr: Expression): Course[] {
 
 	// check to see we're on a _taken course
 	if (expr.$type === 'course' && '_taken' in expr && '$course' in expr) {
-		return [expr.$course]
+		return [expr]
 	}
 
 	// if not, check all sub-chunks
 	const tuples = values(expr)
 	const onlyChildItems = tuples.filter(
-		value => isPlainObject(value) || Array.isArray(value),
+		value => Array.isArray(value) || typeof value === 'object',
 	)
 	const children = onlyChildItems.map(collectTakenCourses)
 
 	// flatten the list
 	const courses = flattenDeep(children)
 
-	return uniq(courses) || []
+	return uniq(courses)
 }

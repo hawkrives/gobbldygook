@@ -177,7 +177,7 @@ function peg$parse(input, options) {
 		peg$c20 = 'of',
 		peg$c21 = peg$literalExpectation('of', false),
 		peg$c22 = function peg$c22(count, course) {
-			return {$type: 'occurrence', $count: count, $course: course.$course}
+			return {$type: 'occurrence', $count: count, $course: course}
 		},
 		peg$c23 = '{',
 		peg$c24 = peg$literalExpectation('{', false),
@@ -502,10 +502,7 @@ function peg$parse(input, options) {
 			return assign({}, sub, {section})
 		},
 		peg$c157 = function peg$c157(dept, num, details) {
-			return {
-				$type: 'course',
-				$course: assign({}, details, dept || fetchDept(), num),
-			}
+			return assign({$type: 'course'}, details, dept || fetchDept(), num)
 		},
 		peg$c158 = /^[A-Z\/]/,
 		peg$c159 = peg$classExpectation([['A', 'Z'], '/'], false, false),

@@ -284,20 +284,20 @@ export function computeCourse({
 	isNeeded,
 }: CourseChunkArgs) {
 	assertKeys(expr, '$course')
-	const foundCourse = findCourse(expr.$course, courses)
+	const foundCourse = findCourse(expr, courses)
 
 	if (!foundCourse) {
 		return {computedResult: false}
 	}
 
-	const keysNotFromQuery = xor(keys(expr.$course), keys(foundCourse))
+	const keysNotFromQuery = xor(keys(expr), keys(foundCourse))
 	if (keysNotFromQuery.length) {
-		;(expr.$course: any)._extraKeys = keysNotFromQuery
+		;(expr: any)._extraKeys = keysNotFromQuery
 	}
 
-	expr._request = expr.$course
-	expr.$course = {...expr.$course, ...foundCourse}
-	let match = expr.$course
+	expr._request = {...expr}
+	expr = {...expr, ...foundCourse}
+	let match = expr
 	const crsident = simplifyCourse(match)
 
 	if (dirty.has(crsident)) {
@@ -384,12 +384,8 @@ export function computeModifier({expr, ctx, courses}: ModifierChunkArgs) {
 		filtered = take(filtered, expr.$count.$num)
 	}
 
-	filtered = filtered.map(
-		course => ('$course' in course ? (course: any).$course : course),
-	)
-
 	if (expr.$besides) {
-		filtered = excludeCourse(expr.$besides.$course, filtered)
+		filtered = excludeCourse(expr.$besides, filtered)
 	}
 
 	// count things

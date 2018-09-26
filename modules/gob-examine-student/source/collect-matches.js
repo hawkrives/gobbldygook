@@ -26,7 +26,7 @@ export default function collectMatches(
 	if (expr.$type === 'course') {
 		/* istanbul ignore else: doesn't matter */
 		if (expr._result === true) {
-			matches = [expr.$course || expr]
+			matches = [expr]
 		}
 	} else if (expr.$type === 'requirement') {
 		// next, we have the "run collectMatches on all my children" cases.

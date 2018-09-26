@@ -61,7 +61,7 @@ Occurrence
     { return {
         $type: 'occurrence',
         $count: count,
-        $course: course.$course,
+        $course: course,
     } }
 
 
@@ -379,10 +379,7 @@ Course
       )? { return assign({}, sub, {section}) }
     )?
   {
-    return {
-      $type: 'course',
-      $course: assign({}, details, (dept || fetchDept()), num),
-    }
+    return assign({$type: 'course'}, details, (dept || fetchDept()), num)
   }
 
 
