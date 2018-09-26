@@ -11,8 +11,13 @@
 emoji=true
 
 ; allow requiring non-js files (like webpack does)
-module.name_mapper='^\(.*\)\.\(css\|scss\)$' -> '<PROJECT_ROOT>/config/flow/css'
-module.name_mapper='^\(.*\)\.\(jpg\|png\|svg\|woff\|woff2\)$' -> '<PROJECT_ROOT>/config/flow/file'
+module.name_mapper.extension='css' -> '<PROJECT_ROOT>/config/flow/css'
+module.name_mapper.extension='scss' -> '<PROJECT_ROOT>/config/flow/css'
+module.name_mapper.extension='jpg' -> '<PROJECT_ROOT>/config/flow/file'
+module.name_mapper.extension='png' -> '<PROJECT_ROOT>/config/flow/file'
+module.name_mapper.extension='svg' -> '<PROJECT_ROOT>/config/flow/file'
+module.name_mapper.extension='woff' -> '<PROJECT_ROOT>/config/flow/file'
+module.name_mapper.extension='woff2' -> '<PROJECT_ROOT>/config/flow/file'
 
 suppress_type=$FlowIssue
 
