@@ -5,11 +5,11 @@ import React, {
 	cloneElement,
 } from 'react'
 import cx from 'classnames'
-import styled from 'styled-components'
+import styled, {css} from 'styled-components'
 
-const BaseList = `
-    margin: 0;
-    padding: 0;
+const BaseList = css`
+	margin: 0;
+	padding: 0;
 `
 
 export const PlainList = styled.ul`
