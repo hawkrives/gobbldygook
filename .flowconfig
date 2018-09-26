@@ -15,4 +15,6 @@ module.name_mapper='^\(.*\)\.\(css\|scss\)$' -> '<PROJECT_ROOT>/config/flow/css'
 module.name_mapper='^\(.*\)\.\(jpg\|png\|svg\|woff\|woff2\)$' -> '<PROJECT_ROOT>/config/flow/file'
 
 suppress_type=$FlowIssue
-suppress_type=$FlowFixMe
+
+suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe
+suppress_comment=\\(.\\|\n\\)*\\$FlowExpectedError
