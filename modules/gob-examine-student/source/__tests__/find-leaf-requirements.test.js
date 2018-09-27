@@ -40,58 +40,58 @@ describe('findLeafRequirements', () => {
 					$of: [
 						{
 							$type: 'course',
-							$course: {department: ['CHIN'], number: 231},
+							$course: {department: 'CHIN', number: 231},
 							_result: false,
 						},
 						{
 							$type: 'course',
-							$course: {department: ['CHIN'], number: 232},
+							$course: {department: 'CHIN', number: 232},
 							_result: false,
 						},
 						{
 							$type: 'course',
-							$course: {department: ['CHIN'], number: 294},
+							$course: {department: 'CHIN', number: 294},
 							_result: false,
 						},
 						{
 							$type: 'course',
-							$course: {department: ['CHIN'], number: 298},
+							$course: {department: 'CHIN', number: 298},
 							_result: false,
 						},
 						{
 							$type: 'course',
-							$course: {department: ['CHIN'], number: 301},
+							$course: {department: 'CHIN', number: 301},
 							_result: false,
 						},
 						{
 							$type: 'course',
-							$course: {department: ['CHIN'], number: 302},
+							$course: {department: 'CHIN', number: 302},
 							_result: false,
 						},
 						{
 							$type: 'course',
-							$course: {department: ['CHIN'], number: 320},
+							$course: {department: 'CHIN', number: 320},
 							_result: false,
 						},
 						{
 							$type: 'course',
-							$course: {department: ['CHIN'], number: 351},
+							$course: {department: 'CHIN', number: 351},
 							_result: false,
 						},
 						{
 							$type: 'course',
-							$course: {department: ['CHIN'], number: 394},
+							$course: {department: 'CHIN', number: 394},
 							_result: false,
 						},
 						{
 							$type: 'course',
-							$course: {department: ['CHIN'], number: 398},
+							$course: {department: 'CHIN', number: 398},
 							_result: false,
 						},
 						{
 							$type: 'course',
 							$course: {
-								department: ['JAPAN'],
+								department: 'JAPAN',
 								number: 231,
 								crsid: 3,
 							},
@@ -101,7 +101,7 @@ describe('findLeafRequirements', () => {
 						{
 							$type: 'course',
 							$course: {
-								department: ['JAPAN'],
+								department: 'JAPAN',
 								number: 232,
 								crsid: 4,
 							},
@@ -110,37 +110,37 @@ describe('findLeafRequirements', () => {
 						},
 						{
 							$type: 'course',
-							$course: {department: ['JAPAN'], number: 294},
+							$course: {department: 'JAPAN', number: 294},
 							_result: false,
 						},
 						{
 							$type: 'course',
-							$course: {department: ['JAPAN'], number: 298},
+							$course: {department: 'JAPAN', number: 298},
 							_result: false,
 						},
 						{
 							$type: 'course',
-							$course: {department: ['JAPAN'], number: 301},
+							$course: {department: 'JAPAN', number: 301},
 							_result: false,
 						},
 						{
 							$type: 'course',
-							$course: {department: ['JAPAN'], number: 302},
+							$course: {department: 'JAPAN', number: 302},
 							_result: false,
 						},
 						{
 							$type: 'course',
-							$course: {department: ['JAPAN'], number: 320},
+							$course: {department: 'JAPAN', number: 320},
 							_result: false,
 						},
 						{
 							$type: 'course',
-							$course: {department: ['JAPAN'], number: 394},
+							$course: {department: 'JAPAN', number: 394},
 							_result: false,
 						},
 						{
 							$type: 'course',
-							$course: {department: ['JAPAN'], number: 398},
+							$course: {department: 'JAPAN', number: 398},
 							_result: false,
 						},
 					],
@@ -153,7 +153,7 @@ describe('findLeafRequirements', () => {
 			Interdisciplinary: {
 				result: {
 					$type: 'course',
-					$course: {department: ['ASIAN'], number: 275, crsid: 5},
+					$course: {department: 'ASIAN', number: 275, crsid: 5},
 					_used: true,
 					_result: true,
 				},
@@ -167,7 +167,7 @@ describe('findLeafRequirements', () => {
 						{
 							$type: 'course',
 							$course: {
-								department: ['ASIAN'],
+								department: 'ASIAN',
 								number: 397,
 								crsid: 12,
 							},
@@ -176,7 +176,7 @@ describe('findLeafRequirements', () => {
 						},
 						{
 							$type: 'course',
-							$course: {department: ['ASIAN'], number: 399},
+							$course: {department: 'ASIAN', number: 399},
 						},
 					],
 					_result: true,
@@ -195,7 +195,7 @@ describe('findLeafRequirements', () => {
 							{
 								$type: 'course',
 								$course: {
-									department: ['ASIAN'],
+									department: 'ASIAN',
 									number: 121,
 									crsid: 13,
 								},
@@ -204,18 +204,18 @@ describe('findLeafRequirements', () => {
 							},
 							{
 								$type: 'course',
-								$course: {department: ['ASIAN'], number: 123},
+								$course: {department: 'ASIAN', number: 123},
 								_result: false,
 							},
 							{
 								$type: 'course',
-								$course: {department: ['ASIAN'], number: 126},
+								$course: {department: 'ASIAN', number: 126},
 								_result: false,
 							},
 							{
 								$type: 'course',
 								$course: {
-									department: ['ASIAN'],
+									department: 'ASIAN',
 									number: 130,
 									crsid: 10,
 								},
@@ -224,7 +224,7 @@ describe('findLeafRequirements', () => {
 							},
 							{
 								$type: 'course',
-								$course: {department: ['ASIAN'], number: 156},
+								$course: {department: 'ASIAN', number: 156},
 								_result: false,
 							},
 						],
@@ -241,13 +241,13 @@ describe('findLeafRequirements', () => {
 						$of: [
 							{
 								$type: 'course',
-								$course: {department: ['ASIAN'], number: 200},
+								$course: {department: 'ASIAN', number: 200},
 								_result: false,
 							},
 							{
 								$type: 'course',
 								$course: {
-									department: ['ASIAN'],
+									department: 'ASIAN',
 									number: 210,
 									crsid: 6,
 								},
@@ -257,7 +257,7 @@ describe('findLeafRequirements', () => {
 							{
 								$type: 'course',
 								$course: {
-									department: ['ASIAN'],
+									department: 'ASIAN',
 									number: 215,
 									crsid: 7,
 								},
@@ -266,13 +266,13 @@ describe('findLeafRequirements', () => {
 							},
 							{
 								$type: 'course',
-								$course: {department: ['ASIAN'], number: 216},
+								$course: {department: 'ASIAN', number: 216},
 								_result: false,
 							},
 							{
 								$type: 'course',
 								$course: {
-									department: ['ASIAN'],
+									department: 'ASIAN',
 									number: 220,
 									crsid: 8,
 								},
@@ -282,7 +282,7 @@ describe('findLeafRequirements', () => {
 							{
 								$type: 'course',
 								$course: {
-									department: ['ASIAN'],
+									department: 'ASIAN',
 									number: 230,
 									crsid: 11,
 								},
@@ -291,36 +291,36 @@ describe('findLeafRequirements', () => {
 							},
 							{
 								$type: 'course',
-								$course: {department: ['ASIAN'], number: 235},
+								$course: {department: 'ASIAN', number: 235},
 								_result: false,
 							},
 							{
 								$type: 'course',
-								$course: {department: ['ASIAN'], number: 236},
+								$course: {department: 'ASIAN', number: 236},
 								_result: false,
 							},
 							{
 								$type: 'course',
-								$course: {department: ['ASIAN'], number: 237},
+								$course: {department: 'ASIAN', number: 237},
 								_result: false,
 							},
 							{
 								$type: 'course',
 								$course: {
-									department: ['ASIAN', 'SOAN'],
+									department: 'AS/SA',
 									number: 239,
 								},
 								_result: false,
 							},
 							{
 								$type: 'course',
-								$course: {department: ['ASIAN'], number: 240},
+								$course: {department: 'ASIAN', number: 240},
 								_result: false,
 							},
 							{
 								$type: 'course',
 								$course: {
-									department: ['ASIAN', 'PSCI'],
+									department: 'AS/PS',
 									number: 245,
 								},
 								_result: false,
@@ -328,7 +328,7 @@ describe('findLeafRequirements', () => {
 							{
 								$type: 'course',
 								$course: {
-									department: ['ASIAN', 'HIST'],
+									department: 'AS/HI',
 									number: 250,
 								},
 								_result: false,
@@ -336,7 +336,7 @@ describe('findLeafRequirements', () => {
 							{
 								$type: 'course',
 								$course: {
-									department: ['ASIAN', 'PSCI'],
+									department: 'AS/PS',
 									number: 250,
 								},
 								_result: false,
@@ -344,7 +344,7 @@ describe('findLeafRequirements', () => {
 							{
 								$type: 'course',
 								$course: {
-									department: ['ASIAN', 'HIST'],
+									department: 'AS/HI',
 									number: 251,
 								},
 								_result: false,
@@ -352,7 +352,7 @@ describe('findLeafRequirements', () => {
 							{
 								$type: 'course',
 								$course: {
-									department: ['ASIAN', 'PHIL'],
+									department: 'AS/PH',
 									number: 251,
 								},
 								_result: false,
@@ -360,7 +360,7 @@ describe('findLeafRequirements', () => {
 							{
 								$type: 'course',
 								$course: {
-									department: ['ASIAN', 'HIST'],
+									department: 'AS/HI',
 									number: 252,
 								},
 								_result: false,
@@ -368,7 +368,7 @@ describe('findLeafRequirements', () => {
 							{
 								$type: 'course',
 								$course: {
-									department: ['ASIAN', 'HIST'],
+									department: 'AS/HI',
 									number: 253,
 								},
 								_result: false,
@@ -376,7 +376,7 @@ describe('findLeafRequirements', () => {
 							{
 								$type: 'course',
 								$course: {
-									department: ['ASIAN', 'REL'],
+									department: 'AS/RE',
 									number: 253,
 								},
 								_result: false,
@@ -384,7 +384,7 @@ describe('findLeafRequirements', () => {
 							{
 								$type: 'course',
 								$course: {
-									department: ['ASIAN', 'REL'],
+									department: 'AS/RE',
 									number: 254,
 								},
 								_result: false,
@@ -392,7 +392,7 @@ describe('findLeafRequirements', () => {
 							{
 								$type: 'course',
 								$course: {
-									department: ['ASIAN', 'REL'],
+									department: 'AS/RE',
 									number: 256,
 								},
 								_result: false,
@@ -400,7 +400,7 @@ describe('findLeafRequirements', () => {
 							{
 								$type: 'course',
 								$course: {
-									department: ['ASIAN', 'REL'],
+									department: 'AS/RE',
 									number: 257,
 								},
 								_result: false,
@@ -408,7 +408,7 @@ describe('findLeafRequirements', () => {
 							{
 								$type: 'course',
 								$course: {
-									department: ['ART', 'ASIAN'],
+									department: 'AR/AS',
 									number: 259,
 								},
 								_result: false,
@@ -416,7 +416,7 @@ describe('findLeafRequirements', () => {
 							{
 								$type: 'course',
 								$course: {
-									department: ['ART', 'ASIAN'],
+									department: 'AR/AS',
 									number: 260,
 								},
 								_result: false,
@@ -424,7 +424,7 @@ describe('findLeafRequirements', () => {
 							{
 								$type: 'course',
 								$course: {
-									department: ['ART', 'ASIAN'],
+									department: 'AR/AS',
 									number: 262,
 								},
 								_result: false,
@@ -432,7 +432,7 @@ describe('findLeafRequirements', () => {
 							{
 								$type: 'course',
 								$course: {
-									department: ['ASIAN', 'HIST'],
+									department: 'AS/HI',
 									number: 262,
 								},
 								_result: false,
@@ -440,7 +440,7 @@ describe('findLeafRequirements', () => {
 							{
 								$type: 'course',
 								$course: {
-									department: ['ASIAN'],
+									department: 'ASIAN',
 									number: 268,
 									crsid: 9,
 								},
@@ -450,7 +450,7 @@ describe('findLeafRequirements', () => {
 							{
 								$type: 'course',
 								$course: {
-									department: ['ART', 'ASIAN'],
+									department: 'AR/AS',
 									number: 270,
 								},
 								_result: false,
@@ -458,7 +458,7 @@ describe('findLeafRequirements', () => {
 							{
 								$type: 'course',
 								$course: {
-									department: ['ASIAN', 'ENVST'],
+									department: 'AS/EN',
 									number: 277,
 								},
 								_result: false,
@@ -466,30 +466,30 @@ describe('findLeafRequirements', () => {
 							{
 								$type: 'course',
 								$course: {
-									department: ['ASIAN', 'REL'],
+									department: 'AS/RE',
 									number: 289,
 								},
 								_result: false,
 							},
 							{
 								$type: 'course',
-								$course: {department: ['ASIAN'], number: 294},
+								$course: {department: 'ASIAN', number: 294},
 								_result: false,
 							},
 							{
 								$type: 'course',
-								$course: {department: ['ASIAN'], number: 298},
+								$course: {department: 'ASIAN', number: 298},
 								_result: false,
 							},
 							{
 								$type: 'course',
-								$course: {department: ['ASIAN'], number: 300},
+								$course: {department: 'ASIAN', number: 300},
 								_result: false,
 							},
 							{
 								$type: 'course',
 								$course: {
-									department: ['ART', 'ASIAN'],
+									department: 'AR/AS',
 									number: 310,
 								},
 								_result: false,
@@ -497,99 +497,99 @@ describe('findLeafRequirements', () => {
 							{
 								$type: 'course',
 								$course: {
-									department: ['ASIAN', 'HIST'],
+									department: 'AS/HI',
 									number: 345,
 								},
 								_result: false,
 							},
 							{
 								$type: 'course',
-								$course: {department: ['ASIAN'], number: 384},
+								$course: {department: 'ASIAN', number: 384},
 								_result: false,
 							},
 							{
 								$type: 'course',
-								$course: {department: ['ASIAN'], number: 396},
+								$course: {department: 'ASIAN', number: 396},
 								_result: false,
 							},
 							{
 								$type: 'course',
-								$course: {department: ['ASIAN'], number: 398},
+								$course: {department: 'ASIAN', number: 398},
 								_result: false,
 							},
 							{
 								$type: 'course',
-								$course: {department: ['CHIN'], number: 301},
+								$course: {department: 'CHIN', number: 301},
 								_result: false,
 							},
 							{
 								$type: 'course',
-								$course: {department: ['CHIN'], number: 302},
+								$course: {department: 'CHIN', number: 302},
 								_result: false,
 							},
 							{
 								$type: 'course',
-								$course: {department: ['CHIN'], number: 320},
+								$course: {department: 'CHIN', number: 320},
 								_result: false,
 							},
 							{
 								$type: 'course',
-								$course: {department: ['CHIN'], number: 351},
+								$course: {department: 'CHIN', number: 351},
 								_result: false,
 							},
 							{
 								$type: 'course',
-								$course: {department: ['CHIN'], number: 394},
+								$course: {department: 'CHIN', number: 394},
 								_result: false,
 							},
 							{
 								$type: 'course',
-								$course: {department: ['CHIN'], number: 398},
+								$course: {department: 'CHIN', number: 398},
 								_result: false,
 							},
 							{
 								$type: 'course',
-								$course: {department: ['JAPAN'], number: 301},
+								$course: {department: 'JAPAN', number: 301},
 								_result: false,
 							},
 							{
 								$type: 'course',
-								$course: {department: ['JAPAN'], number: 302},
+								$course: {department: 'JAPAN', number: 302},
 								_result: false,
 							},
 							{
 								$type: 'course',
-								$course: {department: ['JAPAN'], number: 320},
+								$course: {department: 'JAPAN', number: 320},
 								_result: false,
 							},
 							{
 								$type: 'course',
-								$course: {department: ['JAPAN'], number: 394},
+								$course: {department: 'JAPAN', number: 394},
 								_result: false,
 							},
 							{
 								$type: 'course',
-								$course: {department: ['JAPAN'], number: 398},
+								$course: {department: 'JAPAN', number: 398},
 								_result: false,
 							},
 							{
 								$type: 'course',
-								$course: {department: ['ECON'], number: 218},
+								$course: {department: 'ECON', number: 218},
 								_result: false,
 							},
 							{
 								$type: 'course',
-								$course: {department: ['ECON'], number: 238},
+								$course: {department: 'ECON', number: 238},
 								_result: false,
 							},
 							{
 								$type: 'course',
-								$course: {department: ['HIST'], number: 240},
+								$course: {department: 'HIST', number: 240},
 								_result: false,
 							},
 							{
 								$type: 'course',
-								$course: {department: ['PHIL'], number: 127},
+								$course: {department: 'PHIL', number: 127},
 								_result: false,
 							},
 						],
