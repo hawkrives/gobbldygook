@@ -238,6 +238,7 @@ export function computeBoolean({
 			// the result.
 			return thisResult
 		})
+
 		computedResult = results.some(Boolean)
 	} else if (expr.$booleanType === 'and') {
 		const results = expr.$and.map(req =>
@@ -249,6 +250,7 @@ export function computeBoolean({
 				isNeeded,
 			}),
 		)
+
 		computedResult = results.every(Boolean)
 	} else {
 		throw new TypeError(
