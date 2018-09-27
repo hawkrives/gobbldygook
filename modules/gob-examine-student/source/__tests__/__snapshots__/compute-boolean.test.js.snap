@@ -6,9 +6,7 @@ Object {
   "$or": Array [
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 121,
       },
       "$type": "course",
@@ -17,17 +15,13 @@ Object {
     },
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 125,
       },
       "$type": "course",
       "_checked": true,
       "_request": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 125,
       },
       "_result": true,
@@ -41,9 +35,7 @@ Object {
 exports[`computeBoolean can compute the result of several course expressions 2`] = `
 Array [
   Object {
-    "department": Array [
-      "CSCI",
-    ],
+    "department": "CSCI",
     "number": 125,
   },
 ]
@@ -69,9 +61,7 @@ Object {
             "credits",
           ],
           "credits": 1,
-          "department": Array [
-            "ART",
-          ],
+          "department": "ART",
           "number": 120,
         },
         Object {
@@ -79,9 +69,7 @@ Object {
             "credits",
           ],
           "credits": 1,
-          "department": Array [
-            "ART",
-          ],
+          "department": "ART",
           "number": 104,
         },
         Object {
@@ -89,9 +77,7 @@ Object {
             "credits",
           ],
           "credits": 1,
-          "department": Array [
-            "ART",
-          ],
+          "department": "ART",
           "number": 105,
         },
       ],
@@ -123,9 +109,7 @@ Object {
             "credits",
           ],
           "credits": 1,
-          "department": Array [
-            "ART",
-          ],
+          "department": "ART",
           "number": 120,
         },
         Object {
@@ -133,9 +117,7 @@ Object {
             "credits",
           ],
           "credits": 1,
-          "department": Array [
-            "ART",
-          ],
+          "department": "ART",
           "number": 104,
         },
         Object {
@@ -143,9 +125,7 @@ Object {
             "credits",
           ],
           "credits": 1,
-          "department": Array [
-            "ART",
-          ],
+          "department": "ART",
           "number": 105,
         },
       ],
@@ -164,9 +144,7 @@ Array [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
-      "ART",
-    ],
+    "department": "ART",
     "number": 120,
   },
   Object {
@@ -174,9 +152,7 @@ Array [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
-      "ART",
-    ],
+    "department": "ART",
     "number": 104,
   },
   Object {
@@ -184,9 +160,7 @@ Array [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
-      "ART",
-    ],
+    "department": "ART",
     "number": 105,
   },
 ]
@@ -202,9 +176,7 @@ Object {
         "$operator": "$gte",
       },
       "$course": Object {
-        "department": Array [
-          "THEAT",
-        ],
+        "department": "THEAT",
         "number": 222,
       },
       "$type": "occurrence",
@@ -219,9 +191,7 @@ Object {
         "$operator": "$gte",
       },
       "$course": Object {
-        "department": Array [
-          "THEAT",
-        ],
+        "department": "THEAT",
         "number": 266,
       },
       "$type": "occurrence",
@@ -229,25 +199,19 @@ Object {
       "_counted": 3,
       "_matches": Array [
         Object {
-          "department": Array [
-            "THEAT",
-          ],
+          "department": "THEAT",
           "number": 266,
           "semester": 1,
           "year": 2014,
         },
         Object {
-          "department": Array [
-            "THEAT",
-          ],
+          "department": "THEAT",
           "number": 266,
           "semester": 3,
           "year": 2014,
         },
         Object {
-          "department": Array [
-            "THEAT",
-          ],
+          "department": "THEAT",
           "number": 266,
           "semester": 1,
           "year": 2015,
@@ -263,25 +227,19 @@ Object {
 exports[`computeBoolean can compute the result of several occurrence expressions 2`] = `
 Array [
   Object {
-    "department": Array [
-      "THEAT",
-    ],
+    "department": "THEAT",
     "number": 266,
     "semester": 1,
     "year": 2014,
   },
   Object {
-    "department": Array [
-      "THEAT",
-    ],
+    "department": "THEAT",
     "number": 266,
     "semester": 3,
     "year": 2014,
   },
   Object {
-    "department": Array [
-      "THEAT",
-    ],
+    "department": "THEAT",
     "number": 266,
     "semester": 1,
     "year": 2015,
@@ -300,9 +258,7 @@ Object {
       "$of": Array [
         Object {
           "$course": Object {
-            "department": Array [
-              "CSCI",
-            ],
+            "department": "CSCI",
             "number": 121,
           },
           "$type": "course",
@@ -311,17 +267,13 @@ Object {
         },
         Object {
           "$course": Object {
-            "department": Array [
-              "CSCI",
-            ],
+            "department": "CSCI",
             "number": 125,
           },
           "$type": "course",
           "_checked": true,
           "_request": Object {
-            "department": Array [
-              "CSCI",
-            ],
+            "department": "CSCI",
             "number": 125,
           },
           "_result": true,
@@ -333,9 +285,7 @@ Object {
       "_counted": 1,
       "_matches": Array [
         Object {
-          "department": Array [
-            "CSCI",
-          ],
+          "department": "CSCI",
           "number": 125,
         },
       ],
@@ -349,17 +299,13 @@ Object {
       "$of": Array [
         Object {
           "$course": Object {
-            "department": Array [
-              "ART",
-            ],
+            "department": "ART",
             "number": 102,
           },
           "$type": "course",
           "_checked": true,
           "_request": Object {
-            "department": Array [
-              "ART",
-            ],
+            "department": "ART",
             "number": 102,
           },
           "_result": true,
@@ -367,9 +313,7 @@ Object {
         },
         Object {
           "$course": Object {
-            "department": Array [
-              "ART",
-            ],
+            "department": "ART",
             "number": 103,
           },
           "$type": "course",
@@ -382,9 +326,7 @@ Object {
       "_counted": 1,
       "_matches": Array [
         Object {
-          "department": Array [
-            "ART",
-          ],
+          "department": "ART",
           "number": 102,
         },
       ],
@@ -399,15 +341,11 @@ Object {
 exports[`computeBoolean can compute the result of several of-expressions 2`] = `
 Array [
   Object {
-    "department": Array [
-      "CSCI",
-    ],
+    "department": "CSCI",
     "number": 125,
   },
   Object {
-    "department": Array [
-      "ART",
-    ],
+    "department": "ART",
     "number": 102,
   },
 ]
@@ -421,9 +359,7 @@ Object {
       "$or": Array [
         Object {
           "$course": Object {
-            "department": Array [
-              "CSCI",
-            ],
+            "department": "CSCI",
             "number": 121,
           },
           "$type": "course",
@@ -432,17 +368,13 @@ Object {
         },
         Object {
           "$course": Object {
-            "department": Array [
-              "CSCI",
-            ],
+            "department": "CSCI",
             "number": 125,
           },
           "$type": "course",
           "_checked": true,
           "_request": Object {
-            "department": Array [
-              "CSCI",
-            ],
+            "department": "CSCI",
             "number": 125,
           },
           "_result": true,
@@ -453,9 +385,7 @@ Object {
       "_checked": true,
       "_matches": Array [
         Object {
-          "department": Array [
-            "CSCI",
-          ],
+          "department": "CSCI",
           "number": 125,
         },
       ],
@@ -466,17 +396,13 @@ Object {
       "$or": Array [
         Object {
           "$course": Object {
-            "department": Array [
-              "CSCI",
-            ],
+            "department": "CSCI",
             "number": 130,
           },
           "$type": "course",
           "_checked": true,
           "_request": Object {
-            "department": Array [
-              "CSCI",
-            ],
+            "department": "CSCI",
             "number": 130,
           },
           "_result": true,
@@ -484,9 +410,7 @@ Object {
         },
         Object {
           "$course": Object {
-            "department": Array [
-              "CSCI",
-            ],
+            "department": "CSCI",
             "number": 131,
           },
           "$type": "course",
@@ -498,9 +422,7 @@ Object {
       "_checked": true,
       "_matches": Array [
         Object {
-          "department": Array [
-            "CSCI",
-          ],
+          "department": "CSCI",
           "number": 130,
         },
       ],
@@ -515,15 +437,11 @@ Object {
 exports[`computeBoolean can compute the result of several other boolean expressions 2`] = `
 Array [
   Object {
-    "department": Array [
-      "CSCI",
-    ],
+    "department": "CSCI",
     "number": 125,
   },
   Object {
-    "department": Array [
-      "CSCI",
-    ],
+    "department": "CSCI",
     "number": 130,
   },
 ]
@@ -538,9 +456,7 @@ Object {
       "_checked": true,
       "_matches": Array [
         Object {
-          "department": Array [
-            "ART",
-          ],
+          "department": "ART",
           "number": 120,
         },
       ],
@@ -552,15 +468,11 @@ Object {
       "_checked": true,
       "_matches": Array [
         Object {
-          "department": Array [
-            "ART",
-          ],
+          "department": "ART",
           "number": 104,
         },
         Object {
-          "department": Array [
-            "ART",
-          ],
+          "department": "ART",
           "number": 105,
         },
       ],
@@ -575,21 +487,15 @@ Object {
 exports[`computeBoolean can compute the result of several requirement references 2`] = `
 Array [
   Object {
-    "department": Array [
-      "ART",
-    ],
+    "department": "ART",
     "number": 120,
   },
   Object {
-    "department": Array [
-      "ART",
-    ],
+    "department": "ART",
     "number": 104,
   },
   Object {
-    "department": Array [
-      "ART",
-    ],
+    "department": "ART",
     "number": 105,
   },
 ]
@@ -615,9 +521,7 @@ Object {
       "_counted": 1,
       "_matches": Array [
         Object {
-          "department": Array [
-            "CSCI",
-          ],
+          "department": "CSCI",
           "gereqs": Array [
             "WRI",
           ],
@@ -643,9 +547,7 @@ Object {
       "_counted": 1,
       "_matches": Array [
         Object {
-          "department": Array [
-            "ART",
-          ],
+          "department": "ART",
           "gereqs": Array [
             "BTS-T",
           ],
@@ -663,18 +565,14 @@ Object {
 exports[`computeBoolean can compute the result of several where-expressions 2`] = `
 Array [
   Object {
-    "department": Array [
-      "CSCI",
-    ],
+    "department": "CSCI",
     "gereqs": Array [
       "WRI",
     ],
     "number": 125,
   },
   Object {
-    "department": Array [
-      "ART",
-    ],
+    "department": "ART",
     "gereqs": Array [
       "BTS-T",
     ],
@@ -689,9 +587,7 @@ Object {
   "$or": Array [
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 121,
       },
       "$type": "course",
@@ -700,17 +596,13 @@ Object {
     },
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 125,
       },
       "$type": "course",
       "_checked": true,
       "_request": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 125,
       },
       "_result": true,
@@ -724,9 +616,7 @@ Object {
 exports[`computeBoolean computes an or-clause even if the first item is false 2`] = `
 Array [
   Object {
-    "department": Array [
-      "CSCI",
-    ],
+    "department": "CSCI",
     "number": 125,
   },
 ]
@@ -737,17 +627,13 @@ Object {
   "$and": Array [
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 121,
       },
       "$type": "course",
       "_checked": true,
       "_request": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 121,
       },
       "_result": true,
@@ -755,17 +641,13 @@ Object {
     },
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 125,
       },
       "$type": "course",
       "_checked": true,
       "_request": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 125,
       },
       "_result": true,
@@ -780,15 +662,11 @@ Object {
 exports[`computeBoolean computes the boolean result of and-clauses 2`] = `
 Array [
   Object {
-    "department": Array [
-      "CSCI",
-    ],
+    "department": "CSCI",
     "number": 121,
   },
   Object {
-    "department": Array [
-      "CSCI",
-    ],
+    "department": "CSCI",
     "number": 125,
   },
 ]
@@ -800,17 +678,13 @@ Object {
   "$or": Array [
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 121,
       },
       "$type": "course",
       "_checked": true,
       "_request": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 121,
       },
       "_result": true,
@@ -818,17 +692,13 @@ Object {
     },
     Object {
       "$course": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 125,
       },
       "$type": "course",
       "_checked": true,
       "_request": Object {
-        "department": Array [
-          "CSCI",
-        ],
+        "department": "CSCI",
         "number": 125,
       },
       "_result": false,
@@ -842,9 +712,7 @@ Object {
 exports[`computeBoolean computes the boolean result of or-clauses 2`] = `
 Array [
   Object {
-    "department": Array [
-      "CSCI",
-    ],
+    "department": "CSCI",
     "number": 121,
   },
 ]
