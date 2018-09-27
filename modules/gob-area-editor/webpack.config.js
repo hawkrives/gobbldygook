@@ -14,12 +14,9 @@ const {
 	NormalModuleReplacementPlugin,
 } = webpack
 
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlPlugin = require('@gob/webpack-plugin-html')
-const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
-const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
 
 const isCI = Boolean(process.env.CI)
@@ -33,11 +30,11 @@ const html = ({cssHref, scriptSrc}) => {
 <html lang="en-US">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gobbldygook</title>
+<title>Area Editor - Gobbldygook</title>
 ${cssLink}
 <script async type="module" src="${scriptSrc}"></script>
 
-<main id="gobbldygook"></main>
+<main id="app"></main>
 </html>
 `.trim()
 }
@@ -57,7 +54,7 @@ function config() {
 	}
 
 	const entry = {
-		[entryPointName]: ['./index.js'],
+		[entryPointName]: ['./start.js'],
 	}
 
 	if (isDevelopment) {
@@ -78,7 +75,7 @@ function config() {
 	}
 
 	const devServer = {
-		port: 3000, // for webpack-dev-server
+		port: 4000, // for webpack-dev-server
 
 		stats: {
 			assets: false,
@@ -97,9 +94,6 @@ function config() {
 	}
 
 	let plugins = [
-		// clean out the build folder between builds
-		new CleanWebpackPlugin([outputFolder]),
-
 		// Generates an index.html for us.
 		new HtmlPlugin(entryPointName, context => {
 			let cssHref = context.htmlPluginCss
@@ -130,18 +124,11 @@ function config() {
 			// APP_BASE is used in react-router, to set its base appropriately
 			// across both local dev and gh-pages.
 			APP_BASE: JSON.stringify(publicPath),
-			'process.env.TRAVIS_COMMIT': JSON.stringify(
-				process.env.TRAVIS_COMMIT || process.env.COMMIT_REF,
-			),
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 		}),
 
-		// Watcher doesn't work well if you mistype casing in a path so we use
-		// a plugin that prints an error when you attempt to do this.
-		new CaseSensitivePathsPlugin(),
-
 		// copy files – into the webpack {output} directory
-		new CopyWebpackPlugin([{from: './static/*', flatten: true}]),
+		new CopyWebpackPlugin([]),
 
 		// minimize the bundle impact of the Monaco editor
 		new MonacoWebpackPlugin({languages: ['json', 'yaml']}),
@@ -156,10 +143,7 @@ function config() {
 				filename: isDevelopment ? 'app.css' : 'app.[contenthash].css',
 				chunkFilename: 'chunk.[name].[chunkhash].css',
 			}),
-			new LoaderOptionsPlugin({
-				minimize: true,
-			}),
-			new DuplicatePackageCheckerPlugin(),
+			new LoaderOptionsPlugin({minimize: true}),
 		]
 	}
 
@@ -171,8 +155,6 @@ function config() {
 		},
 	}
 
-	const urlLoader = {loader: 'url-loader', options: {limit: 10000}}
-
 	const module = {
 		rules: [
 			{
@@ -180,45 +162,11 @@ function config() {
 				exclude: /node_modules/,
 				use: [babelLoader],
 			},
-			// {
-			// 	test: /\.worker\.js$/,
-			// 	exclude: /node_modules/,
-			// 	use: ['worker-loader', babelLoader],
-			// },
 			{
-				test: /check-student\.worker\.js$/,
-				use: [
-					{
-						loader: 'worker-loader',
-						options: {name: 'worker.check-student.[hash].js'},
-					},
-					babelLoader,
-				],
-			},
-			{
-				test: /load-data\.worker\.js$/,
-				use: [
-					{
-						loader: 'worker-loader',
-						options: {name: 'worker.load-data.[hash].js'},
-					},
-					babelLoader,
-				],
-			},
-			{
-				test: /\.otf|eot|ttf|woff2?$/,
-				use: [urlLoader],
-			},
-			{
-				test: /\.jpe?g|png|gif$/,
-				use: [urlLoader],
-			},
-			{
-				test: /\.s?css$/,
+				test: /\.css$/,
 				use: [
 					isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
 					'css-loader',
-					'sass-loader',
 				],
 			},
 		],
