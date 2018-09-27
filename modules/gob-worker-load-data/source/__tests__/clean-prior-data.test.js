@@ -64,7 +64,7 @@ describe('cleanPriorData', () => {
 		expect.assertions(1)
 
 		try {
-			// $FlowFixMe
+			// $FlowExpectedError
 			await cleanPriorData('path', 'invalid_type')
 		} catch (err) {
 			expect(err.message).toMatchSnapshot()

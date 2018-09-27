@@ -16,6 +16,6 @@ test('getCacheStoreName runs', () => {
 })
 
 test('getCacheStoreName throws an error on unexpected values', () => {
-	// $FlowFixMe
+	// $FlowExpectedError
 	expect(() => getCacheStoreName('invalid')).toThrowErrorMatchingSnapshot()
 })

@@ -7,12 +7,27 @@
 [libs]
 ./config/decls
 
+[lints]
+# all=off by default
+; all=warn
+; untyped-type-import=error
+; sketchy-null-bool=off
+; sketchy-number=error
+
 [options]
 emoji=true
+; include_warnings=true
 
 ; allow requiring non-js files (like webpack does)
-module.name_mapper='^\(.*\)\.\(css\|scss\)$' -> '<PROJECT_ROOT>/config/flow/css'
-module.name_mapper='^\(.*\)\.\(jpg\|png\|svg\|woff\|woff2\)$' -> '<PROJECT_ROOT>/config/flow/file'
+module.name_mapper.extension='css' -> '<PROJECT_ROOT>/config/flow/css'
+module.name_mapper.extension='scss' -> '<PROJECT_ROOT>/config/flow/css'
+module.name_mapper.extension='jpg' -> '<PROJECT_ROOT>/config/flow/file'
+module.name_mapper.extension='png' -> '<PROJECT_ROOT>/config/flow/file'
+module.name_mapper.extension='svg' -> '<PROJECT_ROOT>/config/flow/file'
+module.name_mapper.extension='woff' -> '<PROJECT_ROOT>/config/flow/file'
+module.name_mapper.extension='woff2' -> '<PROJECT_ROOT>/config/flow/file'
 
 suppress_type=$FlowIssue
-suppress_type=$FlowFixMe
+
+suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe
+suppress_comment=\\(.\\|\n\\)*\\$FlowExpectedError

@@ -9,4 +9,5 @@ const grammar = fs.readFileSync(
 	path.join(__dirname, '../../parse-hanson-string.pegjs'),
 	'utf-8',
 )
+
 export const customParser = (...args) => peg.generate(grammar, ...args).parse

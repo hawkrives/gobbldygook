@@ -65,7 +65,8 @@ describe('generateOps', () => {
 				sourcePath: 'type/invalid-area.yaml',
 			},
 		]
-		// $FlowFixMe this is an explicit test for handling revision:undefined
+
+		// $FlowExpectedError this is an explicit test for handling revision:undefined
 		expect(generateOps(areas)).toEqual({
 			'type/invalid-area.yaml': null,
 		})

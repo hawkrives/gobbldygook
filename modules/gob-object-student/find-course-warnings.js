@@ -118,11 +118,11 @@ export function findWarnings(
 	let warningsOfInvalidity = checkForInvalidity(onlyCourses, {year, semester})
 	let timeConflicts = checkForTimeConflicts(onlyCourses)
 
-	// $FlowFixMe at some point, flow should be able to automatically upgrade a tuple to an array
-	let nearlyMerged: Array<Array<?Warning>> = (zip(
+	let nearlyMerged: Array<Array<Array<?Warning>>> = (zip(
 		warningsOfInvalidity,
 		timeConflicts,
 	): Array<any>)
+
 	let allWarnings = nearlyMerged.map(flatten)
 
 	return allWarnings
