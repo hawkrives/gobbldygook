@@ -9,7 +9,7 @@ export default function collectTakenCourses(expr: Expression): Course[] {
 	// anywhere in this object which have the `_taken` property.
 
 	// check to see we're on a _taken course
-	if (expr.$type === 'course' && '_taken' in expr && '$course' in expr) {
+	if (expr.$type === 'course' && '_taken' in expr) {
 		return [expr]
 	}
 
