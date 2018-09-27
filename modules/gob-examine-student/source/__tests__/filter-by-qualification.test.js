@@ -11,31 +11,31 @@ describe('filterByQualification', () => {
 
 		const courses = [
 			{
-				department: ['ART', 'ASIAN'],
+				department: 'AR/AS',
 				number: 310,
 				lab: true,
 				year: 2012,
 			},
 			{
-				department: ['ASIAN'],
+				department: 'ASIAN',
 				number: 275,
 				year: 2016,
 			},
 			{
-				department: ['CSCI'],
+				department: 'CSCI',
 				number: 375,
 				gereqs: ['EIN'],
 				year: 2013,
 			},
 			{
-				department: ['REL'],
+				department: 'REL',
 				number: 111,
 				section: 'C',
 				gereqs: ['BTS-T'],
 				year: 2012,
 			},
 			{
-				department: ['REL'],
+				department: 'REL',
 				number: 115,
 				gereqs: ['BTS-T'],
 				year: 2013,
@@ -44,7 +44,7 @@ describe('filterByQualification', () => {
 
 		expect(filterByQualification(courses, basicQualification)).toEqual([
 			{
-				department: ['CSCI'],
+				department: 'CSCI',
 				number: 375,
 				gereqs: ['EIN'],
 				year: 2013,
@@ -66,31 +66,31 @@ describe('filterByQualification', () => {
 
 		const courses = [
 			{
-				department: ['ART', 'ASIAN'],
+				department: 'AR/AS',
 				number: 310,
 				lab: true,
 				year: 2012,
 			},
 			{
-				department: ['ASIAN'],
+				department: 'ASIAN',
 				number: 275,
 				year: 2016,
 			},
 			{
-				department: ['CSCI'],
+				department: 'CSCI',
 				number: 375,
 				gereqs: ['EIN'],
 				year: 2013,
 			},
 			{
-				department: ['REL'],
+				department: 'REL',
 				number: 111,
 				section: 'C',
 				gereqs: ['BTS-T'],
 				year: 2012,
 			},
 			{
-				department: ['REL'],
+				department: 'REL',
 				number: 115,
 				gereqs: ['BTS-T'],
 				year: 2013,
@@ -99,20 +99,20 @@ describe('filterByQualification', () => {
 
 		expect(filterByQualification(courses, basicQualification)).toEqual([
 			{
-				department: ['CSCI'],
+				department: 'CSCI',
 				number: 375,
 				gereqs: ['EIN'],
 				year: 2013,
 			},
 			{
-				department: ['REL'],
+				department: 'REL',
 				number: 111,
 				section: 'C',
 				gereqs: ['BTS-T'],
 				year: 2012,
 			},
 			{
-				department: ['REL'],
+				department: 'REL',
 				number: 115,
 				gereqs: ['BTS-T'],
 				year: 2013,
@@ -134,31 +134,31 @@ describe('filterByQualification', () => {
 
 		const courses = [
 			{
-				department: ['ART', 'ASIAN'],
+				department: 'AR/AS',
 				number: 310,
 				lab: true,
 				year: 2012,
 			},
 			{
-				department: ['ASIAN'],
+				department: 'ASIAN',
 				number: 275,
 				year: 2016,
 			},
 			{
-				department: ['CSCI'],
+				department: 'CSCI',
 				number: 375,
 				gereqs: ['EIN'],
 				year: 2013,
 			},
 			{
-				department: ['REL'],
+				department: 'REL',
 				number: 111,
 				section: 'C',
 				gereqs: ['BTS-T'],
 				year: 2012,
 			},
 			{
-				department: ['REL'],
+				department: 'REL',
 				number: 115,
 				gereqs: ['BTS-T'],
 				year: 2013,
@@ -190,31 +190,31 @@ describe('filterByQualification', () => {
 
 		const courses = [
 			{
-				department: ['ART', 'ASIAN'],
+				department: 'AR/AS',
 				number: 310,
 				lab: true,
 				year: 2012,
 			},
 			{
-				department: ['ASIAN'],
+				department: 'ASIAN',
 				number: 275,
 				year: 2016,
 			},
 			{
-				department: ['CSCI'],
+				department: 'CSCI',
 				number: 375,
 				gereqs: ['EIN'],
 				year: 2013,
 			},
 			{
-				department: ['REL'],
+				department: 'REL',
 				number: 111,
 				section: 'C',
 				gereqs: ['BTS-T'],
 				year: 2012,
 			},
 			{
-				department: ['REL'],
+				department: 'REL',
 				number: 115,
 				gereqs: ['BTS-T'],
 				year: 2013,
@@ -225,26 +225,26 @@ describe('filterByQualification', () => {
 			filterByQualification(courses, advancedQualificationMax),
 		).toEqual([
 			{
-				department: ['ART', 'ASIAN'],
+				department: 'AR/AS',
 				number: 310,
 				lab: true,
 				year: 2012,
 			},
 			{
-				department: ['CSCI'],
+				department: 'CSCI',
 				number: 375,
 				gereqs: ['EIN'],
 				year: 2013,
 			},
 			{
-				department: ['REL'],
+				department: 'REL',
 				number: 111,
 				section: 'C',
 				gereqs: ['BTS-T'],
 				year: 2012,
 			},
 			{
-				department: ['REL'],
+				department: 'REL',
 				number: 115,
 				gereqs: ['BTS-T'],
 				year: 2013,
@@ -272,31 +272,31 @@ describe('filterByQualification', () => {
 
 		const courses = [
 			{
-				department: ['ART', 'ASIAN'],
+				department: 'AR/AS',
 				number: 310,
 				lab: true,
 				year: 2012,
 			},
 			{
-				department: ['ASIAN'],
+				department: 'ASIAN',
 				number: 275,
 				year: 2016,
 			},
 			{
-				department: ['CSCI'],
+				department: 'CSCI',
 				number: 375,
 				gereqs: ['EIN'],
 				year: 2013,
 			},
 			{
-				department: ['REL'],
+				department: 'REL',
 				number: 111,
 				section: 'C',
 				gereqs: ['BTS-T'],
 				year: 2012,
 			},
 			{
-				department: ['REL'],
+				department: 'REL',
 				number: 115,
 				gereqs: ['BTS-T'],
 				year: 2013,
@@ -307,13 +307,13 @@ describe('filterByQualification', () => {
 			filterByQualification(courses, advancedQualificationMin),
 		).toEqual([
 			{
-				department: ['ART', 'ASIAN'],
+				department: 'AR/AS',
 				number: 310,
 				lab: true,
 				year: 2012,
 			},
 			{
-				department: ['REL'],
+				department: 'REL',
 				number: 111,
 				section: 'C',
 				gereqs: ['BTS-T'],
@@ -342,31 +342,31 @@ describe('filterByQualification', () => {
 
 		const courses = [
 			{
-				department: ['ART', 'ASIAN'],
+				department: 'AR/AS',
 				number: 310,
 				lab: true,
 				year: 2012,
 			},
 			{
-				department: ['ASIAN'],
+				department: 'ASIAN',
 				number: 275,
 				year: 2016,
 			},
 			{
-				department: ['CSCI'],
+				department: 'CSCI',
 				number: 375,
 				gereqs: ['EIN'],
 				year: 2013,
 			},
 			{
-				department: ['REL'],
+				department: 'REL',
 				number: 111,
 				section: 'C',
 				gereqs: ['BTS-T'],
 				year: 2012,
 			},
 			{
-				department: ['REL'],
+				department: 'REL',
 				number: 115,
 				gereqs: ['BTS-T'],
 				year: 2013,
@@ -398,31 +398,31 @@ describe('filterByQualification', () => {
 
 		const courses = [
 			{
-				department: ['ART', 'ASIAN'],
+				department: 'AR/AS',
 				number: 310,
 				lab: true,
 				year: 2012,
 			},
 			{
-				department: ['ASIAN'],
+				department: 'ASIAN',
 				number: 275,
 				year: 2016,
 			},
 			{
-				department: ['CSCI'],
+				department: 'CSCI',
 				number: 375,
 				gereqs: ['EIN'],
 				year: 2013,
 			},
 			{
-				department: ['REL'],
+				department: 'REL',
 				number: 111,
 				section: 'C',
 				gereqs: ['BTS-T'],
 				year: 2012,
 			},
 			{
-				department: ['REL'],
+				department: 'REL',
 				number: 115,
 				gereqs: ['BTS-T'],
 				year: 2013,
@@ -444,13 +444,13 @@ describe('filterByQualification', () => {
 
 		const courses = [
 			{
-				department: ['ESTH'],
+				department: 'ESTH',
 				number: 182,
 				year: 2012,
 				gereqs: ['SPM'],
 			},
 			{
-				department: ['ESTH'],
+				department: 'ESTH',
 				number: 182,
 				year: 2013,
 				gereqs: ['SPM'],
@@ -475,13 +475,13 @@ describe('filterByQualification', () => {
 
 		const courses = [
 			{
-				department: ['ESTH'],
+				department: 'ESTH',
 				number: 182,
 				year: 2012,
 				gereqs: ['FYW'],
 			},
 			{
-				department: ['ESTH'],
+				department: 'ESTH',
 				number: 182,
 				year: 2013,
 				gereqs: ['SPM'],
