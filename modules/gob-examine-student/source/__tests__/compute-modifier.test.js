@@ -21,15 +21,15 @@ describe('computeModifier', () => {
 					$or: [
 						{
 							$type: 'course',
-							$course: {department: ['REL'], number: 111},
+							$course: {department: 'REL', number: 111},
 						},
 						{
 							$type: 'course',
-							$course: {department: ['REL'], number: 112},
+							$course: {department: 'REL', number: 112},
 						},
 						{
 							$type: 'course',
-							$course: {department: ['REL'], number: 251},
+							$course: {department: 'REL', number: 251},
 						},
 					],
 				},
@@ -39,9 +39,9 @@ describe('computeModifier', () => {
 
 		const dirty = new Set()
 		const courses = [
-			{department: ['REL'], number: 111},
-			{department: ['REL'], number: 112},
-			{department: ['CSCI'], number: 251},
+			{department: 'REL', number: 111},
+			{department: 'REL', number: 112},
+			{department: 'CSCI', number: 251},
 		]
 
 		req.Bible.computed = computeChunk({
@@ -58,9 +58,9 @@ describe('computeModifier', () => {
 			dirty,
 		})
 
-		expect(computedResult).toBe(true)
 		expect(matches).toMatchSnapshot()
 		expect(counted).toBe(1)
+		expect(computedResult).toBe(true)
 		expect(modifier).toMatchSnapshot()
 	})
 
@@ -82,15 +82,15 @@ describe('computeModifier', () => {
 					$or: [
 						{
 							$type: 'course',
-							$course: {department: ['REL'], number: 111},
+							$course: {department: 'REL', number: 111},
 						},
 						{
 							$type: 'course',
-							$course: {department: ['REL'], number: 112},
+							$course: {department: 'REL', number: 112},
 						},
 						{
 							$type: 'course',
-							$course: {department: ['REL'], number: 251},
+							$course: {department: 'REL', number: 251},
 						},
 					],
 				},
@@ -100,9 +100,9 @@ describe('computeModifier', () => {
 
 		const dirty = new Set()
 		const courses = [
-			{department: ['REL'], number: 111},
-			{department: ['REL'], number: 112},
-			{department: ['CSCI'], number: 251},
+			{department: 'REL', number: 111},
+			{department: 'REL', number: 112},
+			{department: 'CSCI', number: 251},
 		]
 
 		req.Bible.computed = computeChunk({
@@ -119,9 +119,9 @@ describe('computeModifier', () => {
 			dirty,
 		})
 
-		expect(computedResult).toBe(true)
 		expect(matches).toMatchSnapshot()
 		expect(counted).toBe(1)
+		expect(computedResult).toBe(true)
 		expect(modifier).toMatchSnapshot()
 	})
 
@@ -149,9 +149,9 @@ describe('computeModifier', () => {
 
 		const dirty = new Set()
 		let courses = [
-			{department: ['REL'], number: 111},
-			{department: ['REL'], number: 112},
-			{department: ['CSCI'], number: 251},
+			{department: 'REL', number: 111},
+			{department: 'REL', number: 112},
+			{department: 'CSCI', number: 251},
 		]
 
 		courses = applyFilter(req.filter, courses)
@@ -163,9 +163,9 @@ describe('computeModifier', () => {
 			dirty,
 		})
 
-		expect(computedResult).toBe(true)
 		expect(matches).toMatchSnapshot()
 		expect(counted).toBe(2)
+		expect(computedResult).toBe(true)
 		expect(modifier).toMatchSnapshot()
 	})
 
@@ -173,7 +173,7 @@ describe('computeModifier', () => {
 		const modifier = {
 			$besides: {
 				$type: 'course',
-				$course: {department: ['CHEM'], number: 398},
+				$course: {department: 'CHEM', number: 398},
 			},
 			$count: {$num: 1, $operator: '$gte'},
 			$from: 'filter',
@@ -199,7 +199,7 @@ describe('computeModifier', () => {
 			result: modifier,
 		}
 
-		let goodCourses = [{department: ['REL'], number: 111}]
+		let goodCourses = [{department: 'REL', number: 111}]
 		goodCourses = applyFilter(req.filter, goodCourses)
 
 		const {computedResult: one} = computeModifier({
@@ -210,7 +210,7 @@ describe('computeModifier', () => {
 		})
 		expect(one).toBe(true)
 
-		let badCourses = [{department: ['CHEM'], number: 398}]
+		let badCourses = [{department: 'CHEM', number: 398}]
 		badCourses = applyFilter(req.filter, badCourses)
 
 		const {computedResult: two} = computeModifier({
@@ -222,8 +222,8 @@ describe('computeModifier', () => {
 		expect(two).toBe(false)
 
 		let moreGoodCourses = [
-			{department: ['CHEM'], number: 398},
-			{department: ['REL'], number: 111},
+			{department: 'CHEM', number: 398},
+			{department: 'REL', number: 111},
 		]
 		moreGoodCourses = applyFilter(req.filter, moreGoodCourses)
 
@@ -254,9 +254,9 @@ describe('computeModifier', () => {
 
 		const dirty = new Set()
 		const courses = [
-			{department: ['REL'], number: 111},
-			{department: ['REL'], number: 112},
-			{department: ['CSCI'], number: 251},
+			{department: 'REL', number: 111},
+			{department: 'REL', number: 112},
+			{department: 'CSCI', number: 251},
 		]
 
 		const {computedResult, matches, counted} = computeModifier({
@@ -266,9 +266,9 @@ describe('computeModifier', () => {
 			dirty,
 		})
 
-		expect(computedResult).toBe(true)
 		expect(matches).toMatchSnapshot()
 		expect(counted).toBe(2)
+		expect(computedResult).toBe(true)
 
 		expect(modifier).toMatchSnapshot()
 	})
@@ -291,11 +291,11 @@ describe('computeModifier', () => {
 					$and: [
 						{
 							$type: 'course',
-							$course: {department: ['REL'], number: 111},
+							$course: {department: 'REL', number: 111},
 						},
 						{
 							$type: 'course',
-							$course: {department: ['REL'], number: 112},
+							$course: {department: 'REL', number: 112},
 						},
 					],
 				},
@@ -304,7 +304,7 @@ describe('computeModifier', () => {
 				$type: 'requirement',
 				result: {
 					$type: 'course',
-					$course: {department: ['CSCI'], number: 251},
+					$course: {department: 'CSCI', number: 251},
 				},
 			},
 			result: modifier,
@@ -312,9 +312,9 @@ describe('computeModifier', () => {
 
 		const dirty = new Set()
 		const courses = [
-			{department: ['REL'], number: 111, credits: 1.0},
-			{department: ['REL'], number: 112, credits: 1.0},
-			{department: ['CSCI'], number: 251, credits: 1.0},
+			{department: 'REL', number: 111, credits: 1.0},
+			{department: 'REL', number: 112, credits: 1.0},
+			{department: 'CSCI', number: 251, credits: 1.0},
 		]
 
 		req.Bible.computed = computeChunk({
@@ -337,9 +337,9 @@ describe('computeModifier', () => {
 			dirty,
 		})
 
-		expect(computedResult).toBe(true)
 		expect(matches).toMatchSnapshot()
 		expect(counted).toBe(3)
+		expect(computedResult).toBe(true)
 		expect(modifier).toMatchSnapshot()
 	})
 
@@ -362,14 +362,14 @@ describe('computeModifier', () => {
 						{
 							$type: 'course',
 							$course: {
-								department: ['CHEM', 'BIO'],
+								department: 'CH/BI',
 								number: 111,
 							},
 						},
 						{
 							$type: 'course',
 							$course: {
-								department: ['CHEM', 'BIO'],
+								department: 'CH/BI',
 								number: 112,
 							},
 						},
@@ -380,7 +380,7 @@ describe('computeModifier', () => {
 				$type: 'requirement',
 				result: {
 					$type: 'course',
-					$course: {department: ['CSCI'], number: 251},
+					$course: {department: 'CSCI', number: 251},
 				},
 			},
 			result: modifier,
@@ -388,9 +388,9 @@ describe('computeModifier', () => {
 
 		const dirty = new Set()
 		const courses = [
-			{department: ['CHEM', 'BIO'], number: 111, credits: 1.0},
-			{department: ['CHEM', 'BIO'], number: 112, credits: 1.0},
-			{department: ['CSCI'], number: 251, credits: 1.0},
+			{department: 'CH/BI', number: 111, credits: 1.0},
+			{department: 'CH/BI', number: 112, credits: 1.0},
+			{department: 'CSCI', number: 251, credits: 1.0},
 		]
 
 		req.CHBI.computed = computeChunk({
@@ -413,9 +413,9 @@ describe('computeModifier', () => {
 			dirty,
 		})
 
-		expect(computedResult).toBe(true)
 		expect(matches).toMatchSnapshot()
 		expect(counted).toBe(3)
+		expect(computedResult).toBe(true)
 		expect(modifier).toMatchSnapshot()
 	})
 
@@ -437,15 +437,15 @@ describe('computeModifier', () => {
 					$or: [
 						{
 							$type: 'course',
-							$course: {department: ['REL'], number: 111},
+							$course: {department: 'REL', number: 111},
 						},
 						{
 							$type: 'course',
-							$course: {department: ['REL'], number: 112},
+							$course: {department: 'REL', number: 112},
 						},
 						{
 							$type: 'course',
-							$course: {department: ['REL'], number: 251},
+							$course: {department: 'REL', number: 251},
 						},
 					],
 				},
@@ -454,7 +454,7 @@ describe('computeModifier', () => {
 				$type: 'requirement',
 				result: {
 					$type: 'course',
-					$course: {department: ['CSCI'], number: 251},
+					$course: {department: 'CSCI', number: 251},
 				},
 			},
 			result: modifier,
@@ -462,9 +462,9 @@ describe('computeModifier', () => {
 
 		const dirty = new Set()
 		const courses = [
-			{department: ['REL'], number: 111, credits: 1.0},
-			{department: ['REL'], number: 112, credits: 1.0},
-			{department: ['CSCI'], number: 251, credits: 1.0},
+			{department: 'REL', number: 111, credits: 1.0},
+			{department: 'REL', number: 112, credits: 1.0},
+			{department: 'CSCI', number: 251, credits: 1.0},
 		]
 
 		req.Bible.computed = computeChunk({
@@ -487,9 +487,9 @@ describe('computeModifier', () => {
 			dirty,
 		})
 
-		expect(computedResult).toBe(true)
 		expect(matches).toMatchSnapshot()
 		expect(counted).toBe(2)
+		expect(computedResult).toBe(true)
 		expect(modifier).toMatchSnapshot()
 	})
 
@@ -520,14 +520,14 @@ describe('computeModifier', () => {
 				$type: 'requirement',
 				result: {
 					$type: 'course',
-					$course: {department: ['CHEM', 'BIO'], number: 111},
+					$course: {department: 'CH/BI', number: 111},
 				},
 			},
 			B: {
 				$type: 'requirement',
 				result: {
 					$type: 'course',
-					$course: {department: ['CHEM', 'BIO'], number: 112},
+					$course: {department: 'CH/BI', number: 112},
 				},
 			},
 			result: modifier,
@@ -535,8 +535,8 @@ describe('computeModifier', () => {
 
 		const dirty = new Set()
 		const courses = [
-			{department: ['CHEM', 'BIO'], number: 111, credits: 1.0},
-			{department: ['CHEM', 'BIO'], number: 112, credits: 1.0},
+			{department: 'CH/BI', number: 111, credits: 1.0},
+			{department: 'CH/BI', number: 112, credits: 1.0},
 		]
 
 		req.A.computed = computeChunk({
@@ -586,13 +586,13 @@ describe('computeModifier', () => {
 			],
 		})
 
-		expect(courseResults.computedResult).toBe(true)
 		expect(courseResults.matches).toMatchSnapshot()
 		expect(courseResults.counted).toBe(2)
+		expect(courseResults.computedResult).toBe(true)
 
-		expect(departmentResults.computedResult).toBe(true)
 		expect(departmentResults.matches).toMatchSnapshot()
 		expect(departmentResults.counted).toBe(2)
+		expect(departmentResults.computedResult).toBe(true)
 	})
 
 	it('throws when $what is none of "course", "credit", nor "department"', () => {
