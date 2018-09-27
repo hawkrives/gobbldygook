@@ -18,7 +18,7 @@ describe('getMatchesFromChildren', () => {
 					$of: [
 						{
 							$type: 'course',
-							department: ['CSCI'],
+							department: 'CSCI',
 							number: 121,
 							_result: true,
 						},
@@ -28,13 +28,13 @@ describe('getMatchesFromChildren', () => {
 							$of: [
 								{
 									$type: 'course',
-									department: ['ASIAN'],
+									department: 'ASIAN',
 									number: 130,
 									_result: true,
 								},
 								{
 									$type: 'course',
-									department: ['ASIAN'],
+									department: 'ASIAN',
 									number: 275,
 									_result: true,
 								},
@@ -55,20 +55,20 @@ describe('getMatchesFromChildren', () => {
 							$count: {$operator: '$gte', $num: 2},
 							course: {
 								$type: 'course',
-								department: ['THEAT'],
+								department: 'THEAT',
 								number: 222,
 							},
 							_matches: [
 								{
 									$type: 'course',
-									department: ['THEAT'],
+									department: 'THEAT',
 									number: 222,
 									_result: true,
 									year: 2014,
 								},
 								{
 									$type: 'course',
-									department: ['THEAT'],
+									department: 'THEAT',
 									number: 222,
 									_result: true,
 									year: 2015,
@@ -79,32 +79,32 @@ describe('getMatchesFromChildren', () => {
 					_matches: [
 						{
 							$type: 'course',
-							department: ['CSCI'],
+							department: 'CSCI',
 							number: 121,
 							_result: true,
 						},
 						{
 							$type: 'course',
-							department: ['ASIAN'],
+							department: 'ASIAN',
 							number: 130,
 							_result: true,
 						},
 						{
 							$type: 'course',
-							department: ['ASIAN'],
+							department: 'ASIAN',
 							number: 275,
 							_result: true,
 						},
 						{
 							$type: 'course',
-							department: ['THEAT'],
+							department: 'THEAT',
 							number: 222,
 							_result: true,
 							year: 2014,
 						},
 						{
 							$type: 'course',
-							department: ['THEAT'],
+							department: 'THEAT',
 							number: 222,
 							_result: true,
 							year: 2015,
@@ -136,7 +136,7 @@ describe('getMatchesFromChildren', () => {
 					$of: [
 						{
 							$type: 'course',
-							department: ['CSCI'],
+							department: 'CSCI',
 							gereqs: ['AQR'],
 							number: 121,
 							_result: true,
@@ -147,13 +147,13 @@ describe('getMatchesFromChildren', () => {
 							$of: [
 								{
 									$type: 'course',
-									department: ['ASIAN'],
+									department: 'ASIAN',
 									number: 130,
 									_result: true,
 								},
 								{
 									$type: 'course',
-									department: ['ASIAN'],
+									department: 'ASIAN',
 									number: 275,
 									_result: true,
 								},
@@ -170,7 +170,7 @@ describe('getMatchesFromChildren', () => {
 							_matches: [
 								{
 									$type: 'course',
-									department: ['CSCI'],
+									department: 'CSCI',
 									gereqs: ['AQR'],
 									number: 121,
 									_result: true,
@@ -182,20 +182,20 @@ describe('getMatchesFromChildren', () => {
 							$count: {$operator: '$gte', $num: 2},
 							course: {
 								$type: 'course',
-								department: ['THEAT'],
+								department: 'THEAT',
 								number: 222,
 							},
 							_matches: [
 								{
 									$type: 'course',
-									department: ['THEAT'],
+									department: 'THEAT',
 									number: 222,
 									_result: true,
 									year: 2014,
 								},
 								{
 									$type: 'course',
-									department: ['THEAT'],
+									department: 'THEAT',
 									number: 222,
 									_result: true,
 									year: 2015,
@@ -206,40 +206,40 @@ describe('getMatchesFromChildren', () => {
 					_matches: [
 						{
 							$type: 'course',
-							department: ['CSCI'],
+							department: 'CSCI',
 							gereqs: ['AQR'],
 							number: 121,
 							_result: true,
 						},
 						{
 							$type: 'course',
-							department: ['CSCI'],
+							department: 'CSCI',
 							gereqs: ['AQR'],
 							number: 121,
 							_result: true,
 						},
 						{
 							$type: 'course',
-							department: ['ASIAN'],
+							department: 'ASIAN',
 							number: 130,
 							_result: true,
 						},
 						{
 							$type: 'course',
-							department: ['ASIAN'],
+							department: 'ASIAN',
 							number: 275,
 							_result: true,
 						},
 						{
 							$type: 'course',
-							department: ['THEAT'],
+							department: 'THEAT',
 							number: 222,
 							_result: true,
 							year: 2014,
 						},
 						{
 							$type: 'course',
-							department: ['THEAT'],
+							department: 'THEAT',
 							number: 222,
 							_result: true,
 							year: 2015,
@@ -253,33 +253,33 @@ describe('getMatchesFromChildren', () => {
 			[
 				{
 					$type: 'course',
-					department: ['CSCI'],
+					department: 'CSCI',
 					gereqs: ['AQR'],
 					number: 121,
 					_result: true,
 				},
 				{
 					$type: 'course',
-					department: ['ASIAN'],
+					department: 'ASIAN',
 					number: 130,
 					_result: true,
 				},
 				{
 					$type: 'course',
-					department: ['ASIAN'],
+					department: 'ASIAN',
 					number: 275,
 					_result: true,
 				},
 				{
 					$type: 'course',
-					department: ['THEAT'],
+					department: 'THEAT',
 					number: 222,
 					_result: true,
 					year: 2014,
 				},
 				{
 					$type: 'course',
-					department: ['THEAT'],
+					department: 'THEAT',
 					number: 222,
 					_result: true,
 					year: 2015,
