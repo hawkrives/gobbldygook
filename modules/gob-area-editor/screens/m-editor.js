@@ -104,13 +104,15 @@ export let Editor = () => (
 				}
 			}}
 			render={({state: {content}, setState}) => {
-				return <>
-					<AreaTextEditor
-						value={content}
-						onChange={value => setState({content: value})}
-					/>
-					<AreaCompiledViewer value={content} />
-				</>
+				return (
+					<>
+						<AreaTextEditor
+							value={content}
+							onChange={value => setState({content: value})}
+						/>
+						<AreaCompiledViewer value={content} />
+					</>
+				)
 			}}
 		/>
 	</Layout>
