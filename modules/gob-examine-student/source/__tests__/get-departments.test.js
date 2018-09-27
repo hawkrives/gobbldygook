@@ -9,6 +9,6 @@ describe('getDepartments', () => {
 			{department: 'CH/BI'},
 		]
 
-		expect(getDepartments(courses)).toEqual(['ART', 'AR/AS', 'CH/BI'])
+		expect(getDepartments(courses)).toEqual(['ART', 'ASIAN', 'CHEM', 'BIO'])
 	})
 })
