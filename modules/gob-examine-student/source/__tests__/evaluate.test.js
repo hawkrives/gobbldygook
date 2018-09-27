@@ -11,10 +11,8 @@ describe('evaluate', () => {
 				$type: 'requirement',
 				result: {
 					$type: 'course',
-					$course: {
-						department: ['ASIAN'],
-						number: 100,
-					},
+					department: ['ASIAN'],
+					number: 100,
 				},
 			},
 		}

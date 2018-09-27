@@ -1,7 +1,5 @@
 // @flow
-import keys from 'lodash/keys'
 import take from 'lodash/take'
-import xor from 'lodash/xor'
 import stringify from 'stabilize'
 import applyFulfillmentToResult from './apply-fulfillment-to-result'
 import assertKeys from './assert-keys'
@@ -283,21 +281,16 @@ export function computeCourse({
 	dirty,
 	isNeeded,
 }: CourseChunkArgs) {
-	assertKeys(expr, '$course')
 	const foundCourse = findCourse(expr, courses)
 
 	if (!foundCourse) {
 		return {computedResult: false}
 	}
 
-	const keysNotFromQuery = xor(keys(expr), keys(foundCourse))
-	if (keysNotFromQuery.length) {
-		;(expr: any)._extraKeys = keysNotFromQuery
-	}
+	let {$type: _type, _taken, ...plucked} = expr
+	let match = {...plucked, ...foundCourse}
+	expr._request = (plucked: any)
 
-	expr._request = {...expr}
-	expr = {...expr, ...foundCourse}
-	let match = expr
 	const crsident = simplifyCourse(match)
 
 	if (dirty.has(crsident)) {

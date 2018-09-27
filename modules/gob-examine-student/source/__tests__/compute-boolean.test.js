@@ -8,11 +8,13 @@ describe('computeBoolean', () => {
 			$and: [
 				{
 					$type: 'course',
-					$course: {department: ['CSCI'], number: 121},
+					department: ['CSCI'],
+					number: 121,
 				},
 				{
 					$type: 'course',
-					$course: {department: ['CSCI'], number: 125},
+					department: ['CSCI'],
+					number: 125,
 				},
 			],
 		}
@@ -41,11 +43,13 @@ describe('computeBoolean', () => {
 			$or: [
 				{
 					$type: 'course',
-					$course: {department: ['CSCI'], number: 121},
+					department: ['CSCI'],
+					number: 121,
 				},
 				{
 					$type: 'course',
-					$course: {department: ['CSCI'], number: 125},
+					department: ['CSCI'],
+					number: 125,
 				},
 			],
 		}
@@ -74,11 +78,13 @@ describe('computeBoolean', () => {
 			$or: [
 				{
 					$type: 'course',
-					$course: {department: ['CSCI'], number: 121},
+					department: ['CSCI'],
+					number: 121,
 				},
 				{
 					$type: 'course',
-					$course: {department: ['CSCI'], number: 125},
+					department: ['CSCI'],
+					number: 125,
 				},
 			],
 		}
@@ -111,11 +117,13 @@ describe('computeBoolean', () => {
 					$or: [
 						{
 							$type: 'course',
-							$course: {department: ['CSCI'], number: 121},
+							department: ['CSCI'],
+							number: 121,
 						},
 						{
 							$type: 'course',
-							$course: {department: ['CSCI'], number: 125},
+							department: ['CSCI'],
+							number: 125,
 						},
 					],
 				},
@@ -125,11 +133,13 @@ describe('computeBoolean', () => {
 					$or: [
 						{
 							$type: 'course',
-							$course: {department: ['CSCI'], number: 130},
+							department: ['CSCI'],
+							number: 130,
 						},
 						{
 							$type: 'course',
-							$course: {department: ['CSCI'], number: 131},
+							department: ['CSCI'],
+							number: 131,
 						},
 					],
 				},
@@ -159,11 +169,13 @@ describe('computeBoolean', () => {
 			$or: [
 				{
 					$type: 'course',
-					$course: {department: ['CSCI'], number: 121},
+					department: ['CSCI'],
+					number: 121,
 				},
 				{
 					$type: 'course',
-					$course: {department: ['CSCI'], number: 125},
+					department: ['CSCI'],
+					number: 125,
 				},
 			],
 			$type: 'boolean',
@@ -218,12 +230,14 @@ describe('computeBoolean', () => {
 			$type: 'boolean',
 			$booleanType: 'and',
 		}
+
 		const requirement = {
 			A: {
 				$type: 'requirement',
 				result: {
 					$type: 'course',
-					$course: {department: ['ART'], number: 120},
+					department: ['ART'],
+					number: 120,
 				},
 			},
 			C: {
@@ -233,15 +247,18 @@ describe('computeBoolean', () => {
 					$of: [
 						{
 							$type: 'course',
-							$course: {department: ['ART'], number: 103},
+							department: ['ART'],
+							number: 103,
 						},
 						{
 							$type: 'course',
-							$course: {department: ['ART'], number: 104},
+							department: ['ART'],
+							number: 104,
 						},
 						{
 							$type: 'course',
-							$course: {department: ['ART'], number: 105},
+							department: ['ART'],
+							number: 105,
 						},
 					],
 					$type: 'of',
@@ -277,6 +294,7 @@ describe('computeBoolean', () => {
 			dirty,
 			isNeeded: true,
 		})
+
 		expect(clause).toMatchSnapshot()
 		expect(computedResult).toBe(true)
 		expect(matches).toMatchSnapshot()
@@ -327,11 +345,13 @@ describe('computeBoolean', () => {
 					$count: {$operator: '$gte', $num: 1},
 					$of: [
 						{
-							$course: {department: ['CSCI'], number: 121},
+							department: ['CSCI'],
+							number: 121,
 							$type: 'course',
 						},
 						{
-							$course: {department: ['CSCI'], number: 125},
+							department: ['CSCI'],
+							number: 125,
 							$type: 'course',
 						},
 					],
@@ -341,11 +361,13 @@ describe('computeBoolean', () => {
 					$count: {$operator: '$gte', $num: 1},
 					$of: [
 						{
-							$course: {department: ['ART'], number: 102},
+							department: ['ART'],
+							number: 102,
 							$type: 'course',
 						},
 						{
-							$course: {department: ['ART'], number: 103},
+							department: ['ART'],
+							number: 103,
 							$type: 'course',
 						},
 					],
@@ -389,7 +411,8 @@ describe('computeBoolean', () => {
 				$type: 'requirement',
 				result: {
 					$type: 'course',
-					$course: {department: ['ART'], number: 120},
+					department: ['ART'],
+					number: 120,
 				},
 			},
 			C: {
@@ -399,15 +422,18 @@ describe('computeBoolean', () => {
 					$of: [
 						{
 							$type: 'course',
-							$course: {department: ['ART'], number: 103},
+							department: ['ART'],
+							number: 103,
 						},
 						{
 							$type: 'course',
-							$course: {department: ['ART'], number: 104},
+							department: ['ART'],
+							number: 104,
 						},
 						{
 							$type: 'course',
-							$course: {department: ['ART'], number: 105},
+							department: ['ART'],
+							number: 105,
 						},
 					],
 					$type: 'of',

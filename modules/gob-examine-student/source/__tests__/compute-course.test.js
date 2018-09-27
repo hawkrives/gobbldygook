@@ -10,7 +10,8 @@ describe('computeCourse', () => {
 
 		const query = {
 			$type: 'course',
-			$course: {department: ['ART'], number: 250},
+			department: ['ART'],
+			number: 250,
 		}
 
 		const {computedResult, match} = computeCourse({
@@ -28,7 +29,9 @@ describe('computeCourse', () => {
 		const courses = [{department: ['ART'], number: 130, type: 'Research'}]
 		const query = {
 			$type: 'course',
-			$course: {department: ['ART'], number: 130, type: 'Research'},
+			department: ['ART'],
+			number: 130,
+			type: 'Research',
 		}
 
 		const dirty = new Set()
@@ -44,7 +47,9 @@ describe('computeCourse', () => {
 		]
 		const query = {
 			$type: 'course',
-			$course: {department: ['ART'], number: 999, type: 'Lab'},
+			department: ['ART'],
+			number: 999,
+			type: 'Lab',
 		}
 
 		const dirty = new Set()
@@ -58,7 +63,9 @@ describe('computeCourse', () => {
 		const courses = [{department: ['ART'], number: 130, type: 'Research'}]
 		const query = {
 			$type: 'course',
-			$course: {department: ['ART'], number: 130, type: 'Research'},
+			department: ['ART'],
+			number: 130,
+			type: 'Research',
 		}
 
 		const dirty = new Set(['ART 130 Research'])
@@ -83,7 +90,9 @@ describe('computeCourse', () => {
 
 		const query = {
 			$type: 'course',
-			$course: {department: ['ART'], number: 250, crsid: 20951},
+			department: ['ART'],
+			number: 250,
+			crsid: 20951,
 		}
 
 		const {computedResult, match} = computeCourse({

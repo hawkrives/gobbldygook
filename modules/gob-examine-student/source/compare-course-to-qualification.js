@@ -100,9 +100,6 @@ function compareCourseToQualificationViaOperator(
 	course: Course,
 	{$key, $operator, $value}: Qualification,
 ) {
-	// get the actual course out of the object
-	course = (course: any).$course || course
-
 	// it's a static value; a number or string
 	if ($operator === '$eq') {
 		if (Array.isArray(course[$key])) {

@@ -21,15 +21,18 @@ describe('computeModifier', () => {
 					$or: [
 						{
 							$type: 'course',
-							$course: {department: ['REL'], number: 111},
+							department: ['REL'],
+							number: 111,
 						},
 						{
 							$type: 'course',
-							$course: {department: ['REL'], number: 112},
+							department: ['REL'],
+							number: 112,
 						},
 						{
 							$type: 'course',
-							$course: {department: ['REL'], number: 251},
+							department: ['REL'],
+							number: 251,
 						},
 					],
 				},
@@ -82,15 +85,15 @@ describe('computeModifier', () => {
 					$or: [
 						{
 							$type: 'course',
-							$course: {department: ['REL'], number: 111},
+							department: ['REL'], number: 111,
 						},
 						{
 							$type: 'course',
-							$course: {department: ['REL'], number: 112},
+							department: ['REL'], number: 112,
 						},
 						{
 							$type: 'course',
-							$course: {department: ['REL'], number: 251},
+							department: ['REL'], number: 251,
 						},
 					],
 				},
@@ -173,7 +176,7 @@ describe('computeModifier', () => {
 		const modifier = {
 			$besides: {
 				$type: 'course',
-				$course: {department: ['CHEM'], number: 398},
+				department: ['CHEM'], number: 398,
 			},
 			$count: {$num: 1, $operator: '$gte'},
 			$from: 'filter',
@@ -291,11 +294,11 @@ describe('computeModifier', () => {
 					$and: [
 						{
 							$type: 'course',
-							$course: {department: ['REL'], number: 111},
+							department: ['REL'], number: 111,
 						},
 						{
 							$type: 'course',
-							$course: {department: ['REL'], number: 112},
+							department: ['REL'], number: 112,
 						},
 					],
 				},
@@ -304,7 +307,7 @@ describe('computeModifier', () => {
 				$type: 'requirement',
 				result: {
 					$type: 'course',
-					$course: {department: ['CSCI'], number: 251},
+					department: ['CSCI'], number: 251,
 				},
 			},
 			result: modifier,
@@ -361,17 +364,15 @@ describe('computeModifier', () => {
 					$and: [
 						{
 							$type: 'course',
-							$course: {
+
 								department: ['CHEM', 'BIO'],
 								number: 111,
-							},
 						},
 						{
 							$type: 'course',
-							$course: {
+
 								department: ['CHEM', 'BIO'],
 								number: 112,
-							},
 						},
 					],
 				},
@@ -380,7 +381,7 @@ describe('computeModifier', () => {
 				$type: 'requirement',
 				result: {
 					$type: 'course',
-					$course: {department: ['CSCI'], number: 251},
+					department: ['CSCI'], number: 251,
 				},
 			},
 			result: modifier,
@@ -437,15 +438,15 @@ describe('computeModifier', () => {
 					$or: [
 						{
 							$type: 'course',
-							$course: {department: ['REL'], number: 111},
+							department: ['REL'], number: 111,
 						},
 						{
 							$type: 'course',
-							$course: {department: ['REL'], number: 112},
+							department: ['REL'], number: 112,
 						},
 						{
 							$type: 'course',
-							$course: {department: ['REL'], number: 251},
+							department: ['REL'], number: 251,
 						},
 					],
 				},
@@ -454,7 +455,7 @@ describe('computeModifier', () => {
 				$type: 'requirement',
 				result: {
 					$type: 'course',
-					$course: {department: ['CSCI'], number: 251},
+					department: ['CSCI'], number: 251,
 				},
 			},
 			result: modifier,
@@ -520,14 +521,14 @@ describe('computeModifier', () => {
 				$type: 'requirement',
 				result: {
 					$type: 'course',
-					$course: {department: ['CHEM', 'BIO'], number: 111},
+					department: ['CHEM', 'BIO'], number: 111,
 				},
 			},
 			B: {
 				$type: 'requirement',
 				result: {
 					$type: 'course',
-					$course: {department: ['CHEM', 'BIO'], number: 112},
+					department: ['CHEM', 'BIO'], number: 112,
 				},
 			},
 			result: modifier,

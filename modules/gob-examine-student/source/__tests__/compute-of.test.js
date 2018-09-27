@@ -8,15 +8,18 @@ describe('computeOf', () => {
 			$of: [
 				{
 					$type: 'course',
-					$course: {department: ['CSCI'], number: 121},
+					department: ['CSCI'],
+					number: 121,
 				},
 				{
 					$type: 'course',
-					$course: {department: ['CSCI'], number: 125},
+					department: ['CSCI'],
+					number: 125,
 				},
 				{
 					$type: 'course',
-					$course: {department: ['CSCI'], number: 150},
+					department: ['CSCI'],
+					number: 150,
 				},
 			],
 		}
@@ -40,40 +43,96 @@ describe('computeOf', () => {
 		})
 
 		expect(computedResult).toBe(true)
-		expect(matches).toEqual([
-			{department: ['CSCI'], number: 121},
-			{department: ['CSCI'], number: 125},
-		])
+		expect(matches).toMatchInlineSnapshot(`
+Array [
+  Object {
+    "$type": "course",
+    "_checked": true,
+    "_request": Object {
+      "department": Array [
+        "CSCI",
+      ],
+      "number": 121,
+    },
+    "_result": true,
+    "_taken": true,
+    "department": Array [
+      "CSCI",
+    ],
+    "number": 121,
+  },
+  Object {
+    "$type": "course",
+    "_checked": true,
+    "_request": Object {
+      "department": Array [
+        "CSCI",
+      ],
+      "number": 125,
+    },
+    "_result": true,
+    "_taken": true,
+    "department": Array [
+      "CSCI",
+    ],
+    "number": 125,
+  },
+]
+`)
 		expect(counted).toBe(2)
 
-		expect(expr).toEqual({
-			$type: 'of',
-			$count: {$operator: '$gte', $num: 2},
-			$of: [
-				{
-					_checked: true,
-					_taken: true,
-					_result: true,
-					$type: 'course',
-					_request: {department: ['CSCI'], number: 121},
-					$course: {department: ['CSCI'], number: 121},
-				},
-				{
-					_checked: true,
-					_taken: true,
-					_result: true,
-					$type: 'course',
-					_request: {department: ['CSCI'], number: 125},
-					$course: {department: ['CSCI'], number: 125},
-				},
-				{
-					_result: false,
-					_checked: true,
-					$type: 'course',
-					$course: {department: ['CSCI'], number: 150},
-				},
-			],
-		})
+		expect(expr).toMatchInlineSnapshot(`
+Object {
+  "$count": Object {
+    "$num": 2,
+    "$operator": "$gte",
+  },
+  "$of": Array [
+    Object {
+      "$type": "course",
+      "_checked": true,
+      "_request": Object {
+        "department": Array [
+          "CSCI",
+        ],
+        "number": 121,
+      },
+      "_result": true,
+      "_taken": true,
+      "department": Array [
+        "CSCI",
+      ],
+      "number": 121,
+    },
+    Object {
+      "$type": "course",
+      "_checked": true,
+      "_request": Object {
+        "department": Array [
+          "CSCI",
+        ],
+        "number": 125,
+      },
+      "_result": true,
+      "_taken": true,
+      "department": Array [
+        "CSCI",
+      ],
+      "number": 125,
+    },
+    Object {
+      "$type": "course",
+      "_checked": true,
+      "_result": false,
+      "department": Array [
+        "CSCI",
+      ],
+      "number": 150,
+    },
+  ],
+  "$type": "of",
+}
+`)
 	})
 
 	xit('stores the number of matches in its containing expression', () => {})
