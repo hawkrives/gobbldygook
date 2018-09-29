@@ -48,55 +48,55 @@ let GlobalStyle = createGlobalStyle`
 let NotFound = () => <h1>404 Not Found</h1>
 
 let AreaEditor = Loadable({
-    loader: () =>
-        import(/*webpackChunkName: 'screen.area-editor'*/ '@gob/area-editor'),
-    loading: LoadingComponent,
-    render: (loaded, props) => <loaded.Editor {...props} />,
+	loader: () =>
+		import(/*webpackChunkName: 'screen.area-editor'*/ '@gob/area-editor'),
+	loading: LoadingComponent,
+	render: (loaded, props) => <loaded.Editor {...props} />,
 })
 
 let StudentPicker = Loadable({
-    loader: () =>
-        import(/*webpackChunkName: 'screen.student-picker'*/ './screens/picker'),
-    loading: LoadingComponent,
+	loader: () =>
+		import(/*webpackChunkName: 'screen.student-picker'*/ './screens/picker'),
+	loading: LoadingComponent,
 })
 
 let Degubber = Loadable({
-    loader: () =>
-        import(/*webpackChunkName: 'screen.degub'*/ './screens/degub'),
-    loading: LoadingComponent,
+	loader: () =>
+		import(/*webpackChunkName: 'screen.degub'*/ './screens/degub'),
+	loading: LoadingComponent,
 })
 
 let CreateStudent = Loadable({
-    loader: () =>
-        import(/*webpackChunkName: 'screen.create'*/ './screens/create'),
-    loading: LoadingComponent,
+	loader: () =>
+		import(/*webpackChunkName: 'screen.create'*/ './screens/create'),
+	loading: LoadingComponent,
 })
 
 let Student = Loadable({
-    loader: () =>
-        import(/*webpackChunkName: 'screen.student'*/ './screens/student'),
-    loading: LoadingComponent,
+	loader: () =>
+		import(/*webpackChunkName: 'screen.student'*/ './screens/student'),
+	loading: LoadingComponent,
 })
 
 // needs to be a stateful component: otherwise DragDropContext can't assign a ref, which it needs
 class App extends React.Component<{}> {
-    render() {
-        return (
-            <div>
-                <GlobalStyle />
-                <DocumentTitle title="Gobbldygook" />
-                <Router>
-                    <NotFound default />
+	render() {
+		return (
+			<div>
+				<GlobalStyle />
+				<DocumentTitle title="Gobbldygook" />
+				<Router>
+					<NotFound default />
 
-                    <StudentPicker path="/" />
-                    <Degubber path="/degub" />
-                    <AreaEditor path="/areas" />
-                    <Student path="/student/:studentId" />
-                    <CreateStudent path="/create/*" />
-                </Router>
-            </div>
-        )
-    }
+					<StudentPicker path="/" />
+					<Degubber path="/degub" />
+					<AreaEditor path="/areas" />
+					<Student path="/student/:studentId" />
+					<CreateStudent path="/create/*" />
+				</Router>
+			</div>
+		)
+	}
 }
 
 export default DragDropContext(HTML5Backend)(App)

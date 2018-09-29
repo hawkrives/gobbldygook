@@ -18,7 +18,7 @@ let ModalStyle = createGlobalStyle`
 `
 
 type Props = {
-	navigate: (string) => mixed,
+	navigate: string => mixed,
 }
 
 export default function CourseSearcherOverlay(props: Props) {
@@ -26,7 +26,7 @@ export default function CourseSearcherOverlay(props: Props) {
 
 	return (
 		<>
-			<ModalStyle/>
+			<ModalStyle />
 			<Modal onClose={boundCloseModal} contentLabel="Search">
 				<CourseSearcher closeSearcher={boundCloseModal} />
 			</Modal>

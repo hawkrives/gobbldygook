@@ -159,7 +159,10 @@ function Semester(props: Props) {
 			ref={ref => props.connectDropTarget(ref)}
 		>
 			<Header>
-				<Title to={`term/${year}${semester}`} title={`Details for ${name}`}>
+				<Title
+					to={`term/${year}${semester}`}
+					title={`Details for ${name}`}
+				>
 					<TitleText>{name}</TitleText>
 					<InfoList>{infoBar}</InfoList>
 				</Title>

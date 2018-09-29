@@ -63,13 +63,18 @@ export default function StudentIndex(props: {
 								navigate={props.navigate}
 							/>
 						) : (
-							<GraduationStatusSidebar student={student.present} />
+							<GraduationStatusSidebar
+								student={student.present}
+							/>
 						)}
 					</Sidebar>
 
 					<Router>
 						<CourseTable student={student.present} default />
-						<SemesterDetail student={student.present} path="term/:term" />
+						<SemesterDetail
+							student={student.present}
+							path="term/:term"
+						/>
 					</Router>
 
 					{params.has('share') && (

@@ -47,7 +47,7 @@ let renderFunc = Root => {
 
 	render(
 		<Root store={store}>
-			<App/>
+			<App />
 		</Root>,
 		renderEl,
 	)

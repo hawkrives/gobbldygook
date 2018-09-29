@@ -62,11 +62,7 @@ export class Student extends React.Component<Props, State> {
 
 	render() {
 		if (!this.props.student) {
-			return (
-				<p>
-					Student {this.props.studentId} could not be loaded.
-				</p>
-			)
+			return <p>Student {this.props.studentId} could not be loaded.</p>
 		}
 
 		if (this.props.student.isLoading) {
