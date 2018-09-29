@@ -5,7 +5,6 @@ import cx from 'classnames'
 import Autosize from 'react-input-autosize'
 import Select from 'react-select'
 import {connect} from 'react-redux'
-import withRouter from 'react-router/lib/withRouter'
 import map from 'lodash/map'
 import filter from 'lodash/filter'
 import 'react-select/dist/react-select.css'
@@ -21,7 +20,7 @@ class ManualCreationScreen extends React.Component {
 		areas: PropTypes.array.isRequired, // redux
 		areasLoading: PropTypes.bool.isRequired, // redux
 		dispatch: PropTypes.func.isRequired, // redux
-		router: PropTypes.object.isRequired,
+		navigate: PropTypes.func.isRequired, // react-router
 	}
 
 	state = {
@@ -124,7 +123,7 @@ class ManualCreationScreen extends React.Component {
 
 		let action = initStudent(rawStudent)
 		this.props.dispatch(action)
-		this.props.router.push(`/s/${action.payload.id}`)
+		this.props.navigate(`/student/${action.payload.id}`)
 	}
 
 	render() {
@@ -243,4 +242,4 @@ let mapDispatch = dispatch => ({dispatch})
 export default connect(
 	mapState,
 	mapDispatch,
-)(withRouter(ManualCreationScreen))
+)(ManualCreationScreen)

@@ -25,9 +25,7 @@ loadData().catch(err => console.error(err))
 // Kick off the GUI
 log('3. 2.. 1... Blast off! 🚀')
 
-import Router from 'react-router/lib/Router'
-import history from './history'
-import routes from './routes'
+import App from './app'
 
 // Create the redux store
 import configureStore from './redux'
@@ -46,9 +44,10 @@ let renderFunc = Root => {
 	if (!renderEl) {
 		return
 	}
+
 	render(
 		<Root store={store}>
-			<Router history={history} routes={routes} />
+			<App/>
 		</Root>,
 		renderEl,
 	)

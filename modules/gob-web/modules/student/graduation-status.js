@@ -3,22 +3,19 @@ import React from 'react'
 
 import {AreaOfStudySidebar} from './area-of-study-sidebar'
 import {ConnectedStudentSummary} from './connected-student-summary'
+import type {HydratedStudentType} from '@gob/object-student'
 
 import './graduation-status.scss'
 
-type Student = Object
-
 type Props = {
-	student: Student,
+	student: HydratedStudentType,
 }
 
-export default class GraduationStatusContainer extends React.PureComponent<
-	Props,
-> {
+class GraduationStatusContainer extends React.Component<Props> {
 	render() {
 		const student = this.props.student
 		if (!student) {
-			return null
+			return <p>No student loaded.</p>
 		}
 
 		return (
@@ -29,3 +26,5 @@ export default class GraduationStatusContainer extends React.PureComponent<
 		)
 	}
 }
+
+export default GraduationStatusContainer

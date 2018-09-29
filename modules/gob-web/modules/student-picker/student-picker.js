@@ -1,6 +1,6 @@
 // @flow
 import React from 'react'
-import Link from 'react-router/lib/Link'
+import {Link} from '@reach/router'
 import * as theme from '../../theme'
 import {
 	androidSearch,
@@ -14,6 +14,9 @@ import {FlatButton, RaisedButton} from '../../components/button'
 import {Icon} from '../../components/icon'
 import StudentList from './student-list'
 import styled from 'styled-components'
+import type {ReduxStudentStore} from '../student/student'
+
+import {type SORT_BY_ENUM} from './types'
 
 const StudentListToolbar = styled(Toolbar)`
 	width: 100%;
@@ -90,23 +93,23 @@ const FilterBox = styled.input`
 	}
 `
 
-let sortByExpanded = {
+let sortByExpanded: {[key: SORT_BY_ENUM]: string} = {
 	dateLastModified: 'date last modified',
 	name: 'name',
 	canGraduate: 'can graduate',
 }
 
 type PropTypes = {
-	destroyStudent: () => any,
+	destroyStudent: string => mixed,
 	filterText: string,
 	groupBy: string,
 	isEditing: boolean,
-	onFilterChange: () => any,
-	onGroupChange: () => any,
-	onSortChange: () => any,
-	onToggleEditing: () => any,
-	sortBy: string,
-	students: Object,
+	onFilterChange: (SyntheticInputEvent<HTMLInputElement>) => mixed,
+	onGroupChange: () => mixed,
+	onSortChange: () => mixed,
+	onToggleEditing: () => mixed,
+	sortBy: SORT_BY_ENUM,
+	students: {[key: string]: ReduxStudentStore},
 }
 
 export default function StudentPicker(props: PropTypes) {
@@ -147,21 +150,17 @@ export default function StudentPicker(props: PropTypes) {
 						onChange={onFilterChange}
 					/>
 
-					<StudentListButton as={Link} onClick={onSortChange}>
+					<StudentListButton onClick={onSortChange}>
 						<Icon block>{funnel}</Icon>
 						Sort
 					</StudentListButton>
 
-					<StudentListButton
-						as={Link}
-						disabled
-						onClick={onGroupChange}
-					>
+					<StudentListButton disabled onClick={onGroupChange}>
 						<Icon block>{androidApps}</Icon>
 						Group
 					</StudentListButton>
 
-					<StudentListButton as={Link} onClick={onToggleEditing}>
+					<StudentListButton onClick={onToggleEditing}>
 						<Icon block>{androidMenu}</Icon>
 						Edit
 					</StudentListButton>
@@ -192,7 +191,7 @@ export default function StudentPicker(props: PropTypes) {
 					students={students}
 				/>
 			) : (
-				<MakeStudentButton as={Link} to="/create">
+				<MakeStudentButton as={Link} to="create/">
 					Add a Student
 				</MakeStudentButton>
 			)}

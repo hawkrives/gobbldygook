@@ -1,5 +1,6 @@
+// @flow
+
 import React from 'react'
-import PropTypes from 'prop-types'
 import filter from 'lodash/filter'
 import sortBy from 'lodash/sortBy'
 import fuzzysearch from 'fuzzysearch'
@@ -7,6 +8,8 @@ import styled from 'styled-components'
 import List from '../../components/list'
 import StudentListItem from './student-list-item'
 import * as theme from '../../theme'
+import {type SORT_BY_ENUM} from './types'
+import type {ReduxStudentStore} from '../student/student'
 
 const ListOfStudents = styled(List)`
 	${theme.card};
@@ -16,7 +19,16 @@ const ListOfStudents = styled(List)`
 	overflow: hidden;
 `
 
-export default function StudentList(props) {
+type Props = {
+	destroyStudent: string => mixed,
+	filter: string,
+	groupBy: string,
+	isEditing: boolean,
+	sortBy: SORT_BY_ENUM,
+	students: {[key: string]: ReduxStudentStore},
+}
+
+export default function StudentList(props: Props) {
 	const {isEditing, destroyStudent, students} = props
 
 	let {
@@ -43,16 +55,6 @@ export default function StudentList(props) {
 	)
 
 	return <ListOfStudents type="plain">{studentObjects}</ListOfStudents>
-}
-
-StudentList.propTypes = {
-	destroyStudent: PropTypes.func.isRequired,
-	filter: PropTypes.string.isRequired,
-	groupBy: PropTypes.string.isRequired,
-	isEditing: PropTypes.bool.isRequired,
-	sortBy: PropTypes.oneOf(['dateLastModified', 'name', 'canGraduate'])
-		.isRequired,
-	students: PropTypes.object.isRequired,
 }
 
 StudentList.defaultProps = {

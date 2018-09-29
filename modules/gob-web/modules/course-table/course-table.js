@@ -32,10 +32,10 @@ const AddYearButton = styled(FlatButton)`
 const Container = styled.div``
 
 type PropTypes = {
-	addSemester: () => any,
-	addYear: () => any,
+	addSemester: number => mixed,
+	addYear: number => mixed,
 	className?: string,
-	removeYear: () => any,
+	removeYear: number => mixed,
 	student: Object,
 }
 

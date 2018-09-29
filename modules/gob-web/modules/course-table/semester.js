@@ -2,7 +2,7 @@
 
 import React from 'react'
 import cx from 'classnames'
-import Link from 'react-router/lib/Link'
+import {Link} from '@reach/router'
 import {semesterName} from '@gob/school-st-olaf-college'
 import {countCredits} from '@gob/examine-student'
 import {IDENT_COURSE} from '@gob/object-student'
@@ -151,20 +151,22 @@ function Semester(props: Props) {
 		'can-drop': canDrop,
 	})
 
+	let name = semesterName(semester)
+
 	return (
 		<Container
 			className={className}
 			ref={ref => props.connectDropTarget(ref)}
 		>
 			<Header>
-				<Title to={`/s/${studentId}/semester/${year}/${semester}`}>
-					<TitleText>{semesterName(semester)}</TitleText>
+				<Title to={`term/${year}${semester}`} title={`Details for ${name}`}>
+					<TitleText>{name}</TitleText>
 					<InfoList>{infoBar}</InfoList>
 				</Title>
 
 				<TitleButton
 					as={Link}
-					to={`/s/${studentId}/search/${year}/${semester}`}
+					to={`./?search&term=${year}${semester}`}
 					title="Search for courses"
 				>
 					<Icon>{search}</Icon> Course
@@ -172,7 +174,7 @@ function Semester(props: Props) {
 
 				<RemoveSemesterButton
 					onClick={props.removeSemester}
-					title={`Remove ${year} ${semesterName(semester)}`}
+					title={`Remove ${year} ${name}`}
 				>
 					<Icon>{close}</Icon>
 				</RemoveSemesterButton>

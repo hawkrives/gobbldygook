@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import Link from 'react-router/lib/Link'
+import {Link} from '@reach/router'
 import groupBy from 'lodash/groupBy'
 import map from 'lodash/map'
 import {sortStudiesByType} from '@gob/object-student'
@@ -10,6 +10,7 @@ import {FlatButton} from '../../components/button'
 import {Icon} from '../../components/icon'
 import {iosTrashOutline, iosArrowForward} from '../../icons/ionicons'
 import * as theme from '../../theme'
+import type {ReduxStudentStore} from '../student/student'
 
 const Container = styled.div`
 	display: flex;
@@ -110,7 +111,7 @@ const ListItemLink = styled(Link)`
 type Props = {
 	destroyStudent: string => any,
 	isEditing: boolean,
-	student: Object,
+	student: ReduxStudentStore,
 	as?: string,
 }
 
@@ -151,7 +152,7 @@ export default function StudentListItem(props: Props) {
 				</DeleteButton>
 			)}
 
-			<ListItemLink to={`/s/${student.data.present.id}/`}>
+			<ListItemLink to={`/student/${student.data.present.id}/`}>
 				<StudentInfo>
 					<StudentName>
 						{student.data.present.name}

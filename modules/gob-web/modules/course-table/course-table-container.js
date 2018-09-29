@@ -1,5 +1,6 @@
+// @flow
+
 import React from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import map from 'lodash/map'
@@ -11,12 +12,17 @@ import {
 } from '../../redux/students/actions/schedules'
 import {findFirstAvailableYear} from '../../helpers/find-first-available-year'
 import {findFirstAvailableSemester} from '../../helpers/find-first-available-semester'
+import type {HydratedStudentType} from '@gob/object-student'
+import values from 'lodash/values'
 
 import CourseTable from './course-table'
 
 const addYear = (addSchedule, student) => {
 	addSchedule(student.id, {
-		year: findFirstAvailableYear(student.schedules, student.matriculation),
+		year: findFirstAvailableYear(
+			values(student.schedules),
+			student.matriculation,
+		),
 		semester: 1,
 		index: 1,
 		active: true,
@@ -25,7 +31,7 @@ const addYear = (addSchedule, student) => {
 
 const addSemester = (addSchedule, student, year) => {
 	const nextAvailableSemester = findFirstAvailableSemester(
-		student.schedules,
+		values(student.schedules),
 		year,
 	)
 
@@ -47,8 +53,16 @@ const removeYear = (destroySchedules, student, year) => {
 	destroySchedules(student.id, ...scheduleIds)
 }
 
-export function CourseTableContainer(props) {
-	const student = props.student.data.present
+type Props = {
+	addSchedule: Function,
+	className?: string,
+	destroySchedules: Function,
+	student: HydratedStudentType,
+}
+
+export function CourseTableContainer(props: Props) {
+	const student = props.student
+
 	return (
 		<CourseTable
 			className={props.className}
@@ -60,13 +74,6 @@ export function CourseTableContainer(props) {
 			}
 		/>
 	)
-}
-
-CourseTableContainer.propTypes = {
-	addSchedule: PropTypes.func.isRequired,
-	className: PropTypes.string,
-	destroySchedules: PropTypes.func.isRequired,
-	student: PropTypes.object.isRequired,
 }
 
 const mapDispatchToProps = dispatch =>

@@ -1,39 +1,53 @@
 // @flow
-import React, {Component, cloneElement} from 'react'
+import * as React from 'react'
 import DocumentTitle from 'react-document-title'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {loadStudent} from '../../redux/students/actions/load-student'
-
-import Sidebar from '../../components/sidebar'
+import type {HydratedStudentType} from '@gob/object-student'
+import type {Undoable} from '../../types'
 import Loading from '../../components/loading'
+import styled from 'styled-components'
 
-import CourseTable from '../course-table'
-import GraduationStatus from './graduation-status'
+const Container = styled.div`
+	display: grid;
+	justify-content: space-between;
+	padding: var(--page-edge-padding);
 
-import './student.scss'
+	grid-template-columns: 1fr;
 
-type StudentType = Object
+	@media all and (min-width: 600px) {
+		grid-template-columns: 280px 1fr;
+		grid-column-gap: calc(var(--page-edge-padding) * (2 / 3));
+	}
+`
+
+export type ReduxStudentStore = {
+	data: Undoable<HydratedStudentType>,
+	isLoading: boolean,
+	isFetching: boolean,
+	isValdiating: boolean,
+	isChecking: boolean,
+}
+
 type Props = {
-	content: React$Element<any>, // from react-router
+	children: ({student: Undoable<HydratedStudentType>}) => React.Node, // from react-router
 	loadStudent: string => any, // redux
-	overlay: ?React$Element<any>,
-	params: {studentId: string}, // react-router
-	sidebar: ?React$Element<any>, // from react-router
-	student: StudentType, // redux
+	studentId: string, // react-router
+	student?: ReduxStudentStore, // redux
 }
 
 type State = {
 	cachedStudentId: ?string,
 }
 
-export class Student extends Component<Props, State> {
+export class Student extends React.Component<Props, State> {
 	state = {
 		cachedStudentId: null,
 	}
 
 	static getDerivedStateFromProps(props: Props, state: State) {
-		let studentId = props.params.studentId
+		let studentId = props.studentId
 
 		// We have to be able to load the student here because we only load
 		// students on-demand into the redux store
@@ -49,9 +63,9 @@ export class Student extends Component<Props, State> {
 	render() {
 		if (!this.props.student) {
 			return (
-				<div>
-					Student {this.props.params.studentId} could not be loaded.
-				</div>
+				<p>
+					Student {this.props.studentId} could not be loaded.
+				</p>
 			)
 		}
 
@@ -59,41 +73,24 @@ export class Student extends Component<Props, State> {
 			return <Loading>Loading Student…</Loading>
 		}
 
-		const name = this.props.student
-			? this.props.student.data.present.name
-			: 'Loading…'
+		let student = this.props.student.data
 
-		const contentProps = {
-			student: this.props.student,
-			className: 'content',
-		}
-		const contents = this.props.content ? (
-			cloneElement(this.props.content, contentProps)
-		) : (
-			<CourseTable {...contentProps} />
-		)
-
-		const sidebarProps = {student: this.props.student.data.present}
-		const sidebar = this.props.sidebar ? (
-			cloneElement(this.props.sidebar, sidebarProps)
-		) : (
-			<GraduationStatus {...sidebarProps} />
-		)
+		let title = student
+			? `${student.present.name} | Gobbldygook`
+			: 'Gobbldygook'
 
 		return (
-			<DocumentTitle title={`${name} | Gobbldygook`}>
-				<div className="student">
-					<Sidebar student={this.props.student}>{sidebar}</Sidebar>
-					{contents}
-					{this.props.overlay || null}
-				</div>
-			</DocumentTitle>
+			<Container>
+				<DocumentTitle title={title} />
+
+				{this.props.children({student})}
+			</Container>
 		)
 	}
 }
 
 const mapStateToProps = (state, ownProps) => ({
-	student: state.students[ownProps.params.studentId],
+	student: state.students[ownProps.studentId],
 })
 
 const mapDispatchToProps = dispatch =>

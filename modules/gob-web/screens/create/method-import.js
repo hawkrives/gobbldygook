@@ -15,7 +15,6 @@ import groupBy from 'lodash/groupBy'
 import sortBy from 'lodash/sortBy'
 import {initStudent} from '../../redux/students/actions/init-student'
 import {connect} from 'react-redux'
-import withRouter from 'react-router/lib/withRouter'
 import type {Course as CourseType, CourseError} from '@gob/types'
 import './method-import.scss'
 
@@ -26,7 +25,7 @@ import type {
 
 type Props = {
 	+dispatch: Function, // redux
-	+router: Object,
+	+navigate: string => mixed,
 }
 
 type State = {
@@ -71,7 +70,7 @@ class SISImportScreen extends React.Component<Props, State> {
 	handleCreateStudent = () => {
 		let action = initStudent(this.state.student)
 		this.props.dispatch(action)
-		this.props.router.push(`/s/${action.payload.id}`)
+		this.props.navigate(`/student/${action.payload.id}`)
 	}
 
 	handleRawStudent = (ev: SyntheticInputEvent<HTMLTextAreaElement>) => {
@@ -225,4 +224,4 @@ let mapDispatch = dispatch => ({dispatch})
 export default connect(
 	undefined,
 	mapDispatch,
-)(withRouter(SISImportScreen))
+)(SISImportScreen)

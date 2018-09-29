@@ -77,8 +77,8 @@ const canAddSemester = (nextAvailableSemester?: number) => {
 }
 
 type Props = {
-	addSemester: Function,
-	removeYear: Function,
+	addSemester: number => mixed,
+	removeYear: number => mixed,
 	student: HydratedStudentType,
 	year: number,
 }

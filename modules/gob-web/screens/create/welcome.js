@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react'
-import Link from 'react-router/lib/Link'
+import {Link} from '@reach/router'
 import {RaisedButton} from '../../components/button'
 
 export default function WelcomeScreen() {
@@ -27,21 +27,21 @@ export default function WelcomeScreen() {
 				</p>
 			</section>
 			<section className="choices">
-				<RaisedButton as={Link} to="/create/sis">
+				<RaisedButton as={Link} to="sis">
 					Import from the SIS
 				</RaisedButton>
 				<RaisedButton
 					as={Link}
 					disabled
-					to="/create/drive"
+					to="drive"
 					onClick={ev => ev.preventDefault()}
 				>
 					Link to Google Drive
 				</RaisedButton>
-				<RaisedButton as={Link} to="/create/upload">
+				<RaisedButton as={Link} to="upload">
 					Upload a File
 				</RaisedButton>
-				<RaisedButton as={Link} to="/create/manual">
+				<RaisedButton as={Link} to="manual">
 					Create Manually
 				</RaisedButton>
 			</section>

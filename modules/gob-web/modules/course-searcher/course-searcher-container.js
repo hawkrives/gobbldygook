@@ -16,10 +16,6 @@ export class CourseSearcherContainer extends React.PureComponent {
 	static propTypes = {
 		closeSearcher: PropTypes.func.isRequired,
 		groupResults: PropTypes.func.isRequired, // redux
-		partial: PropTypes.shape({
-			year: PropTypes.number,
-			semester: PropTypes.number,
-		}),
 		search: PropTypes.shape({
 			error: PropTypes.any.isRequired,
 			groupBy: PropTypes.string.isRequired,
@@ -33,11 +29,12 @@ export class CourseSearcherContainer extends React.PureComponent {
 		sortResults: PropTypes.func.isRequired, // redux
 		studentId: PropTypes.string,
 		submitQuery: PropTypes.func.isRequired, // redux
+		term: PropTypes.number,
 		updateQuery: PropTypes.func.isRequired, // redux
 	}
 
 	handleQuerySubmit = () => {
-		this.props.setPartialQuery(this.props.partial)
+		this.props.setPartialQuery({term: this.props.term})
 		this.props.submitQuery()
 	}
 
@@ -72,7 +69,7 @@ export class CourseSearcherContainer extends React.PureComponent {
 				onQueryChange={this.handleQueryChange}
 				onQuerySubmit={this.handleQuerySubmit}
 				onSortChange={this.handleSortChange}
-				partial={this.props.partial}
+				partial={this.props.term ? {term: this.props.term} : null}
 				query={this.props.search.query}
 				results={this.props.search.results}
 				sortBy={this.props.search.sortBy}

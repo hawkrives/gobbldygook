@@ -6,7 +6,6 @@ import {FlatButton} from '../../components/button'
 import List from '../../components/list'
 import {StudentSummary} from '../../modules/student/student-summary'
 import {initStudent} from '../../redux/students/actions/init-student'
-import withRouter from 'react-router/lib/withRouter'
 import {connect} from 'react-redux'
 import debug from 'debug'
 const log = debug('web:react')
@@ -16,7 +15,7 @@ import './method-upload.scss'
 class UploadFileScreen extends React.Component {
 	static propTypes = {
 		dispatch: PropTypes.func.isRequired,
-		router: PropTypes.object.isRequired,
+		navigate: PropTypes.func.isRequired,
 	}
 
 	state = {
@@ -73,7 +72,7 @@ class UploadFileScreen extends React.Component {
 
 	handleImportStudents = () => {
 		this.state.actions.forEach(this.props.dispatch)
-		this.props.router.push('/')
+		this.props.navigate('/')
 	}
 
 	render() {
@@ -138,4 +137,4 @@ let mapDispatch = dispatch => ({dispatch})
 export default connect(
 	undefined,
 	mapDispatch,
-)(withRouter(UploadFileScreen))
+)(UploadFileScreen)

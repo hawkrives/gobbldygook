@@ -3,12 +3,6 @@
 import {css} from 'styled-components'
 import * as vars from './variables'
 
-export const contentBlockSpacing = css`
-	padding-top: ${vars.pageEdgePadding};
-	padding-bottom: ${vars.pageEdgePadding};
-	overflow-y: scroll;
-`
-
 export const materialShadow = `
 	border: 1px solid;
 	border-color: #e5e6e9 #dfe0e4 #d0d1d5;
