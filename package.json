@@ -73,10 +73,6 @@
       "history"
     ]
   },
-  "resolutions": {
-    "flow-coverage-report/react-dom": "^16",
-    "flow-coverage-report/react": "^16"
-  },
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
