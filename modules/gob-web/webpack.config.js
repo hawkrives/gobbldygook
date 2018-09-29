@@ -218,7 +218,12 @@ function config() {
 				use: [
 					isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
 					'css-loader',
-					'sass-loader',
+					{
+						loader: 'sass-loader',
+						options: {
+							implementation: require('dart-sass'),
+						},
+					},
 				],
 			},
 		],
