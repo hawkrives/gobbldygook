@@ -8,8 +8,7 @@ import {LoadingComponent} from '../../components/loading-comp'
 import Student from '../../modules/student'
 
 const Sidebar = Loadable({
-	loader: () =>
-		import(/* webpackChunkName: 'student.sidebar' */ '../../components/sidebar'),
+	loader: () => import('../../components/sidebar'),
 	loading: LoadingComponent,
 })
 
@@ -26,20 +25,17 @@ const GraduationStatusSidebar = Loadable({
 })
 
 const CourseTable = Loadable({
-	loader: () =>
-		import(/* webpackChunkName: 'student.course-table' */ '../../modules/course-table'),
+	loader: () => import('../../modules/course-table'),
 	loading: LoadingComponent,
 })
 
 const ShareStudentOverlay = Loadable({
-	loader: () =>
-		import(/* webpackChunkName: 'student.share-student' */ './share-student'),
+	loader: () => import('./share-student'),
 	loading: LoadingComponent,
 })
 
 const SemesterDetail = Loadable({
-	loader: () =>
-		import(/* webpackChunkName: 'student.semester-detail' */ '../../modules/semester-detail'),
+	loader: () => import('../../modules/semester-detail'),
 	loading: LoadingComponent,
 })
 
