@@ -1,7 +1,6 @@
 // @flow
 
 import filter from 'lodash/filter'
-import debug from 'debug'
 
 import {evaluate} from '@gob/examine-student'
 import {getActiveCourses} from '@gob/object-student'
@@ -12,13 +11,12 @@ import type {
 	AreaOfStudyEvaluationError,
 	HydratedStudentType,
 } from '@gob/object-student'
-const log = debug('worker:check-student:worker')
 
 function tryEvaluate(student, area): any {
 	try {
 		return evaluate((student: any), area)
 	} catch (err) {
-		log('checkStudentAgainstArea:', err)
+		console.warn(err)
 		return {...area, _error: err.message}
 	}
 }
@@ -74,7 +72,7 @@ export default async function checkStudentAgainstArea(
 	area: any,
 ): any {
 	if (!area || area._error || !area._area) {
-		log(
+		console.warn(
 			'checkStudentAgainstArea:',
 			area ? area._error : 'area is null',
 			area,
