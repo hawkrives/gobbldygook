@@ -13,14 +13,23 @@ const Sidebar = Loadable({
 })
 
 const SearchSidebar = Loadable({
-	loader: () =>
-		import(/* webpackChunkName: 'search-sidebar.components' */ '../../components/sidebar--course-search'),
+	loader: () => import('../../components/sidebar--course-search'),
 	loading: LoadingComponent,
 })
 
-const GraduationStatusSidebar = Loadable({
+const AreaOfStudySidebar = Loadable({
 	loader: () =>
-		import(/*webpackChunkName: 'graduation-status-sidebar.components'*/ '../../modules/student/graduation-status'),
+		import('../../modules/student/area-of-study-sidebar').then(
+			mod => mod.AreaOfStudySidebar,
+		),
+	loading: LoadingComponent,
+})
+
+const StudentSummary = Loadable({
+	loader: () =>
+		import('../../modules/student/connected-student-summary').then(
+			mod => mod.ConnectedStudentSummary,
+		),
 	loading: LoadingComponent,
 })
 
@@ -59,9 +68,10 @@ export default function StudentIndex(props: {
 								navigate={props.navigate}
 							/>
 						) : (
-							<GraduationStatusSidebar
-								student={student.present}
-							/>
+							<>
+								<StudentSummary student={student.present} />
+								<AreaOfStudySidebar student={student.present} />
+							</>
 						)}
 					</Sidebar>
 
@@ -88,4 +98,5 @@ export default function StudentIndex(props: {
 
 CourseTable.preload()
 Sidebar.preload()
-GraduationStatusSidebar.preload()
+StudentSummary.preload()
+AreaOfStudySidebar.preload()

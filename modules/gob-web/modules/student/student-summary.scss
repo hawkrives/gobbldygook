@@ -8,6 +8,7 @@
 	hyphens: none;
 	font-variant-numeric: oldstyle-nums tabular-nums;
 	text-shadow: 0 1px rgba(white, 0.5);
+	font-size: 0.85em;
 
 	&.cannot-graduate .graduation-message {
 		color: $deep-orange-500;
