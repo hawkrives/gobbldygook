@@ -21,5 +21,5 @@ export const GROUP_BY = {
 	none: 'None',
 }
 
-export const sortByOptions: Array<string> = values(SORT_BY)
-export const groupByOptions: Array<string> = values(GROUP_BY)
+export const sortByOptions: Array<$Values<typeof SORT_BY>> = values(SORT_BY)
+export const groupByOptions: Array<$Values<typeof GROUP_BY>> = values(GROUP_BY)

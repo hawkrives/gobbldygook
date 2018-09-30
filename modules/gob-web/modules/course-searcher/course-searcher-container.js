@@ -1,8 +1,10 @@
+// @flow
+
 import * as React from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import CourseSearcher from './course-searcher'
+import type {Course as CourseType} from '@gob/types'
 
 import {
 	groupResults,
@@ -11,49 +13,54 @@ import {
 	updateQuery,
 	setPartialQuery,
 } from './redux/actions'
+import {GROUP_BY, SORT_BY} from './course-searcher-options'
 
-export class CourseSearcherContainer extends React.PureComponent {
-	static propTypes = {
-		closeSearcher: PropTypes.func.isRequired,
-		groupResults: PropTypes.func.isRequired, // redux
-		search: PropTypes.shape({
-			error: PropTypes.any.isRequired,
-			groupBy: PropTypes.string.isRequired,
-			hasQueried: PropTypes.bool.isRequired,
-			inProgress: PropTypes.bool.isRequired,
-			query: PropTypes.string.isRequired,
-			results: PropTypes.array.isRequired,
-			sortBy: PropTypes.string.isRequired,
-		}).isRequired, // redux
-		setPartialQuery: PropTypes.func.isRequired,
-		sortResults: PropTypes.func.isRequired, // redux
-		studentId: PropTypes.string,
-		submitQuery: PropTypes.func.isRequired, // redux
-		term: PropTypes.number,
-		updateQuery: PropTypes.func.isRequired, // redux
-	}
+type Props = {
+	closeSearcher: Function,
+	groupResults: Function, // redux
+	search: {
+		error: ?string,
+		groupBy: $Keys<typeof GROUP_BY>,
+		hasQueried: boolean,
+		inProgress: boolean,
+		query: string,
+		results: Array<string | CourseType>,
+		sortBy: $Keys<typeof SORT_BY>,
+	}, // redux
+	setPartialQuery: Function,
+	sortResults: Function, // redux
+	studentId?: string,
+	submitQuery: Function, // redux
+	term?: number,
+	updateQuery: Function, // redux
+}
+
+type State = {}
+
+export class CourseSearcherContainer extends React.Component<Props, State> {
+	state = {}
 
 	handleQuerySubmit = () => {
 		this.props.setPartialQuery({term: this.props.term})
 		this.props.submitQuery()
 	}
 
-	handleQueryChange = ev => {
-		this.props.updateQuery(ev.target.value)
+	handleQueryChange = (ev: SyntheticKeyboardEvent<HTMLInputElement>) => {
+		this.props.updateQuery(ev.currentTarget.value)
 	}
 
-	handleKeyDown = ev => {
+	handleKeyDown = (ev: SyntheticKeyboardEvent<HTMLInputElement>) => {
 		if (ev.keyCode === 13) {
 			this.handleQuerySubmit()
 		}
 	}
 
-	handleSortChange = ev => {
-		this.props.sortResults(ev.target.value)
+	handleSortChange = (ev: SyntheticEvent<HTMLSelectElement>) => {
+		this.props.sortResults(ev.currentTarget.value)
 	}
 
-	handleGroupByChange = ev => {
-		this.props.groupResults(ev.target.value)
+	handleGroupByChange = (ev: SyntheticEvent<HTMLSelectElement>) => {
+		this.props.groupResults(ev.currentTarget.value)
 	}
 
 	render() {

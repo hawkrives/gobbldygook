@@ -4,7 +4,7 @@ import React from 'react'
 import uniqueId from 'lodash/uniqueId'
 
 export function LabelledSelect(props: {
-	onChange: (ev: SyntheticInputEvent<HTMLSelectElement>) => void,
+	onChange: (ev: SyntheticEvent<HTMLSelectElement>) => mixed,
 	value: string,
 	label: string,
 	options: Array<string>,

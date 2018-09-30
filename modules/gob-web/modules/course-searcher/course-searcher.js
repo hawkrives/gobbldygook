@@ -9,25 +9,26 @@ import {Icon} from '../../components/icon'
 import Loading from '../../components/loading'
 import CourseResultsList from './course-results-list'
 import {androidArrowForward} from '../../icons/ionicons'
+import type {Course as CourseType} from '@gob/types'
 
 import {sortByOptions, groupByOptions} from './course-searcher-options'
 
 import './course-searcher.scss'
 
 type CourseSearcherProps = {
-	error?: string,
+	error?: ?string,
 	groupBy: string,
 	hasQueried?: boolean,
 	inProgress: boolean,
-	onCloseSearcher: () => any,
-	onGroupByChange: () => any,
-	onKeyDown: () => any,
-	onQueryChange: () => any,
-	onQuerySubmit: () => any,
-	onSortChange: () => any,
+	onCloseSearcher: () => mixed,
+	onGroupByChange: (ev: SyntheticEvent<HTMLSelectElement>) => mixed,
+	onKeyDown: (ev: SyntheticKeyboardEvent<HTMLInputElement>) => mixed,
+	onQueryChange: (ev: SyntheticKeyboardEvent<HTMLInputElement>) => mixed,
+	onQuerySubmit: (ev: SyntheticKeyboardEvent<HTMLInputElement>) => mixed,
+	onSortChange: (ev: SyntheticEvent<HTMLSelectElement>) => mixed,
 	partial?: ?Object,
 	query: string,
-	results: any[],
+	results: Array<string | CourseType>,
 	sortBy: string,
 	studentId?: string,
 }
