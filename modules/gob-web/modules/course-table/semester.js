@@ -160,7 +160,7 @@ function Semester(props: Props) {
 		>
 			<Header>
 				<Title
-					to={`term/${year}${semester}`}
+					to={`./term/${year}${semester}`}
 					title={`Details for ${name}`}
 				>
 					<TitleText>{name}</TitleText>
@@ -169,7 +169,7 @@ function Semester(props: Props) {
 
 				<TitleButton
 					as={Link}
-					to={`./?search&term=${year}${semester}`}
+					to={`./search?term=${year}${semester}`}
 					title="Search for courses"
 				>
 					<Icon>{search}</Icon> Course
