@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import CourseSearcher from '../modules/course-searcher'
+import {CourseSearcher} from '../modules/course-searcher'
 
 type Props = {
 	term: ?string,
@@ -20,13 +20,11 @@ function CourseSearcherSidebar(props: Props) {
 	}
 
 	let {term} = props
-	if (term) {
-		term = parseInt(term, 10)
-	}
+	term = term ? parseInt(term, 10) : null
 
 	return (
 		<CourseSearcher
-			closeSearcher={boundCloseModal}
+			onCloseSearcher={boundCloseModal}
 			studentId={studentId}
 			term={term}
 		/>

@@ -6,7 +6,7 @@ import sortBy from 'lodash/sortBy'
 import values from 'lodash/values'
 import findLast from 'lodash/findLast'
 
-import {type AreaOfStudyType} from './types'
+import {type ParsedHansonFile} from '@gob/hanson-format'
 
 function convertRevisionToYear(rev) {
 	// The +1 is because the year is the beginning of the academic year, but
@@ -30,9 +30,9 @@ function convertRevisionToYear(rev) {
 // class year is between the previous one and the newest.
 
 export function filterAreaList(
-	areas: Array<AreaOfStudyType>,
+	areas: Array<ParsedHansonFile>,
 	availableThrough: number,
-): $ReadOnlyArray<AreaOfStudyType> {
+): $ReadOnlyArray<ParsedHansonFile> {
 	// Remove all areas that are closed to new class years.
 	let onlyAvailableAreas = areas.filter(
 		area =>

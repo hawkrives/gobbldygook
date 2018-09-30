@@ -1,11 +1,10 @@
 // @flow
 
-export type AreaOfStudyType = {|
-	'available through'?: number,
+export type AreaOfStudyType = {
 	name: string,
 	type: string,
 	revision: string,
-|}
+}
 
 export type HydratedAreaOfStudyType = {|
 	...$Exact<AreaOfStudyType>,
@@ -22,11 +21,11 @@ export type AreaOfStudyEvaluationError = {|
 	_error: string,
 |}
 
-export type AreaQuery = {|
-	+type: string,
-	+name: string,
-	+revision?: string,
-|}
+export type AreaQuery = {
+	type: string,
+	name: string,
+	revision?: string,
+}
 
 export type OverrideType = {||}
 

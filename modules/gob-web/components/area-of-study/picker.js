@@ -5,25 +5,27 @@ import Select from 'react-select'
 import uniqueId from 'lodash/uniqueId'
 import type {OptionType} from 'react-select/src/types'
 import {AreaOfStudyProvider} from './provider'
+import type {ParsedHansonFile} from '@gob/hanson-format'
+import {filterAreaList} from '@gob/object-student'
 
-import {filterAreaList, type AreaOfStudyType} from '@gob/object-student'
+export type Selection = {
+	name: string,
+	type: string,
+	revision?: string,
+	label: string,
+	value: string,
+}
 
 type Props = {
-	selections: Array<{
-		name: string,
-		type: string,
-		revision: string,
-		label: string,
-		value: string,
-	}>,
+	selections: Array<Selection>,
 	type: string,
 	label?: string,
-	onChange: (Array<AreaOfStudyType>) => mixed,
+	onChange: (Array<Selection>) => any,
 	availableThrough?: number,
 }
 
 export function getOptions(
-	areas: Array<AreaOfStudyType>,
+	areas: Array<ParsedHansonFile>,
 	type: string,
 	availableThrough?: number,
 ): Array<OptionType> {

@@ -3,15 +3,15 @@
 import * as React from 'react'
 
 import {db} from '../../helpers/db'
-import {type AreaOfStudyType} from '@gob/object-student'
+import {type ParsedHansonFile} from '@gob/hanson-format'
 
 type Props = {
-	children: ({loading: boolean, areas: Array<AreaOfStudyType>}) => React.Node,
+	children: ({loading: boolean, areas: Array<ParsedHansonFile>}) => React.Node,
 }
 
 type State = {
 	loading: boolean,
-	areas: Array<AreaOfStudyType>,
+	areas: Array<ParsedHansonFile>,
 }
 
 export class AreaOfStudyProvider extends React.PureComponent<Props, State> {
