@@ -32,9 +32,6 @@ import configureStore from './redux'
 import ReduxWrapper from './redux-wrapper'
 const store = configureStore()
 
-import {loadAllAreas} from './redux/areas/actions'
-store.dispatch(loadAllAreas())
-
 // for debugging
 global._dispatch = store.dispatch
 global._store = store

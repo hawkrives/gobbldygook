@@ -4,7 +4,7 @@ import startsWith from 'lodash/startsWith'
 import series from 'p-series'
 import {status, json} from '@gob/lib'
 import debug from 'debug'
-import {refreshCourses, refreshAreas, Notification} from './lib-dispatch'
+import {refreshCourses, Notification} from './lib-dispatch'
 import needsUpdate from './needs-update'
 import updateDatabase from './update-database'
 import removeDuplicateAreas from './remove-duplicate-areas'
@@ -111,8 +111,6 @@ export function finishUp({type, notification}: Args) {
 	// istanbul ignore else
 	if (type === 'courses') {
 		return refreshCourses()
-	} else if (type === 'areas') {
-		return refreshAreas()
 	}
 }
 

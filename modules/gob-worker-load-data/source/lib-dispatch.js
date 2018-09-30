@@ -11,7 +11,6 @@ function dispatch(type: string, action: string, ...args: any[]) {
 }
 
 export const refreshCourses = () => dispatch('courses', 'refreshCourses')
-export const refreshAreas = () => dispatch('areas', 'refreshAreas')
 export const quotaExceededError = (dbName: string) => {
 	dispatch('notifications', 'logError', {
 		id: 'db-storage-quota-exceeded',

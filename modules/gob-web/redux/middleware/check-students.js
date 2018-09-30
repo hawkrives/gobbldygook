@@ -1,6 +1,5 @@
 // @flow
 import * as studentConstants from '../students/constants'
-import * as areaConstants from '../areas/constants'
 import * as courseConstants from '../courses/constants'
 
 import toArray from 'lodash/toArray'
@@ -27,10 +26,6 @@ const whitelist = new Set([
 	studentConstants.REMOVE_OVERRIDE,
 	studentConstants.ADD_FABRICATION,
 	studentConstants.REMOVE_FABRICATION,
-
-	// need to check everyone with one of the new areas
-	// when one of these fires
-	areaConstants.REFRESH_AREAS,
 
 	// need to check everyone with one of these courses
 	// when one of these fires
@@ -60,9 +55,7 @@ const checkMiddleware = (store: any) => (next: any) => async (action: any) => {
 
 	let affectedStudents = []
 
-	if (action.type === areaConstants.REFRESH_AREAS) {
-		affectedStudents = toArray(newStudents)
-	} else if (action.type === courseConstants.REFRESH_COURSES) {
+	if (action.type === courseConstants.REFRESH_COURSES) {
 		affectedStudents = toArray(newStudents)
 	} else {
 		affectedStudents = toArray(newStudents).filter((_, id) => {
