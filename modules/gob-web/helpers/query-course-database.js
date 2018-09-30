@@ -21,22 +21,10 @@ export function queryCourseDatabase(
 			if (!Array.isArray(val)) {
 				val = [val]
 			}
-			if (val.some(v => v === undefined)) {
-				val = compact(val)
-			}
+			val = compact(val)
 			return [key, val]
 		})
 		.filter(([_, val]) => val.length)
 
-	let finalQuery = fromPairs(filteredQuery)
-
-	return db
-		.store('courses')
-		.query(finalQuery)
-		.catch(
-			err =>
-				new Error(
-					`course query failed on "${queryString}" with error "${err}"`,
-				),
-		)
+	return db.store('courses').query(fromPairs(filteredQuery))
 }
