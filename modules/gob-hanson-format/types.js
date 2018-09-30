@@ -10,7 +10,7 @@ export type HansonFile = {
 	dateAdded?: string,
 	sourcePath?: string,
 	slug?: string,
-	'available through'?: string,
+	'available through'?: number,
 	[key: string]: Mapped<string | HansonRequirement>,
 }
 
@@ -22,7 +22,7 @@ export type ParsedHansonFile = {
 	slug: string,
 	dateAdded?: string,
 	sourcePath?: string,
-	'available through'?: string,
+	'available through'?: number,
 	$type: 'requirement',
 	[key: string]: Mapped<ParsedHansonRequirement>,
 }
@@ -48,6 +48,6 @@ export type ParsedHansonRequirement = {
 	description?: boolean,
 	filter: ?Mapped<ParsedHansonRequirement>,
 	message: ?string,
-	result: Mapped<ParsedHansonRequirement>,
+	result: ?Mapped<ParsedHansonRequirement>,
 	[key: string]: Mapped<ParsedHansonRequirement>,
 }
