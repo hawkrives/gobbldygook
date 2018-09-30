@@ -48,33 +48,27 @@ let GlobalStyle = createGlobalStyle`
 let NotFound = () => <h1>404 Not Found</h1>
 
 let AreaEditor = Loadable({
-	loader: () =>
-		import(/*webpackChunkName: 'screen.area-editor'*/ '@gob/area-editor'),
+	loader: () => import('@gob/area-editor').then(mod => mod.Editor),
 	loading: LoadingComponent,
-	render: (loaded, props) => <loaded.Editor {...props} />,
 })
 
 let StudentPicker = Loadable({
-	loader: () =>
-		import(/*webpackChunkName: 'screen.student-picker'*/ './screens/picker'),
+	loader: () => import('./screens/picker'),
 	loading: LoadingComponent,
 })
 
 let Degubber = Loadable({
-	loader: () =>
-		import(/*webpackChunkName: 'screen.degub'*/ './screens/degub'),
+	loader: () => import('./screens/degub'),
 	loading: LoadingComponent,
 })
 
 let CreateStudent = Loadable({
-	loader: () =>
-		import(/*webpackChunkName: 'screen.create'*/ './screens/create'),
+	loader: () => import('./screens/create'),
 	loading: LoadingComponent,
 })
 
 let Student = Loadable({
-	loader: () =>
-		import(/*webpackChunkName: 'screen.student'*/ './screens/student'),
+	loader: () => import('./screens/student'),
 	loading: LoadingComponent,
 })
 
