@@ -121,7 +121,7 @@ class AreaOfStudyContainer extends Component<Props, State> {
 		const progressOf = typeof progress === 'object' ? progress.of : 1
 
 		const summary = (
-			<div>
+			<>
 				<div className="area--summary-row">
 					<h1 className="area--title">
 						{slug && !isCustom && isOpen ? (
@@ -159,7 +159,7 @@ class AreaOfStudyContainer extends Component<Props, State> {
 					value={progressAt}
 					max={progressOf}
 				/>
-			</div>
+			</>
 		)
 
 		const removalConfirmation = (
