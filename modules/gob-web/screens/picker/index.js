@@ -8,13 +8,12 @@ import {LoadingComponent} from '../../components/loading-comp'
 let NotFound = () => <h1>404 Not Found</h1>
 
 const StudentPicker = Loadable({
-	loader: () =>
-		import(/* webpackChunkName: 'student-picker.components' */ '../../modules/student-picker'),
+	loader: () => import('../../modules/student-picker'),
 	loading: LoadingComponent,
 })
 
 let CourseSearcherOverlay = Loadable({
-	loader: () => import(/*webpackChunkName: 'search'*/ './search'),
+	loader: () => import('./search'),
 	loading: LoadingComponent,
 })
 
