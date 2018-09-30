@@ -82,11 +82,11 @@ class App extends React.Component<{}> {
 				<Router>
 					<NotFound default />
 
-					<StudentPicker path="/" />
 					<Degubber path="/degub" />
 					<AreaEditor path="/areas" />
 					<Student path="/student/:studentId/*" />
 					<CreateStudent path="/create/*" />
+					<StudentPicker path="/*" />
 				</Router>
 			</div>
 		)
