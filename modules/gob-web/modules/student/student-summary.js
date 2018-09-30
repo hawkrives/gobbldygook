@@ -5,6 +5,7 @@ import listify from 'listify'
 import groupBy from 'lodash/groupBy'
 import sample from 'lodash/sample'
 
+import {Card} from '../../components/card'
 import {AvatarLetter} from '../../components/avatar-letter'
 import ContentEditable from '../../components/content-editable'
 
@@ -51,15 +52,27 @@ type Props = {
 	student: HydratedStudentType,
 }
 
-export class StudentSummary extends React.PureComponent<Props> {
+type State = {
+	message: string,
+}
+
+export class StudentSummary extends React.Component<Props, State> {
+	state = {
+		message: this.props.randomizeHello
+			? sample(welcomeMessages)
+			: welcomeMessage,
+	}
+
 	render() {
 		const {
 			student,
 			showMessage = true,
 			showAvatar = true,
-			randomizeHello = true,
-			...props
+			onChangeName,
+			onChangeMatriculation,
+			onChangeGraduation,
 		} = this.props
+
 		const {studies, canGraduate} = student
 
 		const className = canGraduate ? 'can-graduate' : 'cannot-graduate'
@@ -67,37 +80,34 @@ export class StudentSummary extends React.PureComponent<Props> {
 		const currentCredits = countCredits(getActiveCourses(student))
 		const neededCredits = student.creditsNeeded
 
-		const message = randomizeHello
-			? sample(welcomeMessages)
-			: welcomeMessage
+		const message = this.state.message
 
 		return (
-			<article className={cx('student-summary', className)}>
+			<Card as="article" className={cx('student-summary', className)}>
 				<Header
 					canGraduate={canGraduate}
 					name={student.name}
-					onChangeName={props.onChangeName}
+					onChangeName={onChangeName}
 					helloMessage={message}
 					showAvatar={showAvatar}
 				/>
-				<div className="content">
-					<DateSummary
-						onChangeGraduation={props.onChangeGraduation}
-						onChangeMatriculation={props.onChangeMatriculation}
-						matriculation={student.matriculation}
-						graduation={student.graduation}
-					/>
 
-					<DegreeSummary studies={studies} />
+				<DateSummary
+					onChangeGraduation={onChangeGraduation}
+					onChangeMatriculation={onChangeMatriculation}
+					matriculation={student.matriculation}
+					graduation={student.graduation}
+				/>
 
-					<CreditSummary
-						currentCredits={currentCredits}
-						neededCredits={neededCredits}
-					/>
+				<DegreeSummary studies={studies} />
 
-					{showMessage ? <Footer canGraduate={canGraduate} /> : null}
-				</div>
-			</article>
+				<CreditSummary
+					currentCredits={currentCredits}
+					neededCredits={neededCredits}
+				/>
+
+				{showMessage ? <Footer canGraduate={canGraduate} /> : null}
+			</Card>
 		)
 	}
 }
@@ -110,18 +120,11 @@ type HeaderProps = {
 	showAvatar: boolean,
 }
 
-export class Header extends React.PureComponent<HeaderProps> {
+export class Header extends React.Component<HeaderProps> {
 	render() {
 		const props = this.props
 
 		const className = props.canGraduate ? 'can-graduate' : 'cannot-graduate'
-
-		const avatar = props.showAvatar ? (
-			<AvatarLetter
-				className={cx('student-letter', className)}
-				value={props.name}
-			/>
-		) : null
 
 		const name = (
 			<ContentEditable
@@ -134,7 +137,12 @@ export class Header extends React.PureComponent<HeaderProps> {
 
 		return (
 			<header className="student-summary--header">
-				{avatar}
+				{props.showAvatar && (
+					<AvatarLetter
+						className={cx('student-letter', className)}
+						value={props.name}
+					/>
+				)}
 
 				<div className="intro">
 					{props.helloMessage}
@@ -149,19 +157,18 @@ type FooterProps = {
 	canGraduate: boolean,
 }
 
-export class Footer extends React.PureComponent<FooterProps> {
-	goodGraduationMessage =
-		"It looks like you'll make it! Just follow the plan, and go over my output with your advisor a few times."
+const goodGraduationMessage =
+	"It looks like you'll make it! Just follow the plan, and go over my output with your advisor a few times."
+const badGraduationMessage =
+	"You haven't planned everything out yet. Ask your advisor if you need help fitting everything in."
 
-	badGraduationMessage =
-		"You haven't planned everything out yet. Ask your advisor if you need help fitting everything in."
-
+export class Footer extends React.Component<FooterProps> {
 	render() {
 		const msg = this.props.canGraduate
-			? this.goodGraduationMessage
-			: this.badGraduationMessage
+			? goodGraduationMessage
+			: badGraduationMessage
 
-		return <div className="paragraph graduation-message">{msg}</div>
+		return <p className="paragraph graduation-message">{msg}</p>
 	}
 }
 
@@ -172,7 +179,7 @@ type DateSummaryProps = {
 	graduation: number,
 }
 
-export class DateSummary extends React.PureComponent<DateSummaryProps> {
+export class DateSummary extends React.Component<DateSummaryProps> {
 	render() {
 		const props = this.props
 
@@ -207,7 +214,7 @@ type DegreeSummaryProps = {
 	studies: Array<AreaQuery>,
 }
 
-export class DegreeSummary extends React.PureComponent<DegreeSummaryProps> {
+export class DegreeSummary extends React.Component<DegreeSummaryProps> {
 	render() {
 		const grouped: {
 			[key: string]: {+type: string, +name: string}[],
@@ -265,7 +272,7 @@ type CreditSummaryProps = {
 	neededCredits: number,
 }
 
-export class CreditSummary extends React.PureComponent<CreditSummaryProps> {
+export class CreditSummary extends React.Component<CreditSummaryProps> {
 	render() {
 		const {currentCredits, neededCredits} = this.props
 		const enoughCredits = currentCredits >= neededCredits

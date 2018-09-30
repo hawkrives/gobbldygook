@@ -1,14 +1,10 @@
-@import '../../styles/variables.scss';
-@import '../../styles/mixins.scss';
-
 .student-summary {
-	@include card();
-
 	text-align: center;
 	hyphens: none;
 	font-variant-numeric: oldstyle-nums tabular-nums;
 	text-shadow: 0 1px rgba(white, 0.5);
 	font-size: 0.85em;
+	padding: calc(var(--block-edge-padding) * 2);
 
 	&.cannot-graduate .graduation-message {
 		color: var(--deep-orange-500);
@@ -25,16 +21,12 @@
 		}
 	}
 
-	.content {
-		padding: $block-edge-padding * 2;
+	.paragraph {
+		margin: 0;
+	}
 
-		.paragraph {
-			margin: 0;
-		}
-
-		.paragraph + .paragraph {
-			margin-top: $block-edge-padding * 2;
-		}
+	.paragraph + .paragraph {
+		margin-top: calc(var(--block-edge-padding) * 2);
 	}
 
 	.student-summary--header {
