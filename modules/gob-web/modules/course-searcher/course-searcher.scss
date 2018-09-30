@@ -1,23 +1,6 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixins.scss';
 
-.course-search {
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-
-	// for AutoSizer (react-virtualized):
-	// > If the parent has style `position: static` (default value), it changes to
-	// > position: relative. It also injects a sibling div for size measuring.
-	position: relative;
-
-	.course-group {
-		@include card();
-		padding: 0.5em;
-		margin-top: 1em;
-	}
-}
-
 .search-box {
 	border: 0;
 	border-bottom: $material-divider;
@@ -55,12 +38,23 @@
 }
 
 .sidebar-heading {
-	@include card;
-	padding: 0;
 	margin-bottom: 0.5em;
+
+	display: grid;
+	grid-template-columns: 1fr max-content;
+	grid-template-areas:
+		"title close"
+		"search search"
+		"submit submit";
 }
 
-.submit-search-query {
+.sidebar-heading .search-box {
+	grid-area: search;
+}
+
+.sidebar-heading .submit-search-query {
+	grid-area: submit;
+
 	font-size: 0.8em;
 	padding: 1em 1em;
 	flex: 1;
@@ -69,26 +63,19 @@
 		flex: 1;
 	}
 }
-.submit-search-query:hover,
-.submit-search-query:focus {
+.sidebar-heading .submit-search-query:hover,
+.sidebar-heading .submit-search-query:focus {
 	color: $green;
 	background-color: $green-50;
 }
-.submit-search-query:disabled {
+.sidebar-heading .submit-search-query:disabled {
 	color: $gray;
 	background-color: white;
 }
 
-.sidebar-heading .row {
-	position: relative;
-
-	display: flex;
-	flex-flow: row nowrap;
-	align-items: stretch;
-	justify-content: stretch;
-}
-
 .sidebar-heading h2 {
+	grid-area: title;
+
 	font-size: 0.8em;
 	font-weight: 500;
 	margin: 0;
@@ -100,13 +87,13 @@
 }
 
 .close-sidebar {
+	grid-area: close;
+
 	font-size: 0.8em;
 	padding: 0.4em 1em;
-	flex: 0 1 auto;
 }
 
 .search-filters {
-	border-top: $material-divider;
 	padding: 0.35em 0.85em;
 
 	display: grid;

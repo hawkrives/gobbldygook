@@ -1,5 +1,7 @@
 // @flow
 
+import values from 'lodash'
+
 export const SORT_BY = {
 	year: 'Year',
 	title: 'Title',
@@ -19,7 +21,5 @@ export const GROUP_BY = {
 	none: 'None',
 }
 
-export const sortByOptions: Array<string> = (Object.values(SORT_BY): Array<any>)
-export const groupByOptions: Array<string> = (Object.values(GROUP_BY): Array<
-	any,
->)
+export const sortByOptions: Array<string> = values(SORT_BY)
+export const groupByOptions: Array<string> = values(GROUP_BY)

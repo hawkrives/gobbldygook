@@ -1,4 +1,5 @@
 // @flow
+
 import * as React from 'react'
 import {VariableSizeList as List} from 'react-window'
 import AutoSizer from 'react-virtualized-auto-sizer'
@@ -37,8 +38,13 @@ const TermList = styled(List)`
 	list-style: none;
 `
 
-const ResultsListSizer = styled('div')`
+const ResultsListSizer = styled.div`
 	flex: 1;
+
+	// for AutoSizer (react-virtualized):
+	// > If the parent has style 'position: static' (default value), it changes to
+	// > position: relative. It also injects a sibling div for size measuring.
+	position: relative;
 
 	background-color: white;
 	border-radius: var(--base-border-radius);
@@ -48,7 +54,7 @@ const ResultsListSizer = styled('div')`
 	overflow: hidden;
 `
 
-const CourseGroupTitle = styled('h3')`
+const CourseGroupTitle = styled.h3`
 	margin: 0;
 	font-size: 1em;
 	font-weight: 400;
