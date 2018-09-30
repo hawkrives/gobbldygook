@@ -6,10 +6,8 @@ import maxBy from 'lodash/maxBy'
 import find from 'lodash/find'
 import kebabCase from 'lodash/kebabCase'
 import yaml from 'js-yaml'
-import debug from 'debug'
 import {pluralizeArea} from '@gob/examine-student'
 import {status, text} from '@gob/lib'
-const log = debug('worker:load-area')
 
 function resolveArea(areas, query) {
 	if (!('revision' in query)) {
@@ -87,7 +85,7 @@ function loadAreaFromDatabase(areaQuery: AreaQueryType) {
 			return {...areaQuery, _area: enhanceHanson(result)}
 		})
 		.catch(err => {
-			log(err) // we can probably remove this in the future
+			console.warn(err) // we can probably remove this in the future
 			const q = JSON.stringify(dbQuery)
 			return {
 				...areaQuery,
@@ -111,7 +109,6 @@ export default function getArea(
 			(revision === 'latest' ? true : a.revision === revision),
 	)
 	if (cachedArea) {
-		log('loadArea used cached area')
 		return cachedArea
 	}
 
@@ -135,7 +132,6 @@ export default function getArea(
 	promiseCache[id] = getAreaFrom({name, type, revision, source, isCustom})
 
 	return promiseCache[id].then(area => {
-		// console.log(area)
 		delete promiseCache[id]
 		return area
 	})
