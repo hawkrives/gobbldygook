@@ -18,17 +18,18 @@
 }
 
 .manual .areas {
-	.row {
-		display: flex;
-		flex-flow: row nowrap;
-		align-items: center;
-		margin-bottom: 0.5em;
-	}
+	display: grid;
+	grid-template-columns: max-content 1fr;
+	grid-column-gap: 1em;
+	grid-row-gap: 1em;
+	align-items: center;
+
 	label {
-		margin-right: 1em;
+		grid-column: 1;
+		text-align: right;
 	}
-	.Select {
-		flex: 1;
+	.react-select {
+		grid-column: 2;
 	}
 }
 

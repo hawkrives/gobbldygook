@@ -1,28 +1,38 @@
+// @flow
+
 import React from 'react'
-import PropTypes from 'prop-types'
 import {FlatButton} from '../../components/button'
 import cx from 'classnames'
 import Autosize from 'react-input-autosize'
-import Select from 'react-select'
 import {connect} from 'react-redux'
-import map from 'lodash/map'
-import filter from 'lodash/filter'
-import 'react-select/dist/react-select.css'
 import {initStudent} from '../../redux/students/actions/init-student'
-import {filterAreaList} from '@gob/object-student'
+import {AreaPicker} from '../../components/area-of-study/picker'
+import type {AreaOfStudyType} from '@gob/object-student'
 
 import './method-manual.scss'
 
 let now = new Date()
 
-class ManualCreationScreen extends React.Component {
-	static propTypes = {
-		areas: PropTypes.array.isRequired, // redux
-		areasLoading: PropTypes.bool.isRequired, // redux
-		dispatch: PropTypes.func.isRequired, // redux
-		navigate: PropTypes.func.isRequired, // react-router
-	}
+type Props = {
+	dispatch: Function, // redux
+	navigate: string => mixed, // react-router
+}
 
+type State = {
+	error: string,
+	name: string,
+	matriculation: number,
+	matriculationIsValid: boolean,
+	graduation: number,
+	graduationIsValid: boolean,
+	degree: Array<AreaOfStudyType>,
+	major: Array<AreaOfStudyType>,
+	concentration: Array<AreaOfStudyType>,
+	emphasis: Array<AreaOfStudyType>,
+	submitted: boolean,
+}
+
+class ManualCreationScreen extends React.Component<Props, State> {
 	state = {
 		error: '',
 		name: 'Black Widow',
@@ -34,22 +44,7 @@ class ManualCreationScreen extends React.Component {
 		major: [],
 		concentration: [],
 		emphasis: [],
-		sumitted: false,
-	}
-
-	getAreaOptions = type => {
-		let {graduation} = this.state
-
-		let filtered = filterAreaList(this.props.areas, {graduation})
-		filtered = filter(filtered, {type})
-		let options = map(filtered, ({name, type, revision}) => ({
-			name,
-			type,
-			revision,
-			value: `${name} (${revision})`,
-			label: `${name} (${revision})`,
-		}))
-		return options
+		submitted: false,
 	}
 
 	handleAreaChange = type => values => {
@@ -62,7 +57,7 @@ class ManualCreationScreen extends React.Component {
 
 	handleMatriculationChange = ev => {
 		let val = parseInt(ev.target.value)
-		let isValid = val && ev.target.value.length === 4
+		let isValid = Boolean(val && ev.target.value.length === 4)
 		this.setState(
 			() => ({
 				matriculation: val,
@@ -74,7 +69,7 @@ class ManualCreationScreen extends React.Component {
 
 	handleGraduationChange = ev => {
 		let val = parseInt(ev.target.value)
-		let isValid = val && ev.target.value.length === 4
+		let isValid = Boolean(val && ev.target.value.length === 4)
 		this.setState(
 			() => ({
 				graduation: val,
@@ -98,17 +93,17 @@ class ManualCreationScreen extends React.Component {
 	}
 
 	onCreateStudent = () => {
-		this.setState({submitted: true})
+		this.setState(() => ({submitted: true}))
 
-		let studies = [].concat(
-			this.state.degree,
-			this.state.major,
-			this.state.concentration,
-			this.state.emphasis,
-		)
+		let studies = [
+			...this.state.degree,
+			...this.state.major,
+			...this.state.concentration,
+			...this.state.emphasis,
+		]
 
 		// pick out only the values that we want
-		studies = map(studies, ({name, revision, type}) => ({
+		studies = studies.map(({name, revision, type}) => ({
 			name,
 			revision,
 			type,
@@ -161,9 +156,9 @@ class ManualCreationScreen extends React.Component {
 					<h1>Manually Create</h1>
 				</header>
 
-				{this.state.error ? (
+				{this.state.error && (
 					<pre className="errors">{this.state.error}</pre>
-				) : null}
+				)}
 
 				<div className="intro">
 					Hi! My name is {nameEl}.<br />I matriculated in{' '}
@@ -171,50 +166,34 @@ class ManualCreationScreen extends React.Component {
 				</div>
 
 				<div className="areas">
-					<div className="row">
-						<label htmlFor="degreeSelector">Degrees:</label>
-						<Select
-							multi
-							inputProps={{id: 'degreeSelector'}}
-							value={this.state.degree}
-							options={this.getAreaOptions('degree')}
-							onChange={this.handleAreaChange('degree')}
-						/>
-					</div>
-					<div className="row">
-						<label htmlFor="majorSelector">Majors:</label>
-						<Select
-							multi
-							inputProps={{id: 'majorSelector'}}
-							value={this.state.major}
-							options={this.getAreaOptions('major')}
-							onChange={this.handleAreaChange('major')}
-						/>
-					</div>
-					<div className="row">
-						<label htmlFor="concentrationSelector">
-							Concentrations:
-						</label>
-						<Select
-							multi
-							inputProps={{id: 'concentrationSelector'}}
-							value={this.state.concentration}
-							options={this.getAreaOptions('concentration')}
-							onChange={this.handleAreaChange('concentration')}
-						/>
-					</div>
-					<div className="row">
-						<label htmlFor="emphasisSelector">
-							Areas of Emphasis:
-						</label>
-						<Select
-							multi
-							inputProps={{id: 'emphasisSelector'}}
-							value={this.state.emphasis}
-							options={this.getAreaOptions('emphasis')}
-							onChange={this.handleAreaChange('emphasis')}
-						/>
-					</div>
+					<AreaPicker
+						label="Degrees"
+						type="degree"
+						selections={this.state.degree}
+						onChange={this.handleAreaChange('degree')}
+						availableThrough={this.state.graduation}
+					/>
+					<AreaPicker
+						label="Majors"
+						type="major"
+						selections={this.state.major}
+						onChange={this.handleAreaChange('major')}
+						availableThrough={this.state.graduation}
+					/>
+					<AreaPicker
+						label="Concentrations"
+						type="concentration"
+						selections={this.state.concentration}
+						onChange={this.handleAreaChange('concentration')}
+						availableThrough={this.state.graduation}
+					/>
+					<AreaPicker
+						label="Areas of Emphasis"
+						type="emphasis"
+						selections={this.state.emphasis}
+						onChange={this.handleAreaChange('emphasis')}
+						availableThrough={this.state.graduation}
+					/>
 				</div>
 
 				<div className="actions">
@@ -232,14 +211,9 @@ class ManualCreationScreen extends React.Component {
 	}
 }
 
-let mapState = state => ({
-	areas: state.areas.data,
-	areasLoading: state.areas.isLoading,
-})
-
 let mapDispatch = dispatch => ({dispatch})
 
 export default connect(
-	mapState,
+	undefined,
 	mapDispatch,
 )(ManualCreationScreen)
