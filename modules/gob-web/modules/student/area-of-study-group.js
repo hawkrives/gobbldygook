@@ -8,7 +8,7 @@ import capitalize from 'lodash/capitalize'
 import type {AreaOfStudyTypeEnum} from '@gob/examine-student'
 import {addArea, removeArea} from '../../redux/students/actions/areas'
 import AreaOfStudy from '../area-of-study'
-import AreaPicker from './area-picker'
+import {AreaPicker} from '../../components/area-of-study/picker'
 import {FlatButton} from '../../components/button'
 import type {HydratedStudentType, AreaOfStudyType} from '@gob/object-student'
 
@@ -17,7 +17,6 @@ import './area-of-study-group.scss'
 type Student = HydratedStudentType
 type Props = {
 	addArea: (string, AreaOfStudyType) => any,
-	allAreasOfType: Array<AreaOfStudyType>,
 	areas: Array<AreaOfStudyType>,
 	onEndAddArea: (string, Event) => any,
 	onInitiateAddArea: (string, Event) => any,
@@ -29,15 +28,25 @@ type Props = {
 
 class AreaOfStudyGroup extends React.PureComponent<Props> {
 	onAddArea = (area: AreaOfStudy, ev: Event) => {
-		ev.stopPropagation()
 		ev.preventDefault()
 		this.props.addArea(this.props.student.id, area)
 	}
 
-	onRemoveArea = (areaQuery: any, ev: Event) => {
-		ev.stopPropagation()
+	onRemoveArea = (areaQuery: AreaOfStudy, ev: Event) => {
 		ev.preventDefault()
 		this.props.removeArea(this.props.student.id, areaQuery)
+	}
+
+	handleChage = (value: Array<AreaOfStudyType>, action: any) => {
+		if (action.action === 'remove-value') {
+			let {name, type, revision} = action.removedValue
+			let area = {name, type, revision}
+			this.props.removeArea(this.props.student.id, area)
+		} else if (action.action === 'select-option') {
+			let {name, type, revision} = action.option
+			let area = {name, type, revision}
+			this.props.addArea(this.props.student.id, area)
+		}
 	}
 
 	render() {
@@ -61,11 +70,14 @@ class AreaOfStudyGroup extends React.PureComponent<Props> {
 
 				{showAreaPicker ? (
 					<AreaPicker
-						areaList={props.allAreasOfType}
-						currentAreas={props.areas}
-						onAddArea={this.onAddArea}
-						studentGraduation={props.student.graduation}
 						type={props.type}
+						onChange={this.handleChage}
+						selections={props.areas.map(a => ({
+							label: `${a.name}`,
+							value: `${a.name} (${a.revision})`,
+							...a,
+						}))}
+						availableThrough={props.student.graduation}
 					/>
 				) : null}
 

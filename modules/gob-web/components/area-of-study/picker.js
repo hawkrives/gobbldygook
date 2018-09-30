@@ -9,7 +9,13 @@ import {AreaOfStudyProvider} from './provider'
 import {filterAreaList, type AreaOfStudyType} from '@gob/object-student'
 
 type Props = {
-	selections: Array<AreaOfStudyType>,
+	selections: Array<{
+		name: string,
+		type: string,
+		revision: string,
+		label: string,
+		value: string,
+	}>,
 	type: string,
 	label?: string,
 	onChange: (Array<AreaOfStudyType>) => mixed,
