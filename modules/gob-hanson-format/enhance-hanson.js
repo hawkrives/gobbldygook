@@ -102,11 +102,11 @@ export function enhanceHanson(data: HansonFile): ParsedHansonFile {
 	let {name, type, revision, dateAdded, 'available through': available} = data
 
 	let returnValue: ParsedHansonFile = {
+		...requirements,
 		$type: 'requirement',
 		name,
 		type,
 		revision,
-		requirements,
 		slug,
 		result,
 	}
@@ -179,12 +179,14 @@ function enhanceRequirement(
 		  })
 		: null
 
-	let parsedResult = parseWithPeg(result, {
-		abbreviations,
-		titles,
-		variables,
-		startRule: 'Result',
-	})
+	let parsedResult = result
+		? parseWithPeg(result, {
+				abbreviations,
+				titles,
+				variables,
+				startRule: 'Result',
+		  })
+		: null
 
 	let enhanced = toPairs(requirements).map(
 		([key: string, value: HansonRequirement]) => {
@@ -196,10 +198,10 @@ function enhanceRequirement(
 		},
 	)
 
-	let returnedValue: ParsedHansonRequirement = {
-		...fromPairs(enhanced),
-		$type: 'requirement',
-		result: parsedResult,
+	let returnedValue: ParsedHansonRequirement = {...fromPairs(enhanced), $type: 'requirement'}
+
+	if (parsedResult) {
+		returnedValue.result = parsedResult
 	}
 
 	if (parsedFilter) {
@@ -213,7 +215,7 @@ function assertString(value: mixed) {
 	return `\`${String(value)}\` should be \`string\`, not \`${typeof value}\``
 }
 
-function extractRequirementNames(data: Object) {
+function extractRequirementNames(data: {}) {
 	// Create the lists of requirement titles and abbreviations for the parser.
 	// Because we allow both full titles ("Biblical Studies") and shorthand
 	// abbreviations ("BTS-B") all glommed together into one string ("Biblical
