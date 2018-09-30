@@ -14,7 +14,7 @@ import {encodeStudent} from '@gob/object-student'
 
 type Props = {
 	navigate: string => mixed,
-	student?: HydratedStudentType,
+	student: HydratedStudentType,
 	queryString?: string,
 }
 
