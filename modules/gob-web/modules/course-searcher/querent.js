@@ -31,7 +31,7 @@ type State = {|
 
 const memSortAndGroup = mem(sortAndGroup, {maxAge: 10000})
 
-export class Querier extends React.Component<Props, State> {
+export class Querent extends React.Component<Props, State> {
 	state = {
 		error: '',
 		inProgress: false,
@@ -73,7 +73,6 @@ export class Querier extends React.Component<Props, State> {
 		this.setState(() => ({inProgress: true}))
 
 		try {
-			console.log(query, {term})
 			const payload = await queryCourseDatabase(query, {term})
 			console.info(`query took ${prettyMs(present() - startQueryTime)}.`)
 

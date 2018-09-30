@@ -14,7 +14,7 @@ import {
 	type GROUP_BY_KEY,
 } from './constants'
 import {CourseResultsList} from './results-list'
-import {Querier} from './querier'
+import {Querent} from './querent'
 
 import './searcher.scss'
 
@@ -107,7 +107,7 @@ export class CourseSearcher extends React.Component<Props, State> {
 					/>
 				</Card>
 
-				<Querier
+				<Querent
 					key={`${query}-${String(term)}-${groupBy}-${sortBy}`}
 					query={query}
 					groupBy={groupBy}
@@ -147,7 +147,7 @@ export class CourseSearcher extends React.Component<Props, State> {
 							/>
 						)
 					}}
-				</Querier>
+				</Querent>
 			</>
 		)
 	}
