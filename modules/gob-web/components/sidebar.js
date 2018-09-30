@@ -56,7 +56,7 @@ function Sidebar(props: Props) {
 						{iosPeopleOutline}
 					</Icon>
 				</ToolbarButton>
-				<ToolbarButton as={Link} to="?search" title="Search">
+				<ToolbarButton as={Link} to="./search" title="Search">
 					<Icon block large>
 						{iosSearch}
 					</Icon>

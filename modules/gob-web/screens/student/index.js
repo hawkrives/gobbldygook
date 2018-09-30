@@ -33,6 +33,13 @@ const StudentSummary = Loadable({
 	loading: LoadingComponent,
 })
 
+const StatusSidebar = ({student}) => (
+	<>
+		<StudentSummary student={student.present} />
+		<AreaOfStudySidebar student={student.present} />
+	</>
+)
+
 const CourseTable = Loadable({
 	loader: () => import('../../modules/course-table'),
 	loading: LoadingComponent,
@@ -50,7 +57,7 @@ const SemesterDetail = Loadable({
 
 export default function StudentIndex(props: {
 	studentId: string,
-	location: Object,
+	location: {},
 	navigate: string => mixed,
 }) {
 	let params = new URLSearchParams(location.search)
@@ -60,23 +67,21 @@ export default function StudentIndex(props: {
 			{({student}) => (
 				<>
 					<Sidebar student={student}>
-						{params.has('search') ? (
+						<Router>
+							<StatusSidebar default student={student} />
+
 							<SearchSidebar
+								path="search"
 								term={params.get('term')}
 								studentId={student.present.id}
-								location={location}
 								navigate={props.navigate}
 							/>
-						) : (
-							<>
-								<StudentSummary student={student.present} />
-								<AreaOfStudySidebar student={student.present} />
-							</>
-						)}
+						</Router>
 					</Sidebar>
 
 					<Router>
-						<CourseTable student={student.present} default />
+						<CourseTable default student={student.present} />
+
 						<SemesterDetail
 							student={student.present}
 							path="term/:term"

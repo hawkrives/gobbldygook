@@ -85,7 +85,7 @@ class App extends React.Component<{}> {
 					<StudentPicker path="/" />
 					<Degubber path="/degub" />
 					<AreaEditor path="/areas" />
-					<Student path="/student/:studentId" />
+					<Student path="/student/:studentId/*" />
 					<CreateStudent path="/create/*" />
 				</Router>
 			</div>
