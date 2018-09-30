@@ -4,16 +4,15 @@ import React from 'react'
 
 import Modal from '../../components/modal'
 import {CourseSearcher} from '../../modules/course-searcher'
-import {createGlobalStyle} from 'styled-components'
+import styled from 'styled-components'
 
-let ModalStyle = createGlobalStyle`
-	.modal--content .course-search {
-		width: 100vw;
-		max-width: 40em;
+let StyledModal = styled(Modal)`
+	width: 100vw;
+	max-width: 40em;
+	min-width: 320px;
 
-		.course-search--results_sizer {
-			min-height: 250px;
-		}
+	.course-search--results_sizer {
+		min-height: 250px;
 	}
 `
 
@@ -25,11 +24,8 @@ export default function CourseSearcherOverlay(props: Props) {
 	const boundCloseModal = () => props.navigate('../')
 
 	return (
-		<>
-			<ModalStyle />
-			<Modal onClose={boundCloseModal} contentLabel="Search">
-				<CourseSearcher onCloseSearcher={boundCloseModal} />
-			</Modal>
-		</>
+		<StyledModal onClose={boundCloseModal} contentLabel="Search">
+			<CourseSearcher onCloseSearcher={boundCloseModal} />
+		</StyledModal>
 	)
 }
