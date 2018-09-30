@@ -6,8 +6,7 @@ import cx from 'classnames'
 import Autosize from 'react-input-autosize'
 import {connect} from 'react-redux'
 import {initStudent} from '../../redux/students/actions/init-student'
-import {AreaPicker} from '../../components/area-of-study/picker'
-import type {AreaOfStudyType} from '@gob/object-student'
+import {AreaPicker, type Selection} from '../../components/area-of-study/picker'
 
 import './method-manual.scss'
 
@@ -25,10 +24,10 @@ type State = {
 	matriculationIsValid: boolean,
 	graduation: number,
 	graduationIsValid: boolean,
-	degree: Array<AreaOfStudyType>,
-	major: Array<AreaOfStudyType>,
-	concentration: Array<AreaOfStudyType>,
-	emphasis: Array<AreaOfStudyType>,
+	degrees: Array<Selection>,
+	majors: Array<Selection>,
+	concentrations: Array<Selection>,
+	emphases: Array<Selection>,
 	submitted: boolean,
 }
 
@@ -40,10 +39,10 @@ class ManualCreationScreen extends React.Component<Props, State> {
 		matriculationIsValid: true,
 		graduation: now.getFullYear() + 1,
 		graduationIsValid: true,
-		degree: [],
-		major: [],
-		concentration: [],
-		emphasis: [],
+		degrees: [],
+		majors: [],
+		concentrations: [],
+		emphases: [],
 		submitted: false,
 	}
 
@@ -96,10 +95,10 @@ class ManualCreationScreen extends React.Component<Props, State> {
 		this.setState(() => ({submitted: true}))
 
 		let studies = [
-			...this.state.degree,
-			...this.state.major,
-			...this.state.concentration,
-			...this.state.emphasis,
+			...this.state.degrees,
+			...this.state.majors,
+			...this.state.concentrations,
+			...this.state.emphases,
 		]
 
 		// pick out only the values that we want
@@ -169,29 +168,29 @@ class ManualCreationScreen extends React.Component<Props, State> {
 					<AreaPicker
 						label="Degrees"
 						type="degree"
-						selections={this.state.degree}
-						onChange={this.handleAreaChange('degree')}
+						selections={this.state.degrees}
+						onChange={values => this.setState(() => ({degrees: values}))}
 						availableThrough={this.state.graduation}
 					/>
 					<AreaPicker
 						label="Majors"
 						type="major"
-						selections={this.state.major}
-						onChange={this.handleAreaChange('major')}
+						selections={this.state.majors}
+						onChange={values => this.setState(() => ({majors: values}))}
 						availableThrough={this.state.graduation}
 					/>
 					<AreaPicker
 						label="Concentrations"
 						type="concentration"
-						selections={this.state.concentration}
-						onChange={this.handleAreaChange('concentration')}
+						selections={this.state.concentrations}
+						onChange={values => this.setState(() => ({concentrations: values}))}
 						availableThrough={this.state.graduation}
 					/>
 					<AreaPicker
 						label="Areas of Emphasis"
 						type="emphasis"
-						selections={this.state.emphasis}
-						onChange={this.handleAreaChange('emphasis')}
+						selections={this.state.emphases}
+						onChange={values => this.setState(() => ({emphases: values}))}
 						availableThrough={this.state.graduation}
 					/>
 				</div>

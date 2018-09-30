@@ -8,7 +8,7 @@ import capitalize from 'lodash/capitalize'
 import type {AreaOfStudyTypeEnum} from '@gob/examine-student'
 import {addArea, removeArea} from '../../redux/students/actions/areas'
 import AreaOfStudy from '../area-of-study'
-import {AreaPicker} from '../../components/area-of-study/picker'
+import {AreaPicker, type Selection} from '../../components/area-of-study/picker'
 import {FlatButton} from '../../components/button'
 import type {HydratedStudentType, AreaOfStudyType} from '@gob/object-student'
 
@@ -37,7 +37,7 @@ class AreaOfStudyGroup extends React.PureComponent<Props> {
 		this.props.removeArea(this.props.student.id, areaQuery)
 	}
 
-	handleChage = (value: Array<AreaOfStudyType>, action: any) => {
+	handleChange = (value: Array<Selection>, action: any) => {
 		if (action.action === 'remove-value') {
 			let {name, type, revision} = action.removedValue
 			let area = {name, type, revision}
@@ -71,7 +71,7 @@ class AreaOfStudyGroup extends React.PureComponent<Props> {
 				{showAreaPicker ? (
 					<AreaPicker
 						type={props.type}
-						onChange={this.handleChage}
+						onChange={this.handleChange}
 						selections={props.areas.map(a => ({
 							label: `${a.name}`,
 							value: `${a.name} (${a.revision})`,
