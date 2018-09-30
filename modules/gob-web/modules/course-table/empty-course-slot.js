@@ -3,14 +3,14 @@
 import React from 'react'
 import FakeCourse from './fake-course'
 import styled from 'styled-components'
-import * as theme from '../../theme'
 
 const Course = styled(FakeCourse)`
-	color: ${theme.gray500};
+	color: var(--gray-500);
 	user-select: none;
 
-	* {
+	&:hover {
 		cursor: default;
+		background-color: white !important;
 	}
 `
 
