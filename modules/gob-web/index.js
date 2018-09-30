@@ -29,25 +29,29 @@ import App from './app'
 
 // Create the redux store
 import configureStore from './redux'
-import ReduxWrapper from './redux-wrapper'
+import {Provider} from 'react-redux'
+import Notifications from './modules/notifications'
 const store = configureStore()
 
 // for debugging
 global._dispatch = store.dispatch
 global._store = store
 
-let renderFunc = Root => {
+let renderFunc = chosenStore => {
 	let renderEl = document.getElementById('gobbldygook')
 	if (!renderEl) {
 		return
 	}
 
 	render(
-		<Root store={store}>
-			<App />
-		</Root>,
+		<Provider store={chosenStore}>
+			<>
+				<App />
+				<Notifications />
+			</>
+		</Provider>,
 		renderEl,
 	)
 }
 
-renderFunc(ReduxWrapper)
+renderFunc(store)
