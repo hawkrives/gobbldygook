@@ -1,9 +1,7 @@
 @import '../../styles/variables.scss';
-@import '../../styles/mixins.scss';
 
 .search-box {
 	border: 0;
-	border-bottom: $material-divider;
 
 	flex: 1;
 	box-sizing: inherit;
@@ -22,10 +20,6 @@
 	&:focus {
 		background-color: $blue-50;
 		color: $blue-900;
-
-		&::-webkit-input-placeholder {
-			color: desaturate($light-blue-300, 75%);
-		}
 	}
 }
 
@@ -44,8 +38,7 @@
 	grid-template-columns: 1fr max-content;
 	grid-template-areas:
 		"title close"
-		"search search"
-		"submit submit";
+		"search search";
 }
 
 .sidebar-heading .search-box {
@@ -102,6 +95,8 @@
 	grid-column-gap: 0.35em;
 	grid-row-gap: 0.35em;
 	align-items: center;
+
+	margin-bottom: 0.5em;
 }
 
 .search-filters label {
@@ -112,4 +107,15 @@
 
 .search-filters select {
 	font-size: 0.9em;
+}
+
+.course-search--results_sizer {
+	min-height: 300px;
+}
+
+.course-results--notice {
+	text-align: center;
+	color: var(--gray-500);
+	font-size: 0.9em;
+	padding: 1em;
 }

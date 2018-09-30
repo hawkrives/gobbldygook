@@ -3,7 +3,7 @@
 import React from 'react'
 
 import Modal from '../../components/modal'
-import CourseSearcher from '../../modules/course-searcher/course-searcher-container'
+import {CourseSearcher} from '../../modules/course-searcher'
 import {createGlobalStyle} from 'styled-components'
 
 let ModalStyle = createGlobalStyle`
@@ -11,7 +11,7 @@ let ModalStyle = createGlobalStyle`
 		width: 100vw;
 		max-width: 40em;
 
-		& > div {
+		.course-search--results_sizer {
 			min-height: 250px;
 		}
 	}
@@ -28,7 +28,7 @@ export default function CourseSearcherOverlay(props: Props) {
 		<>
 			<ModalStyle />
 			<Modal onClose={boundCloseModal} contentLabel="Search">
-				<CourseSearcher closeSearcher={boundCloseModal} />
+				<CourseSearcher onCloseSearcher={boundCloseModal} />
 			</Modal>
 		</>
 	)

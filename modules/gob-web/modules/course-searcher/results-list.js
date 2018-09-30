@@ -11,24 +11,24 @@ import {
 } from '@gob/school-st-olaf-college'
 import styled from 'styled-components'
 import {type Course as CourseType} from '@gob/types'
+import type {GROUP_BY_KEY} from './constants'
 
-const GROUP_BY_TO_TITLE = {
-	'Day of Week': days => days,
-	Department: depts => depts,
-	GenEd: gereqs => gereqs,
-	Semester: sem => semesterName(sem),
-	Term: term => toPrettyTerm(term),
-	'Time of Day': times => times,
-	Year: year => expandYear(year),
-	None: () => '',
+const GROUP_BY_TO_TITLE: {[key: GROUP_BY_KEY]: (string) => string} = {
+	day: days => days,
+	department: depts => depts,
+	gened: gereqs => gereqs,
+	semester: sem => semesterName(sem),
+	term: term => toPrettyTerm(term),
+	time: times => times,
+	year: year => expandYear(year),
+	none: () => '',
 }
 
 type Results = Array<string | CourseType>
 
 type Props = {
-	groupBy: string,
+	groupedBy: GROUP_BY_KEY,
 	results: Results,
-	sortBy?: string,
 	studentId?: string,
 }
 
@@ -111,7 +111,7 @@ function getRowHeight(item: string | CourseType) {
 	return height + verticalPadding * 2
 }
 
-export default class CourseResultsList extends React.Component<Props> {
+export class CourseResultsList extends React.Component<Props> {
 	getRowHeight = (index: number) => {
 		let item = this.props.results[index]
 
@@ -127,7 +127,7 @@ export default class CourseResultsList extends React.Component<Props> {
 			return null
 		}
 
-		const title = GROUP_BY_TO_TITLE[this.props.groupBy](groupTitle)
+		const title = GROUP_BY_TO_TITLE[this.props.groupedBy](groupTitle)
 		return (
 			<CourseGroupTitle style={style} title={title}>
 				<span>{title}</span>
@@ -154,11 +154,10 @@ export default class CourseResultsList extends React.Component<Props> {
 
 	render() {
 		return (
-			<ResultsListSizer>
+			<ResultsListSizer className="course-search--results_sizer">
 				<AutoSizer>
 					{({height, width}) => (
 						<TermList
-							key={this.props.groupBy}
 							height={height}
 							itemCount={this.props.results.length}
 							itemSize={this.getRowHeight}
