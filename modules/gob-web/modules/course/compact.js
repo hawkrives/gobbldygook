@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import noop from 'lodash/noop'
-import styled, {css} from 'styled-components'
+import styled from 'styled-components'
 import * as theme from '../../theme'
 import {InlineList, InlineListItem} from '../../components/list'
 import CourseTitle from './course-title'
@@ -24,17 +24,14 @@ export const Container = styled.article`
 	}
 `
 
-const Row = css`
+export const Title = styled(CourseTitle)`
 	overflow: hidden;
 	line-height: 1.35;
 `
 
-export const Title = styled(CourseTitle)`
-	${Row};
-`
-
 export const SummaryRow = styled.div`
-	${Row};
+	overflow: hidden;
+	line-height: 1.35;
 
 	text-overflow: ellipsis;
 	white-space: nowrap;
