@@ -20,7 +20,6 @@ const courseStyles = css`
 
 const List = styled(PlainList)`
 	min-height: 30px;
-	padding-bottom: 0.25em;
 
 	&:focus {
 		outline: 0;
@@ -28,17 +27,19 @@ const List = styled(PlainList)`
 `
 
 const Item = styled(ListItem)`
-	&:last-child {
-		border-bottom: 0;
+	& + & {
+		border-top: solid 1px #eaeaea;
 	}
 `
 
 const Missing = styled(MissingCourse)`
 	${courseStyles};
 `
+
 const Course = styled(DraggableCourse)`
 	${courseStyles};
 `
+
 const Empty = styled(EmptyCourseSlot)`
 	${courseStyles};
 `
