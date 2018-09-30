@@ -10,32 +10,27 @@ import {Router} from '@reach/router'
 let NotFound = () => <h1>404 Not Found</h1>
 
 const WelcomePage = Loadable({
-	loader: () =>
-		import(/* webpackChunkName: 'screen.create.welcome' */ './welcome'),
+	loader: () => import('./welcome'),
 	loading: LoadingComponent,
 })
 
 const ImportPage = Loadable({
-	loader: () =>
-		import(/* webpackChunkName: 'screen.create.import' */ './method-import'),
+	loader: () => import('./method-import'),
 	loading: LoadingComponent,
 })
 
 const ManualPage = Loadable({
-	loader: () =>
-		import(/* webpackChunkName: 'screen.create.manual' */ './method-manual'),
+	loader: () => import('./method-manual'),
 	loading: LoadingComponent,
 })
 
 const DrivePage = Loadable({
-	loader: () =>
-		import(/* webpackChunkName: 'screen.create.drive' */ './method-drive'),
+	loader: () => import('./method-drive'),
 	loading: LoadingComponent,
 })
 
 const UploadPage = Loadable({
-	loader: () =>
-		import(/* webpackChunkName: 'screen.create.upload' */ './method-upload'),
+	loader: () => import('./method-upload'),
 	loading: LoadingComponent,
 })
 
