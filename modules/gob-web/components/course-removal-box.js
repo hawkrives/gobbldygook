@@ -1,13 +1,14 @@
 // @flow
 import * as React from 'react'
 import {DropTarget} from 'react-dnd'
-import debug from 'debug'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 import styled, {css} from 'styled-components'
-const log = debug('web:courses')
 import * as theme from '../theme'
 import {IDENT_COURSE} from '@gob/object-student'
 import {Icon} from './icon'
 import {iosTrashOutline} from '../icons/ionicons'
+import {removeCourse} from '../redux/students/actions/courses'
 
 const Box: any = styled.div`
 	padding: 5em 1em;
@@ -30,6 +31,7 @@ const Box: any = styled.div`
 			display: flex;
 			z-index: ${theme.zSidebar + 1};
 		`};
+
 	${props =>
 		props.isOver &&
 		css`
@@ -43,8 +45,10 @@ type Props = {
 	canDrop: boolean, // react-dnd
 	connectDropTarget: (React.Element<*>) => any, // react-dnd
 	isOver: boolean, // react-dnd
-	removeCourse: (string, number) => any, // studentId is embedded in the passed function
+	studentId: string,
+	removeCourse: (string, string, number) => any, // redux
 }
+
 function CourseRemovalBox(props: Props) {
 	return (
 		<Box
@@ -62,13 +66,12 @@ function CourseRemovalBox(props: Props) {
 
 // Implements the drag source contract.
 const removeCourseTarget = {
-	drop(props, monitor: any) {
+	drop(props: Props, monitor: any) {
 		const item = monitor.getItem()
 		const {clbid, fromScheduleId, isFromSchedule} = item
 		if (isFromSchedule) {
-			log('dropped course', item)
 			// the studentId is embedded in the passed function
-			props.removeCourse(fromScheduleId, clbid)
+			props.removeCourse(props.studentId, fromScheduleId, clbid)
 		}
 	},
 	canDrop(props, monitor: any) {
@@ -89,6 +92,10 @@ function collect(connect, monitor) {
 	}
 }
 
-export default DropTarget(IDENT_COURSE, removeCourseTarget, collect)(
-	CourseRemovalBox,
-)
+const mapDispatch = dispatch => bindActionCreators({removeCourse}, dispatch)
+
+// $FlowFixMe
+export default connect(
+	undefined,
+	mapDispatch,
+)(DropTarget(IDENT_COURSE, removeCourseTarget, collect)(CourseRemovalBox))

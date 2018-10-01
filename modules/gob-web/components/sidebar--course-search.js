@@ -2,15 +2,19 @@
 
 import React from 'react'
 import {CourseSearcher} from '../modules/course-searcher'
+import CourseRemovalBox from '../components/course-removal-box'
+import {ConnectedSidebarToolbar} from './sidebar'
+import type {HydratedStudentType} from '@gob/object-student'
+import type {Undoable} from '../types'
 
 type Props = {
 	term: ?string,
 	navigate: string => mixed,
-	studentId: string,
+	student: Undoable<HydratedStudentType>,
 }
 
-function CourseSearcherSidebar(props: Props) {
-	let {studentId, navigate} = props
+export function CourseSearcherSidebar(props: Props) {
+	let {student, navigate} = props
 
 	let boundCloseModal = () => {
 		navigate('../')
@@ -20,12 +24,14 @@ function CourseSearcherSidebar(props: Props) {
 	term = term ? parseInt(term, 10) : null
 
 	return (
-		<CourseSearcher
-			onCloseSearcher={boundCloseModal}
-			studentId={studentId}
-			term={term}
-		/>
+		<aside>
+			<ConnectedSidebarToolbar student={props.student} />
+			<CourseRemovalBox studentId={student.present.id} />
+			<CourseSearcher
+				onCloseSearcher={boundCloseModal}
+				studentId={student.present.id}
+				term={term}
+			/>
+		</aside>
 	)
 }
-
-export default CourseSearcherSidebar

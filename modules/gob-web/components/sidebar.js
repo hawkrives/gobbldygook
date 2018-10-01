@@ -7,9 +7,7 @@ import {bindActionCreators} from 'redux'
 import {Icon} from './icon'
 import {Toolbar, ToolbarButton} from './toolbar'
 import Separator from './separator'
-import CourseRemovalBox from './course-removal-box'
 import {undo, redo} from '../redux/students/actions/undo'
-import {removeCourse} from '../redux/students/actions/courses'
 import {
 	iosUndo,
 	iosUndoOutline,
@@ -18,17 +16,21 @@ import {
 	iosSearch,
 	iosPeopleOutline,
 	iosUploadOutline,
+	grid,
 } from '../icons/ionicons'
 import styled from 'styled-components'
 import type {HydratedStudentType} from '@gob/object-student'
 import type {Undoable} from '../types'
 
 type Props = {
-	children: React.Node,
 	redo: string => any,
 	removeCourse: Function,
 	student: Undoable<HydratedStudentType>,
 	undo: string => any,
+
+	search?: boolean,
+	share?: boolean,
+	backTo?: 'picker' | 'overview',
 }
 
 const StudentButtonsToolbar = styled(Toolbar)`
@@ -36,78 +38,85 @@ const StudentButtonsToolbar = styled(Toolbar)`
 	flex-shrink: 0;
 `
 
-const SidebarElement = styled.aside`
-	flex: 1;
-`
-
-function Sidebar(props: Props) {
-	const {undo, redo} = props
+export function SidebarToolbar(props: Props) {
+	const {undo, redo, search = true, share = true, backTo = 'picker'} = props
 
 	let student = props.student.present
 	let studentId = student.id
 	let canUndo = props.student.past.length > 0
 	let canRedo = props.student.future.length > 0
 
+	let toPicker = backTo === 'picker'
+	let toOverview = backTo === 'overview'
+
 	return (
-		<SidebarElement>
-			<StudentButtonsToolbar>
+		<StudentButtonsToolbar>
+			{toPicker ? (
 				<ToolbarButton as={Link} to="/" title="Students">
 					<Icon block large>
 						{iosPeopleOutline}
 					</Icon>
 				</ToolbarButton>
+			) : toOverview ? (
+				<ToolbarButton as={Link} to="../.." title="Courses">
+					<Icon block large>
+						{grid}
+					</Icon>
+				</ToolbarButton>
+			) : (
+				<div />
+			)}
+
+			<Separator type="spacer" />
+
+			{search ? (
 				<ToolbarButton as={Link} to="./search" title="Search">
 					<Icon block large>
 						{iosSearch}
 					</Icon>
 				</ToolbarButton>
+			) : (
+				<div />
+			)}
 
-				<Separator type="spacer" />
+			<ToolbarButton
+				title="Undo"
+				onClick={() => undo(studentId)}
+				disabled={!canUndo}
+			>
+				<Icon block large>
+					{!canUndo ? iosUndoOutline : iosUndo}
+				</Icon>
+			</ToolbarButton>
+			<ToolbarButton
+				title="Redo"
+				onClick={() => redo(studentId)}
+				disabled={!canRedo}
+			>
+				<Icon block large>
+					{!canRedo ? iosRedoOutline : iosRedo}
+				</Icon>
+			</ToolbarButton>
 
-				<ToolbarButton
-					title="Undo"
-					onClick={() => undo(studentId)}
-					disabled={!canUndo}
-				>
-					<Icon block large>
-						{!canUndo ? iosUndoOutline : iosUndo}
-					</Icon>
-				</ToolbarButton>
-				<ToolbarButton
-					title="Redo"
-					onClick={() => redo(studentId)}
-					disabled={!canRedo}
-				>
-					<Icon block large>
-						{!canRedo ? iosRedoOutline : iosRedo}
-					</Icon>
-				</ToolbarButton>
+			<Separator type="spacer" />
 
-				<Separator type="spacer" />
-
+			{share ? (
 				<ToolbarButton as={Link} to="?share" title="Share">
 					<Icon block large>
 						{iosUploadOutline}
 					</Icon>
 				</ToolbarButton>
-			</StudentButtonsToolbar>
-
-			<CourseRemovalBox
-				removeCourse={(scheduleId, clbid) =>
-					props.removeCourse(studentId, scheduleId, clbid)
-				}
-			/>
-
-			{props.children}
-		</SidebarElement>
+			) : (
+				<div />
+			)}
+		</StudentButtonsToolbar>
 	)
 }
 
-const mapDispatch = dispatch =>
-	bindActionCreators({undo, redo, removeCourse}, dispatch)
+const mapDispatch = dispatch => bindActionCreators({undo, redo}, dispatch)
 
 // $FlowFixMe
-export default connect(
+export const ConnectedSidebarToolbar = connect(
 	undefined,
 	mapDispatch,
-)(Sidebar)
+)(SidebarToolbar)

@@ -7,37 +7,31 @@ import {LoadingComponent} from '../../components/loading-comp'
 
 import Student from '../../modules/student'
 
-const Sidebar = Loadable({
-	loader: () => import('../../components/sidebar'),
-	loading: LoadingComponent,
-})
-
 const SearchSidebar = Loadable({
-	loader: () => import('../../components/sidebar--course-search'),
-	loading: LoadingComponent,
-})
-
-const AreaOfStudySidebar = Loadable({
 	loader: () =>
-		import('../../modules/student/area-of-study-sidebar').then(
-			mod => mod.AreaOfStudySidebar,
+		import('../../components/sidebar--course-search').then(
+			mod => mod.CourseSearcherSidebar,
 		),
 	loading: LoadingComponent,
 })
 
-const StudentSummary = Loadable({
-	loader: () =>
-		import('../../modules/student/connected-student-summary').then(
-			mod => mod.ConnectedStudentSummary,
-		),
-	loading: LoadingComponent,
-})
+import CourseRemovalBox from '../../components/course-removal-box'
+import {ConnectedSidebarToolbar} from '../../components/sidebar'
+import {AreaOfStudySidebar} from '../../modules/student/area-of-study-sidebar'
+import {ConnectedStudentSummary as StudentSummary} from '../../modules/student/connected-student-summary'
 
 const StatusSidebar = ({student}) => (
-	<>
+	<aside>
+		<ConnectedSidebarToolbar
+			backTo="picker"
+			search={true}
+			share={true}
+			student={student}
+		/>
+		<CourseRemovalBox studentId={student.id} />
 		<StudentSummary student={student.present} />
 		<AreaOfStudySidebar student={student.present} />
-	</>
+	</aside>
 )
 
 const CourseTable = Loadable({
@@ -55,6 +49,17 @@ const SemesterDetail = Loadable({
 	loading: LoadingComponent,
 })
 
+const TermSidebar = ({student}) => (
+	<aside>
+		<ConnectedSidebarToolbar
+			backTo="overview"
+			search={false}
+			share={false}
+			student={student}
+		/>
+	</aside>
+)
+
 export default function StudentIndex(props: {
 	studentId: string,
 	location: {},
@@ -66,25 +71,29 @@ export default function StudentIndex(props: {
 		<Student studentId={props.studentId}>
 			{({student}) => (
 				<>
-					<Sidebar student={student}>
-						<Router>
-							<StatusSidebar default student={student} />
+					<Router>
+						<StatusSidebar path="/" student={student} />
 
-							<SearchSidebar
-								path="search"
-								term={params.get('term')}
-								studentId={student.present.id}
-								navigate={props.navigate}
-							/>
-						</Router>
-					</Sidebar>
+						<SearchSidebar
+							path="/search"
+							term={params.get('term')}
+							student={student}
+							navigate={props.navigate}
+						/>
+
+						<TermSidebar
+							path="/term/:term"
+							student={student}
+							navigate={props.navigate}
+						/>
+					</Router>
 
 					<Router>
-						<CourseTable default student={student.present} />
+						<CourseTable path="/" student={student.present} />
 
 						<SemesterDetail
 							student={student.present}
-							path="term/:term"
+							path="/term/:term"
 						/>
 					</Router>
 
@@ -102,6 +111,3 @@ export default function StudentIndex(props: {
 }
 
 CourseTable.preload()
-Sidebar.preload()
-StudentSummary.preload()
-AreaOfStudySidebar.preload()
