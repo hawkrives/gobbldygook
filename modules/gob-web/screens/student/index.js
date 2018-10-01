@@ -4,6 +4,8 @@ import * as React from 'react'
 import {Router} from '@reach/router'
 import Loadable from 'react-loadable'
 import {LoadingComponent} from '../../components/loading-comp'
+import type {HydratedStudentType} from '@gob/object-student'
+import type {Undoable} from '../../types'
 
 import Student from '../../modules/student'
 
@@ -20,7 +22,7 @@ import {ConnectedSidebarToolbar} from '../../components/sidebar'
 import {AreaOfStudySidebar} from '../../modules/student/area-of-study-sidebar'
 import {ConnectedStudentSummary as StudentSummary} from '../../modules/student/connected-student-summary'
 
-const StatusSidebar = ({student}) => (
+const StatusSidebar = ({student}: {student: Undoable<HydratedStudentType>}) => (
 	<aside>
 		<ConnectedSidebarToolbar
 			backTo="picker"
@@ -28,7 +30,7 @@ const StatusSidebar = ({student}) => (
 			share={true}
 			student={student}
 		/>
-		<CourseRemovalBox studentId={student.id} />
+		<CourseRemovalBox studentId={student.present.id} />
 		<StudentSummary student={student.present} />
 		<AreaOfStudySidebar student={student.present} />
 	</aside>
@@ -49,7 +51,7 @@ const SemesterDetail = Loadable({
 	loading: LoadingComponent,
 })
 
-const TermSidebar = ({student}) => (
+const TermSidebar = ({student}: {student: Undoable<HydratedStudentType>}) => (
 	<aside>
 		<ConnectedSidebarToolbar
 			backTo="overview"
