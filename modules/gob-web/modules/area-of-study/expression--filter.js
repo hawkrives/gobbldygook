@@ -32,9 +32,9 @@ export default function Filter(props: Props) {
 		return null
 	}
 
-	if (props.expr.$type === 'of') {
+	if (props.expr.$filterType === 'of') {
 		return <FilterOf {...props} />
-	} else if (props.expr.$type === 'where') {
+	} else if (props.expr.$filterType === 'where') {
 		return <FilterWhere {...props} />
 	} else {
 		return <div>{JSON.stringify(props, null, 2)}</div>
