@@ -6,7 +6,10 @@ import {db} from '../../helpers/db'
 import {type ParsedHansonFile} from '@gob/hanson-format'
 
 type Props = {
-	children: ({loading: boolean, areas: Array<ParsedHansonFile>}) => React.Node,
+	children: ({
+		loading: boolean,
+		areas: Array<ParsedHansonFile>,
+	}) => React.Node,
 }
 
 type State = {

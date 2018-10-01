@@ -198,7 +198,10 @@ function enhanceRequirement(
 		},
 	)
 
-	let returnedValue: ParsedHansonRequirement = {...fromPairs(enhanced), $type: 'requirement'}
+	let returnedValue: ParsedHansonRequirement = {
+		...fromPairs(enhanced),
+		$type: 'requirement',
+	}
 
 	if (parsedResult) {
 		returnedValue.result = parsedResult

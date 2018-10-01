@@ -169,28 +169,36 @@ class ManualCreationScreen extends React.Component<Props, State> {
 						label="Degrees"
 						type="degree"
 						selections={this.state.degrees}
-						onChange={values => this.setState(() => ({degrees: values}))}
+						onChange={values =>
+							this.setState(() => ({degrees: values}))
+						}
 						availableThrough={this.state.graduation}
 					/>
 					<AreaPicker
 						label="Majors"
 						type="major"
 						selections={this.state.majors}
-						onChange={values => this.setState(() => ({majors: values}))}
+						onChange={values =>
+							this.setState(() => ({majors: values}))
+						}
 						availableThrough={this.state.graduation}
 					/>
 					<AreaPicker
 						label="Concentrations"
 						type="concentration"
 						selections={this.state.concentrations}
-						onChange={values => this.setState(() => ({concentrations: values}))}
+						onChange={values =>
+							this.setState(() => ({concentrations: values}))
+						}
 						availableThrough={this.state.graduation}
 					/>
 					<AreaPicker
 						label="Areas of Emphasis"
 						type="emphasis"
 						selections={this.state.emphases}
-						onChange={values => this.setState(() => ({emphases: values}))}
+						onChange={values =>
+							this.setState(() => ({emphases: values}))
+						}
 						availableThrough={this.state.graduation}
 					/>
 				</div>

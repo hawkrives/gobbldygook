@@ -37,8 +37,8 @@
 	display: grid;
 	grid-template-columns: 1fr max-content;
 	grid-template-areas:
-		"title close"
-		"search search";
+		'title close'
+		'search search';
 }
 
 .sidebar-heading .search-box {
