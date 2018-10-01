@@ -67,8 +67,6 @@ export function SidebarToolbar(props: Props) {
 				<div />
 			)}
 
-			<Separator type="spacer" />
-
 			{search ? (
 				<ToolbarButton as={Link} to="./search" title="Search">
 					<Icon block large>
@@ -88,6 +86,7 @@ export function SidebarToolbar(props: Props) {
 					{!canUndo ? iosUndoOutline : iosUndo}
 				</Icon>
 			</ToolbarButton>
+
 			<ToolbarButton
 				title="Redo"
 				onClick={() => redo(studentId)}
@@ -97,8 +96,6 @@ export function SidebarToolbar(props: Props) {
 					{!canRedo ? iosRedoOutline : iosRedo}
 				</Icon>
 			</ToolbarButton>
-
-			<Separator type="spacer" />
 
 			{share ? (
 				<ToolbarButton as={Link} to="?share" title="Share">
