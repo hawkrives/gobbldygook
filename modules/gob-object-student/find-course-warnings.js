@@ -1,10 +1,8 @@
 // @flow
 
-import flatten from 'lodash/flatten'
 import compact from 'lodash/compact'
 import some from 'lodash/some'
-import zip from 'lodash/zip'
-import {List} from 'immutable'
+import {List, Map} from 'immutable'
 
 import ordinal from 'ord'
 import oxford from 'listify'
@@ -112,7 +110,7 @@ export function checkForTimeConflicts(
 export function findWarnings(
 	courses: List<Course | CourseError>,
 	schedule: Schedule,
-): Array<Array<?WarningType>> {
+): Map<string, List<?WarningType>> {
 	let [year, semester] = [schedule.get('year'), schedule.get('semester')]
 
 	let onlyCourses = courses.filterNot(c => !c.error)
