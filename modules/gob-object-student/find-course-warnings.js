@@ -18,7 +18,7 @@ export type WarningTypeEnum =
 	| 'invalid-year'
 	| 'time-conflict'
 
-export type Warning = {
+export type WarningType = {
 	warning: true,
 	type: WarningTypeEnum,
 	msg: string,
@@ -27,7 +27,7 @@ export type Warning = {
 export function checkForInvalidYear(
 	course: Course,
 	scheduleYear: number,
-): ?Warning {
+): ?WarningType {
 	if (course.semester === 9 || course.semester === undefined) {
 		return null
 	}
@@ -49,7 +49,7 @@ export function checkForInvalidYear(
 export function checkForInvalidSemester(
 	course: Course,
 	scheduleSemester: number,
-): ?Warning {
+): ?WarningType {
 	if (course.semester === undefined) {
 		return null
 	}
@@ -69,7 +69,7 @@ export function checkForInvalidSemester(
 export function checkForInvalidity(
 	courses: Array<Course>,
 	{year, semester}: {year: number, semester: number},
-): Array<[?Warning, ?Warning]> {
+): Array<[?WarningType, ?WarningType]> {
 	return courses.map(course => {
 		let invalidYear = checkForInvalidYear(course, year)
 		let invalidSemester = checkForInvalidSemester(course, semester)
@@ -77,7 +77,7 @@ export function checkForInvalidity(
 	})
 }
 
-export function checkForTimeConflicts(courses: Array<Course>): Array<?Warning> {
+export function checkForTimeConflicts(courses: Array<Course>): Array<?WarningType> {
 	let conflicts = findTimeConflicts(courses)
 
 	conflicts = conflicts.map(conflictSet => {
@@ -108,7 +108,7 @@ export function checkForTimeConflicts(courses: Array<Course>): Array<?Warning> {
 export function findWarnings(
 	courses: Array<Course | CourseError>,
 	schedule: ScheduleType,
-): Array<Array<?Warning>> {
+): Array<Array<?WarningType>> {
 	let {year, semester} = schedule
 
 	let onlyCourses: Array<Course> = (courses.filter(
@@ -118,7 +118,7 @@ export function findWarnings(
 	let warningsOfInvalidity = checkForInvalidity(onlyCourses, {year, semester})
 	let timeConflicts = checkForTimeConflicts(onlyCourses)
 
-	let nearlyMerged: Array<Array<Array<?Warning>>> = (zip(
+	let nearlyMerged: Array<Array<Array<?WarningType>>> = (zip(
 		warningsOfInvalidity,
 		timeConflicts,
 	): Array<any>)
