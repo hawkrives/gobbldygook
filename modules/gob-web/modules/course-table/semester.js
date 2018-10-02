@@ -1,10 +1,10 @@
 // @flow
 
 import React from 'react'
+
 import cx from 'classnames'
 import {Link} from '@reach/router'
 import {semesterName} from '@gob/school-st-olaf-college'
-import {countCredits} from '@gob/examine-student'
 import {IDENT_COURSE} from '@gob/object-student'
 import {DropTarget} from 'react-dnd'
 import includes from 'lodash/includes'
@@ -102,99 +102,130 @@ const TitleText = styled.h1`
 
 // TODO: fix up types here
 type Props = {
-	addCourse: Function, // redux
 	canDrop: boolean,
 	connectDropTarget: Function,
 	isOver: boolean,
-	moveCourse: Function, // redux
-	removeSemester: Function,
 	schedule: HydratedScheduleType,
 	semester: number,
 	studentId: string,
 	year: number,
 }
 
-function Semester(props: Props) {
-	let {studentId, semester, year, canDrop, schedule} = props
-	let {courses, conflicts, hasConflict} = schedule
+type State = {
+	loading: boolean,
+	checking: boolean,
+	courses: Array<CourseType>,
+	warnings: Array<Array<WarningType>>,
+	hasConflict: boolean,
+	credits: number,
+}
 
-	// `recommendedCredits` is 4 for fall/spring and 1 for everything else
-	let creditsPerCourse = 1
-	let recommendedCredits = semester === 1 || semester === 3 ? 4 : 1
-	let recommendedSlots = creditsPerCourse * recommendedCredits
-
-	let onlyCourses: Array<CourseType> = ((courses || []).filter(
-		(c: any) => c && !c.error,
-	): Array<any>)
-	let currentCredits = countCredits(onlyCourses)
-
-	const infoBar = []
-	if (schedule && courses && courses.length) {
-		let courseCount = courses.length
-
-		infoBar.push(
-			<InfoItem key="course-count">
-				{courseCount} {courseCount === 1 ? 'course' : 'courses'}
-			</InfoItem>,
-		)
-		currentCredits &&
-			infoBar.push(
-				<InfoItem key="credit-count">
-					{currentCredits}{' '}
-					{currentCredits === 1 ? 'credit' : 'credits'}
-				</InfoItem>,
-			)
+class Semester extends React.Component<Props, State> {
+	state = {
+		loading: true,
+		checking: true,
+		courses: [],
+		warnings: [],
+		hasConflict: false,
+		credits: 0,
 	}
 
-	const className = cx('semester', {
-		invalid: hasConflict,
-		'can-drop': canDrop,
-	})
+	componentDidMount() {
+		this.prepare()
+	}
 
-	let name = semesterName(semester)
+	prepare = async () => {
+		this.setState(() => ({loading: true, checking: true}))
 
-	return (
-		<Container
-			className={className}
-			ref={ref => props.connectDropTarget(ref)}
-		>
-			<Header>
-				<Title
-					to={`./term/${year}${semester}`}
-					title={`Details for ${name}`}
-				>
-					<TitleText>{name}</TitleText>
-					<InfoList>{infoBar}</InfoList>
-				</Title>
+		let {year, semester, student} = this.props
 
-				<TitleButton
-					as={Link}
-					to={`./search?term=${year}${semester}`}
-					title="Search for courses"
-				>
-					<Icon>{search}</Icon> Course
-				</TitleButton>
+		let schedule = student.getScheduleForTerm({year, semester})
+		let {courses, credits} = await schedule.getCourses()
 
-				<RemoveSemesterButton
-					onClick={props.removeSemester}
-					title={`Remove ${year} ${name}`}
-				>
-					<Icon>{close}</Icon>
-				</RemoveSemesterButton>
-			</Header>
+		this.setState(() => ({courses, credits, loading: false}))
 
-			{schedule && (
-				<CourseList
-					courses={courses || []}
-					usedSlots={currentCredits / creditsPerCourse}
-					maxSlots={recommendedSlots / creditsPerCourse}
-					studentId={studentId}
-					schedule={schedule}
-					conflicts={conflicts || []}
-				/>
-			)}
-		</Container>
-	)
+		let {warnings, hasConflict} = await schedule.check()
+
+		this.setState(() => ({warnings, hasConflict, checking: false}))
+	}
+
+	removeSemester = () => {
+		const {student, semester, year} = this.props
+		student.removeSchedulesForTerm({year, semester})
+	}
+
+	render() {
+		let props = this.props
+		let {student, semester, year, canDrop} = props
+
+		let schedule = student.getScheduleForTerm({year, semester})
+		let {courses, credits, warnings, hasConflict} = this.state
+
+		let {recommendedCredits} = schedule
+		let creditsPerCourse = 1
+		let recommendedSlots = creditsPerCourse * recommendedCredits
+
+		const infoBar = []
+		if (courses.length) {
+			// prettier-ignore
+			infoBar.push(`${courses.length} ${courses.length === 1 ? 'course' : 'courses'}`)
+
+			// prettier-ignore
+			infoBar.push(`${credits} ${credits === 1 ? 'credit' : 'credits'}`)
+		}
+
+		const className = cx('semester', {
+			invalid: hasConflict,
+			'can-drop': canDrop,
+		})
+
+		let name = semesterName(semester)
+
+		return (
+			<Container
+				className={className}
+				ref={ref => props.connectDropTarget(ref)}
+			>
+				<Header>
+					<Title
+						to={`./term/${year}${semester}`}
+						title={`Details for ${name}`}
+					>
+						<TitleText>{name}</TitleText>
+						<InfoList>
+							{infoBar.map(item => (
+								<InfoItem key={item}>{item}</InfoItem>
+							))}
+						</InfoList>
+					</Title>
+
+					<TitleButton
+						as={Link}
+						to={`./search?term=${year}${semester}`}
+						title="Search for courses"
+					>
+						<Icon>{search}</Icon> Course
+					</TitleButton>
+
+					<RemoveSemesterButton
+						onClick={() => student.removeSemester}
+						title={`Remove ${year} ${name}`}
+					>
+						<Icon>{close}</Icon>
+					</RemoveSemesterButton>
+				</Header>
+
+				{schedule && (
+					<CourseList
+						courses={courses}
+						usedSlots={credits / creditsPerCourse}
+						maxSlots={recommendedSlots / creditsPerCourse}
+						warnings={warnings}
+					/>
+				)}
+			</Container>
+		)
+	}
 }
 
 // Implements the drag source contract.

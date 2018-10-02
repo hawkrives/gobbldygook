@@ -1,6 +1,7 @@
 // @flow
+
 import * as React from 'react'
-import ModalCourse from './modal'
+import {ModalCourse} from './modal'
 import CompactCourse, {type Props as MiniProps} from './compact'
 
 type State = {

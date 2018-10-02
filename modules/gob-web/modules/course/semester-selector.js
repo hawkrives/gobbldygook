@@ -22,56 +22,40 @@ function findSemesterList(student: ?Object) {
 	)
 }
 
-const moveToSchedule = ({
-	moveCourse,
-	addCourse,
-	removeCourse,
-	scheduleId,
-	studentId,
-	clbid,
-}: {
-	moveCourse: Function,
-	addCourse: Function,
-	removeCourse: Function,
+const moveToSchedule = (args: {
 	scheduleId: ?string,
-	studentId: ?string,
+	student: ?Object,
 	clbid: ?string,
 }) => {
-	if (!studentId || !scheduleId || clbid === null || clbid === undefined) {
+	let {scheduleId, student, clbid} = args
+
+	if (!student || !scheduleId || clbid === null || clbid === undefined) {
 		return () => {}
 	}
+
 	return ev => {
-		const targetScheduleId = ev.target.value
+		const targetScheduleId = ev.currentTarget.value
 		if (targetScheduleId === '$none') {
 			return
 		} else if (targetScheduleId === '$remove') {
-			return removeCourse(studentId, scheduleId, clbid)
+			return student.removeCourse({from: scheduleId, clbid})
 		}
 
 		if (scheduleId) {
-			return moveCourse(studentId, scheduleId, targetScheduleId, clbid)
+			return student.moveCourse({from: scheduleId, to: targetScheduleId, clbid})
 		} else {
-			return addCourse(studentId, targetScheduleId, clbid)
+			return student.addCourse({to: targetScheduleId, clbid})
 		}
 	}
 }
 
-export default function SemesterSelector({
-	scheduleId,
-	student,
-	moveCourse,
-	addCourse,
-	removeCourse,
-	clbid,
-}: {
-	addCourse: (string, string, string) => any,
+export default function SemesterSelector(props: {
 	clbid?: string,
-	moveCourse: (string, string, string, string) => any,
-	removeCourse: (string, string, string) => any,
 	scheduleId?: string,
 	student?: Object,
 }) {
-	const studentId = student ? student.id : null
+	let {scheduleId, student, clbid} = props
+
 	const specialOption = scheduleId ? (
 		<option value="$remove">Remove from Schedule</option>
 	) : (
@@ -80,7 +64,7 @@ export default function SemesterSelector({
 
 	const options = map(findSemesterList(student), (group, year) => (
 		<optgroup key={year} label={expandYear(year, true, '–')}>
-			{map(group, schedule => (
+			{group.map(schedule => (
 				<option value={schedule.id} key={schedule.id}>
 					{schedule.title}
 				</option>
@@ -92,14 +76,7 @@ export default function SemesterSelector({
 		<select
 			value={scheduleId || 'none'}
 			disabled={!student || !clbid}
-			onChange={moveToSchedule({
-				moveCourse,
-				addCourse,
-				removeCourse,
-				scheduleId,
-				studentId,
-				clbid,
-			})}
+			onChange={moveToSchedule({scheduleId, student, clbid})}
 		>
 			{specialOption}
 			{options}

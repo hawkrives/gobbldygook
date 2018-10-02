@@ -1,3 +1,3 @@
 // @flow
 
-export {default} from './area-of-study'
+export {AreaOfStudy} from './area-of-study'

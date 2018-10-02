@@ -77,27 +77,38 @@ const canAddSemester = (nextAvailableSemester?: number) => {
 }
 
 type Props = {
-	addSemester: number => mixed,
-	removeYear: number => mixed,
 	student: HydratedStudentType,
 	year: number,
 }
 
 export default class Year extends React.PureComponent<Props> {
 	addSemester = () => {
-		this.props.addSemester(this.props.year)
+		const nextAvailableSemester = findFirstAvailableSemester(
+			values(this.props.student.schedules),
+			this.props.year,
+		)
+
+		this.props.student.addSchedule({
+			year: this.props.year,
+			semester: nextAvailableSemester,
+			index: 1,
+			active: true,
+		})
 	}
 
 	removeYear = () => {
-		this.props.removeYear(this.props.year)
+		this.props.student.removeSchedulesForYear(this.props.year)
 	}
 
 	render() {
 		let {student, year} = this.props
 		let {schedules} = student
 
-		let valid = filter(schedules, s => s.active === true && s.year === year)
-		let sorted = sortBy(valid, s => s.semester)
+		let valid = filter(
+			schedules,
+			s => s.active === true && s.year === year,
+		).map(s => s.semester)
+		let sorted = sortBy(valid, s => s)
 
 		let niceYear = expandYear(year)
 
@@ -133,11 +144,11 @@ export default class Year extends React.PureComponent<Props> {
 				</Header>
 
 				<SemesterList>
-					{sorted.map(schedule => (
+					{sorted.map(semester => (
 						<Semester
-							key={schedule.id}
+							key={semester}
+							semester={semester}
 							student={student}
-							semester={schedule.semester}
 							year={year}
 						/>
 					))}

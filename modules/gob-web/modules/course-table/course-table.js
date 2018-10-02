@@ -32,16 +32,13 @@ const AddYearButton = styled(FlatButton)`
 const Container = styled.div``
 
 type PropTypes = {
-	addSemester: number => mixed,
-	addYear: number => mixed,
 	className?: string,
-	removeYear: number => mixed,
 	student: Object,
 }
 
 export default function CourseTable(props: PropTypes) {
 	let {student} = props
-	let {schedules, matriculation} = student
+	let {schedules, matriculation, addSchedule} = student
 
 	let nextAvailableYear = findFirstAvailableYear(schedules, matriculation)
 	let canAddYear = nextAvailableYear != null // graduation > nextAvailableYear
@@ -51,7 +48,14 @@ export default function CourseTable(props: PropTypes) {
 			<AddYearButton
 				key="add-year"
 				title="Add Year"
-				onClick={props.addYear}
+				onClick={() =>
+					addSchedule({
+						year: nextAvailableYear,
+						semester: 1,
+						index: 1,
+						active: true,
+					})
+				}
 			>
 				Add {expandYear(nextAvailableYear, false, '–')}
 			</AddYearButton>
@@ -61,13 +65,7 @@ export default function CourseTable(props: PropTypes) {
 	let grouped = groupBy(sorted, s => s.year)
 
 	let years = map(grouped, (schedules, year) => (
-		<Year
-			key={year}
-			year={Number(year)}
-			student={student}
-			addSemester={props.addSemester}
-			removeYear={props.removeYear}
-		/>
+		<Year key={year} year={Number(year)} student={student} />
 	))
 
 	if (nextAvailableYear != null) {

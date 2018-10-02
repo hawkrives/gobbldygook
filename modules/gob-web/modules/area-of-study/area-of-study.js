@@ -1,31 +1,30 @@
 // @flow
-import React, {Component} from 'react'
+
+import React from 'react'
 import cx from 'classnames'
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
 
 import {FlatButton} from '../../components/button'
 import {Icon} from '../../components/icon'
 import Requirement from './requirement'
 import ProgressBar from '../../components/progress-bar'
-import {compareProps} from '@gob/lib'
 import {close, chevronUp, chevronDown} from '../../icons/ionicons'
-import has from 'lodash/has'
 import {pathToOverride} from '@gob/examine-student'
-import {
-	setOverride,
-	removeOverride,
-} from '../../redux/students/actions/overrides'
 
 import './area-of-study.scss'
 
 type Student = Object
-type AreaOfStudyType = {
-	_area: Object,
-	_checked?: boolean,
-	_error?: string,
-	_progress?: {at: number, of: number},
+type ExaminedAreaOfStudyType = {
+	details: Object,
+	checked?: boolean,
+	error?: string,
+	progress?: {at: number, of: number},
 	isCustom?: boolean,
+	name: string,
+	revision: string,
+	slug?: string,
+	type: string,
+}
+type AreaOfStudyType = {
 	name: string,
 	revision: string,
 	slug?: string,
@@ -34,30 +33,34 @@ type AreaOfStudyType = {
 
 type Props = {
 	area: AreaOfStudyType,
-	setOverride: (string, string, boolean) => any,
-	onRemoveArea: (Object, Event) => any,
-	removeOverride: (string, string) => any,
 	showCloseButton: boolean,
 	showEditButton: boolean,
 	student: Student,
 }
 
-type State = {
+type State = {|
 	isOpen: boolean,
 	confirmRemoval: boolean,
-}
+	examining: boolean,
+	results: ?ExaminedAreaOfStudyType,
+|}
 
-class AreaOfStudyContainer extends Component<Props, State> {
+export class AreaOfStudy extends React.Component<Props, State> {
 	state = {
 		isOpen: false,
 		confirmRemoval: false,
+		examining: false,
+		results: null,
 	}
 
-	shouldComponentUpdate(nextProps: any, nextState: any) {
-		return (
-			compareProps(this.props, nextProps) ||
-			compareProps(this.state, nextState)
-		)
+	componentDidMount() {
+		this.startExamination()
+	}
+
+	startExamination = async () => {
+		this.setState(() => ({examining: true}))
+		let results = await this.props.student.examineArea(this.props.area)
+		this.setState(() => ({examining: false, results}))
 	}
 
 	startRemovalConfirmation = (ev: Event) => {
@@ -76,28 +79,25 @@ class AreaOfStudyContainer extends Component<Props, State> {
 	}
 
 	addOverride = (path: string[], ev: Event) => {
-		ev.stopPropagation()
 		ev.preventDefault()
 		const codifiedPath = pathToOverride(path)
-		this.props.setOverride(this.props.student.id, codifiedPath, true)
+		this.props.student.setOverride(codifiedPath, true)
 	}
 
 	removeOverride = (path: string[], ev: Event) => {
-		ev.stopPropagation()
 		ev.preventDefault()
 		const codifiedPath = pathToOverride(path)
-		this.props.removeOverride(this.props.student.id, codifiedPath)
+		this.props.student.removeOverride(codifiedPath)
 	}
 
 	toggleOverride = (path: string[], ev: Event) => {
-		ev.stopPropagation()
 		ev.preventDefault()
 		const codifiedPath = pathToOverride(path)
 
-		if (has(this.props.student.overrides, codifiedPath)) {
-			this.props.removeOverride(this.props.student.id, codifiedPath)
+		if (this.props.student.hasOverride(codifiedPath)) {
+			this.props.student.removeOverride(codifiedPath)
 		} else {
-			this.props.setOverride(this.props.student.id, codifiedPath, true)
+			this.props.student.setOverride(codifiedPath, true)
 		}
 	}
 
@@ -108,36 +108,29 @@ class AreaOfStudyContainer extends Component<Props, State> {
 		const {
 			type = '???',
 			revision = '0000-00',
-			slug,
-			isCustom = false,
 			name = 'Unknown Area',
-			_area: areaDetails,
-			_progress: progress,
-			_error: error = '',
-			_checked: checked = false,
+			slug,
 		} = props.area
 
-		const progressAt = typeof progress === 'object' ? progress.at : 0
-		const progressOf = typeof progress === 'object' ? progress.of : 1
+		let progressAt = 0
+		let progressOf = 1
+
+		let error = false
+
+		if (this.state.results && this.state.results.progress) {
+			progressAt = this.state.results.progress.at
+			progressAt = this.state.results.progress.of
+		}
+
+		if (this.state.results && this.state.results.error) {
+			error = this.state.results.error
+		}
 
 		const summary = (
 			<>
 				<div className="area--summary-row">
 					<h1 className="area--title">
-						{slug && !isCustom && isOpen ? (
-							<a
-								className="catalog-link"
-								href={`http://catalog.stolaf.edu/academic-programs/${slug}/`}
-								target="_blank"
-								rel="noopener noreferrer"
-								onClick={ev => ev.stopPropagation()}
-								title="View in the St. Olaf Catalog"
-							>
-								{name}
-							</a>
-						) : (
-							name
-						)}
+						<CatalogLink slug={slug} name={name} />
 					</h1>
 					<span className="icons">
 						{props.showCloseButton && (
@@ -170,9 +163,10 @@ class AreaOfStudyContainer extends Component<Props, State> {
 				<span className="button-group">
 					<FlatButton
 						className="area--actually-remove-area"
-						onClick={ev =>
-							props.onRemoveArea({name, type, revision}, ev)
-						}
+						onClick={ev => {
+							ev.preventDefault()
+							props.student.removeArea({name, type, revision})
+						}}
 					>
 						Remove
 					</FlatButton>
@@ -184,51 +178,68 @@ class AreaOfStudyContainer extends Component<Props, State> {
 		)
 
 		let contents = null
-		if (error) {
-			contents = (
-				<p className="message area--error">
-					{error} {':('}
-				</p>
-			)
-		} else if (!checked) {
+		if (this.state.examining) {
 			contents = <p className="message area--loading">Loading…</p>
 		} else {
-			contents = (
-				<Requirement
-					info={areaDetails}
-					topLevel
-					onAddOverride={this.addOverride}
-					onRemoveOverride={this.removeOverride}
-					onToggleOverride={this.toggleOverride}
-					path={[type, name]}
-				/>
-			)
+			contents = <AreaDetails results={this.state.results} />
 		}
 
-		const className = cx('area', {
-			errored: Boolean(error),
-			loading: !checked,
-		})
-
 		return (
-			<div className={className}>
-				<div
+			<>
+				<header
 					className="area--summary"
 					onClick={this.toggleAreaExpansion}
 				>
 					{showConfirmRemoval ? removalConfirmation : summary}
-				</div>
+				</header>
+
 				{isOpen && !showConfirmRemoval && contents}
-			</div>
+			</>
 		)
 	}
 }
 
-const mapDispatch = dispatch =>
-	bindActionCreators({setOverride, removeOverride}, dispatch)
+const CatalogLink = ({slug, name}: {slug: ?string, name: string}) => {
+	if (!slug) {
+		return <span>{name}</span>
+	}
 
-// $FlowFixMe
-export default connect(
-	null,
-	mapDispatch,
-)(AreaOfStudyContainer)
+	return (
+		<a
+			className="catalog-link"
+			href={`http://catalog.stolaf.edu/academic-programs/${slug}/`}
+			target="_blank"
+			rel="noopener noreferrer"
+			title="View in the St. Olaf Catalog"
+		>
+			{name}
+		</a>
+	)
+}
+
+function AreaDetails(props: {results: ?ExaminedAreaOfStudyType}) {
+	if (!props.results) {
+		return null
+	}
+
+	let {details, error = '', type, name} = props.results
+
+	if (error) {
+		return (
+			<p className="message area--error">
+				{error} {':('}
+			</p>
+		)
+	}
+
+	return (
+		<Requirement
+			info={details}
+			topLevel
+			onAddOverride={this.addOverride}
+			onRemoveOverride={this.removeOverride}
+			onToggleOverride={this.toggleOverride}
+			path={[type, name]}
+		/>
+	)
+}

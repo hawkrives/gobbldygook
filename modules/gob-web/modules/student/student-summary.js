@@ -9,9 +9,7 @@ import {Card} from '../../components/card'
 import {AvatarLetter} from '../../components/avatar-letter'
 import ContentEditable from '../../components/content-editable'
 
-import {getActiveCourses} from '@gob/object-student'
-import {countCredits} from '@gob/examine-student'
-import type {HydratedStudentType, AreaQuery} from '@gob/object-student'
+import type {StudentType, AreaQuery} from '@gob/object-student'
 
 import './student-summary.scss'
 
@@ -43,17 +41,18 @@ const welcomeMessages = [
 const welcomeMessage = welcomeMessages[2]
 
 type Props = {
-	onChangeGraduation?: string => any,
-	onChangeMatriculation?: string => any,
-	onChangeName?: string => any,
 	randomizeHello?: boolean,
 	showAvatar?: boolean,
 	showMessage?: boolean,
-	student: HydratedStudentType,
+	student: StudentType,
 }
 
 type State = {
 	message: string,
+	canGraduate: boolean,
+	creditsNeeded: ?number,
+	creditsTaken: ?number,
+	checking: boolean,
 }
 
 export class StudentSummary extends React.Component<Props, State> {
@@ -61,40 +60,62 @@ export class StudentSummary extends React.Component<Props, State> {
 		message: this.props.randomizeHello
 			? sample(welcomeMessages)
 			: welcomeMessage,
+		checking: true,
+		canGraduate: false,
+		creditsNeeded: null,
+		creditsTaken: null,
+	}
+
+	componentDidMount() {
+		this.checkGraduatability()
+	}
+
+	checkGraduatability = async () => {
+		let {student} = this.props
+
+		this.setState(() => ({checking: true}))
+
+		let {
+			canGraduate,
+			creditsNeeded,
+			creditsTaken,
+		} = await student.checkGraduatability()
+
+		this.setState(() => ({
+			checking: false,
+			canGraduate,
+			creditsNeeded,
+			creditsTaken,
+		}))
 	}
 
 	render() {
-		const {
-			student,
-			showMessage = true,
-			showAvatar = true,
-			onChangeName,
-			onChangeMatriculation,
-			onChangeGraduation,
-		} = this.props
+		let {student, showMessage = true, showAvatar = true} = this.props
 
-		const {studies, canGraduate} = student
+		let {checking, canGraduate, creditsNeeded, creditsTaken} = this.state
 
-		const className = canGraduate ? 'can-graduate' : 'cannot-graduate'
+		let {studies} = student
 
-		const currentCredits = countCredits(getActiveCourses(student))
-		const neededCredits = student.creditsNeeded
+		let gradClassName = canGraduate ? 'can-graduate' : 'cannot-graduate'
 
-		const message = this.state.message
+		let message = this.state.message
 
 		return (
-			<Card as="article" className={cx('student-summary', className)}>
+			<Card
+				as="article"
+				className={cx('student-summary', gradClassName, {checking})}
+			>
 				<Header
 					canGraduate={canGraduate}
 					name={student.name}
-					onChangeName={onChangeName}
+					onChangeName={student.setName}
 					helloMessage={message}
 					showAvatar={showAvatar}
 				/>
 
 				<DateSummary
-					onChangeGraduation={onChangeGraduation}
-					onChangeMatriculation={onChangeMatriculation}
+					onChangeGraduation={student.setGraduation}
+					onChangeMatriculation={student.setMatriculation}
 					matriculation={student.matriculation}
 					graduation={student.graduation}
 				/>
@@ -102,8 +123,8 @@ export class StudentSummary extends React.Component<Props, State> {
 				<DegreeSummary studies={studies} />
 
 				<CreditSummary
-					currentCredits={currentCredits}
-					neededCredits={neededCredits}
+					currentCredits={creditsTaken}
+					neededCredits={creditsNeeded}
 				/>
 
 				{showMessage ? <Footer canGraduate={canGraduate} /> : null}
@@ -268,14 +289,27 @@ export class DegreeSummary extends React.Component<DegreeSummaryProps> {
 }
 
 type CreditSummaryProps = {
-	currentCredits: number,
-	neededCredits: number,
+	currentCredits: ?number,
+	neededCredits: ?number,
 }
 
 export class CreditSummary extends React.Component<CreditSummaryProps> {
 	render() {
-		const {currentCredits, neededCredits} = this.props
-		const enoughCredits = currentCredits >= neededCredits
+		let {currentCredits, neededCredits} = this.props
+
+		if (currentCredits == null) {
+			return null
+		}
+
+		if (neededCredits == null) {
+			return (
+				<p className="paragraph">
+					You have currently planned for {currentCredits} credits.
+				</p>
+			)
+		}
+
+		let enoughCredits = currentCredits >= neededCredits
 
 		return (
 			<p className="paragraph">
