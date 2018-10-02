@@ -2,13 +2,7 @@
 import {db} from './db'
 import {status, json} from '@gob/lib'
 import type {FabricationType} from '@gob/object-student'
-import type {Course as CourseType} from '@gob/types'
-
-type ErrorType = {
-	clbid: string,
-	term: number,
-	error: string,
-}
+import type {Course as CourseType, CourseError as ErrorType} from '@gob/types'
 
 const baseUrl = 'https://stodevx.github.io/course-data'
 const networkCache = Object.create(null)

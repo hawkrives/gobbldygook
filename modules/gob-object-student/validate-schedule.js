@@ -1,14 +1,21 @@
 // @flow
 
-import {findWarnings} from './find-course-warnings'
-import type {HydratedScheduleType} from './schedule'
+import {findWarnings, type WarningType} from './find-course-warnings'
+import {Schedule, type CourseLookupFunc} from './schedule'
 
 // Checks to see if the schedule is valid
-export function validateSchedule(
-	schedule: HydratedScheduleType,
-): HydratedScheduleType {
+export async function validateSchedule(
+	schedule: Schedule,
+	lookupCourse: CourseLookupFunc
+): Promise<{
+	id: string,
+	hasConflict: boolean,
+	conflicts: Array<Array<?WarningType>>,
+}> {
+	let id = schedule.get('id')
+
 	// only check the courses that have data
-	let courses = schedule.courses.filter(c => c)
+	let courses = await schedule.getCourses(lookupCourse)
 
 	// discover any warnings about the course load
 	let conflicts = findWarnings(courses, schedule)
@@ -16,5 +23,5 @@ export function validateSchedule(
 		perCourse.some(w => w && w.warning === true),
 	)
 
-	return {...schedule, hasConflict, conflicts}
+	return {id, hasConflict, conflicts}
 }

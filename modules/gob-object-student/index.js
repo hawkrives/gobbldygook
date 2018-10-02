@@ -15,7 +15,7 @@ export {
 	checkForTimeConflicts,
 } from './find-course-warnings'
 export type {
-	Warning as WarningType,
+	WarningType,
 	WarningTypeEnum,
 } from './find-course-warnings'
 
@@ -30,35 +30,12 @@ export {
 } from './item-types'
 
 export {Schedule} from './schedule'
-export type {ScheduleType, HydratedScheduleType} from './schedule'
 
 export {sortStudiesByType} from './sort-studies-by-type'
 
 export {
 	Student,
-	changeStudentName,
-	changeStudentAdvisor,
-	changeStudentCreditsNeeded,
-	changeStudentMatriculation,
-	changeStudentGraduation,
-	changeStudentSetting,
-	addScheduleToStudent,
-	destroyScheduleFromStudent,
-	addCourseToSchedule,
-	removeCourseFromSchedule,
-	moveCourseToSchedule,
-	addAreaToStudent,
-	removeAreaFromStudent,
-	setOverrideOnStudent,
-	removeOverrideFromStudent,
-	addFabricationToStudent,
-	removeFabricationFromStudent,
-	moveScheduleInStudent,
-	reorderScheduleInStudent,
-	renameScheduleInStudent,
-	reorderCourseInSchedule,
 } from './student'
-export type {StudentType, HydratedStudentType} from './student'
 
 export {validateSchedule} from './validate-schedule'
 

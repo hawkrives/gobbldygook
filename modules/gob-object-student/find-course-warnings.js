@@ -4,14 +4,15 @@ import flatten from 'lodash/flatten'
 import compact from 'lodash/compact'
 import some from 'lodash/some'
 import zip from 'lodash/zip'
+import {List} from 'immutable'
 
 import ordinal from 'ord'
 import oxford from 'listify'
 import {findTimeConflicts} from '@gob/schedule-conflicts'
 import {expandYear, semesterName} from '@gob/school-st-olaf-college'
 
-import type {Course, CourseError} from '@gob/types'
-import type {ScheduleType} from './schedule'
+import type {Course as CourseType, CourseError} from '@gob/types'
+import {Schedule} from './schedule'
 
 export type WarningTypeEnum =
 	| 'invalid-semester'
@@ -24,15 +25,16 @@ export type WarningType = {
 	msg: string,
 }
 
+type Course = CourseType | FabricationType
+
 export function checkForInvalidYear(
 	course: Course,
 	scheduleYear: number,
+	thisYear: number = new Date().getFullYear(),
 ): ?WarningType {
 	if (course.semester === 9 || course.semester === undefined) {
 		return null
 	}
-
-	let thisYear = new Date().getFullYear()
 
 	if (course.year !== scheduleYear && scheduleYear <= thisYear) {
 		const yearString = expandYear(course.year, true, '–')
@@ -67,18 +69,20 @@ export function checkForInvalidSemester(
 }
 
 export function checkForInvalidity(
-	courses: Array<Course>,
+	courses: List<Course>,
 	{year, semester}: {year: number, semester: number},
-): Array<[?WarningType, ?WarningType]> {
+): List<List<?WarningType>> {
 	return courses.map(course => {
 		let invalidYear = checkForInvalidYear(course, year)
 		let invalidSemester = checkForInvalidSemester(course, semester)
-		return [invalidYear, invalidSemester]
+		return List([invalidYear, invalidSemester])
 	})
 }
 
-export function checkForTimeConflicts(courses: Array<Course>): Array<?WarningType> {
-	let conflicts = findTimeConflicts(courses)
+export function checkForTimeConflicts(
+	courses: List<Course>,
+): List<?WarningType> {
+	let conflicts = List(findTimeConflicts(courses.toArray()))
 
 	conflicts = conflicts.map(conflictSet => {
 		if (some(conflictSet)) {
@@ -106,24 +110,21 @@ export function checkForTimeConflicts(courses: Array<Course>): Array<?WarningTyp
 }
 
 export function findWarnings(
-	courses: Array<Course | CourseError>,
-	schedule: ScheduleType,
+	courses: List<Course | CourseError>,
+	schedule: Schedule,
 ): Array<Array<?WarningType>> {
-	let {year, semester} = schedule
+	let [year, semester] = [schedule.get('year'), schedule.get('semester')]
 
-	let onlyCourses: Array<Course> = (courses.filter(
-		(c: any) => !c.error,
-	): Array<any>)
+	let onlyCourses = courses.filterNot(c => !c.error)
 
 	let warningsOfInvalidity = checkForInvalidity(onlyCourses, {year, semester})
 	let timeConflicts = checkForTimeConflicts(onlyCourses)
 
-	let nearlyMerged: Array<Array<Array<?WarningType>>> = (zip(
-		warningsOfInvalidity,
-		timeConflicts,
-	): Array<any>)
+	let nearlyMerged: List<
+		List<List<?WarningType>>,
+	> = warningsOfInvalidity.zip(timeConflicts)
 
-	let allWarnings = nearlyMerged.map(flatten)
+	let allWarnings = nearlyMerged.flatten(1)
 
 	return allWarnings
 }
