@@ -3,3 +3,4 @@ node_modules/
 modules/gob-hanson-format/parse-hanson-string.js
 !.webpackrc.js
 build*/
+flow-typed/
