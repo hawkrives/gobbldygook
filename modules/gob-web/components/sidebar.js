@@ -22,7 +22,6 @@ import type {Undoable} from '../types'
 
 type Props = {
 	redo: string => any,
-	removeCourse: Function,
 	student: Undoable<Student>,
 	undo: string => any,
 

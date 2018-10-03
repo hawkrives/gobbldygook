@@ -32,8 +32,8 @@ export type ReduxStudentStore = {
 type Props = {
 	children: ({student: Undoable<StudentObject>}) => React.Node, // from react-router
 	loadStudent: string => any, // redux
-	studentId: string, // react-router
-	student?: ReduxStudentStore, // redux
+	studentId?: string, // react-router
+	student: ?ReduxStudentStore, // redux
 }
 
 type State = {
@@ -53,7 +53,9 @@ export class Student extends React.Component<Props, State> {
 		const didStudentChange = studentId !== state.cachedStudentId
 
 		if (!props.student || didStudentChange) {
-			props.loadStudent(studentId)
+			if (studentId) {
+				props.loadStudent(studentId)
+			}
 		}
 
 		return {cachedStudentId: studentId}
@@ -85,6 +87,9 @@ export class Student extends React.Component<Props, State> {
 }
 
 export default connect(
-	(state, ownProps) => ({student: state.students[ownProps.studentId]}),
+	(state, ownProps) =>
+		ownProps.studentId
+			? {student: state.students[ownProps.studentId]}
+			: {student: undefined},
 	{loadStudent},
 )(Student)
