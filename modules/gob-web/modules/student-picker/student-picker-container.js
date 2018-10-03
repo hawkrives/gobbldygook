@@ -3,7 +3,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import StudentPicker from './student-picker'
-import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {destroyStudent} from '../../redux/students/actions/destroy-student'
 import {loadStudents} from '../../redux/students/actions/load-students'
@@ -77,15 +76,7 @@ class StudentPickerContainer extends React.Component<Props, State> {
 	}
 }
 
-const mapStateToProps = state => ({
-	students: state.students,
-})
-
-const mapDispatchToProps = dispatch => ({
-	...bindActionCreators({destroyStudent, loadStudents}, dispatch),
-})
-
 export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
+	state => ({students: state.students}),
+	{destroyStudent, loadStudents},
 )(StudentPickerContainer)

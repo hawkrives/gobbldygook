@@ -3,7 +3,6 @@
 import * as React from 'react'
 import {Link} from '@reach/router'
 import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
 import {Icon} from './icon'
 import {Toolbar, ToolbarButton} from './toolbar'
 import Separator from './separator'
@@ -110,9 +109,7 @@ export function SidebarToolbar(props: Props) {
 	)
 }
 
-const mapDispatch = dispatch => bindActionCreators({undo, redo}, dispatch)
-
 export const ConnectedSidebarToolbar = connect(
 	undefined,
-	mapDispatch,
+	{undo, redo},
 )(SidebarToolbar)

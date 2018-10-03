@@ -2,7 +2,6 @@
 import * as React from 'react'
 import DocumentTitle from 'react-document-title'
 import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
 import {loadStudent} from '../../redux/students/actions/load-student'
 import {Student as StudentObject} from '@gob/object-student'
 import type {Undoable} from '../../types'
@@ -85,14 +84,7 @@ export class Student extends React.Component<Props, State> {
 	}
 }
 
-const mapStateToProps = (state, ownProps) => ({
-	student: state.students[ownProps.studentId],
-})
-
-const mapDispatchToProps = dispatch =>
-	bindActionCreators({loadStudent}, dispatch)
-
 export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
+	(state, ownProps) => ({student: state.students[ownProps.studentId]}),
+	{loadStudent},
 )(Student)

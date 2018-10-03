@@ -2,7 +2,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import map from 'lodash/map'
-import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {removeNotification} from './redux/actions'
 import type {Notification as Notif} from './types'
@@ -36,15 +35,7 @@ export const Notifications = ({notifications, removeNotification}: Props) => (
 	</NotificationList>
 )
 
-const selectState = state => ({
-	notifications: state.notifications,
-})
-
-const selectDispatch = dispatch => ({
-	...bindActionCreators({removeNotification}, dispatch),
-})
-
 export default connect(
-	selectState,
-	selectDispatch,
+	state => ({notifications: state.notifications}),
+	{removeNotification},
 )(Notifications)

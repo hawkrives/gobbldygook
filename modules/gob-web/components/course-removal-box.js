@@ -2,7 +2,6 @@
 import * as React from 'react'
 import {DropTarget} from 'react-dnd'
 import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
 import styled, {css} from 'styled-components'
 import * as theme from '../theme'
 import {IDENT_COURSE} from '@gob/object-student'
@@ -92,10 +91,7 @@ function collect(connect, monitor) {
 	}
 }
 
-const mapDispatch = dispatch => bindActionCreators({removeCourse}, dispatch)
-
-// $FlowFixMe
 export default connect(
 	undefined,
-	mapDispatch,
+	{removeCourse},
 )(DropTarget(IDENT_COURSE, removeCourseTarget, collect)(CourseRemovalBox))

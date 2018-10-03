@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import map from 'lodash/map'
 import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
 import {undo, redo} from '../redux/students/actions/undo'
 import {loadStudents} from '../redux/students/actions/load-students'
 
@@ -79,14 +78,7 @@ class DegubContainer extends React.Component {
 	}
 }
 
-const mapStateToProps = state => ({
-	students: state.students,
-})
-
-const mapDispatchToProps = dispatch =>
-	bindActionCreators({undo, redo, loadStudents}, dispatch)
-
 export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
+	state => ({students: state.students}),
+	{undo, redo, loadStudents},
 )(DegubContainer)
