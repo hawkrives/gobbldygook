@@ -1,10 +1,9 @@
+// @flow
+
 import uniqueId from 'lodash/uniqueId'
 import {status, text} from '@gob/lib'
-import debug from 'debug'
 import * as notificationActions from '../modules/notifications/redux/actions'
 import LoadDataWorker from './load-data.worker'
-
-const log = debug('worker:load-data')
 
 const actions = {
 	notifications: notificationActions,
@@ -12,19 +11,21 @@ const actions = {
 
 const worker = new LoadDataWorker()
 
-worker.onerror = msg => log('[main] received error from load-data worker:', msg)
+worker.addEventListener('error', msg =>
+	console.warn('[main] received error from load-data worker:', msg),
+)
 
-worker.onmessage = ({data: [resultId, type, actionInfo]}) => {
+worker.addEventListener('message', ({data: [resultId, type, actionInfo]}) => {
 	if (resultId === null && type === 'dispatch') {
 		const action = actions[actionInfo.type][actionInfo.action](
 			...actionInfo.args,
 		)
 		global._dispatch && global._dispatch(action)
 	}
-}
+})
 
 function loadDataFile(url) {
-	return new Promise((resolve, reject) => {
+	return new Promise(async (resolve, reject) => {
 		const sourceId = uniqueId()
 		const cachebuster = Date.now()
 
@@ -43,26 +44,27 @@ function loadDataFile(url) {
 
 		worker.addEventListener('message', onMessage)
 
-		fetch(url)
-			.then(status)
-			.then(text)
-			.then(path => path.trim())
-			.then(path => {
-				worker.postMessage([
-					sourceId,
-					`${path}/info.json?${cachebuster}`,
-					path,
-				])
-			})
-			.catch(reject)
+		try {
+			let path = await fetch(url)
+				.then(status)
+				.then(text)
+
+			path = path.trim()
+
+			let message = [sourceId, `${path}/info.json?${cachebuster}`, path]
+			worker.postMessage(JSON.stringify(message))
+		} catch (error) {
+			reject(error)
+		}
 	})
 }
 
-export function checkSupport() {
+export function checkSupport(): Promise<boolean | string> {
 	return new Promise(resolve => {
 		let sourceId = '__check-idb-worker-support'
 		// This is inside of the function so that it doesn't get unregistered too early
-		function onMessage({data: [resultId, type, contents]}) {
+		function onMessage({data}: {data: [string, string, boolean | string]}) {
+			let [resultId, type, contents] = data
 			if (resultId === sourceId) {
 				worker.removeEventListener('message', onMessage)
 
@@ -74,7 +76,7 @@ export function checkSupport() {
 			}
 		}
 		worker.addEventListener('message', onMessage)
-		worker.postMessage([sourceId])
+		worker.postMessage(JSON.stringify([sourceId]))
 	})
 }
 
