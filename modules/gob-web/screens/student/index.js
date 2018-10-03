@@ -71,7 +71,7 @@ export default function StudentIndex(props: {
 
 	return (
 		<StudentOverview studentId={props.studentId}>
-			{({student}) => (
+			{({student}: {student: Undoable<Student>}) => (
 				<>
 					<Router>
 						<StatusSidebar path="/" student={student} />

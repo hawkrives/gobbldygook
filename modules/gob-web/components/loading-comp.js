@@ -3,8 +3,8 @@
 import React from 'react'
 
 export function LoadingComponent(props: {
-	error: boolean,
-	retry: () => mixed,
+	error: ?Error,
+	retry: () => any,
 	timedOut: boolean,
 	pastDelay: boolean,
 }) {

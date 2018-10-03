@@ -69,7 +69,7 @@ export class Student extends React.Component<Props, State> {
 			return <Loading>Loading Student…</Loading>
 		}
 
-		let student = this.props.student.data
+		let student: Undoable<StudentObject> = this.props.student.data
 
 		let title = student
 			? `${student.present.name} | Gobbldygook`

@@ -3,7 +3,7 @@
 import React, {Component} from 'react'
 import ScreenToolbar from './screen-toolbar'
 
-export default class DriveLinkScreen extends Component<void> {
+export default class DriveLinkScreen extends Component<{}> {
 	render() {
 		return (
 			<div>
