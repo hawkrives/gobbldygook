@@ -41,7 +41,7 @@ type ScheduleType = {
 const defaultValues: ScheduleType = {
 	id: 'unknown',
 	active: false,
-	index: 0,
+	index: 1,
 	title: 'no title',
 	clbids: List(),
 	year: 0,
