@@ -6,6 +6,8 @@ import {type ParsedHansonFile} from '@gob/hanson-format'
 import {type EvaluationResult} from '@gob/examine-student'
 import {Student} from '@gob/object-student'
 import {getOnlyCourse} from '../helpers/get-courses'
+import mem from 'mem'
+import QuickLRU from 'quick-lru'
 
 const worker = new CheckStudentWorker()
 
@@ -14,7 +16,7 @@ worker.addEventListener('error', function(event: Event) {
 })
 
 // Checks a student object against an area of study.
-export async function checkStudentAgainstArea(
+async function checkStudentAgainstArea(
 	student: Student,
 	area: ParsedHansonFile,
 ): Promise<EvaluationResult> {
@@ -60,3 +62,12 @@ export async function checkStudentAgainstArea(
 		worker.postMessage(msg)
 	})
 }
+
+const memoized = mem(checkStudentAgainstArea, {
+	cache: new QuickLRU({maxSize: 8}),
+	cacheKey: (student: Student, area: ParsedHansonFile) =>
+		JSON.stringify([student.hashCode(), area]),
+	maxAge: 60_000,
+})
+
+export {memoized as checkStudentAgainstArea}
