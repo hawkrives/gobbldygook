@@ -73,7 +73,7 @@ let Student = Loadable({
 })
 
 // needs to be a stateful component: otherwise DragDropContext can't assign a ref, which it needs
-class App extends React.Component<{}> {
+class App extends React.Component<any> {
 	render() {
 		return (
 			<div>
