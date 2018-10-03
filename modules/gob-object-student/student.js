@@ -10,6 +10,7 @@ import type {
 	FulfillmentType,
 	CourseType,
 	CourseLookupFunc,
+	OnlyCourseLookupFunc,
 } from './types'
 
 import {Schedule} from './schedule'
@@ -193,18 +194,18 @@ export class Student extends StudentRecord<StudentType> {
 		)
 	}
 
-	moveScheduleInStudent(
+	moveSchedule(
 		scheduleId: string,
 		{year, semester}: {year: number, semester: number},
 	): this {
 		return this.mergeIn(['schedules', scheduleId], {year, semester})
 	}
 
-	reorderScheduleInStudent(scheduleId: string, index: number): this {
+	reorderSchedule(scheduleId: string, index: number): this {
 		return this.setIn(['schedules', scheduleId, 'index'], index)
 	}
 
-	renameScheduleInStudent(scheduleId: string, title: string): this {
+	renameSchedule(scheduleId: string, title: string): this {
 		return this.setIn(['schedules', scheduleId, 'title'], title)
 	}
 
@@ -345,7 +346,7 @@ export class Student extends StudentRecord<StudentType> {
 	/// Helpers
 	/////
 
-	activeCourses(getCourse: CourseLookupFunc): Promise<Array<CourseType>> {
+	activeCourses(getCourse: OnlyCourseLookupFunc): Promise<Array<CourseType>> {
 		return getActiveCourses(this, getCourse)
 	}
 

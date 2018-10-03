@@ -1,28 +1,6 @@
 import undoable from 'redux-undo'
 
-import {
-	changeStudentName,
-	changeStudentAdvisor,
-	changeStudentCreditsNeeded,
-	changeStudentMatriculation,
-	changeStudentGraduation,
-	changeStudentSetting,
-	addAreaToStudent,
-	removeAreaFromStudent,
-	addScheduleToStudent,
-	destroyScheduleFromStudent,
-	moveCourseToSchedule,
-	setOverrideOnStudent,
-	removeOverrideFromStudent,
-	addFabricationToStudent,
-	removeFabricationFromStudent,
-	renameScheduleInStudent,
-	reorderScheduleInStudent,
-	moveScheduleInStudent,
-	addCourseToSchedule,
-	removeCourseFromSchedule,
-	reorderCourseInSchedule,
-} from '@gob/object-student'
+import {Student} from '@gob/object-student'
 
 import {
 	LOAD_STUDENT,
@@ -30,7 +8,6 @@ import {
 	IMPORT_STUDENT,
 	CHANGE_NAME,
 	CHANGE_ADVISOR,
-	CHANGE_CREDITS_NEEDED,
 	CHANGE_MATRICULATION,
 	CHANGE_GRADUATION,
 	CHANGE_SETTING,
@@ -53,9 +30,9 @@ import {
 	REMOVE_FABRICATION,
 } from '../constants'
 
-const initialState = {}
+const initialState: Student = new Student()
 
-export function studentReducer(state = initialState, action) {
+export function studentReducer(state: Student = initialState, action) {
 	const {type, payload} = action
 
 	switch (type) {
@@ -67,88 +44,76 @@ export function studentReducer(state = initialState, action) {
 		}
 
 		case CHANGE_NAME: {
-			return changeStudentName(state, payload.name)
+			return state.setName(payload.name)
 		}
 		case CHANGE_ADVISOR: {
-			return changeStudentAdvisor(state, payload.advisor)
-		}
-		case CHANGE_CREDITS_NEEDED: {
-			return changeStudentCreditsNeeded(state, payload.credits)
+			return state.setAdvisor(payload.advisor)
 		}
 		case CHANGE_MATRICULATION: {
-			return changeStudentMatriculation(state, payload.matriculation)
+			return state.setMatriculation(payload.matriculation)
 		}
 		case CHANGE_GRADUATION: {
-			return changeStudentGraduation(state, payload.graduation)
+			return state.setGraduation(payload.graduation)
 		}
 		case CHANGE_SETTING: {
-			return changeStudentSetting(state, payload.key, payload.value)
+			return state.setSetting(payload.key, payload.value)
 		}
 
 		case ADD_AREA: {
-			return addAreaToStudent(state, payload.area)
+			return state.addArea(payload.area)
 		}
 		case REMOVE_AREA: {
-			return removeAreaFromStudent(state, payload.areaQuery)
+			return state.removeArea(payload.areaQuery)
 		}
 		case REMOVE_AREAS: {
 			for (const areaQuery of payload.areaQueries) {
-				state = removeAreaFromStudent(state, areaQuery)
+				state = state.removeArea(areaQuery)
 			}
 			return state
 		}
 
 		case ADD_SCHEDULE: {
-			return addScheduleToStudent(state, payload.schedule)
+			return state.addSchedule(payload.schedule)
 		}
 		case DESTROY_SCHEDULE: {
-			return destroyScheduleFromStudent(state, payload.scheduleId)
+			return state.destroySchedule(payload.scheduleId)
 		}
 		case DESTROY_SCHEDULES: {
 			for (const id of payload.scheduleIds) {
-				state = destroyScheduleFromStudent(state, id)
+				state = state.destroySchedule(state, id)
 			}
 			return state
 		}
 		case RENAME_SCHEDULE: {
-			return renameScheduleInStudent(
-				state,
-				payload.scheduleId,
-				payload.newTitle,
-			)
+			return state.renameSchedule(payload.scheduleId, payload.newTitle)
 		}
 		case REORDER_SCHEDULE: {
-			return reorderScheduleInStudent(
-				state,
-				payload.scheduleId,
-				payload.newIndex,
-			)
+			return state.reorderSchedule(payload.scheduleId, payload.newIndex)
 		}
 		case MOVE_SCHEDULE: {
-			return moveScheduleInStudent(state, payload.scheduleId, {
+			return state.moveSchedule(payload.scheduleId, {
 				year: payload.year,
 				semester: payload.semester,
 			})
 		}
 
 		case ADD_COURSE: {
-			return addCourseToSchedule(state, payload.scheduleId, payload.clbid)
+			return state.addCourseToSchedule(payload.scheduleId, payload.clbid)
 		}
 		case REMOVE_COURSE: {
-			return removeCourseFromSchedule(
-				state,
+			return state.removeCourseFromSchedule(
 				payload.scheduleId,
 				payload.clbid,
 			)
 		}
 		case REORDER_COURSE: {
-			return reorderCourseInSchedule(state, payload.scheduleId, {
+			return state.reorderCourseInSchedule(payload.scheduleId, {
 				clbid: payload.clbid,
 				index: payload.index,
 			})
 		}
 		case MOVE_COURSE: {
-			return moveCourseToSchedule(state, {
+			return state.moveCourseToSchedule({
 				fromScheduleId: payload.fromScheduleId,
 				toScheduleId: payload.toScheduleId,
 				clbid: payload.clbid,
@@ -156,16 +121,16 @@ export function studentReducer(state = initialState, action) {
 		}
 
 		case SET_OVERRIDE: {
-			return setOverrideOnStudent(state, payload.key, payload.value)
+			return state.setOverride(payload.key, payload.value)
 		}
 		case REMOVE_OVERRIDE: {
-			return removeOverrideFromStudent(state, payload.override)
+			return state.removeOverride(payload.override)
 		}
 		case ADD_FABRICATION: {
-			return addFabricationToStudent(state, payload.fabrication)
+			return state.addFabrication(payload.fabrication)
 		}
 		case REMOVE_FABRICATION: {
-			return removeFabricationFromStudent(state, payload.fabricationId)
+			return state.removeFabrication(payload.fabricationId)
 		}
 
 		default: {

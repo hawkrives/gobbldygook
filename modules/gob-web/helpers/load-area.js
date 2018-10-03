@@ -67,7 +67,7 @@ function loadAreaFromDatabase(areaQuery: AreaQuery) {
 
 export function loadArea(
 	areaQuery: AreaQuery,
-): ResultOrError<ParsedHansonFile> {
+): Promise<ResultOrError<ParsedHansonFile>> {
 	let {name, type, revision} = areaQuery
 
 	return loadAreaFromDatabase({name, type, revision})

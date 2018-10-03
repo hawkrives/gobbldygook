@@ -38,14 +38,14 @@ export default async function main() {
 			validateSchedule(schedule, getOnlyCourse),
 		])
 
-		let {hasConflict, conflicts} = conflictInfo
+		let {hasConflict, warnings} = conflictInfo
 
 		return {
 			...schedule.toJSON(),
 			courses,
 			term: schedule.getTerm(),
 			hasConflict,
-			conflicts,
+			warnings,
 		}
 	})
 
@@ -54,7 +54,7 @@ export default async function main() {
 	let anyConflicts = schedules.some(s => s.hasConflict)
 
 	for (let schedule of schedules) {
-		let {courses, hasConflict, conflicts} = schedule
+		let {courses, hasConflict, warnings} = schedule
 
 		if (!hasConflict) {
 			continue
@@ -65,7 +65,7 @@ export default async function main() {
 		for (let course of courses) {
 			print(1, buildDeptNum(course))
 
-			let courseConflicts = conflicts.get(course.clbid)
+			let courseConflicts = warnings.get(course.clbid)
 
 			if (!courseConflicts) {
 				continue

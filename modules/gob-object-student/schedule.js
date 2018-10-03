@@ -12,7 +12,10 @@ import type {
 	CourseType,
 	CourseError,
 } from './types'
-import {validateSchedule} from './validate-schedule'
+import {
+	validateSchedule,
+	type Result as ValidationResult,
+} from './validate-schedule'
 
 type InputSchedule = {
 	id?: string,
@@ -116,11 +119,11 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
 		return List(results).filter(Boolean)
 	}
 
-	isSpecificTerm(year: number, semester: number) {
+	isSpecificTerm(year: number, semester: number): boolean {
 		return this.year === year && this.semester === semester
 	}
 
-	async validate(getCourse: OnlyCourseLookupFunc) {
+	async validate(getCourse: OnlyCourseLookupFunc): Promise<ValidationResult> {
 		return validateSchedule(this, getCourse)
 	}
 }

@@ -5,10 +5,10 @@ import type {OnlyCourseLookupFunc} from './types'
 import {Schedule} from './schedule'
 import {Map, List} from 'immutable'
 
-type Result = {
+export type Result = {
 	id: string,
 	hasConflict: boolean,
-	conflicts: Map<string, List<?WarningType>>,
+	warnings: Map<string, List<?WarningType>>,
 }
 
 // Checks to see if the schedule is valid
@@ -22,10 +22,10 @@ export async function validateSchedule(
 	let courses = await schedule.getOnlyCourses(lookupCourse)
 
 	// discover any warnings about the course load
-	let conflicts = findWarnings(courses, schedule)
-	let hasConflict = conflicts.some(perCourse =>
+	let warnings = findWarnings(courses, schedule)
+	let hasConflict = warnings.some(perCourse =>
 		perCourse.some(w => w && w.warning === true),
 	)
 
-	return {id, hasConflict, conflicts}
+	return {id, hasConflict, warnings}
 }
