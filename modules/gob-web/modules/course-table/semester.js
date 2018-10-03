@@ -225,9 +225,7 @@ class Semester extends React.Component<Props, State> {
 					</TitleButton>
 
 					<RemoveSemesterButton
-						onClick={() =>
-							student.destroySchedulesForTerm({year, semester})
-						}
+						onClick={this.removeSemester}
 						title={`Remove ${year} ${name}`}
 					>
 						<Icon>{close}</Icon>

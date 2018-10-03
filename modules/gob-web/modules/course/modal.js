@@ -6,10 +6,16 @@ import Modal from '../../components/modal'
 import Separator from '../../components/separator'
 import {Toolbar} from '../../components/toolbar'
 import {FlatButton, RaisedButton} from '../../components/button'
-import SemesterSelector from './semester-selector'
+import {SemesterSelector} from './semester-selector'
 import ExpandedCourse from './expanded'
 import * as theme from '../../theme'
 import type {Course as CourseType} from '@gob/types'
+import {Student} from '@gob/object-student'
+import {connect} from 'react-redux'
+import {
+	changeStudent,
+	type ChangeStudentFunc,
+} from '../../redux/students/actions/change'
 
 const ContainerModal = styled(Modal)`
 	${theme.baseCard};
@@ -50,56 +56,58 @@ const Course = styled(ExpandedCourse)`
 	padding: 0 20px;
 `
 
-const removeFromSemester = (args: {
-	student: ?Object,
-	clbid: ?string,
-	scheduleId: ?string,
-}) => () => {
-	let {student, clbid, scheduleId} = args
-	if (student && scheduleId && clbid !== null && clbid !== undefined) {
-		student.removeCourse({from: scheduleId, clbid})
-	}
-}
-
-export function ModalCourse(props: {
+type Props = {
 	course: CourseType, // parent
 	onClose: () => any, // parent
 	scheduleId?: string, // parent
-	student?: Object, // redux
-}) {
-	const {course, student, scheduleId, onClose} = props
-
-	const showSemesterButtons = scheduleId || student
-
-	return (
-		<ContainerModal onClose={onClose} contentLabel="Course">
-			<Toolbar>
-				<Separator type="flex-spacer" flex={3} />
-				<RaisedButton onClick={onClose}>Close</RaisedButton>
-			</Toolbar>
-
-			<Course course={course} />
-
-			<BottomToolbar>
-				{showSemesterButtons ? (
-					<SemesterSelector
-						scheduleId={scheduleId}
-						student={student}
-						clbid={course.clbid}
-					/>
-				) : null}
-				{showSemesterButtons ? (
-					<RemoveCourseButton
-						onClick={removeFromSemester({
-							student,
-							clbid: course.clbid,
-							scheduleId,
-						})}
-					>
-						Remove Course
-					</RemoveCourseButton>
-				) : null}
-			</BottomToolbar>
-		</ContainerModal>
-	)
+	student?: Student, // redux
+	changeStudent: ChangeStudentFunc,
 }
+
+class ModalCourse extends React.Component<Props> {
+	remove = () => {
+		let {student, course, scheduleId} = this.props
+		if (!student || !scheduleId) {
+			return
+		}
+		let s = student.removeCourseFromSchedule(scheduleId, course.clbid)
+		this.props.changeStudent(s)
+	}
+
+	render() {
+		let {course, student, scheduleId, onClose} = this.props
+
+		return (
+			<ContainerModal onClose={onClose} contentLabel="Course">
+				<Toolbar>
+					<Separator type="flex-spacer" flex={3} />
+					<RaisedButton onClick={onClose}>Close</RaisedButton>
+				</Toolbar>
+
+				<Course course={course} />
+
+				<BottomToolbar>
+					{scheduleId && student ? (
+						<SemesterSelector
+							scheduleId={scheduleId}
+							student={student}
+							clbid={course.clbid}
+						/>
+					) : null}
+					{scheduleId && student ? (
+						<RemoveCourseButton onClick={this.remove}>
+							Remove Course
+						</RemoveCourseButton>
+					) : null}
+				</BottomToolbar>
+			</ContainerModal>
+		)
+	}
+}
+
+const connected = connect(
+	undefined,
+	{changeStudent},
+)(ModalCourse)
+
+export {connected as ModalCourse}

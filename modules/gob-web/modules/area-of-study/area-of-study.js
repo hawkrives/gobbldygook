@@ -82,13 +82,15 @@ class AreaOfStudy extends React.Component<Props, State> {
 	addOverride = (path: string[], ev: Event) => {
 		ev.preventDefault()
 		const codifiedPath = pathToOverride(path)
-		this.props.student.setOverride(codifiedPath, true)
+		let s = this.props.student.setOverride(codifiedPath, true)
+		this.props.changeStudent(s)
 	}
 
 	removeOverride = (path: string[], ev: Event) => {
 		ev.preventDefault()
 		const codifiedPath = pathToOverride(path)
-		this.props.student.removeOverride(codifiedPath)
+		let s = this.props.student.removeOverride(codifiedPath)
+		this.props.changeStudent(s)
 	}
 
 	toggleOverride = (path: string[], ev: Event) => {
@@ -96,9 +98,11 @@ class AreaOfStudy extends React.Component<Props, State> {
 		const codifiedPath = pathToOverride(path)
 
 		if (this.props.student.hasOverride(codifiedPath)) {
-			this.props.student.removeOverride(codifiedPath)
+			let s = this.props.student.removeOverride(codifiedPath)
+			this.props.changeStudent(s)
 		} else {
-			this.props.student.setOverride(codifiedPath, true)
+			let s = this.props.student.setOverride(codifiedPath, true)
+			this.props.changeStudent(s)
 		}
 	}
 
@@ -112,11 +116,7 @@ class AreaOfStudy extends React.Component<Props, State> {
 		let props = this.props
 		let {isOpen, confirmRemoval: showConfirmRemoval} = this.state
 
-		let {
-			type = '???',
-			revision = '0000-00',
-			name = 'Unknown Area',
-		} = props.areaOfStudy
+		let {name = 'Unknown Area'} = props.areaOfStudy
 
 		// TODO: fix slugs
 		// let slug = ''

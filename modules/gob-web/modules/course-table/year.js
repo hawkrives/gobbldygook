@@ -103,7 +103,8 @@ class Year extends React.Component<Props> {
 	}
 
 	removeYear = () => {
-		this.props.student.destroySchedulesForYear(this.props.year)
+		let s = this.props.student.destroySchedulesForYear(this.props.year)
+		this.props.changeStudent(s)
 	}
 
 	render() {

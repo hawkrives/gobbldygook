@@ -1,89 +1,102 @@
 // @flow
+
 import React from 'react'
-
-import map from 'lodash/map'
-import sortBy from 'lodash/sortBy'
-import groupBy from 'lodash/groupBy'
+import {connect} from 'react-redux'
+import {Map} from 'immutable'
 import {semesterName, expandYear} from '@gob/school-st-olaf-college'
+import {Student} from '@gob/object-student'
+import {
+	changeStudent,
+	type ChangeStudentFunc,
+} from '../../redux/students/actions/change'
 
-function findSemesterList(student: ?Object) {
-	if (!student) {
-		return {}
-	}
-
-	let schedules = map(student.schedules, s => ({
-		...s,
-		title: `${semesterName(s.semester)} – ${s.title}`,
-	}))
-
-	return groupBy(
-		sortBy(schedules, [s => s.year, s => s.semester]),
-		s => s.year,
-	)
+function semesterList(student: Student): Map<number, Map<string, string>> {
+	return student.schedules
+		.toList()
+		.map(s => ({
+			term: s.getTerm(),
+			id: s.id,
+			title: `${semesterName(s.semester)} – ${s.title}`,
+		}))
+		.groupBy(s => s.term)
+		.sortBy((_, term) => term)
+		.map(group => Map(group.map(s => [s.id, s.title])))
+		.toMap()
 }
 
-const moveToSchedule = (args: {
-	scheduleId: ?string,
-	student: ?Object,
-	clbid: ?string,
-}) => {
-	let {scheduleId, student, clbid} = args
+type Props = {
+	clbid: string,
+	scheduleId?: string,
+	student: Student,
+	changeStudent: ChangeStudentFunc,
+}
 
-	if (!student || !scheduleId || clbid === null || clbid === undefined) {
-		return () => {}
-	}
+const NO_SCHEDULE: '$none' = '$none'
+const REMOVE_FROM_SCHEDULE: '$remove' = '$remove'
 
-	return ev => {
-		const targetScheduleId = ev.currentTarget.value
-		if (targetScheduleId === '$none') {
+class SemesterSelector extends React.Component<Props> {
+	moveToSchedule = ev => {
+		let {scheduleId, student, clbid} = this.props
+
+		if (!scheduleId) {
 			return
-		} else if (targetScheduleId === '$remove') {
-			return student.removeCourse({from: scheduleId, clbid})
 		}
 
-		if (scheduleId) {
-			return student.moveCourse({
+		let targetScheduleId = ev.currentTarget.value
+		if (targetScheduleId === NO_SCHEDULE) {
+			return
+		}
+
+		let s = null
+		if (targetScheduleId === REMOVE_FROM_SCHEDULE) {
+			s = student.removeCourseFromSchedule(scheduleId, clbid)
+		} else if (scheduleId) {
+			s = student.moveCourseToSchedule({
 				from: scheduleId,
 				to: targetScheduleId,
 				clbid,
 			})
 		} else {
-			return student.addCourse({to: targetScheduleId, clbid})
+			s = student.addCourseToSchedule(targetScheduleId, clbid)
 		}
+
+		this.props.changeStudent(s)
+	}
+
+	render() {
+		let {scheduleId, student} = this.props
+
+		let specialOption = scheduleId ? (
+			<option value={REMOVE_FROM_SCHEDULE}>Remove from Schedule</option>
+		) : (
+			<option value={NO_SCHEDULE}>No Schedule</option>
+		)
+
+		let options = semesterList(student).map((group, year) => (
+			<optgroup key={year} label={expandYear(year, true, '–')}>
+				{group.map((title: string, id: string) => (
+					<option value={id} key={id}>
+						{title}
+					</option>
+				))}
+			</optgroup>
+		))
+
+		return (
+			<select
+				value={scheduleId || NO_SCHEDULE}
+				onChange={this.moveToSchedule}
+			>
+				{specialOption}
+				{[...options]}
+			</select>
+		)
 	}
 }
 
-export default function SemesterSelector(props: {
-	clbid?: string,
-	scheduleId?: string,
-	student?: Object,
-}) {
-	let {scheduleId, student, clbid} = props
+const connected = connect(
+	undefined,
+	{changeStudent},
+)(SemesterSelector)
 
-	const specialOption = scheduleId ? (
-		<option value="$remove">Remove from Schedule</option>
-	) : (
-		<option value="$none">No Schedule</option>
-	)
-
-	const options = map(findSemesterList(student), (group, year) => (
-		<optgroup key={year} label={expandYear(year, true, '–')}>
-			{group.map(schedule => (
-				<option value={schedule.id} key={schedule.id}>
-					{schedule.title}
-				</option>
-			))}
-		</optgroup>
-	))
-
-	return (
-		<select
-			value={scheduleId || 'none'}
-			disabled={!student || !clbid}
-			onChange={moveToSchedule({scheduleId, student, clbid})}
-		>
-			{specialOption}
-			{options}
-		</select>
-	)
-}
+export {connected as SemesterSelector}
