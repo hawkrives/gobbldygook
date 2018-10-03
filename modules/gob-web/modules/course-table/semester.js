@@ -2,6 +2,7 @@
 
 import React from 'react'
 import cx from 'classnames'
+import {connect} from 'react-redux'
 import {Link} from '@reach/router'
 import {List, Map} from 'immutable'
 import {countCredits} from '@gob/examine-student'
@@ -21,7 +22,10 @@ import {
 } from '@gob/object-student'
 import type {Course as CourseType} from '@gob/types'
 import {getOnlyCourse} from '../../helpers/get-courses'
-
+import {
+	action as changeStudent,
+	type ActionCreator as ChangeStudentFunc,
+} from '../../redux/students/actions/change'
 import {CourseList} from './course-list'
 import styled from 'styled-components'
 
@@ -106,17 +110,24 @@ const TitleText = styled.h1`
 	color: black;
 `
 
-// TODO: fix up types here
-type Props = {
-	canDrop: boolean,
+type DnDProps = {
+	canDrop?: boolean,
 	connectDropTarget: Function,
 	isOver: boolean,
+}
+
+type ReduxProps = {
+	changeStudent: ChangeStudentFunc,
+}
+
+type ReactProps = {
 	schedule: Schedule,
 	semester: number,
-	studentId: string,
-	year: number,
 	student: Student,
+	year: number,
 }
+
+type Props = ReduxProps & DnDProps & ReactProps
 
 type State = {
 	loading: boolean,
@@ -240,25 +251,26 @@ class Semester extends React.Component<Props, State> {
 
 // Implements the drag source contract.
 const semesterTarget = {
-	drop(props, monitor) {
-		const item = monitor.getItem()
-		const {clbid, fromScheduleId, isFromSchedule} = item
-		const toSchedule = props.schedule
+	drop(props: ReactProps & ReduxProps, monitor) {
+		let {clbid, fromScheduleId, isFromSchedule} = monitor.getItem()
+		let {student, schedule} = props
 
 		if (isFromSchedule) {
-			props.moveCourse(
-				props.studentId,
-				fromScheduleId,
-				toSchedule.id,
+			let s = student.moveCourseToSchedule({
+				from: fromScheduleId,
+				to: schedule.id,
 				clbid,
-			)
+			})
+			props.changeStudent(s)
 		} else {
-			props.addCourse(props.studentId, toSchedule.id, clbid)
+			let s = student.addCourseToSchedule(schedule.id, clbid)
+			props.changeStudent(s)
 		}
 	},
-	canDrop(props, monitor) {
-		const item = monitor.getItem()
-		return !includes(props.schedule.clbids, item.clbid)
+	canDrop(props: ReactProps, monitor) {
+		let item = monitor.getItem()
+		let hasClbid = props.schedule.clbids.includes(item.clbid)
+		return !hasClbid
 	},
 }
 
@@ -273,4 +285,9 @@ function collect(connect, monitor) {
 
 const droppable = DropTarget(IDENT_COURSE, semesterTarget, collect)(Semester)
 
-export default droppable
+const connected = connect(
+	undefined,
+	{changeStudent},
+)(droppable)
+
+export default connected

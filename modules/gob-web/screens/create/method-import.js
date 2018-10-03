@@ -11,7 +11,10 @@ import {
 import {Map, List} from 'immutable'
 import {getOnlyCourse} from '../../helpers/get-courses'
 import {StudentSummary} from '../../modules/student/student-summary'
-import {initStudent} from '../../redux/students/actions/init-student'
+import {
+	action as initStudent,
+	type ActionCreator as InitStudentFunc,
+} from '../../redux/students/actions/init-student'
 import {connect} from 'react-redux'
 import type {Course as CourseType} from '@gob/types'
 import './method-import.scss'
@@ -19,8 +22,8 @@ import './method-import.scss'
 import {Student, Schedule} from '@gob/object-student'
 
 type Props = {
-	+dispatch: Function, // redux
-	+navigate: string => mixed,
+	+initStudent: InitStudentFunc, // redux
+	+navigate?: string => mixed,
 }
 
 type State = {
@@ -63,9 +66,16 @@ class SISImportScreen extends React.Component<Props, State> {
 	}
 
 	handleCreateStudent = () => {
-		let action = initStudent(this.state.student)
-		this.props.dispatch(action)
-		this.props.navigate(`/student/${action.payload.id}`)
+		if (!this.state.student) {
+			return
+		}
+		let id = this.state.student.id
+		this.props.initStudent(this.state.student)
+
+		if (!this.props.navigate) {
+			throw new Error('no navigate prop passed!')
+		}
+		this.props.navigate(`/student/${id}`)
 	}
 
 	handleRawStudent = (ev: SyntheticInputEvent<HTMLTextAreaElement>) => {
@@ -176,24 +186,19 @@ const StudentInfo = ({student}: {student: Student}) => (
 	</>
 )
 
-class ScheduleListing extends React.Component<
-	{schedules: Map<string, Schedule>},
-	{courses: Array<CourseType>},
-> {
-	render() {
-		let {schedules = Map()} = this.props
+const ScheduleListing = (props: {schedules: Map<string, Schedule>}) => {
+	let {schedules = Map()} = props
 
-		return (
-			<ul>
-				{schedules.sortBy(s => s.semester).map(schedule => (
-					<li key={schedule.semester}>
-						{semesterName(schedule.semester)}:
-						<AbbreviatedCourseListing schedule={schedule} />
-					</li>
-				))}
-			</ul>
-		)
-	}
+	return (
+		<ul>
+			{schedules.sortBy(s => s.semester).map(schedule => (
+				<li key={schedule.semester}>
+					{semesterName(schedule.semester)}:
+					<AbbreviatedCourseListing schedule={schedule} />
+				</li>
+			))}
+		</ul>
+	)
 }
 
 class AbbreviatedCourseListing extends React.Component<
@@ -223,9 +228,7 @@ class AbbreviatedCourseListing extends React.Component<
 	}
 }
 
-let mapDispatch = dispatch => ({dispatch})
-
 export default connect(
 	undefined,
-	mapDispatch,
+	{initStudent},
 )(SISImportScreen)

@@ -1,12 +1,16 @@
 // @flow
+
 import * as React from 'react'
 import {DropTarget} from 'react-dnd'
 import {connect} from 'react-redux'
 import styled, {css} from 'styled-components'
-import {IDENT_COURSE} from '@gob/object-student'
+import {IDENT_COURSE, Student} from '@gob/object-student'
 import {Icon} from './icon'
 import {iosTrashOutline} from '../icons/ionicons'
-import {removeCourse} from '../redux/students/actions/courses'
+import {
+	action as changeStudent,
+	type ActionCreator as ChangeStudentFunc,
+} from '../redux/students/actions/change'
 
 const Box = styled.div`
 	padding: 5em 1em;
@@ -43,8 +47,8 @@ type Props = {
 	canDrop: boolean, // react-dnd
 	connectDropTarget: (React.Element<*>) => any, // react-dnd
 	isOver: boolean, // react-dnd
-	studentId: string,
-	removeCourse: (string, string, number) => any, // redux
+	changeStudent: ChangeStudentFunc,
+	student: Student,
 }
 
 function CourseRemovalBox(props: Props) {
@@ -67,10 +71,13 @@ const removeCourseTarget = {
 	drop(props: Props, monitor: any) {
 		const item = monitor.getItem()
 		const {clbid, fromScheduleId, isFromSchedule} = item
-		if (isFromSchedule) {
-			// the studentId is embedded in the passed function
-			props.removeCourse(props.studentId, fromScheduleId, clbid)
+
+		if (!isFromSchedule) {
+			return
 		}
+
+		let s = props.student.removeCourseFromSchedule(fromScheduleId, clbid)
+		props.changeStudent(s)
 	},
 	canDrop(props, monitor: any) {
 		const {isFromSearch} = monitor.getItem()
@@ -90,7 +97,13 @@ function collect(connect, monitor) {
 	}
 }
 
-export default connect(
+const droppable = DropTarget(IDENT_COURSE, removeCourseTarget, collect)(
+	CourseRemovalBox,
+)
+
+const connected = connect(
 	undefined,
-	{removeCourse},
-)(DropTarget(IDENT_COURSE, removeCourseTarget, collect)(CourseRemovalBox))
+	{changeStudent},
+)(droppable)
+
+export default connected

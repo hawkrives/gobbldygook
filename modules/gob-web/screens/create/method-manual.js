@@ -3,9 +3,14 @@
 import React from 'react'
 import {FlatButton} from '../../components/button'
 import cx from 'classnames'
+import {Set} from 'immutable'
 import Autosize from 'react-input-autosize'
 import {connect} from 'react-redux'
-import {initStudent} from '../../redux/students/actions/init-student'
+import {Student} from '@gob/object-student'
+import {
+	action as initStudent,
+	type ActionCreator as InitStudentFunc,
+} from '../../redux/students/actions/init-student'
 import {AreaPicker, type Selection} from '../../components/area-of-study/picker'
 
 import './method-manual.scss'
@@ -13,8 +18,8 @@ import './method-manual.scss'
 let now = new Date()
 
 type Props = {
-	dispatch: Function, // redux
-	navigate: string => mixed, // react-router
+	+initStudent: InitStudentFunc, // redux
+	+navigate?: string => mixed, // react-router
 }
 
 type State = {
@@ -58,10 +63,7 @@ class ManualCreationScreen extends React.Component<Props, State> {
 		let val = parseInt(ev.target.value)
 		let isValid = Boolean(val && ev.target.value.length === 4)
 		this.setState(
-			() => ({
-				matriculation: val,
-				matriculationIsValid: isValid,
-			}),
+			() => ({matriculation: val, matriculationIsValid: isValid}),
 			this.checkValidity,
 		)
 	}
@@ -70,10 +72,7 @@ class ManualCreationScreen extends React.Component<Props, State> {
 		let val = parseInt(ev.target.value)
 		let isValid = Boolean(val && ev.target.value.length === 4)
 		this.setState(
-			() => ({
-				graduation: val,
-				graduationIsValid: isValid,
-			}),
+			() => ({graduation: val, graduationIsValid: isValid}),
 			this.checkValidity,
 		)
 	}
@@ -94,12 +93,12 @@ class ManualCreationScreen extends React.Component<Props, State> {
 	onCreateStudent = () => {
 		this.setState(() => ({submitted: true}))
 
-		let studies = [
+		let studies = Set([
 			...this.state.degrees,
 			...this.state.majors,
 			...this.state.concentrations,
 			...this.state.emphases,
-		]
+		])
 
 		// pick out only the values that we want
 		studies = studies.map(({name, revision, type}) => ({
@@ -115,9 +114,13 @@ class ManualCreationScreen extends React.Component<Props, State> {
 			studies,
 		}
 
-		let action = initStudent(rawStudent)
-		this.props.dispatch(action)
-		this.props.navigate(`/student/${action.payload.id}`)
+		let student = new Student((rawStudent: any))
+
+		this.props.initStudent(student)
+		if (!this.props.navigate) {
+			throw new Error('no navigate prop passed!')
+		}
+		this.props.navigate(`/student/${student.id}`)
 	}
 
 	render() {
@@ -218,9 +221,7 @@ class ManualCreationScreen extends React.Component<Props, State> {
 	}
 }
 
-let mapDispatch = dispatch => ({dispatch})
-
 export default connect(
 	undefined,
-	mapDispatch,
+	{initStudent},
 )(ManualCreationScreen)
