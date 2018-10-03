@@ -20,7 +20,7 @@ const SearchSidebar = Loadable({
 import CourseRemovalBox from '../../components/course-removal-box'
 import {ConnectedSidebarToolbar} from '../../components/sidebar'
 import {AreaOfStudySidebar} from '../../modules/student/area-of-study-sidebar'
-import {ConnectedStudentSummary as StudentSummary} from '../../modules/student/connected-student-summary'
+import {StudentSummary} from '../../modules/student/student-summary'
 
 const StatusSidebar = ({student}: {student: Undoable<Student>}) => (
 	<aside>
