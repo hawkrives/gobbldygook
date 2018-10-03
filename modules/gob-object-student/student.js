@@ -132,7 +132,7 @@ export class Student extends StudentRecord<StudentType> {
 		)
 	}
 
-	findAllSchedulesForTerm(args: {
+	findSchedulesForTerm(args: {
 		year: number,
 		semester: number,
 	}): List<Schedule> {

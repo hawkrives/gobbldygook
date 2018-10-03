@@ -37,10 +37,7 @@ export class SemesterDetail extends React.Component<Props, State> {
 		let year = parseInt(term.substr(0, 4), 10)
 		let semester = parseInt(term.substr(4, 1), 10)
 
-		const schedules = this.props.student.findAllSchedulesForTerm({
-			year,
-			semester,
-		})
+		let schedules = student.findSchedulesForTerm({year, semester})
 
 		let sem = semesterName(semester)
 		let name = this.props.student.name
