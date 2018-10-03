@@ -17,11 +17,17 @@ let StyledModal = styled(Modal)`
 `
 
 type Props = {
-	navigate: string => mixed,
+	navigate?: string => mixed,
 }
 
 export default function CourseSearcherOverlay(props: Props) {
-	const boundCloseModal = () => props.navigate('../')
+	let {navigate} = props
+
+	if (!navigate) {
+		return <p>Error: @reach/router did not pass navigate!</p>
+	}
+
+	let boundCloseModal = () => navigate('../')
 
 	return (
 		<StyledModal onClose={boundCloseModal} contentLabel="Search">

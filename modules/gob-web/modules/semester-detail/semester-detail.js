@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import filter from 'lodash/filter'
 import DocumentTitle from 'react-document-title'
 import {semesterName} from '@gob/school-st-olaf-college'
 import styled from 'styled-components'
@@ -13,7 +12,7 @@ const DetailText = styled.pre`
 
 type RouterProps = {
 	term?: string,
-	uri: string,
+	uri?: string, // TODO: not actually optional
 }
 
 type ReactProps = {
@@ -23,17 +22,13 @@ type ReactProps = {
 
 type Props = RouterProps & ReactProps
 
-type State = {
-	term: ?string,
-}
+type State = {}
 
-export default class SemesterDetail extends React.Component<Props, State> {
-	state = {
-		term: null,
-	}
+export class SemesterDetail extends React.Component<Props, State> {
+	state = {}
 
 	render() {
-		const {term} = this.props
+		let {term, student} = this.props
 
 		if (!term) {
 			return <p>Unknown term</p>
@@ -55,7 +50,7 @@ export default class SemesterDetail extends React.Component<Props, State> {
 			<>
 				<DocumentTitle title={title} />
 				<DetailText>
-					{this.props.uri}
+					{this.props.uri || ''}
 					{'\n'}
 					{JSON.stringify(schedules.toJSON(), null, 2)}
 				</DetailText>

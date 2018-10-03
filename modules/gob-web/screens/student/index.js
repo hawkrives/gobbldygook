@@ -63,10 +63,20 @@ const TermSidebar = ({student}: {student: Undoable<Student>}) => (
 )
 
 export default function StudentIndex(props: {
-	studentId: string,
-	location: {},
-	navigate: string => mixed,
+	studentId?: string,
+	location?: {search: string},
+	navigate?: string => mixed,
 }) {
+	let {location, studentId, navigate} = props
+
+	if (!studentId) {
+		return <p>Student {this.props.studentId} could not be loaded.</p>
+	}
+
+	if (!location || !navigate) {
+		return <p>Error: @reach/router did not pass location or navigate!</p>
+	}
+
 	let params = new URLSearchParams(location.search)
 
 	return (
@@ -80,13 +90,13 @@ export default function StudentIndex(props: {
 							path="/search"
 							term={params.get('term')}
 							student={student}
-							navigate={props.navigate}
+							navigate={navigate}
 						/>
 
 						<TermSidebar
 							path="/term/:term"
 							student={student}
-							navigate={props.navigate}
+							navigate={navigate}
 						/>
 					</Router>
 
@@ -102,7 +112,7 @@ export default function StudentIndex(props: {
 					{params.has('share') && (
 						<ShareStudentOverlay
 							student={student.present}
-							navigate={props.navigate}
+							navigate={navigate}
 							location={location}
 						/>
 					)}

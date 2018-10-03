@@ -1,3 +1,3 @@
 // @flow
 
-export {default} from './semester-detail'
+export {SemesterDetail as default} from './semester-detail'
