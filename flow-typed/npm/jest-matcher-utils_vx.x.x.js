@@ -16,17 +16,3 @@
 declare module 'jest-matcher-utils' {
   declare module.exports: any;
 }
-
-/**
- * We include stubs for each file inside this npm package in case you need to
- * require those files directly. Feel free to delete any files that aren't
- * needed.
- */
-declare module 'jest-matcher-utils/build/index' {
-  declare module.exports: any;
-}
-
-// Filename aliases
-declare module 'jest-matcher-utils/build/index.js' {
-  declare module.exports: $Exports<'jest-matcher-utils/build/index'>;
-}
