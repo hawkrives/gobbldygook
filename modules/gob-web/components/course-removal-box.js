@@ -3,21 +3,20 @@ import * as React from 'react'
 import {DropTarget} from 'react-dnd'
 import {connect} from 'react-redux'
 import styled, {css} from 'styled-components'
-import * as theme from '../theme'
 import {IDENT_COURSE} from '@gob/object-student'
 import {Icon} from './icon'
 import {iosTrashOutline} from '../icons/ionicons'
 import {removeCourse} from '../redux/students/actions/courses'
 
-const Box: any = styled.div`
+const Box = styled.div`
 	padding: 5em 1em;
-	color: ${theme.gray500};
+	color: var(--gray-500);
 	background-color: white;
 	border-radius: 5px;
 
 	position: fixed;
-	top: calc(${theme.pageEdgePadding} * 2);
-	left: calc(${theme.pageEdgePadding} * 2);
+	top: calc(var(--page-edge-padding) * 2);
+	left: calc(var(--page-edge-padding) * 2);
 	max-width: 240px;
 
 	display: none;
@@ -28,15 +27,15 @@ const Box: any = styled.div`
 		css`
 			color: black;
 			display: flex;
-			z-index: ${theme.zSidebar + 1};
+			z-index: calc(var(--z-sidebar) + 1);
 		`};
 
 	${props =>
 		props.isOver &&
 		css`
-			box-shadow: 0 0 10px ${theme.red900};
-			color: ${theme.red900};
-			background-color: ${theme.red50};
+			box-shadow: 0 0 10px var(--red-900);
+			color: var(--red-900);
+			background-color: var(--red-50);
 		`};
 `
 
