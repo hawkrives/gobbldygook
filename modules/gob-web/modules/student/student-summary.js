@@ -14,6 +14,8 @@ import {
 	type ChangeStudentFunc,
 } from '../../redux/students/actions/change'
 import {Student, type AreaQuery} from '@gob/object-student'
+import {checkStudentAgainstArea} from '../../workers/check-student'
+import {loadArea} from '../../helpers/load-area'
 
 import './student-summary.scss'
 
@@ -80,11 +82,16 @@ class StudentSummary extends React.Component<Props, State> {
 
 		this.setState(() => ({checking: true}))
 
-		// TODO: figure out how to avoid(?) computing Areas twice, yet also allow
-		// <AreaOfStudy/> to control the computation???
-		// $FlowFixMe
-		let promise = student.checkGraduatability()
-		let {canGraduate, creditsNeeded, creditsTaken} = promise
+		let areas = student.studies.map(loadArea)
+		let loadedAreas = (await Promise.all(areas))
+			.filter(({error}) => !error)
+			.map(({data}) => data)
+
+		let promises = loadedAreas.map(a => checkStudentAgainstArea(student, a))
+		let results = await Promise.all(promises)
+
+		let canGraduate = results.every(r => r.computed === true)
+		let {creditsNeeded = 0, creditsTaken = 0} = {}
 
 		this.setState(() => ({
 			checking: false,
