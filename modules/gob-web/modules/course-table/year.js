@@ -1,12 +1,17 @@
 // @flow
 
 import React from 'react'
+import {connect} from 'react-redux'
 import {FlatButton} from '../../components/button'
 import Semester from './semester'
 import {findFirstAvailableSemester} from '../../helpers/find-first-available-semester'
 import {expandYear, semesterName} from '@gob/school-st-olaf-college'
 import {Student, Schedule} from '@gob/object-student'
 import * as theme from '../../theme'
+import {
+	changeStudent,
+	type ChangeStudentFunc,
+} from '../../redux/students/actions/change'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -75,16 +80,17 @@ const canAddSemester = (nextAvailableSemester?: number) => {
 type Props = {
 	student: Student,
 	year: number,
+	changeStudent: ChangeStudentFunc,
 }
 
-export default class Year extends React.PureComponent<Props> {
+class Year extends React.Component<Props> {
 	addSemester = () => {
-		const nextAvailableSemester = findFirstAvailableSemester(
+		let nextAvailableSemester = findFirstAvailableSemester(
 			[...this.props.student.schedules.values()],
 			this.props.year,
 		)
 
-		this.props.student.addSchedule(
+		let s = this.props.student.addSchedule(
 			new Schedule({
 				year: this.props.year,
 				semester: nextAvailableSemester,
@@ -92,6 +98,8 @@ export default class Year extends React.PureComponent<Props> {
 				active: true,
 			}),
 		)
+
+		this.props.changeStudent(s)
 	}
 
 	removeYear = () => {
@@ -108,7 +116,7 @@ export default class Year extends React.PureComponent<Props> {
 		let niceYear = expandYear(year)
 
 		let nextSemester = findFirstAvailableSemester(
-			[...schedules.values],
+			[...schedules.values()],
 			year,
 		)
 		let isAddSemesterDisabled = !canAddSemester(nextSemester)
@@ -153,3 +161,10 @@ export default class Year extends React.PureComponent<Props> {
 		)
 	}
 }
+
+const connected = connect(
+	undefined,
+	{changeStudent},
+)(Year)
+
+export {connected as Year}

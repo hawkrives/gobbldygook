@@ -2,6 +2,7 @@
 
 import React from 'react'
 import cx from 'classnames'
+import {connect} from 'react-redux'
 import {FlatButton} from '../../components/button'
 import {Icon} from '../../components/icon'
 import Requirement from './requirement'
@@ -11,6 +12,10 @@ import {pathToOverride, type EvaluationResult} from '@gob/examine-student'
 import {Student, type AreaQuery} from '@gob/object-student'
 import {checkStudentAgainstArea} from '../../workers/check-student'
 import {loadArea} from '../../helpers/load-area'
+import {
+	changeStudent,
+	type ChangeStudentFunc,
+} from '../../redux/students/actions/change'
 
 import './area-of-study.scss'
 
@@ -19,6 +24,7 @@ type Props = {
 	showCloseButton: boolean,
 	showEditButton: boolean,
 	student: Student,
+	changeStudent: ChangeStudentFunc,
 }
 
 type State = {|
@@ -29,7 +35,7 @@ type State = {|
 	error: ?string,
 |}
 
-export class AreaOfStudy extends React.Component<Props, State> {
+class AreaOfStudy extends React.Component<Props, State> {
 	state = {
 		isOpen: false,
 		confirmRemoval: false,
@@ -94,6 +100,12 @@ export class AreaOfStudy extends React.Component<Props, State> {
 		} else {
 			this.props.student.setOverride(codifiedPath, true)
 		}
+	}
+
+	removeArea = (ev: SyntheticEvent<HTMLButtonElement>) => {
+		ev.preventDefault()
+		let s = this.props.student.removeArea(this.props.areaOfStudy)
+		this.props.changeStudent(s)
 	}
 
 	render() {
@@ -163,10 +175,7 @@ export class AreaOfStudy extends React.Component<Props, State> {
 				<span className="button-group">
 					<FlatButton
 						className="area--actually-remove-area"
-						onClick={ev => {
-							ev.preventDefault()
-							props.student.removeArea({name, type, revision})
-						}}
+						onClick={this.removeArea}
 					>
 						Remove
 					</FlatButton>
@@ -249,3 +258,10 @@ function AreaDetails(props: {results: ?EvaluationResult, area: AreaQuery}) {
 		/>
 	)
 }
+
+const connected = connect(
+	undefined,
+	{changeStudent},
+)(AreaOfStudy)
+
+export {connected as AreaOfStudy}

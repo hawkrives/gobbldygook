@@ -7,7 +7,12 @@ import {AreaOfStudy} from '../area-of-study'
 import {AreaPicker, type Selection} from '../../components/area-of-study/picker'
 import {FlatButton} from '../../components/button'
 import {List} from 'immutable'
+import {connect} from 'react-redux'
 import {Student, type AreaQuery} from '@gob/object-student'
+import {
+	changeStudent,
+	type ChangeStudentFunc,
+} from '../../redux/students/actions/change'
 
 import './area-of-study-group.scss'
 
@@ -18,35 +23,37 @@ type Props = {
 	showAreaPicker: boolean,
 	student: Student,
 	type: string,
+	changeStudent: ChangeStudentFunc,
 }
 
-export class AreaOfStudyGroup extends React.PureComponent<Props> {
+class AreaOfStudyGroup extends React.PureComponent<Props> {
 	handleChange = (value: Array<Selection>, action: any) => {
 		if (action.action === 'remove-value') {
 			let {name, type, revision} = action.removedValue
 			let area = {name, type, revision}
-			this.props.student.removeArea(area)
+			let s = this.props.student.removeArea(area)
+			this.props.changeStudent(s)
 		} else if (action.action === 'select-option') {
 			let {name, type, revision} = action.option
 			let area = {name, type, revision}
-			this.props.student.addArea(area)
+			let s = this.props.student.addArea(area)
+			this.props.changeStudent(s)
 		}
 	}
 
 	render() {
-		const props = this.props
-		const showAreaPicker = props.showAreaPicker || false
-		const showOrHidePicker = showAreaPicker
-			? props.onEndAddArea
-			: props.onInitiateAddArea
+		let {showAreaPicker = false, areas = []} = this.props
+		let showOrHidePicker = showAreaPicker
+			? this.props.onEndAddArea
+			: this.props.onInitiateAddArea
 
 		return (
 			<section className="area-of-study-group">
 				<h1 className="area-type-heading">
-					{capitalize(pluralizeArea(props.type))}
+					{capitalize(pluralizeArea(this.props.type))}
 					<FlatButton
 						className="add-area-of-study"
-						onClick={ev => showOrHidePicker(props.type, ev)}
+						onClick={ev => showOrHidePicker(this.props.type, ev)}
 					>
 						{showAreaPicker ? 'Close' : 'Add ∙ Edit'}
 					</FlatButton>
@@ -54,9 +61,9 @@ export class AreaOfStudyGroup extends React.PureComponent<Props> {
 
 				{showAreaPicker ? (
 					<AreaPicker
-						type={props.type}
+						type={this.props.type}
 						onChange={this.handleChange}
-						selections={props.student.studies
+						selections={this.props.student.studies
 							.map(a => {
 								let rev = a.revision ? ` (${a.revision})` : ''
 								return {
@@ -66,25 +73,27 @@ export class AreaOfStudyGroup extends React.PureComponent<Props> {
 								}
 							})
 							.toArray()}
-						availableThrough={props.student.graduation}
+						availableThrough={this.props.student.graduation}
 					/>
 				) : null}
 
-				{props.areas
-					? props.areas.map(area => (
-							<AreaOfStudy
-								areaOfStudy={area}
-								key={`${area.name}${String(area.revision)}`}
-								onRemoveArea={() =>
-									this.props.student.removeArea(area)
-								}
-								showCloseButton={showAreaPicker}
-								showEditButton={showAreaPicker}
-								student={props.student}
-							/>
-					  ))
-					: null}
+				{areas.map(area => (
+					<AreaOfStudy
+						areaOfStudy={area}
+						key={`${area.name}${String(area.revision)}`}
+						showCloseButton={showAreaPicker}
+						showEditButton={showAreaPicker}
+						student={this.props.student}
+					/>
+				))}
 			</section>
 		)
 	}
 }
+
+const connected = connect(
+	undefined,
+	{changeStudent},
+)(AreaOfStudyGroup)
+
+export {connected as AreaOfStudyGroup}

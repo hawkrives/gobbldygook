@@ -14,3 +14,6 @@ export const DESTROY_STUDENT: 'gobbldygook/students/DESTROY_STUDENT' =
 
 export const SAVE_STUDENT: 'gobbldygook/processed/SAVE_STUDENT' =
 	'gobbldygook/processed/SAVE_STUDENT'
+
+export const INIT_STUDENT: 'gobbldygook/processed/INIT_STUDENT' =
+	'gobbldygook/processed/INIT_STUDENT'

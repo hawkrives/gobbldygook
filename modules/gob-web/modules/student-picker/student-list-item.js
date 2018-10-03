@@ -23,13 +23,13 @@ const Container = styled.div`
 
 	border-left: solid 3px transparent;
 	&.loading {
-		border-left-color: ${theme.blue300};
+		border-left-color: var(--blue-300);
 	}
 	&.can-graduate {
-		border-left-color: ${theme.green300};
+		border-left-color: var(--green-300);
 	}
 	&.cannot-graduate {
-		border-left-color: ${theme.red300};
+		border-left-color: var(--red-300);
 	}
 `
 
@@ -47,8 +47,8 @@ const DeleteButton = styled(FlatButton)`
 
 	&:hover {
 		color: white;
-		border-color: ${theme.red900};
-		background-color: ${theme.red500};
+		border-color: var(--red-900);
+		background-color: var(--red-500);
 	}
 `
 
@@ -86,7 +86,7 @@ const ListItemLink = styled(Link)`
 	${theme.linkUndecorated};
 	background-color: white;
 	&.is-selected {
-		background-color: ${theme.blue50};
+		background-color: var(--blue-50);
 	}
 
 	flex: 1;
@@ -103,8 +103,8 @@ const ListItemLink = styled(Link)`
 	&:hover,
 	&:focus {
 		outline: none;
-		background-color: ${theme.blue50};
-		border-color: ${theme.blue};
+		background-color: var(--blue-50);
+		border-color: var(--blue);
 	}
 `
 

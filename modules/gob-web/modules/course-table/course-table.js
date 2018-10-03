@@ -1,15 +1,17 @@
 // @flow
 
 import React from 'react'
+import {connect} from 'react-redux'
 import styled from 'styled-components'
 import {expandYear} from '@gob/school-st-olaf-college'
 import {findFirstAvailableYear} from '../../helpers/find-first-available-year'
-import map from 'lodash/map'
-import sortBy from 'lodash/sortBy'
-import groupBy from 'lodash/groupBy'
-
 import {FlatButton} from '../../components/button'
-import Year from './year'
+import {Year} from './year'
+import {Student, Schedule} from '@gob/object-student'
+import {
+	changeStudent,
+	type ChangeStudentFunc,
+} from '../../redux/students/actions/change'
 
 const AddYearButton = styled(FlatButton)`
 	display: block;
@@ -19,8 +21,6 @@ const AddYearButton = styled(FlatButton)`
 	font-weight: 500;
 	font-size: 0.9em;
 
-	// 4px is the semester edge padding
-	// 7.5px is the internal semester padding
 	margin: 0 var(--semester-spacing) var(--block-edge-padding);
 	padding-left: var(--semester-side-padding);
 
@@ -29,48 +29,75 @@ const AddYearButton = styled(FlatButton)`
 	}
 `
 
-const Container = styled.div``
-
-type PropTypes = {
+type Props = {
 	className?: string,
-	student: Object,
+	student: Student,
+	changeStudent: ChangeStudentFunc,
 }
 
-export default function CourseTable(props: PropTypes) {
-	let {student} = props
-	let {schedules, matriculation, addSchedule} = student
+class CourseTable extends React.Component<Props> {
+	addSchedule = () => {
+		let {student} = this.props
 
-	let nextAvailableYear = findFirstAvailableYear(schedules, matriculation)
-	let canAddYear = nextAvailableYear != null // graduation > nextAvailableYear
+		let nextAvailableYear = findFirstAvailableYear(
+			[...student.schedules.values()],
+			student.matriculation,
+		)
 
-	let nextYearButton = canAddYear &&
-		nextAvailableYear != null && (
+		let s = student.addSchedule(
+			new Schedule({
+				year: nextAvailableYear,
+				semester: 1,
+				index: 1,
+				active: true,
+			}),
+		)
+
+		this.props.changeStudent(s)
+	}
+
+	render() {
+		let {schedules, matriculation} = this.props.student
+
+		let nextAvailableYear = findFirstAvailableYear(
+			[...schedules.values()],
+			matriculation,
+		)
+
+		let nextYearButton = nextAvailableYear != null && (
 			<AddYearButton
 				key="add-year"
 				title="Add Year"
-				onClick={() =>
-					addSchedule({
-						year: nextAvailableYear,
-						semester: 1,
-						index: 1,
-						active: true,
-					})
-				}
+				onClick={this.addSchedule}
 			>
 				Add {expandYear(nextAvailableYear, false, '–')}
 			</AddYearButton>
 		)
 
-	let sorted = sortBy(schedules, s => s.year)
-	let grouped = groupBy(sorted, s => s.year)
+		let years = schedules
+			.groupBy(s => s.year)
+			.sortBy((_, key) => key)
+			.map((schedules, year) => (
+				<Year key={year} year={year} student={this.props.student} />
+			))
+			.toList()
 
-	let years = map(grouped, (schedules, year) => (
-		<Year key={year} year={Number(year)} student={student} />
-	))
+		if (nextAvailableYear != null) {
+			let targetIndex = nextAvailableYear - matriculation + 1
+			years = years.insert(targetIndex, nextYearButton)
+		}
 
-	if (nextAvailableYear != null) {
-		years.splice(nextAvailableYear - matriculation + 1, 0, nextYearButton)
+		return (
+			<section className={this.props.className}>
+				{years.toArray()}
+			</section>
+		)
 	}
-
-	return <Container className={props.className}>{years}</Container>
 }
+
+const connected = connect(
+	undefined,
+	{changeStudent},
+)(CourseTable)
+
+export {connected as CourseTable}

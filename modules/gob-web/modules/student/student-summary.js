@@ -1,14 +1,18 @@
 // @flow
+
 import React from 'react'
 import cx from 'classnames'
 import listify from 'listify'
 import sample from 'lodash/sample'
 import {Set} from 'immutable'
-
+import {connect} from 'react-redux'
 import {Card} from '../../components/card'
 import {AvatarLetter} from '../../components/avatar-letter'
 import ContentEditable from '../../components/content-editable'
-
+import {
+	changeStudent,
+	type ChangeStudentFunc,
+} from '../../redux/students/actions/change'
 import {Student, type AreaQuery} from '@gob/object-student'
 
 import './student-summary.scss'
@@ -45,6 +49,7 @@ type Props = {
 	showAvatar?: boolean,
 	showMessage?: boolean,
 	student: Student,
+	changeStudent: ChangeStudentFunc,
 }
 
 type State = {
@@ -55,7 +60,7 @@ type State = {
 	checking: boolean,
 }
 
-export class StudentSummary extends React.Component<Props, State> {
+class StudentSummary extends React.Component<Props, State> {
 	state = {
 		message: this.props.randomizeHello
 			? sample(welcomeMessages)
@@ -89,15 +94,24 @@ export class StudentSummary extends React.Component<Props, State> {
 		}))
 	}
 
+	changeName = (val: string) => {
+		let s = this.props.student.setName(val)
+		this.props.changeStudent(s)
+	}
+	changeGraduation = (val: string) => {
+		let s = this.props.student.setGraduation(val)
+		this.props.changeStudent(s)
+	}
+	changeMatriculation = (val: string) => {
+		let s = this.props.student.setMatriculation(val)
+		this.props.changeStudent(s)
+	}
+
 	render() {
 		let {student, showMessage = true, showAvatar = true} = this.props
-
 		let {checking, canGraduate, creditsNeeded, creditsTaken} = this.state
-
 		let {studies} = student
-
 		let gradClassName = canGraduate ? 'can-graduate' : 'cannot-graduate'
-
 		let message = this.state.message
 
 		return (
@@ -108,14 +122,14 @@ export class StudentSummary extends React.Component<Props, State> {
 				<Header
 					canGraduate={canGraduate}
 					name={student.name}
-					onChangeName={student.setName}
+					onChangeName={this.changeName}
 					helloMessage={message}
 					showAvatar={showAvatar}
 				/>
 
 				<DateSummary
-					onChangeGraduation={student.setGraduation}
-					onChangeMatriculation={student.setMatriculation}
+					onChangeGraduation={this.changeGraduation}
+					onChangeMatriculation={this.changeMatriculation}
 					matriculation={student.matriculation}
 					graduation={student.graduation}
 				/>
@@ -132,6 +146,13 @@ export class StudentSummary extends React.Component<Props, State> {
 		)
 	}
 }
+
+const connected = connect(
+	undefined,
+	{changeStudent},
+)(StudentSummary)
+
+export {connected as StudentSummary}
 
 type HeaderProps = {
 	canGraduate: boolean,

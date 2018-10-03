@@ -22,8 +22,8 @@ import {
 import type {Course as CourseType} from '@gob/types'
 import {getOnlyCourse} from '../../helpers/get-courses'
 import {
-	action as changeStudent,
-	type ActionCreator as ChangeStudentFunc,
+	changeStudent,
+	type ChangeStudentFunc,
 } from '../../redux/students/actions/change'
 import {CourseList} from './course-list'
 import styled from 'styled-components'
@@ -167,7 +167,8 @@ class Semester extends React.Component<Props, State> {
 
 	removeSemester = () => {
 		const {student, semester, year} = this.props
-		student.destroySchedulesForTerm({year, semester})
+		let s = student.destroySchedulesForTerm({year, semester})
+		this.props.changeStudent(s)
 	}
 
 	render() {
