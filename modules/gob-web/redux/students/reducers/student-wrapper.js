@@ -1,32 +1,28 @@
-import {BEGIN_LOAD_STUDENT, LOAD_STUDENT} from '../constants'
+// @flow
 
-import reducer from './student'
+import {LOAD_STUDENT} from '../constants'
+import type {Undoable, Action} from '../../types'
+import {undoableReducer} from './student'
+import {Student} from '@gob/object-student'
+
+type State = Undoable<Student>
 
 const initialState = {
-	isLoading: false,
-	data: {present: {}, past: [], future: []},
+	present: new Student(),
+	past: [],
+	future: [],
 }
 
-export default function studentWrapperReducer(state = initialState, action) {
+export function reducer(state: State = initialState, action: Action<*>) {
 	const {type, payload} = action
 
 	switch (type) {
-		case BEGIN_LOAD_STUDENT: {
-			return {...state, isLoading: true}
-		}
 		case LOAD_STUDENT: {
-			return {
-				...state,
-				isLoading: false,
-				data: reducer({...state.data, present: payload}, action),
-			}
+			return undoableReducer({...state, present: payload}, action)
 		}
 
 		default: {
-			return {
-				...state,
-				data: reducer(state.data, action),
-			}
+			return undoableReducer(state, action)
 		}
 	}
 }

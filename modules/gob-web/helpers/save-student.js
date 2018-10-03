@@ -1,31 +1,29 @@
-import union from 'lodash/union'
-import reject from 'lodash/reject'
+// @flow
+
 import stringify from 'stabilize'
-import {prepareStudentForSave} from '@gob/object-student'
-import debug from 'debug'
-const log = debug('web:save-student')
+import {Student, prepareStudentForSave} from '@gob/object-student'
 
-export function getIdCache() {
-	return JSON.parse(localStorage.getItem('studentIds') || '[]')
+export function getIdCache(): Set<string> {
+	return new Set(JSON.parse(localStorage.getItem('studentIds') || '[]'))
 }
 
-export function setIdCache(ids) {
-	localStorage.setItem('studentIds', JSON.stringify(ids))
+export function setIdCache(ids: Set<string>) {
+	localStorage.setItem('studentIds', JSON.stringify([...ids]))
 }
 
-export function addStudentToCache(studentId) {
+export function addStudentToCache(studentId: string) {
 	let ids = getIdCache()
-	ids = union(ids, [studentId])
+	ids.add(studentId)
 	setIdCache(ids)
 }
 
-export function removeStudentFromCache(studentId) {
+export function removeStudentFromCache(studentId: string) {
 	let ids = getIdCache()
-	ids = reject(ids, id => id === studentId)
+	ids.delete(studentId)
 	setIdCache(ids)
 }
 
-export function saveStudent(student) {
+export async function saveStudent(student: Student) {
 	// 1. grab the old (still JSON-encoded) student from localstorage
 	// 2. compare it to the current one
 	// 3. if they're different, update dateLastModified, stringify, and save.
@@ -33,18 +31,15 @@ export function saveStudent(student) {
 	const oldVersion = localStorage.getItem(student.id)
 
 	let prepared = prepareStudentForSave(student)
+	if (oldVersion === stringify(prepared)) {
+		return
+	}
 
-	return Promise.resolve()
-		.then(() => {
-			if (oldVersion === stringify(prepared)) {
-				return
-			}
-			log(`saving student ${prepared.name} (${prepared.id})`)
-			prepared = {...prepared, dateLastModified: new Date()}
-			localStorage.setItem(prepared.id, stringify(prepared))
-			return addStudentToCache(prepared.id)
-		})
-		.then(() => {
-			return prepared
-		})
+	let toSave = student.set('dateLastModified', new Date())
+	let toSavePrepared = prepareStudentForSave(toSave)
+
+	localStorage.setItem(toSavePrepared.id, stringify(toSavePrepared))
+	await addStudentToCache(toSavePrepared.id)
+
+	return toSave
 }

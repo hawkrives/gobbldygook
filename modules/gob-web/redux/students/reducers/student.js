@@ -7,7 +7,7 @@ import {LOAD_STUDENT, INIT_STUDENT, IMPORT_STUDENT} from '../constants'
 
 const initialState: Student = new Student()
 
-export function studentReducer(
+function reducer(
 	state: Student = initialState,
 	action: {type: string, error?: boolean, payload: Student},
 ) {
@@ -29,7 +29,7 @@ export function studentReducer(
 	}
 }
 
-export default undoable(studentReducer, {
+const undoableReducer = undoable(reducer, {
 	limit: 10,
 
 	filter(action, currentState, previousState) {
@@ -46,3 +46,5 @@ export default undoable(studentReducer, {
 		IMPORT_STUDENT,
 	],
 })
+
+export {undoableReducer, reducer}

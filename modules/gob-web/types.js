@@ -1,7 +1,5 @@
 // @flow
 
-export type Undoable<T> = {
-	past: Array<T>,
-	future: Array<T>,
-	present: T,
-}
+import type {Undoable} from './redux/types'
+
+export type {Undoable}

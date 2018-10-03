@@ -1,4 +1,3 @@
-import map from 'lodash/map'
 import uniq from 'lodash/uniq'
 
 import {LOAD_STUDENTS} from '../constants'
@@ -15,7 +14,7 @@ export function loadStudents() {
 		return dispatch({
 			type: LOAD_STUDENTS,
 			payload: Promise.all(
-				map(studentIds, id => dispatch(loadStudent(id))),
+				studentIds.map(id => dispatch(loadStudent(id))),
 			),
 		})
 	}

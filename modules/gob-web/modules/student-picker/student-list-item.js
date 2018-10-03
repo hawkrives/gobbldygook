@@ -1,4 +1,5 @@
 // @flow
+
 import React from 'react'
 import cx from 'classnames'
 import {Link} from '@reach/router'
@@ -118,15 +119,6 @@ type Props = {
 export default function StudentListItem(props: Props) {
 	const {student, isEditing, destroyStudent, as} = props
 
-	const isLoading =
-		student.isLoading ||
-		student.isFetching ||
-		student.isValdiating ||
-		student.isChecking
-
-	const classes = {}
-	classes.loading = isLoading
-
 	const sortedStudies = sortStudiesByType([...student.data.present.studies])
 	const groupedStudies = groupBy(sortedStudies, s => s.type)
 
@@ -139,7 +131,7 @@ export default function StudentListItem(props: Props) {
 	))
 
 	return (
-		<Container as={as} className={cx(classes)}>
+		<Container as={as}>
 			{isEditing && (
 				<DeleteButton
 					onClick={() => destroyStudent(student.data.present.id)}

@@ -1,19 +1,17 @@
-/* globals module */
+// @flow
+
 import {applyMiddleware, createStore, compose} from 'redux'
 import promiseMiddleware from 'redux-promise'
 import thunkMiddleware from 'redux-thunk'
 import {createLogger as loggingMiddleware} from 'redux-logger'
-import checkStudentsMiddleware from './middleware/check-students'
-import saveStudentsMiddleware from './middleware/save-students'
 import rootReducer from './reducer'
 import freezingMiddleware from 'redux-freeze'
 
+// prettier-ignore
 let middleware = [
 	promiseMiddleware,
 	thunkMiddleware,
 	freezingMiddleware,
-	checkStudentsMiddleware,
-	saveStudentsMiddleware,
 ]
 
 if (!global.TESTING) {
@@ -25,8 +23,6 @@ const finalCreateStore = compose(
 	window && window.devToolsExtension ? window.devToolsExtension() : f => f,
 )(createStore)
 
-export default function configureStore(initialState) {
-	const store = finalCreateStore(rootReducer, initialState)
-
-	return store
+export default function configureStore(initialState: {} = {}) {
+	return finalCreateStore(rootReducer, initialState)
 }
