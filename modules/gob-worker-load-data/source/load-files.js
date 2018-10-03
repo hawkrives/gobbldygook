@@ -4,7 +4,7 @@ import startsWith from 'lodash/startsWith'
 import series from 'p-series'
 import {status, json} from '@gob/lib'
 import debug from 'debug'
-import {refreshCourses, Notification} from './lib-dispatch'
+import {Notification} from './lib-dispatch'
 import needsUpdate from './needs-update'
 import updateDatabase from './update-database'
 import removeDuplicateAreas from './remove-duplicate-areas'
@@ -103,15 +103,8 @@ export function deduplicateAreas({type}: Args) {
 }
 
 export function finishUp({type, notification}: Args) {
-	log(`[${type}] done loading`)
-
 	// Remove the progress bar after 1.5 seconds
 	notification.remove()
-
-	// istanbul ignore else
-	if (type === 'courses') {
-		return refreshCourses()
-	}
 }
 
 function handleErrors(err: Error, url: string) {

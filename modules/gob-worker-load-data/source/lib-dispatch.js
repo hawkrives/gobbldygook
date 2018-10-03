@@ -1,16 +1,10 @@
 // @flow
 
-import debug from 'debug'
-const log = debug('worker:load-data:dispatch')
-
 function dispatch(type: string, action: string, ...args: any[]) {
 	const toDispatch = [null, 'dispatch', {type, action, args}]
-
-	log(toDispatch)
 	self.postMessage(toDispatch)
 }
 
-export const refreshCourses = () => dispatch('courses', 'refreshCourses')
 export const quotaExceededError = (dbName: string) => {
 	dispatch('notifications', 'logError', {
 		id: 'db-storage-quota-exceeded',

@@ -2,14 +2,12 @@ import uniqueId from 'lodash/uniqueId'
 import {status, text} from '@gob/lib'
 import debug from 'debug'
 import * as notificationActions from '../modules/notifications/redux/actions'
-import * as courseActions from '../redux/courses/actions'
 import LoadDataWorker from './load-data.worker'
 
 const log = debug('worker:load-data')
 
 const actions = {
 	notifications: notificationActions,
-	courses: courseActions,
 }
 
 const worker = new LoadDataWorker()
