@@ -11,12 +11,9 @@ import {
 import {Map, List} from 'immutable'
 import {getOnlyCourse} from '../../helpers/get-courses'
 import {StudentSummary} from '../../modules/student/student-summary'
-import toPairs from 'lodash/toPairs'
-import groupBy from 'lodash/groupBy'
-import sortBy from 'lodash/sortBy'
 import {initStudent} from '../../redux/students/actions/init-student'
 import {connect} from 'react-redux'
-import type {Course as CourseType, CourseError} from '@gob/types'
+import type {Course as CourseType} from '@gob/types'
 import './method-import.scss'
 
 import {Student, Schedule} from '@gob/object-student'

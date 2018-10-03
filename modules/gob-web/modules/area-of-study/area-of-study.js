@@ -9,7 +9,6 @@ import ProgressBar from '../../components/progress-bar'
 import {close, chevronUp, chevronDown} from '../../icons/ionicons'
 import {pathToOverride, type EvaluationResult} from '@gob/examine-student'
 import {Student, type AreaQuery} from '@gob/object-student'
-import {type ParsedHansonFile} from '@gob/hanson-format'
 import {checkStudentAgainstArea} from '../../workers/check-student'
 import {loadArea} from '../../helpers/load-area'
 

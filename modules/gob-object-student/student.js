@@ -9,7 +9,6 @@ import type {
 	FabricationType,
 	FulfillmentType,
 	CourseType,
-	CourseLookupFunc,
 	OnlyCourseLookupFunc,
 } from './types'
 

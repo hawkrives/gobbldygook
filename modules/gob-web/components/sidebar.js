@@ -5,7 +5,6 @@ import {Link} from '@reach/router'
 import {connect} from 'react-redux'
 import {Icon} from './icon'
 import {Toolbar, ToolbarButton} from './toolbar'
-import Separator from './separator'
 import {undo, redo} from '../redux/students/actions/undo'
 import {
 	iosUndo,

@@ -8,7 +8,6 @@ import {
 	type OnlyCourseLookupFunc,
 } from '@gob/object-student'
 import {List, Set, Map} from 'immutable'
-import type {Course as CourseType} from '@gob/types'
 
 type PartialCourse = {
 	credits: number,

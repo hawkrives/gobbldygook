@@ -1,8 +1,6 @@
 // @flow
 import max from 'lodash/max'
 import uniq from 'lodash/uniq'
-import map from 'lodash/map'
-import filter from 'lodash/filter'
 import sortBy from 'lodash/sortBy'
 import {findMissingNumber} from '@gob/lib'
 import {Schedule} from '@gob/object-student'

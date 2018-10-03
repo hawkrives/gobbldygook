@@ -10,8 +10,6 @@ import List from '../../components/list'
 import {close} from '../../icons/ionicons'
 import {Student} from '@gob/object-student'
 
-import {encodeStudent} from '@gob/object-student'
-
 type Props = {
 	navigate: string => mixed,
 	student: Student,

@@ -5,7 +5,6 @@ import flatten from 'lodash/flatten'
 import {Student} from './student'
 import type {Course as CourseType} from '@gob/types'
 import type {OnlyCourseLookupFunc} from './types'
-import {List} from 'immutable'
 
 export async function getActiveCourses(
 	student: Student,

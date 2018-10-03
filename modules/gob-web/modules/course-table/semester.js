@@ -1,13 +1,11 @@
 // @flow
 
 import React from 'react'
-
 import cx from 'classnames'
 import {Link} from '@reach/router'
 import {List, Map} from 'immutable'
 import {countCredits} from '@gob/examine-student'
 import {semesterName} from '@gob/school-st-olaf-college'
-import {IDENT_COURSE} from '@gob/object-student'
 import {DropTarget} from 'react-dnd'
 import includes from 'lodash/includes'
 import * as theme from '../../theme'
@@ -15,7 +13,12 @@ import {FlatButton} from '../../components/button'
 import {Icon} from '../../components/icon'
 import {InlineList, InlineListItem} from '../../components/list'
 import {close, search} from '../../icons/ionicons'
-import {Student, Schedule, type WarningType} from '@gob/object-student'
+import {
+	IDENT_COURSE,
+	Student,
+	Schedule,
+	type WarningType,
+} from '@gob/object-student'
 import type {Course as CourseType} from '@gob/types'
 import {getOnlyCourse} from '../../helpers/get-courses'
 
@@ -141,9 +144,7 @@ class Semester extends React.Component<Props, State> {
 	prepare = async () => {
 		this.setState(() => ({loading: true, checking: true}))
 
-		let {year, semester, student} = this.props
-
-		let schedule = this.props.schedule
+		let {schedule} = this.props
 		let courses = await schedule.getOnlyCourses(getOnlyCourse)
 		let credits = countCredits([...courses])
 

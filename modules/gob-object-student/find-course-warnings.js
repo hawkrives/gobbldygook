@@ -1,14 +1,10 @@
 // @flow
 
-import compact from 'lodash/compact'
-import some from 'lodash/some'
 import {List, Map} from 'immutable'
-
 import ordinal from 'ord'
 import oxford from 'listify'
 import {findTimeConflicts} from '@gob/schedule-conflicts'
 import {expandYear, semesterName} from '@gob/school-st-olaf-college'
-
 import type {Course as CourseType, CourseError} from '@gob/types'
 import {Schedule} from './schedule'
 

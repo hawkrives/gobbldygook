@@ -1,11 +1,10 @@
 // @flow
 
 import uniqueId from 'lodash/uniqueId'
-import debug from 'debug'
 import CheckStudentWorker from './check-student.worker'
 import {type ParsedHansonFile} from '@gob/hanson-format'
 import {type EvaluationResult} from '@gob/examine-student'
-import {type AreaQuery, Student} from '@gob/object-student'
+import {Student} from '@gob/object-student'
 import {getOnlyCourse} from '../helpers/get-courses'
 
 const worker = new CheckStudentWorker()

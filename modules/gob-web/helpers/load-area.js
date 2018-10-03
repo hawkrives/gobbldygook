@@ -4,12 +4,7 @@ import {db} from './db'
 import {enhanceHanson, type ParsedHansonFile} from '@gob/hanson-format'
 import some from 'lodash/some'
 import maxBy from 'lodash/maxBy'
-import find from 'lodash/find'
-import kebabCase from 'lodash/kebabCase'
-import yaml from 'js-yaml'
 import {type AreaQuery} from '@gob/object-student'
-import {pluralizeArea} from '@gob/examine-student'
-import {status, text} from '@gob/lib'
 
 function resolveArea(areas, query) {
 	if (areas.length === 1) {

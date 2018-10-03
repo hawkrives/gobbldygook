@@ -2,7 +2,6 @@
 import React from 'react'
 import cx from 'classnames'
 import listify from 'listify'
-import groupBy from 'lodash/groupBy'
 import sample from 'lodash/sample'
 import {Set} from 'immutable'
 

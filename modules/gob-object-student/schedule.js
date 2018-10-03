@@ -4,7 +4,6 @@ import uuid from 'uuid/v4'
 import {randomChar} from '@gob/lib'
 
 import {List, Map, Record} from 'immutable'
-import type {WarningType} from './find-course-warnings'
 import type {
 	CourseLookupFunc,
 	OnlyCourseLookupFunc,
@@ -100,11 +99,10 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
 	async getCourses(
 		getCourse: CourseLookupFunc,
 		fabrications?: {[key: string]: FabricationType},
-		options?: {includeErrors?: boolean} = {},
 	): Promise<List<CourseType | FabricationType | CourseError>> {
 		let term = this.getTerm()
 		let promises = this.clbids.map(clbid =>
-			getCourse({clbid, term}, fabrications, options),
+			getCourse({clbid, term}, fabrications),
 		)
 		return Promise.all(promises).then(List)
 	}

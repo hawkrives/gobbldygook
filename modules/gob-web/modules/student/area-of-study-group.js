@@ -8,7 +8,6 @@ import {AreaPicker, type Selection} from '../../components/area-of-study/picker'
 import {FlatButton} from '../../components/button'
 import {List} from 'immutable'
 import {Student, type AreaQuery} from '@gob/object-student'
-import {type ParsedHansonFile} from '@gob/hanson-format'
 
 import './area-of-study-group.scss'
 

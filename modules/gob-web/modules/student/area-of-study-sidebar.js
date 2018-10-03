@@ -1,16 +1,14 @@
 // @flow
 
 import React from 'react'
-
-import groupBy from 'lodash/groupBy'
-import toPairs from 'lodash/toPairs'
-import values from 'lodash/values'
 import {List, Map, Set} from 'immutable'
-
 import {AreaOfStudyGroup} from './area-of-study-group'
 import {FlatButton} from '../../components/button'
-import {sortStudiesByType, areaTypeConstants} from '@gob/object-student'
-import {Student} from '@gob/object-student'
+import {
+	sortStudiesByType,
+	areaTypeConstants,
+	Student,
+} from '@gob/object-student'
 
 import './area-of-study-sidebar.scss'
 

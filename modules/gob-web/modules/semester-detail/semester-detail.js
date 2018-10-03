@@ -3,7 +3,7 @@ import React from 'react'
 import DocumentTitle from 'react-document-title'
 import {semesterName} from '@gob/school-st-olaf-college'
 import styled from 'styled-components'
-import {Schedule, Student} from '@gob/object-student'
+import {Student} from '@gob/object-student'
 
 const DetailText = styled.pre`
 	background-color: white;

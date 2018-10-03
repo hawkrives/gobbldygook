@@ -1,12 +1,8 @@
 // @flow
 
 import React from 'react'
-import filter from 'lodash/filter'
-import sortBy from 'lodash/sortBy'
-
 import {FlatButton} from '../../components/button'
 import Semester from './semester'
-
 import {findFirstAvailableSemester} from '../../helpers/find-first-available-semester'
 import {expandYear, semesterName} from '@gob/school-st-olaf-college'
 import {Student, Schedule} from '@gob/object-student'

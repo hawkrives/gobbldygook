@@ -9,7 +9,7 @@ import meow from 'meow'
 import stdin from 'get-stdin'
 import loadJsonFile from 'load-json-file'
 import {getOnlyCourse} from '../lib/get-course'
-import {validateSchedule, Student, Schedule} from '@gob/object-student'
+import {validateSchedule, Student} from '@gob/object-student'
 import {toPrettyTerm, buildDeptNum} from '@gob/school-st-olaf-college'
 const {version} = require('../package.json')
 
