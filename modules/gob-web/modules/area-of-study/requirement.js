@@ -1,7 +1,10 @@
 // @flow
 import React, {Component} from 'react'
 
-import {isRequirementName} from '@gob/examine-student'
+import {
+	isRequirementName,
+	type Requirement as RequirementType,
+} from '@gob/examine-student'
 
 import {Icon} from '../../components/icon'
 import {iosBoltOutline, iosBolt} from '../../icons/ionicons'
@@ -12,15 +15,15 @@ import ResultIndicator from './result-indicator'
 
 import './requirement.scss'
 
-type RequirementInfo = {
-	computed?: boolean,
-	description?: string,
-	filter?: Object,
-	message?: string,
-	result?: Object,
-	overridden?: boolean,
-	[key: string]: RequirementInfo,
-}
+// type RequirementInfo = {
+// 	computed?: boolean,
+// 	description?: string,
+// 	filter?: Object,
+// 	message?: string,
+// 	result?: Object,
+// 	overridden?: boolean,
+// 	[key: string]: RequirementInfo,
+// }
 
 type Props = {
 	onAddOverride: (string[], Event) => any,
@@ -28,7 +31,7 @@ type Props = {
 	onToggleOverride: (string[], Event) => any,
 	path: string[],
 	topLevel?: boolean,
-	info: ?RequirementInfo,
+	info: ?RequirementType,
 	name?: string,
 }
 
@@ -97,7 +100,7 @@ function Requirement(props: RequirementProps) {
 		<ExpandableRequirement
 			key={key}
 			name={key}
-			info={((info[key]: any): RequirementInfo)}
+			info={((info[key]: any): RequirementType)}
 			path={props.path.concat(key)}
 			onAddOverride={props.onAddOverride}
 			onToggleOverride={props.onToggleOverride}

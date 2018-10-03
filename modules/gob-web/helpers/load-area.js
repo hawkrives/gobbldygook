@@ -1,15 +1,21 @@
 // @flow
+
 import {db} from './db'
-import {enhanceHanson} from '@gob/hanson-format'
+import {enhanceHanson, type ParsedHansonFile} from '@gob/hanson-format'
 import some from 'lodash/some'
 import maxBy from 'lodash/maxBy'
 import find from 'lodash/find'
 import kebabCase from 'lodash/kebabCase'
 import yaml from 'js-yaml'
+import {type AreaQuery} from '@gob/object-student'
 import {pluralizeArea} from '@gob/examine-student'
 import {status, text} from '@gob/lib'
 
 function resolveArea(areas, query) {
+	if (areas.length === 1) {
+		return areas[0]
+	}
+
 	if (!('revision' in query)) {
 		return maxBy(areas, 'revision')
 	} else if (some(areas, possibility => 'dateAdded' in possibility)) {
@@ -19,47 +25,16 @@ function resolveArea(areas, query) {
 	}
 }
 
-function transform(areaSource) {
-	return enhanceHanson((yaml.safeLoad(areaSource): any))
-}
+type ResultOrError<T> =
+	| {error: true, message: string, data: T}
+	| {error: false, data: T}
 
-type AreaQueryType = {
-	name: string,
-	type: string,
-	revision: string,
-	source: string,
-	isCustom: string,
-}
-
-const baseUrl = 'https://hawkrives.github.io/gobbldygook-area-data'
-const networkCache = Object.create(null)
-function loadAreaFromNetwork({name, type, revision}: AreaQueryType) {
-	const id = `{${name}, ${type}, ${revision}}`
-	if (id in networkCache) {
-		return networkCache[id]
-	}
-
-	const path = `${baseUrl}/${pluralizeArea(type)}/${kebabCase(name)}.yaml`
-
-	networkCache[id] = fetch(path)
-		.then(status)
-		.then(text)
-		.then(transform)
-
-	return networkCache[id].then(area => {
-		return {
-			name,
-			type,
-			revision,
-			_area: area,
-		}
-	})
-}
-
-function loadAreaFromDatabase(areaQuery: AreaQueryType) {
+function loadAreaFromDatabase(areaQuery: AreaQuery) {
 	const {name, type, revision} = areaQuery
 
-	let dbQuery: any = {name: [name], type: [type]}
+	let dbQuery = {}
+	dbQuery.name = [name]
+	dbQuery.type = [type]
 	if (revision && revision !== 'latest') {
 		dbQuery.revision = [revision]
 	}
@@ -69,70 +44,31 @@ function loadAreaFromDatabase(areaQuery: AreaQueryType) {
 		.query(dbQuery)
 		.then(result => {
 			if (!result || !result.length) {
-				const q = JSON.stringify(dbQuery)
+				let q = JSON.stringify(dbQuery)
 				return {
-					...areaQuery,
-					_error: `the area "${name}" (${type}) could not be found with the query ${q}`,
+					error: true,
+					message: `the area "${name}" (${type}) could not be found with the query ${q}`,
+					data: dbQuery,
 				}
 			}
 
-			if (result.length === 1) {
-				result = result[0]
-			} else {
-				result = resolveArea(result, dbQuery)
-			}
-
-			return {...areaQuery, _area: enhanceHanson(result)}
+			result = resolveArea(result, dbQuery)
+			return {error: false, data: enhanceHanson(result)}
 		})
 		.catch(err => {
-			console.warn(err) // we can probably remove this in the future
-			const q = JSON.stringify(dbQuery)
+			let q = JSON.stringify(dbQuery)
 			return {
-				...areaQuery,
-				_error: `Could not find area ${q} (error: ${err.message})`,
+				error: true,
+				message: `Could not find area ${q} (error: ${err.message})`,
+				data: dbQuery,
 			}
 		})
 }
 
-const promiseCache = Object.create(null)
+export function loadArea(
+	areaQuery: AreaQuery,
+): ResultOrError<ParsedHansonFile> {
+	let {name, type, revision} = areaQuery
 
-export default function getArea(
-	areaQuery: AreaQueryType,
-	{cache = []}: {cache: any[]},
-): any {
-	const {name, type, revision, source, isCustom} = areaQuery
-	let cachedArea = find(
-		cache,
-		a =>
-			a.name === name &&
-			a.type === type &&
-			(revision === 'latest' ? true : a.revision === revision),
-	)
-	if (cachedArea) {
-		return cachedArea
-	}
-
-	if (isCustom && source) {
-		return Promise.resolve({
-			...areaQuery,
-			_area: transform(source),
-		})
-	}
-
-	const id = `{${name}, ${type}, ${revision}}`
-	if (id in promiseCache) {
-		return promiseCache[id]
-	}
-
-	let getAreaFrom = loadAreaFromDatabase
-	if (global.useNetworkOnly) {
-		getAreaFrom = loadAreaFromNetwork
-	}
-
-	promiseCache[id] = getAreaFrom({name, type, revision, source, isCustom})
-
-	return promiseCache[id].then(area => {
-		delete promiseCache[id]
-		return area
-	})
+	return loadAreaFromDatabase({name, type, revision})
 }

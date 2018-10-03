@@ -239,7 +239,7 @@ type DegreeSummaryProps = {
 export class DegreeSummary extends React.Component<DegreeSummaryProps> {
 	render() {
 		const grouped: {
-			[key: string]: Set<{type: string, name: string, revision?: string}>,
+			[key: string]: Set<{type: string, name: string, revision: string}>,
 		} = this.props.studies.groupBy(s => s.type).toJSON()
 
 		const {

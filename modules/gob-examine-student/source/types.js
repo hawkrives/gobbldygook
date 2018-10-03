@@ -40,6 +40,9 @@ export type Filter = FilterExpression
 
 export type Requirement = {
 	$type: 'requirement',
+	message?: string,
+	description?: string,
+	name?: string,
 	result: Expression,
 	filter: Filter,
 	computed: boolean,

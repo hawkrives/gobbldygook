@@ -3,8 +3,9 @@
 import uniqueId from 'lodash/uniqueId'
 import debug from 'debug'
 import CheckStudentWorker from './check-student.worker'
+import {type ParsedHansonFile} from '@gob/hanson-format'
 import {type EvaluationResult} from '@gob/examine-student'
-import {type AreaOfStudyType, Student} from '@gob/object-student'
+import {type AreaQuery, Student} from '@gob/object-student'
 import {getCourse} from '../helpers/get-courses'
 
 const worker = new CheckStudentWorker()
@@ -16,7 +17,7 @@ worker.addEventListener('error', function(event: Event) {
 // Checks a student object against an area of study.
 export async function checkStudentAgainstArea(
 	student: Student,
-	area: AreaOfStudyType,
+	area: ParsedHansonFile,
 ): Promise<EvaluationResult> {
 	return new Promise(async resolve => {
 		const sourceId = uniqueId()

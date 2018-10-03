@@ -289,6 +289,10 @@ export class Student extends StudentRecord<StudentType> {
 		return this.get('overrides')
 	}
 
+	hasOverride(key: string): boolean {
+		return this.hasIn(['overrides', key])
+	}
+
 	setOverride(key: string, value: OverrideType): this {
 		return this.setIn(['overrides', key], value)
 	}

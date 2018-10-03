@@ -2,37 +2,21 @@
 
 import React from 'react'
 import cx from 'classnames'
-
 import {FlatButton} from '../../components/button'
 import {Icon} from '../../components/icon'
 import Requirement from './requirement'
 import ProgressBar from '../../components/progress-bar'
 import {close, chevronUp, chevronDown} from '../../icons/ionicons'
-import {pathToOverride} from '@gob/examine-student'
+import {pathToOverride, type EvaluationResult} from '@gob/examine-student'
+import {Student, type AreaQuery} from '@gob/object-student'
+import {type ParsedHansonFile} from '@gob/hanson-format'
+import {checkStudentAgainstArea} from '../../workers/check-student'
+import {loadArea} from '../../helpers/load-area'
 
 import './area-of-study.scss'
 
-type Student = Object
-type ExaminedAreaOfStudyType = {
-	details: Object,
-	checked?: boolean,
-	error?: string,
-	progress?: {at: number, of: number},
-	isCustom?: boolean,
-	name: string,
-	revision: string,
-	slug?: string,
-	type: string,
-}
-type AreaOfStudyType = {
-	name: string,
-	revision: string,
-	slug?: string,
-	type: string,
-}
-
 type Props = {
-	area: AreaOfStudyType,
+	areaOfStudy: AreaQuery,
 	showCloseButton: boolean,
 	showEditButton: boolean,
 	student: Student,
@@ -42,7 +26,8 @@ type State = {|
 	isOpen: boolean,
 	confirmRemoval: boolean,
 	examining: boolean,
-	results: ?ExaminedAreaOfStudyType,
+	results: ?EvaluationResult,
+	error: ?string,
 |}
 
 export class AreaOfStudy extends React.Component<Props, State> {
@@ -51,6 +36,7 @@ export class AreaOfStudy extends React.Component<Props, State> {
 		confirmRemoval: false,
 		examining: false,
 		results: null,
+		error: null,
 	}
 
 	componentDidMount() {
@@ -59,7 +45,17 @@ export class AreaOfStudy extends React.Component<Props, State> {
 
 	startExamination = async () => {
 		this.setState(() => ({examining: true}))
-		let results = await this.props.student.examineArea(this.props.area)
+		let area = await loadArea(this.props.areaOfStudy)
+
+		if (area.error) {
+			this.setState(() => ({examining: false, error: area.message}))
+			return
+		}
+
+		let results = await checkStudentAgainstArea(
+			this.props.student,
+			area.data,
+		)
 		this.setState(() => ({examining: false, results}))
 	}
 
@@ -102,15 +98,20 @@ export class AreaOfStudy extends React.Component<Props, State> {
 	}
 
 	render() {
-		const props = this.props
-		const {isOpen, confirmRemoval: showConfirmRemoval} = this.state
+		let props = this.props
+		let {isOpen, confirmRemoval: showConfirmRemoval} = this.state
 
-		const {
+		let {
 			type = '???',
 			revision = '0000-00',
 			name = 'Unknown Area',
-			slug,
-		} = props.area
+		} = props.areaOfStudy
+
+		// TODO: fix slugs
+		// let slug = ''
+		// if (this.state.results) {
+		// 	slug = this.state.results.slug
+		// }
 
 		let progressAt = 0
 		let progressOf = 1
@@ -130,7 +131,7 @@ export class AreaOfStudy extends React.Component<Props, State> {
 			<>
 				<div className="area--summary-row">
 					<h1 className="area--title">
-						<CatalogLink slug={slug} name={name} />
+						<CatalogLink slug={'' /*slug*/} name={name} />
 					</h1>
 					<span className="icons">
 						{props.showCloseButton && (
@@ -181,7 +182,12 @@ export class AreaOfStudy extends React.Component<Props, State> {
 		if (this.state.examining) {
 			contents = <p className="message area--loading">Loading…</p>
 		} else {
-			contents = <AreaDetails results={this.state.results} />
+			contents = (
+				<AreaDetails
+					results={this.state.results}
+					area={props.areaOfStudy}
+				/>
+			)
 		}
 
 		return (
@@ -217,12 +223,13 @@ const CatalogLink = ({slug, name}: {slug: ?string, name: string}) => {
 	)
 }
 
-function AreaDetails(props: {results: ?ExaminedAreaOfStudyType}) {
+function AreaDetails(props: {results: ?EvaluationResult, area: AreaQuery}) {
 	if (!props.results) {
 		return null
 	}
 
-	let {details, error = '', type, name} = props.results
+	let {type, name} = props.area
+	let {details, error = ''} = props.results
 
 	if (error) {
 		return (

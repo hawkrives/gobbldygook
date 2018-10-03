@@ -6,7 +6,6 @@ import {evaluate, type EvaluationResult} from '@gob/examine-student'
 import {type ParsedHansonFile} from '@gob/hanson-format'
 import {getActiveCourses} from '@gob/object-student'
 import {alterForEvaluation as alterCourse} from '@gob/courses'
-import type {AreaOfStudyType} from '@gob/object-student'
 import type {Course as CourseType} from '@gob/types'
 
 function tryEvaluate({
