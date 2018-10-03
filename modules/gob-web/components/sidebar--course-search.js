@@ -4,13 +4,13 @@ import React from 'react'
 import {CourseSearcher} from '../modules/course-searcher'
 import CourseRemovalBox from '../components/course-removal-box'
 import {ConnectedSidebarToolbar} from './sidebar'
-import type {HydratedStudentType} from '@gob/object-student'
+import {Student} from '@gob/object-student'
 import type {Undoable} from '../types'
 
 type Props = {
 	term: ?string,
 	navigate: string => mixed,
-	student: Undoable<HydratedStudentType>,
+	student: Undoable<Student>,
 }
 
 export function CourseSearcherSidebar(props: Props) {

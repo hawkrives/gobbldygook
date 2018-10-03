@@ -4,10 +4,10 @@ import * as React from 'react'
 import {Router} from '@reach/router'
 import Loadable from 'react-loadable'
 import {LoadingComponent} from '../../components/loading-comp'
-import type {HydratedStudentType} from '@gob/object-student'
+import {Student} from '@gob/object-student'
 import type {Undoable} from '../../types'
 
-import Student from '../../modules/student'
+import StudentOverview from '../../modules/student'
 
 const SearchSidebar = Loadable({
 	loader: () =>
@@ -22,7 +22,7 @@ import {ConnectedSidebarToolbar} from '../../components/sidebar'
 import {AreaOfStudySidebar} from '../../modules/student/area-of-study-sidebar'
 import {ConnectedStudentSummary as StudentSummary} from '../../modules/student/connected-student-summary'
 
-const StatusSidebar = ({student}: {student: Undoable<HydratedStudentType>}) => (
+const StatusSidebar = ({student}: {student: Undoable<Student>}) => (
 	<aside>
 		<ConnectedSidebarToolbar
 			backTo="picker"
@@ -51,7 +51,7 @@ const SemesterDetail = Loadable({
 	loading: LoadingComponent,
 })
 
-const TermSidebar = ({student}: {student: Undoable<HydratedStudentType>}) => (
+const TermSidebar = ({student}: {student: Undoable<Student>}) => (
 	<aside>
 		<ConnectedSidebarToolbar
 			backTo="overview"
@@ -70,7 +70,7 @@ export default function StudentIndex(props: {
 	let params = new URLSearchParams(location.search)
 
 	return (
-		<Student studentId={props.studentId}>
+		<StudentOverview studentId={props.studentId}>
 			{({student}) => (
 				<>
 					<Router>
@@ -108,7 +108,7 @@ export default function StudentIndex(props: {
 					)}
 				</>
 			)}
-		</Student>
+		</StudentOverview>
 	)
 }
 

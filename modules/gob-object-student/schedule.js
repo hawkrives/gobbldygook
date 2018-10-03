@@ -3,16 +3,16 @@
 import uuid from 'uuid/v4'
 import {randomChar} from '@gob/lib'
 
-import {Record, Map as IMap, List as IList} from 'immutable'
+import {List, Map, Record} from 'immutable'
 import type {WarningType} from './find-course-warnings'
-import type {CourseError, Course as CourseType} from '@gob/types'
-import type {FabricationType} from './types'
-
-type HydratedScheduleType = {
-	courses: Array<CourseType | CourseError>,
-	conflicts: Array<Array<?WarningType>>,
-	hasConflict: boolean,
-}
+import type {
+	CourseLookupFunc,
+	OnlyCourseLookupFunc,
+	FabricationType,
+	CourseType,
+	CourseError,
+} from './types'
+import {validateSchedule} from './validate-schedule'
 
 type InputSchedule = {
 	id?: string,
@@ -30,10 +30,10 @@ type ScheduleType = {
 	active: boolean,
 	index: number,
 	title: string,
-	clbids: IList<string>,
+	clbids: List<string>,
 	year: number,
 	semester: number,
-	metadata: IMap<string, mixed>,
+	metadata: Map<string, mixed>,
 }
 
 const defaultValues: ScheduleType = {
@@ -41,68 +41,112 @@ const defaultValues: ScheduleType = {
 	active: false,
 	index: 0,
 	title: 'no title',
-	clbids: IList(),
+	clbids: List(),
 	year: 0,
 	semester: 0,
-	metadata: IMap(),
+	metadata: Map(),
 }
 
 const ScheduleRecord = Record(defaultValues)
 
-export type CourseLookupFunc = (
-	{clbid: string, term: number},
-	?{[key: string]: FabricationType},
-) => Promise<CourseType | FabricationType | CourseError>
-
 export class Schedule extends ScheduleRecord<ScheduleType> {
-	constructor(props: InputSchedule = {}) {
-		let {
-			id = uuid(),
-			active = false,
-			index = 0,
-			title = `Schedule ${randomChar().toUpperCase()}`,
-			clbids = [],
-			year = 0,
-			semester = 0,
-			metadata = {},
-		} = props
+	get id(): string {
+		return this.get('id')
+	}
 
-		if (clbids.some(id => typeof id === 'number')) {
-			clbids = clbids.map(
-				id =>
-					typeof id !== 'string' ? String(id).padStart(10, '0') : id,
-			)
-		}
+	get active(): boolean {
+		return this.get('active')
+	}
 
-		clbids = IList(clbids)
-		metadata = IMap(metadata)
+	get index(): number {
+		return this.get('index')
+	}
 
-		super({
-			id,
-			active,
-			index,
-			title,
-			clbids,
-			year,
-			semester,
-			metadata,
-		})
+	get title(): string {
+		return this.get('title')
+	}
+
+	get year(): number {
+		return this.get('year')
+	}
+
+	get semester(): number {
+		return this.get('semester')
+	}
+
+	get clbids(): List<string> {
+		return this.get('clbids')
 	}
 
 	getTerm(): number {
-		return parseInt(`${this.get('year')}${this.get('semester')}`, 10)
+		return parseInt(`${this.year}${this.semester}`, 10)
+	}
+
+	/////
+	/// Helpers
+	/////
+
+	get recommendedCredits(): number {
+		let semester = this.get('semester')
+		if (semester === 1 || semester === 3) {
+			return 4
+		}
+		return 1
 	}
 
 	async getCourses(
 		getCourse: CourseLookupFunc,
 		fabrications?: {[key: string]: FabricationType},
-	): Promise<IList<CourseType | FabricationType | CourseError>> {
+		options?: {includeErrors?: boolean} = {},
+	): Promise<List<CourseType | FabricationType | CourseError>> {
 		let term = this.getTerm()
-		let results = await Promise.all(
-			this.get('clbids')
-				.map(id => getCourse({clbid: id, term}, fabrications))
-				.toArray(),
+		let promises = this.clbids.map(clbid =>
+			getCourse({clbid, term}, fabrications, options),
 		)
-		return IList(results)
+		return Promise.all(promises).then(List)
 	}
+
+	async getOnlyCourses(
+		getCourse: OnlyCourseLookupFunc,
+	): Promise<List<CourseType>> {
+		let term = this.getTerm()
+		let promises = this.clbids.map(clbid => getCourse({clbid, term}))
+		let results = await Promise.all(promises)
+		// remove null results
+		return List(results).filter(Boolean)
+	}
+
+	isSpecificTerm(year: number, semester: number) {
+		return this.year === year && this.semester === semester
+	}
+
+	async validate(getCourse: OnlyCourseLookupFunc) {
+		return validateSchedule(this, getCourse)
+	}
+}
+
+export function createSchedule(sched: InputSchedule = {}) {
+	let {
+		id = uuid(),
+		active = false,
+		index = 0,
+		title = `Schedule ${randomChar().toUpperCase()}`,
+		clbids = [],
+		year = 0,
+		semester = 0,
+		metadata = {},
+	} = sched
+
+	if (clbids.some(id => typeof id === 'number')) {
+		clbids = clbids.map(
+			id => (typeof id !== 'string' ? String(id).padStart(10, '0') : id),
+		)
+	}
+
+	clbids = List(clbids)
+	metadata = Map(metadata)
+
+	let data = {id, active, index, title, clbids, metadata, year, semester}
+
+	return new Schedule(data)
 }

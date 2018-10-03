@@ -2,10 +2,9 @@
 import React from 'react'
 import filter from 'lodash/filter'
 import DocumentTitle from 'react-document-title'
-import {isCurrentSemester} from '@gob/object-student'
 import {semesterName} from '@gob/school-st-olaf-college'
 import styled from 'styled-components'
-import type {HydratedScheduleType, StudentType} from '@gob/object-student'
+import {Schedule, Student} from '@gob/object-student'
 
 const DetailText = styled.pre`
 	background-color: white;
@@ -19,20 +18,18 @@ type RouterProps = {
 
 type ReactProps = {
 	className?: string,
-	student: StudentType,
+	student: Student,
 }
 
 type Props = RouterProps & ReactProps
 
 type State = {
 	term: ?string,
-	schedules: Array<HydratedScheduleType>,
 }
 
 export default class SemesterDetail extends React.Component<Props, State> {
 	state = {
 		term: null,
-		schedules: [],
 	}
 
 	render() {
@@ -44,17 +41,15 @@ export default class SemesterDetail extends React.Component<Props, State> {
 
 		let year = parseInt(term.substr(0, 4), 10)
 		let semester = parseInt(term.substr(4, 1), 10)
-		const student = this.props.student
 
-		const schedules = filter(
-			student.schedules,
-			isCurrentSemester(year, semester),
-		).map(
-			({courses: _1, conflicts: _2, hasConflict: _3, ...sched}) => sched,
-		)
+		const schedules = this.props.student.findAllSchedulesForTerm({
+			year,
+			semester,
+		})
 
-		const sem = semesterName(semester)
-		const title = `${sem} ${year} • ${student.name} | Gobbldygook`
+		let sem = semesterName(semester)
+		let name = this.props.student.name
+		let title = `${sem} ${year} • ${name} | Gobbldygook`
 
 		return (
 			<>
@@ -62,7 +57,7 @@ export default class SemesterDetail extends React.Component<Props, State> {
 				<DetailText>
 					{this.props.uri}
 					{'\n'}
-					{JSON.stringify(schedules, null, 2)}
+					{JSON.stringify(schedules.toJSON(), null, 2)}
 				</DetailText>
 			</>
 		)

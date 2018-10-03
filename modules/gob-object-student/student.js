@@ -1,16 +1,20 @@
 // @flow
 
 import uuid from 'uuid/v4'
-import {Record, Map as IMap, Set as ISet} from 'immutable'
+import {Record, Map, Set, List} from 'immutable'
 
 import type {
 	AreaQuery,
 	OverrideType,
 	FabricationType,
 	FulfillmentType,
+	CourseType,
+	CourseLookupFunc,
 } from './types'
 
-import {type ScheduleType} from './schedule'
+import {Schedule} from './schedule'
+import {getActiveCourses} from './get-active-courses'
+import {encodeStudent} from './encode-student'
 
 export type StudentType = {
 	id: string,
@@ -22,13 +26,13 @@ export type StudentType = {
 	dateLastModified: Date,
 	dateCreated: Date,
 
-	studies: ISet<AreaQuery>,
-	schedules: IMap<string, ScheduleType>,
-	overrides: IMap<string, OverrideType>,
-	fabrications: IMap<string, FabricationType>,
-	fulfillments: IMap<string, FulfillmentType>,
+	studies: Set<AreaQuery>,
+	schedules: Map<string, Schedule>,
+	overrides: Map<string, OverrideType>,
+	fabrications: Map<string, FabricationType>,
+	fulfillments: Map<string, FulfillmentType>,
 
-	settings: IMap<string, mixed>,
+	settings: Map<string, mixed>,
 }
 
 const defaultValues: StudentType = {
@@ -40,46 +44,66 @@ const defaultValues: StudentType = {
 	advisor: 'Professor Y',
 	dateLastModified: new Date(),
 	dateCreated: new Date(),
-	studies: ISet(),
-	schedules: IMap(),
-	overrides: IMap(),
-	fabrications: IMap(),
-	fulfillments: IMap(),
-	settings: IMap(),
+	studies: Set(),
+	schedules: Map(),
+	overrides: Map(),
+	fabrications: Map(),
+	fulfillments: Map(),
+	settings: Map(),
 }
 
 const StudentRecord = Record(defaultValues)
 
 export class Student extends StudentRecord<StudentType> {
-	constructor(props: ?Object) {
-		super(props)
-
-		return this.withMutations(mutable => {
-			const now = new Date()
-			mutable.set('matriculation', now.getFullYear() - 2)
-			mutable.set('graduation', now.getFullYear() + 2)
-
-			mutable.set('id', uuid())
-		})
+	get id(): string {
+		return this.get('id')
 	}
 
-	setName(name: string) {
+	get dateLastModified(): Date {
+		return this.get('dateLastModified')
+	}
+
+	/////
+
+	get name(): string {
+		return this.get('name')
+	}
+
+	setName(name: string): this {
 		return this.set('name', name)
 	}
 
-	setAdvisor(name: string) {
+	get advisor(): string {
+		return this.get('advisor')
+	}
+
+	setAdvisor(name: string): this {
 		return this.set('advisor', name)
 	}
 
-	setMatriculation(year: number) {
-		return this.set('matriculation', year)
+	get matriculation(): number {
+		return this.get('matriculation')
 	}
 
-	setGraduation(year: number) {
-		return this.set('graduation', year)
+	setMatriculation(year: string | number): this {
+		let newYear = typeof year === 'string' ? parseInt(year, 10) : year
+		return this.set('matriculation', newYear)
 	}
 
-	setSetting(key: string, value: mixed) {
+	get graduation(): number {
+		return this.get('graduation')
+	}
+
+	setGraduation(year: string | number): this {
+		let newYear = typeof year === 'string' ? parseInt(year, 10) : year
+		return this.set('graduation', newYear)
+	}
+
+	get settings(): Map<string, mixed> {
+		return this.get('settings')
+	}
+
+	setSetting(key: string, value: mixed): this {
 		return this.setIn(['settings', key], value)
 	}
 
@@ -91,12 +115,34 @@ export class Student extends StudentRecord<StudentType> {
 	 * Provide a description of schedules here
 	 */
 
-	addSchedule(schedule: ScheduleType) {
+	get schedules(): Map<string, Schedule> {
+		return this.get('schedules')
+	}
+
+	addSchedule(schedule: Schedule): this {
 		return this.setIn(['schedules', schedule.id], schedule)
 	}
 
-	destroySchedule(scheduleId: string) {
-		let deleted = this.getIn(['schedules', scheduleId])
+	getScheduleForTerm(args: {year: number, semester: number}): ?Schedule {
+		let {year, semester} = args
+		return this.schedules.find(
+			s =>
+				s.active === true && s.year === year && s.semester === semester,
+		)
+	}
+
+	findAllSchedulesForTerm(args: {
+		year: number,
+		semester: number,
+	}): List<Schedule> {
+		let {year, semester} = args
+		return this.schedules
+			.filter(s => s.year === year && s.semester === semester)
+			.toList()
+	}
+
+	destroySchedule(scheduleId: string): this {
+		let deleted = this.schedules.get(scheduleId)
 
 		if (!deleted) {
 			throw new ReferenceError(
@@ -124,34 +170,61 @@ export class Student extends StudentRecord<StudentType> {
 		})
 	}
 
+	destroySchedulesForYear(year: number): this {
+		let scheduleIds = this.schedules
+			.filter(s => s.year === year)
+			.map(s => s.id)
+			.values()
+
+		return this.update('schedules', schedules =>
+			schedules.deleteAll(scheduleIds),
+		)
+	}
+
+	destroySchedulesForTerm(args: {year: number, semester: number}): this {
+		let {year, semester} = args
+		let scheduleIds = this.schedules
+			.filter(s => s.isSpecificTerm(year, semester))
+			.map(s => s.id)
+			.values()
+
+		return this.update('schedules', schedules =>
+			schedules.deleteAll(scheduleIds),
+		)
+	}
+
 	moveScheduleInStudent(
 		scheduleId: string,
 		{year, semester}: {year: number, semester: number},
-	) {
+	): this {
 		return this.mergeIn(['schedules', scheduleId], {year, semester})
 	}
 
-	reorderScheduleInStudent(scheduleId: string, index: number) {
+	reorderScheduleInStudent(scheduleId: string, index: number): this {
 		return this.setIn(['schedules', scheduleId, 'index'], index)
 	}
 
-	renameScheduleInStudent(scheduleId: string, title: string) {
+	renameScheduleInStudent(scheduleId: string, title: string): this {
 		return this.setIn(['schedules', scheduleId, 'title'], title)
 	}
 
-	addCourseToSchedule(scheduleId: string, clbid: string) {
+	addCourseToSchedule(scheduleId: string, clbid: string): this {
 		return this.updateIn(['schedules', scheduleId, 'clbids'], ids => {
 			return ids.push(clbid)
 		})
 	}
 
-	removeCourseFromSchedule(scheduleId: string, clbid: string) {
+	removeCourseFromSchedule(scheduleId: string, clbid: string): this {
 		return this.updateIn(['schedules', scheduleId, 'clbids'], ids => {
 			return ids.filterNot(id => id === clbid)
 		})
 	}
 
-	moveCourseToSchedule(args: {from: string, to: string, clbid: string}) {
+	moveCourseToSchedule(args: {
+		from: string,
+		to: string,
+		clbid: string,
+	}): this {
 		let {from, to, clbid} = args
 
 		// prettier-ignore
@@ -163,7 +236,7 @@ export class Student extends StudentRecord<StudentType> {
 	reorderCourseInSchedule(
 		scheduleId: string,
 		{clbid, index}: {clbid: string, index: number},
-	) {
+	): this {
 		return this.updateIn(['schedules', scheduleId, 'clbids'], ids => {
 			if (!ids) {
 				throw new ReferenceError(
@@ -192,11 +265,15 @@ export class Student extends StudentRecord<StudentType> {
 	 * Provide a description of areas here
 	 */
 
-	addAreaToStudent(area: AreaQuery) {
+	get studies(): Set<AreaQuery> {
+		return this.get('studies')
+	}
+
+	addArea(area: AreaQuery): this {
 		return this.updateIn(['studies'], set => set.add(area))
 	}
 
-	removeAreaFromStudent(area: AreaQuery) {
+	removeArea(area: AreaQuery): this {
 		return this.updateIn(['studies'], set => set.delete(area))
 	}
 
@@ -208,11 +285,15 @@ export class Student extends StudentRecord<StudentType> {
 	 * Provide a description of overrides here
 	 */
 
-	setOverrideOnStudent(key: string, value: OverrideType) {
+	get overrides(): Map<string, OverrideType> {
+		return this.get('overrides')
+	}
+
+	setOverride(key: string, value: OverrideType): this {
 		return this.setIn(['overrides', key], value)
 	}
 
-	removeOverrideFromStudent(key: string) {
+	removeOverride(key: string): this {
 		return this.deleteIn(['overrides', key])
 	}
 
@@ -224,11 +305,85 @@ export class Student extends StudentRecord<StudentType> {
 	 * Provide a description of fabrications here
 	 */
 
-	addFabricationToStudent(fabrication: FabricationType) {
+	get fabrications(): Map<string, FabricationType> {
+		return this.get('fabrications')
+	}
+
+	addFabrication(fabrication: FabricationType): this {
 		return this.setIn(['fabrications', fabrication.clbid], fabrication)
 	}
 
-	removeFabricationFromStudent(fabricationId: string) {
+	removeFabrication(fabricationId: string): this {
 		return this.deleteIn(['fabrications', fabricationId])
 	}
+
+	/////
+	/// Fulfillments
+	/////
+
+	/**
+	 * Provide a description of fabrications here
+	 */
+
+	get fulfillments(): Map<string, FulfillmentType> {
+		return this.get('fulfillments')
+	}
+
+	// addFabricationToStudent(fabrication: FabricationType): this {
+	// 	return this.setIn(['fabrications', fabrication.clbid], fabrication)
+	// }
+	//
+	// removeFabricationFromStudent(fabricationId: string): this {
+	// 	return this.deleteIn(['fabrications', fabricationId])
+	// }
+
+	/////
+	/// Helpers
+	/////
+
+	activeCourses(getCourse: CourseLookupFunc): Promise<Array<CourseType>> {
+		return getActiveCourses(this, getCourse)
+	}
+
+	urlEncode(): string {
+		return encodeStudent(this)
+	}
+
+	dataUrlEncode(): string {
+		return `data:text/json;charset=utf-8,${this.urlEncode()}`
+	}
+}
+
+type StudentInfo = {
+	id: string,
+	name: string,
+	version: string,
+	matriculation: number,
+	graduation: number,
+	advisor: string,
+	dateLastModified: Date,
+	dateCreated: Date,
+
+	studies: Array<AreaQuery>,
+	schedules: Map<string, Schedule>,
+	overrides: Map<string, OverrideType>,
+	fabrications: Map<string, FabricationType>,
+	fulfillments: Map<string, FulfillmentType>,
+
+	settings: Map<string, mixed>,
+}
+
+export function createNewStudent(data: {} | StudentInfo = {}) {
+	const now = new Date()
+
+	let {
+		id = uuid(),
+		matriculation = now.getFullYear() - 2,
+		graduation = now.getFullYear() + 2,
+		...student
+	} = (data: any)
+
+	let args = {id, matriculation, graduation, ...student}
+
+	return new Student(args)
 }

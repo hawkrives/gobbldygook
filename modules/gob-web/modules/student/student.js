@@ -4,7 +4,7 @@ import DocumentTitle from 'react-document-title'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {loadStudent} from '../../redux/students/actions/load-student'
-import type {HydratedStudentType} from '@gob/object-student'
+import {Student as StudentObject} from '@gob/object-student'
 import type {Undoable} from '../../types'
 import Loading from '../../components/loading'
 import styled from 'styled-components'
@@ -23,7 +23,7 @@ const Container = styled.div`
 `
 
 export type ReduxStudentStore = {
-	data: Undoable<HydratedStudentType>,
+	data: Undoable<StudentObject>,
 	isLoading: boolean,
 	isFetching: boolean,
 	isValdiating: boolean,
@@ -31,7 +31,7 @@ export type ReduxStudentStore = {
 }
 
 type Props = {
-	children: ({student: Undoable<HydratedStudentType>}) => React.Node, // from react-router
+	children: ({student: Undoable<StudentObject>}) => React.Node, // from react-router
 	loadStudent: string => any, // redux
 	studentId: string, // react-router
 	student?: ReduxStudentStore, // redux

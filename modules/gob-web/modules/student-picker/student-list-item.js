@@ -124,13 +124,10 @@ export default function StudentListItem(props: Props) {
 		student.isValdiating ||
 		student.isChecking
 
-	const classes: Object = {loading: isLoading}
-	if (!isLoading) {
-		classes['can-graduate'] = student.data.present.canGraduate
-		classes['cannot-graduate'] = !student.data.present.canGraduate
-	}
+	const classes = {}
+	classes.loading = isLoading
 
-	const sortedStudies = sortStudiesByType(student.data.present.studies)
+	const sortedStudies = sortStudiesByType([...student.data.present.studies])
 	const groupedStudies = groupBy(sortedStudies, s => s.type)
 
 	const areas = map(groupedStudies, (group, type) => (

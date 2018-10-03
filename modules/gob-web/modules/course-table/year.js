@@ -5,11 +5,11 @@ import filter from 'lodash/filter'
 import sortBy from 'lodash/sortBy'
 
 import {FlatButton} from '../../components/button'
-import Semester from './semester-container'
+import Semester from './semester'
 
 import {findFirstAvailableSemester} from '../../helpers/find-first-available-semester'
 import {expandYear, semesterName} from '@gob/school-st-olaf-college'
-import type {HydratedStudentType, ScheduleType} from '@gob/object-student'
+import {Student, Schedule} from '@gob/object-student'
 import * as theme from '../../theme'
 import styled from 'styled-components'
 
@@ -77,43 +77,42 @@ const canAddSemester = (nextAvailableSemester?: number) => {
 }
 
 type Props = {
-	student: HydratedStudentType,
+	student: Student,
 	year: number,
 }
 
 export default class Year extends React.PureComponent<Props> {
 	addSemester = () => {
 		const nextAvailableSemester = findFirstAvailableSemester(
-			values(this.props.student.schedules),
+			[...this.props.student.schedules.values()],
 			this.props.year,
 		)
 
-		this.props.student.addSchedule({
-			year: this.props.year,
-			semester: nextAvailableSemester,
-			index: 1,
-			active: true,
-		})
+		this.props.student.addSchedule(
+			new Schedule({
+				year: this.props.year,
+				semester: nextAvailableSemester,
+				index: 1,
+				active: true,
+			}),
+		)
 	}
 
 	removeYear = () => {
-		this.props.student.removeSchedulesForYear(this.props.year)
+		this.props.student.destroySchedulesForYear(this.props.year)
 	}
 
 	render() {
 		let {student, year} = this.props
-		let {schedules} = student
 
-		let valid = filter(
-			schedules,
-			s => s.active === true && s.year === year,
-		).map(s => s.semester)
-		let sorted = sortBy(valid, s => s)
+		let schedules = student.schedules
+			.filter(s => s.active === true && s.year === year)
+			.sortBy(s => s.getTerm())
 
 		let niceYear = expandYear(year)
 
 		let nextSemester = findFirstAvailableSemester(
-			((valid: Array<any>): Array<ScheduleType>),
+			[...schedules.values],
 			year,
 		)
 		let isAddSemesterDisabled = !canAddSemester(nextSemester)
@@ -144,10 +143,11 @@ export default class Year extends React.PureComponent<Props> {
 				</Header>
 
 				<SemesterList>
-					{sorted.map(semester => (
+					{schedules.map(schedule => (
 						<Semester
-							key={semester}
-							semester={semester}
+							key={schedule.semester}
+							schedule={schedule}
+							semester={schedule.semester}
 							student={student}
 							year={year}
 						/>

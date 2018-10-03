@@ -42,3 +42,11 @@ export function getCourse(
 		)
 		.catch(error => ({clbid, term, error: error.message}))
 }
+
+export function getOnlyCourse(args: {
+	clbid: string,
+	term: number,
+}): Promise<CourseType | null> {
+	let {clbid} = args
+	return getCourseFromNetwork(clbid).catch(error => null)
+}

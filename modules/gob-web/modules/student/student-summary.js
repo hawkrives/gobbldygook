@@ -4,12 +4,13 @@ import cx from 'classnames'
 import listify from 'listify'
 import groupBy from 'lodash/groupBy'
 import sample from 'lodash/sample'
+import {Set} from 'immutable'
 
 import {Card} from '../../components/card'
 import {AvatarLetter} from '../../components/avatar-letter'
 import ContentEditable from '../../components/content-editable'
 
-import type {StudentType, AreaQuery} from '@gob/object-student'
+import {Student, type AreaQuery} from '@gob/object-student'
 
 import './student-summary.scss'
 
@@ -44,7 +45,7 @@ type Props = {
 	randomizeHello?: boolean,
 	showAvatar?: boolean,
 	showMessage?: boolean,
-	student: StudentType,
+	student: Student,
 }
 
 type State = {
@@ -75,11 +76,11 @@ export class StudentSummary extends React.Component<Props, State> {
 
 		this.setState(() => ({checking: true}))
 
-		let {
-			canGraduate,
-			creditsNeeded,
-			creditsTaken,
-		} = await student.checkGraduatability()
+		// TODO: figure out how to avoid(?) computing Areas twice, yet also allow
+		// <AreaOfStudy/> to control the computation???
+		// $FlowFixMe
+		let promise = student.checkGraduatability()
+		let {canGraduate, creditsNeeded, creditsTaken} = promise
 
 		this.setState(() => ({
 			checking: false,
@@ -232,26 +233,26 @@ export class DateSummary extends React.Component<DateSummaryProps> {
 }
 
 type DegreeSummaryProps = {
-	studies: Array<AreaQuery>,
+	studies: Set<AreaQuery>,
 }
 
 export class DegreeSummary extends React.Component<DegreeSummaryProps> {
 	render() {
 		const grouped: {
-			[key: string]: {+type: string, +name: string}[],
-		} = groupBy(this.props.studies, s => s.type)
+			[key: string]: Set<{type: string, name: string, revision?: string}>,
+		} = this.props.studies.groupBy(s => s.type).toJSON()
 
 		const {
-			degree: dS = [],
-			major: mS = [],
-			concentration: cS = [],
-			emphasis: eS = [],
+			degree: dS = Set(),
+			major: mS = Set(),
+			concentration: cS = Set(),
+			emphasis: eS = Set(),
 		} = grouped
 
-		const dCount = dS.length
-		const mCount = mS.length
-		const cCount = cS.length
-		const eCount = eS.length
+		const dCount = dS.size
+		const mCount = mS.size
+		const cCount = cS.size
+		const eCount = eS.size
 
 		const dWord = dCount === 1 ? 'degree' : 'degrees'
 		const mWord = mCount === 1 ? 'major' : 'majors'
@@ -263,10 +264,10 @@ export class DegreeSummary extends React.Component<DegreeSummaryProps> {
 		const cEmph = cCount === 1 ? 'a ' : ''
 		const eEmph = eCount === 1 ? 'an ' : ''
 
-		const dList = listify(dS.map(d => d.name))
-		const mList = listify(mS.map(m => m.name))
-		const cList = listify(cS.map(c => c.name))
-		const eList = listify(eS.map(e => e.name))
+		const dList = listify([...dS.map(d => d.name)])
+		const mList = listify([...mS.map(m => m.name)])
+		const cList = listify([...cS.map(c => c.name)])
+		const eList = listify([...eS.map(e => e.name)])
 
 		return (
 			<p className="paragraph">

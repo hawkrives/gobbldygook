@@ -5,38 +5,39 @@ import React from 'react'
 import groupBy from 'lodash/groupBy'
 import toPairs from 'lodash/toPairs'
 import values from 'lodash/values'
+import {List, Map, Set} from 'immutable'
 
-import AreaOfStudyGroup from './area-of-study-group'
+import {AreaOfStudyGroup} from './area-of-study-group'
 import {FlatButton} from '../../components/button'
 import {sortStudiesByType, areaTypeConstants} from '@gob/object-student'
-import type {HydratedStudentType} from '@gob/object-student'
+import {Student} from '@gob/object-student'
 
 import './area-of-study-sidebar.scss'
 
 type Props = {
-	student: HydratedStudentType,
+	student: Student,
 }
 
 type State = {
-	showAreaPickerFor: {[key: string]: boolean},
+	showAreaPickerFor: Map<string, boolean>,
 }
 
-class AreaOfStudySidebarComponent extends React.PureComponent<Props, State> {
+export class AreaOfStudySidebar extends React.PureComponent<Props, State> {
 	state = {
-		showAreaPickerFor: {},
+		showAreaPickerFor: Map(),
 	}
 
 	showAreaPicker = (type: string, ev: Event) => {
 		ev.preventDefault()
 		this.setState(state => ({
-			showAreaPickerFor: {...state.showAreaPickerFor, [type]: true},
+			showAreaPickerFor: state.showAreaPickerFor.set(type, true),
 		}))
 	}
 
 	hideAreaPicker = (type: string, ev: Event) => {
 		ev.preventDefault()
 		this.setState(state => ({
-			showAreaPickerFor: {...state.showAreaPickerFor, [type]: false},
+			showAreaPickerFor: state.showAreaPickerFor.set(type, false),
 		}))
 	}
 
@@ -45,56 +46,42 @@ class AreaOfStudySidebarComponent extends React.PureComponent<Props, State> {
 		let {student} = props
 		let {showAreaPickerFor} = this.state
 
-		let sortedStudies = sortStudiesByType(student.studies)
+		let sortedStudies = List(sortStudiesByType([...student.studies]))
 
 		// group the studies by their type
-		let groupedStudies = groupBy(sortedStudies, study =>
+		let groupedStudies = sortedStudies.groupBy(study =>
 			study.type.toLowerCase(),
 		)
 
-		// look up either the "study" or the "area result"
-		let studyResults = toPairs(groupedStudies).map(([key, group]) => [
-			key,
-			group.map(
-				area =>
-					(student.areas || []).find(
-						a =>
-							a.name === area.name &&
-							a.type === area.type &&
-							a.revision === area.revision,
-					) || area,
-			),
-		])
-
-		let allAreaTypes = values(areaTypeConstants)
-		let usedAreaTypes = new Set(student.studies.map(s => s.type))
+		let allAreaTypes = Map(areaTypeConstants).toList()
+		let usedAreaTypes = Set(student.studies.map(s => s.type))
 
 		let unusedTypes = allAreaTypes.filter(
-			type => !usedAreaTypes.has(type) && !showAreaPickerFor[type],
+			type =>
+				!usedAreaTypes.has(type) && !showAreaPickerFor.get(type, false),
 		)
 
-		let unusedTypesToShow = toPairs(showAreaPickerFor).filter(
-			([type, toShow]) => toShow && !usedAreaTypes.has(type),
+		let unusedTypesToShow = showAreaPickerFor.filter(
+			(toShow, type) => toShow && !usedAreaTypes.has(type),
 		)
 
 		return (
 			<>
-				{studyResults.map(([areaType, areas]) => (
+				{groupedStudies.map((areas, areaType) => (
 					<AreaOfStudyGroup
 						key={areaType}
 						areas={areas}
 						onEndAddArea={this.hideAreaPicker}
 						onInitiateAddArea={this.showAreaPicker}
-						showAreaPicker={showAreaPickerFor[areaType] || false}
+						showAreaPicker={showAreaPickerFor.get(areaType, false)}
 						student={student}
 						type={areaType}
 					/>
 				))}
 
-				{unusedTypesToShow.map(([type, shouldShow]) => (
+				{unusedTypesToShow.map((shouldShow, type) => (
 					<AreaOfStudyGroup
 						key={type}
-						areas={[]}
 						onEndAddArea={this.hideAreaPicker}
 						onInitiateAddArea={this.showAreaPicker}
 						showAreaPicker={shouldShow || false}
@@ -103,7 +90,7 @@ class AreaOfStudySidebarComponent extends React.PureComponent<Props, State> {
 					/>
 				))}
 
-				{unusedTypes.length && (
+				{unusedTypes.size && (
 					<section className="unused-areas">
 						<span className="unused-areas--title">Add: </span>
 						<span className="unused-areas--container">
@@ -125,5 +112,3 @@ class AreaOfStudySidebarComponent extends React.PureComponent<Props, State> {
 		)
 	}
 }
-
-export const AreaOfStudySidebar = AreaOfStudySidebarComponent

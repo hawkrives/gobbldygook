@@ -19,13 +19,13 @@ import {
 	grid,
 } from '../icons/ionicons'
 import styled from 'styled-components'
-import type {HydratedStudentType} from '@gob/object-student'
+import {Student} from '@gob/object-student'
 import type {Undoable} from '../types'
 
 type Props = {
 	redo: string => any,
 	removeCourse: Function,
-	student: Undoable<HydratedStudentType>,
+	student: Undoable<Student>,
 	undo: string => any,
 
 	search?: boolean,
@@ -112,7 +112,6 @@ export function SidebarToolbar(props: Props) {
 
 const mapDispatch = dispatch => bindActionCreators({undo, redo}, dispatch)
 
-// $FlowFixMe
 export const ConnectedSidebarToolbar = connect(
 	undefined,
 	mapDispatch,

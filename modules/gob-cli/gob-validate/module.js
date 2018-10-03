@@ -8,13 +8,8 @@ validates the schedules of the given student
 import meow from 'meow'
 import stdin from 'get-stdin'
 import loadJsonFile from 'load-json-file'
-import {getCourse} from '../lib'
-import {
-	validateSchedule,
-	type StudentType,
-	type ScheduleType,
-	type HydratedScheduleType,
-} from '@gob/object-student'
+import {getOnlyCourse} from '../lib/get-course'
+import {validateSchedule, Student, Schedule} from '@gob/object-student'
 import {toPrettyTerm, buildDeptNum} from '@gob/school-st-olaf-college'
 const {version} = require('../package.json')
 
@@ -31,54 +26,67 @@ const print = (indent, message) => {
 export default async function main() {
 	let {input} = args()
 
-	let data: StudentType = input.length
+	let data = input.length
 		? await loadJsonFile(input[0])
 		: JSON.parse(await stdin())
 
-	let promises = Object.values(data.schedules).map(async (schedule: any) => {
-		;(schedule: ScheduleType)
-		let term = parseInt(`${schedule.year}${schedule.semester}`)
-		;(schedule: any).courses = await Promise.all(
-			schedule.clbids.map(clbid =>
-				getCourse({clbid, term}, data.fabrications),
-			),
-		)
-	})
+	let student = new Student(data)
 
-	await Promise.all(promises)
+	let promises = student.schedules.map(async schedule => {
+		let [courses, conflictInfo] = await Promise.all([
+			schedule.getOnlyCourses(getOnlyCourse),
+			validateSchedule(schedule, getOnlyCourse),
+		])
 
-	let anyConflicts = false
+		let {hasConflict, conflicts} = conflictInfo
 
-	Object.values(data.schedules).forEach((schedule: any) => {
-		;(schedule: HydratedScheduleType)
-		let {hasConflict, conflicts, courses} = validateSchedule(schedule)
-		let term = `${schedule.year}${schedule.semester}`
-
-		if (hasConflict) {
-			anyConflicts = true
-
-			print(0, `${toPrettyTerm(term)}`)
-
-			courses.forEach((course, i) => {
-				print(1, buildDeptNum((course: any)))
-
-				let courseHasConflict = conflicts[i].some(c => c)
-
-				if (!courseHasConflict) {
-					print(2, 'No warnings')
-					return
-				}
-
-				conflicts[i].forEach(conflict => {
-					if (!conflict) {
-						return
-					}
-
-					print(2, `- ${conflict.msg}`)
-				})
-			})
+		return {
+			...schedule.toJSON(),
+			courses,
+			term: schedule.getTerm(),
+			hasConflict,
+			conflicts,
 		}
 	})
+
+	let schedules = await Promise.all(promises.values())
+
+	let anyConflicts = schedules.some(s => s.hasConflict)
+
+	for (let schedule of schedules) {
+		let {courses, hasConflict, conflicts} = schedule
+
+		if (!hasConflict) {
+			continue
+		}
+
+		print(0, `${toPrettyTerm(schedule.term)}`)
+
+		for (let course of courses) {
+			print(1, buildDeptNum(course))
+
+			let courseConflicts = conflicts.get(course.clbid)
+
+			if (!courseConflicts) {
+				continue
+			}
+
+			let courseHasConflict = courseConflicts.some(Boolean)
+
+			if (!courseHasConflict) {
+				print(2, 'No warnings')
+				continue
+			}
+
+			for (let conflict of courseConflicts) {
+				if (!conflict) {
+					continue
+				}
+
+				print(2, `- ${conflict.msg}`)
+			}
+		}
+	}
 
 	if (!anyConflicts) {
 		console.log('No warnings')

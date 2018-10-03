@@ -42,7 +42,11 @@ const moveToSchedule = (args: {
 		}
 
 		if (scheduleId) {
-			return student.moveCourse({from: scheduleId, to: targetScheduleId, clbid})
+			return student.moveCourse({
+				from: scheduleId,
+				to: targetScheduleId,
+				clbid,
+			})
 		} else {
 			return student.addCourse({to: targetScheduleId, clbid})
 		}

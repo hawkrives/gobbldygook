@@ -46,6 +46,7 @@ export function getCourseFromDatabase(clbid: string) {
 export function getCourse(
 	{clbid, term}: {clbid: string, term: number},
 	fabrications?: ?{[key: string]: FabricationType} = {},
+	options?: ?{includeErrors?: boolean} = {},
 ): Promise<CourseType | FabricationType | ErrorType> {
 	if (fabrications && clbid in fabrications) {
 		return Promise.resolve(fabrications[clbid])
@@ -61,4 +62,18 @@ export function getCourse(
 			course => course || {clbid, term, error: `Could not find ${clbid}`},
 		)
 		.catch(error => ({clbid, term, error: error.message}))
+}
+
+export function getOnlyCourse(args: {
+	clbid: string,
+	term: number,
+}): Promise<?CourseType> {
+	let {clbid, term} = args
+
+	let getCourseFrom = getCourseFromDatabase
+	if (global.useNetworkOnly) {
+		getCourseFrom = getCourseFromNetwork
+	}
+
+	return getCourseFrom(clbid).catch(err => null)
 }

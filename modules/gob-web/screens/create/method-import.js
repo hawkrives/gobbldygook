@@ -8,7 +8,8 @@ import {
 	semesterName,
 	type PartialStudent,
 } from '@gob/school-st-olaf-college'
-import {getCourse} from '../../helpers/get-courses'
+import {Map, List} from 'immutable'
+import {getOnlyCourse} from '../../helpers/get-courses'
 import {StudentSummary} from '../../modules/student/student-summary'
 import toPairs from 'lodash/toPairs'
 import groupBy from 'lodash/groupBy'
@@ -18,10 +19,7 @@ import {connect} from 'react-redux'
 import type {Course as CourseType, CourseError} from '@gob/types'
 import './method-import.scss'
 
-import type {
-	HydratedStudentType,
-	HydratedScheduleType,
-} from '@gob/object-student'
+import {Student, Schedule} from '@gob/object-student'
 
 type Props = {
 	+dispatch: Function, // redux
@@ -33,7 +31,7 @@ type State = {
 	error: ?Error,
 	ids: Array<mixed>,
 	selectedId: ?number,
-	student: ?HydratedStudentType,
+	student: ?Student,
 	rawStudentText: string,
 	parsedStudentText: ?PartialStudent,
 }
@@ -59,7 +57,7 @@ class SISImportScreen extends React.Component<Props, State> {
 		this.setState(() => ({status: 'processing'}))
 
 		try {
-			let student = await convertStudent(parsedStudentText, getCourse)
+			let student = await convertStudent(parsedStudentText, getOnlyCourse)
 			this.setState(() => ({student}))
 		} catch (error) {
 			console.warn(error)
@@ -167,56 +165,65 @@ class SISImportScreen extends React.Component<Props, State> {
 	}
 }
 
-const StudentInfo = ({student}: {student: HydratedStudentType}) => (
+const StudentInfo = ({student}: {student: Student}) => (
 	<>
 		<StudentSummary student={student} showMessage={false} />
 
 		<ul>
-			{toPairs(groupBy(student.schedules, s => s.year)).map(
-				([year, schedules]) => (
-					<li key={year}>
-						{year}:<ScheduleListing schedules={schedules} />
-					</li>
-				),
-			)}
+			{student.schedules.groupBy(s => s.year).map((schedules, year) => (
+				<li key={year}>
+					{year}:<ScheduleListing schedules={schedules} />
+				</li>
+			))}
 		</ul>
 	</>
 )
 
-const ScheduleListing = (props: {schedules: Array<HydratedScheduleType>}) => {
-	let {schedules = []} = props
+class ScheduleListing extends React.Component<
+	{schedules: Map<string, Schedule>},
+	{courses: Array<CourseType>},
+> {
+	render() {
+		let {schedules = Map()} = this.props
 
-	return (
-		<ul>
-			{sortBy(schedules, s => s.semester).map(schedule => (
-				<li key={schedule.semester}>
-					{semesterName(schedule.semester)}:
-					<AbbreviatedCourseListing courses={schedule.courses} />
-				</li>
-			))}
-		</ul>
-	)
+		return (
+			<ul>
+				{schedules.sortBy(s => s.semester).map(schedule => (
+					<li key={schedule.semester}>
+						{semesterName(schedule.semester)}:
+						<AbbreviatedCourseListing schedule={schedule} />
+					</li>
+				))}
+			</ul>
+		)
+	}
 }
 
-const AbbreviatedCourseListing = (props: {
-	courses: Array<CourseType | CourseError>,
-}) => {
-	let {courses = []} = props
+class AbbreviatedCourseListing extends React.Component<
+	{schedule: Schedule},
+	{courses: List<CourseType>},
+> {
+	componentDidMount() {
+		this.fetchCourses()
+	}
+	fetchCourses = async () => {
+		let courses = await this.props.schedule.getOnlyCourses(getOnlyCourse)
+		this.setState(() => ({courses}))
+	}
+	render() {
+		let {courses = List()} = this.state
 
-	let onlyCourses: Array<CourseType> = (courses.filter(
-		(c: any) => c && !c.error,
-	): Array<any>)
-
-	return (
-		<ul>
-			{onlyCourses.map(course => (
-				<li key={course.clbid}>
-					{course.department} {course.number}
-					{course.section} – {course.name}
-				</li>
-			))}
-		</ul>
-	)
+		return (
+			<ul>
+				{courses.map(course => (
+					<li key={course.clbid}>
+						{course.department} {course.number}
+						{course.section} – {course.name}
+					</li>
+				))}
+			</ul>
+		)
+	}
 }
 
 let mapDispatch = dispatch => ({dispatch})

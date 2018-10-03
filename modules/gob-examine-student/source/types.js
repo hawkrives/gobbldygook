@@ -3,23 +3,34 @@
 import type {Course} from '@gob/types'
 export type {Course}
 
+import type {
+	ParsedHansonFile,
+	ParsedHansonRequirement,
+} from '@gob/hanson-format'
+export type {ParsedHansonFile, ParsedHansonRequirement}
+
+export type ComputationResult = {
+	computed: boolean,
+	details: ?Requirement,
+	overridden?: true,
+	error?: string,
+}
+
+export type EvaluationResult = {
+	computed: boolean,
+	details: ?Requirement,
+	overridden?: true,
+	error?: string,
+	progress: {
+		of: number,
+		at: number,
+	},
+}
+
 export type OverridesPath = string[]
 export type OverridesObject = {[key: string]: any}
 export type FulfillmentsPath = OverridesPath
 export type FulfillmentsObject = {[key: string]: Fulfillment}
-
-export type AreaOfStudyTypeEnum =
-	| 'degree'
-	| 'major'
-	| 'concentration'
-	| 'emphasis'
-	| 'interdisciplinary'
-
-export type AreaOfStudy = {
-	...Requirement,
-	name: string,
-	type: AreaOfStudyTypeEnum,
-}
 
 export type Fulfillment = {
 	$course: Course,

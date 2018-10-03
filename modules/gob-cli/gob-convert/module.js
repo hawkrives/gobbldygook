@@ -8,7 +8,7 @@ outputs the converted file to stdout
 import meow from 'meow'
 import stdin from 'get-stdin'
 import loadJsonFile from 'load-json-file'
-import {getCourse} from '../lib'
+import {getOnlyCourse} from '../lib/get-course'
 import {convertStudent} from '@gob/school-st-olaf-college'
 const {version} = require('../package.json')
 
@@ -27,7 +27,7 @@ export default async function main() {
 		? await loadJsonFile(input[0])
 		: JSON.parse(await stdin())
 
-	let hydrated = await convertStudent(data, getCourse)
+	let hydrated = await convertStudent(data, getOnlyCourse)
 
 	for (let schedule of Object.values(hydrated.schedules)) {
 		delete (schedule: any).courses

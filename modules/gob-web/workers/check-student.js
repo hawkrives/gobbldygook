@@ -3,44 +3,40 @@
 import uniqueId from 'lodash/uniqueId'
 import debug from 'debug'
 import CheckStudentWorker from './check-student.worker'
-
-import type {
-	HydratedAreaOfStudyType,
-	AreaOfStudyEvaluationError,
-	AreaOfStudyType,
-	HydratedStudentType,
-} from '@gob/object-student'
-
-const log = debug('worker:check-student:main')
+import {type EvaluationResult} from '@gob/examine-student'
+import {type AreaOfStudyType, Student} from '@gob/object-student'
+import {getCourse} from '../helpers/get-courses'
 
 const worker = new CheckStudentWorker()
 
 worker.addEventListener('error', function(event: Event) {
-	log('received error from check-student worker:', event)
+	console.warn('received error from check-student worker:', event)
 })
 
-type Result = HydratedAreaOfStudyType | AreaOfStudyEvaluationError
-
 // Checks a student object against an area of study.
-export function checkStudentAgainstArea(
-	student: HydratedStudentType,
+export async function checkStudentAgainstArea(
+	student: Student,
 	area: AreaOfStudyType,
-): Promise<Result> {
-	return new Promise(resolve => {
+): Promise<EvaluationResult> {
+	return new Promise(async resolve => {
 		const sourceId = uniqueId()
 
 		// This is inside of the function so that it doesn't get unregistered too early
-		function onMessage({data}) {
-			const [resultId, type, contents] = JSON.parse(data)
+		function onMessage({data: messageData}) {
+			const {id: resultId, type, data} = JSON.parse(messageData)
 
 			if (resultId === sourceId) {
-				// $FlowFixMe flow doesn't like … unbinding this?
 				worker.removeEventListener('message', onMessage)
 
 				if (type === 'result') {
-					resolve(contents)
+					resolve(data)
 				} else if (type === 'error') {
-					resolve({_error: contents.message})
+					resolve({
+						computed: false,
+						details: null,
+						error: data.message,
+						progress: {at: 0, of: 1},
+					})
 				}
 			}
 		}
@@ -51,6 +47,16 @@ export function checkStudentAgainstArea(
 		 * > We know that serialization/deserialization is slow. It's actually faster to
 		 * > JSON.stringify() then postMessage() a string than to postMessage() an object. :(
 		 */
-		worker.postMessage(JSON.stringify([sourceId, student, area]))
+		let courses = await student.activeCourses(getCourse)
+		let {fulfillments, overrides, name} = student
+		let msg = JSON.stringify({
+			id: sourceId,
+			area,
+			courses,
+			fulfillments,
+			overrides,
+			name,
+		})
+		worker.postMessage(msg)
 	})
 }

@@ -96,7 +96,6 @@ const FilterBox = styled.input`
 let sortByExpanded: {[key: SORT_BY_ENUM]: string} = {
 	dateLastModified: 'date last modified',
 	name: 'name',
-	canGraduate: 'can graduate',
 }
 
 type PropTypes = {

@@ -4,6 +4,8 @@ import React from 'react'
 
 import cx from 'classnames'
 import {Link} from '@reach/router'
+import {List, Map} from 'immutable'
+import {countCredits} from '@gob/examine-student'
 import {semesterName} from '@gob/school-st-olaf-college'
 import {IDENT_COURSE} from '@gob/object-student'
 import {DropTarget} from 'react-dnd'
@@ -13,10 +15,11 @@ import {FlatButton} from '../../components/button'
 import {Icon} from '../../components/icon'
 import {InlineList, InlineListItem} from '../../components/list'
 import {close, search} from '../../icons/ionicons'
-import type {HydratedScheduleType} from '@gob/object-student'
+import {Student, Schedule, type WarningType} from '@gob/object-student'
 import type {Course as CourseType} from '@gob/types'
+import {getOnlyCourse} from '../../helpers/get-courses'
 
-import CourseList from './course-list'
+import {CourseList} from './course-list'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -105,17 +108,18 @@ type Props = {
 	canDrop: boolean,
 	connectDropTarget: Function,
 	isOver: boolean,
-	schedule: HydratedScheduleType,
+	schedule: Schedule,
 	semester: number,
 	studentId: string,
 	year: number,
+	student: Student,
 }
 
 type State = {
 	loading: boolean,
 	checking: boolean,
-	courses: Array<CourseType>,
-	warnings: Array<Array<WarningType>>,
+	courses: List<CourseType>,
+	warnings: Map<string, List<?WarningType>>,
 	hasConflict: boolean,
 	credits: number,
 }
@@ -124,8 +128,8 @@ class Semester extends React.Component<Props, State> {
 	state = {
 		loading: true,
 		checking: true,
-		courses: [],
-		warnings: [],
+		courses: List(),
+		warnings: Map(),
 		hasConflict: false,
 		credits: 0,
 	}
@@ -139,26 +143,27 @@ class Semester extends React.Component<Props, State> {
 
 		let {year, semester, student} = this.props
 
-		let schedule = student.getScheduleForTerm({year, semester})
-		let {courses, credits} = await schedule.getCourses()
+		let schedule = this.props.schedule
+		let courses = await schedule.getOnlyCourses(getOnlyCourse)
+		let credits = countCredits([...courses])
 
 		this.setState(() => ({courses, credits, loading: false}))
 
-		let {warnings, hasConflict} = await schedule.check()
+		let {warnings, hasConflict} = await schedule.validate(getOnlyCourse)
 
 		this.setState(() => ({warnings, hasConflict, checking: false}))
 	}
 
 	removeSemester = () => {
 		const {student, semester, year} = this.props
-		student.removeSchedulesForTerm({year, semester})
+		student.destroySchedulesForTerm({year, semester})
 	}
 
 	render() {
 		let props = this.props
 		let {student, semester, year, canDrop} = props
 
-		let schedule = student.getScheduleForTerm({year, semester})
+		let schedule = this.props.schedule
 		let {courses, credits, warnings, hasConflict} = this.state
 
 		let {recommendedCredits} = schedule
@@ -166,9 +171,9 @@ class Semester extends React.Component<Props, State> {
 		let recommendedSlots = creditsPerCourse * recommendedCredits
 
 		const infoBar = []
-		if (courses.length) {
+		if (courses.size) {
 			// prettier-ignore
-			infoBar.push(`${courses.length} ${courses.length === 1 ? 'course' : 'courses'}`)
+			infoBar.push(`${courses.size} ${courses.size === 1 ? 'course' : 'courses'}`)
 
 			// prettier-ignore
 			infoBar.push(`${credits} ${credits === 1 ? 'credit' : 'credits'}`)
@@ -208,7 +213,9 @@ class Semester extends React.Component<Props, State> {
 					</TitleButton>
 
 					<RemoveSemesterButton
-						onClick={() => student.removeSemester}
+						onClick={() =>
+							student.destroySchedulesForTerm({year, semester})
+						}
 						title={`Remove ${year} ${name}`}
 					>
 						<Icon>{close}</Icon>
@@ -217,10 +224,12 @@ class Semester extends React.Component<Props, State> {
 
 				{schedule && (
 					<CourseList
-						courses={courses}
+						courses={[...courses]}
 						usedSlots={credits / creditsPerCourse}
 						maxSlots={recommendedSlots / creditsPerCourse}
 						warnings={warnings}
+						scheduleId={schedule.id}
+						studentId={student.id}
 					/>
 				)}
 			</Container>

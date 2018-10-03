@@ -8,13 +8,13 @@ import {Toolbar} from '../../components/toolbar'
 import Modal from '../../components/modal'
 import List from '../../components/list'
 import {close} from '../../icons/ionicons'
-import type {HydratedStudentType} from '@gob/object-student'
+import {Student} from '@gob/object-student'
 
 import {encodeStudent} from '@gob/object-student'
 
 type Props = {
 	navigate: string => mixed,
-	student: HydratedStudentType,
+	student: Student,
 	queryString?: string,
 }
 
@@ -44,9 +44,6 @@ export function ShareSheet(props: Props) {
 		)
 	}
 
-	let encodedStudent = encodeStudent(student)
-	let encodedStudentUrl = `data:text/json;charset=utf-8,${encodedStudent}`
-
 	return (
 		<Modal onClose={boundCloseModal} contentLabel="Share">
 			<Card>
@@ -63,7 +60,7 @@ export function ShareSheet(props: Props) {
 						<li>
 							<a
 								download={`${student.name}.gbstudent`}
-								href={encodedStudentUrl}
+								href={student.dataUrlEncode()}
 							>
 								Download file
 							</a>

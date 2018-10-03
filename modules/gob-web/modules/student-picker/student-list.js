@@ -42,17 +42,24 @@ export default function StudentList(props: Props) {
 		fuzzysearch(filterText, (s.data.present.name || '').toLowerCase()),
 	)
 
-	const studentObjects = sortBy(filtered, s => s.data.present[sortByKey]).map(
-		(student, i) => (
-			<StudentListItem
-				key={student.data.present.id || i}
-				as="li"
-				student={student}
-				destroyStudent={destroyStudent}
-				isEditing={isEditing}
-			/>
-		),
-	)
+	const studentObjects = sortBy(filtered, s => {
+		switch (sortByKey) {
+			case 'name':
+				return s.data.present.name
+			case 'dateLastModified':
+				return s.data.present.dateLastModified
+			default:
+				;(sortByKey: empty)
+		}
+	}).map((student, i) => (
+		<StudentListItem
+			key={student.data.present.id || i}
+			as="li"
+			student={student}
+			destroyStudent={destroyStudent}
+			isEditing={isEditing}
+		/>
+	))
 
 	return <ListOfStudents type="plain">{studentObjects}</ListOfStudents>
 }

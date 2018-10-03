@@ -23,10 +23,8 @@ export type WarningType = {
 	msg: string,
 }
 
-type Course = CourseType | FabricationType
-
 export function checkForInvalidYear(
-	course: Course,
+	course: CourseType,
 	scheduleYear: number,
 	thisYear: number = new Date().getFullYear(),
 ): ?WarningType {
@@ -47,82 +45,77 @@ export function checkForInvalidYear(
 }
 
 export function checkForInvalidSemester(
-	course: Course,
+	course: CourseType,
 	scheduleSemester: number,
 ): ?WarningType {
-	if (course.semester === undefined) {
+	if (course.semester === scheduleSemester) {
 		return null
 	}
 
-	if (course.semester !== scheduleSemester) {
-		const semString = semesterName(course.semester)
-		return {
-			warning: true,
-			type: 'invalid-semester',
-			msg: `Wrong Semester (originally from ${semString})`,
-		}
+	const semString = semesterName(course.semester)
+	return {
+		warning: true,
+		type: 'invalid-semester',
+		msg: `Wrong Semester (originally from ${semString})`,
 	}
-
-	return null
 }
 
 export function checkForInvalidity(
-	courses: List<Course>,
+	courses: List<CourseType>,
 	{year, semester}: {year: number, semester: number},
-): List<List<?WarningType>> {
-	return courses.map(course => {
+): Map<string, List<?WarningType>> {
+	let results = courses.map(course => {
 		let invalidYear = checkForInvalidYear(course, year)
 		let invalidSemester = checkForInvalidSemester(course, semester)
-		return List([invalidYear, invalidSemester])
+		return [course.clbid, List.of(invalidYear, invalidSemester)]
 	})
+
+	return Map(results)
 }
 
 export function checkForTimeConflicts(
-	courses: List<Course>,
-): List<?WarningType> {
-	let conflicts = List(findTimeConflicts(courses.toArray()))
+	courses: List<CourseType>,
+): Map<string, List<?WarningType>> {
+	let results = courses
+		.zip(findTimeConflicts(courses.toArray()))
+		.map(([course, conflictSet]) => {
+			if (!conflictSet.some(Boolean)) {
+				return [course.clbid, List()]
+			}
 
-	conflicts = conflicts.map(conflictSet => {
-		if (some(conflictSet)) {
 			// +1 to the indices because humans don't 0-index lists
-			const conflicts = compact(
-				conflictSet.map(
-					(possibility, i) => (possibility === true ? i + 1 : false),
-				),
-			)
-			const conflicted = conflicts.map(i => `${i}${ordinal(i)}`)
+			let conflicts = conflictSet
+				.map((isConflict, i) => (isConflict ? i + 1 : false))
+				.filter(conflictWith => conflictWith !== false)
 
-			const conflictsStr = oxford(conflicted, {oxfordComma: true})
-			const word = conflicts.length === 1 ? 'course' : 'courses'
-			return {
+			let conflicted = conflicts.map(i => `${String(i)}${ordinal(i)}`)
+
+			let conflictsStr = oxford(conflicted, {oxfordComma: true})
+			let word = conflicts.length === 1 ? 'course' : 'courses'
+
+			let warning = {
 				warning: true,
 				type: 'time-conflict',
 				msg: `Time conflict with the ${conflictsStr} ${word}`,
 			}
-		}
 
-		return null
-	})
+			return [course.clbid, List.of(warning)]
+		})
 
-	return conflicts
+	return Map(results)
 }
 
 export function findWarnings(
-	courses: List<Course | CourseError>,
+	courses: List<CourseType | CourseError>,
 	schedule: Schedule,
 ): Map<string, List<?WarningType>> {
-	let [year, semester] = [schedule.get('year'), schedule.get('semester')]
+	let {year, semester} = schedule
 
-	let onlyCourses = courses.filterNot(c => !c.error)
+	let noErrors: List<any> = courses.filterNot((c: any) => c.error)
+	let onlyCourses: List<CourseType> = noErrors
 
 	let warningsOfInvalidity = checkForInvalidity(onlyCourses, {year, semester})
 	let timeConflicts = checkForTimeConflicts(onlyCourses)
 
-	let nearlyMerged: List<
-		List<List<?WarningType>>,
-	> = warningsOfInvalidity.zip(timeConflicts)
-
-	let allWarnings = nearlyMerged.flatten(1)
-
-	return allWarnings
+	return Map().mergeDeep(warningsOfInvalidity, timeConflicts)
 }

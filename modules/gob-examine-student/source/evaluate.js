@@ -1,27 +1,75 @@
 // @flow
 import assertKeys from './assert-keys'
 import compute from './compute'
+
 import type {
 	Course,
-	AreaOfStudy,
+	ParsedHansonFile,
 	OverridesObject,
 	FulfillmentsObject,
+	EvaluationResult,
 } from './types'
 
 type Input = {
-	courses: Course[],
+	area: ParsedHansonFile,
+	courses: Array<Course>,
 	overrides: OverridesObject,
-	fulfilled: FulfillmentsObject,
+	fulfillments: FulfillmentsObject,
 }
 
-export function evaluate(student: Input, area: AreaOfStudy) {
+export function evaluate({
+	courses = [],
+	overrides = {},
+	fulfillments = {},
+	area,
+}: Input): EvaluationResult {
 	assertKeys(area, 'name', 'result', 'type', 'revision')
-	const {name, type} = area
-	const {courses = [], overrides = {}, fulfilled = {}} = student
-	return compute(area, {
+	let {name, type} = area
+
+	let result = compute(area, {
 		path: [type, name],
 		courses,
 		overrides,
-		fulfillments: fulfilled,
+		fulfillments,
 	})
+
+	if (!result.details) {
+		return {
+			error: '`details` missing in result!',
+			computed: false,
+			details: null,
+			progress: {at: 0, of: 1},
+		}
+	}
+
+	let resultDetails = result.details.result
+	let bits = []
+	switch (resultDetails.$type) {
+		case 'of':
+			bits = resultDetails.$of
+			break
+		case 'boolean': {
+			if (resultDetails.$booleanType === 'and') {
+				bits = resultDetails.$and
+			} else if (resultDetails.$booleanType === 'or') {
+				bits = resultDetails.$or
+			}
+			break
+		}
+		default:
+			break
+	}
+
+	const finalReqs = bits.map(b => ('_result' in b ? (b: any)._result : false))
+
+	const maxProgress = finalReqs.length
+	const currentProgress = finalReqs.filter(Boolean).length
+
+	return {
+		...result,
+		progress: {
+			at: currentProgress,
+			of: maxProgress,
+		},
+	}
 }

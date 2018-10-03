@@ -1,6 +1,7 @@
 // @flow
 
 import type {Course as CourseType} from '@gob/types'
+import {List, Map} from 'immutable'
 import groupBy from 'lodash/groupBy'
 import sortBy from 'lodash/sortBy'
 import flatten from 'lodash/flatten'
@@ -63,9 +64,7 @@ function SEMESTER(course: CourseType) {
 	return course.semester
 }
 
-const GROUP_BY_TO_KEY: {
-	[key: GROUP_BY_KEY]: boolean | Function | Array<Function>,
-} = {
+const GROUP_BY_TO_KEY = {
 	day: DAY_OF_WEEK,
 	department: DEPARTMENT,
 	gened: GEREQ,
@@ -73,10 +72,10 @@ const GROUP_BY_TO_KEY: {
 	term: course => [YEAR(course), SEMESTER(course)].join(''),
 	time: TIME_OF_DAY,
 	year: YEAR,
-	none: false,
+	none: null,
 }
 
-const SORT_BY_TO_KEY: {[key: SORT_BY_KEY]: Function | Array<Function>} = {
+const SORT_BY_TO_KEY: {[key: SORT_BY_KEY]: Array<Function>} = {
 	year: [YEAR, SEMESTER, DEPARTMENT, NUMBER, SECTION],
 	title: [TITLE, DEPARTMENT, NUMBER, SECTION],
 	department: [DEPARTMENT, NUMBER, SECTION],
@@ -87,29 +86,38 @@ const SORT_BY_TO_KEY: {[key: SORT_BY_KEY]: Function | Array<Function>} = {
 const REVERSE_ORDER: Set<GROUP_BY_KEY> = new Set(['year', 'term', 'semester'])
 
 export function sortAndGroup(
-	results: Array<CourseType>,
+	results: List<CourseType>,
 	args: {sorting: SORT_BY_KEY, grouping: GROUP_BY_KEY},
-): Array<string | CourseType> {
+): List<string | CourseType> {
 	let {sorting, grouping} = args
 	const start = present()
 
-	// TODO: Speed this up! This preparation stuff takes ~230ms by itself,
-	// with enough courses rendered. (like, say, {year: 2012})
-	const sorted = sortBy(results, SORT_BY_TO_KEY[sorting])
+	for (let comparator of SORT_BY_TO_KEY[sorting]) {
+		if (!comparator) {
+			continue
+		}
+		results = results.sortBy(comparator)
+	}
 
-	// Group them by term, then turn the object into an array of pairs.
-	const groupedAndPaired = toPairs(groupBy(sorted, GROUP_BY_TO_KEY[grouping]))
+	let grouper = GROUP_BY_TO_KEY[grouping]
+	if (!grouper) {
+		throw new Error(`unknown grouping function "${grouping}"`)
+	}
 
-	// Sort the result arrays by the first element, the term, because
-	// object keys don't have an implicit sort.
-	let processed = sortBy(groupedAndPaired, ([key]) => key)
+	let nestedResults = results
+		.groupBy(grouper)
+		.sortBy((_, key) => key)
+		.toOrderedMap()
+		.toList()
 
 	if (REVERSE_ORDER.has(grouping)) {
 		// Also reverse it, so the most recent is at the top.
-		processed.reverse()
+		nestedResults = nestedResults.reverse()
 	}
+
+	nestedResults = nestedResults.flatten()
 
 	console.info(`grouping/sorting took ${prettyMs(present() - start)}`)
 
-	return flatten(flatten(processed))
+	return nestedResults
 }
