@@ -6,7 +6,6 @@ import {loadStudent} from '../../redux/students/actions/load-student'
 import {type IndividualStudentState} from '../../redux/students/reducers'
 import {Student as StudentObject} from '@gob/object-student'
 import type {Undoable} from '../../types'
-import Loading from '../../components/loading'
 import styled from 'styled-components'
 
 const Container = styled.div`

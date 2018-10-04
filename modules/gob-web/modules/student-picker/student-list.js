@@ -1,8 +1,6 @@
 // @flow
 
 import React from 'react'
-import filter from 'lodash/filter'
-import sortBy from 'lodash/sortBy'
 import fuzzysearch from 'fuzzysearch'
 import styled from 'styled-components'
 import List from '../../components/list'

@@ -1,9 +1,7 @@
 // @flow
 import collectMatches from './collect-matches'
 import isRequirementName from './is-requirement-name'
-import filter from 'lodash/filter'
 import flatten from 'lodash/flatten'
-import includes from 'lodash/includes'
 import keys from 'lodash/keys'
 import uniqBy from 'lodash/uniqBy'
 import stringify from 'stabilize'
