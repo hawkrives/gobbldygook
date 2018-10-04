@@ -113,6 +113,7 @@ class Year extends React.Component<Props> {
 		let schedules = student.schedules
 			.filter(s => s.active === true && s.year === year)
 			.sortBy(s => s.getTerm())
+			.toList()
 
 		let niceYear = expandYear(year)
 
