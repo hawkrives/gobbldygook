@@ -106,7 +106,11 @@ export default function compute(
 		)
 	}
 
-	let result: ComputationResult = {computed, details: requirement}
+	let result: ComputationResult = {
+		computed,
+		details: requirement,
+		$type: 'computation-result',
+	}
 
 	if (hasOverride(path, overrides)) {
 		result.overridden = true

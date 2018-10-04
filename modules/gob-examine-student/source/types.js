@@ -14,6 +14,7 @@ export type ComputationResult = {
 	details: ?Requirement,
 	overridden?: true,
 	error?: string,
+	$type: 'computation-result',
 }
 
 export type EvaluationResult = {
