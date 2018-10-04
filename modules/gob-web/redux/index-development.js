@@ -5,13 +5,11 @@ import promiseMiddleware from 'redux-promise'
 import thunkMiddleware from 'redux-thunk'
 import {createLogger as loggingMiddleware} from 'redux-logger'
 import rootReducer from './reducer'
-import freezingMiddleware from 'redux-freeze'
 
 // prettier-ignore
 let middleware = [
 	promiseMiddleware,
 	thunkMiddleware,
-	freezingMiddleware,
 ]
 
 if (!global.TESTING) {

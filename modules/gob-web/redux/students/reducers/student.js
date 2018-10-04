@@ -2,23 +2,18 @@
 
 import undoable from 'redux-undo'
 import {Student} from '@gob/object-student'
+import type {Undoable, Action} from '../../types'
 import {CHANGE_STUDENT} from '../actions/change'
 import {LOAD_STUDENT, INIT_STUDENT, IMPORT_STUDENT} from '../constants'
 
+export type UndoableState = Undoable<Student>
 const initialState: Student = new Student()
 
-function reducer(
-	state: Student = initialState,
-	action: {type: string, error?: boolean, payload: Student},
-) {
+function reducer(state: ?Student = initialState, action: Action<Student>) {
 	switch (action.type) {
-		case INIT_STUDENT: {
-			if (action.error) {
-				return state
-			}
-			return action.payload
-		}
-
+		case INIT_STUDENT:
+		case IMPORT_STUDENT:
+		case LOAD_STUDENT:
 		case CHANGE_STUDENT: {
 			return action.payload
 		}

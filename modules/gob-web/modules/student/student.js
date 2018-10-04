@@ -24,34 +24,18 @@ const Container = styled.div`
 
 type Props = {
 	children: ({student: Undoable<StudentObject>}) => React.Node, // from react-router
-	loadStudent: string => any, // redux
+	loadStudent: string => mixed, // redux
 	studentId?: string, // react-router
 	student: ?IndividualStudentState, // redux
 }
 
-type State = {
-	cachedStudentId: ?string,
-}
+type State = {}
 
 export class Student extends React.Component<Props, State> {
-	state = {
-		cachedStudentId: null,
-	}
-
-	static getDerivedStateFromProps(props: Props, state: State) {
-		let studentId = props.studentId
-
-		// We have to be able to load the student here because we only load
-		// students on-demand into the redux store
-		const didStudentChange = studentId !== state.cachedStudentId
-
-		if (!props.student || didStudentChange) {
-			if (studentId) {
-				props.loadStudent(studentId)
-			}
+	componentDidMount() {
+		if (this.props.studentId && !this.props.student) {
+			this.props.loadStudent(this.props.studentId)
 		}
-
-		return {cachedStudentId: studentId}
 	}
 
 	render() {
@@ -59,9 +43,9 @@ export class Student extends React.Component<Props, State> {
 			return <p>Student {this.props.studentId} could not be loaded.</p>
 		}
 
-		let student: Undoable<StudentObject> = this.props.student
+		let {student} = this.props
 
-		let title = student
+		let title: string = student
 			? `${student.present.name} | Gobbldygook`
 			: 'Gobbldygook'
 
@@ -75,10 +59,12 @@ export class Student extends React.Component<Props, State> {
 	}
 }
 
-export default connect(
+const connected = connect(
 	(state, ownProps) =>
 		ownProps.studentId
 			? {student: state.students[ownProps.studentId]}
 			: {student: undefined},
 	{loadStudent},
 )(Student)
+
+export {connected as default}

@@ -10,10 +10,10 @@ import {
 	LOAD_STUDENT,
 } from '../constants'
 import type {Undoable, Action} from '../../types'
-import {reducer as wrapper} from './student-wrapper'
+import {undoableReducer as wrapper} from './student'
 import {Student} from '@gob/object-student'
 
-export type {State as IndividualStudentState} from './student-wrapper'
+export type {UndoableState as IndividualStudentState} from './student'
 
 const initialState = {}
 
@@ -24,16 +24,8 @@ export type State = {
 export function reducer(state: State = initialState, action: Action<*>) {
 	const {type, payload, error} = action
 
-	switch (type) {
-		case INIT_STUDENT:
-		case IMPORT_STUDENT: {
-			if (error) {
-				console.error(action)
-				return state
-			}
-			return {...state, [payload.id]: wrapper(undefined, action)}
-		}
 
+	switch (type) {
 		case DESTROY_STUDENT: {
 			if (error) {
 				console.error(action)
@@ -42,6 +34,8 @@ export function reducer(state: State = initialState, action: Action<*>) {
 			return omit(state, payload.id)
 		}
 
+		case INIT_STUDENT:
+		case IMPORT_STUDENT:
 		case LOAD_STUDENT:
 		case CHANGE_STUDENT:
 		case UndoableActionTypes.UNDO:
