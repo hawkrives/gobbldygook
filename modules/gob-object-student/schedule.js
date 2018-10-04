@@ -52,6 +52,29 @@ const defaultValues: ScheduleType = {
 const ScheduleRecord = Record(defaultValues)
 
 export class Schedule extends ScheduleRecord<ScheduleType> {
+	constructor(data: {[key: $Keys<ScheduleType>]: mixed} = {}) {
+		let {
+			id = uuid(),
+			clbids = [],
+			metadata = {}
+		} = data
+
+		if (!List.isList(clbids)) {
+			clbids = List((clbids: any))
+		}
+
+		if (!Map.isMap(metadata)) {
+			metadata = Map((metadata: any))
+		}
+
+		super({
+			...data,
+			id,
+			clbids,
+			metadata
+		})
+	}
+
 	get id(): string {
 		return this.get('id')
 	}

@@ -29,7 +29,7 @@ export type StudentType = {
 	studies: Set<AreaQuery>,
 	schedules: Map<string, Schedule>,
 	overrides: Map<string, OverrideType>,
-	fabrications: Map<string, FabricationType>,
+	fabrications: List<FabricationType>,
 	fulfillments: Map<string, FulfillmentType>,
 
 	settings: Map<string, mixed>,
@@ -47,7 +47,7 @@ const defaultValues: StudentType = {
 	studies: Set(),
 	schedules: Map(),
 	overrides: Map(),
-	fabrications: Map(),
+	fabrications: List(),
 	fulfillments: Map(),
 	settings: Map(),
 }
@@ -55,6 +55,61 @@ const defaultValues: StudentType = {
 const StudentRecord = Record(defaultValues)
 
 export class Student extends StudentRecord<StudentType> {
+	constructor(data: {[key: $Keys<StudentType>]: mixed} = {}) {
+		const now = new Date()
+
+		let {
+			id = uuid(),
+			studies = [],
+			schedules = {},
+			matriculation = now.getFullYear() - 2,
+			graduation = now.getFullYear() + 2,
+			overrides = {},
+			fulfillments = {},
+			fabrications = [],
+			settings = {},
+		} = data
+
+		if (Array.isArray(studies)) {
+			studies = Set(studies)
+		}
+
+		if (Array.isArray(schedules)) {
+			schedules = Map(schedules.map((s: any) => [s.id, s]))
+		} else if (!Map.isMap(schedules)) {
+			schedules = Map((schedules: any))
+		}
+
+		if (!List.isList(fabrications)) {
+			fabrications = List((fabrications: any))
+		}
+
+		if (!Map.isMap(overrides)) {
+			overrides = Map((overrides: any))
+		}
+
+		if (!Map.isMap(settings)) {
+			settings = Map((settings: any))
+		}
+
+		if (!Map.isMap(fulfillments)) {
+			fulfillments = Map((fulfillments: any))
+		}
+
+		super({
+			...data,
+			id,
+			studies,
+			schedules,
+			matriculation,
+			graduation,
+			fulfillments,
+			settings,
+			overrides,
+			fabrications,
+		})
+	}
+
 	get id(): string {
 		return this.get('id')
 	}
@@ -154,11 +209,9 @@ export class Student extends StudentRecord<StudentType> {
 			mutable.deleteIn(['schedules', scheduleId])
 
 			if (deleted && deleted.active) {
+				let {year, semester} = deleted
 				let otherSchedKey = mutable.schedules.findKey(
-					s =>
-						s.year === deleted.year &&
-						s.semester === deleted.semester &&
-						s.id !== deleted.id,
+					s => s.isSpecificTerm(year, semester)
 				)
 
 				if (otherSchedKey) {
@@ -181,8 +234,13 @@ export class Student extends StudentRecord<StudentType> {
 		)
 	}
 
-	destroySchedulesForTerm(args: {year: number, semester: number}): this {
+	destroySchedulesForTerm(args: {|year: number, semester: number|}): this {
 		let {year, semester} = args
+
+		if (year == null || semester == null) {
+			throw new Error('year and semester must both be provided')
+		}
+
 		let scheduleIds = this.schedules
 			.filter(s => s.isSpecificTerm(year, semester))
 			.map(s => s.id)
@@ -208,16 +266,40 @@ export class Student extends StudentRecord<StudentType> {
 		return this.setIn(['schedules', scheduleId, 'title'], title)
 	}
 
+	/////
+	/// Courses, within schedules
+	/////
+
 	addCourseToSchedule(scheduleId: string, clbid: string): this {
+		let hasClbid = this.hasCourseInSchedule(scheduleId, clbid)
+
+		if (hasClbid) {
+			return this
+		}
+
 		return this.updateIn(['schedules', scheduleId, 'clbids'], ids => {
 			return ids.push(clbid)
 		})
 	}
 
 	removeCourseFromSchedule(scheduleId: string, clbid: string): this {
+		let hasClbid = this.hasCourseInSchedule(scheduleId, clbid)
+
+		if (!hasClbid) {
+			return this
+		}
+
 		return this.updateIn(['schedules', scheduleId, 'clbids'], ids => {
 			return ids.filterNot(id => id === clbid)
 		})
+	}
+
+	hasCourseInSchedule(scheduleId: string, clbid: string): boolean {
+		let list = this.getIn(['schedules', scheduleId, 'clbids'])
+		if (!list) {
+			return false
+		}
+		return list.some(id => id === clbid)
 	}
 
 	moveCourseToSchedule(args: {
@@ -277,6 +359,17 @@ export class Student extends StudentRecord<StudentType> {
 		return this.updateIn(['studies'], set => set.delete(area))
 	}
 
+	hasArea({name, type, revision}: AreaQuery): boolean {
+		return (
+			this.studies.find(
+				a =>
+					a.name === name &&
+					a.type === type &&
+					a.revision === revision,
+			) !== undefined
+		)
+	}
+
 	/////
 	/// Overrides
 	/////
@@ -309,16 +402,24 @@ export class Student extends StudentRecord<StudentType> {
 	 * Provide a description of fabrications here
 	 */
 
-	get fabrications(): Map<string, FabricationType> {
+	get fabrications(): List<FabricationType> {
 		return this.get('fabrications')
 	}
 
 	addFabrication(fabrication: FabricationType): this {
-		return this.setIn(['fabrications', fabrication.clbid], fabrication)
+		return this.update('fabrications', list => {
+			return list.push(fabrication)
+		})
+	}
+
+	getFabrication(fabricationId: string): ?FabricationType {
+		return this.fabrications.find(({clbid}) => clbid === fabricationId)
 	}
 
 	removeFabrication(fabricationId: string): this {
-		return this.deleteIn(['fabrications', fabricationId])
+		return this.update('fabrications', list => {
+			return list.filterNot(({clbid}) => clbid === fabricationId)
+		})
 	}
 
 	/////
@@ -356,38 +457,4 @@ export class Student extends StudentRecord<StudentType> {
 	dataUrlEncode(): string {
 		return `data:text/json;charset=utf-8,${this.urlEncode()}`
 	}
-}
-
-type StudentInfo = {
-	id: string,
-	name: string,
-	version: string,
-	matriculation: number,
-	graduation: number,
-	advisor: string,
-	dateLastModified: Date,
-	dateCreated: Date,
-
-	studies: Array<AreaQuery>,
-	schedules: Map<string, Schedule>,
-	overrides: Map<string, OverrideType>,
-	fabrications: Map<string, FabricationType>,
-	fulfillments: Map<string, FulfillmentType>,
-
-	settings: Map<string, mixed>,
-}
-
-export function createNewStudent(data: {} | StudentInfo = {}) {
-	const now = new Date()
-
-	let {
-		id = uuid(),
-		matriculation = now.getFullYear() - 2,
-		graduation = now.getFullYear() + 2,
-		...student
-	} = (data: any)
-
-	let args = {id, matriculation, graduation, ...student}
-
-	return new Student(args)
 }
