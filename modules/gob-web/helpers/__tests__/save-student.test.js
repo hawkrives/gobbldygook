@@ -25,7 +25,9 @@ describe('saveStudent', () => {
 	it('saves a student', async () => {
 		await saveStudent(student)
 		let expectedStudentIds = [student.id]
-		let actualStudentIds = JSON.parse(localStorage.getItem('studentIds') || '[]')
+		let actualStudentIds = JSON.parse(
+			localStorage.getItem('studentIds') || '[]',
+		)
 		expect(actualStudentIds).toEqual(expectedStudentIds)
 		let actualStudent = JSON.parse(localStorage.getItem(student.id) || '{}')
 
@@ -39,8 +41,9 @@ describe('saveStudent', () => {
 		let s = JSON.parse(localStorage.getItem(student.id) || '{}')
 		let lastModified = s.dateLastModified
 		await saveStudent({...s, toJSON: () => s})
-		let newLastModified = JSON.parse(localStorage.getItem(student.id) || '{}')
-			.dateLastModified
+		let newLastModified = JSON.parse(
+			localStorage.getItem(student.id) || '{}',
+		).dateLastModified
 		expect(newLastModified).toBe(lastModified)
 	})
 })
@@ -110,7 +113,9 @@ describe('setIdCache', () => {
 		localStorage.clear()
 		const ids = new Set(['1', '2', '3'])
 		setIdCache(ids)
-		let actual = new Set(JSON.parse(localStorage.getItem('studentIds') || '[]'))
+		let actual = new Set(
+			JSON.parse(localStorage.getItem('studentIds') || '[]'),
+		)
 		let expected = ids
 		expect(actual).toEqual(expected)
 	})

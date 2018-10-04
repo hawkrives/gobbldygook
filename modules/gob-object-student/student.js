@@ -210,8 +210,8 @@ export class Student extends StudentRecord<StudentType> {
 
 			if (deleted && deleted.active) {
 				let {year, semester} = deleted
-				let otherSchedKey = mutable.schedules.findKey(
-					s => s.isSpecificTerm(year, semester)
+				let otherSchedKey = mutable.schedules.findKey(s =>
+					s.isSpecificTerm(year, semester),
 				)
 
 				if (otherSchedKey) {

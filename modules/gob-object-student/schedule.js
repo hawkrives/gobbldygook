@@ -53,11 +53,7 @@ const ScheduleRecord = Record(defaultValues)
 
 export class Schedule extends ScheduleRecord<ScheduleType> {
 	constructor(data: {[key: $Keys<ScheduleType>]: mixed} = {}) {
-		let {
-			id = uuid(),
-			clbids = [],
-			metadata = {}
-		} = data
+		let {id = uuid(), clbids = [], metadata = {}} = data
 
 		if (!List.isList(clbids)) {
 			clbids = List((clbids: any))
@@ -75,7 +71,7 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
 			...data,
 			id,
 			clbids,
-			metadata
+			metadata,
 		})
 	}
 

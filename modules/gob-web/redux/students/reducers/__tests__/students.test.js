@@ -1,11 +1,7 @@
 import size from 'lodash/size'
 import range from 'lodash/range'
 
-import {
-	INIT_STUDENT,
-	IMPORT_STUDENT,
-	DESTROY_STUDENT,
-} from '../../constants'
+import {INIT_STUDENT, IMPORT_STUDENT, DESTROY_STUDENT} from '../../constants'
 import {CHANGE_STUDENT} from '../../actions/change'
 
 import {undoableReducer, reducer} from '../student'

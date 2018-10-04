@@ -197,8 +197,16 @@ describe('DegreeSummary', () => {
 		{type: 'major', name: 'Asian Studies', revision: 'latest'},
 		{type: 'major', name: 'Biology', revision: 'latest'},
 		{type: 'major', name: 'Computer Science', revision: 'latest'},
-		{type: 'concentration', name: 'Africa and the Americas', revision: 'latest'},
-		{type: 'concentration', name: 'Biomolecular Science', revision: 'latest'},
+		{
+			type: 'concentration',
+			name: 'Africa and the Americas',
+			revision: 'latest',
+		},
+		{
+			type: 'concentration',
+			name: 'Biomolecular Science',
+			revision: 'latest',
+		},
 		{type: 'concentration', name: 'China Studies', revision: 'latest'},
 		{type: 'emphasis', name: 'Emphasis 1', revision: 'latest'},
 		{type: 'emphasis', name: 'Emphasis 2', revision: 'latest'},

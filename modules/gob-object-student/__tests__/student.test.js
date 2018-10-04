@@ -247,12 +247,13 @@ describe('destroyScheduleFromStudent', () => {
 	})
 })
 
-
 describe('destroySchedulesForYear', () => {
 	it('removes schedules', () => {
 		let sched1 = new Schedule({year: 2014, semester: 1})
 		let sched2 = new Schedule({year: 2014, semester: 2})
-		let initial = new Student({schedules: OrderedMap({[sched1.id]: sched1, [sched2.id]: sched2})})
+		let initial = new Student({
+			schedules: OrderedMap({[sched1.id]: sched1, [sched2.id]: sched2}),
+		})
 
 		let removedSchedule = initial.destroySchedulesForYear(2014)
 		expect(removedSchedule.schedules.size).toBe(0)
@@ -263,7 +264,9 @@ describe('destroySchedulesForTerm', () => {
 	it('removes schedules', () => {
 		let sched1 = new Schedule({year: 2014, semester: 1})
 		let sched2 = new Schedule({year: 2014, semester: 2})
-		let initial = new Student({schedules: OrderedMap({[sched1.id]: sched1, [sched2.id]: sched2})})
+		let initial = new Student({
+			schedules: OrderedMap({[sched1.id]: sched1, [sched2.id]: sched2}),
+		})
 
 		let actual = initial.destroySchedulesForTerm({year: 2014, semester: 1})
 
@@ -271,7 +274,6 @@ describe('destroySchedulesForTerm', () => {
 		expect(actual.schedules.get(sched2.id)).toBeDefined()
 	})
 })
-
 
 describe('changeStudentName', () => {
 	it(`changes the student's name`, () => {
