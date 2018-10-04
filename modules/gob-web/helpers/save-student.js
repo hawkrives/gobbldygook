@@ -1,7 +1,7 @@
 // @flow
 
 import stringify from 'stabilize'
-import {Student, prepareStudentForSave} from '@gob/object-student'
+import {Student} from '@gob/object-student'
 
 export function getIdCache(): Set<string> {
 	return new Set(JSON.parse(localStorage.getItem('studentIds') || '[]'))
@@ -30,16 +30,14 @@ export async function saveStudent(student: Student) {
 
 	const oldVersion = localStorage.getItem(student.id)
 
-	let prepared = prepareStudentForSave(student)
-	if (oldVersion === stringify(prepared)) {
+	if (oldVersion === stringify(student)) {
 		return
 	}
 
 	let toSave = student.set('dateLastModified', new Date())
-	let toSavePrepared = prepareStudentForSave(toSave)
 
-	localStorage.setItem(toSavePrepared.id, stringify(toSavePrepared))
-	await addStudentToCache(toSavePrepared.id)
+	localStorage.setItem(student.id, stringify(student))
+	await addStudentToCache(student.id)
 
 	return toSave
 }

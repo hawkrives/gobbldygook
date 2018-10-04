@@ -1,7 +1,7 @@
 // @flow
 
 export {areaTypeConstants} from './area-types'
-export {encodeStudent, prepareStudentForSave} from './encode-student'
+export {encodeStudent} from './encode-student'
 export {filterAreaList} from './filter-area-list'
 export {getActiveCourses} from './get-active-courses'
 

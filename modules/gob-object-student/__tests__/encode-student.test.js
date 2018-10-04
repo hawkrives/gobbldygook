@@ -3,7 +3,7 @@ import {encodeStudent} from '../encode-student'
 const newEncode = require('querystring').stringify
 const oldEncode = global.encodeURIComponent
 
-describe('prepareStudentForSave', () => {
+describe('encodeStudent', () => {
 	beforeAll(() => {
 		global.encodeURIComponent = newEncode
 	})
