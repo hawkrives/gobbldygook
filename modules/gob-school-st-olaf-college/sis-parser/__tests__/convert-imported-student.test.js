@@ -10,7 +10,7 @@ describe('convertStudent', () => {
 		expect(actual.id).toBeDefined()
 		expect(actual.name).toBeDefined()
 		expect(actual.version).toBeDefined()
-		expect(actual.creditsNeeded).toBeDefined()
+		// expect(actual.creditsNeeded).toBeDefined()
 		expect(actual.matriculation).toBeDefined()
 		expect(actual.graduation).toBeDefined()
 		expect(actual.advisor).toBeDefined()
@@ -56,7 +56,7 @@ describe('convertStudent', () => {
 		]
 
 		for (let expected of expectedStudies) {
-			expect(actual.studies).toContainEqual(
+			expect(actual.studies.toArray()).toContainEqual(
 				expect.objectContaining(expected),
 			)
 		}
@@ -66,7 +66,7 @@ describe('convertStudent', () => {
 		let actual = await convertStudent(sample, getCourseMock)
 
 		for (let expected of expectedSchedules) {
-			expect(Object.values(actual.schedules)).toContainEqual(
+			expect(actual.schedules.toList().toJS()).toContainEqual(
 				expect.objectContaining(expected),
 			)
 		}

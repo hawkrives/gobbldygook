@@ -50,26 +50,21 @@ import type {
 
 export function enhanceHanson(data: HansonFile): ParsedHansonFile {
 	if (typeof data !== 'object') {
-		throw new Error('enhanceHanson: data was not an object!')
+		throw new Error('data was not an object!')
 	}
 
 	// Ensure that a result, message, or filter key exists.
 	// If filter's the only one, it's going to filter the list of courses
 	// available to the child requirements when this is evaluated.
-	const oneOfTheseKeysMustExist = new Set(['result', 'message'])
-	if (!Object.keys(data).some(key => oneOfTheseKeysMustExist.has(key))) {
-		let requiredKeys = quoteAndJoin(oneOfTheseKeysMustExist)
-		let existingKeys = quoteAndJoin(Object.keys(data))
-		throw new TypeError(
-			`enhanceHanson(): could not find any of [${requiredKeys}] in [${existingKeys}].`,
-		)
+	if (!('result' in data)) {
+		throw new TypeError('"result" is a required key')
 	}
 
 	Object.keys(data).forEach(key => {
 		if (!isRequirementName(key) && !topLevelWhitelist.has(key)) {
 			const whitelistStr = quoteAndJoin(topLevelWhitelist)
 			throw new TypeError(
-				`enhanceHanson: only [${whitelistStr}] keys are allowed, and '${key}' is not one of them. All requirement names must begin with an uppercase letter or a number.`,
+				`only [${whitelistStr}] keys are allowed, and '${key}' is not one of them. All requirement names must begin with an uppercase letter or a number.`,
 			)
 		}
 	})
@@ -80,7 +75,7 @@ export function enhanceHanson(data: HansonFile): ParsedHansonFile {
 
 	if (data.revision && typeof data.revision !== 'string') {
 		let rev = data.revision
-		let msg = `enhanceHanson: "revision" must be a string. Try wrapping it in single quotes. "${rev}" is a ${typeof rev}.`
+		let msg = `"revision" must be a string. Try wrapping it in single quotes. "${rev}" is a ${typeof rev}.`
 		throw new TypeError(msg)
 	}
 
@@ -136,7 +131,7 @@ function enhanceRequirement(
 	}
 
 	if (typeof value !== 'object') {
-		throw new Error('enhanceHansonReq(): data was not an object!')
+		throw new Error('data was not an object!')
 	}
 
 	let keys = Object.keys(value)
@@ -149,7 +144,7 @@ function enhanceRequirement(
 		let requiredKeys = quoteAndJoin(oneOfTheseKeysMustExist)
 		let existingKeys = quoteAndJoin(keys)
 		throw new TypeError(
-			`enhanceHanson(): could not find any of [${requiredKeys}] in [${existingKeys}].`,
+			`could not find any of [${requiredKeys}] in [${existingKeys}].`,
 		)
 	}
 
@@ -157,7 +152,7 @@ function enhanceRequirement(
 		if (!isRequirementName(key) && !lowerLevelWhitelist.has(key)) {
 			const whitelistStr = quoteAndJoin(lowerLevelWhitelist)
 			throw new TypeError(
-				`enhanceHanson: only [${whitelistStr}] keys are allowed, and '${key}' is not one of them. All requirement names must begin with an uppercase letter or a number.`,
+				`only [${whitelistStr}] keys are allowed, and '${key}' is not one of them. All requirement names must begin with an uppercase letter or a number.`,
 			)
 		}
 	})
@@ -214,7 +209,7 @@ function enhanceRequirement(
 	return returnedValue
 }
 
-function assertString(value: mixed) {
+function assertString(key: string, value: mixed) {
 	return `\`${String(value)}\` should be \`string\`, not \`${typeof value}\``
 }
 
@@ -255,7 +250,7 @@ function parseWithPeg(
 	try {
 		return parse(value, {abbreviations, titles, startRule})
 	} catch (e) {
-		throw new SyntaxError(`enhanceHanson: ${e.message} (in '${value}')`)
+		throw new SyntaxError(`${e.message} (in '${value}')`)
 	}
 }
 

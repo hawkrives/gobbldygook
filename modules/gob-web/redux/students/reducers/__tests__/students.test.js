@@ -13,14 +13,6 @@ import {ActionCreators} from 'redux-undo'
 const {undo, redo} = ActionCreators
 
 describe('students reducer', () => {
-	it('returns the initial state', () => {
-		const expected = {}
-		const actual = reducer(undefined, {})
-		expect(actual).toEqual(expected)
-	})
-})
-
-describe('students reducer', () => {
 	it('handles INIT_STUDENT', () => {
 		let initialState = {}
 
@@ -79,19 +71,6 @@ describe('students reducer', () => {
 })
 
 describe('the undoable students reducer', () => {
-	it('returns the initial state', () => {
-		const expected = {
-			past: [],
-			present: {},
-			future: [],
-		}
-
-		const actual = undoableReducer(undefined, {})
-		expect(actual.past).toEqual(expected.past)
-		expect(actual.present).toEqual(expected.present)
-		expect(actual.future).toEqual(expected.future)
-	})
-
 	it('returns a new object with changes', () => {
 		const initial = {}
 		const hasOneStudent = undoableReducer(initial, {
@@ -176,7 +155,7 @@ describe('the undoable students reducer', () => {
 		)
 		const hasOneStudent = undoableReducer(initial, {
 			type: CHANGE_STUDENT,
-			payload: {name: 'abc'},
+			payload: {name: 'abc', id: 'xyz'},
 		})
 
 		const shouldBeInitial = undoableReducer(hasOneStudent, undo())

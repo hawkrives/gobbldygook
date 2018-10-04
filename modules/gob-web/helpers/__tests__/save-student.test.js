@@ -29,7 +29,7 @@ describe('saveStudent', () => {
 		expect(actualStudentIds).toEqual(expectedStudentIds)
 		let actualStudent = JSON.parse(localStorage.getItem(student.id) || '{}')
 
-		let {dateLastModified: _1, ...expected} = student.toJSON()
+		let {dateLastModified: _1, ...expected} = student.toJS()
 		let {dateLastModified: _2, ...actual} = actualStudent
 		expect(actual).toEqual(expected)
 	})
@@ -95,7 +95,7 @@ describe('getIdCache', () => {
 	it('gets the list of student ids', () => {
 		localStorage.clear()
 		const ids = new Set(['1', '2', '3'])
-		localStorage.setItem('studentIds', JSON.stringify(ids))
+		localStorage.setItem('studentIds', JSON.stringify([...ids]))
 		expect(getIdCache()).toEqual(ids)
 	})
 

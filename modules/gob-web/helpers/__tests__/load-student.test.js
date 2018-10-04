@@ -26,7 +26,7 @@ describe('loadStudent', () => {
 	})
 
 	it(`removes the student if it is the string [Object object]`, async () => {
-		localStorage.setItem(student.id, String(student))
+		localStorage.setItem(student.id, String({}))
 		const actual = await loadStudent(student.id)
 		expect(actual).toBe(null)
 	})

@@ -2,7 +2,7 @@
 
 import demoStudent from '../demo-student.json'
 import stringify from 'stabilize'
-import {List, Map} from 'immutable'
+import {List, OrderedMap} from 'immutable'
 
 import {Student} from '../student'
 import {Schedule} from '../schedule'
@@ -45,11 +45,11 @@ describe('Student', () => {
 
 		let student = new Student(input)
 
-		expect(Map.isMap(student.schedules)).toBe(true)
+		expect(OrderedMap.isOrderedMap(student.schedules)).toBe(true)
 	})
 
 	it('migrates an array of schedules into an object', () => {
-		let schedules = Map({
+		let schedules = OrderedMap({
 			'1': new Schedule({id: '1'}),
 			'2': new Schedule({id: '2'}),
 		})
@@ -154,7 +154,7 @@ describe('removeAreaFromStudent', () => {
 describe('moveCourseToSchedule', () => {
 	it('moves courses between schedules in one-ish operation', () => {
 		let stu = new Student({
-			schedules: Map([
+			schedules: OrderedMap([
 				['1', new Schedule({clbids: List.of('a-course')})],
 				['2', new Schedule({clbids: List()})],
 			]),
@@ -213,7 +213,7 @@ Immutable.Record {
 describe('destroyScheduleFromStudent', () => {
 	it('removes schedules', () => {
 		let sched = new Schedule()
-		let initial = new Student({schedules: Map({[sched.id]: sched})})
+		let initial = new Student({schedules: OrderedMap({[sched.id]: sched})})
 		let removedSchedule = initial.destroySchedule(sched.id)
 		expect(removedSchedule.schedules.get(sched.id)).not.toBeDefined()
 	})
@@ -241,7 +241,7 @@ describe('destroyScheduleFromStudent', () => {
 	})
 
 	it(`throws if it cannot find the requested schedule id`, () => {
-		let stu = new Student({schedules: Map()})
+		let stu = new Student({schedules: OrderedMap()})
 		let shouldThrowBecauseNotAdded = () => stu.destroySchedule('unknown')
 		expect(shouldThrowBecauseNotAdded).toThrowError(ReferenceError)
 	})
@@ -252,7 +252,7 @@ describe('destroySchedulesForYear', () => {
 	it('removes schedules', () => {
 		let sched1 = new Schedule({year: 2014, semester: 1})
 		let sched2 = new Schedule({year: 2014, semester: 2})
-		let initial = new Student({schedules: Map({[sched1.id]: sched1, [sched2.id]: sched2})})
+		let initial = new Student({schedules: OrderedMap({[sched1.id]: sched1, [sched2.id]: sched2})})
 
 		let removedSchedule = initial.destroySchedulesForYear(2014)
 		expect(removedSchedule.schedules.size).toBe(0)
@@ -263,7 +263,7 @@ describe('destroySchedulesForTerm', () => {
 	it('removes schedules', () => {
 		let sched1 = new Schedule({year: 2014, semester: 1})
 		let sched2 = new Schedule({year: 2014, semester: 2})
-		let initial = new Student({schedules: Map({[sched1.id]: sched1, [sched2.id]: sched2})})
+		let initial = new Student({schedules: OrderedMap({[sched1.id]: sched1, [sched2.id]: sched2})})
 
 		let actual = initial.destroySchedulesForTerm({year: 2014, semester: 1})
 
@@ -360,7 +360,7 @@ describe('changeStudentSetting', () => {
 		let initial = new Student()
 		let actual = initial.setSetting('key', 'value')
 		expect(actual.settings).toBeDefined()
-		expect(actual.settings).toEqual(Map({key: 'value'}))
+		expect(actual.settings).toEqual(OrderedMap({key: 'value'}))
 	})
 
 	it('returns a new object', () => {
@@ -373,7 +373,7 @@ describe('changeStudentSetting', () => {
 describe('moveScheduleInStudent', () => {
 	it('moves both a year and a semester', () => {
 		let sched = new Schedule({year: 2012, semester: 1})
-		let stu = new Student({schedules: Map({[sched.id]: sched})})
+		let stu = new Student({schedules: OrderedMap({[sched.id]: sched})})
 		let actual = stu.moveSchedule(sched.id, {
 			year: 2014,
 			semester: 3,
@@ -388,7 +388,7 @@ describe('moveScheduleInStudent', () => {
 
 	it('returns a new object', () => {
 		let sched = new Schedule({year: 2012})
-		let stu = new Student({schedules: Map({[sched.id]: sched})})
+		let stu = new Student({schedules: OrderedMap({[sched.id]: sched})})
 
 		let actual = stu.moveSchedule(sched.id, {year: 2014, semester: 2})
 
@@ -402,7 +402,7 @@ describe('moveScheduleInStudent', () => {
 describe('reorderScheduleInStudent', () => {
 	it('changes the "index" property', () => {
 		let sched = new Schedule({index: 0})
-		let initial = new Student({schedules: Map({[sched.id]: sched})})
+		let initial = new Student({schedules: OrderedMap({[sched.id]: sched})})
 		let actual = initial.reorderSchedule(sched.id, 5)
 
 		// $FlowExpectedError
@@ -413,7 +413,7 @@ describe('reorderScheduleInStudent', () => {
 
 	it('returns a new object', () => {
 		let sched = new Schedule({index: 0})
-		let initial = new Student({schedules: Map({[sched.id]: sched})})
+		let initial = new Student({schedules: OrderedMap({[sched.id]: sched})})
 		let actual = initial.reorderSchedule(sched.id, 5)
 
 		// $FlowExpectedError
@@ -427,7 +427,7 @@ describe('reorderScheduleInStudent', () => {
 describe('renameScheduleInStudent', () => {
 	it('renames the schedule', () => {
 		let sched = new Schedule({title: 'Initial Title'})
-		let initial = new Student({schedules: Map({[sched.id]: sched})})
+		let initial = new Student({schedules: OrderedMap({[sched.id]: sched})})
 		let actual = initial.renameSchedule(sched.id, 'My New Title')
 
 		// $FlowExpectedError
@@ -438,7 +438,7 @@ describe('renameScheduleInStudent', () => {
 
 	it('returns a new object', () => {
 		let sched = new Schedule({title: 'Initial Title'})
-		let initial = new Student({schedules: Map({[sched.id]: sched})})
+		let initial = new Student({schedules: OrderedMap({[sched.id]: sched})})
 		let actual = initial.renameSchedule(sched.id, 'My New Title')
 
 		// $FlowExpectedError
@@ -452,7 +452,7 @@ describe('renameScheduleInStudent', () => {
 describe('addCourseToSchedule', () => {
 	it('adds a course', () => {
 		let sched = new Schedule({clbids: List(['123'])})
-		let initial = new Student({schedules: Map({[sched.id]: sched})})
+		let initial = new Student({schedules: OrderedMap({[sched.id]: sched})})
 		let addedCourse = initial.addCourseToSchedule(sched.id, '918')
 
 		// $FlowExpectedError
@@ -463,7 +463,7 @@ describe('addCourseToSchedule', () => {
 
 	it('returns a new object', () => {
 		let sched = new Schedule({clbids: List(['123123'])})
-		let initial = new Student({schedules: Map({[sched.id]: sched})})
+		let initial = new Student({schedules: OrderedMap({[sched.id]: sched})})
 		let actual = initial.addCourseToSchedule(sched.id, 'a-new-course')
 
 		// $FlowExpectedError
@@ -478,7 +478,7 @@ describe('addCourseToSchedule', () => {
 
 	it('returns the same student if the clbid already exists in the schedule', () => {
 		let sched = new Schedule({clbids: List(['123'])})
-		let initial = new Student({schedules: Map({[sched.id]: sched})})
+		let initial = new Student({schedules: OrderedMap({[sched.id]: sched})})
 		expect(initial.addCourseToSchedule(sched.id, '123')).toBe(initial)
 	})
 })
@@ -486,7 +486,7 @@ describe('addCourseToSchedule', () => {
 describe('removeCourseFromSchedule', () => {
 	it('removes a course', () => {
 		let sched = new Schedule({clbids: List(['123'])})
-		let initial = new Student({schedules: Map({[sched.id]: sched})})
+		let initial = new Student({schedules: OrderedMap({[sched.id]: sched})})
 		let removedCourse = initial.removeCourseFromSchedule(sched.id, '123')
 
 		// $FlowExpectedError
@@ -497,7 +497,7 @@ describe('removeCourseFromSchedule', () => {
 
 	it('returns a new object', () => {
 		let sched = new Schedule({clbids: List(['123'])})
-		let initial = new Student({schedules: Map({[sched.id]: sched})})
+		let initial = new Student({schedules: OrderedMap({[sched.id]: sched})})
 		let actual = initial.removeCourseFromSchedule(sched.id, '123')
 
 		// $FlowExpectedError
@@ -512,7 +512,7 @@ describe('removeCourseFromSchedule', () => {
 
 	it('returns the same student if the clbid does not exist in the schedule', () => {
 		let sched = new Schedule({clbids: List(['123123123'])})
-		let initial = new Student({schedules: Map({[sched.id]: sched})})
+		let initial = new Student({schedules: OrderedMap({[sched.id]: sched})})
 		expect(
 			initial.removeCourseFromSchedule(sched.id, 'something-else'),
 		).toBe(initial)
@@ -522,7 +522,7 @@ describe('removeCourseFromSchedule', () => {
 describe('reorderCourseInSchedule', () => {
 	it('rearranges courses', () => {
 		let sched = new Schedule({clbids: List(['123', '456', '789'])})
-		let initial = new Student({schedules: Map({[sched.id]: sched})})
+		let initial = new Student({schedules: OrderedMap({[sched.id]: sched})})
 		let actual = initial.reorderCourseInSchedule(sched.id, {
 			clbid: '123',
 			index: 1,
@@ -538,7 +538,7 @@ describe('reorderCourseInSchedule', () => {
 	it('returns a new object', () => {
 		let sched = new Schedule({clbids: List(['123', '456', '789'])})
 
-		let initial = new Student({schedules: Map({[sched.id]: sched})})
+		let initial = new Student({schedules: OrderedMap({[sched.id]: sched})})
 		let actual = initial.reorderCourseInSchedule(sched.id, {
 			clbid: '123',
 			index: 1,
@@ -557,7 +557,7 @@ describe('reorderCourseInSchedule', () => {
 
 	it('requires that the clbid to be moved actually appear in the list of clbids', () => {
 		let sched = new Schedule({clbids: List(['123', '456', '789'])})
-		let stu = new Student({schedules: Map({[sched.id]: sched})})
+		let stu = new Student({schedules: OrderedMap({[sched.id]: sched})})
 		expect(() =>
 			stu.reorderCourseInSchedule(sched.id, {
 				clbid: '123456789',
@@ -568,7 +568,7 @@ describe('reorderCourseInSchedule', () => {
 
 	it('truncates the requested index if it is greater than the number of courses', () => {
 		let sched = new Schedule({clbids: List(['123456789', '123'])})
-		let stu = new Student({schedules: Map({[sched.id]: sched})})
+		let stu = new Student({schedules: OrderedMap({[sched.id]: sched})})
 		let reordered = stu.reorderCourseInSchedule(sched.id, {
 			clbid: '123456789',
 			index: 10,
@@ -582,7 +582,7 @@ describe('reorderCourseInSchedule', () => {
 
 	it('truncates the requested index if it is Infinity', () => {
 		let sched = new Schedule({clbids: List(['123456789', '123'])})
-		let stu = new Student({schedules: Map({[sched.id]: sched})})
+		let stu = new Student({schedules: OrderedMap({[sched.id]: sched})})
 		let reordered = stu.reorderCourseInSchedule(sched.id, {
 			clbid: '123456789',
 			index: Infinity,
@@ -596,7 +596,7 @@ describe('reorderCourseInSchedule', () => {
 
 	it('truncates the requested index if it is less than 0', () => {
 		let sched = new Schedule({clbids: List(['123456789', '123'])})
-		let stu = new Student({schedules: Map({[sched.id]: sched})})
+		let stu = new Student({schedules: OrderedMap({[sched.id]: sched})})
 		let reordered = stu.reorderCourseInSchedule(sched.id, {
 			clbid: '123',
 			index: -10,

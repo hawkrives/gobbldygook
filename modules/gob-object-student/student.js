@@ -231,7 +231,7 @@ export class Student extends StudentRecord<StudentType> {
 
 		return this.withMutations(mutable => {
 			for (let id of scheduleIds) {
-				mutable.schedules = mutable.schedules.delete(id)
+				mutable.deleteIn(['schedules', id])
 			}
 		})
 	}
@@ -250,7 +250,7 @@ export class Student extends StudentRecord<StudentType> {
 
 		return this.withMutations(mutable => {
 			for (let id of scheduleIds) {
-				mutable.schedules = mutable.schedules.delete(id)
+				mutable.deleteIn(['schedules', id])
 			}
 		})
 	}
