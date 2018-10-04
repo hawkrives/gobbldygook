@@ -1,4 +1,4 @@
-import {initStudent} from '../init-student'
+import {action as initStudent} from '../init-student'
 
 import {INIT_STUDENT} from '../../constants'
 

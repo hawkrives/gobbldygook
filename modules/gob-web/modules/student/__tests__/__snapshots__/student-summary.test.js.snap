@@ -870,27 +870,27 @@ exports[`DegreeSummary renders 1`] = `
 `;
 
 exports[`Footer handles the "can graduate" status 1`] = `
-<div
+<p
   className="paragraph graduation-message"
 >
   It looks like you'll make it! Just follow the plan, and go over my output with your advisor a few times.
-</div>
+</p>
 `;
 
 exports[`Footer handles the "cannot graduate" status 1`] = `
-<div
+<p
   className="paragraph graduation-message"
 >
   You haven't planned everything out yet. Ask your advisor if you need help fitting everything in.
-</div>
+</p>
 `;
 
 exports[`Footer renders 1`] = `
-<div
+<p
   className="paragraph graduation-message"
 >
   It looks like you'll make it! Just follow the plan, and go over my output with your advisor a few times.
-</div>
+</p>
 `;
 
 exports[`Header allows editing the name if onChangeName is given 1`] = `
@@ -1077,63 +1077,4 @@ exports[`Header without an avatar handles the "cannot graduate" status 1`] = `
     !
   </div>
 </header>
-`;
-
-exports[`StudentSummary renders 1`] = `
-<article
-  className="student-summary cannot-graduate"
->
-  <Header
-    helloMessage="Hello, "
-    name="test"
-    showAvatar={true}
-  />
-  <div
-    className="content"
-  >
-    <DateSummary
-      graduation={2019}
-      matriculation={2015}
-    />
-    <DegreeSummary
-      studies={Array []}
-    />
-    <CreditSummary
-      currentCredits={0}
-      neededCredits={35}
-    />
-    <Footer />
-  </div>
-</article>
-`;
-
-exports[`StudentSummary renders a student with canGraduate=false 1`] = `
-<article
-  className="student-summary cannot-graduate"
->
-  <Header
-    canGraduate={false}
-    helloMessage="Hello, "
-    name="test"
-    showAvatar={true}
-  />
-  <div
-    className="content"
-  >
-    <DateSummary
-      graduation={2019}
-      matriculation={2015}
-    />
-    <DegreeSummary
-      studies={Array []}
-    />
-    <CreditSummary
-      currentCredits={0}
-      neededCredits={35}
-    />
-    <Footer
-      canGraduate={false}
-    />
-  </div>
-</article>
 `;
