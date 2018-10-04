@@ -14,7 +14,7 @@ import {FlatButton, RaisedButton} from '../../components/button'
 import {Icon} from '../../components/icon'
 import StudentList from './student-list'
 import styled from 'styled-components'
-import type {ReduxStudentStore} from '../student/student'
+import type {State as StudentState} from '../../redux/students/reducers'
 
 import {type SORT_BY_ENUM} from './types'
 
@@ -108,7 +108,7 @@ type PropTypes = {
 	onSortChange: () => mixed,
 	onToggleEditing: () => mixed,
 	sortBy: SORT_BY_ENUM,
-	students: {[key: string]: ReduxStudentStore},
+	students: StudentState,
 }
 
 export default function StudentPicker(props: PropTypes) {

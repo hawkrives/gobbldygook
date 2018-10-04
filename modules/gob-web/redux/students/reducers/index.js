@@ -13,6 +13,8 @@ import type {Undoable, Action} from '../../types'
 import {reducer as wrapper} from './student-wrapper'
 import {Student} from '@gob/object-student'
 
+export type {State as IndividualStudentState} from './student-wrapper'
+
 const initialState = {}
 
 export type State = {

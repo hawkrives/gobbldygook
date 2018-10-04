@@ -9,7 +9,8 @@ import List from '../../components/list'
 import StudentListItem from './student-list-item'
 import * as theme from '../../theme'
 import {type SORT_BY_ENUM} from './types'
-import type {ReduxStudentStore} from '../student/student'
+import {Map} from 'immutable'
+import type {State as StudentState} from '../../redux/students/reducers'
 
 const ListOfStudents = styled(List)`
 	${theme.card};
@@ -25,7 +26,7 @@ type Props = {
 	groupBy: string,
 	isEditing: boolean,
 	sortBy: SORT_BY_ENUM,
-	students: {[key: string]: ReduxStudentStore},
+	students: StudentState,
 }
 
 export default function StudentList(props: Props) {
@@ -38,30 +39,32 @@ export default function StudentList(props: Props) {
 	} = props
 
 	filterText = filterText.toLowerCase()
-	let filtered = filter(students, s =>
-		fuzzysearch(filterText, (s.data.present.name || '').toLowerCase()),
-	)
+	let filtered = Map(students)
+		.filter(s =>
+			fuzzysearch(filterText, (s.present.name || '').toLowerCase()),
+		)
+		.toList()
+		.sortBy(s => {
+			switch (sortByKey) {
+				case 'name':
+					return s.present.name
+				case 'dateLastModified':
+					return s.present.dateLastModified
+				default:
+					;(sortByKey: empty)
+			}
+		})
+		.map((student, i) => (
+			<StudentListItem
+				key={student.present.id || i}
+				as="li"
+				student={student}
+				destroyStudent={destroyStudent}
+				isEditing={isEditing}
+			/>
+		))
 
-	const studentObjects = sortBy(filtered, s => {
-		switch (sortByKey) {
-			case 'name':
-				return s.data.present.name
-			case 'dateLastModified':
-				return s.data.present.dateLastModified
-			default:
-				;(sortByKey: empty)
-		}
-	}).map((student, i) => (
-		<StudentListItem
-			key={student.data.present.id || i}
-			as="li"
-			student={student}
-			destroyStudent={destroyStudent}
-			isEditing={isEditing}
-		/>
-	))
-
-	return <ListOfStudents type="plain">{studentObjects}</ListOfStudents>
+	return <ListOfStudents type="plain">{[...filtered]}</ListOfStudents>
 }
 
 StudentList.defaultProps = {

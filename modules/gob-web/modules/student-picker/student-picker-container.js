@@ -6,13 +6,13 @@ import StudentPicker from './student-picker'
 import {connect} from 'react-redux'
 import {destroyStudent} from '../../redux/students/actions/destroy-student'
 import {loadStudents} from '../../redux/students/actions/load-students'
-import type {ReduxStudentStore} from '../student/student'
+import type {State as StudentState} from '../../redux/students/reducers'
 import {type SORT_BY_ENUM} from './types'
 
 type Props = {
 	destroyStudent: string => mixed,
 	loadStudents: () => mixed,
-	students: {[key: string]: ReduxStudentStore},
+	students: StudentState,
 }
 
 type State = {

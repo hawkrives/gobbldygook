@@ -3,6 +3,7 @@ import * as React from 'react'
 import DocumentTitle from 'react-document-title'
 import {connect} from 'react-redux'
 import {loadStudent} from '../../redux/students/actions/load-student'
+import {type IndividualStudentState} from '../../redux/students/reducers'
 import {Student as StudentObject} from '@gob/object-student'
 import type {Undoable} from '../../types'
 import Loading from '../../components/loading'
@@ -21,19 +22,11 @@ const Container = styled.div`
 	}
 `
 
-export type ReduxStudentStore = {
-	data: Undoable<StudentObject>,
-	isLoading: boolean,
-	isFetching: boolean,
-	isValdiating: boolean,
-	isChecking: boolean,
-}
-
 type Props = {
 	children: ({student: Undoable<StudentObject>}) => React.Node, // from react-router
 	loadStudent: string => any, // redux
 	studentId?: string, // react-router
-	student: ?ReduxStudentStore, // redux
+	student: ?IndividualStudentState, // redux
 }
 
 type State = {
@@ -66,11 +59,7 @@ export class Student extends React.Component<Props, State> {
 			return <p>Student {this.props.studentId} could not be loaded.</p>
 		}
 
-		if (this.props.student.isLoading) {
-			return <Loading>Loading Student…</Loading>
-		}
-
-		let student: Undoable<StudentObject> = this.props.student.data
+		let student: Undoable<StudentObject> = this.props.student
 
 		let title = student
 			? `${student.present.name} | Gobbldygook`

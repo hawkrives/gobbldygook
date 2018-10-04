@@ -5,7 +5,7 @@ import type {Undoable, Action} from '../../types'
 import {undoableReducer} from './student'
 import {Student} from '@gob/object-student'
 
-type State = Undoable<Student>
+export type State = Undoable<Student>
 
 const initialState = {
 	present: new Student(),

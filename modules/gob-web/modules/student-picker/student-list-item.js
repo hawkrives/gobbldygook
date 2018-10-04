@@ -10,7 +10,7 @@ import {FlatButton} from '../../components/button'
 import {Icon} from '../../components/icon'
 import {iosTrashOutline, iosArrowForward} from '../../icons/ionicons'
 import * as theme from '../../theme'
-import type {ReduxStudentStore} from '../student/student'
+import {type IndividualStudentState} from '../../redux/students/reducers'
 
 const Container = styled.div`
 	display: flex;
@@ -111,14 +111,14 @@ const ListItemLink = styled(Link)`
 type Props = {
 	destroyStudent: string => any,
 	isEditing: boolean,
-	student: ReduxStudentStore,
+	student: IndividualStudentState,
 	as?: string,
 }
 
 export default function StudentListItem(props: Props) {
 	const {student, isEditing, destroyStudent, as} = props
 
-	const sortedStudies = sortStudiesByType([...student.data.present.studies])
+	const sortedStudies = sortStudiesByType([...student.present.studies])
 	const groupedStudies = groupBy(sortedStudies, s => s.type)
 
 	const areas = map(groupedStudies, (group, type) => (
@@ -133,19 +133,19 @@ export default function StudentListItem(props: Props) {
 		<Container as={as}>
 			{isEditing && (
 				<DeleteButton
-					onClick={() => destroyStudent(student.data.present.id)}
+					onClick={() => destroyStudent(student.present.id)}
 				>
 					<Icon large>{iosTrashOutline}</Icon>
 					Delete
 				</DeleteButton>
 			)}
 
-			<ListItemLink to={`/student/${student.data.present.id}/`}>
+			<ListItemLink to={`/student/${student.present.id}/`}>
 				<StudentInfo>
 					<StudentName>
-						{student.data.present.name}
+						{student.present.name}
 						{process.env.NODE_ENV !== 'production'
-							? ` (${student.data.present.id})`
+							? ` (${student.present.id})`
 							: ''}
 					</StudentName>
 					<StudentAreas>{areas}</StudentAreas>
