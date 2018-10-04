@@ -86,7 +86,7 @@
     "eslint-plugin-flowtype": "^2.50.3",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-react": "^7.11.1",
-    "flow-bin": "^0.81.0",
+    "flow-bin": "^0.82.0",
     "flow-remove-types": "^1.2.3",
     "jest": "^23.6.0",
     "jest-matcher-utils": "^23.6.0",
