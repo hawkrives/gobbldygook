@@ -63,6 +63,10 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
 			clbids = List((clbids: any))
 		}
 
+		if ((clbids: any).some(id => typeof id === 'number')) {
+			clbids = (clbids: any).map(id => String(id).padStart(10, '0'))
+		}
+
 		if (!Map.isMap(metadata)) {
 			metadata = Map((metadata: any))
 		}
