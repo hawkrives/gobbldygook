@@ -1,7 +1,7 @@
 // @flow
 
 import uuid from 'uuid/v4'
-import {Record, Map, Set, List} from 'immutable'
+import {Record, OrderedMap, Set, List} from 'immutable'
 
 import type {
 	AreaQuery,
@@ -27,12 +27,12 @@ export type StudentType = {
 	dateCreated: Date,
 
 	studies: Set<AreaQuery>,
-	schedules: Map<string, Schedule>,
-	overrides: Map<string, OverrideType>,
+	schedules: OrderedMap<string, Schedule>,
+	overrides: OrderedMap<string, OverrideType>,
 	fabrications: List<FabricationType>,
-	fulfillments: Map<string, FulfillmentType>,
+	fulfillments: OrderedMap<string, FulfillmentType>,
 
-	settings: Map<string, mixed>,
+	settings: OrderedMap<string, mixed>,
 }
 
 const defaultValues: StudentType = {
@@ -45,11 +45,11 @@ const defaultValues: StudentType = {
 	dateLastModified: new Date(),
 	dateCreated: new Date(),
 	studies: Set(),
-	schedules: Map(),
-	overrides: Map(),
+	schedules: OrderedMap(),
+	overrides: OrderedMap(),
 	fabrications: List(),
-	fulfillments: Map(),
-	settings: Map(),
+	fulfillments: OrderedMap(),
+	settings: OrderedMap(),
 }
 
 const StudentRecord = Record(defaultValues)
@@ -75,25 +75,25 @@ export class Student extends StudentRecord<StudentType> {
 		}
 
 		if (Array.isArray(schedules)) {
-			schedules = Map(schedules.map((s: any) => [s.id, s]))
-		} else if (!Map.isMap(schedules)) {
-			schedules = Map((schedules: any))
+			schedules = OrderedMap(schedules.map((s: any) => [s.id, s]))
+		} else if (!OrderedMap.isOrderedMap(schedules)) {
+			schedules = OrderedMap((schedules: any))
 		}
 
 		if (!List.isList(fabrications)) {
 			fabrications = List((fabrications: any))
 		}
 
-		if (!Map.isMap(overrides)) {
-			overrides = Map((overrides: any))
+		if (!OrderedMap.isOrderedMap(overrides)) {
+			overrides = OrderedMap((overrides: any))
 		}
 
-		if (!Map.isMap(settings)) {
-			settings = Map((settings: any))
+		if (!OrderedMap.isOrderedMap(settings)) {
+			settings = OrderedMap((settings: any))
 		}
 
-		if (!Map.isMap(fulfillments)) {
-			fulfillments = Map((fulfillments: any))
+		if (!OrderedMap.isOrderedMap(fulfillments)) {
+			fulfillments = OrderedMap((fulfillments: any))
 		}
 
 		super({
@@ -154,7 +154,7 @@ export class Student extends StudentRecord<StudentType> {
 		return this.set('graduation', newYear)
 	}
 
-	get settings(): Map<string, mixed> {
+	get settings(): OrderedMap<string, mixed> {
 		return this.get('settings')
 	}
 
@@ -170,7 +170,7 @@ export class Student extends StudentRecord<StudentType> {
 	 * Provide a description of schedules here
 	 */
 
-	get schedules(): Map<string, Schedule> {
+	get schedules(): OrderedMap<string, Schedule> {
 		return this.get('schedules')
 	}
 
@@ -229,9 +229,11 @@ export class Student extends StudentRecord<StudentType> {
 			.map(s => s.id)
 			.values()
 
-		return this.update('schedules', schedules =>
-			schedules.deleteAll(scheduleIds),
-		)
+		return this.withMutations(mutable => {
+			for (let id of scheduleIds) {
+				mutable.schedules = mutable.schedules.delete(id)
+			}
+		})
 	}
 
 	destroySchedulesForTerm(args: {|year: number, semester: number|}): this {
@@ -246,9 +248,11 @@ export class Student extends StudentRecord<StudentType> {
 			.map(s => s.id)
 			.values()
 
-		return this.update('schedules', schedules =>
-			schedules.deleteAll(scheduleIds),
-		)
+		return this.withMutations(mutable => {
+			for (let id of scheduleIds) {
+				mutable.schedules = mutable.schedules.delete(id)
+			}
+		})
 	}
 
 	moveSchedule(
@@ -378,7 +382,7 @@ export class Student extends StudentRecord<StudentType> {
 	 * Provide a description of overrides here
 	 */
 
-	get overrides(): Map<string, OverrideType> {
+	get overrides(): OrderedMap<string, OverrideType> {
 		return this.get('overrides')
 	}
 
@@ -430,7 +434,7 @@ export class Student extends StudentRecord<StudentType> {
 	 * Provide a description of fabrications here
 	 */
 
-	get fulfillments(): Map<string, FulfillmentType> {
+	get fulfillments(): OrderedMap<string, FulfillmentType> {
 		return this.get('fulfillments')
 	}
 
