@@ -38,8 +38,6 @@ import loadFiles, * as load from '../load-files'
 
 beforeEach(async () => {
 	await db.__clear()
-	dispatch.refreshCourses.mockClear()
-	dispatch.refreshAreas.mockClear()
 	dispatch.quotaExceededError.mockClear()
 	goodFetch.mockClear()
 	badFetch.mockClear()
@@ -90,24 +88,6 @@ describe('filterForRecentCourses', () => {
 })
 
 describe('finishUp', () => {
-	test('calls refreshCourses if working on a course index', () => {
-		const {type, notification} = mockArgs('courses')
-
-		load.finishUp({type, notification})
-
-		expect(dispatch.refreshCourses).toHaveBeenCalledTimes(1)
-		expect(dispatch.refreshAreas).not.toHaveBeenCalled()
-	})
-
-	test('calls refreshAreas if working on an area index', () => {
-		const {type, notification} = mockArgs('areas')
-
-		load.finishUp({type, notification})
-
-		expect(dispatch.refreshAreas).toHaveBeenCalledTimes(1)
-		expect(dispatch.refreshCourses).not.toHaveBeenCalled()
-	})
-
 	test('removes the notification', () => {
 		const {type, notification} = mockArgs('areas')
 
