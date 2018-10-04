@@ -102,7 +102,7 @@ export function deduplicateAreas({type}: Args) {
 	}
 }
 
-export function finishUp({type, notification}: Args) {
+export function finishUp({notification}: Args) {
 	// Remove the progress bar after 1.5 seconds
 	notification.remove()
 }
