@@ -39,6 +39,9 @@ const Container = styled.div`
 		box-shadow: 0 0 4px var(--gray-500);
 		z-index: 10;
 	}
+
+	&.loading {
+	}
 `
 
 const TitleButton = styled(FlatButton)`
@@ -148,13 +151,19 @@ class Semester extends React.Component<Props, State> {
 	}
 
 	componentDidMount() {
-		this.prepare()
+		this.prepare(this.props)
 	}
 
-	prepare = async () => {
+	componentDidUpdate(prevProps: Props) {
+		if (this.props.schedule !== prevProps.schedule) {
+			this.prepare(this.props)
+		}
+	}
+
+	prepare = async props => {
 		this.setState(() => ({loading: true, checking: true}))
 
-		let {schedule} = this.props
+		let {schedule} = props
 		let courses = await schedule.getOnlyCourses(getOnlyCourse)
 		let credits = countCredits([...courses])
 
@@ -176,7 +185,7 @@ class Semester extends React.Component<Props, State> {
 		let {student, semester, year, canDrop} = props
 
 		let schedule = this.props.schedule
-		let {courses, credits, warnings, hasConflict} = this.state
+		let {courses, credits, warnings, hasConflict, loading} = this.state
 
 		let {recommendedCredits} = schedule
 		let creditsPerCourse = 1
@@ -191,9 +200,14 @@ class Semester extends React.Component<Props, State> {
 			infoBar.push(`${credits} ${credits === 1 ? 'credit' : 'credits'}`)
 		}
 
+		if (loading) {
+			infoBar.unshift('Loading…')
+		}
+
 		const className = cx('semester', {
 			invalid: hasConflict,
 			'can-drop': canDrop,
+			loading: loading,
 		})
 
 		let name = semesterName(semester)
