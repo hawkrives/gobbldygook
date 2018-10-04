@@ -5,10 +5,8 @@ import DropZone from 'react-dropzone'
 import {FlatButton} from '../../components/button'
 import List from '../../components/list'
 import {StudentSummary} from '../../modules/student/student-summary'
-import {initStudent} from '../../redux/students/actions/init-student'
+import {action as initStudent} from '../../redux/students/actions/init-student'
 import {connect} from 'react-redux'
-import debug from 'debug'
-const log = debug('web:react')
 
 import './method-upload.scss'
 
@@ -24,7 +22,7 @@ class UploadFileScreen extends React.Component {
 	}
 
 	handleFileDrop = files => {
-		log(files)
+		console.log(files)
 		files = files.map(f => ({
 			name: f.name,
 			size: f.size,

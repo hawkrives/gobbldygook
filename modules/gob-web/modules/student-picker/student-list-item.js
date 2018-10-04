@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react'
-import cx from 'classnames'
 import {Link} from '@reach/router'
 import groupBy from 'lodash/groupBy'
 import map from 'lodash/map'
