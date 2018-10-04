@@ -67,7 +67,7 @@ const memoized = mem(checkStudentAgainstArea, {
 	cache: new QuickLRU({maxSize: 8}),
 	cacheKey: (student: Student, area: ParsedHansonFile) =>
 		JSON.stringify([student.hashCode(), area]),
-	maxAge: 60_000,
+	maxAge: 60000,
 })
 
 export {memoized as checkStudentAgainstArea}
