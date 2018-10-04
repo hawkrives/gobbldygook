@@ -1,7 +1,7 @@
 // @flow
 
 import uuid from 'uuid/v4'
-import {Record, OrderedMap, Set, List} from 'immutable'
+import {Record, OrderedMap, Set, Map, List} from 'immutable'
 
 import type {
 	AreaQuery,
@@ -80,8 +80,12 @@ export class Student extends StudentRecord<StudentType> {
 			schedules = OrderedMap((schedules: any))
 		}
 
-		if (!List.isList(fabrications)) {
+		if (Array.isArray(fabrications)) {
 			fabrications = List((fabrications: any))
+		} else if (List.isList(fabrications)) {
+			fabrications = List((fabrications: any))
+		} else {
+			fabrications = Map((fabrications: any)).toList()
 		}
 
 		if (!OrderedMap.isOrderedMap(overrides)) {
