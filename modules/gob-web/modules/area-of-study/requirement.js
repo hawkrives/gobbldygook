@@ -4,6 +4,7 @@ import React, {Component} from 'react'
 import {
 	isRequirementName,
 	type Requirement as RequirementType,
+	type ComputationResult,
 } from '@gob/examine-student'
 
 import {Icon} from '../../components/icon'
@@ -31,7 +32,7 @@ type Props = {
 	onToggleOverride: (string[], Event) => any,
 	path: string[],
 	topLevel?: boolean,
-	info: ?RequirementType,
+	info: ?(RequirementType | ComputationResult),
 	name?: string,
 }
 
@@ -42,7 +43,15 @@ type RequirementProps = Props & {
 
 function Requirement(props: RequirementProps) {
 	const {topLevel = false} = props
-	let info = props.info || {}
+
+	let info =
+		props.info && props.info.$type === 'computation-result'
+			? props.info.details
+				? props.info.details
+				: {}
+			: props.info
+				? props.info
+				: {}
 
 	const childKeys = Object.keys(info).filter(isRequirementName)
 
@@ -52,6 +61,7 @@ function Requirement(props: RequirementProps) {
 			? 'result-success'
 			: 'result-failure'
 		: ''
+
 	const status = <ResultIndicator result={info.computed} />
 
 	const extraClasses = [info.overridden ? 'overridden' : '']
