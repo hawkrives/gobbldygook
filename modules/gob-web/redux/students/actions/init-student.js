@@ -2,9 +2,7 @@
 
 import {Range} from 'immutable'
 import {Student, Schedule} from '@gob/object-student'
-
-const INIT_STUDENT: 'gobbldygook/students/INIT_STUDENT' =
-	'gobbldygook/students/INIT_STUDENT'
+import {INIT_STUDENT} from '../constants'
 
 type Action = {type: typeof INIT_STUDENT, payload: Student}
 
