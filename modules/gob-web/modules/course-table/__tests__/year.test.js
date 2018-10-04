@@ -1,12 +1,12 @@
 import 'jest-styled-components'
 import React from 'react'
-import Year from '../year'
+import {Year} from '../year'
 import {Student} from '@gob/object-student'
 import renderer from 'react-test-renderer'
 import {shallow} from 'enzyme'
 
 const mockStudent = () =>
-	Student({
+	new Student({
 		name: 'test',
 		id: '0xabadidea',
 		matriculation: 2015,
