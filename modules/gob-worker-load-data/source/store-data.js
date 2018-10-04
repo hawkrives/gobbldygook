@@ -1,20 +1,17 @@
 // @flow
 
-import round from 'lodash/round'
 import present from 'present'
-import debug from 'debug'
 import prepareCourse from './lib-prepare-course'
 import {quotaExceededError} from './lib-dispatch'
 import {db} from './db'
 import type {InfoFileTypeEnum} from './types'
-const coursesLog = debug('worker:load-data:store-data:courses')
-const areasLog = debug('worker:load-data:store-data:areas')
+import prettyMs from 'pretty-ms'
 
 type BasicCourse = Object
 type BasicArea = {type: string}
 
 export function storeCourses(path: string, data: Array<BasicCourse>) {
-	coursesLog(path)
+	console.log(`courses: storing ${path}`)
 
 	let coursesToStore = data.map(course => ({
 		...course,
@@ -25,8 +22,10 @@ export function storeCourses(path: string, data: Array<BasicCourse>) {
 	const start = present()
 
 	const onSuccess = () => {
-		const time = round(present() - start, 2)
-		coursesLog(`Stored ${coursesToStore.length} courses in ${time}ms.`)
+		let time = present() - start
+		console.log(
+			`stored ${coursesToStore.length} courses in ${prettyMs(time)}.`,
+		)
 	}
 
 	// istanbul ignore next
@@ -49,7 +48,7 @@ export function storeCourses(path: string, data: Array<BasicCourse>) {
 }
 
 export function storeArea(path: string, data: BasicArea) {
-	areasLog(path)
+	console.log(`areas: storing ${path}`)
 
 	const area = {
 		...data,
@@ -58,7 +57,30 @@ export function storeArea(path: string, data: BasicArea) {
 		dateAdded: new Date(),
 	}
 
-	return db.store('areas').put(area)
+	const start = present()
+
+	const onSuccess = () => {
+		let time = present() - start
+		console.log(`stored area ${path} in ${prettyMs(time)}.`)
+	}
+
+	// istanbul ignore next
+	const onFailure = err => {
+		const db = err.target.db.name
+		const errorName = err.target.error.name
+
+		// istanbul ignore else
+		if (errorName === 'QuotaExceededError') {
+			quotaExceededError(db)
+		}
+
+		throw err
+	}
+
+	return db
+		.store('areas')
+		.put(area)
+		.then(onSuccess, onFailure)
 }
 
 export default function storeData(

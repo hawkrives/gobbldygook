@@ -1,6 +1,5 @@
 // @flow
 
-import debug from 'debug'
 import {status, text} from '@gob/lib'
 
 import parseData from './parse-data'
@@ -11,9 +10,7 @@ import {Notification} from './lib-dispatch'
 
 import type {InfoFileTypeEnum, InfoFileRef} from './types'
 
-const log = debug('worker:load-data:update-database')
 const fetchText = (...args): Promise<string> => {
-	// $FlowFixMe text isn't refining the return type
 	return fetch(...args)
 		.then(status)
 		.then(text)
@@ -25,7 +22,7 @@ export default function updateDatabase(
 	notification: Notification,
 	{path, hash}: InfoFileRef,
 ) {
-	log(path)
+	console.log(`fetching ${path}`)
 
 	// Append the hash, to act as a sort of cache-busting mechanism
 	const url = `${infoFileBase}/${path}?v=${hash}`
@@ -45,13 +42,13 @@ export default function updateDatabase(
 	}
 
 	const onFailure = () => {
-		log(`Could not fetch ${url}`)
+		console.warn(`Could not fetch ${url}`)
 		notification.increment()
 		return false
 	}
 
 	const onSuccess = () => {
-		log(`added ${path}`)
+		console.log(`added ${path}`)
 		notification.increment()
 		return true
 	}
