@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react'
-import PropTypes from 'prop-types'
 import StudentPicker from './student-picker'
 import {connect} from 'react-redux'
 import {destroyStudent} from '../../redux/students/actions/destroy-student'
@@ -23,12 +22,6 @@ type State = {
 }
 
 class StudentPickerContainer extends React.Component<Props, State> {
-	static propTypes = {
-		destroyStudent: PropTypes.func.isRequired,
-		loadStudents: PropTypes.func.isRequired,
-		students: PropTypes.object.isRequired,
-	}
-
 	state = {
 		filterText: '',
 		isEditing: false,
