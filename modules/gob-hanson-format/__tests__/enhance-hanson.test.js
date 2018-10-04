@@ -20,7 +20,7 @@ describe('enhanceHanson', () => {
 
 	it('requires the top-level to have certain keys', () => {
 		expect(() => enhanceHanson({$type: 'a', slug: 'nope'})).toThrowError(
-			'enhanceHanson(): could not find any of ["result", "message", "filter"] in ["$type", "slug"].',
+			'enhanceHanson(): could not find any of ["result", "message"] in ["$type", "slug"].',
 		)
 
 		expect(() => enhanceHanson({message: 'have a nice day'})).not.toThrow()
