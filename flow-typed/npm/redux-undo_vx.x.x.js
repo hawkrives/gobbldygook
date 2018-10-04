@@ -14,6 +14,8 @@
  */
 
 declare module 'redux-undo' {
+  declare module.exports: any;
+  /*
   declare type UndoableState<T> = {
     present: T,
     past: Array<T>,
@@ -56,4 +58,5 @@ declare module 'redux-undo' {
     JUMP_TO_FUTURE: string,
     JUMP_TO_PAST: string,
   }
+  */
 }
