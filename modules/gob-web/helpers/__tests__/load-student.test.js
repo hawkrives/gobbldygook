@@ -1,12 +1,14 @@
+// @flow
+
 import {loadStudent} from '../load-student'
-import * as demoStudent from '@gob/object-student/demo-student.json'
+const demoStudent = require('@gob/object-student/demo-student.json')
 
 import {Student} from '@gob/object-student'
 
 describe('loadStudent', () => {
 	let student
 	beforeEach(() => {
-		student = Student(demoStudent)
+		student = new Student(demoStudent)
 		localStorage.clear()
 		localStorage.setItem(student.id, JSON.stringify(student))
 	})
