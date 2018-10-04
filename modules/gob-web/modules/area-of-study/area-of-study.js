@@ -194,6 +194,9 @@ class AreaOfStudy extends React.Component<Props, State> {
 				<AreaDetails
 					results={this.state.results}
 					area={props.areaOfStudy}
+					addOverride={this.addOverride}
+					removeOverride={this.removeOverride}
+					toggleOverride={this.toggleOverride}
 				/>
 			)
 		}
@@ -231,7 +234,13 @@ const CatalogLink = ({slug, name}: {slug: ?string, name: string}) => {
 	)
 }
 
-function AreaDetails(props: {results: ?EvaluationResult, area: AreaQuery}) {
+function AreaDetails(props: {
+	results: ?EvaluationResult,
+	area: AreaQuery,
+	addOverride: (Array<string>, Event) => mixed,
+	removeOverride: (Array<string>, Event) => mixed,
+	toggleOverride: (Array<string>, Event) => mixed,
+}) {
 	if (!props.results) {
 		return null
 	}
@@ -251,9 +260,9 @@ function AreaDetails(props: {results: ?EvaluationResult, area: AreaQuery}) {
 		<Requirement
 			info={details}
 			topLevel
-			onAddOverride={this.addOverride}
-			onRemoveOverride={this.removeOverride}
-			onToggleOverride={this.toggleOverride}
+			onAddOverride={props.addOverride}
+			onRemoveOverride={props.removeOverride}
+			onToggleOverride={props.toggleOverride}
 			path={[type, name]}
 		/>
 	)
