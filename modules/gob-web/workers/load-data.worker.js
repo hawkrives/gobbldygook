@@ -15,7 +15,7 @@ function checkIdbInWorkerSupport() {
 }
 
 function main({data}) {
-	const [id, ...args] = data
+	const [id, ...args] = JSON.parse(data)
 	// console.log('received message:', ...args)
 
 	if (id === CHECK_IDB_IN_WORKER_SUPPORT) {
