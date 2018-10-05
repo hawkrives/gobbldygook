@@ -3,7 +3,7 @@
 import uuid from 'uuid/v4'
 import {randomChar} from '@gob/lib'
 
-import {List, Map, Record} from 'immutable'
+import {List, Map, Record, OrderedMap} from 'immutable'
 import type {
 	CourseLookupFunc,
 	OnlyCourseLookupFunc,
@@ -51,9 +51,19 @@ const defaultValues: ScheduleType = {
 
 const ScheduleRecord = Record(defaultValues)
 
+type ScheduleInput = {
+	[key: $Keys<ScheduleType>]: mixed,
+	year?: number,
+	semester?: number,
+	index?: number,
+	active?: boolean,
+	title?: string,
+	id?: string,
+}
+
 export class Schedule extends ScheduleRecord<ScheduleType> {
-	constructor(data: {[key: $Keys<ScheduleType>]: mixed} = {}) {
-		let {id = uuid(), clbids = [], metadata = {}} = data
+	constructor(data: ScheduleInput = {}) {
+		let {id = uuid(), clbids = [], metadata = {}, year, semester, active, index, title} = data
 
 		if (!List.isList(clbids)) {
 			clbids = List((clbids: any))
@@ -68,10 +78,14 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
 		}
 
 		super({
-			...data,
+			year,
+			semester,
+			index,
+			active,
+			title,
 			id,
-			clbids,
-			metadata,
+			clbids: (clbids: any),
+			metadata: (metadata: any),
 		})
 	}
 

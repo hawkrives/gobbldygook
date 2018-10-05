@@ -80,7 +80,9 @@ export class Student extends StudentRecord<StudentType> {
 			schedules = OrderedMap((schedules: any))
 		}
 
-		schedules = (schedules: any).map(s => new Schedule(s))
+		if ((schedules: any).some(s => !(s instanceof Schedule))) {
+			schedules = (schedules: any).map(s => new Schedule(s))
+		}
 
 		if (Array.isArray(fabrications)) {
 			fabrications = List((fabrications: any))

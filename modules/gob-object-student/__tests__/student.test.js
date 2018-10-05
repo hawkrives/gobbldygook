@@ -57,6 +57,20 @@ describe('Student', () => {
 		expect(stu.schedules.get('2')).toBeDefined()
 		expect(stu.schedules.get('2')).toEqual(schedules.get('2'))
 	})
+
+	it('copies from one Student to another', () => {
+		let initial = new Student(demoStudent)
+		let copy = new Student(initial)
+
+		expect(copy.id).toBe(initial.id)
+		expect(copy.matriculation).toBe(initial.matriculation)
+		expect(copy.graduation).toBe(initial.graduation)
+		expect(copy.studies).toBe(initial.studies)
+		expect(copy.schedules).toBe(initial.schedules)
+		expect(copy.fabrications).toBe(initial.fabrications)
+		expect(copy.settings).toBe(initial.settings)
+		expect(copy.overrides).toBe(initial.overrides)
+	})
 })
 
 describe('addFabricationToStudent', () => {
