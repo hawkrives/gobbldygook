@@ -1,9 +1,5 @@
 // @flow
 import isEqualWith from 'lodash/isEqualWith'
-import every from 'lodash/every'
-import keys from 'lodash/keys'
-import filter from 'lodash/filter'
-import includes from 'lodash/includes'
 import type {Course} from './types'
 
 const baseKeys = new Set([
