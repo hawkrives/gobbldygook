@@ -30,7 +30,7 @@ const StatusSidebar = ({student}: {student: Undoable<Student>}) => (
 			share={true}
 			student={student}
 		/>
-		<CourseRemovalBox studentId={student.present.id} />
+		<CourseRemovalBox student={student.present} />
 		<StudentSummary student={student.present} />
 		<AreaOfStudySidebar student={student.present} />
 	</aside>

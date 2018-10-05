@@ -25,8 +25,8 @@ export function CourseSearcherSidebar(props: Props) {
 
 	return (
 		<aside>
-			<ConnectedSidebarToolbar student={props.student} />
-			<CourseRemovalBox studentId={student.present.id} />
+			<ConnectedSidebarToolbar student={student} />
+			<CourseRemovalBox student={student.present} />
 			<CourseSearcher
 				onCloseSearcher={boundCloseModal}
 				studentId={student.present.id}
