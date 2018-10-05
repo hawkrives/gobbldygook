@@ -273,6 +273,16 @@ describe('destroySchedulesForTerm', () => {
 		expect(actual.schedules.get(sched1.id)).not.toBeDefined()
 		expect(actual.schedules.get(sched2.id)).toBeDefined()
 	})
+
+	it('requires both the "year" and "semester" arguments', () => {
+		let s = new Student()
+		// only year
+		expect(() => s.destroySchedulesForTerm({year: 2014})).toThrow()
+		// only semester
+		expect(() => s.destroySchedulesForTerm({semester: 3})).toThrow()
+		// both semester; good
+		expect(() => s.destroySchedulesForTerm({year: 2014, semester: 3})).not.toThrow()
+	})
 })
 
 describe('changeStudentName', () => {

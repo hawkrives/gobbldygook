@@ -26,9 +26,11 @@ describe('evaluate', () => {
 
 		expect(evaluate({courses, overrides, area})).toMatchInlineSnapshot(`
 Object {
+  "$type": "computation-result",
   "computed": false,
   "details": Object {
     "Req": Object {
+      "$type": "computation-result",
       "computed": false,
       "details": Object {
         "$type": "requirement",
