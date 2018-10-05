@@ -1,5 +1,9 @@
 /* eslint-env jest */
 
+jest.spyOn(global.console, 'log').mockImplementation(() => jest.fn())
+jest.spyOn(global.console, 'error').mockImplementation(() => jest.fn())
+jest.spyOn(global.console, 'warn').mockImplementation(() => jest.fn())
+
 jest.mock('@gob/web-database')
 jest.mock('../lib-dispatch', () => {
 	const NotificationMock = jest.fn(() => ({

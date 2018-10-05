@@ -1,6 +1,9 @@
 /* eslint-env jest */
 // @flow
 
+jest.spyOn(global.console, 'log').mockImplementation(() => jest.fn())
+jest.spyOn(global.console, 'error').mockImplementation(() => jest.fn())
+jest.spyOn(global.console, 'warn').mockImplementation(() => jest.fn())
 jest.mock('@gob/web-database')
 
 import {db} from '../db'
@@ -67,7 +70,9 @@ describe('cleanPriorData', () => {
 			// $FlowExpectedError
 			await cleanPriorData('path', 'invalid_type')
 		} catch (err) {
-			expect(err.message).toMatchSnapshot()
+			expect(err.message).toMatchInlineSnapshot(
+				`"\\"invalid_type\\" is not a valid store type"`,
+			)
 		}
 	})
 })
