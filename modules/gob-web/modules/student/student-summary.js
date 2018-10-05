@@ -8,7 +8,6 @@ import {Set} from 'immutable'
 import {connect} from 'react-redux'
 import {Card} from '../../components/card'
 import {AvatarLetter} from '../../components/avatar-letter'
-import {ContentEditable} from '../../components/content-editable'
 import {AutoSizedInput} from '../../components/autosize'
 import {
 	changeStudent,
@@ -97,7 +96,6 @@ class StudentSummary extends React.Component<Props, State> {
 		let promises = loadedAreas.map(a => checkStudentAgainstArea(student, a))
 		let results = await Promise.all(promises)
 
-		console.log(results)
 		let canGraduate = results.every(r => r.computed === true)
 		let {creditsNeeded = 0, creditsTaken = 0} = {}
 
