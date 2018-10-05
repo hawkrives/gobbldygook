@@ -31,7 +31,7 @@ import styled from 'styled-components'
 const Container = styled.div`
 	${theme.card};
 	flex: 1 0;
-	min-width: 16em;
+	min-width: 14em;
 	margin: var(--semester-spacing);
 
 	&.can-drop {
