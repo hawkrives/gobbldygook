@@ -12,13 +12,13 @@ import * as theme from '../../theme'
 import {FlatButton} from '../../components/button'
 import {Icon} from '../../components/icon'
 import {InlineList, InlineListItem} from '../../components/list'
-import {type FabricationType} from '@gob/object-student'
 import {close, search} from '../../icons/ionicons'
 import {
 	IDENT_COURSE,
 	Student,
 	Schedule,
 	type WarningType,
+	type FabricationType,
 } from '@gob/object-student'
 import type {Course as CourseType, CourseError} from '@gob/types'
 import {getOnlyCourse, getCourse} from '../../helpers/get-courses'
