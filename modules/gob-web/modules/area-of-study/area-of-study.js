@@ -114,7 +114,7 @@ class AreaOfStudy extends React.Component<Props, State> {
 
 	render() {
 		let props = this.props
-		let {isOpen, confirmRemoval: showConfirmRemoval} = this.state
+		let {isOpen, confirmRemoval: showConfirmRemoval, examining} = this.state
 
 		let {name = 'Unknown Area'} = props.areaOfStudy
 
@@ -202,7 +202,7 @@ class AreaOfStudy extends React.Component<Props, State> {
 		}
 
 		return (
-			<>
+			<article className={cx('area', examining && 'loading')}>
 				<header
 					className="area--summary"
 					onClick={this.toggleAreaExpansion}
@@ -211,7 +211,7 @@ class AreaOfStudy extends React.Component<Props, State> {
 				</header>
 
 				{isOpen && !showConfirmRemoval && contents}
-			</>
+			</article>
 		)
 	}
 }
