@@ -2,6 +2,7 @@
 
 import type {CourseError, Course as CourseType} from '@gob/types'
 export type {CourseError, CourseType}
+import {List} from 'immutable'
 
 export type AreaQuery = {
 	type: string,
@@ -27,7 +28,7 @@ export type FulfillmentType = {||}
 
 export type CourseLookupFunc = (
 	{clbid: string, term: number},
-	?{[key: string]: FabricationType},
+	?(Array<FabricationType> | List<FabricationType>),
 ) => Promise<CourseType | FabricationType | CourseError>
 
 export type OnlyCourseLookupFunc = ({

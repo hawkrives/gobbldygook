@@ -144,7 +144,7 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
 
 	async getCourses(
 		getCourse: CourseLookupFunc,
-		fabrications?: {[key: string]: FabricationType},
+		fabrications?: Array<FabricationType> | List<FabricationType>,
 	): Promise<List<CourseType | FabricationType | CourseError>> {
 		let term = this.getTerm()
 		let promises = this.clbids.map(clbid =>
