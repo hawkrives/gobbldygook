@@ -4,6 +4,7 @@ import {db} from './db'
 import {status, json} from '@gob/lib'
 import type {FabricationType} from '@gob/object-student'
 import type {Course as CourseType, CourseError as ErrorType} from '@gob/types'
+import {List} from 'immutable'
 
 const baseUrl = 'https://stodevx.github.io/course-data'
 const networkCache = Object.create(null)
@@ -46,10 +47,13 @@ export function getCourseFromDatabase(clbid: string) {
 // Gets a course from the database.
 export function getCourse(
 	{clbid, term}: {clbid: string, term: number},
-	fabrications?: ?{[key: string]: FabricationType} = {},
+	fabrications?: ?(Array<FabricationType> | List<FabricationType>) = [],
 ): Promise<CourseType | FabricationType | ErrorType> {
-	if (fabrications && clbid in fabrications) {
-		return Promise.resolve(fabrications[clbid])
+	if (fabrications) {
+		let fab = fabrications.find(c => c.clbid === clbid)
+		if (fab) {
+			return Promise.resolve(fab)
+		}
 	}
 
 	let getCourseFrom = getCourseFromDatabase
