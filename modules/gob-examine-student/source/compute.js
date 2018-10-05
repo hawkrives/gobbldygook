@@ -10,7 +10,6 @@ import mapValues from 'lodash/mapValues'
 import type {
 	ParsedHansonFile,
 	ParsedHansonRequirement,
-	AreaOfStudy,
 	Requirement,
 	Course,
 	OverridesObject,

@@ -19,18 +19,6 @@ import {
 
 import './area-of-study.scss'
 
-type AreaOfStudyType = {
-	_area: Object,
-	_checked?: boolean,
-	_error?: string,
-	_progress?: {at: number, of: number},
-	isCustom?: boolean,
-	name: string,
-	revision: string,
-	slug?: string,
-	type: string,
-}
-
 type Props = {
 	areaOfStudy: AreaQuery,
 	showCloseButton: boolean,
@@ -126,7 +114,7 @@ class AreaOfStudy extends React.Component<Props, State> {
 
 	render() {
 		let props = this.props
-		let {isOpen, confirmRemoval: showConfirmRemoval, examining} = this.state
+		let {isOpen, confirmRemoval: showConfirmRemoval} = this.state
 
 		let {name = 'Unknown Area'} = props.areaOfStudy
 
