@@ -8,6 +8,10 @@
 	font-variant-numeric: oldstyle-nums;
 }
 
+.requirement.is-closed > *:not(.heading) {
+	display: none;
+}
+
 .requirement .requirement {
 	margin-left: 0.5em;
 }

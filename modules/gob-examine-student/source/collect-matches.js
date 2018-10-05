@@ -3,7 +3,7 @@ import assertKeys from './assert-keys'
 import flatMap from 'lodash/flatMap'
 import uniqBy from 'lodash/uniqBy'
 import stringify from 'stabilize'
-import type {Expression, Requirement, Course, ComputationResult} from './types'
+import type {Expression, Requirement, Course} from './types'
 
 /**
  * Collects matched courses from a result object
@@ -12,7 +12,7 @@ import type {Expression, Requirement, Course, ComputationResult} from './types'
  * @returns {Course[]} matches - the list of matched courses
  */
 export default function collectMatches(
-	expr: Expression | Requirement | ComputationResult,
+	expr: Expression | Requirement,
 ): Course[] {
 	assertKeys(expr, '$type')
 
@@ -28,20 +28,9 @@ export default function collectMatches(
 		if (expr._result === true) {
 			matches = [expr.$course || expr]
 		}
-	} else if (expr.$type === 'computation-result') {
-		// next, we have the "run collectMatches on all my children" cases.
-		if (expr.details) {
-			if (expr.details.result) {
-				matches = collectMatches(expr.details.result)
-			} else {
-				matches = []
-			}
-		} else {
-			matches = []
-		}
 	} else if (expr.$type === 'requirement') {
 		// next, we have the "run collectMatches on all my children" cases.
-		if (expr.result) {
+		if ('result' in expr) {
 			matches = collectMatches(expr.result)
 		} else {
 			matches = []

@@ -1,7 +1,6 @@
 // @flow
 import assertKeys from './assert-keys'
 import compute from './compute'
-
 import type {
 	Course,
 	ParsedHansonFile,
@@ -13,6 +12,8 @@ import type {
 type Input = {
 	area: ParsedHansonFile,
 	courses: Array<Course>,
+
+	courses: Course[],
 	overrides: OverridesObject,
 	fulfillments: FulfillmentsObject,
 }
@@ -33,16 +34,18 @@ export function evaluate({
 		fulfillments,
 	})
 
-	if (!result.details) {
+	if (!result) {
 		return {
+			$type: 'requirement',
 			error: '`details` missing in result!',
 			computed: false,
-			details: null,
+			_result: false,
+			_checked: false,
 			progress: {at: 0, of: 1},
 		}
 	}
 
-	let resultDetails = result.details.result
+	let resultDetails = result.result
 	let bits = []
 	switch (resultDetails.$type) {
 		case 'of':
@@ -60,10 +63,10 @@ export function evaluate({
 			break
 	}
 
-	const finalReqs = bits.map(b => ('_result' in b ? (b: any)._result : false))
+	let finalReqs = bits.map(b => ('_result' in b ? (b: any)._result : false))
 
-	const maxProgress = finalReqs.length
-	const currentProgress = finalReqs.filter(Boolean).length
+	let maxProgress = finalReqs.length
+	let currentProgress = finalReqs.filter(Boolean).length
 
 	return {
 		...result,

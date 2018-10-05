@@ -34,8 +34,8 @@ async function checkStudentAgainstArea(
 					resolve(data)
 				} else if (type === 'error') {
 					resolve({
+						$type: 'requirement',
 						computed: false,
-						details: null,
 						error: data.message,
 						progress: {at: 0, of: 1},
 					})

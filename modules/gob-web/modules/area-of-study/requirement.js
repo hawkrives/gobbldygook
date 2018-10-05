@@ -1,11 +1,7 @@
 // @flow
 import React, {Component} from 'react'
 
-import {
-	isRequirementName,
-	type Requirement as RequirementType,
-	type ComputationResult,
-} from '@gob/examine-student'
+import {isRequirementName} from '@gob/examine-student'
 
 import {Icon} from '../../components/icon'
 import {iosBoltOutline, iosBolt} from '../../icons/ionicons'
@@ -16,15 +12,15 @@ import ResultIndicator from './result-indicator'
 
 import './requirement.scss'
 
-// type RequirementInfo = {
-// 	computed?: boolean,
-// 	description?: string,
-// 	filter?: Object,
-// 	message?: string,
-// 	result?: Object,
-// 	overridden?: boolean,
-// 	[key: string]: RequirementInfo,
-// }
+type RequirementInfo = {
+	computed?: boolean,
+	description?: string,
+	filter?: Object,
+	message?: string,
+	result?: Object,
+	overridden?: boolean,
+	[key: string]: RequirementInfo,
+}
 
 type Props = {
 	onAddOverride: (string[], Event) => any,
@@ -32,7 +28,7 @@ type Props = {
 	onToggleOverride: (string[], Event) => any,
 	path: string[],
 	topLevel?: boolean,
-	info: ?(RequirementType | ComputationResult),
+	info: ?RequirementInfo,
 	name?: string,
 }
 
@@ -41,30 +37,19 @@ type RequirementProps = Props & {
 	onToggleOpen: () => any,
 }
 
-export function Requirement(props: RequirementProps) {
+function Requirement(props: RequirementProps) {
 	const {topLevel = false} = props
-
-	let info =
-		props.info && props.info.$type === 'computation-result'
-			? props.info.details
-				? props.info.details
-				: {}
-			: props.info
-				? props.info
-				: {}
+	let info = props.info || {}
 
 	const childKeys = Object.keys(info).filter(isRequirementName)
 
 	const wasEvaluated = info.result && info.result._checked
 	const computationClassName = wasEvaluated
-		? info.computed || info.result._result
+		? info.computed
 			? 'result-success'
 			: 'result-failure'
 		: ''
-
-	const status = (
-		<ResultIndicator result={info.computed || info.result._result} />
-	)
+	const status = <ResultIndicator result={info.computed} />
 
 	const extraClasses = [info.overridden ? 'overridden' : '']
 
@@ -82,7 +67,7 @@ export function Requirement(props: RequirementProps) {
 	const filterEl = info.filter && <Filter expr={info.filter} ctx={info} />
 
 	const title = !topLevel && (
-		<h2 className="heading" title={info.name} onClick={props.onToggleOpen}>
+		<h2 className="heading" title={props.name} onClick={props.onToggleOpen}>
 			<span className="title">
 				{' '}
 				{props.name}
@@ -108,7 +93,7 @@ export function Requirement(props: RequirementProps) {
 		<ExpandableRequirement
 			key={key}
 			name={key}
-			info={((info[key]: any): RequirementType)}
+			info={((info[key]: any): RequirementInfo)}
 			path={props.path.concat(key)}
 			onAddOverride={props.onAddOverride}
 			onToggleOverride={props.onToggleOverride}
@@ -134,21 +119,20 @@ export function Requirement(props: RequirementProps) {
 		'requirement',
 		extraClasses.join(' '),
 		computationClassName,
+		props.isOpen ? 'is-open' : 'is-closed',
 	].join(' ')
 
 	return (
 		<div className={className}>
 			{title}
-			<div className="contents" hidden={!props.isOpen}>
-				{description}
-				{message}
-				{overrideButtons}
-				{filterEl}
-				{result}
-				{children.length ? (
-					<div className="children">{children}</div>
-				) : null}
-			</div>
+			{description}
+			{message}
+			{overrideButtons}
+			{filterEl}
+			{result}
+			{children.length ? (
+				<div className="children">{children}</div>
+			) : null}
 		</div>
 	)
 }

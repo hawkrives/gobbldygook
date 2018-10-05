@@ -9,18 +9,15 @@ import type {
 } from '@gob/hanson-format'
 export type {ParsedHansonFile, ParsedHansonRequirement}
 
-export type ComputationResult = {
-	computed: boolean,
-	details: ?Requirement,
-	overridden?: true,
-	error?: string,
-	$type: 'computation-result',
-}
-
 export type EvaluationResult = {
-	computed: boolean,
-	details: ?Requirement,
-	overridden?: true,
+	$type: 'requirement',
+	result?: Expression,
+	filter?: Filter,
+	'children share courses'?: boolean,
+	_checked?: boolean,
+	_result?: boolean,
+	computed?: boolean,
+	overridden?: boolean,
 	error?: string,
 	progress: {
 		of: number,
@@ -33,6 +30,19 @@ export type OverridesObject = {[key: string]: any}
 export type FulfillmentsPath = OverridesPath
 export type FulfillmentsObject = {[key: string]: Fulfillment}
 
+export type AreaOfStudyTypeEnum =
+	| 'degree'
+	| 'major'
+	| 'concentration'
+	| 'emphasis'
+	| 'interdisciplinary'
+
+export type AreaOfStudy = {
+	...Requirement,
+	name: string,
+	type: AreaOfStudyTypeEnum,
+}
+
 export type Fulfillment = {
 	$course: Course,
 }
@@ -41,9 +51,6 @@ export type Filter = FilterExpression
 
 export type Requirement = {
 	$type: 'requirement',
-	message?: string,
-	description?: string,
-	name?: string,
 	result: Expression,
 	filter: Filter,
 	computed: boolean,

@@ -5,7 +5,7 @@ import cx from 'classnames'
 import {connect} from 'react-redux'
 import {FlatButton} from '../../components/button'
 import {Icon} from '../../components/icon'
-import {Requirement} from './requirement'
+import Requirement from './requirement'
 import ProgressBar from '../../components/progress-bar'
 import {close, chevronUp, chevronDown} from '../../icons/ionicons'
 import {pathToOverride, type EvaluationResult} from '@gob/examine-student'
@@ -18,6 +18,18 @@ import {
 } from '../../redux/students/actions/change'
 
 import './area-of-study.scss'
+
+type AreaOfStudyType = {
+	_area: Object,
+	_checked?: boolean,
+	_error?: string,
+	_progress?: {at: number, of: number},
+	isCustom?: boolean,
+	name: string,
+	revision: string,
+	slug?: string,
+	type: string,
+}
 
 type Props = {
 	areaOfStudy: AreaQuery,
@@ -138,6 +150,8 @@ class AreaOfStudy extends React.Component<Props, State> {
 			error = this.state.results.error
 		}
 
+		let areaDetails = this.state.results
+
 		const summary = (
 			<>
 				<div className="area--summary-row">
@@ -186,29 +200,43 @@ class AreaOfStudy extends React.Component<Props, State> {
 			</div>
 		)
 
+		let contents = null
+		if (error) {
+			contents = (
+				<p className="message area--error">
+					{error} {':('}
+				</p>
+			)
+		} else if (this.state.examining) {
+			contents = <p className="message area--loading">Loading…</p>
+		} else {
+			contents = (
+				<Requirement
+					info={(areaDetails: any)}
+					topLevel
+					onAddOverride={this.addOverride}
+					onRemoveOverride={this.removeOverride}
+					onToggleOverride={this.toggleOverride}
+					path={[this.props.areaOfStudy.type, name]}
+				/>
+			)
+		}
+
+		const className = cx('area', {
+			errored: Boolean(error),
+			loading: this.state.examining,
+		})
+
 		return (
-			<article className={cx('area', examining && 'loading')}>
-				<header
+			<div className={className}>
+				<div
 					className="area--summary"
 					onClick={this.toggleAreaExpansion}
 				>
 					{showConfirmRemoval ? removalConfirmation : summary}
-				</header>
-
-				{this.state.examining && (
-					<p hidden={!isOpen} className="message area--loading">
-						Loading…
-					</p>
-				)}
-				<AreaDetails
-					isOpen={isOpen}
-					results={this.state.results}
-					area={props.areaOfStudy}
-					addOverride={this.addOverride}
-					removeOverride={this.removeOverride}
-					toggleOverride={this.toggleOverride}
-				/>
-			</article>
+				</div>
+				{isOpen && !showConfirmRemoval && contents}
+			</div>
 		)
 	}
 }
@@ -228,43 +256,6 @@ const CatalogLink = ({slug, name}: {slug: ?string, name: string}) => {
 		>
 			{name}
 		</a>
-	)
-}
-
-function AreaDetails(props: {
-	results: ?EvaluationResult,
-	area: AreaQuery,
-	addOverride: (Array<string>, Event) => mixed,
-	removeOverride: (Array<string>, Event) => mixed,
-	toggleOverride: (Array<string>, Event) => mixed,
-	isOpen: boolean,
-}) {
-	if (!props.results) {
-		return null
-	}
-
-	let {type, name} = props.area
-	let {details, error = ''} = props.results
-
-	if (error) {
-		return (
-			<p className="message area--error">
-				{error} {':('}
-			</p>
-		)
-	}
-
-	return (
-		<Requirement
-			info={details}
-			topLevel
-			onAddOverride={props.addOverride}
-			onRemoveOverride={props.removeOverride}
-			onToggleOverride={props.toggleOverride}
-			path={[type, name]}
-			isOpen={props.isOpen}
-			onToggleOpen={() => {}}
-		/>
 	)
 }
 

@@ -16,8 +16,8 @@ function tryEvaluate({
 	} catch (err) {
 		console.warn(err)
 		return {
+			$type: 'requirement',
 			computed: false,
-			details: null,
 			error: err.message,
 			progress: {at: 0, of: 1},
 		}

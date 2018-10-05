@@ -10,11 +10,11 @@ import mapValues from 'lodash/mapValues'
 import type {
 	ParsedHansonFile,
 	ParsedHansonRequirement,
+	AreaOfStudy,
 	Requirement,
 	Course,
 	OverridesObject,
 	FulfillmentsObject,
-	ComputationResult,
 } from './types'
 
 // The overall computation is done by compute, which is in charge of computing
@@ -28,7 +28,7 @@ export default function compute(
 		fulfillments: FulfillmentsObject,
 		dirty?: Set<string>,
 	},
-): ComputationResult {
+) {
 	let {
 		path,
 		courses = [],
@@ -36,7 +36,6 @@ export default function compute(
 		fulfillments = {},
 		dirty = new Set(),
 	} = args
-
 	let childrenShareCourses = Boolean(outerReq['children share courses'])
 
 	let requirement: Requirement = mapValues(
@@ -106,16 +105,12 @@ export default function compute(
 		)
 	}
 
-	let result: ComputationResult = {
-		computed,
-		details: requirement,
-		$type: 'computation-result',
-	}
+	requirement.computed = computed
 
 	if (hasOverride(path, overrides)) {
-		result.overridden = true
-		result.computed = getOverride(path, overrides)
+		requirement.overridden = true
+		requirement.computed = getOverride(path, overrides)
 	}
 
-	return result
+	return requirement
 }
