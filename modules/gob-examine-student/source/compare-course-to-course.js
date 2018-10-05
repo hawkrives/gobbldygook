@@ -55,7 +55,7 @@ export default function compareCourseToCourse(
 	// this should accomplish the same effect as
 	// `intersection(keys(query), baseKeys)`,
 	// but it benchmarks quite a bit faster.
-	const keysToCheck = keys(query).filter(key => baseKeys.has(key))
+	const keysToCheck = Object.keys(query).filter(key => baseKeys.has(key))
 
 	// We only check the specified keys.
 	// If any of them are not equal, we return false.
