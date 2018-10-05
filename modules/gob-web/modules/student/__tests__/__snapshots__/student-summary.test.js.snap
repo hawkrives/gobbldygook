@@ -54,174 +54,14 @@ exports[`CreditSummary renders shallowly 1`] = `
 </p>
 `;
 
-exports[`DateSummary allows editing the graduation year if onChangeGraduation is given 1`] = `
-<p
-  className="paragraph"
->
-  After matriculating in 
-  <ContentEditable
-    className="autosize-input"
-    disabled={true}
-    multiLine={false}
-    onChange={[Function]}
-    value="2012"
-  />
-  , you are planning to graduate in 
-  <ContentEditable
-    className="autosize-input"
-    disabled={false}
-    multiLine={false}
-    onBlur={[MockFunction]}
-    onChange={[Function]}
-    value="2016"
-  />
-  .
-</p>
-`;
-
-exports[`DateSummary allows editing the matriculation year if onChangeMatriculation is given 1`] = `
-<p
-  className="paragraph"
->
-  After matriculating in 
-  <ContentEditable
-    className="autosize-input"
-    disabled={false}
-    multiLine={false}
-    onBlur={[MockFunction]}
-    onChange={[Function]}
-    value="2012"
-  />
-  , you are planning to graduate in 
-  <ContentEditable
-    className="autosize-input"
-    disabled={true}
-    multiLine={false}
-    onChange={[Function]}
-    value="2016"
-  />
-  .
-</p>
-`;
-
-exports[`DateSummary calls onChangeGraduation when the graduation year is changed 1`] = `
-<p
-  className="paragraph"
->
-  After matriculating in 
-  <ContentEditable
-    className="autosize-input"
-    disabled={true}
-    multiLine={false}
-    onChange={[Function]}
-    value="2012"
-  />
-  , you are planning to graduate in 
-  <ContentEditable
-    className="autosize-input"
-    disabled={false}
-    multiLine={false}
-    onBlur={[MockFunction]}
-    onChange={[Function]}
-    value="2016"
-  />
-  .
-</p>
-`;
-
-exports[`DateSummary calls onChangeMatriculation when the matriculation year is changed 1`] = `
-<p
-  className="paragraph"
->
-  After matriculating in 
-  <ContentEditable
-    className="autosize-input"
-    disabled={false}
-    multiLine={false}
-    onBlur={[MockFunction]}
-    onChange={[Function]}
-    value="2012"
-  />
-  , you are planning to graduate in 
-  <ContentEditable
-    className="autosize-input"
-    disabled={true}
-    multiLine={false}
-    onChange={[Function]}
-    value="2016"
-  />
-  .
-</p>
-`;
-
-exports[`DateSummary disables editing the graduation year if onChangeGraduation is not given 1`] = `
-<p
-  className="paragraph"
->
-  After matriculating in 
-  <ContentEditable
-    className="autosize-input"
-    disabled={true}
-    multiLine={false}
-    onChange={[Function]}
-    value="2012"
-  />
-  , you are planning to graduate in 
-  <ContentEditable
-    className="autosize-input"
-    disabled={true}
-    multiLine={false}
-    onChange={[Function]}
-    value="2016"
-  />
-  .
-</p>
-`;
-
-exports[`DateSummary disables editing the matriculation year if onChangeMatriculation is not given 1`] = `
-<p
-  className="paragraph"
->
-  After matriculating in 
-  <ContentEditable
-    className="autosize-input"
-    disabled={true}
-    multiLine={false}
-    onChange={[Function]}
-    value="2012"
-  />
-  , you are planning to graduate in 
-  <ContentEditable
-    className="autosize-input"
-    disabled={true}
-    multiLine={false}
-    onChange={[Function]}
-    value="2016"
-  />
-  .
-</p>
-`;
-
 exports[`DateSummary handles graduating before matriculation 1`] = `
 <p
   className="paragraph"
 >
   After matriculating in 
-  <ContentEditable
-    className="autosize-input"
-    disabled={true}
-    multiLine={false}
-    onChange={[Function]}
-    value="2016"
-  />
+  2016
   , you are planning to graduate in 
-  <ContentEditable
-    className="autosize-input"
-    disabled={true}
-    multiLine={false}
-    onChange={[Function]}
-    value="2012"
-  />
+  2012
   .
 </p>
 `;
@@ -231,21 +71,9 @@ exports[`DateSummary handles graduating in five years 1`] = `
   className="paragraph"
 >
   After matriculating in 
-  <ContentEditable
-    className="autosize-input"
-    disabled={true}
-    multiLine={false}
-    onChange={[Function]}
-    value="2000"
-  />
+  2000
   , you are planning to graduate in 
-  <ContentEditable
-    className="autosize-input"
-    disabled={true}
-    multiLine={false}
-    onChange={[Function]}
-    value="2005"
-  />
+  2005
   .
 </p>
 `;
@@ -255,21 +83,9 @@ exports[`DateSummary handles graduating in four years 1`] = `
   className="paragraph"
 >
   After matriculating in 
-  <ContentEditable
-    className="autosize-input"
-    disabled={true}
-    multiLine={false}
-    onChange={[Function]}
-    value="2000"
-  />
+  2000
   , you are planning to graduate in 
-  <ContentEditable
-    className="autosize-input"
-    disabled={true}
-    multiLine={false}
-    onChange={[Function]}
-    value="2004"
-  />
+  2004
   .
 </p>
 `;
@@ -279,21 +95,9 @@ exports[`DateSummary handles graduating in six years 1`] = `
   className="paragraph"
 >
   After matriculating in 
-  <ContentEditable
-    className="autosize-input"
-    disabled={true}
-    multiLine={false}
-    onChange={[Function]}
-    value="2000"
-  />
+  2000
   , you are planning to graduate in 
-  <ContentEditable
-    className="autosize-input"
-    disabled={true}
-    multiLine={false}
-    onChange={[Function]}
-    value="2006"
-  />
+  2006
   .
 </p>
 `;
@@ -303,21 +107,9 @@ exports[`DateSummary handles graduating in three years 1`] = `
   className="paragraph"
 >
   After matriculating in 
-  <ContentEditable
-    className="autosize-input"
-    disabled={true}
-    multiLine={false}
-    onChange={[Function]}
-    value="2000"
-  />
+  2000
   , you are planning to graduate in 
-  <ContentEditable
-    className="autosize-input"
-    disabled={true}
-    multiLine={false}
-    onChange={[Function]}
-    value="2003"
-  />
+  2003
   .
 </p>
 `;
@@ -327,21 +119,9 @@ exports[`DateSummary renders 1`] = `
   className="paragraph"
 >
   After matriculating in 
-  <ContentEditable
-    className="autosize-input"
-    disabled={true}
-    multiLine={false}
-    onChange={[Function]}
-    value="2012"
-  />
+  2012
   , you are planning to graduate in 
-  <ContentEditable
-    className="autosize-input"
-    disabled={true}
-    multiLine={false}
-    onChange={[Function]}
-    value="2016"
-  />
+  2016
   .
 </p>
 `;
@@ -893,77 +673,23 @@ exports[`Footer renders 1`] = `
 </p>
 `;
 
-exports[`Header allows editing the name if onChangeName is given 1`] = `
+exports[`Header handles the "can graduate" status 1`] = `
 <header
   className="student-summary--header"
 >
-  <AvatarLetter
-    className="student-letter cannot-graduate"
-    value="Natasha"
-  />
-  <div
-    className="intro"
-  >
-    Welcome, 
-    <ContentEditable
-      className="autosize-input"
-      disabled={false}
-      multiLine={false}
-      onBlur={[MockFunction]}
-      onChange={[Function]}
-      value="Natasha"
-    />
-    !
-  </div>
+  Welcome, 
+  Susan
+  !
 </header>
 `;
 
-exports[`Header calls onChangeName when the name is changed 1`] = `
+exports[`Header handles the "cannot graduate" status 1`] = `
 <header
   className="student-summary--header"
 >
-  <AvatarLetter
-    className="student-letter cannot-graduate"
-    value="Natasha"
-  />
-  <div
-    className="intro"
-  >
-    Welcome, 
-    <ContentEditable
-      className="autosize-input"
-      disabled={false}
-      multiLine={false}
-      onBlur={[MockFunction]}
-      onChange={[Function]}
-      value="Natasha"
-    />
-    !
-  </div>
-</header>
-`;
-
-exports[`Header disables editing the name if onChangeName is not given 1`] = `
-<header
-  className="student-summary--header"
->
-  <AvatarLetter
-    className="student-letter cannot-graduate"
-    value="Natasha"
-  />
-  <div
-    className="intro"
-  >
-    Welcome, 
-    <ContentEditable
-      className="autosize-input"
-      disabled={true}
-      multiLine={false}
-      onChange={[Function]}
-      value="Natasha"
-    />
-    !
-  </div>
+  Welcome, 
+  Susan
+  !
 </header>
 `;
 
@@ -971,110 +697,8 @@ exports[`Header renders 1`] = `
 <header
   className="student-summary--header"
 >
-  <AvatarLetter
-    className="student-letter can-graduate"
-    value="Susan"
-  />
-  <div
-    className="intro"
-  >
-    Welcome, 
-    <ContentEditable
-      className="autosize-input"
-      disabled={true}
-      multiLine={false}
-      onChange={[Function]}
-      value="Susan"
-    />
-    !
-  </div>
-</header>
-`;
-
-exports[`Header with an avatar handles the "can graduate" status 1`] = `
-<header
-  className="student-summary--header"
->
-  <AvatarLetter
-    className="student-letter can-graduate"
-    value="Susan"
-  />
-  <div
-    className="intro"
-  >
-    Welcome, 
-    <ContentEditable
-      className="autosize-input"
-      disabled={true}
-      multiLine={false}
-      onChange={[Function]}
-      value="Susan"
-    />
-    !
-  </div>
-</header>
-`;
-
-exports[`Header with an avatar handles the "cannot graduate" status 1`] = `
-<header
-  className="student-summary--header"
->
-  <AvatarLetter
-    className="student-letter cannot-graduate"
-    value="Susan"
-  />
-  <div
-    className="intro"
-  >
-    Welcome, 
-    <ContentEditable
-      className="autosize-input"
-      disabled={true}
-      multiLine={false}
-      onChange={[Function]}
-      value="Susan"
-    />
-    !
-  </div>
-</header>
-`;
-
-exports[`Header without an avatar handles the "can graduate" status 1`] = `
-<header
-  className="student-summary--header"
->
-  <div
-    className="intro"
-  >
-    Welcome, 
-    <ContentEditable
-      className="autosize-input"
-      disabled={true}
-      multiLine={false}
-      onChange={[Function]}
-      value="Susan"
-    />
-    !
-  </div>
-</header>
-`;
-
-exports[`Header without an avatar handles the "cannot graduate" status 1`] = `
-<header
-  className="student-summary--header"
->
-  <div
-    className="intro"
-  >
-    Welcome, 
-    <ContentEditable
-      className="autosize-input"
-      disabled={true}
-      multiLine={false}
-      onChange={[Function]}
-      value="Susan"
-    />
-    !
-  </div>
+  Welcome, 
+  Susan
+  !
 </header>
 `;
