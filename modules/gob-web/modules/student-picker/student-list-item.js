@@ -20,17 +20,6 @@ const Container = styled.div`
 	& + & {
 		border-top: ${theme.materialDivider};
 	}
-
-	border-left: solid 3px transparent;
-	&.loading {
-		border-left-color: var(--blue-300);
-	}
-	&.can-graduate {
-		border-left-color: var(--green-300);
-	}
-	&.cannot-graduate {
-		border-left-color: var(--red-300);
-	}
 `
 
 const DeleteButton = styled(FlatButton)`
