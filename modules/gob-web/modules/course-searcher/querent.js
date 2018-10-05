@@ -3,11 +3,10 @@
 import * as React from 'react'
 import type {Course as CourseType} from '@gob/types'
 import {queryCourseDatabase} from '../../helpers/query-course-database'
-import present from 'present'
 import mem from 'mem'
-import prettyMs from 'pretty-ms'
 import {sortAndGroup} from './lib'
 import {ga} from '../../analytics'
+import {List} from 'immutable'
 import type {GROUP_BY_KEY, SORT_BY_KEY} from './constants'
 
 type Props = {
@@ -25,18 +24,18 @@ type Props = {
 type State = {|
 	error: ?string,
 	inProgress: boolean,
-	results: Array<CourseType>,
-	grouped: Array<string | CourseType>,
+	results: List<CourseType>,
+	grouped: List<string | CourseType>,
 |}
 
-const memSortAndGroup = mem(sortAndGroup, {maxAge: 10000})
+const memSortAndGroup: typeof sortAndGroup = mem(sortAndGroup, {maxAge: 10000})
 
 export class Querent extends React.Component<Props, State> {
 	state = {
 		error: '',
 		inProgress: false,
-		results: [],
-		grouped: [],
+		results: List(),
+		grouped: List(),
 	}
 
 	_isMounted: boolean = false
@@ -66,21 +65,25 @@ export class Querent extends React.Component<Props, State> {
 			return
 		}
 
+		if (term == null && query.length < 3) {
+			return
+		}
+
 		ga('send', 'event', 'search_query', 'submit', query, 1)
 
-		const startQueryTime = present()
+		console.time(`query: ${query}`)
 
 		this.setState(() => ({inProgress: true}))
 
 		try {
 			const payload = await queryCourseDatabase(query, {term})
-			console.info(`query took ${prettyMs(present() - startQueryTime)}.`)
+			console.timeEnd(`query: ${query}`)
 
 			if (!this._isMounted) {
 				return
 			}
 
-			this.setState(() => ({inProgress: false, results: payload}))
+			this.setState(() => ({inProgress: false, results: List(payload)}))
 		} catch (error) {
 			if (!this._isMounted) {
 				return

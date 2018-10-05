@@ -3,8 +3,7 @@
 import type {Course as CourseType} from '@gob/types'
 import {List, Set} from 'immutable'
 import oxford from 'listify'
-import present from 'present'
-import prettyMs from 'pretty-ms'
+import flatten from 'lodash/flatten'
 import {to12HourTime as to12} from '@gob/lib'
 import {type SORT_BY_KEY, type GROUP_BY_KEY} from './constants'
 
@@ -84,9 +83,9 @@ const REVERSE_ORDER: Set<GROUP_BY_KEY> = Set.of('year', 'term', 'semester')
 export function sortAndGroup(
 	results: List<CourseType>,
 	args: {sorting: SORT_BY_KEY, grouping: GROUP_BY_KEY},
-): List<string | CourseType> {
+): Array<string | CourseType> {
 	let {sorting, grouping} = args
-	const start = present()
+	console.time('query: grouping/sorting')
 
 	for (let comparator of SORT_BY_TO_KEY[sorting]) {
 		if (!comparator) {
@@ -104,16 +103,20 @@ export function sortAndGroup(
 		.groupBy(grouper)
 		.sortBy((_, key) => key)
 		.toOrderedMap()
-		.toList()
 
 	if (REVERSE_ORDER.has(grouping)) {
 		// Also reverse it, so the most recent is at the top.
 		nestedResults = nestedResults.reverse()
 	}
 
-	nestedResults = nestedResults.flatten()
+	nestedResults = nestedResults
+		.map((val, key) => [key, val])
+		.toList()
+		.toJS()
 
-	console.info(`grouping/sorting took ${prettyMs(present() - start)}`)
+	nestedResults = flatten((flatten(nestedResults): any))
+
+	console.timeEnd('query: grouping/sorting')
 
 	return nestedResults
 }

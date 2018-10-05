@@ -5,11 +5,12 @@ import {buildQueryFromString} from '@gob/search-queries'
 import compact from 'lodash/compact'
 import toPairs from 'lodash/toPairs'
 import fromPairs from 'lodash/fromPairs'
+import {type Course} from '@gob/types'
 
 export function queryCourseDatabase(
 	queryString: string,
 	baseQuery: Object = {},
-) {
+): Array<Course> {
 	let queryObject = buildQueryFromString(queryString, {
 		words: true,
 		profWords: true,
