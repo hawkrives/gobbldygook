@@ -9,17 +9,17 @@ import {
 	type PartialStudent,
 } from '@gob/school-st-olaf-college'
 import {Map, List} from 'immutable'
-import {getOnlyCourse} from '../../helpers/get-courses'
+import {getOnlyCourse, getCourse} from '../../helpers/get-courses'
 import {StudentSummary} from '../../modules/student/student-summary'
 import {
 	action as initStudent,
 	type ActionCreator as InitStudentFunc,
 } from '../../redux/students/actions/init-student'
 import {connect} from 'react-redux'
-import type {Course as CourseType} from '@gob/types'
+import type {Course as CourseType, CourseError} from '@gob/types'
 import './method-import.scss'
 
-import {Student, Schedule} from '@gob/object-student'
+import {Student, Schedule, type FabricationType} from '@gob/object-student'
 
 type Props = {
 	+initStudent: InitStudentFunc, // redux
@@ -177,39 +177,61 @@ const StudentInfo = ({student}: {student: Student}) => (
 		<StudentSummary student={student} showMessage={false} />
 
 		<ul>
-			{student.schedules.groupBy(s => s.year).map((schedules, year) => (
-				<li key={year}>
-					{year}:<ScheduleListing schedules={schedules} />
-				</li>
-			))}
+			{student.schedules
+				.groupBy(s => s.year)
+				.map((schedules, year) => (
+					<li key={year}>
+						{year}:
+						<ScheduleListing
+							fabrications={student.fabrications}
+							schedules={schedules}
+						/>
+					</li>
+				))
+				.toList()
+				.toArray()}
 		</ul>
 	</>
 )
 
-const ScheduleListing = (props: {schedules: Map<string, Schedule>}) => {
-	let {schedules = Map()} = props
+const ScheduleListing = (props: {
+	schedules: Map<string, Schedule>,
+	fabrications: List<FabricationType>,
+}) => {
+	let {schedules = Map(), fabrications = List()} = props
 
 	return (
 		<ul>
-			{schedules.sortBy(s => s.semester).map(schedule => (
-				<li key={schedule.semester}>
-					{semesterName(schedule.semester)}:
-					<AbbreviatedCourseListing schedule={schedule} />
-				</li>
-			))}
+			{schedules
+				.sortBy(s => s.semester)
+				.map(schedule => (
+					<li key={schedule.semester}>
+						{semesterName(schedule.semester)}:
+						<AbbreviatedCourseListing
+							fabrications={fabrications}
+							schedule={schedule}
+						/>
+					</li>
+				))
+				.toList()
+				.toArray()}
 		</ul>
 	)
 }
 
 class AbbreviatedCourseListing extends React.Component<
-	{schedule: Schedule},
-	{courses: List<CourseType>},
+	{schedule: Schedule, fabrications: List<FabricationType>},
+	{courses: List<CourseType | FabricationType | CourseError>},
 > {
+	state = {courses: List()}
 	componentDidMount() {
 		this.fetchCourses()
 	}
 	fetchCourses = async () => {
-		let courses = await this.props.schedule.getOnlyCourses(getOnlyCourse)
+		let courses = await this.props.schedule.getCourses(
+			getCourse,
+			this.props.fabrications,
+		)
 		this.setState(() => ({courses}))
 	}
 	render() {
@@ -217,12 +239,15 @@ class AbbreviatedCourseListing extends React.Component<
 
 		return (
 			<ul>
-				{courses.map(course => (
-					<li key={course.clbid}>
-						{course.department} {course.number}
-						{course.section} – {course.name}
-					</li>
-				))}
+				{courses
+					// TODO: replace any with handling of CourseError
+					.map((course: any) => (
+						<li key={course.clbid}>
+							{course.department} {course.number}
+							{course.section} – {course.name}
+						</li>
+					))
+					.toArray()}
 			</ul>
 		)
 	}
