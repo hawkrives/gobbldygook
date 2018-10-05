@@ -7,7 +7,7 @@ import {DraggableCourse} from '../course'
 import {PlainList, ListItem} from '../../components/list'
 import MissingCourse from './missing-course'
 import EmptyCourseSlot from './empty-course-slot'
-import {type WarningType} from '@gob/object-student'
+import {type WarningType, type FabricationType} from '@gob/object-student'
 import {Map, List as IList} from 'immutable'
 import type {Course as CourseType, CourseError} from '@gob/types'
 
@@ -46,7 +46,7 @@ const Empty = styled(EmptyCourseSlot)`
 `
 
 type Props = {
-	courses: Array<CourseType | CourseError>,
+	courses: Array<CourseType | CourseError | FabricationType>,
 	usedSlots: number,
 	warnings: Map<string, IList<?WarningType>>,
 	maxSlots: number,

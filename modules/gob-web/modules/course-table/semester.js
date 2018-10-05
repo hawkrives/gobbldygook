@@ -12,6 +12,7 @@ import * as theme from '../../theme'
 import {FlatButton} from '../../components/button'
 import {Icon} from '../../components/icon'
 import {InlineList, InlineListItem} from '../../components/list'
+import {type FabricationType} from '@gob/object-student'
 import {close, search} from '../../icons/ionicons'
 import {
 	IDENT_COURSE,
@@ -19,8 +20,8 @@ import {
 	Schedule,
 	type WarningType,
 } from '@gob/object-student'
-import type {Course as CourseType} from '@gob/types'
-import {getOnlyCourse} from '../../helpers/get-courses'
+import type {Course as CourseType, CourseError} from '@gob/types'
+import {getOnlyCourse, getCourse} from '../../helpers/get-courses'
 import {
 	changeStudent,
 	type ChangeStudentFunc,
@@ -134,7 +135,7 @@ type Props = ReduxProps & DnDProps & ReactProps
 type State = {
 	loading: boolean,
 	checking: boolean,
-	courses: List<CourseType>,
+	courses: List<CourseType | FabricationType | CourseError>,
 	warnings: Map<string, List<?WarningType>>,
 	hasConflict: boolean,
 	credits: number,
@@ -164,7 +165,10 @@ class Semester extends React.Component<Props, State> {
 		this.setState(() => ({loading: true, checking: true}))
 
 		let {schedule} = props
-		let courses = await schedule.getOnlyCourses(getOnlyCourse)
+		let courses = await schedule.getCourses(
+			getCourse,
+			props.student.fabrications,
+		)
 		let credits = countCredits([...courses])
 
 		this.setState(() => ({courses, credits, loading: false}))
