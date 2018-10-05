@@ -101,7 +101,7 @@ export default function StudentIndex(props: {
 					</Router>
 
 					<Router>
-						<CourseTable path="/" student={student.present} />
+						<CourseTable default student={student.present} />
 
 						<SemesterDetail
 							student={student.present}
