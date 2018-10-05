@@ -59,7 +59,7 @@ export async function convertStudent(
 		getCourse,
 	)
 
-	let filledStudent: any = new Student({
+	let filledStudent = new Student({
 		...info,
 		schedules,
 		fabrications,
