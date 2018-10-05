@@ -131,7 +131,7 @@ class AreaOfStudy extends React.Component<Props, State> {
 
 		if (this.state.results && this.state.results.progress) {
 			progressAt = this.state.results.progress.at
-			progressAt = this.state.results.progress.of
+			progressOf = this.state.results.progress.of
 		}
 
 		if (this.state.results && this.state.results.error) {
