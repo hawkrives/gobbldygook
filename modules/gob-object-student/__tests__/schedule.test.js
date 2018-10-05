@@ -12,6 +12,30 @@ describe('Schedule', () => {
 		expect(input.clbids).toBe(clbids)
 	})
 
+
+	it('copies from one Schedule to another', () => {
+		let initial = new Schedule({
+			id: 'null',
+			active: true,
+			index: 10,
+			title: 'title me oh my',
+			clbids: ['1'],
+			year: 2018,
+			semester: 59,
+			metadata: {key: 'value'},
+		})
+		let copy = new Schedule(initial)
+
+		expect(copy.id).toBe(initial.id)
+		expect(copy.active).toBe(initial.active)
+		expect(copy.index).toBe(initial.index)
+		expect(copy.title).toBe(initial.title)
+		expect(copy.clbids).toBe(initial.clbids)
+		expect(copy.year).toBe(initial.year)
+		expect(copy.semester).toBe(initial.semester)
+		expect(copy.metadata).toBe(initial.metadata)
+	})
+
 	it('uses the ID that you give it', () => {
 		let schedule = new Schedule({id: '1'})
 		expect(schedule.id).toBe('1')

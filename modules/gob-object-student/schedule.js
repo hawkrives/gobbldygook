@@ -3,7 +3,7 @@
 import uuid from 'uuid/v4'
 import {randomChar} from '@gob/lib'
 
-import {List, Map, Record, OrderedMap} from 'immutable'
+import {List, Map, Record} from 'immutable'
 import type {
 	CourseLookupFunc,
 	OnlyCourseLookupFunc,
