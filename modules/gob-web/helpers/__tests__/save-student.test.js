@@ -35,17 +35,6 @@ describe('saveStudent', () => {
 		let {dateLastModified: _2, ...actual} = actualStudent
 		expect(actual).toEqual(expected)
 	})
-
-	it("doesn't save if the student hasn't changed", async () => {
-		await saveStudent(student)
-		let s = JSON.parse(localStorage.getItem(student.id) || '{}')
-		let lastModified = s.dateLastModified
-		await saveStudent({...s, toJSON: () => s})
-		let newLastModified = JSON.parse(
-			localStorage.getItem(student.id) || '{}',
-		).dateLastModified
-		expect(newLastModified).toBe(lastModified)
-	})
 })
 
 describe('addStudentToCache', () => {
