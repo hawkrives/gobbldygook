@@ -65,10 +65,10 @@ describe('convertStudent', () => {
 	it('contains all of the expected schedules', async () => {
 		let actual = await convertStudent(sample, getCourseMock)
 
-		for (let expected of expectedSchedules) {
-			expect(actual.schedules.toList().toJS()).toContainEqual(
-				expect.objectContaining(expected),
-			)
+		let actualSchedules = actual.schedules.toList().toJS()
+		for (let expectedSched of expectedSchedules) {
+			let expected = expect.objectContaining(expectedSched)
+			expect(actualSchedules).toContainEqual(expected)
 		}
 	})
 })
