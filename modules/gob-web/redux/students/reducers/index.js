@@ -24,7 +24,6 @@ export type State = {
 export function reducer(state: State = initialState, action: Action<*>) {
 	const {type, payload, error} = action
 
-
 	switch (type) {
 		case DESTROY_STUDENT: {
 			if (error) {

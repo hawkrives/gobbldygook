@@ -63,7 +63,16 @@ type ScheduleInput = {
 
 export class Schedule extends ScheduleRecord<ScheduleType> {
 	constructor(data: ScheduleInput = {}) {
-		let {id = uuid(), clbids = [], metadata = {}, year, semester, active, index, title} = data
+		let {
+			id = uuid(),
+			clbids = [],
+			metadata = {},
+			year,
+			semester,
+			active,
+			index,
+			title,
+		} = data
 
 		if (!List.isList(clbids)) {
 			clbids = List((clbids: any))

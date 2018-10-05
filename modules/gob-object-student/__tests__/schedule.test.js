@@ -12,7 +12,6 @@ describe('Schedule', () => {
 		expect(input.clbids).toBe(clbids)
 	})
 
-
 	it('copies from one Schedule to another', () => {
 		let initial = new Schedule({
 			id: 'null',

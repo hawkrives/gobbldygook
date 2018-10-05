@@ -108,21 +108,23 @@ export class Student extends StudentRecord<StudentType> {
 			fulfillments = OrderedMap((fulfillments: any))
 		}
 
-		super(({
-			dateLastModified,
-			dateCreated,
-			id,
-			studies,
-			schedules,
-			matriculation,
-			graduation,
-			fulfillments,
-			settings,
-			overrides,
-			fabrications,
-			advisor,
-			version,
-		}: any))
+		super(
+			({
+				dateLastModified,
+				dateCreated,
+				id,
+				studies,
+				schedules,
+				matriculation,
+				graduation,
+				fulfillments,
+				settings,
+				overrides,
+				fabrications,
+				advisor,
+				version,
+			}: any),
+		)
 	}
 
 	get id(): string {

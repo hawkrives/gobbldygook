@@ -301,7 +301,9 @@ describe('destroySchedulesForTerm', () => {
 		// only semester
 		expect(() => s.destroySchedulesForTerm({semester: 3})).toThrow()
 		// both semester; good
-		expect(() => s.destroySchedulesForTerm({year: 2014, semester: 3})).not.toThrow()
+		expect(() =>
+			s.destroySchedulesForTerm({year: 2014, semester: 3}),
+		).not.toThrow()
 	})
 })
 
