@@ -63,10 +63,10 @@ async function checkStudentAgainstArea(
 	})
 }
 
-const memoized = mem(checkStudentAgainstArea, {
+const memoized: typeof checkStudentAgainstArea = mem(checkStudentAgainstArea, {
 	cache: new QuickLRU({maxSize: 8}),
 	cacheKey: (student: Student, area: ParsedHansonFile) =>
-		JSON.stringify([student, area]),
+		JSON.stringify([student.hashCode(), area]),
 	maxAge: 60000,
 })
 
