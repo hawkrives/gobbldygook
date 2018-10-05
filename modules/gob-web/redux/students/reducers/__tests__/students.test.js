@@ -1,7 +1,7 @@
 import size from 'lodash/size'
 import range from 'lodash/range'
 
-import {INIT_STUDENT, IMPORT_STUDENT, DESTROY_STUDENT} from '../../constants'
+import {INIT_STUDENT, DESTROY_STUDENT} from '../../constants'
 import {CHANGE_STUDENT} from '../../actions/change'
 
 import {undoableReducer, reducer} from '../student'
@@ -20,32 +20,6 @@ describe('students reducer', () => {
 
 		expect(actual).toEqual(expected)
 		expect(actual).not.toBe(initialState)
-	})
-
-	it('returns existing state if INIT_STUDENT has an error', () => {
-		let initialState = {}
-
-		let action = {type: INIT_STUDENT, payload: new Error(), error: true}
-
-		let expected = initialState
-		let actual = reducer(initialState, action)
-
-		expect(actual).toBe(expected)
-	})
-
-	it('returns existing state if IMPORT_STUDENT has an error', () => {
-		let initialState = {}
-
-		let action = {
-			type: IMPORT_STUDENT,
-			payload: new Error(),
-			error: true,
-		}
-
-		let expected = initialState
-		let actual = reducer(initialState, action)
-
-		expect(actual).toBe(expected)
 	})
 
 	it.skip('handles DESTROY_STUDENT', () => {
