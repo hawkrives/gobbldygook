@@ -8,7 +8,8 @@ import type {Props} from './expression'
 
 function FilterOf({expr, ctx}: {expr: OfExpression, ctx: mixed}) {
 	return (
-		<div>
+		<div className="filter filter--of">
+			<h4>Filter:</h4>
 			{expr.$of.map((ex, i) => (
 				<Expression key={i} expr={ex} ctx={ctx} />
 			))}
@@ -21,7 +22,8 @@ function FilterWhere({expr}: {expr: WhereExpression}) {
 	const description = `only courses where ${qualifier}`
 
 	return (
-		<div>
+		<div className="filter filter--where">
+			<h4>Filter:</h4>
 			<p>{description}</p>
 		</div>
 	)

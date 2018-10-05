@@ -41,7 +41,7 @@ type RequirementProps = Props & {
 	onToggleOpen: () => any,
 }
 
-function Requirement(props: RequirementProps) {
+export function Requirement(props: RequirementProps) {
 	const {topLevel = false} = props
 
 	let info =
@@ -57,12 +57,14 @@ function Requirement(props: RequirementProps) {
 
 	const wasEvaluated = info.result && info.result._checked
 	const computationClassName = wasEvaluated
-		? info.computed
+		? info.computed || info.result._result
 			? 'result-success'
 			: 'result-failure'
 		: ''
 
-	const status = <ResultIndicator result={info.computed} />
+	const status = (
+		<ResultIndicator result={info.computed || info.result._result} />
+	)
 
 	const extraClasses = [info.overridden ? 'overridden' : '']
 
@@ -77,11 +79,7 @@ function Requirement(props: RequirementProps) {
 		<p className="description">{info.description}</p>
 	)
 
-	const filterEl = info.filter && (
-		<div className="filter">
-			Filter: <Filter expr={info.filter} ctx={info} />
-		</div>
-	)
+	const filterEl = info.filter && <Filter expr={info.filter} ctx={info} />
 
 	const title = !topLevel && (
 		<h2 className="heading" title={info.name} onClick={props.onToggleOpen}>
@@ -136,20 +134,21 @@ function Requirement(props: RequirementProps) {
 		'requirement',
 		extraClasses.join(' '),
 		computationClassName,
-		props.isOpen ? 'is-open' : 'is-closed',
 	].join(' ')
 
 	return (
 		<div className={className}>
 			{title}
-			{description}
-			{message}
-			{overrideButtons}
-			{filterEl}
-			{result}
-			{children.length ? (
-				<div className="children">{children}</div>
-			) : null}
+			<div className="contents" hidden={!props.isOpen}>
+				{description}
+				{message}
+				{overrideButtons}
+				{filterEl}
+				{result}
+				{children.length ? (
+					<div className="children">{children}</div>
+				) : null}
+			</div>
 		</div>
 	)
 }

@@ -5,7 +5,7 @@ import cx from 'classnames'
 import {connect} from 'react-redux'
 import {FlatButton} from '../../components/button'
 import {Icon} from '../../components/icon'
-import Requirement from './requirement'
+import {Requirement} from './requirement'
 import ProgressBar from '../../components/progress-bar'
 import {close, chevronUp, chevronDown} from '../../icons/ionicons'
 import {pathToOverride, type EvaluationResult} from '@gob/examine-student'
@@ -186,21 +186,6 @@ class AreaOfStudy extends React.Component<Props, State> {
 			</div>
 		)
 
-		let contents = null
-		if (this.state.examining) {
-			contents = <p className="message area--loading">Loading…</p>
-		} else {
-			contents = (
-				<AreaDetails
-					results={this.state.results}
-					area={props.areaOfStudy}
-					addOverride={this.addOverride}
-					removeOverride={this.removeOverride}
-					toggleOverride={this.toggleOverride}
-				/>
-			)
-		}
-
 		return (
 			<article className={cx('area', examining && 'loading')}>
 				<header
@@ -210,7 +195,19 @@ class AreaOfStudy extends React.Component<Props, State> {
 					{showConfirmRemoval ? removalConfirmation : summary}
 				</header>
 
-				{isOpen && !showConfirmRemoval && contents}
+				{this.state.examining && (
+					<p hidden={!isOpen} className="message area--loading">
+						Loading…
+					</p>
+				)}
+				<AreaDetails
+					isOpen={isOpen}
+					results={this.state.results}
+					area={props.areaOfStudy}
+					addOverride={this.addOverride}
+					removeOverride={this.removeOverride}
+					toggleOverride={this.toggleOverride}
+				/>
 			</article>
 		)
 	}
@@ -240,6 +237,7 @@ function AreaDetails(props: {
 	addOverride: (Array<string>, Event) => mixed,
 	removeOverride: (Array<string>, Event) => mixed,
 	toggleOverride: (Array<string>, Event) => mixed,
+	isOpen: boolean,
 }) {
 	if (!props.results) {
 		return null
@@ -264,6 +262,8 @@ function AreaDetails(props: {
 			onRemoveOverride={props.removeOverride}
 			onToggleOverride={props.toggleOverride}
 			path={[type, name]}
+			isOpen={props.isOpen}
+			onToggleOpen={() => {}}
 		/>
 	)
 }

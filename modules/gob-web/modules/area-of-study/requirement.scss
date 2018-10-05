@@ -8,10 +8,6 @@
 	font-variant-numeric: oldstyle-nums;
 }
 
-.requirement.is-closed > *:not(.heading) {
-	display: none;
-}
-
 .requirement .requirement {
 	margin-left: 0.5em;
 }
@@ -116,6 +112,35 @@
 	padding-bottom: 0.2em;
 }
 
+.filter {
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+
+	h4 {
+		margin: 0;
+		padding: 0;
+	}
+}
+
+.filter--of {
+	display: grid;
+	grid-column-gap: 0.2em;
+	grid-row-gap: 0.2em;
+	grid-template-columns: repeat(auto-fit, 46px);
+
+	h4 {
+		grid-row: 1;
+		grid-column: 1 / -1;
+	}
+
+	.expression--course {
+		grid-column: span 1;
+	}
+	.expression--course.big {
+		grid-column: span 2;
+	}
+}
+
 .message,
 .description {
 	margin-top: 0;
@@ -128,7 +153,7 @@
 
 .message,
 .description,
-.result > :global(.expression) > :global(.expression--description) {
+.result > .expression > .expression--description {
 	margin-top: 0.5em;
 }
 
