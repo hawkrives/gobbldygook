@@ -240,7 +240,9 @@ class Semester extends React.Component<Props, State> {
 
 					<TitleButton
 						as={Link}
-						to={`./search?term=${year}${semester}`}
+						to={`/student/${
+							student.id
+						}/search?term=${year}${semester}`}
 						title="Search for courses"
 					>
 						<Icon>{search}</Icon> Course
