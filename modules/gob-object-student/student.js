@@ -68,6 +68,10 @@ export class Student extends StudentRecord<StudentType> {
 			fulfillments = {},
 			fabrications = [],
 			settings = {},
+			dateLastModified = now,
+			dateCreated = now,
+			advisor,
+			version,
 		} = data
 
 		if (Array.isArray(studies)) {
@@ -104,8 +108,9 @@ export class Student extends StudentRecord<StudentType> {
 			fulfillments = OrderedMap((fulfillments: any))
 		}
 
-		super({
-			...data,
+		super(({
+			dateLastModified,
+			dateCreated,
 			id,
 			studies,
 			schedules,
@@ -115,7 +120,9 @@ export class Student extends StudentRecord<StudentType> {
 			settings,
 			overrides,
 			fabrications,
-		})
+			advisor,
+			version,
+		}: any))
 	}
 
 	get id(): string {

@@ -63,11 +63,17 @@ describe('Student', () => {
 		let copy = new Student(initial)
 
 		expect(copy.id).toBe(initial.id)
+		expect(copy.name).toBe(initial.name)
 		expect(copy.matriculation).toBe(initial.matriculation)
+		expect(copy.version).toBe(initial.version)
 		expect(copy.graduation).toBe(initial.graduation)
+		expect(copy.advisor).toBe(initial.advisor)
+		expect(copy.dateLastModified).toBe(initial.dateLastModified)
+		expect(copy.dateCreated).toBe(initial.dateCreated)
 		expect(copy.studies).toBe(initial.studies)
 		expect(copy.schedules).toBe(initial.schedules)
 		expect(copy.fabrications).toBe(initial.fabrications)
+		expect(copy.fulfillments).toBe(initial.fulfillments)
 		expect(copy.settings).toBe(initial.settings)
 		expect(copy.overrides).toBe(initial.overrides)
 	})
@@ -324,7 +330,7 @@ describe('changeStudentAdvisor', () => {
 
 	it('returns a new object', () => {
 		let initial = new Student()
-		let final = initial.setAdvisor('')
+		let final = initial.setAdvisor('new name')
 		expect(final).not.toBe(initial)
 	})
 
