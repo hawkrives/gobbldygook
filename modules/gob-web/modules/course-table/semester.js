@@ -195,6 +195,10 @@ class Semester extends React.Component<Props, State> {
 		let creditsPerCourse = 1
 		let recommendedSlots = creditsPerCourse * recommendedCredits
 
+		if (loading) {
+			recommendedSlots = 0
+		}
+
 		const infoBar = []
 		if (courses.size) {
 			// prettier-ignore
