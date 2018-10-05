@@ -8,7 +8,6 @@ import {Set} from 'immutable'
 import {connect} from 'react-redux'
 import {Card} from '../../components/card'
 import {AvatarLetter} from '../../components/avatar-letter'
-import {AutoSizedInput} from '../../components/autosize'
 import {
 	changeStudent,
 	type ChangeStudentFunc,
