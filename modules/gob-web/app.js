@@ -20,7 +20,6 @@ let GlobalStyle = createGlobalStyle`
 
         box-sizing: border-box;
 
-        background: var(--background);
         min-height: 100vh;
 
         line-height: 1.4;
@@ -30,7 +29,7 @@ let GlobalStyle = createGlobalStyle`
     }
 
     body {
-        height: 100%;
+        background: var(--background);
     }
 
     menu {
