@@ -50,7 +50,6 @@ export class AreaPicker extends React.PureComponent<Props> {
 
 	render() {
 		let {selections, type, label, availableThrough} = this.props
-
 		let id = `area-picker-${this.id}`
 
 		return (
