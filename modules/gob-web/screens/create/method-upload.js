@@ -8,6 +8,7 @@ import {StudentSummary} from '../../modules/student/student-summary'
 import {action as initStudent} from '../../redux/students/actions/init-student'
 import {connect} from 'react-redux'
 import {Header} from './components'
+import {Student} from '@gob/object-student'
 import './method-upload.scss'
 
 class UploadFileScreen extends React.Component {
@@ -56,7 +57,7 @@ class UploadFileScreen extends React.Component {
 
 		let converted
 		try {
-			converted = initStudent(parsed)
+			converted = initStudent(new Student(parsed))
 		} catch (err) {
 			converted = {name: file.name, error: err.message}
 		}
