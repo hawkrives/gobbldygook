@@ -57,11 +57,12 @@ const Course = styled(ExpandedCourse)`
 `
 
 type Props = {
-	course: CourseType, // parent
-	onClose: () => any, // parent
-	scheduleId?: string, // parent
-	student?: Student, // redux
-	changeStudent: ChangeStudentFunc,
+	course: CourseType,
+	onClose: () => any,
+	scheduleId?: string,
+	studentId?: string,
+	student: ?Student, // redux
+	changeStudent: ChangeStudentFunc, // redux
 }
 
 class ModalCourse extends React.Component<Props> {
