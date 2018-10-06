@@ -50,7 +50,7 @@ export function SidebarToolbar(props: Props) {
 	let toOverview = backTo === 'overview'
 
 	return (
-		<ToolsCard style={{marginBottom: '0.5em'}}>
+		<ToolsCard>
 			<Toolbar>
 				{toPicker ? (
 					<ToolbarButton as={Link} to="/" title="Students">
