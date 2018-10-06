@@ -1,12 +1,12 @@
 // @flow
 
 import React from 'react'
+import styled from 'styled-components'
 import {Card} from '../../components/card'
 import {FlatButton} from '../../components/button'
 import {Icon} from '../../components/icon'
 import {Toolbar} from '../../components/toolbar'
 import Modal from '../../components/modal'
-import List from '../../components/list'
 import {close} from '../../icons/ionicons'
 import {Student} from '@gob/object-student'
 
@@ -15,6 +15,14 @@ type Props = {
 	student: Student,
 	queryString?: string,
 }
+
+const SizedCard = styled(Card)`
+	width: 300px;
+	height: 200px;
+
+	margin: auto;
+	padding: 1em;
+`
 
 export function ShareSheet(props: Props) {
 	let {student, navigate, queryString = window.location.search} = props
@@ -28,7 +36,7 @@ export function ShareSheet(props: Props) {
 	if (!student) {
 		return (
 			<Modal onClose={boundCloseModal} contentLabel="Share">
-				<Card>
+				<SizedCard>
 					<Toolbar>
 						<FlatButton onClick={boundCloseModal}>
 							<Icon>{close}</Icon>
@@ -36,35 +44,32 @@ export function ShareSheet(props: Props) {
 					</Toolbar>
 
 					<p>No student given?</p>
-				</Card>
+				</SizedCard>
 			</Modal>
 		)
 	}
 
 	return (
 		<Modal onClose={boundCloseModal} contentLabel="Share">
-			<Card>
+			<SizedCard>
 				<Toolbar>
 					<FlatButton onClick={boundCloseModal}>
 						<Icon>{close}</Icon>
 					</FlatButton>
 				</Toolbar>
 
-				<>
-					Share "{student.name}" via:
-					<List type="bullet">
-						<li>Google Drive (not implemented)</li>
-						<li>
-							<a
-								download={`${student.name}.gbstudent`}
-								href={student.dataUrlEncode()}
-							>
-								Download file
-							</a>
-						</li>
-					</List>
-				</>
-			</Card>
+				<p>
+					Share "{student.name}
+					":
+					<br />
+					<a
+						download={`${student.name}.gbstudent`}
+						href={student.dataUrlEncode()}
+					>
+						Download file
+					</a>
+				</p>
+			</SizedCard>
 		</Modal>
 	)
 }

@@ -13,6 +13,12 @@ import {
 	type ChangeStudentFunc,
 } from '../../redux/students/actions/change'
 
+const Container = styled.section`
+	height: 100vh;
+	overflow: scroll;
+	padding: var(--page-edge-padding);
+`
+
 const AddYearButton = styled(FlatButton)`
 	display: block;
 
@@ -88,9 +94,9 @@ class CourseTable extends React.Component<Props> {
 		}
 
 		return (
-			<section className={this.props.className}>
+			<Container className={this.props.className}>
 				{years.toArray()}
-			</section>
+			</Container>
 		)
 	}
 }

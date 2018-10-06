@@ -11,13 +11,10 @@ import styled from 'styled-components'
 const Container = styled.div`
 	display: grid;
 	justify-content: space-between;
-	padding: var(--page-edge-padding);
-
-	grid-template-columns: 1fr;
+	grid-gap: calc(var(--page-edge-padding) * (2 / 3));
 
 	@media all and (min-width: 600px) {
 		grid-template-columns: 280px 1fr;
-		grid-column-gap: calc(var(--page-edge-padding) * (2 / 3));
 	}
 `
 

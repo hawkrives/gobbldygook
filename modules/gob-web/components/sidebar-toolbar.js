@@ -3,6 +3,7 @@
 import * as React from 'react'
 import {Link} from '@reach/router'
 import {connect} from 'react-redux'
+import {Card} from './card'
 import {Icon} from './icon'
 import {Toolbar, ToolbarButton} from './toolbar'
 import {undo, redo} from '../redux/students/actions/undo'
@@ -30,9 +31,11 @@ type Props = {
 	backTo?: 'picker' | 'overview',
 }
 
-const StudentButtonsToolbar = styled(Toolbar)`
-	margin-bottom: 0.5em;
+const ToolsCard = styled(Card)`
 	flex-shrink: 0;
+	margin-bottom: 1em;
+	position: sticky;
+	top: 0;
 `
 
 export function SidebarToolbar(props: Props) {
@@ -47,63 +50,73 @@ export function SidebarToolbar(props: Props) {
 	let toOverview = backTo === 'overview'
 
 	return (
-		<StudentButtonsToolbar>
-			{toPicker ? (
-				<ToolbarButton as={Link} to="/" title="Students">
+		<ToolsCard style={{marginBottom: '0.5em'}}>
+			<Toolbar>
+				{toPicker ? (
+					<ToolbarButton as={Link} to="/" title="Students">
+						<Icon block large>
+							{iosPeopleOutline}
+						</Icon>
+					</ToolbarButton>
+				) : toOverview ? (
+					<ToolbarButton
+						as={Link}
+						to={`/student/${studentId}`}
+						title="Courses"
+					>
+						<Icon block large>
+							{grid}
+						</Icon>
+					</ToolbarButton>
+				) : (
+					<div />
+				)}
+
+				{search ? (
+					<ToolbarButton
+						as={Link}
+						to={`/student/${studentId}/search`}
+						title="Search"
+					>
+						<Icon block large>
+							{iosSearch}
+						</Icon>
+					</ToolbarButton>
+				) : (
+					<div />
+				)}
+
+				<ToolbarButton
+					title="Undo"
+					onClick={() => undo(studentId)}
+					disabled={!canUndo}
+				>
 					<Icon block large>
-						{iosPeopleOutline}
+						{!canUndo ? iosUndoOutline : iosUndo}
 					</Icon>
 				</ToolbarButton>
-			) : toOverview ? (
-				<ToolbarButton as={Link} to="../.." title="Courses">
+
+				<ToolbarButton
+					title="Redo"
+					onClick={() => redo(studentId)}
+					disabled={!canRedo}
+				>
 					<Icon block large>
-						{grid}
+						{!canRedo ? iosRedoOutline : iosRedo}
 					</Icon>
 				</ToolbarButton>
-			) : (
-				<div />
-			)}
 
-			{search ? (
-				<ToolbarButton as={Link} to="./search" title="Search">
-					<Icon block large>
-						{iosSearch}
-					</Icon>
-				</ToolbarButton>
-			) : (
-				<div />
-			)}
-
-			<ToolbarButton
-				title="Undo"
-				onClick={() => undo(studentId)}
-				disabled={!canUndo}
-			>
-				<Icon block large>
-					{!canUndo ? iosUndoOutline : iosUndo}
-				</Icon>
-			</ToolbarButton>
-
-			<ToolbarButton
-				title="Redo"
-				onClick={() => redo(studentId)}
-				disabled={!canRedo}
-			>
-				<Icon block large>
-					{!canRedo ? iosRedoOutline : iosRedo}
-				</Icon>
-			</ToolbarButton>
-
-			{share ? (
-				<ToolbarButton as={Link} to="?share" title="Share">
-					<Icon block large>
-						{iosUploadOutline}
-					</Icon>
-				</ToolbarButton>
-			) : (
-				<div />
-			)}
-		</StudentButtonsToolbar>
+				{share ? (
+					<ToolbarButton as={Link} to="?share" title="Share">
+						<Icon block large>
+							{iosUploadOutline}
+						</Icon>
+					</ToolbarButton>
+				) : (
+					<div />
+				)}
+			</Toolbar>
+		</ToolsCard>
 	)
 }
 

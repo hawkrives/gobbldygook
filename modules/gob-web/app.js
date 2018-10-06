@@ -30,17 +30,12 @@ let GlobalStyle = createGlobalStyle`
 
     body {
         background: var(--background);
+        height: 100%;
     }
 
     menu {
         padding: 0;
         margin: 0;
-    }
-
-    .content {
-        padding-top: var(--page-edge-padding);
-        padding-bottom: var(--page-edge-padding);
-        overflow-y: scroll;
     }
 `
 
