@@ -14,7 +14,7 @@ type Props = {
 }
 
 export function CourseSearcherSidebar(props: Props) {
-	let {student, navigate} = props
+	let {student} = props
 
 	let {term} = props
 	term = term ? parseInt(term, 10) : null
