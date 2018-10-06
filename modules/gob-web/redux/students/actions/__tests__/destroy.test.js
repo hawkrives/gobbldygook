@@ -16,9 +16,7 @@ describe('destroyStudent action', () => {
 
 		let action = await actionPromise
 		expect(action).toHaveProperty('type', DESTROY_STUDENT)
-		expect(action.payload).toEqual({
-			studentId: 'student',
-		})
+		expect(action.payload).toEqual({id: 'student'})
 
 		expect(localStorage.hasItem('student')).toBe(false)
 	})
