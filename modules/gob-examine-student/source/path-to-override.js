@@ -1,5 +1,7 @@
 // @flow
 
+const JOINER = '\x1C'
+
 /**
  * Creates an "override path" – a period-separated string.
  * @private
@@ -7,5 +9,5 @@
  * @returns {string} - the stringified path
  */
 export default function pathToOverride(path: string[]) {
-	return path.join('.').toLowerCase()
+	return path.join(JOINER).toLowerCase()
 }
