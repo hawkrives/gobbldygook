@@ -1,6 +1,7 @@
 // @flow
 
 import type {Course} from '@gob/types'
+
 export type {Course}
 
 import type {
@@ -227,7 +228,7 @@ export type FilterWhereExpression = {
 export type FilterOfExpression = {
 	...BaseFilterExpression,
 	$filterType: 'of',
-	$of: Array<Course>,
+	$of: Array<CourseExpression>,
 }
 export type FilterExpression = FilterOfExpression | FilterWhereExpression
 
