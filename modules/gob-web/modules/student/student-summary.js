@@ -4,7 +4,7 @@ import React from 'react'
 import cx from 'classnames'
 import listify from 'listify'
 import sample from 'lodash/sample'
-import {List} from 'immutable'
+import {List, Set} from 'immutable'
 import {connect} from 'react-redux'
 import {Card} from '../../components/card'
 import {AvatarLetter} from '../../components/avatar-letter'
@@ -16,6 +16,8 @@ import {Student, type AreaQuery} from '@gob/object-student'
 import {checkStudentAgainstArea} from '../../workers/check-student'
 import {loadArea} from '../../helpers/load-area'
 import uniqueId from 'lodash/uniqueId'
+import {getCourse} from '../../helpers/get-courses'
+import {countCredits} from '@gob/examine-student'
 
 import './student-summary.scss'
 
@@ -73,19 +75,34 @@ class StudentSummary extends React.Component<Props, State> {
 	}
 
 	componentDidMount() {
-		this.checkGraduatability(this.props)
+		this.check(this.props)
 	}
 
 	componentDidUpdate(prevProps: Props) {
 		if (prevProps.student !== this.props.student) {
-			this.checkGraduatability(this.props)
+			this.check(this.props)
 		}
+	}
+
+	check = async (props: Props) => {
+		this.setState(() => ({checking: true, }))
+		await Promise.all([this.countCredits(props), this.checkGraduatability(props)])
+		this.setState(() => ({checking: false, }))
+	}
+
+	countCredits = async (props: Props) => {
+		let {student} = props
+		let {schedules, fabrications} = student
+		let promises = Set(schedules.toList().flatMap(s => s.clbids)).map(
+			clbid => getCourse({clbid}, fabrications),
+		)
+		let courses = await Promise.all(promises)
+		let credits = countCredits([...courses])
+		this.setState(() => ({creditsTaken: credits}))
 	}
 
 	checkGraduatability = async (props: Props) => {
 		let {student} = props
-
-		this.setState(() => ({checking: true}))
 
 		let areas = student.studies.map(loadArea)
 		let loadedAreas = (await Promise.all(areas))
@@ -99,7 +116,6 @@ class StudentSummary extends React.Component<Props, State> {
 		// let {creditsNeeded = 0, creditsTaken = 0} = {}
 
 		this.setState(() => ({
-			checking: false,
 			canGraduate,
 			// creditsNeeded,
 			// creditsTaken,
