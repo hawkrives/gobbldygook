@@ -89,7 +89,7 @@ export class CourseSearcher extends React.Component<Props, State> {
 						value={query}
 						placeholder="Search for a course or phrase"
 						onChange={this.handleQueryChange}
-						autoFocus={true}
+						// autoFocus={true}
 					/>
 				</Card>
 
