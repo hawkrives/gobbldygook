@@ -9,6 +9,7 @@ import CourseWarnings from './warnings'
 import type {Course} from '@gob/types'
 import type {WarningType} from '@gob/object-student'
 import {consolidateOfferings} from './offerings'
+import {List} from 'immutable'
 
 export const Container = styled.article`
 	display: block;
@@ -59,7 +60,7 @@ const Prereqs = styled.span``
 
 export type Props = {
 	className?: string,
-	conflicts?: Array<Array<?WarningType>>,
+	conflicts?: ?List<WarningType>,
 	course: Course,
 	index?: number,
 	onClick?: Event => any,
@@ -71,7 +72,6 @@ export default class CompactCourse extends React.Component<Props> {
 		let {
 			course,
 			conflicts,
-			index,
 			onClick = noop,
 			style,
 			className,
@@ -80,7 +80,7 @@ export default class CompactCourse extends React.Component<Props> {
 		return (
 			<Container className={className} onClick={onClick} style={style}>
 				{conflicts && (
-					<CourseWarnings warnings={conflicts[index || 0]} />
+					<CourseWarnings warnings={conflicts} />
 				)}
 
 				<Title

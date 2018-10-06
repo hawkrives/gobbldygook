@@ -8,7 +8,7 @@ import {Map, List} from 'immutable'
 export type Result = {
 	id: string,
 	hasConflict: boolean,
-	warnings: Map<string, List<?WarningType>>,
+	warnings: Map<string, List<WarningType>>,
 }
 
 // Checks to see if the schedule is valid

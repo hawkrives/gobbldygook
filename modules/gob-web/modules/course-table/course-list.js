@@ -44,7 +44,7 @@ const Empty = styled(EmptyCourseSlot)`
 type Props = {
 	courses: Array<CourseType | CourseError | FabricationType>,
 	usedSlots: number,
-	warnings: Map<string, IList<?WarningType>>,
+	warnings: Map<string, IList<WarningType>>,
 	maxSlots: number,
 	scheduleId: string,
 	studentId: string,
@@ -60,7 +60,7 @@ export function CourseList(props: Props) {
 					key={i}
 					index={i}
 					course={course}
-					conflicts={props.warnings}
+					conflicts={props.warnings.get(course.clbid)}
 					scheduleId={props.scheduleId}
 					studentId={props.studentId}
 				/>

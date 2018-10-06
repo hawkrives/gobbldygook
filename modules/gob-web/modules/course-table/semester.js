@@ -152,7 +152,7 @@ type State = {
 	loading: boolean,
 	checking: boolean,
 	courses: List<CourseType | FabricationType | CourseError>,
-	warnings: Map<string, List<?WarningType>>,
+	warnings: Map<string, List<WarningType>>,
 	hasConflict: boolean,
 	credits: number,
 }

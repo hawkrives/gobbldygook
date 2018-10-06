@@ -104,7 +104,7 @@ export function checkForTimeConflicts(
 export function findWarnings(
 	courses: List<CourseType | CourseError>,
 	schedule: Schedule,
-): Map<string, List<?WarningType>> {
+): Map<string, List<WarningType>> {
 	let {year, semester} = schedule
 
 	let noErrors: List<any> = courses.filterNot((c: any) => c.error)
@@ -113,5 +113,7 @@ export function findWarnings(
 	let warningsOfInvalidity = checkForInvalidity(onlyCourses, {year, semester})
 	let timeConflicts = checkForTimeConflicts(onlyCourses)
 
-	return Map().mergeDeep(warningsOfInvalidity, timeConflicts)
+	return Map()
+		.mergeDeep(warningsOfInvalidity, timeConflicts)
+		.map(warnings => warnings.filter(Boolean))
 }
