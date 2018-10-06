@@ -12,6 +12,7 @@ const Wrapper = styled.div`
 	text-transform: uppercase;
 
 	display: inline-block;
+	user-select: none;
 
 	padding: 0;
 
