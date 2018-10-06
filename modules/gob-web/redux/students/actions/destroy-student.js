@@ -7,6 +7,6 @@ export function destroyStudent(studentId) {
 		removeStudentFromCache(studentId)
 		localStorage.removeItem(studentId)
 
-		resolve({type: DESTROY_STUDENT, payload: {studentId}})
+		resolve({type: DESTROY_STUDENT, payload: {id: studentId}})
 	})
 }
