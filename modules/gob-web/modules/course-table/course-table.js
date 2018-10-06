@@ -14,8 +14,10 @@ import {
 } from '../../redux/students/actions/change'
 
 const Container = styled.section`
-	height: 100vh;
-	overflow: scroll;
+	@media all and (min-width: 800px) {
+		height: 100vh;
+		overflow: scroll;
+	}
 	// padding: var(--page-edge-padding);
 	padding-top: var(--page-edge-padding);
 	padding-bottom: var(--page-edge-padding);

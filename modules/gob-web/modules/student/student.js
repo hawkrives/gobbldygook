@@ -16,7 +16,7 @@ const Container = styled.div`
 	padding-left: var(--page-edge-padding);
 	padding-right: var(--page-edge-padding);
 
-	@media all and (min-width: 600px) {
+	@media all and (min-width: 800px) {
 		grid-template-columns: 280px 1fr 280px;
 	}
 `

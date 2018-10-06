@@ -3,8 +3,10 @@
 import styled from 'styled-components'
 
 export const Sidebar = styled.aside`
-	height: 100vh;
-	overflow: scroll;
+	@media all and (min-width: 800px) {
+		height: 100vh;
+		overflow: scroll;
+	}
 	padding-left: var(--semester-spacing);
 	padding-right: var(--semester-spacing);
 	// padding: var(--page-edge-padding);
