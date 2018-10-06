@@ -27,7 +27,7 @@ export type FabricationType = {|
 export type FulfillmentType = {||}
 
 export type CourseLookupFunc = (
-	{clbid: string, term: number},
+	{clbid: string, term?: ?number},
 	?(Array<FabricationType> | List<FabricationType>),
 ) => Promise<CourseType | FabricationType | CourseError>
 

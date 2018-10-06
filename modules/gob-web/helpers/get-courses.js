@@ -46,7 +46,7 @@ export function getCourseFromDatabase(clbid: string) {
 
 // Gets a course from the database.
 export function getCourse(
-	{clbid, term}: {clbid: string, term: number},
+	{clbid, term}: {clbid: string, term?: ?number},
 	fabrications?: ?(Array<FabricationType> | List<FabricationType>) = [],
 ): Promise<CourseType | FabricationType | ErrorType> {
 	if (fabrications) {
