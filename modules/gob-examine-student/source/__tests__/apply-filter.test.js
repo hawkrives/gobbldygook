@@ -52,8 +52,8 @@ describe('applyFilter', () => {
 			$type: 'filter',
 			$filterType: 'of',
 			$of: [
-				{$type: 'course', department: ['CSCI'], number: 121},
-				{$type: 'course', department: ['CSCI'], number: 125},
+				{$type: 'course', $course: {department: ['CSCI'], number: 121}},
+				{$type: 'course', $course: {department: ['CSCI'], number: 125}},
 			],
 		}
 

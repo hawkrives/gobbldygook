@@ -21,7 +21,6 @@ Array [
 exports[`applyFilter filters by list-of-valid-courses queries 1`] = `
 Array [
   Object {
-    "$type": "course",
     "department": Array [
       "CSCI",
     ],
