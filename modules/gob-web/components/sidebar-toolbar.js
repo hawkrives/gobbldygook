@@ -36,6 +36,7 @@ const ToolsCard = styled(Card)`
 	margin-bottom: 1em;
 	position: sticky;
 	top: 0;
+	z-index: 1;
 `
 
 export function SidebarToolbar(props: Props) {
