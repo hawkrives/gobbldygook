@@ -12,7 +12,7 @@ import * as theme from '../../theme'
 import {FlatButton} from '../../components/button'
 import {Icon} from '../../components/icon'
 import {InlineList, InlineListItem} from '../../components/list'
-import {close, search} from '../../icons/ionicons'
+import {close, search, alertCircled} from '../../icons/ionicons'
 import {
 	IDENT_COURSE,
 	Student,
@@ -95,6 +95,10 @@ const Header = styled.header`
 	overflow: hidden;
 
 	padding-left: var(--semester-side-padding);
+
+	& > ${Icon} {
+		margin-right: var(--semester-side-padding);
+	}
 `
 
 const InfoList = styled(InlineList)`
@@ -242,6 +246,7 @@ class Semester extends React.Component<Props, State> {
 				ref={ref => props.connectDropTarget(ref)}
 			>
 				<Header>
+					{hasConflict && <Icon>{alertCircled}</Icon>}
 					<Title
 						to={`./term/${year}${semester}`}
 						title={`Details for ${name}`}
