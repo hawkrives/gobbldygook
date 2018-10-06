@@ -22,8 +22,7 @@ export function ShareSheet(props: Props) {
 	const boundCloseModal = () => {
 		let params = new URLSearchParams(queryString)
 		params.delete('share')
-		console.log(params.toString())
-		navigate(`./${student.id}?${params.toString()}`)
+		navigate(`/student/${student.id}?${params.toString()}`)
 	}
 
 	if (!student) {
