@@ -87,12 +87,20 @@ export class Querent extends React.Component<Props, State> {
 				return
 			}
 
-			this.setState(() => ({didSearch: true, inProgress: false, results: List(payload)}))
+			this.setState(() => ({
+				didSearch: true,
+				inProgress: false,
+				results: List(payload),
+			}))
 		} catch (error) {
 			if (!this._isMounted) {
 				return
 			}
-			this.setState(() => ({didSearch: true, inProgress: false, error: error.message}))
+			this.setState(() => ({
+				didSearch: true,
+				inProgress: false,
+				error: error.message,
+			}))
 		}
 	}
 
@@ -101,6 +109,11 @@ export class Querent extends React.Component<Props, State> {
 		let {sortBy: sorting, groupBy: grouping} = this.props
 		let grouped = memSortAndGroup(results, {sorting, grouping})
 
-		return this.props.children({error, inProgress, didSearch, results: grouped})
+		return this.props.children({
+			error,
+			inProgress,
+			didSearch,
+			results: grouped,
+		})
 	}
 }

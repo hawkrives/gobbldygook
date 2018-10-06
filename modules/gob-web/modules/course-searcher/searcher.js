@@ -73,13 +73,15 @@ export class CourseSearcher extends React.Component<Props, State> {
 							</>
 						)}
 					</h2>
-					{onCloseSearcher && <FlatButton
-						className="close-sidebar"
-						title="Close Search"
-						onClick={onCloseSearcher}
-					>
-						Close
-					</FlatButton>}
+					{onCloseSearcher && (
+						<FlatButton
+							className="close-sidebar"
+							title="Close Search"
+							onClick={onCloseSearcher}
+						>
+							Close
+						</FlatButton>
+					)}
 
 					<input
 						type="search"

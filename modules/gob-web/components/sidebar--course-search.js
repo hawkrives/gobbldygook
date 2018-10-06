@@ -22,10 +22,7 @@ export function CourseSearcherSidebar(props: Props) {
 	return (
 		<Sidebar>
 			<CourseRemovalBox student={student.present} />
-			<CourseSearcher
-				studentId={student.present.id}
-				term={term}
-			/>
+			<CourseSearcher studentId={student.present.id} term={term} />
 		</Sidebar>
 	)
 }

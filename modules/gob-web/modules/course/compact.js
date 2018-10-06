@@ -69,19 +69,11 @@ export type Props = {
 
 export default class CompactCourse extends React.Component<Props> {
 	render() {
-		let {
-			course,
-			conflicts,
-			onClick = noop,
-			style,
-			className,
-		} = this.props
+		let {course, conflicts, onClick = noop, style, className} = this.props
 
 		return (
 			<Container className={className} onClick={onClick} style={style}>
-				{conflicts && (
-					<CourseWarnings warnings={conflicts} />
-				)}
+				{conflicts && <CourseWarnings warnings={conflicts} />}
 
 				<Title
 					title={course.title}
