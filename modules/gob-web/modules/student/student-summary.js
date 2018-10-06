@@ -52,6 +52,7 @@ type Props = {
 	randomizeHello?: boolean,
 	showAvatar?: boolean,
 	showMessage?: boolean,
+	showEditor?: boolean,
 	student: Student,
 }
 
@@ -126,7 +127,12 @@ class StudentSummary extends React.Component<Props, State> {
 	}
 
 	render() {
-		let {student, showMessage = true, showAvatar = true} = this.props
+		let {
+			student,
+			showMessage = true,
+			showEditor = true,
+			showAvatar = true,
+		} = this.props
 		let {checking, canGraduate, creditsTaken} = this.state
 		let {studies} = student
 		let gradClassName = canGraduate ? 'can-graduate' : 'cannot-graduate'
@@ -139,7 +145,7 @@ class StudentSummary extends React.Component<Props, State> {
 				as="article"
 				className={cx('student-summary', gradClassName, {checking})}
 			>
-				<ConnectedEditor student={student} />
+				{showEditor && <ConnectedEditor student={student} />}
 
 				{showAvatar && (
 					<AvatarLetter
