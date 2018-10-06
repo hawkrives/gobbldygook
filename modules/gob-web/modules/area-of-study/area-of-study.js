@@ -48,6 +48,15 @@ class AreaOfStudy extends React.Component<Props, State> {
 		this.startExamination()
 	}
 
+	componentDidUpdate(prevProps: Props) {
+		if (
+			this.props.student !== prevProps.student ||
+			this.props.areaOfStudy !== prevProps.areaOfStudy
+		) {
+			this.startExamination()
+		}
+	}
+
 	startExamination = async () => {
 		this.setState(() => ({examining: true}))
 		let area = await loadArea(this.props.areaOfStudy)
