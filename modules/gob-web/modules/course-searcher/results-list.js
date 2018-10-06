@@ -39,7 +39,7 @@ const TermList = styled(List)`
 	list-style: none;
 `
 
-const ResultsListSizer = styled.div`
+const ResultsListSizer = styled(Card)`
 	flex: 1;
 
 	// for AutoSizer (react-virtualized):
@@ -150,22 +150,20 @@ export class CourseResultsList extends React.Component<Props> {
 
 	render() {
 		return (
-			<Card>
-				<ResultsListSizer className="course-search--results_sizer">
-					<AutoSizer>
-						{({height, width}) => (
-							<TermList
-								height={height}
-								itemCount={this.props.results.length}
-								itemSize={this.getRowHeight}
-								width={width}
-							>
-								{this.renderRow}
-							</TermList>
-						)}
-					</AutoSizer>
-				</ResultsListSizer>
-			</Card>
+			<ResultsListSizer className="course-search--results_sizer">
+				<AutoSizer>
+					{({height, width}) => (
+						<TermList
+							height={height}
+							itemCount={this.props.results.length}
+							itemSize={this.getRowHeight}
+							width={width}
+						>
+							{this.renderRow}
+						</TermList>
+					)}
+				</AutoSizer>
+			</ResultsListSizer>
 		)
 	}
 }
