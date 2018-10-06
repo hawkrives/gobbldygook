@@ -106,7 +106,10 @@ class ModalCourse extends React.Component<Props> {
 }
 
 const connected = connect(
-	undefined,
+	(state, ownProps) =>
+		ownProps.studentId && ownProps.studentId in state.students
+			? {student: state.students[ownProps.studentId].present}
+			: {student: undefined},
 	{changeStudent},
 )(ModalCourse)
 
