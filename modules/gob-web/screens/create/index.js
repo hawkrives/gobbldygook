@@ -41,33 +41,6 @@ const NewStudentPage = styled(Card)`
 	width: 100%;
 
 	padding: 20px;
-
-	.introduction {
-		text-align: center;
-		width: 75%;
-		margin: 0 auto;
-	}
-
-	.header {
-		text-align: center;
-
-		h1 {
-			font-weight: 400;
-		}
-		h2 {
-			font-weight: 300;
-		}
-	}
-
-	.choices {
-		display: flex;
-		flex-flow: row wrap;
-		justify-content: space-around;
-
-		button {
-			margin-bottom: 1em;
-		}
-	}
 `
 
 export default function() {

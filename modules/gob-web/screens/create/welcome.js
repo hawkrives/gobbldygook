@@ -3,15 +3,16 @@
 import * as React from 'react'
 import {Link} from '@reach/router'
 import {RaisedButton} from '../../components/button'
+import {Choices, Header} from './components'
 
 export default function WelcomeScreen() {
 	return (
 		<>
-			<header className="header">
+			<Header>
 				<h1>Hi there!</h1>
 				<h2>I don't know anything about you. Care to enlighten me?</h2>
-			</header>
-			<section className="body">
+			</Header>
+			<section>
 				<p>We need to know:</p>
 				<ul>
 					<li>what year you entered the college,</li>
@@ -26,17 +27,9 @@ export default function WelcomeScreen() {
 					everything out manually.
 				</p>
 			</section>
-			<section className="choices">
+			<Choices>
 				<RaisedButton as={Link} to="sis">
 					Import from the SIS
-				</RaisedButton>
-				<RaisedButton
-					as={Link}
-					disabled
-					to="drive"
-					onClick={ev => ev.preventDefault()}
-				>
-					Link to Google Drive
 				</RaisedButton>
 				<RaisedButton as={Link} to="upload">
 					Upload a File
@@ -44,7 +37,7 @@ export default function WelcomeScreen() {
 				<RaisedButton as={Link} to="manual">
 					Create Manually
 				</RaisedButton>
-			</section>
+			</Choices>
 		</>
 	)
 }

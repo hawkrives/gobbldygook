@@ -1,12 +1,13 @@
 // @flow
 
 import React from 'react'
-import {FlatButton} from '../../components/button'
+import {RaisedButton} from '../../components/button'
 import cx from 'classnames'
 import {Set} from 'immutable'
 import Autosize from 'react-input-autosize'
 import {connect} from 'react-redux'
 import {Student} from '@gob/object-student'
+import {Header} from './components'
 import {
 	action as initStudent,
 	type ActionCreator as InitStudentFunc,
@@ -154,9 +155,9 @@ class ManualCreationScreen extends React.Component<Props, State> {
 
 		return (
 			<div className="manual">
-				<header className="header">
+				<Header>
 					<h1>Manually Create</h1>
-				</header>
+				</Header>
 
 				{this.state.error && (
 					<pre className="errors">{this.state.error}</pre>
@@ -207,14 +208,14 @@ class ManualCreationScreen extends React.Component<Props, State> {
 				</div>
 
 				<div className="actions">
-					<FlatButton
+					<RaisedButton
 						disabled={
 							Boolean(this.state.error) || this.state.submitted
 						}
 						onClick={this.onCreateStudent}
 					>
 						{!this.state.error ? "Let's go!" : 'Hmm…'}
-					</FlatButton>
+					</RaisedButton>
 				</div>
 			</div>
 		)

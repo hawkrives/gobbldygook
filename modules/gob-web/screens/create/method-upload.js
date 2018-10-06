@@ -2,12 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import DropZone from 'react-dropzone'
-import {FlatButton} from '../../components/button'
+import {RaisedButton} from '../../components/button'
 import List from '../../components/list'
 import {StudentSummary} from '../../modules/student/student-summary'
 import {action as initStudent} from '../../redux/students/actions/init-student'
 import {connect} from 'react-redux'
-
+import {Choices, Header} from './components'
 import './method-upload.scss'
 
 class UploadFileScreen extends React.Component {
@@ -79,9 +79,9 @@ class UploadFileScreen extends React.Component {
 
 		return (
 			<>
-				<header className="header">
+				<Header>
 					<h1>Upload a File</h1>
-				</header>
+				</Header>
 
 				<DropZone
 					ref={el => (this.dropzone = el)}
@@ -122,9 +122,11 @@ class UploadFileScreen extends React.Component {
 					))}
 				</List>
 
-				<FlatButton onClick={this.handleImportStudents}>
-					Import Students
-				</FlatButton>
+				<div className="actions">
+					<RaisedButton onClick={this.handleImportStudents}>
+						Import Students
+					</RaisedButton>
+				</div>
 			</>
 		)
 	}

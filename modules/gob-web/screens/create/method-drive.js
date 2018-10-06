@@ -1,7 +1,6 @@
 // @flow
 
 import React, {Component} from 'react'
-import ScreenToolbar from './screen-toolbar'
 
 export default class DriveLinkScreen extends Component<{}> {
 	render() {
@@ -12,8 +11,6 @@ export default class DriveLinkScreen extends Component<{}> {
 				</header>
 
 				<p>Unfortunately, this functionality has not yet been built.</p>
-
-				<ScreenToolbar onBack={() => {}} onNext={() => {}} />
 			</div>
 		)
 	}

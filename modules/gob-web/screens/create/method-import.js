@@ -17,6 +17,7 @@ import {
 } from '../../redux/students/actions/init-student'
 import {connect} from 'react-redux'
 import type {Course as CourseType, CourseError} from '@gob/types'
+import {Header} from './components'
 import './method-import.scss'
 
 import {Student, Schedule, type FabricationType} from '@gob/object-student'
@@ -105,9 +106,9 @@ class SISImportScreen extends React.Component<Props, State> {
 
 		return (
 			<>
-				<header className="header">
+				<Header>
 					<h1>Import from the SIS</h1>
-				</header>
+				</Header>
 
 				<p>
 					This is a <strong>Work-In-Progress</strong>. It may not work
