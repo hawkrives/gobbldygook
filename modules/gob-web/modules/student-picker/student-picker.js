@@ -79,6 +79,7 @@ const MakeStudentButton = styled(RaisedButton)`
 
 const FilterBox = styled.input`
 	${theme.card};
+	border: 0;
 	flex: 3 0 auto;
 	align-self: center;
 	padding: 0.25em 0.5em;

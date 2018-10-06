@@ -2,25 +2,24 @@
 
 import React from 'react'
 import fuzzysearch from 'fuzzysearch'
-import styled from 'styled-components'
-import List from '../../components/list'
+ import styled from 'styled-components'
+import {Card} from '../../components/card'
+import {PlainList} from '../../components/list'
 import StudentListItem from './student-list-item'
-import * as theme from '../../theme'
 import {type SORT_BY_ENUM} from './types'
 import {Map} from 'immutable'
 import type {State as StudentState} from '../../redux/students/reducers'
 
-const ListOfStudents = styled(List)`
-	${theme.card};
+const OuterCard = styled(Card)`
 	max-width: 35em;
 	width: 100%;
-	margin: 0 auto;
+	margin: 0 auto 2em;
 	overflow: hidden;
 `
 
 type Props = {
 	destroyStudent: string => mixed,
-	filter: string,
+	filter?: string,
 	groupBy: string,
 	isEditing: boolean,
 	sortBy: SORT_BY_ENUM,
@@ -28,10 +27,11 @@ type Props = {
 }
 
 export default function StudentList(props: Props) {
-	const {isEditing, destroyStudent, students} = props
-
 	let {
-		filter: filterText,
+		isEditing,
+		destroyStudent,
+		students = {},
+		filter: filterText = '',
 		sortBy: sortByKey,
 		// groupBy: groupByKey,
 	} = props
@@ -62,10 +62,9 @@ export default function StudentList(props: Props) {
 			/>
 		))
 
-	return <ListOfStudents type="plain">{[...filtered]}</ListOfStudents>
-}
-
-StudentList.defaultProps = {
-	filter: '',
-	students: {},
+	return (
+		<OuterCard>
+			<PlainList>{[...filtered]}</PlainList>
+		</OuterCard>
+	)
 }
