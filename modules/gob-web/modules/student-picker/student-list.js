@@ -2,7 +2,7 @@
 
 import React from 'react'
 import fuzzysearch from 'fuzzysearch'
- import styled from 'styled-components'
+import styled from 'styled-components'
 import {Card} from '../../components/card'
 import {PlainList} from '../../components/list'
 import StudentListItem from './student-list-item'
