@@ -106,6 +106,7 @@ class UploadFileScreen extends React.Component {
 								<li key={stu.payload.id}>
 									<StudentSummary
 										student={stu.payload}
+										showEditor={false}
 										showMessage={false}
 										showAvatar={false}
 										randomizeHello
