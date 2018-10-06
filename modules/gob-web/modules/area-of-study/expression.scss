@@ -98,6 +98,20 @@
 	}
 }
 
+.expression--modifier,
+.expression--reference {
+	&.used {
+		background-color: var(--green-50);
+		color: var(--text-color);
+		border: solid 1px var(--green-100);
+	}
+	&.not-used {
+		background-color: var(--pink-50);
+		color: var(--text-color);
+		border: solid 1px var(--pink-100);
+	}
+}
+
 .expression--reference {
 	display: inline;
 }

@@ -1,4 +1,4 @@
 /* area of study colors */
-$result-success-background: hsl(153, 25%, 95%);
-$result-success-color: hsl(153, 43%, 42%);
-$result-failure-color: hsl(3, 100%, 61%);
+$result-success-background: var(--green-50); //hsl(153, 25%, 95%);
+$result-success-color: var(--green-700); //hsl(153, 43%, 42%);
+$result-failure-color: var(--red-500); //hsl(3, 100%, 61%);
