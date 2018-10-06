@@ -18,4 +18,6 @@
 
 	// slightly buggy; see https://bugs.chromium.org/p/chromium/issues/detail?id=813094
 	overscroll-behavior: contain;
+
+	z-index: 100;
 }
