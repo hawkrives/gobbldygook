@@ -398,12 +398,13 @@ export class CreditSummary extends React.Component<CreditSummaryProps> {
 		}
 
 		let enoughCredits = currentCredits >= neededCredits
+		let anyCredits = neededCredits >= 0
 
 		return (
 			<p className="paragraph">
 				You have currently planned for {currentCredits} of your{' '}
 				{neededCredits} required credits.
-				{enoughCredits ? ' Good job!' : ''}
+				{enoughCredits && neededCredits ? ' Good job!' : ''}
 			</p>
 		)
 	}
