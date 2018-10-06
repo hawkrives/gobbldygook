@@ -96,22 +96,24 @@ class StudentSummary extends React.Component<Props, State> {
 		let results = await Promise.all(promises)
 
 		let canGraduate = results.every(r => r.computed === true)
-		let {creditsNeeded = 0, creditsTaken = 0} = {}
+		// let {creditsNeeded = 0, creditsTaken = 0} = {}
 
 		this.setState(() => ({
 			checking: false,
 			canGraduate,
-			creditsNeeded,
-			creditsTaken,
+			// creditsNeeded,
+			// creditsTaken,
 		}))
 	}
 
 	render() {
 		let {student, showMessage = true, showAvatar = true} = this.props
-		let {checking, canGraduate, creditsNeeded, creditsTaken} = this.state
+		let {checking, canGraduate, creditsTaken} = this.state
 		let {studies} = student
 		let gradClassName = canGraduate ? 'can-graduate' : 'cannot-graduate'
 		let message = this.state.message
+
+		let {creditsNeeded} = this.props.student
 
 		return (
 			<Card

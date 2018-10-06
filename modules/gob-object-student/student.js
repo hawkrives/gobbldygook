@@ -16,7 +16,7 @@ import {Schedule} from './schedule'
 import {getActiveCourses} from './get-active-courses'
 import {encodeStudent} from './encode-student'
 
-export type StudentType = {
+type StudentType = {
 	id: string,
 	name: string,
 	version: string,
@@ -25,6 +25,8 @@ export type StudentType = {
 	advisor: string,
 	dateLastModified: Date,
 	dateCreated: Date,
+
+	creditsNeeded: number,
 
 	studies: List<AreaQuery>,
 	schedules: OrderedMap<string, Schedule>,
@@ -50,6 +52,7 @@ const defaultValues: StudentType = {
 	fabrications: List(),
 	fulfillments: OrderedMap(),
 	settings: OrderedMap(),
+	creditsNeeded: 35,
 }
 
 const StudentRecord = Record(defaultValues)
@@ -73,6 +76,7 @@ export class Student extends StudentRecord<StudentType> {
 			advisor,
 			version,
 			name,
+			creditsNeeded,
 		} = data
 
 		if (Array.isArray(studies)) {
@@ -125,6 +129,7 @@ export class Student extends StudentRecord<StudentType> {
 				advisor,
 				version,
 				name,
+				creditsNeeded,
 			}: any),
 		)
 	}
