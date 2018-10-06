@@ -14,12 +14,13 @@ function semesterList(student: Student): Map<number, Map<string, string>> {
 	return student.schedules
 		.toList()
 		.map(s => ({
-			term: s.getTerm(),
+			year: s.year,
+			semester: s.semester,
 			id: s.id,
 			title: `${semesterName(s.semester)} – ${s.title}`,
 		}))
-		.groupBy(s => s.term)
-		.sortBy((_, term) => term)
+		.sortBy(s => `${s.year}${s.semester}`)
+		.groupBy(s => s.year)
 		.map(group => Map(group.map(s => [s.id, s.title])))
 		.toMap()
 }
@@ -72,13 +73,16 @@ class SemesterSelector extends React.Component<Props> {
 			<option value={NO_SCHEDULE}>No Schedule</option>
 		)
 
-		let options = semesterList(student).map((group, year) => (
+		let semesters = semesterList(student)
+		let options = semesters.map((group, year) => (
 			<optgroup key={year} label={expandYear(year, true, '–')}>
-				{group.map((title: string, id: string) => (
-					<option value={id} key={id}>
-						{title}
-					</option>
-				))}
+				{group
+					.map((title: string, id: string) => (
+						<option value={id} key={id}>
+							{title}
+						</option>
+					))
+					.toArray()}
 			</optgroup>
 		))
 
