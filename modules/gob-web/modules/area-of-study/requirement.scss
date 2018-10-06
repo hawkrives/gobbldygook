@@ -25,7 +25,8 @@
 }
 
 .requirement .requirement {
-	@include card();
+	border: 1px solid #e9ebeb;
+	border-radius: 4px;
 }
 
 .override-button {

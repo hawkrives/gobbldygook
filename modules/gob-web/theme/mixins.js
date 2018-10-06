@@ -14,8 +14,8 @@ export const baseCard = css`
 `
 
 export const card = css`
-	${materialShadow};
 	${baseCard};
+	box-shadow: 0 2px 4px 0 rgba(14, 30, 37, 0.12);
 `
 
 export const cardContent = `
