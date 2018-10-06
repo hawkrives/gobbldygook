@@ -65,36 +65,36 @@ class AreaOfStudy extends React.Component<Props, State> {
 	}
 
 	startRemovalConfirmation = (ev: Event) => {
-		ev.preventDefault()
+		ev.stopPropagation()
 		this.setState({confirmRemoval: true})
 	}
 
 	endRemovalConfirmation = (ev: Event) => {
-		ev.preventDefault()
+		ev.stopPropagation()
 		this.setState({confirmRemoval: false})
 	}
 
 	toggleAreaExpansion = (ev: Event) => {
-		ev.preventDefault()
+		ev.stopPropagation()
 		this.setState({isOpen: !this.state.isOpen})
 	}
 
 	addOverride = (path: string[], ev: Event) => {
-		ev.preventDefault()
+		ev.stopPropagation()
 		const codifiedPath = pathToOverride(path)
 		let s = this.props.student.setOverride(codifiedPath, true)
 		this.props.changeStudent(s)
 	}
 
 	removeOverride = (path: string[], ev: Event) => {
-		ev.preventDefault()
+		ev.stopPropagation()
 		const codifiedPath = pathToOverride(path)
 		let s = this.props.student.removeOverride(codifiedPath)
 		this.props.changeStudent(s)
 	}
 
 	toggleOverride = (path: string[], ev: Event) => {
-		ev.preventDefault()
+		ev.stopPropagation()
 		const codifiedPath = pathToOverride(path)
 
 		if (this.props.student.hasOverride(codifiedPath)) {
@@ -107,7 +107,7 @@ class AreaOfStudy extends React.Component<Props, State> {
 	}
 
 	removeArea = (ev: SyntheticEvent<HTMLButtonElement>) => {
-		ev.preventDefault()
+		ev.stopPropagation()
 		let s = this.props.student.removeArea(this.props.areaOfStudy)
 		this.props.changeStudent(s)
 	}
