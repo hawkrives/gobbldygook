@@ -4,7 +4,7 @@ import React from 'react'
 import cx from 'classnames'
 import listify from 'listify'
 import sample from 'lodash/sample'
-import {Set} from 'immutable'
+import {List} from 'immutable'
 import {connect} from 'react-redux'
 import {Card} from '../../components/card'
 import {AvatarLetter} from '../../components/avatar-letter'
@@ -320,20 +320,20 @@ export class DateSummary extends React.Component<DateSummaryProps> {
 }
 
 type DegreeSummaryProps = {
-	studies: Set<AreaQuery>,
+	studies: List<AreaQuery>,
 }
 
 export class DegreeSummary extends React.Component<DegreeSummaryProps> {
 	render() {
 		const grouped: {
-			[key: string]: Set<{type: string, name: string, revision: string}>,
+			[key: string]: List<{type: string, name: string, revision: string}>,
 		} = this.props.studies.groupBy(s => s.type).toJSON()
 
 		const {
-			degree: dS = Set(),
-			major: mS = Set(),
-			concentration: cS = Set(),
-			emphasis: eS = Set(),
+			degree: dS = List(),
+			major: mS = List(),
+			concentration: cS = List(),
+			emphasis: eS = List(),
 		} = grouped
 
 		const dCount = dS.size

@@ -26,7 +26,7 @@ export type StudentType = {
 	dateLastModified: Date,
 	dateCreated: Date,
 
-	studies: Set<AreaQuery>,
+	studies: List<AreaQuery>,
 	schedules: OrderedMap<string, Schedule>,
 	overrides: OrderedMap<string, OverrideType>,
 	fabrications: List<FabricationType>,
@@ -44,7 +44,7 @@ const defaultValues: StudentType = {
 	advisor: 'Professor Y',
 	dateLastModified: new Date(),
 	dateCreated: new Date(),
-	studies: Set(),
+	studies: List(),
 	schedules: OrderedMap(),
 	overrides: OrderedMap(),
 	fabrications: List(),
@@ -76,7 +76,7 @@ export class Student extends StudentRecord<StudentType> {
 		} = data
 
 		if (Array.isArray(studies)) {
-			studies = Set(studies)
+			studies = List(studies)
 		}
 
 		if (Array.isArray(schedules)) {
@@ -370,16 +370,26 @@ export class Student extends StudentRecord<StudentType> {
 	 * Provide a description of areas here
 	 */
 
-	get studies(): Set<AreaQuery> {
+	get studies(): List<AreaQuery> {
 		return this.get('studies')
 	}
 
 	addArea(area: AreaQuery): this {
-		return this.updateIn(['studies'], set => set.add(area))
+		return this.updateIn(['studies'], set => set.push(area))
 	}
 
 	removeArea(area: AreaQuery): this {
-		return this.updateIn(['studies'], set => set.delete(area))
+		let index = this.findAreaIndex(area)
+		if (index === -1) {
+			return this
+		}
+		return this.updateIn(['studies'], set => set.delete(index))
+	}
+
+	findAreaIndex({name, type, revision}: AreaQuery): number {
+		return this.studies.findIndex(
+			a => a.name === name && a.type === type && a.revision === revision,
+		)
 	}
 
 	hasArea({name, type, revision}: AreaQuery): boolean {

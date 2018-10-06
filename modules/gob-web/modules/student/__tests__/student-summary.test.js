@@ -10,7 +10,7 @@ import {
 	Header,
 } from '../student-summary'
 import {shallow} from 'enzyme'
-import {Set, OrderedSet} from 'immutable'
+import {List} from 'immutable'
 
 describe('CreditSummary', () => {
 	it('renders shallowly', () => {
@@ -90,7 +90,7 @@ describe('DateSummary', () => {
 })
 
 describe('DegreeSummary', () => {
-	const studies = OrderedSet([
+	const studies = List([
 		{type: 'degree', name: 'Bachelor of Science', revision: 'latest'},
 		{type: 'degree', name: 'Bachelor of Music', revision: 'latest'},
 		{type: 'degree', name: 'Bachelor of Arts', revision: 'latest'},
@@ -114,7 +114,7 @@ describe('DegreeSummary', () => {
 	])
 
 	it('renders', () => {
-		const tree = shallow(<DegreeSummary studies={Set()} />)
+		const tree = shallow(<DegreeSummary studies={List()} />)
 		expect(tree).toMatchSnapshot()
 	})
 
@@ -125,7 +125,7 @@ describe('DegreeSummary', () => {
 					it(`handles ${degreeCount} degrees, ${majorCount} majors, ${concentrationCount} concentrations, and ${emphasisCount} emphases`, () => {
 						const tree = shallow(
 							<DegreeSummary
-								studies={OrderedSet([
+								studies={List([
 									...studies
 										.filter(s => s.type === 'degree')
 										.slice(0, degreeCount),
