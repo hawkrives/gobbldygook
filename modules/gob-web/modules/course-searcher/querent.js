@@ -15,6 +15,7 @@ type Props = {
 	children: ({
 		error: ?string,
 		inProgress: boolean,
+		didSearch: boolean,
 		results: Array<string | CourseType>,
 	}) => React.Node,
 	groupBy: GROUP_BY_KEY,
@@ -24,6 +25,7 @@ type Props = {
 type State = {|
 	error: ?string,
 	inProgress: boolean,
+	didSearch: boolean,
 	results: List<CourseType>,
 	grouped: List<string | CourseType>,
 |}
@@ -36,6 +38,7 @@ export class Querent extends React.Component<Props, State> {
 		inProgress: false,
 		results: List(),
 		grouped: List(),
+		didSearch: false,
 	}
 
 	_isMounted: boolean = false
@@ -66,6 +69,7 @@ export class Querent extends React.Component<Props, State> {
 		}
 
 		if (term == null && query.length < 3) {
+			this.setState(() => ({didSearch: false}))
 			return
 		}
 
@@ -83,20 +87,20 @@ export class Querent extends React.Component<Props, State> {
 				return
 			}
 
-			this.setState(() => ({inProgress: false, results: List(payload)}))
+			this.setState(() => ({didSearch: true, inProgress: false, results: List(payload)}))
 		} catch (error) {
 			if (!this._isMounted) {
 				return
 			}
-			this.setState(() => ({inProgress: false, error: error.message}))
+			this.setState(() => ({didSearch: true, inProgress: false, error: error.message}))
 		}
 	}
 
 	render() {
-		let {error, inProgress, results} = this.state
+		let {error, inProgress, results, didSearch} = this.state
 		let {sortBy: sorting, groupBy: grouping} = this.props
 		let grouped = memSortAndGroup(results, {sorting, grouping})
 
-		return this.props.children({error, inProgress, results: grouped})
+		return this.props.children({error, inProgress, didSearch, results: grouped})
 	}
 }

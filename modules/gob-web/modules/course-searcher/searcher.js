@@ -114,7 +114,7 @@ export class CourseSearcher extends React.Component<Props, State> {
 					sortBy={sortBy}
 					term={term}
 				>
-					{({error, inProgress, results}) => {
+					{({error, inProgress, results, didSearch}) => {
 						if (error) {
 							return (
 								<Card className="course-results--notice">
@@ -132,6 +132,13 @@ export class CourseSearcher extends React.Component<Props, State> {
 						}
 
 						if (results.length === 0) {
+							if (!didSearch) {
+								return (
+									<Card className="course-results--notice">
+										Search for something!
+									</Card>
+								)
+							}
 							return (
 								<Card className="course-results--notice">
 									No Results Found
