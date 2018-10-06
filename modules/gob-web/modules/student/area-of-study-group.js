@@ -64,6 +64,7 @@ class AreaOfStudyGroup extends React.PureComponent<Props> {
 						type={this.props.type}
 						onChange={this.handleChange}
 						selections={this.props.student.studies
+							.filter(a => a.type === this.props.type)
 							.map(a => {
 								let rev = a.revision ? ` (${a.revision})` : ''
 								return {
