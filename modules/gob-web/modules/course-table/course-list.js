@@ -13,10 +13,6 @@ import type {Course as CourseType, CourseError} from '@gob/types'
 
 const courseStyles = css`
 	padding: var(--block-edge-padding) var(--semester-side-padding);
-
-	&:hover {
-		background-color: var(--gray-100);
-	}
 `
 
 const List = styled(PlainList)`
@@ -29,7 +25,7 @@ const List = styled(PlainList)`
 
 const Item = styled(ListItem)`
 	& + & {
-		border-top: solid 1px #eaeaea;
+		border-top: solid 1px var(--separator-color, #eaeaea);
 	}
 `
 

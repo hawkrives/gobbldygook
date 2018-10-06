@@ -9,8 +9,8 @@ export const materialShadow = `
 `
 
 export const baseCard = css`
-	background-color: white;
-	border-radius: ${vars.baseBorderRadius};
+	background-color: var(--background-color, white);
+	border-radius: var(--base-border-radius);
 `
 
 export const card = css`

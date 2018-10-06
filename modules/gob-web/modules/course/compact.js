@@ -2,7 +2,6 @@
 import React from 'react'
 import noop from 'lodash/noop'
 import styled from 'styled-components'
-import * as theme from '../../theme'
 import {InlineList, InlineListItem} from '../../components/list'
 import CourseTitle from './course-title'
 import {buildDeptNum} from '@gob/school-st-olaf-college'
@@ -14,9 +13,9 @@ import {consolidateOfferings} from './offerings'
 export const Container = styled.article`
 	display: block;
 
-	&:hover {
+	&:not(.fake-course):hover {
 		cursor: pointer;
-		background-color: ${theme.gray100};
+		background-color: var(--background-color-hover, rgba(10, 10, 10, 0.1));
 	}
 
 	&.is-dragging {

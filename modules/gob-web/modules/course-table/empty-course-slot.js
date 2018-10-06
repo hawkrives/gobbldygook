@@ -5,13 +5,8 @@ import FakeCourse from './fake-course'
 import styled from 'styled-components'
 
 const Course = styled(FakeCourse)`
-	color: var(--gray-500);
+	color: rgba(0, 0, 0, 0.4);
 	user-select: none;
-
-	&:hover {
-		cursor: default;
-		background-color: white !important;
-	}
 `
 
 export default function EmptyCourseSlot(props: {className: string}) {

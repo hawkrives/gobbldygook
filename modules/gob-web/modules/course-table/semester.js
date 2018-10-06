@@ -42,7 +42,17 @@ const Container = styled.div`
 		z-index: 10;
 	}
 
+	--background-color: var(--white);
+	--background-color-hover: var(--gray-200);
+	--separator-color: var(--gray-200);
+
 	&.loading {
+	}
+
+	&.invalid {
+		--background-color: var(--amber-50);
+		--background-color-hover: var(--amber-100);
+		--separator-color: var(--amber-100);
 	}
 `
 
@@ -54,6 +64,10 @@ const TitleButton = styled(FlatButton)`
 	border: 0;
 	border-radius: 0;
 	transition: 0.15s;
+
+	&:hover {
+		background-color: var(--background-color-hover, var(--gray-100));
+	}
 
 	& + & {
 		margin-left: 0.1em;
@@ -69,18 +83,18 @@ const RemoveSemesterButton = styled(TitleButton)`
 `
 
 const Header = styled.header`
-	border-bottom: ${theme.materialDivider};
+	border-bottom: solid 1px var(--separator-color, #eaeaea);
 
 	font-size: 0.85em;
 
 	display: flex;
 	flex-flow: row nowrap;
 	align-items: stretch;
-	border-top-right-radius: 2px;
-	border-top-left-radius: 2px;
-	color: var(--gray-500);
+	color: var(--header-fg-color, --gray-500);
 
 	overflow: hidden;
+
+	padding-left: var(--semester-side-padding);
 `
 
 const InfoList = styled(InlineList)`
@@ -101,7 +115,8 @@ const Title = styled(Link)`
 	flex: 1;
 	display: flex;
 	flex-direction: column;
-	padding: var(--block-edge-padding) var(--semester-side-padding);
+	padding: var(--block-edge-padding) 0;
+	padding-right: var(--semester-side-padding);
 
 	&:hover {
 		text-decoration: underline;
