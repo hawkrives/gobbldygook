@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import {List, Map, Set} from 'immutable'
+import {List, Map} from 'immutable'
 import {AreaOfStudyGroup} from './area-of-study-group'
 import {FlatButton} from '../../components/button'
 import {
@@ -50,7 +50,7 @@ export class AreaOfStudySidebar extends React.PureComponent<Props, State> {
 		)
 
 		let allAreaTypes = Map(areaTypeConstants).toList()
-		let usedAreaTypes = Set(student.studies.map(s => s.type))
+		let usedAreaTypes = new Set(student.studies.map(s => s.type))
 
 		let unusedTypes = allAreaTypes.filter(
 			type =>
