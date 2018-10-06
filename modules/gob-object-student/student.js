@@ -1,7 +1,7 @@
 // @flow
 
 import uuid from 'uuid/v4'
-import {Record, OrderedMap, Set, Map, List} from 'immutable'
+import {Record, OrderedMap, Map, List} from 'immutable'
 
 import type {
 	AreaQuery,
