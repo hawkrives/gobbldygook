@@ -72,6 +72,7 @@ export class Student extends StudentRecord<StudentType> {
 			dateCreated = now,
 			advisor,
 			version,
+			name,
 		} = data
 
 		if (Array.isArray(studies)) {
@@ -123,6 +124,7 @@ export class Student extends StudentRecord<StudentType> {
 				fabrications,
 				advisor,
 				version,
+				name,
 			}: any),
 		)
 	}
