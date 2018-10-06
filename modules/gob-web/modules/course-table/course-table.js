@@ -16,7 +16,9 @@ import {
 const Container = styled.section`
 	height: 100vh;
 	overflow: scroll;
-	padding: var(--page-edge-padding);
+	// padding: var(--page-edge-padding);
+	padding-top: var(--page-edge-padding);
+	padding-bottom: var(--page-edge-padding);
 `
 
 const AddYearButton = styled(FlatButton)`

@@ -3,7 +3,6 @@
 import React from 'react'
 import {CourseSearcher} from '../modules/course-searcher'
 import CourseRemovalBox from '../components/course-removal-box'
-import {ConnectedSidebarToolbar} from './sidebar-toolbar'
 import {Sidebar} from './sidebar'
 import {Student} from '@gob/object-student'
 import type {Undoable} from '../types'
@@ -17,19 +16,13 @@ type Props = {
 export function CourseSearcherSidebar(props: Props) {
 	let {student, navigate} = props
 
-	let boundCloseModal = () => {
-		navigate('../')
-	}
-
 	let {term} = props
 	term = term ? parseInt(term, 10) : null
 
 	return (
 		<Sidebar>
-			<ConnectedSidebarToolbar student={student} />
 			<CourseRemovalBox student={student.present} />
 			<CourseSearcher
-				onCloseSearcher={boundCloseModal}
 				studentId={student.present.id}
 				term={term}
 			/>

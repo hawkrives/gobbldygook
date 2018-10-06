@@ -27,7 +27,7 @@ const StatusSidebar = ({student}: {student: Undoable<Student>}) => (
 	<Sidebar>
 		<ConnectedSidebarToolbar
 			backTo="picker"
-			search={true}
+			search={false}
 			share={true}
 			student={student}
 		/>
@@ -55,9 +55,9 @@ const SemesterDetail = Loadable({
 const TermSidebar = ({student}: {student: Undoable<Student>}) => (
 	<Sidebar>
 		<ConnectedSidebarToolbar
-			backTo="overview"
+			backTo="picker"
 			search={false}
-			share={false}
+			share={true}
 			student={student}
 		/>
 	</Sidebar>
@@ -85,14 +85,7 @@ export default function StudentIndex(props: {
 			{({student}) => (
 				<>
 					<Router>
-						<StatusSidebar path="/" student={student} />
-
-						<SearchSidebar
-							path="/search"
-							term={params.get('term')}
-							student={student}
-							navigate={navigate}
-						/>
+						<StatusSidebar default student={student} />
 
 						<TermSidebar
 							path="/term/:term"
@@ -109,6 +102,12 @@ export default function StudentIndex(props: {
 							path="/term/:term"
 						/>
 					</Router>
+
+					<SearchSidebar
+						term={params.get('term')}
+						student={student}
+						navigate={navigate}
+					/>
 
 					{params.has('share') && (
 						<ShareStudentOverlay

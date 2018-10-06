@@ -19,7 +19,7 @@ import {Querent} from './querent'
 import './searcher.scss'
 
 type Props = {
-	onCloseSearcher: () => mixed,
+	onCloseSearcher?: () => mixed,
 	term?: ?number,
 	studentId?: string,
 }
@@ -73,13 +73,13 @@ export class CourseSearcher extends React.Component<Props, State> {
 							</>
 						)}
 					</h2>
-					<FlatButton
+					{onCloseSearcher && <FlatButton
 						className="close-sidebar"
 						title="Close Search"
 						onClick={onCloseSearcher}
 					>
 						Close
-					</FlatButton>
+					</FlatButton>}
 
 					<input
 						type="search"
