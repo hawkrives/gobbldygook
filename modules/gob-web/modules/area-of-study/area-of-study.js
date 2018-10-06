@@ -140,76 +140,6 @@ class AreaOfStudy extends React.Component<Props, State> {
 
 		let areaDetails = this.state.results
 
-		const summary = (
-			<>
-				<div className="area--summary-row">
-					<h1 className="area--title">
-						<CatalogLink slug={'' /*slug*/} name={name} />
-					</h1>
-					<span className="icons">
-						{props.showCloseButton && (
-							<FlatButton
-								className="area--remove-button"
-								onClick={this.startRemovalConfirmation}
-							>
-								<Icon>{close}</Icon>
-							</FlatButton>
-						)}
-						<Icon className="area--open-indicator">
-							{isOpen ? chevronUp : chevronDown}
-						</Icon>
-					</span>
-				</div>
-				<ProgressBar
-					className={cx('area--progress', {error: Boolean(error)})}
-					colorful={true}
-					value={progressAt}
-					max={progressOf}
-				/>
-			</>
-		)
-
-		const removalConfirmation = (
-			<div className="area--confirm-removal">
-				<p>
-					Remove <strong>{name}</strong>?
-				</p>
-				<span className="button-group">
-					<FlatButton
-						className="area--actually-remove-area"
-						onClick={this.removeArea}
-					>
-						Remove
-					</FlatButton>
-					<FlatButton onClick={this.endRemovalConfirmation}>
-						Cancel
-					</FlatButton>
-				</span>
-			</div>
-		)
-
-		let contents = null
-		if (error) {
-			contents = (
-				<p className="message area--error">
-					{error} {':('}
-				</p>
-			)
-		} else if (this.state.examining) {
-			contents = <p className="message area--loading">Loading…</p>
-		} else {
-			contents = (
-				<Requirement
-					info={(areaDetails: any)}
-					topLevel
-					onAddOverride={this.addOverride}
-					onRemoveOverride={this.removeOverride}
-					onToggleOverride={this.toggleOverride}
-					path={[this.props.areaOfStudy.type, name]}
-				/>
-			)
-		}
-
 		const className = cx('area', {
 			errored: Boolean(error),
 			loading: this.state.examining,
@@ -221,9 +151,73 @@ class AreaOfStudy extends React.Component<Props, State> {
 					className="area--summary"
 					onClick={this.toggleAreaExpansion}
 				>
-					{showConfirmRemoval ? removalConfirmation : summary}
+					<div className="area--summary-row">
+						<h1 className="area--title">
+							<CatalogLink slug={'' /*slug*/} name={name} />
+						</h1>
+						<span className="icons">
+							{props.showCloseButton && (
+								<FlatButton
+									className="area--remove-button"
+									onClick={this.startRemovalConfirmation}
+								>
+									<Icon>{close}</Icon>
+								</FlatButton>
+							)}
+							<Icon className="area--open-indicator">
+								{isOpen ? chevronUp : chevronDown}
+							</Icon>
+						</span>
+					</div>
+					<ProgressBar
+						className={cx('area--progress', {
+							error: Boolean(error),
+						})}
+						colorful={true}
+						value={progressAt}
+						max={progressOf}
+					/>
 				</div>
-				{isOpen && !showConfirmRemoval && contents}
+
+				{showConfirmRemoval && (
+					<div className="area--confirm-removal">
+						<p>
+							Remove <strong>{name}</strong>?
+						</p>
+						<span className="button-group">
+							<FlatButton
+								className="area--actually-remove-area"
+								onClick={this.removeArea}
+							>
+								Remove
+							</FlatButton>
+							<FlatButton onClick={this.endRemovalConfirmation}>
+								Cancel
+							</FlatButton>
+						</span>
+					</div>
+				)}
+
+				{error && (
+					<p className="message area--error">
+						{error} {':('}
+					</p>
+				)}
+
+				{isOpen && this.state.examining ? (
+					<p className="message area--loading">Loading…</p>
+				) : null}
+
+				{isOpen ? (
+					<Requirement
+						info={(areaDetails: any)}
+						topLevel
+						onAddOverride={this.addOverride}
+						onRemoveOverride={this.removeOverride}
+						onToggleOverride={this.toggleOverride}
+						path={[this.props.areaOfStudy.type, name]}
+					/>
+				) : null}
 			</div>
 		)
 	}
