@@ -85,9 +85,12 @@ class StudentSummary extends React.Component<Props, State> {
 	}
 
 	check = async (props: Props) => {
-		this.setState(() => ({checking: true, }))
-		await Promise.all([this.countCredits(props), this.checkGraduatability(props)])
-		this.setState(() => ({checking: false, }))
+		this.setState(() => ({checking: true}))
+		await Promise.all([
+			this.countCredits(props),
+			this.checkGraduatability(props),
+		])
+		this.setState(() => ({checking: false}))
 	}
 
 	countCredits = async (props: Props) => {
