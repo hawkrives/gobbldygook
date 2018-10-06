@@ -398,7 +398,7 @@ export class CreditSummary extends React.Component<CreditSummaryProps> {
 		}
 
 		let enoughCredits = currentCredits >= neededCredits
-		let anyCredits = neededCredits >= 0
+		let anyCredits = neededCredits > 0
 
 		return (
 			<p className="paragraph">
