@@ -80,22 +80,23 @@ class CourseTable extends React.Component<Props> {
 			</AddYearButton>
 		)
 
-		let years = schedules
-			.groupBy(s => s.year)
-			.sortBy((_, key) => key)
+		let years = schedules.groupBy(s => s.year).sortBy((_, key) => key)
+
+		let yearEls = years
 			.map((schedules, year) => (
 				<Year key={year} year={year} student={this.props.student} />
 			))
 			.toList()
 
 		if (nextAvailableYear != null) {
-			let targetIndex = nextAvailableYear - matriculation + 1
-			years = years.insert(targetIndex, nextYearButton)
+			let yearNumbers = [...years.keys(), nextAvailableYear].sort()
+			let targetIndex = yearNumbers.indexOf(nextAvailableYear)
+			yearEls = yearEls.insert(targetIndex, nextYearButton)
 		}
 
 		return (
 			<Container className={this.props.className}>
-				{years.toArray()}
+				{yearEls.toArray()}
 			</Container>
 		)
 	}
