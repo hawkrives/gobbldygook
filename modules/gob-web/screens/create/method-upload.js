@@ -7,7 +7,7 @@ import List from '../../components/list'
 import {StudentSummary} from '../../modules/student/student-summary'
 import {action as initStudent} from '../../redux/students/actions/init-student'
 import {connect} from 'react-redux'
-import {Choices, Header} from './components'
+import {Header} from './components'
 import './method-upload.scss'
 
 class UploadFileScreen extends React.Component {
