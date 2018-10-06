@@ -34,6 +34,7 @@ const Container = styled.div`
 	flex: 1 0;
 	min-width: 14em;
 	margin: var(--semester-spacing);
+	overflow: hidden;
 
 	&.can-drop {
 		cursor: copy;
