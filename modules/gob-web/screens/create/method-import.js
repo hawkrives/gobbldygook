@@ -175,7 +175,11 @@ class SISImportScreen extends React.Component<Props, State> {
 
 const StudentInfo = ({student}: {student: Student}) => (
 	<>
-		<StudentSummary student={student} showMessage={false} />
+		<StudentSummary
+			student={student}
+			showEditor={false}
+			showMessage={false}
+		/>
 
 		<ul>
 			{student.schedules
