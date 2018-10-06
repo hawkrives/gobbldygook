@@ -129,7 +129,7 @@ class StudentSummary extends React.Component<Props, State> {
 		let gradClassName = canGraduate ? 'can-graduate' : 'cannot-graduate'
 		let message = this.state.message
 
-		let {creditsNeeded} = this.props.student
+		let {creditsNeeded} = student
 
 		return (
 			<Card

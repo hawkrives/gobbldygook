@@ -142,6 +142,10 @@ export class Student extends StudentRecord<StudentType> {
 		return this.get('dateLastModified')
 	}
 
+	get creditsNeeded(): number {
+		return this.get('creditsNeeded')
+	}
+
 	/////
 
 	get name(): string {
