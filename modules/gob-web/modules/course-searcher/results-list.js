@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import {VariableSizeList as List} from 'react-window'
+import {Card} from '../../components/card'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import {DraggableCourse} from '../course'
 import {
@@ -45,11 +46,6 @@ const ResultsListSizer = styled.div`
 	// > If the parent has style 'position: static' (default value), it changes to
 	// > position: relative. It also injects a sibling div for size measuring.
 	position: relative;
-
-	background-color: white;
-	border-radius: var(--base-border-radius);
-	border: 1px solid;
-	border-color: #e5e6e9 #dfe0e4 #d0d1d5;
 
 	overflow: hidden;
 `
@@ -154,20 +150,22 @@ export class CourseResultsList extends React.Component<Props> {
 
 	render() {
 		return (
-			<ResultsListSizer className="course-search--results_sizer">
-				<AutoSizer>
-					{({height, width}) => (
-						<TermList
-							height={height}
-							itemCount={this.props.results.length}
-							itemSize={this.getRowHeight}
-							width={width}
-						>
-							{this.renderRow}
-						</TermList>
-					)}
-				</AutoSizer>
-			</ResultsListSizer>
+			<Card>
+				<ResultsListSizer className="course-search--results_sizer">
+					<AutoSizer>
+						{({height, width}) => (
+							<TermList
+								height={height}
+								itemCount={this.props.results.length}
+								itemSize={this.getRowHeight}
+								width={width}
+							>
+								{this.renderRow}
+							</TermList>
+						)}
+					</AutoSizer>
+				</ResultsListSizer>
+			</Card>
 		)
 	}
 }
