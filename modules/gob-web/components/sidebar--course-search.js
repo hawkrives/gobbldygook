@@ -3,7 +3,8 @@
 import React from 'react'
 import {CourseSearcher} from '../modules/course-searcher'
 import CourseRemovalBox from '../components/course-removal-box'
-import {ConnectedSidebarToolbar} from './sidebar'
+import {ConnectedSidebarToolbar} from './sidebar-toolbar'
+import {Sidebar} from './sidebar'
 import {Student} from '@gob/object-student'
 import type {Undoable} from '../types'
 
@@ -24,7 +25,7 @@ export function CourseSearcherSidebar(props: Props) {
 	term = term ? parseInt(term, 10) : null
 
 	return (
-		<aside>
+		<Sidebar>
 			<ConnectedSidebarToolbar student={student} />
 			<CourseRemovalBox student={student.present} />
 			<CourseSearcher
@@ -32,6 +33,6 @@ export function CourseSearcherSidebar(props: Props) {
 				studentId={student.present.id}
 				term={term}
 			/>
-		</aside>
+		</Sidebar>
 	)
 }

@@ -6,6 +6,7 @@ import Loadable from 'react-loadable'
 import {LoadingComponent} from '../../components/loading-comp'
 import {Student} from '@gob/object-student'
 import type {Undoable} from '../../types'
+import {Sidebar} from '../../components/sidebar'
 
 import StudentOverview from '../../modules/student'
 
@@ -18,12 +19,12 @@ const SearchSidebar = Loadable({
 })
 
 import CourseRemovalBox from '../../components/course-removal-box'
-import {ConnectedSidebarToolbar} from '../../components/sidebar'
+import {ConnectedSidebarToolbar} from '../../components/sidebar-toolbar'
 import {AreaOfStudySidebar} from '../../modules/student/area-of-study-sidebar'
 import {StudentSummary} from '../../modules/student/student-summary'
 
 const StatusSidebar = ({student}: {student: Undoable<Student>}) => (
-	<aside>
+	<Sidebar>
 		<ConnectedSidebarToolbar
 			backTo="picker"
 			search={true}
@@ -33,7 +34,7 @@ const StatusSidebar = ({student}: {student: Undoable<Student>}) => (
 		<CourseRemovalBox student={student.present} />
 		<StudentSummary student={student.present} />
 		<AreaOfStudySidebar student={student.present} />
-	</aside>
+	</Sidebar>
 )
 
 const CourseTable = Loadable({
@@ -52,14 +53,14 @@ const SemesterDetail = Loadable({
 })
 
 const TermSidebar = ({student}: {student: Undoable<Student>}) => (
-	<aside>
+	<Sidebar>
 		<ConnectedSidebarToolbar
 			backTo="overview"
 			search={false}
 			share={false}
 			student={student}
 		/>
-	</aside>
+	</Sidebar>
 )
 
 export default function StudentIndex(props: {
