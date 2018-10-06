@@ -404,7 +404,7 @@ export class CreditSummary extends React.Component<CreditSummaryProps> {
 			<p className="paragraph">
 				You have currently planned for {currentCredits} of your{' '}
 				{neededCredits} required credits.
-				{enoughCredits && neededCredits ? ' Good job!' : ''}
+				{anyCredits && enoughCredits ? ' Good job!' : ''}
 			</p>
 		)
 	}
