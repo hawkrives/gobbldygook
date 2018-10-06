@@ -268,7 +268,7 @@ export class Student extends StudentRecord<StudentType> {
 		let {year, semester} = args
 
 		if (year == null || semester == null) {
-			throw new Error('year and semester must both be provided')
+			console.warn('year and semester must both be provided')
 		}
 
 		let scheduleIds = this.schedules
