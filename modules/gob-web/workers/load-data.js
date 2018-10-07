@@ -15,7 +15,12 @@ const actions = {
 
 const worker = new LoadDataWorker()
 
-const memFetch: typeof fetch = mem(fetch)
+let fetchText = (...args) =>
+	fetch(...args)
+		.then(status)
+		.then(text)
+
+const memFetchText: typeof fetchText = mem(fetchText)
 
 worker.addEventListener('error', msg =>
 	console.warn('[main] received error from load-data worker:', msg),
@@ -73,10 +78,7 @@ function messageWorker(
 async function loadDataFile(url) {
 	let nonce = Date.now()
 
-	let path = await memFetch(url)
-		.then(status)
-		.then(text)
-		.then(path => path.trim())
+	let path = await memFetchText(url).then(path => path.trim())
 
 	await messageWorker({
 		type: 'load-from-info',
@@ -99,10 +101,7 @@ export async function loadDataForTerm(term: number): Promise<mixed> {
 		return
 	}
 
-	let path = await memFetch(COURSE_URL)
-		.then(status)
-		.then(text)
-		.then(path => path.trim())
+	let path = await memFetchText(COURSE_URL).then(path => path.trim())
 
 	await messageWorker({
 		type: 'load-term-data',
