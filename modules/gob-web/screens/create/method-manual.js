@@ -4,10 +4,10 @@ import React from 'react'
 import {RaisedButton} from '../../components/button'
 import cx from 'classnames'
 import {Set} from 'immutable'
-import Autosize from 'react-input-autosize'
 import {connect} from 'react-redux'
 import {Student} from '@gob/object-student'
 import {Header} from './components'
+import uniqueId from 'lodash/uniqueId'
 import {
 	action as initStudent,
 	type ActionCreator as InitStudentFunc,
@@ -124,35 +124,15 @@ class ManualCreationScreen extends React.Component<Props, State> {
 		this.props.navigate(`/student/${student.id}`)
 	}
 
+	onSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
+		event.preventDefault()
+	}
+
+	nameLabelId = `student-editor--${uniqueId()}`
+	matriculationLabelId = `student-editor--${uniqueId()}`
+	graduationLabelId = `student-editor--${uniqueId()}`
+
 	render() {
-		let nameEl = (
-			<Autosize
-				className="autosize-input"
-				value={this.state.name}
-				onChange={this.handleNameChange}
-			/>
-		)
-
-		let matriculationEl = (
-			<Autosize
-				className={cx('autosize-input', {
-					invalid: !this.state.matriculationIsValid,
-				})}
-				value={String(this.state.matriculation)}
-				onChange={this.handleMatriculationChange}
-			/>
-		)
-
-		let graduationEl = (
-			<Autosize
-				className={cx('autosize-input', {
-					invalid: !this.state.graduationIsValid,
-				})}
-				value={String(this.state.graduation)}
-				onChange={this.handleGraduationChange}
-			/>
-		)
-
 		return (
 			<div className="manual">
 				<Header>
@@ -163,12 +143,39 @@ class ManualCreationScreen extends React.Component<Props, State> {
 					<pre className="errors">{this.state.error}</pre>
 				)}
 
-				<div className="intro">
-					Hi! My name is {nameEl}.<br />I matriculated in{' '}
-					{matriculationEl}, and I plan to graduate in {graduationEl}.
-				</div>
+				<form onSubmit={this.onSubmit} className="student-editor">
+					<label htmlFor={this.nameLabelId}>Name:</label>
+					<input
+						id={this.nameLabelId}
+						onChange={this.handleNameChange}
+						onBlur={this.onSubmit}
+						value={this.state.name}
+					/>
 
-				<div className="areas">
+					<label htmlFor={this.matriculationLabelId}>
+						Matriculation:
+					</label>
+					<input
+						id={this.matriculationLabelId}
+						onChange={this.handleMatriculationChange}
+						onBlur={this.onSubmit}
+						value={this.state.matriculation}
+						type="number"
+						className={cx({
+							invalid: !this.state.matriculationIsValid,
+						})}
+					/>
+
+					<label htmlFor={this.graduationLabelId}>Graduation:</label>
+					<input
+						id={this.graduationLabelId}
+						onChange={this.handleGraduationChange}
+						onBlur={this.onSubmit}
+						value={this.state.graduation}
+						type="number"
+						className={cx({invalid: !this.state.graduationIsValid})}
+					/>
+
 					<AreaPicker
 						label="Degrees"
 						type="degree"
@@ -205,6 +212,12 @@ class ManualCreationScreen extends React.Component<Props, State> {
 						}
 						availableThrough={this.state.graduation}
 					/>
+				</form>
+
+				<div className="intro">
+					Hi! My name is {this.state.name}.<br />I matriculated in{' '}
+					{String(this.state.matriculation)}, and I plan to graduate
+					in {String(this.state.graduation)}.
 				</div>
 
 				<div className="actions">
