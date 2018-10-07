@@ -295,15 +295,21 @@ describe('destroySchedulesForTerm', () => {
 	})
 
 	it('requires both the "year" and "semester" arguments', () => {
-		let s = new Student()
-		// only year
-		expect(() => s.destroySchedulesForTerm({year: 2014})).toThrow()
-		// only semester
-		expect(() => s.destroySchedulesForTerm({semester: 3})).toThrow()
-		// both semester; good
-		expect(() =>
-			s.destroySchedulesForTerm({year: 2014, semester: 3}),
-		).not.toThrow()
+		let sched1 = new Schedule({year: 2014, semester: 1})
+		let sched2 = new Schedule({year: 2014, semester: 2})
+		let initial = new Student({
+			schedules: OrderedMap({[sched1.id]: sched1, [sched2.id]: sched2}),
+		})
+
+		let onlyYear = initial.destroySchedulesForTerm({year: 2014})
+
+		expect(onlyYear.schedules.get(sched1.id)).toBeDefined()
+		expect(onlyYear.schedules.get(sched2.id)).toBeDefined()
+
+		let onlySemester = initial.destroySchedulesForTerm({semester: 1})
+
+		expect(onlySemester.schedules.get(sched1.id)).toBeDefined()
+		expect(onlySemester.schedules.get(sched2.id)).toBeDefined()
 	})
 })
 
