@@ -1,0 +1,45 @@
+@import '../../styles/variables.scss';
+
+.manual .autosize-input > input {
+	border: 0;
+	border-bottom: 1px solid $gray-400;
+	// padding: 0 0.125em 0 0;
+	padding: 0 0.0625em 0 0.125em;
+
+	&:focus {
+		outline: 0;
+		background-color: $blue-50;
+		border-bottom-color: $blue-400;
+	}
+}
+
+.manual .invalid > input {
+	border-color: red;
+}
+
+.manual .areas {
+	display: grid;
+	grid-template-columns: max-content 1fr;
+	grid-column-gap: 1em;
+	grid-row-gap: 1em;
+	align-items: center;
+
+	label {
+		grid-column: 1;
+		text-align: right;
+	}
+	.react-select {
+		grid-column: 2;
+	}
+}
+
+.manual .intro {
+	text-align: center;
+	margin-bottom: 1em;
+}
+
+.manual .actions {
+	margin-top: 1em;
+	display: flex;
+	justify-content: center;
+}

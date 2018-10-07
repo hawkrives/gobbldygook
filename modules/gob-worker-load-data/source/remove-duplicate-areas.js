@@ -50,17 +50,15 @@ export function generateOps(allAreas: AreaOfStudy[]) {
 	// remove any that are invalid
 	// --- something about any values that aren't objects
 	const requiredKeys = ['name', 'revision', 'type']
-	const invalidAreas = filter(allAreas, area =>
+	const invalidAreas = allAreas.filter(area =>
 		requiredKeys.some(key => area[key] === undefined),
 	)
 
 	return {...ops, ...buildRemoveAreaOps(invalidAreas)}
 }
 
-export default function removeDuplicateAreas() {
-	return db
-		.store('areas')
-		.getAll()
-		.then(generateOps)
-		.then(ops => db.store('areas').batch(ops))
+export default async function removeDuplicateAreas() {
+	let allAreas = await db.store('areas').getAll()
+	let ops = generateOps(allAreas)
+	return db.store('areas').batch(ops)
 }

@@ -1,7 +1,30 @@
 // @flow
 
 import type {Course} from '@gob/types'
+
 export type {Course}
+
+import type {
+	ParsedHansonFile,
+	ParsedHansonRequirement,
+} from '@gob/hanson-format'
+export type {ParsedHansonFile, ParsedHansonRequirement}
+
+export type EvaluationResult = {
+	$type: 'requirement',
+	result?: Expression,
+	filter?: Filter,
+	'children share courses'?: boolean,
+	_checked?: boolean,
+	_result?: boolean,
+	computed?: boolean,
+	overridden?: boolean,
+	error?: string,
+	progress: {
+		of: number,
+		at: number,
+	},
+}
 
 export type OverridesPath = string[]
 export type OverridesObject = {[key: string]: any}
@@ -205,7 +228,7 @@ export type FilterWhereExpression = {
 export type FilterOfExpression = {
 	...BaseFilterExpression,
 	$filterType: 'of',
-	$of: Array<Course>,
+	$of: Array<CourseExpression>,
 }
 export type FilterExpression = FilterOfExpression | FilterWhereExpression
 

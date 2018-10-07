@@ -1,73 +1,101 @@
-@import '../../styles/variables.scss';
-@import '../../styles/mixins.scss';
-
 .student-summary {
-	@include card();
-
 	text-align: center;
-	hyphens: auto;
+	hyphens: none;
 	font-variant-numeric: oldstyle-nums tabular-nums;
 	text-shadow: 0 1px rgba(white, 0.5);
+	font-size: 0.85em;
+	padding: calc(var(--block-edge-padding) * 2);
 
 	&.cannot-graduate .graduation-message {
-		color: $deep-orange-500;
+		color: var(--deep-orange-500);
 	}
+
 	&.can-graduate .graduation-message {
-		color: $light-green-800;
+		color: var(--light-green-800);
 	}
+
 	&.can-graduate {
-		background-color: $light-green-50;
+		background-color: var(--light-green-50);
 		&::selection {
-			background-color: $light-green-900;
+			background-color: var(--light-green-900);
 		}
 	}
 
-	.content {
-		padding: $block-edge-padding * 2;
+	.paragraph {
+		margin: 0;
+	}
 
-		.paragraph {
-			margin: 0;
-		}
-
-		.paragraph + .paragraph {
-			margin-top: $block-edge-padding * 2;
-		}
+	.paragraph + .paragraph {
+		margin-top: calc(var(--block-edge-padding) * 2);
 	}
 
 	.student-summary--header {
-		color: $black;
+		color: var(--black);
 
-		margin: $block-edge-padding * 2;
-		margin-bottom: 0;
+		margin-bottom: calc(var(--block-edge-padding) * 2);
 		font-style: italic;
 		line-height: 1.6em;
 	}
 
 	.autosize-input {
-		border-bottom: 1px solid $gray-400;
-		padding: 0 0.125em 0 0;
+		input {
+			background-color: transparent;
+			border: 0;
+			border-bottom: 1px solid var(--gray-400);
+			padding: 0 0 0 0.125em;
 
-		&:focus {
-			outline: 0;
-			background-color: $blue-50;
-			border-color: $blue-500;
+			&:focus {
+				outline: 0;
+				background-color: var(--blue-50);
+				border-color: var(--blue-500);
+			}
 		}
 	}
 }
 
+.student-summary--editor {
+	display: grid;
+	grid-template-columns: max-content 1fr;
+	align-items: center;
+	grid-column-gap: 0.5em;
+	grid-row-gap: 0.5em;
+
+	padding-left: 0.5em;
+	padding-right: 0.25em;
+
+	label {
+		text-align: right;
+	}
+
+	input {
+		width: 100%;
+		border-radius: 0.2em;
+		padding: 2px 6px;
+		border: solid 1px var(--gray-300);
+
+		&:focus {
+			box-shadow: var(--blue-500) 0 0 0 1px;
+			border-color: var(--blue-500);
+			outline: 0;
+		}
+	}
+
+	margin-bottom: 1em;
+}
+
 .student-letter {
 	display: block;
-	margin: $block-edge-padding auto ($block-edge-padding * 2);
+	margin: var(--block-edge-padding) auto calc(var(--block-edge-padding) * 2);
 
 	border: solid 1px;
 	background-color: white;
 
 	&.cannot-graduate {
-		color: $deep-orange-500;
+		color: var(--deep-orange-500);
 	}
 
 	&.can-graduate {
-		color: $light-green-800;
-		box-shadow: 0 0 0 5px white, 0 0 0 6px $light-green-100;
+		color: var(--light-green-800);
+		box-shadow: 0 0 0 5px white, 0 0 0 6px var(--light-green-100);
 	}
 }

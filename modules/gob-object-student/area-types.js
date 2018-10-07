@@ -1,10 +1,6 @@
 // @flow
 
-import type {AreaOfStudyTypeEnum} from '@gob/examine-student/source/types'
-
-export const areaTypeConstants: {
-	[key: string]: AreaOfStudyTypeEnum,
-} = {
+export const areaTypeConstants: {[key: string]: string} = {
 	DEGREE: 'degree',
 	MAJOR: 'major',
 	CONCENTRATION: 'concentration',

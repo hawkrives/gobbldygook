@@ -1,3 +1,3 @@
 // @flow
 
-export {default} from './course-table-container'
+export {CourseTable as default} from './course-table'

@@ -1,481 +1,502 @@
 // @flow
 
-import findIndex from 'lodash/findIndex'
-import findKey from 'lodash/findKey'
-import map from 'lodash/map'
-import fromPairs from 'lodash/fromPairs'
-import mapValues from 'lodash/mapValues'
-import omit from 'lodash/omit'
-import reject from 'lodash/reject'
 import uuid from 'uuid/v4'
-import debug from 'debug'
-const log = debug('student-format:student')
-
-import {randomChar} from '@gob/lib'
+import {Record, OrderedMap, Map, List} from 'immutable'
 
 import type {
-	AreaOfStudyType,
 	AreaQuery,
 	OverrideType,
 	FabricationType,
 	FulfillmentType,
+	CourseType,
+	OnlyCourseLookupFunc,
 } from './types'
 
-const now = new Date()
-import {
-	Schedule,
-	type ScheduleType,
-	type HydratedScheduleType,
-} from './schedule'
+import {Schedule} from './schedule'
+import {getActiveCourses} from './get-active-courses'
+import {encodeStudent} from './encode-student'
 
-export type StudentType = {
+type StudentType = {
 	id: string,
 	name: string,
 	version: string,
-	creditsNeeded: number,
 	matriculation: number,
 	graduation: number,
 	advisor: string,
 	dateLastModified: Date,
 	dateCreated: Date,
 
-	studies: Array<AreaQuery>,
-	schedules: {[key: string]: ScheduleType},
-	overrides: {[key: string]: OverrideType},
-	fabrications: {[key: string]: FabricationType},
-	fulfillments: {[key: string]: FulfillmentType},
+	creditsNeeded: number,
 
-	settings: {[key: string]: mixed},
+	studies: List<AreaQuery>,
+	schedules: OrderedMap<string, Schedule>,
+	overrides: OrderedMap<string, OverrideType>,
+	fabrications: List<FabricationType>,
+	fulfillments: OrderedMap<string, FulfillmentType>,
+
+	settings: OrderedMap<string, mixed>,
 }
 
-export type HydratedStudentType = {
-	...$Exact<StudentType>,
-	schedules: {[key: string]: HydratedScheduleType},
-	canGraduate: boolean,
-	areas: Array<AreaOfStudyType>,
-	fulfilled: mixed,
+const defaultValues: StudentType = {
+	id: 'unknown',
+	name: 'Student X',
+	version: global.VERSION,
+	matriculation: 0,
+	graduation: 4,
+	advisor: 'Professor Y',
+	dateLastModified: new Date(),
+	dateCreated: new Date(),
+	studies: List(),
+	schedules: OrderedMap(),
+	overrides: OrderedMap(),
+	fabrications: List(),
+	fulfillments: OrderedMap(),
+	settings: OrderedMap(),
+	creditsNeeded: 35,
 }
 
-type IncomingStudent = {}
+const StudentRecord = Record(defaultValues)
 
-export function Student(data: IncomingStudent): StudentType {
-	const baseStudent = {
-		id: uuid(),
-		name: 'Student ' + randomChar(),
-		version: global.VERSION,
+export class Student extends StudentRecord<StudentType> {
+	constructor(data: {[key: $Keys<StudentType>]: mixed} = {}) {
+		const now = new Date()
 
-		creditsNeeded: 35,
+		let {
+			id = uuid(),
+			studies = [],
+			schedules = {},
+			matriculation = now.getFullYear() - 2,
+			graduation = now.getFullYear() + 2,
+			overrides = {},
+			fulfillments = {},
+			fabrications = [],
+			settings = {},
+			dateLastModified = now,
+			dateCreated = now,
+			advisor,
+			version,
+			name,
+			creditsNeeded,
+		} = data
 
-		matriculation: now.getFullYear() - 2,
-		graduation: now.getFullYear() + 2,
-		advisor: '',
-
-		dateLastModified: new Date(),
-		dateCreated: new Date(),
-
-		studies: [],
-		schedules: {},
-		overrides: {},
-		fabrications: {},
-		fulfillments: {},
-
-		settings: {},
-	}
-
-	const student = {...baseStudent, ...data}
-
-	if (Array.isArray(student.schedules)) {
-		student.schedules = fromPairs(
-			map(student.schedules, s => [
-				String(s.id),
-				{...s, id: String(s.id)},
-			]),
-		)
-	}
-
-	student.schedules = mapValues(student.schedules, Schedule)
-
-	return student
-}
-
-////////
-////////
-////////
-
-export function changeStudentName(student: StudentType, newName: string) {
-	if (student.name === newName) {
-		return student
-	}
-	return {...student, name: newName}
-}
-
-export function changeStudentAdvisor(student: StudentType, newAdvisor: string) {
-	if (student.advisor === newAdvisor) {
-		return student
-	}
-	return {...student, advisor: newAdvisor}
-}
-
-export function changeStudentCreditsNeeded(
-	student: StudentType,
-	newCreditsNeeded: number,
-) {
-	if (student.creditsNeeded === newCreditsNeeded) {
-		return student
-	}
-	return {...student, creditsNeeded: newCreditsNeeded}
-}
-
-export function changeStudentMatriculation(
-	student: StudentType,
-	newMatriculation: number,
-) {
-	if (student.matriculation === newMatriculation) {
-		return student
-	}
-	return {...student, matriculation: newMatriculation}
-}
-
-export function changeStudentGraduation(
-	student: StudentType,
-	newGraduation: number,
-) {
-	if (student.graduation === newGraduation) {
-		return student
-	}
-	return {...student, graduation: newGraduation}
-}
-
-export function changeStudentSetting(
-	student: StudentType,
-	key: string,
-	value: mixed,
-) {
-	if (student.settings && student.settings[key] === value) {
-		return student
-	}
-	return {...student, settings: {...student.settings, [key]: value}}
-}
-
-export function addScheduleToStudent(
-	student: StudentType,
-	newSchedule: ScheduleType,
-) {
-	if (student.schedules instanceof Array) {
-		throw new TypeError(
-			'addScheduleToStudent: schedules must not be an array!',
-		)
-	}
-
-	return {
-		...student,
-		schedules: {...student.schedules, [newSchedule.id]: newSchedule},
-	}
-}
-
-export function destroyScheduleFromStudent(
-	student: StudentType,
-	scheduleId: string,
-) {
-	log(`Student.destroySchedule(): removing schedule ${scheduleId}`)
-
-	if (student.schedules instanceof Array) {
-		throw new TypeError(
-			'destroyScheduleFromStudent: schedules must not be an array!',
-		)
-	}
-
-	if (!(scheduleId in student.schedules)) {
-		throw new ReferenceError(
-			`Could not find a schedule with an ID of ${scheduleId}.`,
-		)
-	}
-
-	const deadSched = student.schedules[scheduleId]
-	const schedules = omit(student.schedules, scheduleId)
-
-	if (deadSched && deadSched.active) {
-		const otherSchedKey = findKey(
-			schedules,
-			sched =>
-				sched.year === deadSched.year &&
-				sched.semester === deadSched.semester &&
-				sched.id !== deadSched.id,
-		)
-
-		/* istanbul ignore else */
-		if (otherSchedKey) {
-			schedules[otherSchedKey] = {
-				...schedules[otherSchedKey],
-				active: true,
-			}
+		if (Array.isArray(studies)) {
+			studies = List(studies)
 		}
-	}
 
-	return {...student, schedules}
-}
+		if (Array.isArray(schedules)) {
+			schedules = OrderedMap(schedules.map((s: any) => [s.id, s]))
+		} else if (!OrderedMap.isOrderedMap(schedules)) {
+			schedules = OrderedMap((schedules: any))
+		}
 
-export function addCourseToSchedule(
-	student: StudentType,
-	scheduleId: string,
-	clbid: string,
-) {
-	if (typeof clbid !== 'string') {
-		throw new TypeError('addCourse(): clbid must be a string')
-	}
+		if ((schedules: any).some(s => !(s instanceof Schedule))) {
+			schedules = (schedules: any).map(s => new Schedule(s))
+		}
 
-	if (!(scheduleId in student.schedules)) {
-		throw new ReferenceError(
-			`Could not find a schedule with an ID of ${scheduleId}.`,
+		if (Array.isArray(fabrications)) {
+			fabrications = List((fabrications: any))
+		} else if (List.isList(fabrications)) {
+			fabrications = List((fabrications: any))
+		} else {
+			fabrications = Map((fabrications: any)).toList()
+		}
+
+		if (!OrderedMap.isOrderedMap(overrides)) {
+			overrides = OrderedMap((overrides: any))
+		}
+
+		if (!OrderedMap.isOrderedMap(settings)) {
+			settings = OrderedMap((settings: any))
+		}
+
+		if (!OrderedMap.isOrderedMap(fulfillments)) {
+			fulfillments = OrderedMap((fulfillments: any))
+		}
+
+		super(
+			({
+				dateLastModified,
+				dateCreated,
+				id,
+				studies,
+				schedules,
+				matriculation,
+				graduation,
+				fulfillments,
+				settings,
+				overrides,
+				fabrications,
+				advisor,
+				version,
+				name,
+				creditsNeeded,
+			}: any),
 		)
 	}
 
-	let schedule = {...student.schedules[scheduleId]}
-
-	// If the schedule already has the course we're adding, just return the student
-	if (schedule.clbids.includes(clbid)) {
-		return student
+	get id(): string {
+		return this.get('id')
 	}
 
-	log(
-		`adding clbid ${clbid} to schedule ${schedule.id} (${schedule.year}-${
-			schedule.semester
-		}.${schedule.index})`,
-	)
-
-	schedule.clbids = [...schedule.clbids, clbid]
-
-	return {
-		...student,
-		schedules: {...student.schedules, [schedule.id]: schedule},
+	get dateLastModified(): Date {
+		return this.get('dateLastModified')
 	}
-}
 
-export function removeCourseFromSchedule(
-	student: StudentType,
-	scheduleId: string,
-	clbid: string,
-) {
-	if (typeof clbid !== 'string') {
-		throw new TypeError(
-			`removeCourse(): clbid must be a string (was ${typeof clbid})`,
+	get creditsNeeded(): number {
+		return this.get('creditsNeeded')
+	}
+
+	/////
+
+	get name(): string {
+		return this.get('name')
+	}
+
+	setName(name: string): this {
+		return this.set('name', name)
+	}
+
+	get advisor(): string {
+		return this.get('advisor')
+	}
+
+	setAdvisor(name: string): this {
+		return this.set('advisor', name)
+	}
+
+	get matriculation(): number {
+		return this.get('matriculation')
+	}
+
+	setMatriculation(year: string | number): this {
+		let newYear = typeof year === 'string' ? parseInt(year, 10) : year
+		return this.set('matriculation', newYear)
+	}
+
+	get graduation(): number {
+		return this.get('graduation')
+	}
+
+	setGraduation(year: string | number): this {
+		let newYear = typeof year === 'string' ? parseInt(year, 10) : year
+		return this.set('graduation', newYear)
+	}
+
+	get settings(): OrderedMap<string, mixed> {
+		return this.get('settings')
+	}
+
+	setSetting(key: string, value: mixed): this {
+		return this.setIn(['settings', key], value)
+	}
+
+	/////
+	/// Schedules
+	/////
+
+	/**
+	 * Provide a description of schedules here
+	 */
+
+	get schedules(): OrderedMap<string, Schedule> {
+		return this.get('schedules')
+	}
+
+	addSchedule(schedule: Schedule): this {
+		return this.setIn(['schedules', schedule.id], schedule)
+	}
+
+	getScheduleForTerm(args: {year: number, semester: number}): ?Schedule {
+		let {year, semester} = args
+		return this.schedules.find(
+			s =>
+				s.active === true && s.year === year && s.semester === semester,
 		)
 	}
 
-	if (!(scheduleId in student.schedules)) {
-		throw new ReferenceError(
-			`Could not find a schedule with an ID of ${scheduleId}.`,
+	findSchedulesForTerm(args: {
+		year: number,
+		semester: number,
+	}): List<Schedule> {
+		let {year, semester} = args
+		return this.schedules
+			.filter(s => s.year === year && s.semester === semester)
+			.toList()
+	}
+
+	destroySchedule(scheduleId: string): this {
+		let deleted = this.schedules.get(scheduleId)
+
+		if (!deleted) {
+			throw new ReferenceError(
+				`Could not find a schedule with an ID of ${scheduleId}.`,
+			)
+		}
+
+		return this.withMutations(mutable => {
+			mutable.deleteIn(['schedules', scheduleId])
+
+			if (deleted && deleted.active) {
+				let {year, semester} = deleted
+				let otherSchedKey = mutable.schedules.findKey(s =>
+					s.isSpecificTerm(year, semester),
+				)
+
+				if (otherSchedKey) {
+					mutable.setIn(['schedules', otherSchedKey, 'active'], true)
+				}
+			}
+
+			return mutable
+		})
+	}
+
+	destroySchedulesForYear(year: number): this {
+		let scheduleIds = this.schedules
+			.filter(s => s.year === year)
+			.map(s => s.id)
+			.values()
+
+		return this.withMutations(mutable => {
+			for (let id of scheduleIds) {
+				mutable.deleteIn(['schedules', id])
+			}
+		})
+	}
+
+	destroySchedulesForTerm(args: {|year: number, semester: number|}): this {
+		let {year, semester} = args
+
+		if (year == null || semester == null) {
+			console.warn('year and semester must both be provided')
+		}
+
+		let scheduleIds = this.schedules
+			.filter(s => s.isSpecificTerm(year, semester))
+			.map(s => s.id)
+			.values()
+
+		return this.withMutations(mutable => {
+			for (let id of scheduleIds) {
+				mutable.deleteIn(['schedules', id])
+			}
+		})
+	}
+
+	moveSchedule(
+		scheduleId: string,
+		{year, semester}: {year: number, semester: number},
+	): this {
+		return this.mergeIn(['schedules', scheduleId], {year, semester})
+	}
+
+	reorderSchedule(scheduleId: string, index: number): this {
+		return this.setIn(['schedules', scheduleId, 'index'], index)
+	}
+
+	renameSchedule(scheduleId: string, title: string): this {
+		return this.setIn(['schedules', scheduleId, 'title'], title)
+	}
+
+	/////
+	/// Courses, within schedules
+	/////
+
+	addCourseToSchedule(scheduleId: string, clbid: string): this {
+		let hasClbid = this.hasCourseInSchedule(scheduleId, clbid)
+
+		if (hasClbid) {
+			return this
+		}
+
+		return this.updateIn(['schedules', scheduleId, 'clbids'], ids => {
+			return ids.push(clbid)
+		})
+	}
+
+	removeCourseFromSchedule(scheduleId: string, clbid: string): this {
+		let hasClbid = this.hasCourseInSchedule(scheduleId, clbid)
+
+		if (!hasClbid) {
+			return this
+		}
+
+		return this.updateIn(['schedules', scheduleId, 'clbids'], ids => {
+			return ids.filterNot(id => id === clbid)
+		})
+	}
+
+	hasCourseInSchedule(scheduleId: string, clbid: string): boolean {
+		let list = this.getIn(['schedules', scheduleId, 'clbids'])
+		if (!list) {
+			return false
+		}
+		return list.some(id => id === clbid)
+	}
+
+	moveCourseToSchedule(args: {
+		from: string,
+		to: string,
+		clbid: string,
+	}): this {
+		let {from, to, clbid} = args
+
+		// prettier-ignore
+		return this
+			.removeCourseFromSchedule(from, clbid)
+			.addCourseToSchedule(to, clbid)
+	}
+
+	reorderCourseInSchedule(
+		scheduleId: string,
+		{clbid, index}: {clbid: string, index: number},
+	): this {
+		return this.updateIn(['schedules', scheduleId, 'clbids'], ids => {
+			if (!ids) {
+				throw new ReferenceError(
+					`Could not find a schedule with an ID of "${scheduleId}".`,
+				)
+			}
+
+			if (!ids.includes(clbid)) {
+				throw new ReferenceError(
+					`${clbid} is not in schedule "${scheduleId}"`,
+				)
+			}
+
+			index = Math.min(Math.max(0, index), ids.size)
+
+			const oldIndex = ids.indexOf(clbid)
+			return ids.delete(oldIndex).insert(index, clbid)
+		})
+	}
+
+	/////
+	/// Areas of Study
+	/////
+
+	/**
+	 * Provide a description of areas here
+	 */
+
+	get studies(): List<AreaQuery> {
+		return this.get('studies')
+	}
+
+	addArea(area: AreaQuery): this {
+		return this.updateIn(['studies'], set => set.push(area))
+	}
+
+	removeArea(area: AreaQuery): this {
+		let index = this.findAreaIndex(area)
+		if (index === -1) {
+			return this
+		}
+		return this.updateIn(['studies'], set => set.delete(index))
+	}
+
+	findAreaIndex({name, type, revision}: AreaQuery): number {
+		return this.studies.findIndex(
+			a => a.name === name && a.type === type && a.revision === revision,
 		)
 	}
 
-	let schedule = {...student.schedules[scheduleId]}
-
-	// If the schedule doesn't have the course we're removing, just return the student
-	if (!schedule.clbids.includes(clbid)) {
-		return student
-	}
-
-	log(
-		`removing clbid ${clbid} from schedule ${schedule.id} (${
-			schedule.year
-		}-${schedule.semester}.${schedule.index})`,
-	)
-
-	schedule.clbids = schedule.clbids.filter(id => id !== clbid)
-
-	return {
-		...student,
-		schedules: {...student.schedules, [schedule.id]: schedule},
-	}
-}
-
-export function moveCourseToSchedule(
-	student: StudentType,
-	{
-		fromScheduleId,
-		toScheduleId,
-		clbid,
-	}: {fromScheduleId: string, toScheduleId: string, clbid: string},
-) {
-	log(
-		`moveCourseToSchedule(): moving ${clbid} from schedule ${fromScheduleId} to schedule ${toScheduleId}`,
-	)
-
-	student = removeCourseFromSchedule(student, fromScheduleId, clbid)
-	student = addCourseToSchedule(student, toScheduleId, clbid)
-
-	return {...student}
-}
-
-export function addAreaToStudent(
-	student: StudentType,
-	areaOfStudy: AreaOfStudyType,
-) {
-	return {...student, studies: [...student.studies, areaOfStudy]}
-}
-
-export function removeAreaFromStudent(
-	student: StudentType,
-	areaQuery: AreaQuery,
-) {
-	return {...student, studies: reject(student.studies, areaQuery)}
-}
-
-export function setOverrideOnStudent(
-	student: StudentType,
-	key: string,
-	value: OverrideType,
-) {
-	return {...student, overrides: {...student.overrides, [key]: value}}
-}
-
-export function removeOverrideFromStudent(student: StudentType, key: string) {
-	let overrides = omit(student.overrides, key)
-	return {...student, overrides}
-}
-
-export function addFabricationToStudent(
-	student: StudentType,
-	fabrication: FabricationType,
-) {
-	if (!('clbid' in fabrication)) {
-		throw new ReferenceError(
-			'addFabricationToStudent: fabrications must include a clbid',
-		)
-	}
-	if (typeof fabrication.clbid !== 'string') {
-		throw new TypeError('addFabricationToStudent: clbid must be a string')
-	}
-	let fabrications = {
-		...student.fabrications,
-		[fabrication.clbid]: fabrication,
-	}
-	return {...student, fabrications}
-}
-
-export function removeFabricationFromStudent(
-	student: StudentType,
-	fabricationId: string,
-) {
-	if (typeof fabricationId !== 'string') {
-		throw new TypeError('removeCourseFromSchedule: clbid must be a string')
-	}
-	let fabrications = omit(student.fabrications, fabricationId)
-	return {...student, fabrications}
-}
-
-export function moveScheduleInStudent(
-	student: StudentType,
-	scheduleId: string,
-	{year, semester}: {year?: number, semester?: number} = {},
-): StudentType {
-	if (year === undefined && semester === undefined) {
-		throw new RangeError(
-			'moveScheduleInStudent: Either year or semester must be provided.',
-		)
-	}
-	if (year != null && typeof year !== 'number') {
-		throw new TypeError('moveScheduleInStudent: year must be a number.')
-	}
-	if (semester != null && typeof semester !== 'number') {
-		throw new TypeError('moveScheduleInStudent: semester must be a number.')
-	}
-
-	if (!(scheduleId in student.schedules)) {
-		throw new ReferenceError(
-			`moveScheduleInStudent: Could not find a schedule with an ID of "${scheduleId}".`,
+	hasArea({name, type, revision}: AreaQuery): boolean {
+		return (
+			this.studies.find(
+				a =>
+					a.name === name &&
+					a.type === type &&
+					a.revision === revision,
+			) !== undefined
 		)
 	}
 
-	let schedule = {...student.schedules[scheduleId]}
+	/////
+	/// Overrides
+	/////
 
-	if (year != null) {
-		schedule.year = year
+	/**
+	 * Provide a description of overrides here
+	 */
+
+	get overrides(): OrderedMap<string, OverrideType> {
+		return this.get('overrides')
 	}
 
-	if (semester != null) {
-		schedule.semester = semester
+	hasOverride(key: string): boolean {
+		return this.hasIn(['overrides', key])
 	}
 
-	return {
-		...student,
-		schedules: {...student.schedules, [schedule.id]: schedule},
-	}
-}
-
-export function reorderScheduleInStudent(
-	student: StudentType,
-	scheduleId: string,
-	index: number,
-) {
-	if (!(scheduleId in student.schedules)) {
-		throw new ReferenceError(
-			`reorderScheduleInStudent: Could not find a schedule with an ID of "${scheduleId}".`,
-		)
+	setOverride(key: string, value: OverrideType): this {
+		return this.setIn(['overrides', key], value)
 	}
 
-	let schedule = {...student.schedules[scheduleId], index}
-	return {
-		...student,
-		schedules: {...student.schedules, [schedule.id]: schedule},
-	}
-}
-
-export function renameScheduleInStudent(
-	student: StudentType,
-	scheduleId: string,
-	title: string,
-) {
-	if (!(scheduleId in student.schedules)) {
-		throw new ReferenceError(
-			`renameScheduleInStudent: Could not find a schedule with an ID of "${scheduleId}".`,
-		)
+	removeOverride(key: string): this {
+		return this.deleteIn(['overrides', key])
 	}
 
-	let schedule = {...student.schedules[scheduleId], title}
-	return {
-		...student,
-		schedules: {...student.schedules, [schedule.id]: schedule},
-	}
-}
+	/////
+	/// Fabrications
+	/////
 
-export function reorderCourseInSchedule(
-	student: StudentType,
-	scheduleId: string,
-	{clbid, index}: {clbid: string, index: number},
-) {
-	if (typeof clbid !== 'string') {
-		throw new TypeError('reorderCourse(): clbid must be a string')
+	/**
+	 * Provide a description of fabrications here
+	 */
+
+	get fabrications(): List<FabricationType> {
+		return this.get('fabrications')
 	}
 
-	if (!(scheduleId in student.schedules)) {
-		throw new ReferenceError(
-			`reorderCourseInSchedule: Could not find a schedule with an ID of "${scheduleId}".`,
-		)
+	addFabrication(fabrication: FabricationType): this {
+		return this.update('fabrications', list => {
+			return list.push(fabrication)
+		})
 	}
 
-	let schedule = {...student.schedules[scheduleId]}
-
-	if (index < 0) {
-		index = 0
-	} else if (index >= schedule.clbids.length) {
-		index = schedule.clbids.length - 1
+	getFabrication(fabricationId: string): ?FabricationType {
+		return this.fabrications.find(({clbid}) => clbid === fabricationId)
 	}
 
-	const oldIndex = findIndex(schedule.clbids, id => id === clbid)
-
-	if (oldIndex === -1) {
-		throw new ReferenceError(
-			`reorderCourseInSchedule: ${clbid} is not in schedule "${scheduleId}"`,
-		)
+	removeFabrication(fabricationId: string): this {
+		return this.update('fabrications', list => {
+			return list.filterNot(({clbid}) => clbid === fabricationId)
+		})
 	}
 
-	schedule.clbids = [...schedule.clbids]
-	schedule.clbids.splice(oldIndex, 1)
-	schedule.clbids.splice(index, 0, clbid)
+	/////
+	/// Fulfillments
+	/////
 
-	return {
-		...student,
-		schedules: {...student.schedules, [schedule.id]: schedule},
+	/**
+	 * Provide a description of fabrications here
+	 */
+
+	get fulfillments(): OrderedMap<string, FulfillmentType> {
+		return this.get('fulfillments')
+	}
+
+	// addFabricationToStudent(fabrication: FabricationType): this {
+	// 	return this.setIn(['fabrications', fabrication.clbid], fabrication)
+	// }
+	//
+	// removeFabricationFromStudent(fabricationId: string): this {
+	// 	return this.deleteIn(['fabrications', fabricationId])
+	// }
+
+	/////
+	/// Helpers
+	/////
+
+	activeCourses(getCourse: OnlyCourseLookupFunc): Promise<Array<CourseType>> {
+		return getActiveCourses(this, getCourse)
+	}
+
+	urlEncode(): string {
+		return encodeStudent(this)
+	}
+
+	dataUrlEncode(): string {
+		return `data:text/json;charset=utf-8,${this.urlEncode()}`
 	}
 }

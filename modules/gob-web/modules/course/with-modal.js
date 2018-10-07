@@ -1,6 +1,7 @@
 // @flow
+
 import * as React from 'react'
-import ModalCourse from './modal'
+import {ModalCourse} from './modal'
 import CompactCourse, {type Props as MiniProps} from './compact'
 
 type State = {
@@ -8,7 +9,7 @@ type State = {
 }
 
 export default class CourseWithModal extends React.PureComponent<
-	MiniProps,
+	MiniProps & {studentId?: string},
 	State,
 > {
 	state = {

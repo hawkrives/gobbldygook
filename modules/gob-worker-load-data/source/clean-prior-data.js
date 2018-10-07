@@ -4,10 +4,8 @@ import {db} from './db'
 import range from 'idb-range'
 import fromPairs from 'lodash/fromPairs'
 import map from 'lodash/map'
-import debug from 'debug'
 import getCacheStoreName from './get-cache-store-name'
 import type {InfoFileTypeEnum} from './types'
-const log = debug('worker:load-data:clean-prior-data')
 
 export function getPriorCourses(path: string) {
 	return db
@@ -30,7 +28,7 @@ export default async function cleanPriorData(
 	path: string,
 	type: InfoFileTypeEnum,
 ) {
-	log(path)
+	console.log(`cleaning ${path}`)
 
 	let operations
 	if (type === 'courses') {
@@ -38,10 +36,8 @@ export default async function cleanPriorData(
 	} else if (type === 'areas') {
 		operations = await getPriorAreas(path)
 	} else {
-		log(`"${type}" is not a valid store type`)
-		throw new TypeError(
-			`cleanPriorData: "${type}" is not a valid store type`,
-		)
+		console.warn(`"${type}" is not a valid store type`)
+		throw new TypeError(`"${type}" is not a valid store type`)
 	}
 
 	await db.store(type).batch(operations)

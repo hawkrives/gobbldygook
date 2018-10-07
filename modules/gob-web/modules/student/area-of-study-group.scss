@@ -12,12 +12,16 @@
 	.area:last-child {
 		margin-bottom: 0.15em;
 	}
+
+	.react-select {
+		margin: 0 0.5em 0.5em;
+	}
 }
 
 .area-type-heading {
 	@include heading-neutral();
 
-	font-size: 0.9em;
+	font-size: 0.765em;
 	font-weight: normal;
 	margin-top: 0.1em;
 	margin-bottom: 0.15em;
@@ -31,12 +35,12 @@
 .add-area-of-study {
 	text-decoration: underline;
 
-	padding: 0.25em ($block-edge-padding * 1.5);
+	padding: 0.25em calc(var(--block-edge-padding) * 1.5);
 	margin-left: 0.5em;
 
 	text-transform: lowercase;
 
-	color: $gray-600;
+	color: var(--gray-600);
 	border: 0;
 
 	&:hover {

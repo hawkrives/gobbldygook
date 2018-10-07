@@ -8,7 +8,8 @@ import hasOverride from './has-override'
 import isRequirementName from './is-requirement-name'
 import mapValues from 'lodash/mapValues'
 import type {
-	AreaOfStudy,
+	ParsedHansonFile,
+	ParsedHansonRequirement,
 	Requirement,
 	Course,
 	OverridesObject,
@@ -18,14 +19,8 @@ import type {
 // The overall computation is done by compute, which is in charge of computing
 // sub-requirements and such.
 export default function compute(
-	outerReq: Requirement | AreaOfStudy,
-	{
-		path,
-		courses = [],
-		overrides = {},
-		fulfillments = {},
-		dirty = new Set(),
-	}: {
+	outerReq: Requirement | ParsedHansonFile | ParsedHansonRequirement,
+	args: {
 		path: string[],
 		courses: Course[],
 		overrides: OverridesObject,
@@ -33,6 +28,13 @@ export default function compute(
 		dirty?: Set<string>,
 	},
 ) {
+	let {
+		path,
+		courses = [],
+		overrides = {},
+		fulfillments = {},
+		dirty = new Set(),
+	} = args
 	let childrenShareCourses = Boolean(outerReq['children share courses'])
 
 	let requirement: Requirement = mapValues(

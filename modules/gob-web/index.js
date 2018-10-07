@@ -25,33 +25,33 @@ loadData().catch(err => console.error(err))
 // Kick off the GUI
 log('3. 2.. 1... Blast off! 🚀')
 
-import Router from 'react-router/lib/Router'
-import history from './history'
-import routes from './routes'
+import App from './app'
 
 // Create the redux store
 import configureStore from './redux'
-import ReduxWrapper from './redux-wrapper'
+import {Provider} from 'react-redux'
+import Notifications from './modules/notifications'
 const store = configureStore()
-
-import {loadAllAreas} from './redux/areas/actions'
-store.dispatch(loadAllAreas())
 
 // for debugging
 global._dispatch = store.dispatch
 global._store = store
 
-let renderFunc = Root => {
+let renderFunc = chosenStore => {
 	let renderEl = document.getElementById('gobbldygook')
 	if (!renderEl) {
 		return
 	}
+
 	render(
-		<Root store={store}>
-			<Router history={history} routes={routes} />
-		</Root>,
+		<Provider store={chosenStore}>
+			<>
+				<App />
+				<Notifications />
+			</>
+		</Provider>,
 		renderEl,
 	)
 }
 
-renderFunc(ReduxWrapper)
+renderFunc(store)

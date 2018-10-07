@@ -1,108 +1,106 @@
 // @flow
+
 import React from 'react'
-
-import map from 'lodash/map'
-import sortBy from 'lodash/sortBy'
-import groupBy from 'lodash/groupBy'
+import {connect} from 'react-redux'
+import {Map} from 'immutable'
 import {semesterName, expandYear} from '@gob/school-st-olaf-college'
+import {Student} from '@gob/object-student'
+import {
+	changeStudent,
+	type ChangeStudentFunc,
+} from '../../redux/students/actions/change'
 
-function findSemesterList(student: ?Object) {
-	if (!student) {
-		return {}
-	}
-
-	let schedules = map(student.schedules, s => ({
-		...s,
-		title: `${semesterName(s.semester)} – ${s.title}`,
-	}))
-
-	return groupBy(
-		sortBy(schedules, [s => s.year, s => s.semester]),
-		s => s.year,
-	)
+function semesterList(student: Student): Map<number, Map<string, string>> {
+	return student.schedules
+		.toList()
+		.map(s => ({
+			year: s.year,
+			semester: s.semester,
+			id: s.id,
+			title: `${semesterName(s.semester)} – ${s.title}`,
+		}))
+		.sortBy(s => `${s.year}${s.semester}`)
+		.groupBy(s => s.year)
+		.map(group => Map(group.map(s => [s.id, s.title])))
+		.toMap()
 }
 
-const moveToSchedule = ({
-	moveCourse,
-	addCourse,
-	removeCourse,
-	scheduleId,
-	studentId,
-	clbid,
-}: {
-	moveCourse: Function,
-	addCourse: Function,
-	removeCourse: Function,
-	scheduleId: ?string,
-	studentId: ?string,
-	clbid: ?string,
-}) => {
-	if (!studentId || !scheduleId || clbid === null || clbid === undefined) {
-		return () => {}
-	}
-	return ev => {
-		const targetScheduleId = ev.target.value
-		if (targetScheduleId === '$none') {
-			return
-		} else if (targetScheduleId === '$remove') {
-			return removeCourse(studentId, scheduleId, clbid)
-		}
-
-		if (scheduleId) {
-			return moveCourse(studentId, scheduleId, targetScheduleId, clbid)
-		} else {
-			return addCourse(studentId, targetScheduleId, clbid)
-		}
-	}
-}
-
-export default function SemesterSelector({
-	scheduleId,
-	student,
-	moveCourse,
-	addCourse,
-	removeCourse,
-	clbid,
-}: {
-	addCourse: (string, string, string) => any,
-	clbid?: string,
-	moveCourse: (string, string, string, string) => any,
-	removeCourse: (string, string, string) => any,
+type Props = {
+	clbid: string,
 	scheduleId?: string,
-	student?: Object,
-}) {
-	const studentId = student ? student.id : null
-	const specialOption = scheduleId ? (
-		<option value="$remove">Remove from Schedule</option>
-	) : (
-		<option value="$none">No Schedule</option>
-	)
-
-	const options = map(findSemesterList(student), (group, year) => (
-		<optgroup key={year} label={expandYear(year, true, '–')}>
-			{map(group, schedule => (
-				<option value={schedule.id} key={schedule.id}>
-					{schedule.title}
-				</option>
-			))}
-		</optgroup>
-	))
-
-	return (
-		<select
-			value={scheduleId || 'none'}
-			disabled={!student || !clbid}
-			onChange={moveToSchedule({
-				moveCourse,
-				addCourse,
-				removeCourse,
-				scheduleId,
-				studentId,
-				clbid,
-			})}
-		>
-			{specialOption}
-			{options}
-		</select>
-	)
+	student: Student,
+	changeStudent: ChangeStudentFunc,
 }
+
+const NO_SCHEDULE: '$none' = '$none'
+const REMOVE_FROM_SCHEDULE: '$remove' = '$remove'
+
+class SemesterSelector extends React.Component<Props> {
+	moveToSchedule = ev => {
+		let {scheduleId, student, clbid} = this.props
+
+		if (!scheduleId) {
+			return
+		}
+
+		let targetScheduleId = ev.currentTarget.value
+		if (targetScheduleId === NO_SCHEDULE) {
+			return
+		}
+
+		let s = null
+		if (targetScheduleId === REMOVE_FROM_SCHEDULE) {
+			s = student.removeCourseFromSchedule(scheduleId, clbid)
+		} else if (scheduleId) {
+			s = student.moveCourseToSchedule({
+				from: scheduleId,
+				to: targetScheduleId,
+				clbid,
+			})
+		} else {
+			s = student.addCourseToSchedule(targetScheduleId, clbid)
+		}
+
+		this.props.changeStudent(s)
+	}
+
+	render() {
+		let {scheduleId, student} = this.props
+
+		let specialOption = scheduleId ? (
+			<option value={REMOVE_FROM_SCHEDULE}>Remove from Schedule</option>
+		) : (
+			<option value={NO_SCHEDULE}>No Schedule</option>
+		)
+
+		let semesters = semesterList(student)
+		let options = semesters.map((group, year) => (
+			<optgroup key={year} label={expandYear(year, true, '–')}>
+				{group
+					.map((title: string, id: string) => (
+						<option value={id} key={id}>
+							{title}
+						</option>
+					))
+					.toArray()}
+			</optgroup>
+		))
+
+		return (
+			<select
+				value={scheduleId || NO_SCHEDULE}
+				onChange={this.moveToSchedule}
+			>
+				{specialOption}
+				{[...options]}
+			</select>
+		)
+	}
+}
+
+const connected = connect(
+	undefined,
+	{changeStudent},
+)(SemesterSelector)
+
+export {connected as SemesterSelector}

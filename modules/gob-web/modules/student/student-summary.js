@@ -1,16 +1,23 @@
 // @flow
+
 import React from 'react'
 import cx from 'classnames'
 import listify from 'listify'
-import groupBy from 'lodash/groupBy'
 import sample from 'lodash/sample'
-
+import {List, Set} from 'immutable'
+import {connect} from 'react-redux'
+import {Card} from '../../components/card'
 import {AvatarLetter} from '../../components/avatar-letter'
-import ContentEditable from '../../components/content-editable'
-
-import {getActiveCourses} from '@gob/object-student'
+import {
+	changeStudent,
+	type ChangeStudentFunc,
+} from '../../redux/students/actions/change'
+import {Student, type AreaQuery} from '@gob/object-student'
+import {checkStudentAgainstArea} from '../../workers/check-student'
+import {loadArea} from '../../helpers/load-area'
+import uniqueId from 'lodash/uniqueId'
+import {getCourse} from '../../helpers/get-courses'
 import {countCredits} from '@gob/examine-student'
-import type {HydratedStudentType, AreaQuery} from '@gob/object-student'
 
 import './student-summary.scss'
 
@@ -42,65 +49,239 @@ const welcomeMessages = [
 const welcomeMessage = welcomeMessages[2]
 
 type Props = {
-	onChangeGraduation?: string => any,
-	onChangeMatriculation?: string => any,
-	onChangeName?: string => any,
 	randomizeHello?: boolean,
 	showAvatar?: boolean,
 	showMessage?: boolean,
-	student: HydratedStudentType,
+	showEditor?: boolean,
+	student: Student,
 }
 
-export class StudentSummary extends React.PureComponent<Props> {
+type State = {
+	message: string,
+	canGraduate: boolean,
+	creditsNeeded: ?number,
+	creditsTaken: ?number,
+	checking: boolean,
+}
+
+class StudentSummary extends React.Component<Props, State> {
+	state = {
+		message: this.props.randomizeHello
+			? sample(welcomeMessages)
+			: welcomeMessage,
+		checking: true,
+		canGraduate: false,
+		creditsNeeded: null,
+		creditsTaken: null,
+	}
+
+	componentDidMount() {
+		this.check(this.props)
+	}
+
+	componentDidUpdate(prevProps: Props) {
+		if (prevProps.student !== this.props.student) {
+			this.check(this.props)
+		}
+	}
+
+	check = async (props: Props) => {
+		this.setState(() => ({checking: true}))
+		await Promise.all([
+			this.countCredits(props),
+			this.checkGraduatability(props),
+		])
+		this.setState(() => ({checking: false}))
+	}
+
+	countCredits = async (props: Props) => {
+		let {student} = props
+		let {schedules, fabrications} = student
+		let promises = Set(schedules.toList().flatMap(s => s.clbids)).map(
+			clbid => getCourse({clbid}, fabrications),
+		)
+		let courses = await Promise.all(promises)
+		let credits = countCredits([...courses])
+		this.setState(() => ({creditsTaken: credits}))
+	}
+
+	checkGraduatability = async (props: Props) => {
+		let {student} = props
+
+		let areas = student.studies.map(loadArea)
+		let loadedAreas = (await Promise.all(areas))
+			.filter(({error}) => !error)
+			.map(({data}) => data)
+
+		let promises = loadedAreas.map(a => checkStudentAgainstArea(student, a))
+		let results = await Promise.all(promises)
+
+		let canGraduate = results.every(r => r.computed === true)
+		// let {creditsNeeded = 0, creditsTaken = 0} = {}
+
+		this.setState(() => ({
+			canGraduate,
+			// creditsNeeded,
+			// creditsTaken,
+		}))
+	}
+
 	render() {
-		const {
+		let {
 			student,
 			showMessage = true,
+			showEditor = true,
 			showAvatar = true,
-			randomizeHello = true,
-			...props
 		} = this.props
-		const {studies, canGraduate} = student
+		let {checking, canGraduate, creditsTaken} = this.state
+		let {studies} = student
+		let gradClassName = canGraduate ? 'can-graduate' : 'cannot-graduate'
+		let message = this.state.message
 
-		const className = canGraduate ? 'can-graduate' : 'cannot-graduate'
-
-		const currentCredits = countCredits(getActiveCourses(student))
-		const neededCredits = student.creditsNeeded
-
-		const message = randomizeHello
-			? sample(welcomeMessages)
-			: welcomeMessage
+		let {creditsNeeded} = student
 
 		return (
-			<article className={cx('student-summary', className)}>
+			<Card
+				as="article"
+				className={cx('student-summary', gradClassName, {checking})}
+			>
+				{showEditor && <ConnectedEditor student={student} />}
+
+				{showAvatar && (
+					<AvatarLetter
+						className={cx(
+							'student-letter',
+							canGraduate ? 'can-graduate' : 'cannot-graduate',
+						)}
+						value={student.name}
+					/>
+				)}
+
 				<Header
+					key={student.name}
 					canGraduate={canGraduate}
 					name={student.name}
-					onChangeName={props.onChangeName}
 					helloMessage={message}
 					showAvatar={showAvatar}
 				/>
-				<div className="content">
-					<DateSummary
-						onChangeGraduation={props.onChangeGraduation}
-						onChangeMatriculation={props.onChangeMatriculation}
-						matriculation={student.matriculation}
-						graduation={student.graduation}
-					/>
 
-					<DegreeSummary studies={studies} />
+				<DateSummary
+					matriculation={student.matriculation}
+					graduation={student.graduation}
+				/>
 
-					<CreditSummary
-						currentCredits={currentCredits}
-						neededCredits={neededCredits}
-					/>
+				<DegreeSummary studies={studies} />
 
-					{showMessage ? <Footer canGraduate={canGraduate} /> : null}
-				</div>
-			</article>
+				<CreditSummary
+					currentCredits={creditsTaken}
+					neededCredits={creditsNeeded}
+				/>
+
+				{showMessage ? <Footer canGraduate={canGraduate} /> : null}
+			</Card>
 		)
 	}
 }
+
+export {StudentSummary}
+
+type EditorProps = {
+	student: Student,
+	changeStudent: ChangeStudentFunc,
+}
+
+type EditorState = {
+	name: string,
+	matriculation: string,
+	graduation: string,
+}
+
+class Editor extends React.Component<EditorProps, EditorState> {
+	state = {
+		name: this.props.student.name,
+		matriculation: String(this.props.student.matriculation),
+		graduation: String(this.props.student.graduation),
+	}
+
+	nameLabelId = `student-editor--${uniqueId()}`
+	matriculationLabelId = `student-editor--${uniqueId()}`
+	graduationLabelId = `student-editor--${uniqueId()}`
+
+	changeName = (event: SyntheticInputEvent<HTMLInputElement>) => {
+		let val = event.currentTarget.value
+		this.setState(() => ({name: val}))
+	}
+
+	changeGraduation = (event: SyntheticInputEvent<HTMLInputElement>) => {
+		let val = event.currentTarget.value
+		this.setState(() => ({graduation: val}))
+	}
+
+	changeMatriculation = (event: SyntheticInputEvent<HTMLInputElement>) => {
+		let val = event.currentTarget.value
+		this.setState(() => ({matriculation: val}))
+	}
+
+	onSubmit = (event: SyntheticInputEvent<HTMLFormElement>) => {
+		event.preventDefault()
+
+		let {name, matriculation, graduation} = this.state
+		let s = this.props.student
+
+		if (matriculation !== s.matriculation) {
+			s = s.setMatriculation(matriculation)
+		}
+
+		if (graduation !== s.graduation) {
+			s = s.setGraduation(graduation)
+		}
+
+		if (name !== s.name) {
+			s = s.setName(name)
+		}
+
+		if (s !== this.props.student) {
+			this.props.changeStudent(s)
+		}
+	}
+
+	render() {
+		return (
+			<form onSubmit={this.onSubmit} className="student-summary--editor">
+				<label htmlFor={this.nameLabelId}>Name:</label>
+				<input
+					id={this.nameLabelId}
+					onChange={this.changeName}
+					onBlur={this.onSubmit}
+					value={this.state.name}
+				/>
+
+				<label htmlFor={this.matriculationLabelId}>
+					Matriculation:
+				</label>
+				<input
+					id={this.matriculationLabelId}
+					onChange={this.changeMatriculation}
+					onBlur={this.onSubmit}
+					value={this.state.matriculation}
+				/>
+
+				<label htmlFor={this.graduationLabelId}>Graduation:</label>
+				<input
+					id={this.graduationLabelId}
+					onChange={this.changeGraduation}
+					onBlur={this.onSubmit}
+					value={this.state.graduation}
+				/>
+			</form>
+		)
+	}
+}
+
+const ConnectedEditor = connect(
+	undefined,
+	{changeStudent},
+)(Editor)
 
 type HeaderProps = {
 	canGraduate: boolean,
@@ -110,36 +291,19 @@ type HeaderProps = {
 	showAvatar: boolean,
 }
 
-export class Header extends React.PureComponent<HeaderProps> {
+export class Header extends React.Component<HeaderProps> {
+	handleNameChange = (val: string) => {
+		console.log(val)
+		this.props.onChangeName && this.props.onChangeName(val)
+	}
+
 	render() {
 		const props = this.props
 
-		const className = props.canGraduate ? 'can-graduate' : 'cannot-graduate'
-
-		const avatar = props.showAvatar ? (
-			<AvatarLetter
-				className={cx('student-letter', className)}
-				value={props.name}
-			/>
-		) : null
-
-		const name = (
-			<ContentEditable
-				disabled={!props.onChangeName}
-				className="autosize-input"
-				onBlur={props.onChangeName}
-				value={String(props.name)}
-			/>
-		)
-
 		return (
 			<header className="student-summary--header">
-				{avatar}
-
-				<div className="intro">
-					{props.helloMessage}
-					{name}!
-				</div>
+				{props.helloMessage}
+				{String(this.props.name)}!
 			</header>
 		)
 	}
@@ -149,81 +313,60 @@ type FooterProps = {
 	canGraduate: boolean,
 }
 
-export class Footer extends React.PureComponent<FooterProps> {
-	goodGraduationMessage =
-		"It looks like you'll make it! Just follow the plan, and go over my output with your advisor a few times."
+const goodGraduationMessage =
+	"It looks like you'll make it! Just follow the plan, and go over my output with your advisor a few times."
+const badGraduationMessage =
+	"You haven't planned everything out yet. Ask your advisor if you need help fitting everything in."
 
-	badGraduationMessage =
-		"You haven't planned everything out yet. Ask your advisor if you need help fitting everything in."
-
+export class Footer extends React.Component<FooterProps> {
 	render() {
 		const msg = this.props.canGraduate
-			? this.goodGraduationMessage
-			: this.badGraduationMessage
+			? goodGraduationMessage
+			: badGraduationMessage
 
-		return <div className="paragraph graduation-message">{msg}</div>
+		return <p className="paragraph graduation-message">{msg}</p>
 	}
 }
 
 type DateSummaryProps = {
-	onChangeGraduation?: string => any,
-	onChangeMatriculation?: string => any,
 	matriculation: number,
 	graduation: number,
 }
 
-export class DateSummary extends React.PureComponent<DateSummaryProps> {
+export class DateSummary extends React.Component<DateSummaryProps> {
 	render() {
 		const props = this.props
 
-		const matriculation = (
-			<ContentEditable
-				disabled={!props.onChangeMatriculation}
-				className="autosize-input"
-				onBlur={props.onChangeMatriculation}
-				value={String(props.matriculation)}
-			/>
-		)
-
-		const graduation = (
-			<ContentEditable
-				disabled={!props.onChangeGraduation}
-				className="autosize-input"
-				onBlur={props.onChangeGraduation}
-				value={String(props.graduation)}
-			/>
-		)
-
 		return (
 			<p className="paragraph">
-				After matriculating in {matriculation}, you are planning to
-				graduate in {graduation}.
+				After matriculating in {String(props.matriculation)}, you are
+				planning to graduate in {String(props.graduation)}.
 			</p>
 		)
 	}
 }
 
 type DegreeSummaryProps = {
-	studies: Array<AreaQuery>,
+	studies: List<AreaQuery>,
 }
 
-export class DegreeSummary extends React.PureComponent<DegreeSummaryProps> {
+export class DegreeSummary extends React.Component<DegreeSummaryProps> {
 	render() {
 		const grouped: {
-			[key: string]: {+type: string, +name: string}[],
-		} = groupBy(this.props.studies, s => s.type)
+			[key: string]: List<{type: string, name: string, revision: string}>,
+		} = this.props.studies.groupBy(s => s.type).toJSON()
 
 		const {
-			degree: dS = [],
-			major: mS = [],
-			concentration: cS = [],
-			emphasis: eS = [],
+			degree: dS = List(),
+			major: mS = List(),
+			concentration: cS = List(),
+			emphasis: eS = List(),
 		} = grouped
 
-		const dCount = dS.length
-		const mCount = mS.length
-		const cCount = cS.length
-		const eCount = eS.length
+		const dCount = dS.size
+		const mCount = mS.size
+		const cCount = cS.size
+		const eCount = eS.size
 
 		const dWord = dCount === 1 ? 'degree' : 'degrees'
 		const mWord = mCount === 1 ? 'major' : 'majors'
@@ -235,10 +378,10 @@ export class DegreeSummary extends React.PureComponent<DegreeSummaryProps> {
 		const cEmph = cCount === 1 ? 'a ' : ''
 		const eEmph = eCount === 1 ? 'an ' : ''
 
-		const dList = listify(dS.map(d => d.name))
-		const mList = listify(mS.map(m => m.name))
-		const cList = listify(cS.map(c => c.name))
-		const eList = listify(eS.map(e => e.name))
+		const dList = listify([...dS.map(d => d.name)])
+		const mList = listify([...mS.map(m => m.name)])
+		const cList = listify([...cS.map(c => c.name)])
+		const eList = listify([...eS.map(e => e.name)])
 
 		return (
 			<p className="paragraph">
@@ -261,20 +404,34 @@ export class DegreeSummary extends React.PureComponent<DegreeSummaryProps> {
 }
 
 type CreditSummaryProps = {
-	currentCredits: number,
-	neededCredits: number,
+	currentCredits: ?number,
+	neededCredits: ?number,
 }
 
-export class CreditSummary extends React.PureComponent<CreditSummaryProps> {
+export class CreditSummary extends React.Component<CreditSummaryProps> {
 	render() {
-		const {currentCredits, neededCredits} = this.props
-		const enoughCredits = currentCredits >= neededCredits
+		let {currentCredits, neededCredits} = this.props
+
+		if (currentCredits == null) {
+			return null
+		}
+
+		if (neededCredits == null) {
+			return (
+				<p className="paragraph">
+					You have currently planned for {currentCredits} credits.
+				</p>
+			)
+		}
+
+		let enoughCredits = currentCredits >= neededCredits
+		let anyCredits = neededCredits > 0
 
 		return (
 			<p className="paragraph">
 				You have currently planned for {currentCredits} of your{' '}
 				{neededCredits} required credits.
-				{enoughCredits ? ' Good job!' : ''}
+				{anyCredits && enoughCredits ? ' Good job!' : ''}
 			</p>
 		)
 	}

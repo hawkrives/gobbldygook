@@ -64,14 +64,10 @@ function Requirement(props: RequirementProps) {
 		<p className="description">{info.description}</p>
 	)
 
-	const filterEl = info.filter && (
-		<div className="filter">
-			Filter: <Filter expr={info.filter} ctx={info} />
-		</div>
-	)
+	const filterEl = info.filter && <Filter expr={info.filter} ctx={info} />
 
 	const title = !topLevel && (
-		<h2 className="heading" title={info.name} onClick={props.onToggleOpen}>
+		<h2 className="heading" title={props.name} onClick={props.onToggleOpen}>
 			<span className="title">
 				{' '}
 				{props.name}

@@ -35,9 +35,7 @@ describe('removeNotification action', () => {
 		let actual = removeNotification(id, 10)
 		expect(actual.type).toBe(expectedAction.type)
 
-		let actualPayload = await actual.payload
-		let expectedPayload = await expectedAction.payload
-		expect(actualPayload).toEqual(expectedPayload)
+		expect(await actual.payload).toEqual(await expectedAction.payload)
 	})
 })
 

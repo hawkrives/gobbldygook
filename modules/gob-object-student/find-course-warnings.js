@@ -1,38 +1,32 @@
 // @flow
 
-import flatten from 'lodash/flatten'
-import compact from 'lodash/compact'
-import some from 'lodash/some'
-import zip from 'lodash/zip'
-
+import {List, Map} from 'immutable'
 import ordinal from 'ord'
 import oxford from 'listify'
 import {findTimeConflicts} from '@gob/schedule-conflicts'
 import {expandYear, semesterName} from '@gob/school-st-olaf-college'
-
-import type {Course, CourseError} from '@gob/types'
-import type {ScheduleType} from './schedule'
+import type {Course as CourseType, CourseError} from '@gob/types'
+import {Schedule} from './schedule'
 
 export type WarningTypeEnum =
 	| 'invalid-semester'
 	| 'invalid-year'
 	| 'time-conflict'
 
-export type Warning = {
+export type WarningType = {
 	warning: true,
 	type: WarningTypeEnum,
 	msg: string,
 }
 
 export function checkForInvalidYear(
-	course: Course,
+	course: CourseType,
 	scheduleYear: number,
-): ?Warning {
+	thisYear: number = new Date().getFullYear(),
+): ?WarningType {
 	if (course.semester === 9 || course.semester === undefined) {
 		return null
 	}
-
-	let thisYear = new Date().getFullYear()
 
 	if (course.year !== scheduleYear && scheduleYear <= thisYear) {
 		const yearString = expandYear(course.year, true, '–')
@@ -47,83 +41,79 @@ export function checkForInvalidYear(
 }
 
 export function checkForInvalidSemester(
-	course: Course,
+	course: CourseType,
 	scheduleSemester: number,
-): ?Warning {
-	if (course.semester === undefined) {
+): ?WarningType {
+	if (course.semester === scheduleSemester) {
 		return null
 	}
 
-	if (course.semester !== scheduleSemester) {
-		const semString = semesterName(course.semester)
-		return {
-			warning: true,
-			type: 'invalid-semester',
-			msg: `Wrong Semester (originally from ${semString})`,
-		}
+	const semString = semesterName(course.semester)
+	return {
+		warning: true,
+		type: 'invalid-semester',
+		msg: `Wrong Semester (originally from ${semString})`,
 	}
-
-	return null
 }
 
 export function checkForInvalidity(
-	courses: Array<Course>,
+	courses: List<CourseType>,
 	{year, semester}: {year: number, semester: number},
-): Array<[?Warning, ?Warning]> {
-	return courses.map(course => {
+): Map<string, List<?WarningType>> {
+	let results = courses.map(course => {
 		let invalidYear = checkForInvalidYear(course, year)
 		let invalidSemester = checkForInvalidSemester(course, semester)
-		return [invalidYear, invalidSemester]
+		return [course.clbid, List.of(invalidYear, invalidSemester)]
 	})
+
+	return Map(results)
 }
 
-export function checkForTimeConflicts(courses: Array<Course>): Array<?Warning> {
-	let conflicts = findTimeConflicts(courses)
+export function checkForTimeConflicts(
+	courses: List<CourseType>,
+): Map<string, List<?WarningType>> {
+	let results = courses
+		.zip(findTimeConflicts(courses.toArray()))
+		.map(([course, conflictSet]) => {
+			if (!conflictSet.some(Boolean)) {
+				return [course.clbid, List()]
+			}
 
-	conflicts = conflicts.map(conflictSet => {
-		if (some(conflictSet)) {
 			// +1 to the indices because humans don't 0-index lists
-			const conflicts = compact(
-				conflictSet.map(
-					(possibility, i) => (possibility === true ? i + 1 : false),
-				),
-			)
-			const conflicted = conflicts.map(i => `${i}${ordinal(i)}`)
+			let conflicts = conflictSet
+				.map((isConflict, i) => (isConflict ? i + 1 : false))
+				.filter(conflictWith => conflictWith !== false)
 
-			const conflictsStr = oxford(conflicted, {oxfordComma: true})
-			const word = conflicts.length === 1 ? 'course' : 'courses'
-			return {
+			let conflicted = conflicts.map(i => `${String(i)}${ordinal(i)}`)
+
+			let conflictsStr = oxford(conflicted, {oxfordComma: true})
+			let word = conflicts.length === 1 ? 'course' : 'courses'
+
+			let warning = {
 				warning: true,
 				type: 'time-conflict',
 				msg: `Time conflict with the ${conflictsStr} ${word}`,
 			}
-		}
 
-		return null
-	})
+			return [course.clbid, List.of(warning)]
+		})
 
-	return conflicts
+	return Map(results)
 }
 
 export function findWarnings(
-	courses: Array<Course | CourseError>,
-	schedule: ScheduleType,
-): Array<Array<?Warning>> {
+	courses: List<CourseType | CourseError>,
+	schedule: Schedule,
+): Map<string, List<WarningType>> {
 	let {year, semester} = schedule
 
-	let onlyCourses: Array<Course> = (courses.filter(
-		(c: any) => !c.error,
-	): Array<any>)
+	let noErrors: List<any> = courses.filterNot((c: any) => c.error)
+	let onlyCourses: List<CourseType> = noErrors
 
 	let warningsOfInvalidity = checkForInvalidity(onlyCourses, {year, semester})
 	let timeConflicts = checkForTimeConflicts(onlyCourses)
 
-	let nearlyMerged: Array<Array<Array<?Warning>>> = (zip(
-		warningsOfInvalidity,
-		timeConflicts,
-	): Array<any>)
-
-	let allWarnings = nearlyMerged.map(flatten)
-
-	return allWarnings
+	return Map()
+		.mergeDeep(warningsOfInvalidity, timeConflicts)
+		.map(warnings => warnings.filter(Boolean))
 }

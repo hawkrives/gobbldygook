@@ -4,10 +4,10 @@ import React from 'react'
 import uniqueId from 'lodash/uniqueId'
 
 export function LabelledSelect(props: {
-	onChange: (ev: SyntheticInputEvent<HTMLSelectElement>) => void,
+	onChange: (ev: SyntheticEvent<HTMLSelectElement>) => mixed,
 	value: string,
 	label: string,
-	options: Array<string>,
+	options: Array<[string, string]>,
 }) {
 	let {onChange, value, label, options} = props
 	let id = `labelled-select-${uniqueId()}`
@@ -17,9 +17,9 @@ export function LabelledSelect(props: {
 			<label htmlFor={id}>{label}</label>
 
 			<select id={id} value={value} onChange={onChange}>
-				{options.map(opt => (
-					<option key={opt} value={opt}>
-						{opt}
+				{options.map(([value, label]) => (
+					<option key={value} value={value}>
+						{label}
 					</option>
 				))}
 			</select>

@@ -11,6 +11,7 @@ import {
 } from '../../icons/ionicons'
 import * as theme from '../../theme'
 import type {WarningType} from '@gob/object-student'
+import {List} from 'immutable'
 
 const WarningList = styled(PlainList)`
 	font-size: 0.85em;
@@ -49,32 +50,27 @@ const icons = {
 }
 
 type Props = {
-	warnings: Array<?WarningType>,
+	warnings: List<WarningType>,
 }
 
 export default class CourseWarnings extends React.Component<Props> {
 	render() {
-		if (!this.props.warnings) {
-			return null
-		}
+		let {warnings = List()} = this.props
 
-		// $FlowFixMe at some point, flow should be able to determine that the filter will not return any nullable elements
-		let warnings: Array<WarningType> = (this.props.warnings.filter(
-			w => w && w.warning === true,
-		): Array<any>)
-
-		if (!warnings.length) {
+		if (!warnings.size) {
 			return null
 		}
 
 		return (
 			<WarningList>
-				{warnings.map(w => (
-					<WarningItem key={w.msg}>
-						<WarningIcon>{icons[w.type]}</WarningIcon>
-						<WarningMessage>{w.msg}</WarningMessage>
-					</WarningItem>
-				))}
+				{warnings
+					.map(w => (
+						<WarningItem title={w.msg} key={w.msg}>
+							<WarningIcon>{icons[w.type]}</WarningIcon>
+							<WarningMessage>{w.msg}</WarningMessage>
+						</WarningItem>
+					))
+					.toArray()}
 			</WarningList>
 		)
 	}

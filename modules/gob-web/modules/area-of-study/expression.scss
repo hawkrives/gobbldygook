@@ -7,10 +7,11 @@
 }
 
 .expression--contents {
-	display: inline-flex;
+	display: flex;
 	flex-flow: row wrap;
 	align-items: center;
 	justify-content: center;
+	flex: 1;
 }
 
 .expression--description {
@@ -94,6 +95,20 @@
 	&.evaluated .result-indicator--failure {
 		color: $result-failure-color;
 		font-weight: 600;
+	}
+}
+
+.expression--modifier,
+.expression--reference {
+	&.used {
+		background-color: var(--green-50);
+		color: var(--text-color);
+		border: solid 1px var(--green-100);
+	}
+	&.not-used {
+		background-color: var(--pink-50);
+		color: var(--text-color);
+		border: solid 1px var(--pink-100);
 	}
 }
 

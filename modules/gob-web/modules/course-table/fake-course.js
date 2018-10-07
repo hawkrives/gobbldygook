@@ -10,7 +10,7 @@ type PropTypes = {
 
 export default function FakeCourse(props: PropTypes) {
 	return (
-		<Container className={props.className}>
+		<Container className={`fake-course ${props.className}`}>
 			<Title name={props.title} />
 			<SummaryRow>{props.details || 'no details'}</SummaryRow>
 		</Container>

@@ -1,6 +1,8 @@
 @import '../../styles/variables.scss';
 
 .area {
+	font-size: 0.85em;
+
 	&.errored {
 		background-color: $red-50;
 		color: $red-900;

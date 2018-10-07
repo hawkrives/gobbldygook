@@ -1,46 +1,44 @@
 // @flow
 
 import uniqueId from 'lodash/uniqueId'
-import debug from 'debug'
 import CheckStudentWorker from './check-student.worker'
-
-import type {
-	HydratedAreaOfStudyType,
-	AreaOfStudyEvaluationError,
-	AreaOfStudyType,
-	HydratedStudentType,
-} from '@gob/object-student'
-
-const log = debug('worker:check-student:main')
+import {type ParsedHansonFile} from '@gob/hanson-format'
+import {type EvaluationResult} from '@gob/examine-student'
+import {Student} from '@gob/object-student'
+import {getOnlyCourse} from '../helpers/get-courses'
+import mem from 'mem'
+import QuickLRU from 'quick-lru'
 
 const worker = new CheckStudentWorker()
 
 worker.addEventListener('error', function(event: Event) {
-	log('received error from check-student worker:', event)
+	console.warn('received error from check-student worker:', event)
 })
 
-type Result = HydratedAreaOfStudyType | AreaOfStudyEvaluationError
-
 // Checks a student object against an area of study.
-export function checkStudentAgainstArea(
-	student: HydratedStudentType,
-	area: AreaOfStudyType,
-): Promise<Result> {
-	return new Promise(resolve => {
+async function checkStudentAgainstArea(
+	student: Student,
+	area: ParsedHansonFile,
+): Promise<EvaluationResult> {
+	return new Promise(async resolve => {
 		const sourceId = uniqueId()
 
 		// This is inside of the function so that it doesn't get unregistered too early
-		function onMessage({data}) {
-			const [resultId, type, contents] = JSON.parse(data)
+		function onMessage({data: messageData}) {
+			const {id: resultId, type, data} = JSON.parse(messageData)
 
 			if (resultId === sourceId) {
-				// $FlowFixMe flow doesn't like … unbinding this?
 				worker.removeEventListener('message', onMessage)
 
 				if (type === 'result') {
-					resolve(contents)
+					resolve(data)
 				} else if (type === 'error') {
-					resolve({_error: contents.message})
+					resolve({
+						$type: 'requirement',
+						computed: false,
+						error: data.message,
+						progress: {at: 0, of: 1},
+					})
 				}
 			}
 		}
@@ -51,6 +49,25 @@ export function checkStudentAgainstArea(
 		 * > We know that serialization/deserialization is slow. It's actually faster to
 		 * > JSON.stringify() then postMessage() a string than to postMessage() an object. :(
 		 */
-		worker.postMessage(JSON.stringify([sourceId, student, area]))
+		let courses = await student.activeCourses(getOnlyCourse)
+		let {fulfillments, overrides, name} = student
+		let msg = JSON.stringify({
+			id: sourceId,
+			area,
+			courses,
+			fulfillments,
+			overrides,
+			name,
+		})
+		worker.postMessage(msg)
 	})
 }
+
+const memoized: typeof checkStudentAgainstArea = mem(checkStudentAgainstArea, {
+	cache: new QuickLRU({maxSize: 8}),
+	cacheKey: (student: Student, area: ParsedHansonFile) =>
+		JSON.stringify([student.hashCode(), area]),
+	maxAge: 60000,
+})
+
+export {memoized as checkStudentAgainstArea}

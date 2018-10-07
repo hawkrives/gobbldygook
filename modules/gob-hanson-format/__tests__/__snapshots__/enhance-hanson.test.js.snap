@@ -1,22 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`enhanceHanson adds a "slug" key to the top-level 1`] = `
-Object {
-  "$type": "requirement",
-  "message": "have a nice day",
-  "name": "test",
-  "slug": "test",
-}
-`;
-
 exports[`enhanceHanson allows defining variables in result 1`] = `
 Object {
   "$type": "requirement",
   "Req": Object {
     "$type": "requirement",
-    "declare": Object {
-      "math-level-3": "MATH 330, 340, 344, 348, 351, 356, 364, 382, 384",
-    },
     "result": Object {
       "$count": Object {
         "$num": 1,
@@ -90,11 +78,14 @@ Object {
       "$type": "of",
     },
   },
+  "name": undefined,
   "result": Object {
     "$requirement": "Req",
     "$type": "reference",
   },
+  "revision": undefined,
   "slug": "",
+  "type": undefined,
 }
 `;
 
@@ -103,9 +94,6 @@ Object {
   "$type": "requirement",
   "Req": Object {
     "$type": "requirement",
-    "declare": Object {
-      "math-level-3": "MATH 330, 340, 344, 348, 351, 356, 364, 382, 384",
-    },
     "filter": Object {
       "$distinct": false,
       "$filterType": "of",
@@ -177,11 +165,14 @@ Object {
       "$type": "filter",
     },
   },
+  "name": undefined,
   "result": Object {
     "$requirement": "Req",
     "$type": "reference",
   },
+  "revision": undefined,
   "slug": "",
+  "type": undefined,
 }
 `;
 
@@ -198,19 +189,14 @@ Object {
       "$type": "course",
     },
   },
+  "name": undefined,
   "result": Object {
     "$requirement": "Requirement",
     "$type": "reference",
   },
+  "revision": undefined,
   "slug": "",
-}
-`;
-
-exports[`enhanceHanson marks the top-level as a "requirement" 1`] = `
-Object {
-  "$type": "requirement",
-  "message": "have a nice day",
-  "slug": "",
+  "type": undefined,
 }
 `;
 
@@ -234,11 +220,14 @@ Object {
       "$type": "filter",
     },
   },
+  "name": undefined,
   "result": Object {
     "$requirement": "Req",
     "$type": "reference",
   },
+  "revision": undefined,
   "slug": "",
+  "type": undefined,
 }
 `;
 
@@ -264,10 +253,13 @@ Object {
       "$type": "of",
     },
   },
+  "name": undefined,
   "result": Object {
     "$requirement": "Req",
     "$type": "reference",
   },
+  "revision": undefined,
   "slug": "",
+  "type": undefined,
 }
 `;

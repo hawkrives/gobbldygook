@@ -1,0 +1,28 @@
+.unused-areas {
+	margin-top: 1em;
+	display: flex;
+	align-items: baseline;
+	justify-content: flex-start;
+	font-size: 0.765em;
+	color: var(--gray-700);
+	flex-shrink: 0;
+}
+
+.unused-areas--title {
+	margin-right: 0.25em;
+	margin-left: 0.25em;
+}
+
+.unused-areas--container {
+	display: flex;
+	flex-flow: row wrap;
+}
+
+.unused-areas--button {
+	text-transform: capitalize;
+	display: inline-block;
+	text-decoration: underline;
+	color: inherit;
+
+	padding: 0.125em 0.25em;
+}

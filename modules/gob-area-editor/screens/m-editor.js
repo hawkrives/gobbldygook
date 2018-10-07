@@ -2,10 +2,15 @@
 
 import * as React from 'react'
 import styled from 'styled-components'
-import {MonacoEditor} from '../components/monaco'
+import {Controlled as CodeMirror} from 'react-codemirror2'
 import {enhanceHanson} from '@gob/hanson-format'
 import yaml from 'js-yaml'
 import Component2 from '@reach/component-component'
+
+import 'codemirror/mode/javascript/javascript'
+import 'codemirror/mode/yaml/yaml'
+import 'codemirror/lib/codemirror.css'
+import 'codemirror/theme/material.css'
 
 import stabilize from 'stabilize'
 import LZString from 'lz-string'
@@ -32,7 +37,7 @@ function replace(state) {
 	window.history.replaceState(null, null, url)
 }
 
-const StyledEditor = styled(MonacoEditor)`
+const StyledEditor = styled(CodeMirror)`
 	border: solid 1px #444;
 	border-radius: 4px;
 	margin: 1em;
@@ -54,11 +59,8 @@ const GridArea = styled.div`
 
 const DefaultEditor = props => (
 	<StyledEditor
-		theme="vs-dark"
-		width="100%"
-		height="100%"
-		options={{selectOnLineNumbers: true}}
 		{...props}
+		options={{lineNumbers: true, ...(props.options || {})}}
 	/>
 )
 
@@ -66,7 +68,13 @@ class AreaTextEditor extends React.Component<any, any> {
 	render() {
 		let {value, onChange} = this.props
 		return (
-			<DefaultEditor value={value} onChange={onChange} language="yaml" />
+			<DefaultEditor
+				value={value}
+				onBeforeChange={(editor, data, value) => {
+					onChange(value)
+				}}
+				mode="yaml"
+			/>
 		)
 	}
 }
@@ -82,9 +90,21 @@ class AreaCompiledViewer extends React.Component<any> {
 				value = JSON.stringify(data, null, 2)
 			}
 
-			return <DefaultEditor value={value} language="json" />
+			return (
+				<DefaultEditor
+					value={value}
+					options={{readOnly: true}}
+					mode={{name: 'javascript', json: true}}
+				/>
+			)
 		} catch (err) {
-			return <DefaultEditor value={err.message} language="text" />
+			return (
+				<DefaultEditor
+					value={err.message}
+					options={{readOnly: true}}
+					mode="text"
+				/>
+			)
 		}
 	}
 }
@@ -98,7 +118,6 @@ export let Editor = () => (
 		<Component2
 			initialState={{content: '', ...read()}}
 			didUpdate={({state, prevState}) => {
-				// console.log(state, nextState, prevState)
 				if (state.content !== prevState.content) {
 					replace({content: state.content})
 				}

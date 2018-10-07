@@ -1,5 +1,8 @@
+// @flow
+
 import yaml from 'js-yaml'
 import {enhanceHanson as enhance} from '@gob/hanson-format'
+import {type AreaQuery} from '@gob/object-student'
 import maxBy from 'lodash/maxBy'
 import got from 'got'
 
@@ -21,7 +24,8 @@ async function findArea({name, type, revision}) {
 	)
 
 	if (!matches.length) {
-		throw new Error('could not find area matching', {name, type, revision})
+		let ser = JSON.stringify({name, type, revision})
+		throw new Error(`could not find area matching ${ser}`)
 	}
 
 	if (!revision || revision === 'latest') {
@@ -36,28 +40,14 @@ function getArea({path}) {
 	return got(`${BASE}/${path}`).then(r => yaml.safeLoad(r.body))
 }
 
-async function loadArea({name, type, revision, source, isCustom}) {
-	let obj
-
-	if (isCustom) {
-		obj = yaml.safeLoad(source)
-	} else {
-		let foundArea = await findArea({name, type, revision})
-		if (!foundArea) {
-			throw new Error('could not find area matching', {
-				name,
-				type,
-				revision,
-			})
-		}
-		obj = await getArea(foundArea)
+async function loadArea({name, type, revision}: AreaQuery) {
+	let foundArea = await findArea({name, type, revision})
+	if (!foundArea) {
+		let ser = JSON.stringify({name, type, revision})
+		throw new Error(`could not find area matching ${ser}`)
 	}
-
-	try {
-		return enhance(obj)
-	} catch (err) {
-		console.error(`Problem enhancing area "${name}"`, err)
-	}
+	let obj = await getArea(foundArea)
+	return enhance(obj)
 }
 
 export default loadArea

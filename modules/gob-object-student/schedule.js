@@ -3,82 +3,197 @@
 import uuid from 'uuid/v4'
 import {randomChar} from '@gob/lib'
 
-import type {Warning} from './find-course-warnings'
-import type {Course, CourseError} from '@gob/types'
-
-export type ScheduleType = {
-	id: string,
-	active: boolean,
-	index: number,
-	title: string,
-	clbids: Array<string>,
-	year: number,
-	semester: number,
-	metadata: Object,
-}
-
-export type HydratedScheduleType = {
-	...$Exact<ScheduleType>,
-	courses: Array<Course | CourseError>,
-	conflicts: Array<Array<?Warning>>,
-	hasConflict: boolean,
-}
+import {List, Map, Record} from 'immutable'
+import type {
+	CourseLookupFunc,
+	OnlyCourseLookupFunc,
+	FabricationType,
+	CourseType,
+	CourseError,
+} from './types'
+import {
+	validateSchedule,
+	type Result as ValidationResult,
+} from './validate-schedule'
 
 type InputSchedule = {
 	id?: string,
 	active?: boolean,
 	index?: number,
 	title?: string,
-	clbids?: Array<number | string>,
-	year?: string | number,
-	semester?: string | number,
+	clbids?: Array<string>,
+	year?: number,
+	semester?: number,
 	metadata?: Object,
 }
 
-export function Schedule(data: InputSchedule = {}): ScheduleType {
-	const baseSchedule = {
-		id: uuid(),
-		active: false,
+type ScheduleType = {
+	id: string,
+	active: boolean,
+	index: number,
+	title: string,
+	clbids: List<string>,
+	year: number,
+	semester: number,
+	metadata: Map<string, mixed>,
+}
 
-		index: 1,
-		title: `Schedule ${randomChar().toUpperCase()}`,
+const defaultValues: ScheduleType = {
+	id: 'unknown',
+	active: false,
+	index: 1,
+	title: 'no title',
+	clbids: List(),
+	year: 0,
+	semester: 0,
+	metadata: Map(),
+}
 
-		clbids: [],
-		year: 0,
-		semester: 0,
+const ScheduleRecord = Record(defaultValues)
 
-		metadata: {},
+type ScheduleInput = {
+	[key: $Keys<ScheduleType>]: mixed,
+	year?: number,
+	semester?: number,
+	index?: number,
+	active?: boolean,
+	title?: string,
+	id?: string,
+}
+
+export class Schedule extends ScheduleRecord<ScheduleType> {
+	constructor(data: ScheduleInput = {}) {
+		let {
+			id = uuid(),
+			clbids = [],
+			metadata = {},
+			year,
+			semester,
+			active,
+			index,
+			title,
+		} = data
+
+		if (!List.isList(clbids)) {
+			clbids = List((clbids: any))
+		}
+
+		if ((clbids: any).some(id => typeof id === 'number')) {
+			clbids = (clbids: any).map(id => String(id).padStart(10, '0'))
+		}
+
+		if (!Map.isMap(metadata)) {
+			metadata = Map((metadata: any))
+		}
+
+		super({
+			year,
+			semester,
+			index,
+			active,
+			title,
+			id,
+			clbids: (clbids: any),
+			metadata: (metadata: any),
+		})
 	}
 
-	let schedule = {...baseSchedule, ...data}
-
-	let id = schedule.id
-	if (typeof id !== 'string') {
-		throw new TypeError('Schedule id must be a string.')
+	get id(): string {
+		return this.get('id')
 	}
 
-	let clbids = schedule.clbids
+	get active(): boolean {
+		return this.get('active')
+	}
+
+	get index(): number {
+		return this.get('index')
+	}
+
+	get title(): string {
+		return this.get('title')
+	}
+
+	get year(): number {
+		return this.get('year')
+	}
+
+	get semester(): number {
+		return this.get('semester')
+	}
+
+	get clbids(): List<string> {
+		return this.get('clbids')
+	}
+
+	getTerm(): number {
+		return parseInt(`${this.year}${this.semester}`, 10)
+	}
+
+	/////
+	/// Helpers
+	/////
+
+	get recommendedCredits(): number {
+		let semester = this.get('semester')
+		if (semester === 1 || semester === 3) {
+			return 4
+		}
+		return 1
+	}
+
+	async getCourses(
+		getCourse: CourseLookupFunc,
+		fabrications?: Array<FabricationType> | List<FabricationType>,
+	): Promise<List<CourseType | FabricationType | CourseError>> {
+		let term = this.getTerm()
+		let promises = this.clbids.map(clbid =>
+			getCourse({clbid, term}, fabrications),
+		)
+		return Promise.all(promises).then(List)
+	}
+
+	async getOnlyCourses(
+		getCourse: OnlyCourseLookupFunc,
+	): Promise<List<CourseType>> {
+		let term = this.getTerm()
+		let promises = this.clbids.map(clbid => getCourse({clbid, term}))
+		let results = await Promise.all(promises)
+		// remove null results
+		return List(results).filter(Boolean)
+	}
+
+	isSpecificTerm(year: number, semester: number): boolean {
+		return this.year === year && this.semester === semester
+	}
+
+	async validate(getCourse: OnlyCourseLookupFunc): Promise<ValidationResult> {
+		return validateSchedule(this, getCourse)
+	}
+}
+
+export function createSchedule(sched: InputSchedule = {}) {
+	let {
+		id = uuid(),
+		active = false,
+		index = 0,
+		title = `Schedule ${randomChar().toUpperCase()}`,
+		clbids = [],
+		year = 0,
+		semester = 0,
+		metadata = {},
+	} = sched
+
 	if (clbids.some(id => typeof id === 'number')) {
 		clbids = clbids.map(
 			id => (typeof id !== 'string' ? String(id).padStart(10, '0') : id),
 		)
 	}
 
-	let year = schedule.year
-	if (typeof year === 'string') {
-		year = parseInt(year, 10)
-	}
+	clbids = List(clbids)
+	metadata = Map(metadata)
 
-	let semester = schedule.semester
-	if (typeof semester === 'string') {
-		semester = parseInt(semester, 10)
-	}
+	let data = {id, active, index, title, clbids, metadata, year, semester}
 
-	return {
-		...(schedule: any),
-		id: id,
-		year: year,
-		semester: semester,
-		clbids: ((clbids: any): Array<string>),
-	}
+	return new Schedule(data)
 }

@@ -1,22 +1,21 @@
 // @flow
+
 import React from 'react'
-import noop from 'lodash/noop'
 import styled from 'styled-components'
 import Modal from '../../components/modal'
 import Separator from '../../components/separator'
 import {Toolbar} from '../../components/toolbar'
 import {FlatButton, RaisedButton} from '../../components/button'
-import SemesterSelector from './semester-selector'
+import {SemesterSelector} from './semester-selector'
 import ExpandedCourse from './expanded'
-import {bindActionCreators} from 'redux'
-import {connect} from 'react-redux'
-import {
-	addCourse,
-	moveCourse,
-	removeCourse,
-} from '../../redux/students/actions/courses'
 import * as theme from '../../theme'
 import type {Course as CourseType} from '@gob/types'
+import {Student} from '@gob/object-student'
+import {connect} from 'react-redux'
+import {
+	changeStudent,
+	type ChangeStudentFunc,
+} from '../../redux/students/actions/change'
 
 const ContainerModal = styled(Modal)`
 	${theme.baseCard};
@@ -31,12 +30,8 @@ const ContainerModal = styled(Modal)`
 	}
 `
 
-const VerticalSegment = `
-    padding: 0 20px;
-`
-
 const BottomToolbar = styled.div`
-	${VerticalSegment};
+	padding: 0 20px;
 	border-top: ${theme.materialDivider};
 	margin-top: 0.5em;
 	padding-top: 0.5em;
@@ -58,99 +53,65 @@ const RemoveCourseButton = styled(FlatButton)`
 `
 
 const Course = styled(ExpandedCourse)`
-	${VerticalSegment};
+	padding: 0 20px;
 `
 
-const removeFromSemester = ({
-	studentId,
-	removeCourse,
-	clbid,
-	scheduleId,
-}: {
-	studentId: ?string,
-	removeCourse: Function,
-	clbid: ?string,
-	scheduleId: ?string,
-}) => () => {
-	if (studentId && scheduleId && clbid !== null && clbid !== undefined) {
-		removeCourse(studentId, scheduleId, clbid)
-	}
+type Props = {
+	course: CourseType,
+	onClose: () => any,
+	scheduleId?: string,
+	studentId?: string,
+	student: ?Student, // redux
+	changeStudent: ChangeStudentFunc, // redux
 }
 
-function ModalCourse(props: {
-	addCourse?: () => any, // redux
-	course: CourseType, // parent
-	moveCourse?: () => any, // redux
-	onClose: () => any, // parent
-	removeCourse?: (string, string, string) => any, // redux
-	scheduleId?: string, // parent
-	student?: Object, // redux
-	studentId?: string, // parent
-}) {
-	const {
-		course,
-		student,
-		studentId,
-		scheduleId,
-		removeCourse = noop,
-		addCourse = noop,
-		moveCourse = noop,
-		onClose,
-	} = props
-
-	const showSemesterButtons = scheduleId || student
-
-	return (
-		<ContainerModal onClose={onClose} contentLabel="Course">
-			<Toolbar>
-				<Separator type="flex-spacer" flex={3} />
-				<RaisedButton onClick={onClose}>Close</RaisedButton>
-			</Toolbar>
-
-			<Course course={course} />
-
-			<BottomToolbar>
-				{showSemesterButtons ? (
-					<SemesterSelector
-						scheduleId={scheduleId}
-						student={student}
-						moveCourse={moveCourse}
-						addCourse={addCourse}
-						removeCourse={removeCourse}
-						clbid={course.clbid}
-					/>
-				) : null}
-				{showSemesterButtons ? (
-					<RemoveCourseButton
-						onClick={removeFromSemester({
-							studentId,
-							removeCourse,
-							clbid: course.clbid,
-							scheduleId,
-						})}
-					>
-						Remove Course
-					</RemoveCourseButton>
-				) : null}
-			</BottomToolbar>
-		</ContainerModal>
-	)
-}
-
-const mapState = (state, ownProps) => {
-	if (ownProps.studentId) {
-		return {
-			student: state.students[ownProps.studentId].data.present,
+class ModalCourse extends React.Component<Props> {
+	remove = () => {
+		let {student, course, scheduleId} = this.props
+		if (!student || !scheduleId) {
+			return
 		}
+		let s = student.removeCourseFromSchedule(scheduleId, course.clbid)
+		this.props.changeStudent(s)
 	}
-	return {}
+
+	render() {
+		let {course, student, scheduleId, onClose} = this.props
+
+		return (
+			<ContainerModal onClose={onClose} contentLabel="Course">
+				<Toolbar>
+					<Separator type="flex-spacer" flex={3} />
+					<RaisedButton onClick={onClose}>Close</RaisedButton>
+				</Toolbar>
+
+				<Course course={course} />
+
+				<BottomToolbar>
+					{scheduleId && student ? (
+						<SemesterSelector
+							scheduleId={scheduleId}
+							student={student}
+							clbid={course.clbid}
+						/>
+					) : null}
+					{scheduleId && student ? (
+						<RemoveCourseButton onClick={this.remove}>
+							Remove Course
+						</RemoveCourseButton>
+					) : null}
+				</BottomToolbar>
+			</ContainerModal>
+		)
+	}
 }
 
-const mapDispatch = dispatch =>
-	bindActionCreators({addCourse, moveCourse, removeCourse}, dispatch)
-
-// $FlowFixMe
-export default connect(
-	mapState,
-	mapDispatch,
+const connected = connect(
+	(state, ownProps) =>
+		ownProps.studentId && ownProps.studentId in state.students
+			? {student: state.students[ownProps.studentId].present}
+			: {student: undefined},
+	{changeStudent},
 )(ModalCourse)
+
+export {connected as ModalCourse}

@@ -1,22 +1,22 @@
 // @flow
 import React from 'react'
 import noop from 'lodash/noop'
-import styled, {css} from 'styled-components'
-import * as theme from '../../theme'
+import styled from 'styled-components'
 import {InlineList, InlineListItem} from '../../components/list'
 import CourseTitle from './course-title'
 import {buildDeptNum} from '@gob/school-st-olaf-college'
 import CourseWarnings from './warnings'
-import {to12HourTime} from '@gob/lib'
 import type {Course} from '@gob/types'
 import type {WarningType} from '@gob/object-student'
+import {consolidateOfferings} from './offerings'
+import {List} from 'immutable'
 
 export const Container = styled.article`
 	display: block;
 
-	&:hover {
+	&:not(.fake-course):hover {
 		cursor: pointer;
-		background-color: ${theme.gray100};
+		background-color: var(--background-color-hover, rgba(10, 10, 10, 0.1));
 	}
 
 	&.is-dragging {
@@ -24,17 +24,14 @@ export const Container = styled.article`
 	}
 `
 
-const Row = css`
+export const Title = styled(CourseTitle)`
 	overflow: hidden;
 	line-height: 1.35;
 `
 
-export const Title = styled(CourseTitle)`
-	${Row};
-`
-
 export const SummaryRow = styled.div`
-	${Row};
+	overflow: hidden;
+	line-height: 1.35;
 
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -63,7 +60,7 @@ const Prereqs = styled.span``
 
 export type Props = {
 	className?: string,
-	conflicts?: Array<Array<?WarningType>>,
+	conflicts?: ?List<WarningType>,
 	course: Course,
 	index?: number,
 	onClick?: Event => any,
@@ -72,20 +69,11 @@ export type Props = {
 
 export default class CompactCourse extends React.Component<Props> {
 	render() {
-		let {
-			course,
-			conflicts,
-			index,
-			onClick = noop,
-			style,
-			className,
-		} = this.props
+		let {course, conflicts, onClick = noop, style, className} = this.props
 
 		return (
 			<Container className={className} onClick={onClick} style={style}>
-				{conflicts && (
-					<CourseWarnings warnings={conflicts[index || 0]} />
-				)}
+				{conflicts && <CourseWarnings warnings={conflicts} />}
 
 				<Title
 					title={course.title}
@@ -108,11 +96,11 @@ export default class CompactCourse extends React.Component<Props> {
 					)}
 				</SummaryRow>
 				<SummaryRow>
-					{(course.offerings || []).map(({day, start, end}, i) => (
-						<span key={i}>
-							{day} {to12HourTime(start)}-{to12HourTime(end)}
-						</span>
-					))}
+					{consolidateOfferings(course.offerings || []).map(
+						offering => (
+							<span key={offering}>{offering}</span>
+						),
+					)}
 				</SummaryRow>
 			</Container>
 		)

@@ -7,20 +7,16 @@ import {DraggableCourse} from '../course'
 import {PlainList, ListItem} from '../../components/list'
 import MissingCourse from './missing-course'
 import EmptyCourseSlot from './empty-course-slot'
-import type {WarningType, HydratedScheduleType} from '@gob/object-student'
+import {type WarningType, type FabricationType} from '@gob/object-student'
+import {Map, List as IList} from 'immutable'
 import type {Course as CourseType, CourseError} from '@gob/types'
 
 const courseStyles = css`
 	padding: var(--block-edge-padding) var(--semester-side-padding);
-
-	&:hover {
-		background-color: var(--gray-100);
-	}
 `
 
 const List = styled(PlainList)`
 	min-height: 30px;
-	padding-bottom: 0.25em;
 
 	&:focus {
 		outline: 0;
@@ -28,31 +24,33 @@ const List = styled(PlainList)`
 `
 
 const Item = styled(ListItem)`
-	&:last-child {
-		border-bottom: 0;
+	& + & {
+		border-top: solid 1px var(--separator-color, #eaeaea);
 	}
 `
 
 const Missing = styled(MissingCourse)`
 	${courseStyles};
 `
+
 const Course = styled(DraggableCourse)`
 	${courseStyles};
 `
+
 const Empty = styled(EmptyCourseSlot)`
 	${courseStyles};
 `
 
 type Props = {
-	courses: Array<CourseType | CourseError>,
+	courses: Array<CourseType | CourseError | FabricationType>,
 	usedSlots: number,
-	conflicts: Array<Array<?WarningType>>,
+	warnings: Map<string, IList<WarningType>>,
 	maxSlots: number,
-	schedule: HydratedScheduleType,
+	scheduleId: string,
 	studentId: string,
 }
 
-export default function CourseList(props: Props) {
+export function CourseList(props: Props) {
 	const courseObjects = props.courses.map(
 		(course, i) =>
 			course.error ? (
@@ -62,8 +60,8 @@ export default function CourseList(props: Props) {
 					key={i}
 					index={i}
 					course={course}
-					conflicts={props.conflicts}
-					scheduleId={props.schedule.id}
+					conflicts={props.warnings.get(course.clbid)}
+					scheduleId={props.scheduleId}
 					studentId={props.studentId}
 				/>
 			),

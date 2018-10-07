@@ -1,12 +1,10 @@
 // @flow
 
-import debug from 'debug'
-import round from 'lodash/round'
+import prettyMs from 'pretty-ms'
 import present from 'present'
 import {stringifyError} from '@gob/lib'
-import {checkStudentAgainstArea} from '@gob/worker-check-student'
+import {checkAgainstArea} from '@gob/worker-check-student'
 import {IS_WORKER} from './lib'
-const log = debug('worker:check-student:listener')
 
 declare var self: DedicatedWorkerGlobalScope
 
@@ -17,19 +15,19 @@ function main({data}) {
 	// > We know that serialization/deserialization is slow. It's actually faster to
 	// > JSON.stringify() then postMessage() a string than to postMessage() an object. :(
 
-	const [id, student, area] = JSON.parse(data)
-	log('received message:', id, student, area)
+	const {id, area, courses, fulfillments, overrides, name} = JSON.parse(data)
+	// console.log('received message:', id, student, area)
 
-	checkStudentAgainstArea(student, area)
-		.then(result => {
-			self.postMessage(JSON.stringify([id, 'result', result]))
-			const taken = round(present() - start)
-			console.log(`(${student.name}, ${area.name}) took ${taken} ms`)
-		})
-		.catch(err => {
-			self.postMessage(JSON.stringify([id, 'error', stringifyError(err)]))
-			console.warn(`(${student.name}, ${area.name})`, err)
-		})
+	try {
+		let result = checkAgainstArea(area, {courses, fulfillments, overrides})
+		self.postMessage(JSON.stringify({id, type: 'result', data: result}))
+		const taken = prettyMs(present() - start)
+		console.log(`(${name}, ${area.name}) took ${taken}`)
+	} catch (error) {
+		let err = stringifyError(error)
+		self.postMessage(JSON.stringify({id, type: 'error', data: err}))
+		console.warn(`(${name}, ${area.name})`, error)
+	}
 }
 
 if (IS_WORKER) {

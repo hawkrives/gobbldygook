@@ -1,16 +1,9 @@
 // @flow
 import uniq from 'lodash/uniq'
-import map from 'lodash/map'
 import sortBy from 'lodash/sortBy'
 import max from 'lodash/max'
-import includes from 'lodash/includes'
 import {findMissingNumber} from '@gob/lib'
-
-type Schedule = {
-	id: any,
-	year: number,
-	semester: number,
-}
+import {Schedule} from '@gob/object-student'
 
 /**
  * Takes a list of schedules and finds the first open year.
@@ -24,17 +17,17 @@ type Schedule = {
  * @returns {Number} - the first available semester slot
  */
 export function findFirstAvailableYear(
-	schedules: Schedule[],
+	schedules: Array<Schedule>,
 	matriculation: number,
 ) {
-	if (schedules && schedules.length === 0 && matriculation === undefined) {
+	if (schedules && schedules.length === 0 && matriculation == null) {
 		return new Date().getFullYear()
 	}
 
-	let years = map(schedules, s => s.year)
+	let years = schedules.map(s => s.year)
 
 	// put the matriculation year at the front to give a starting point
-	if (matriculation !== undefined && !includes(years, matriculation)) {
+	if (matriculation != null && !years.includes(matriculation)) {
 		years.unshift(matriculation - 1)
 	}
 

@@ -1,5 +1,5 @@
 // @flow
-import some from 'lodash/some'
+
 import compareCourseToCourse from './compare-course-to-course'
 import type {Course} from './types'
 
@@ -11,5 +11,5 @@ import type {Course} from './types'
  * @returns {Boolean} - if the course was found or not
  */
 export default function checkForCourse(query: Course, courses: Course[]) {
-	return some(courses, course => compareCourseToCourse(query, course))
+	return courses.some(course => compareCourseToCourse(query, course))
 }

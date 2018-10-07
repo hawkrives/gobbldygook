@@ -1,3 +1,3 @@
 // @flow
 
-export {default} from './course-searcher-container'
+export {CourseSearcher} from './searcher'

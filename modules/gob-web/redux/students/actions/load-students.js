@@ -1,7 +1,5 @@
-import map from 'lodash/map'
 import uniq from 'lodash/uniq'
 
-import {LOAD_STUDENTS} from '../constants'
 import {loadStudent} from './load-student'
 
 export function loadStudents() {
@@ -12,11 +10,8 @@ export function loadStudents() {
 			JSON.parse(localStorage.getItem('studentIds')) || [],
 		)
 
-		return dispatch({
-			type: LOAD_STUDENTS,
-			payload: Promise.all(
-				map(studentIds, id => dispatch(loadStudent(id))),
-			),
-		})
+		for (let id of studentIds) {
+			dispatch(loadStudent(id))
+		}
 	}
 }

@@ -2,33 +2,57 @@
 
 import React from 'react'
 import cx from 'classnames'
-import Link from 'react-router/lib/Link'
-import {semesterName} from '@gob/school-st-olaf-college'
+import {connect} from 'react-redux'
+import {Link} from '@reach/router'
+import {List, Map} from 'immutable'
 import {countCredits} from '@gob/examine-student'
-import {IDENT_COURSE} from '@gob/object-student'
+import {semesterName} from '@gob/school-st-olaf-college'
 import {DropTarget} from 'react-dnd'
-import includes from 'lodash/includes'
 import * as theme from '../../theme'
 import {FlatButton} from '../../components/button'
 import {Icon} from '../../components/icon'
 import {InlineList, InlineListItem} from '../../components/list'
-import {close, search} from '../../icons/ionicons'
-import type {HydratedScheduleType} from '@gob/object-student'
-import type {Course as CourseType} from '@gob/types'
-
-import CourseList from './course-list'
+import {close, search, alertCircled} from '../../icons/ionicons'
+import {
+	IDENT_COURSE,
+	Student,
+	Schedule,
+	type WarningType,
+	type FabricationType,
+} from '@gob/object-student'
+import type {Course as CourseType, CourseError} from '@gob/types'
+import {getOnlyCourse, getCourse} from '../../helpers/get-courses'
+import {
+	changeStudent,
+	type ChangeStudentFunc,
+} from '../../redux/students/actions/change'
+import {CourseList} from './course-list'
 import styled from 'styled-components'
 
 const Container = styled.div`
 	${theme.card};
 	flex: 1 0;
-	min-width: 16em;
+	min-width: 14em;
 	margin: var(--semester-spacing);
+	overflow: hidden;
 
 	&.can-drop {
 		cursor: copy;
 		box-shadow: 0 0 4px var(--gray-500);
 		z-index: 10;
+	}
+
+	--background-color: var(--white);
+	--background-color-hover: var(--gray-200);
+	--separator-color: var(--gray-200);
+
+	&.loading {
+	}
+
+	&.invalid {
+		--background-color: var(--amber-50);
+		--background-color-hover: var(--amber-100);
+		--separator-color: var(--amber-100);
 	}
 `
 
@@ -40,6 +64,10 @@ const TitleButton = styled(FlatButton)`
 	border: 0;
 	border-radius: 0;
 	transition: 0.15s;
+
+	&:hover {
+		background-color: var(--background-color-hover, var(--gray-100));
+	}
 
 	& + & {
 		margin-left: 0.1em;
@@ -55,18 +83,22 @@ const RemoveSemesterButton = styled(TitleButton)`
 `
 
 const Header = styled.header`
-	border-bottom: ${theme.materialDivider};
+	border-bottom: solid 1px var(--separator-color, #eaeaea);
 
 	font-size: 0.85em;
 
 	display: flex;
 	flex-flow: row nowrap;
 	align-items: stretch;
-	border-top-right-radius: 2px;
-	border-top-left-radius: 2px;
-	color: var(--gray-500);
+	color: var(--header-fg-color, --gray-500);
 
 	overflow: hidden;
+
+	padding-left: var(--semester-side-padding);
+
+	& > ${Icon} {
+		margin-right: var(--semester-side-padding);
+	}
 `
 
 const InfoList = styled(InlineList)`
@@ -87,7 +119,8 @@ const Title = styled(Link)`
 	flex: 1;
 	display: flex;
 	flex-direction: column;
-	padding: var(--block-edge-padding) var(--semester-side-padding);
+	padding: var(--block-edge-padding) 0;
+	padding-right: var(--semester-side-padding);
 
 	&:hover {
 		text-decoration: underline;
@@ -100,119 +133,187 @@ const TitleText = styled.h1`
 	color: black;
 `
 
-// TODO: fix up types here
-type Props = {
-	addCourse: Function, // redux
-	canDrop: boolean,
+type DnDProps = {
+	canDrop?: boolean,
 	connectDropTarget: Function,
 	isOver: boolean,
-	moveCourse: Function, // redux
-	removeSemester: Function,
-	schedule: HydratedScheduleType,
+}
+
+type ReduxProps = {
+	changeStudent: ChangeStudentFunc,
+}
+
+type ReactProps = {
+	schedule: Schedule,
 	semester: number,
-	studentId: string,
+	student: Student,
 	year: number,
 }
 
-function Semester(props: Props) {
-	let {studentId, semester, year, canDrop, schedule} = props
-	let {courses, conflicts, hasConflict} = schedule
+type Props = ReduxProps & DnDProps & ReactProps
 
-	// `recommendedCredits` is 4 for fall/spring and 1 for everything else
-	let creditsPerCourse = 1
-	let recommendedCredits = semester === 1 || semester === 3 ? 4 : 1
-	let recommendedSlots = creditsPerCourse * recommendedCredits
+type State = {
+	loading: boolean,
+	checking: boolean,
+	courses: List<CourseType | FabricationType | CourseError>,
+	warnings: Map<string, List<WarningType>>,
+	hasConflict: boolean,
+	credits: number,
+}
 
-	let onlyCourses: Array<CourseType> = ((courses || []).filter(
-		(c: any) => c && !c.error,
-	): Array<any>)
-	let currentCredits = countCredits(onlyCourses)
-
-	const infoBar = []
-	if (schedule && courses && courses.length) {
-		let courseCount = courses.length
-
-		infoBar.push(
-			<InfoItem key="course-count">
-				{courseCount} {courseCount === 1 ? 'course' : 'courses'}
-			</InfoItem>,
-		)
-		currentCredits &&
-			infoBar.push(
-				<InfoItem key="credit-count">
-					{currentCredits}{' '}
-					{currentCredits === 1 ? 'credit' : 'credits'}
-				</InfoItem>,
-			)
+class Semester extends React.Component<Props, State> {
+	state = {
+		loading: true,
+		checking: true,
+		courses: List(),
+		warnings: Map(),
+		hasConflict: false,
+		credits: 0,
 	}
 
-	const className = cx('semester', {
-		invalid: hasConflict,
-		'can-drop': canDrop,
-	})
+	componentDidMount() {
+		this.prepare(this.props)
+	}
 
-	return (
-		<Container
-			className={className}
-			ref={ref => props.connectDropTarget(ref)}
-		>
-			<Header>
-				<Title to={`/s/${studentId}/semester/${year}/${semester}`}>
-					<TitleText>{semesterName(semester)}</TitleText>
-					<InfoList>{infoBar}</InfoList>
-				</Title>
+	componentDidUpdate(prevProps: Props) {
+		if (this.props.schedule !== prevProps.schedule) {
+			this.prepare(this.props)
+		}
+	}
 
-				<TitleButton
-					as={Link}
-					to={`/s/${studentId}/search/${year}/${semester}`}
-					title="Search for courses"
-				>
-					<Icon>{search}</Icon> Course
-				</TitleButton>
+	prepare = async props => {
+		this.setState(() => ({loading: true, checking: true}))
 
-				<RemoveSemesterButton
-					onClick={props.removeSemester}
-					title={`Remove ${year} ${semesterName(semester)}`}
-				>
-					<Icon>{close}</Icon>
-				</RemoveSemesterButton>
-			</Header>
+		let {schedule} = props
+		let courses = await schedule.getCourses(
+			getCourse,
+			props.student.fabrications,
+		)
+		let credits = countCredits([...courses])
 
-			{schedule && (
-				<CourseList
-					courses={courses || []}
-					usedSlots={currentCredits / creditsPerCourse}
-					maxSlots={recommendedSlots / creditsPerCourse}
-					studentId={studentId}
-					schedule={schedule}
-					conflicts={conflicts || []}
-				/>
-			)}
-		</Container>
-	)
+		this.setState(() => ({courses, credits, loading: false}))
+
+		let {warnings, hasConflict} = await schedule.validate(getOnlyCourse)
+
+		this.setState(() => ({warnings, hasConflict, checking: false}))
+	}
+
+	removeSemester = () => {
+		const {student, semester, year} = this.props
+		let s = student.destroySchedulesForTerm({year, semester})
+		this.props.changeStudent(s)
+	}
+
+	render() {
+		let props = this.props
+		let {student, semester, year, canDrop} = props
+
+		let schedule = this.props.schedule
+		let {courses, credits, warnings, hasConflict, loading} = this.state
+
+		let {recommendedCredits} = schedule
+		let creditsPerCourse = 1
+		let recommendedSlots = creditsPerCourse * recommendedCredits
+
+		if (loading) {
+			recommendedSlots = 0
+		}
+
+		const infoBar = []
+		if (courses.size) {
+			// prettier-ignore
+			infoBar.push(`${courses.size} ${courses.size === 1 ? 'course' : 'courses'}`)
+
+			// prettier-ignore
+			infoBar.push(`${credits} ${credits === 1 ? 'credit' : 'credits'}`)
+		}
+
+		if (loading) {
+			infoBar.unshift('Loading…')
+		}
+
+		const className = cx('semester', {
+			invalid: hasConflict,
+			'can-drop': canDrop,
+			loading: loading,
+		})
+
+		let name = semesterName(semester)
+
+		return (
+			<Container
+				className={className}
+				ref={ref => props.connectDropTarget(ref)}
+			>
+				<Header>
+					{hasConflict && <Icon>{alertCircled}</Icon>}
+					<Title
+						to={`./term/${year}${semester}`}
+						title={`Details for ${name}`}
+					>
+						<TitleText>{name}</TitleText>
+						<InfoList>
+							{infoBar.map(item => (
+								<InfoItem key={item}>{item}</InfoItem>
+							))}
+						</InfoList>
+					</Title>
+
+					<TitleButton
+						as={Link}
+						to={`/student/${
+							student.id
+						}/search?term=${year}${semester}`}
+						title="Search for courses"
+					>
+						<Icon>{search}</Icon> Course
+					</TitleButton>
+
+					<RemoveSemesterButton
+						onClick={this.removeSemester}
+						title={`Remove ${year} ${name}`}
+					>
+						<Icon>{close}</Icon>
+					</RemoveSemesterButton>
+				</Header>
+
+				{schedule && (
+					<CourseList
+						courses={[...courses]}
+						usedSlots={credits / creditsPerCourse}
+						maxSlots={recommendedSlots / creditsPerCourse}
+						warnings={warnings}
+						scheduleId={schedule.id}
+						studentId={student.id}
+					/>
+				)}
+			</Container>
+		)
+	}
 }
 
 // Implements the drag source contract.
 const semesterTarget = {
-	drop(props, monitor) {
-		const item = monitor.getItem()
-		const {clbid, fromScheduleId, isFromSchedule} = item
-		const toSchedule = props.schedule
+	drop(props: ReactProps & ReduxProps, monitor) {
+		let {clbid, fromScheduleId, isFromSchedule} = monitor.getItem()
+		let {student, schedule} = props
 
 		if (isFromSchedule) {
-			props.moveCourse(
-				props.studentId,
-				fromScheduleId,
-				toSchedule.id,
+			let s = student.moveCourseToSchedule({
+				from: fromScheduleId,
+				to: schedule.id,
 				clbid,
-			)
+			})
+			props.changeStudent(s)
 		} else {
-			props.addCourse(props.studentId, toSchedule.id, clbid)
+			let s = student.addCourseToSchedule(schedule.id, clbid)
+			props.changeStudent(s)
 		}
 	},
-	canDrop(props, monitor) {
-		const item = monitor.getItem()
-		return !includes(props.schedule.clbids, item.clbid)
+	canDrop(props: ReactProps, monitor) {
+		let item = monitor.getItem()
+		let hasClbid = props.schedule.clbids.includes(item.clbid)
+		return !hasClbid
 	},
 }
 
@@ -227,4 +328,9 @@ function collect(connect, monitor) {
 
 const droppable = DropTarget(IDENT_COURSE, semesterTarget, collect)(Semester)
 
-export default droppable
+const connected = connect(
+	undefined,
+	{changeStudent},
+)(droppable)
+
+export default connected

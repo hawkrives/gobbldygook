@@ -1,30 +1,25 @@
-import forEach from 'lodash/forEach'
-import range from 'lodash/range'
-import size from 'lodash/size'
+// @flow
 
-import {Student, Schedule, addScheduleToStudent} from '@gob/object-student'
-
+import {Range} from 'immutable'
+import {Student, Schedule} from '@gob/object-student'
 import {INIT_STUDENT} from '../constants'
+import {saveStudent} from '../../../helpers/save-student'
 
-export function initStudent(raw) {
-	let student = new Student(raw)
+type Action = {type: typeof INIT_STUDENT, payload: Student}
 
-	if (size(student.schedules) === 0) {
-		forEach(range(student.matriculation, student.graduation), year => {
-			student = addScheduleToStudent(
-				student,
-				Schedule({year, index: 1, active: true, semester: 1}),
-			)
-			student = addScheduleToStudent(
-				student,
-				Schedule({year, index: 1, active: true, semester: 2}),
-			)
-			student = addScheduleToStudent(
-				student,
-				Schedule({year, index: 1, active: true, semester: 3}),
-			)
+export type ActionCreator = any => Action
+
+export const action: ActionCreator = (student: Student) => {
+	if (student.schedules.size === 0) {
+		Range(student.matriculation, student.graduation).forEach(year => {
+			Range(1, 4).forEach(semester => {
+				let sched = new Schedule({year, semester, active: true})
+				student = student.addSchedule(sched)
+			})
 		})
 	}
+
+	saveStudent(student)
 
 	return {type: INIT_STUDENT, payload: student}
 }

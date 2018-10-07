@@ -1,105 +1,69 @@
 // @flow
-import React, {Component, cloneElement} from 'react'
+import * as React from 'react'
 import DocumentTitle from 'react-document-title'
 import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
 import {loadStudent} from '../../redux/students/actions/load-student'
+import {type IndividualStudentState} from '../../redux/students/reducers'
+import {Student as StudentObject} from '@gob/object-student'
+import type {Undoable} from '../../types'
+import styled from 'styled-components'
 
-import Sidebar from '../../components/sidebar'
-import Loading from '../../components/loading'
+const Container = styled.div`
+	display: grid;
+	justify-content: space-between;
+	// grid-gap: calc(var(--page-edge-padding) * (2 / 3));
+	grid-gap: var(--page-edge-padding);
+	padding-left: var(--page-edge-padding);
+	padding-right: var(--page-edge-padding);
 
-import CourseTable from '../course-table'
-import GraduationStatus from './graduation-status'
-
-import './student.scss'
-
-type StudentType = Object
-type Props = {
-	content: React$Element<any>, // from react-router
-	loadStudent: string => any, // redux
-	overlay: ?React$Element<any>,
-	params: {studentId: string}, // react-router
-	sidebar: ?React$Element<any>, // from react-router
-	student: StudentType, // redux
-}
-
-type State = {
-	cachedStudentId: ?string,
-}
-
-export class Student extends Component<Props, State> {
-	state = {
-		cachedStudentId: null,
+	@media all and (min-width: 800px) {
+		grid-template-columns: 280px 1fr 280px;
 	}
+`
 
-	static getDerivedStateFromProps(props: Props, state: State) {
-		let studentId = props.params.studentId
+type Props = {
+	children: ({student: Undoable<StudentObject>}) => React.Node, // from react-router
+	loadStudent: string => mixed, // redux
+	studentId?: string, // react-router
+	student: ?IndividualStudentState, // redux
+}
 
-		// We have to be able to load the student here because we only load
-		// students on-demand into the redux store
-		const didStudentChange = studentId !== state.cachedStudentId
+type State = {}
 
-		if (!props.student || didStudentChange) {
-			props.loadStudent(studentId)
+export class Student extends React.Component<Props, State> {
+	componentDidMount() {
+		if (this.props.studentId && !this.props.student) {
+			this.props.loadStudent(this.props.studentId)
 		}
-
-		return {cachedStudentId: studentId}
 	}
 
 	render() {
 		if (!this.props.student) {
-			return (
-				<div>
-					Student {this.props.params.studentId} could not be loaded.
-				</div>
-			)
+			return <p>Student {this.props.studentId} could not be loaded.</p>
 		}
 
-		if (this.props.student.isLoading) {
-			return <Loading>Loading Student…</Loading>
-		}
+		let {student} = this.props
 
-		const name = this.props.student
-			? this.props.student.data.present.name
-			: 'Loading…'
-
-		const contentProps = {
-			student: this.props.student,
-			className: 'content',
-		}
-		const contents = this.props.content ? (
-			cloneElement(this.props.content, contentProps)
-		) : (
-			<CourseTable {...contentProps} />
-		)
-
-		const sidebarProps = {student: this.props.student.data.present}
-		const sidebar = this.props.sidebar ? (
-			cloneElement(this.props.sidebar, sidebarProps)
-		) : (
-			<GraduationStatus {...sidebarProps} />
-		)
+		let title: string = student
+			? `${student.present.name} | Gobbldygook`
+			: 'Gobbldygook'
 
 		return (
-			<DocumentTitle title={`${name} | Gobbldygook`}>
-				<div className="student">
-					<Sidebar student={this.props.student}>{sidebar}</Sidebar>
-					{contents}
-					{this.props.overlay || null}
-				</div>
-			</DocumentTitle>
+			<Container>
+				<DocumentTitle title={title} />
+
+				{this.props.children({student})}
+			</Container>
 		)
 	}
 }
 
-const mapStateToProps = (state, ownProps) => ({
-	student: state.students[ownProps.params.studentId],
-})
-
-const mapDispatchToProps = dispatch =>
-	bindActionCreators({loadStudent}, dispatch)
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
+const connected = connect(
+	(state, ownProps) =>
+		ownProps.studentId
+			? {student: state.students[ownProps.studentId]}
+			: {student: undefined},
+	{loadStudent},
 )(Student)
+
+export {connected as default}

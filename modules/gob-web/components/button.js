@@ -44,6 +44,8 @@ export const RaisedButton = styled(BaseButton)`
 
 	&:hover {
 		background-color: var(--white);
+		box-shadow: 0 2px 4px 0 rgba(14, 30, 37, 0.12);
+		border-radius: var(--base-border-radius);
 	}
 	&:focus {
 		background-color: var(--blue-50);

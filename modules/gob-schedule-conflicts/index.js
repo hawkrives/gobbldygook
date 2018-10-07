@@ -54,8 +54,8 @@ export function checkCoursesForTimeConflicts(
 }
 
 export function findTimeConflicts(
-	courses: Array<Course>,
-): Array<Array<null | boolean>> {
+	courses: $ReadOnlyArray<Course>,
+): Array<Array<null | true | false>> {
 	// results = [
 	// 		[c1: null,  c2: false, c3: true ],
 	// 		[c1: false, c2: null,  c3: false],

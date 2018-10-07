@@ -1,10 +1,8 @@
 // @flow
 
 import serializeError from 'serialize-error'
-import debug from 'debug'
 import {loadFiles} from '@gob/worker-load-data'
 import {IS_WORKER} from './lib'
-const log = debug('worker:load-data:listener')
 
 declare var self: DedicatedWorkerGlobalScope
 const CHECK_IDB_IN_WORKER_SUPPORT = '__check-idb-worker-support'
@@ -17,8 +15,8 @@ function checkIdbInWorkerSupport() {
 }
 
 function main({data}) {
-	const [id, ...args] = data
-	log('received message:', ...args)
+	const [id, ...args] = JSON.parse(data)
+	// console.log('received message:', ...args)
 
 	if (id === CHECK_IDB_IN_WORKER_SUPPORT) {
 		checkIdbInWorkerSupport()

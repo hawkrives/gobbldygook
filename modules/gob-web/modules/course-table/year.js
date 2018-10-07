@@ -1,16 +1,17 @@
 // @flow
 
 import React from 'react'
-import filter from 'lodash/filter'
-import sortBy from 'lodash/sortBy'
-
+import {connect} from 'react-redux'
 import {FlatButton} from '../../components/button'
-import Semester from './semester-container'
-
+import Semester from './semester'
 import {findFirstAvailableSemester} from '../../helpers/find-first-available-semester'
 import {expandYear, semesterName} from '@gob/school-st-olaf-college'
-import type {HydratedStudentType, ScheduleType} from '@gob/object-student'
+import {Student, Schedule} from '@gob/object-student'
 import * as theme from '../../theme'
+import {
+	changeStudent,
+	type ChangeStudentFunc,
+} from '../../redux/students/actions/change'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -77,32 +78,47 @@ const canAddSemester = (nextAvailableSemester?: number) => {
 }
 
 type Props = {
-	addSemester: Function,
-	removeYear: Function,
-	student: HydratedStudentType,
+	student: Student,
 	year: number,
+	changeStudent: ChangeStudentFunc,
 }
 
-export default class Year extends React.PureComponent<Props> {
+class Year extends React.Component<Props> {
 	addSemester = () => {
-		this.props.addSemester(this.props.year)
+		let nextAvailableSemester = findFirstAvailableSemester(
+			[...this.props.student.schedules.values()],
+			this.props.year,
+		)
+
+		let s = this.props.student.addSchedule(
+			new Schedule({
+				year: this.props.year,
+				semester: nextAvailableSemester,
+				index: 1,
+				active: true,
+			}),
+		)
+
+		this.props.changeStudent(s)
 	}
 
 	removeYear = () => {
-		this.props.removeYear(this.props.year)
+		let s = this.props.student.destroySchedulesForYear(this.props.year)
+		this.props.changeStudent(s)
 	}
 
 	render() {
 		let {student, year} = this.props
-		let {schedules} = student
 
-		let valid = filter(schedules, s => s.active === true && s.year === year)
-		let sorted = sortBy(valid, s => s.semester)
+		let schedules = student.schedules
+			.filter(s => s.active === true && s.year === year)
+			.sortBy(s => s.getTerm())
+			.toList()
 
 		let niceYear = expandYear(year)
 
 		let nextSemester = findFirstAvailableSemester(
-			((valid: Array<any>): Array<ScheduleType>),
+			[...schedules.values()],
 			year,
 		)
 		let isAddSemesterDisabled = !canAddSemester(nextSemester)
@@ -133,11 +149,12 @@ export default class Year extends React.PureComponent<Props> {
 				</Header>
 
 				<SemesterList>
-					{sorted.map(schedule => (
+					{schedules.map(schedule => (
 						<Semester
-							key={schedule.id}
-							student={student}
+							key={schedule.semester}
+							schedule={schedule}
 							semester={schedule.semester}
+							student={student}
 							year={year}
 						/>
 					))}
@@ -146,3 +163,10 @@ export default class Year extends React.PureComponent<Props> {
 		)
 	}
 }
+
+const connected = connect(
+	undefined,
+	{changeStudent},
+)(Year)
+
+export {connected as Year}

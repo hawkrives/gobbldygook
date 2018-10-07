@@ -24,7 +24,7 @@ export default function applyFilter(
 	if (expr.$filterType === 'where') {
 		filtered = filterByWhereClause(courses, expr.$where)
 	} else if (expr.$filterType === 'of') {
-		filtered = filterByOfExpression(courses, expr.$of)
+		filtered = filterByOfExpression(courses, expr.$of.map(c => c.$course))
 	}
 
 	// grab the matches

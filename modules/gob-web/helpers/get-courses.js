@@ -1,14 +1,10 @@
 // @flow
+
 import {db} from './db'
 import {status, json} from '@gob/lib'
 import type {FabricationType} from '@gob/object-student'
-import type {Course as CourseType} from '@gob/types'
-
-type ErrorType = {
-	clbid: string,
-	term: number,
-	error: string,
-}
+import type {Course as CourseType, CourseError as ErrorType} from '@gob/types'
+import {List} from 'immutable'
 
 const baseUrl = 'https://stodevx.github.io/course-data'
 const networkCache = Object.create(null)
@@ -50,11 +46,14 @@ export function getCourseFromDatabase(clbid: string) {
 
 // Gets a course from the database.
 export function getCourse(
-	{clbid, term}: {clbid: string, term: number},
-	fabrications?: ?{[key: string]: FabricationType} = {},
+	{clbid, term}: {clbid: string, term?: ?number},
+	fabrications?: ?(Array<FabricationType> | List<FabricationType>) = [],
 ): Promise<CourseType | FabricationType | ErrorType> {
-	if (fabrications && clbid in fabrications) {
-		return Promise.resolve(fabrications[clbid])
+	if (fabrications) {
+		let fab = fabrications.find(c => c.clbid === clbid)
+		if (fab) {
+			return Promise.resolve(fab)
+		}
 	}
 
 	let getCourseFrom = getCourseFromDatabase
@@ -67,4 +66,18 @@ export function getCourse(
 			course => course || {clbid, term, error: `Could not find ${clbid}`},
 		)
 		.catch(error => ({clbid, term, error: error.message}))
+}
+
+export function getOnlyCourse(args: {
+	clbid: string,
+	term: number,
+}): Promise<?CourseType> {
+	let {clbid} = args
+
+	let getCourseFrom = getCourseFromDatabase
+	if (global.useNetworkOnly) {
+		getCourseFrom = getCourseFromNetwork
+	}
+
+	return getCourseFrom(clbid).catch(() => null)
 }

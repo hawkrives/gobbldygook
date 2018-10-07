@@ -5,40 +5,64 @@ describe('enhanceHanson', () => {
 		const actual = enhanceHanson({
 			name: 'test',
 			message: 'have a nice day',
+			result: 'Requirement',
 		})
-		expect(actual).toMatchSnapshot()
+		expect(actual).toMatchInlineSnapshot(`
+Object {
+  "$type": "requirement",
+  "message": "have a nice day",
+  "name": "test",
+  "result": Object {
+    "$requirement": "Requirement",
+    "$type": "reference",
+  },
+  "revision": undefined,
+  "slug": "test",
+  "type": undefined,
+}
+`)
 		expect(actual.slug).toBe('test')
 	})
 
 	it('marks the top-level as a "requirement"', () => {
 		const actual = enhanceHanson({
 			message: 'have a nice day',
+			result: 'Requirement',
 		})
-		expect(actual).toMatchSnapshot()
+		expect(actual).toMatchInlineSnapshot(`
+Object {
+  "$type": "requirement",
+  "message": "have a nice day",
+  "name": undefined,
+  "result": Object {
+    "$requirement": "Requirement",
+    "$type": "reference",
+  },
+  "revision": undefined,
+  "slug": "",
+  "type": undefined,
+}
+`)
 		expect(actual.$type).toBe('requirement')
 	})
 
 	it('requires the top-level to have certain keys', () => {
 		expect(() => enhanceHanson({$type: 'a', slug: 'nope'})).toThrowError(
-			'enhanceHanson(): could not find any of ["result", "message", "filter"] in ["$type", "slug"].',
+			'"result" is a required key',
 		)
-
-		expect(() => enhanceHanson({message: 'have a nice day'})).not.toThrow()
 
 		expect(() => enhanceHanson({result: 'CSCI 121'})).not.toThrow()
 	})
 
 	it('requires its input to be an object', () => {
-		expect(() => enhanceHanson('')).toThrowError(
-			'enhanceHanson: data was not an object!',
-		)
+		expect(() => enhanceHanson('')).toThrowError('data was not an object!')
 	})
 
 	it('requires "revision" to be a string, if present', () => {
 		expect(() =>
 			enhanceHanson({revision: 2, result: 'CSCI 121'}),
 		).toThrowError(
-			'enhanceHanson: "revision" must be a string. Try wrapping it in single quotes.',
+			'"revision" must be a string. Try wrapping it in single quotes.',
 		)
 
 		expect(() =>
@@ -83,7 +107,7 @@ describe('enhanceHanson', () => {
 					result: 'only courses from (CSCI 121)',
 				},
 			}),
-		).toThrowError('enhanceHanson: Expected expression but "o" found.')
+		).toThrowError('Expected expression but "o" found.')
 
 		expect(() =>
 			enhanceHanson({
@@ -130,7 +154,7 @@ describe('enhanceHanson', () => {
 					filter: 'one of (CSCI 121)',
 				},
 			}),
-		).toThrowError('enhanceHanson: Expected "only" but "o" found.')
+		).toThrowError('Expected "only" but "o" found.')
 	})
 
 	it('allows defining variables in result', () => {
@@ -184,7 +208,7 @@ describe('enhanceHanson', () => {
 		}
 
 		expect(() => enhanceHanson(input)).toThrowError(
-			'enhanceHanson: Expected expression but "o" found. (in \'one of ($math-level-3)\')',
+			'Expected expression but "o" found. (in \'one of ($math-level-3)\')',
 		)
 	})
 })

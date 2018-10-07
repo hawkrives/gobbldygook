@@ -35,10 +35,6 @@ Object {
 }
 `)
 	})
-
-	it('returns null if no semester is given', () => {
-		expect(checkForInvalidSemester({semester: undefined}, 5)).toBe(null)
-	})
 })
 
 xdescribe('checkForTimeConflicts', () => {})

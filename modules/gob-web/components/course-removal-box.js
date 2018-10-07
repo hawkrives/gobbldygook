@@ -1,23 +1,26 @@
 // @flow
+
 import * as React from 'react'
 import {DropTarget} from 'react-dnd'
-import debug from 'debug'
+import {connect} from 'react-redux'
 import styled, {css} from 'styled-components'
-const log = debug('web:courses')
-import * as theme from '../theme'
-import {IDENT_COURSE} from '@gob/object-student'
+import {IDENT_COURSE, Student} from '@gob/object-student'
 import {Icon} from './icon'
 import {iosTrashOutline} from '../icons/ionicons'
+import {
+	action as changeStudent,
+	type ActionCreator as ChangeStudentFunc,
+} from '../redux/students/actions/change'
 
-const Box: any = styled.div`
+const Box = styled.div`
 	padding: 5em 1em;
-	color: ${theme.gray500};
+	color: var(--gray-500);
 	background-color: white;
 	border-radius: 5px;
 
 	position: fixed;
-	top: calc(${theme.pageEdgePadding} * 2);
-	left: calc(${theme.pageEdgePadding} * 2);
+	top: calc(var(--page-edge-padding) * 2);
+	left: calc(var(--page-edge-padding) * 2);
 	max-width: 240px;
 
 	display: none;
@@ -28,14 +31,15 @@ const Box: any = styled.div`
 		css`
 			color: black;
 			display: flex;
-			z-index: ${theme.zSidebar + 1};
+			z-index: calc(var(--z-sidebar) + 1);
 		`};
+
 	${props =>
 		props.isOver &&
 		css`
-			box-shadow: 0 0 10px ${theme.red900};
-			color: ${theme.red900};
-			background-color: ${theme.red50};
+			box-shadow: 0 0 10px var(--red-900);
+			color: var(--red-900);
+			background-color: var(--red-50);
 		`};
 `
 
@@ -43,8 +47,10 @@ type Props = {
 	canDrop: boolean, // react-dnd
 	connectDropTarget: (React.Element<*>) => any, // react-dnd
 	isOver: boolean, // react-dnd
-	removeCourse: (string, number) => any, // studentId is embedded in the passed function
+	changeStudent: ChangeStudentFunc,
+	student: Student,
 }
+
 function CourseRemovalBox(props: Props) {
 	return (
 		<Box
@@ -62,14 +68,16 @@ function CourseRemovalBox(props: Props) {
 
 // Implements the drag source contract.
 const removeCourseTarget = {
-	drop(props, monitor: any) {
+	drop(props: Props, monitor: any) {
 		const item = monitor.getItem()
 		const {clbid, fromScheduleId, isFromSchedule} = item
-		if (isFromSchedule) {
-			log('dropped course', item)
-			// the studentId is embedded in the passed function
-			props.removeCourse(fromScheduleId, clbid)
+
+		if (!isFromSchedule) {
+			return
 		}
+
+		let s = props.student.removeCourseFromSchedule(fromScheduleId, clbid)
+		props.changeStudent(s)
 	},
 	canDrop(props, monitor: any) {
 		const {isFromSearch} = monitor.getItem()
@@ -89,6 +97,13 @@ function collect(connect, monitor) {
 	}
 }
 
-export default DropTarget(IDENT_COURSE, removeCourseTarget, collect)(
+const droppable = DropTarget(IDENT_COURSE, removeCourseTarget, collect)(
 	CourseRemovalBox,
 )
+
+const connected = connect(
+	undefined,
+	{changeStudent},
+)(droppable)
+
+export default connected

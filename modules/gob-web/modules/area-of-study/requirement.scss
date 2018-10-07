@@ -25,7 +25,8 @@
 }
 
 .requirement .requirement {
-	@include card();
+	border: 1px solid #e9ebeb;
+	border-radius: 4px;
 }
 
 .override-button {
@@ -116,6 +117,36 @@
 	padding-bottom: 0.2em;
 }
 
+.filter {
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+
+	h4 {
+		margin: 0;
+		padding: 0;
+	}
+}
+
+.filter--of {
+	display: grid;
+	grid-column-gap: 0.2em;
+	grid-row-gap: 0.2em;
+	grid-template-columns: repeat(auto-fit, 46px);
+	justify-content: space-between;
+
+	h4 {
+		grid-row: 1;
+		grid-column: 1 / -1;
+	}
+
+	.expression--course {
+		grid-column: span 1;
+	}
+	.expression--course.big {
+		grid-column: span 2;
+	}
+}
+
 .message,
 .description {
 	margin-top: 0;
@@ -128,7 +159,7 @@
 
 .message,
 .description,
-.result > :global(.expression) > :global(.expression--description) {
+.result > .expression > .expression--description {
 	margin-top: 0.5em;
 }
 

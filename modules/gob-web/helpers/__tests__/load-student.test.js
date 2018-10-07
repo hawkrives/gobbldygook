@@ -1,12 +1,17 @@
+// @flow
+
 import {loadStudent} from '../load-student'
-import * as demoStudent from '@gob/object-student/demo-student.json'
+const demoStudent = require('@gob/object-student/demo-student.json')
 
 import {Student} from '@gob/object-student'
+jest.spyOn(global.console, 'log').mockImplementation(() => jest.fn())
+jest.spyOn(global.console, 'error').mockImplementation(() => jest.fn())
+jest.spyOn(global.console, 'warn').mockImplementation(() => jest.fn())
 
 describe('loadStudent', () => {
 	let student
 	beforeEach(() => {
-		student = Student(demoStudent)
+		student = new Student(demoStudent)
 		localStorage.clear()
 		localStorage.setItem(student.id, JSON.stringify(student))
 	})
@@ -17,16 +22,16 @@ describe('loadStudent', () => {
 		expect(actual).toHaveProperty('id')
 	})
 
-	it(`removes the student if it is null`, async () => {
+	it('returns a fresh student if it is null', async () => {
 		localStorage.removeItem(student.id)
 		const actual = await loadStudent(student.id)
-		expect(actual).toBe(null)
+		expect(actual).toBeInstanceOf(Student)
 	})
 
-	it(`removes the student if it is the string [Object object]`, async () => {
-		localStorage.setItem(student.id, String(student))
+	it('returns a fresh student if it is the string [Object object]', async () => {
+		localStorage.setItem(student.id, String({}))
 		const actual = await loadStudent(student.id)
-		expect(actual).toBe(null)
+		expect(actual).toBeInstanceOf(Student)
 	})
 
 	it('returns a fresh student if JSON errors are encountered', async () => {

@@ -1,11 +1,9 @@
 // @flow
 import max from 'lodash/max'
 import uniq from 'lodash/uniq'
-import map from 'lodash/map'
-import filter from 'lodash/filter'
 import sortBy from 'lodash/sortBy'
 import {findMissingNumber} from '@gob/lib'
-import type {ScheduleType} from '@gob/object-student'
+import {Schedule} from '@gob/object-student'
 
 /**
  * Takes a list of schedules and finds the first open semester.
@@ -18,11 +16,11 @@ import type {ScheduleType} from '@gob/object-student'
  * @returns {Number} - the first available semester slot
  */
 export function findFirstAvailableSemester(
-	schedules: Array<ScheduleType>,
+	schedules: Array<Schedule>,
 	forYear: number,
 ) {
-	const thisYear = filter(schedules, s => s.year === forYear)
-	const semesters = map(thisYear, s => s.semester)
+	const thisYear = schedules.filter(s => s.year === forYear)
+	const semesters = thisYear.map(s => s.semester)
 
 	// stick a 0 at the front so findBinary will start from 1
 	semesters.unshift(0)

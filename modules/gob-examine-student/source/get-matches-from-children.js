@@ -1,11 +1,8 @@
 // @flow
 import collectMatches from './collect-matches'
 import isRequirementName from './is-requirement-name'
-import filter from 'lodash/filter'
 import flatten from 'lodash/flatten'
-import includes from 'lodash/includes'
 import keys from 'lodash/keys'
-import map from 'lodash/map'
 import uniqBy from 'lodash/uniqBy'
 import stringify from 'stabilize'
 import type {
@@ -31,15 +28,15 @@ export default function getMatchesFromChildren(
 	}
 
 	// grab all the child requirement names from this requirement
-	let childKeys = filter(keys(ctx), isRequirementName)
+	let childKeys = keys(ctx).filter(isRequirementName)
 
 	// either use all of the child requirements in the computation,
 	if (expr.$children === '$all') {
 		// do nothing; the default case.
 	} else if (Array.isArray(expr.$children)) {
 		// or just use some of them (those listed in expr.$children)
-		const requested = map(expr.$children, c => c.$requirement)
-		childKeys = filter(childKeys, key => includes(requested, key))
+		const requested = expr.$children.map(c => c.$requirement)
+		childKeys = childKeys.filter(key => requested.includes(key))
 	}
 
 	// `uniq` had the same problem here that the dirty course stuff struggles
@@ -50,7 +47,7 @@ export default function getMatchesFromChildren(
 	// (I opted for passing iteratee to uniq, rather than mapping, to let lodash optimize a bit.)
 
 	// finally, collect the matching courses from the requested children
-	const matches = map(childKeys, key => collectMatches((ctx: any)[key]))
+	const matches = childKeys.map(key => collectMatches((ctx: any)[key]))
 	const flatMatches = flatten(matches)
 	const uniquedMatches = uniqBy(flatMatches, stringify)
 

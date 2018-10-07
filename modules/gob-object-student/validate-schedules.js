@@ -1,12 +1,14 @@
 // @flow
 
-import mapValues from 'lodash/mapValues'
 import {validateSchedule} from './validate-schedule'
 
-import type {HydratedStudentType} from './student'
+import {List} from 'immutable'
+import {Schedule} from './schedule'
+import {type OnlyCourseLookupFunc} from './types'
 
-export async function validateSchedules(student: HydratedStudentType) {
-	let {schedules} = student
-	schedules = mapValues(schedules, validateSchedule)
-	return {...student, schedules}
+export async function validateSchedules(
+	schedules: List<Schedule>,
+	lookup: OnlyCourseLookupFunc,
+) {
+	return schedules.map(s => validateSchedule(s, lookup))
 }

@@ -17,7 +17,6 @@ const {
 const HtmlPlugin = require('@gob/webpack-plugin-html')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
 
 const isCI = Boolean(process.env.CI)
 const outputFolder = __dirname + '/build/'
@@ -129,9 +128,6 @@ function config() {
 
 		// copy files – into the webpack {output} directory
 		new CopyWebpackPlugin([]),
-
-		// minimize the bundle impact of the Monaco editor
-		new MonacoWebpackPlugin({languages: ['json', 'yaml']}),
 
 		new Stylish(),
 	]

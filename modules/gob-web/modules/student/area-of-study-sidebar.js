@@ -1,158 +1,116 @@
 // @flow
+
 import React from 'react'
-import {connect} from 'react-redux'
-
-import difference from 'lodash/difference'
-import filter from 'lodash/filter'
-import groupBy from 'lodash/groupBy'
-import includes from 'lodash/includes'
-import keys from 'lodash/keys'
-import map from 'lodash/map'
-import mapValues from 'lodash/mapValues'
-import pickBy from 'lodash/pickBy'
-import toPairs from 'lodash/toPairs'
-import union from 'lodash/union'
-import values from 'lodash/values'
-
-import AreaOfStudyGroup from './area-of-study-group'
+import {List, Map} from 'immutable'
+import {AreaOfStudyGroup} from './area-of-study-group'
 import {FlatButton} from '../../components/button'
-import {sortStudiesByType} from '@gob/object-student/sort-studies-by-type'
-import {areaTypeConstants} from '@gob/object-student/area-types'
-import type {HydratedStudentType, AreaOfStudyType} from '@gob/object-student'
+import {
+	sortStudiesByType,
+	areaTypeConstants,
+	Student,
+} from '@gob/object-student'
 
-type Student = HydratedStudentType
+import './area-of-study-sidebar.scss'
+
 type Props = {
-	allAreas: Array<AreaOfStudyType>,
 	student: Student,
 }
+
 type State = {
-	showAreaPickerFor: {[key: string]: boolean},
+	showAreaPickerFor: Map<string, boolean>,
 }
 
-class AreaOfStudySidebarComponent extends React.PureComponent<Props, State> {
+export class AreaOfStudySidebar extends React.PureComponent<Props, State> {
 	state = {
-		showAreaPickerFor: {},
+		showAreaPickerFor: Map(),
 	}
 
-	showAreaPicker = (type: string, ev: Event) => {
-		ev.stopPropagation()
-		ev.preventDefault()
+	showAreaPicker = (type: string) => {
 		this.setState(state => ({
-			showAreaPickerFor: {...state.showAreaPickerFor, [type]: true},
+			showAreaPickerFor: state.showAreaPickerFor.set(type, true),
 		}))
 	}
 
-	hideAreaPicker = (type: string, ev: Event) => {
-		ev.stopPropagation()
-		ev.preventDefault()
+	hideAreaPicker = (type: string) => {
 		this.setState(state => ({
-			showAreaPickerFor: {...state.showAreaPickerFor, [type]: false},
+			showAreaPickerFor: state.showAreaPickerFor.set(type, false),
 		}))
 	}
 
 	render() {
-		const props = this.props
-		const {allAreas, student} = props
-		const {showAreaPickerFor} = this.state
-		const allAreasGrouped = groupBy(allAreas, 'type')
+		let props = this.props
+		let {student} = props
+		let {showAreaPickerFor} = this.state
 
-		const sortedStudies = sortStudiesByType(student.studies)
+		let sortedStudies = List(sortStudiesByType([...student.studies]))
 
 		// group the studies by their type
-		const groupedStudies = groupBy(sortedStudies, study =>
+		let groupedStudies = sortedStudies.groupBy(study =>
 			study.type.toLowerCase(),
 		)
 
-		// pull out the results
-		const studyResults = student.areas
-			? mapValues(groupedStudies, group =>
-					group.map(
-						area =>
-							student.areas.find(
-								a =>
-									a.name === area.name &&
-									a.type === area.type &&
-									a.revision === area.revision,
-							) || area,
-					),
-			  )
-			: {}
+		let allAreaTypes = Map(areaTypeConstants).toList()
+		let usedAreaTypes = new Set(student.studies.map(s => s.type))
 
-		// and then render them
-		const sections = map(studyResults, (areas, areaType) => (
+		let unusedTypes = allAreaTypes.filter(
+			type =>
+				!usedAreaTypes.has(type) && !showAreaPickerFor.get(type, false),
+		)
+
+		let unusedTypesToShow = showAreaPickerFor.filter(
+			(toShow, type) => toShow && !usedAreaTypes.has(type),
+		)
+
+		/////
+
+		let activeAreas = groupedStudies.map((areas, areaType) => (
 			<AreaOfStudyGroup
 				key={areaType}
-				allAreasOfType={allAreasGrouped[areaType] || []}
 				areas={areas}
 				onEndAddArea={this.hideAreaPicker}
 				onInitiateAddArea={this.showAreaPicker}
-				showAreaPicker={showAreaPickerFor[areaType] || false}
+				showAreaPicker={showAreaPickerFor.get(areaType, false)}
 				student={student}
 				type={areaType}
 			/>
 		))
 
-		const allAreaTypes = values(areaTypeConstants)
-		const usedAreaTypes = [...new Set(student.studies.map(s => s.type))]
-
-		const areaTypesToShowButtonsFor = union(
-			usedAreaTypes,
-			keys(pickBy(showAreaPickerFor, v => v === true)),
-		)
-
-		const unusedTypes = difference(allAreaTypes, areaTypesToShowButtonsFor)
-
-		const unusedAreaTypeButtons = unusedTypes.length ? (
-			<section className="unused-areas-of-study">
-				<span className="unused-areas-title">Add: </span>
-				<span className="unused-areas-buttons">
-					{unusedTypes.map(type => (
-						<FlatButton
-							key={type}
-							className="add-unused-area-of-study"
-							onClick={ev => this.showAreaPicker(type, ev)}
-						>
-							{type}
-						</FlatButton>
-					))}
-				</span>
-			</section>
-		) : null
-
-		const unusedTypesToShow = filter(
-			toPairs(showAreaPickerFor),
-			([type, toShow]) =>
-				toShow === true && !includes(usedAreaTypes, type),
-		)
-
-		const unusedTypesToShowComponents = map(
-			unusedTypesToShow,
-			([type, shouldShow]) => (
-				<AreaOfStudyGroup
-					key={type}
-					allAreasOfType={allAreasGrouped[type] || []}
-					areas={[]}
-					onEndAddArea={this.hideAreaPicker}
-					onInitiateAddArea={this.showAreaPicker}
-					showAreaPicker={shouldShow || false}
-					student={student}
-					type={type}
-				/>
-			),
-		)
+		let openedAreas = unusedTypesToShow.map((shouldShow, type) => (
+			<AreaOfStudyGroup
+				key={type}
+				onEndAddArea={this.hideAreaPicker}
+				onInitiateAddArea={this.showAreaPicker}
+				showAreaPicker={shouldShow || false}
+				student={student}
+				type={type}
+			/>
+		))
 
 		return (
-			<div>
-				{sections}
-				{unusedTypesToShowComponents}
-				{unusedAreaTypeButtons}
-			</div>
+			<>
+				{[...activeAreas.values()]}
+				{[...openedAreas.values()]}
+				{unusedTypes.size && (
+					<section className="unused-areas">
+						<span className="unused-areas--title">Add: </span>
+						<span className="unused-areas--container">
+							{unusedTypes
+								.map(type => (
+									<FlatButton
+										key={type}
+										className="unused-areas--button"
+										onClick={() =>
+											this.showAreaPicker(type)
+										}
+									>
+										{type}
+									</FlatButton>
+								))
+								.toArray()}
+						</span>
+					</section>
+				)}
+			</>
 		)
 	}
 }
-
-const mapState = (state): {allAreas: Array<AreaOfStudyType>} => ({
-	allAreas: state.areas.data,
-})
-
-export const AreaOfStudySidebar = connect(mapState)(AreaOfStudySidebarComponent)

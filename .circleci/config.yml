@@ -45,15 +45,6 @@ jobs:
       - attach_workspace: *attach-workspace-node_modules
       - run: yarn run --silent flow check --quiet
 
-  flow-coverage:
-    docker: *image
-    environment:
-      task: flow
-    steps:
-      - checkout
-      - attach_workspace: *attach-workspace-node_modules
-      - run: yarn run --silent flow-check-coverage
-
   jest:
     docker: *image
     environment:

@@ -5,9 +5,11 @@
 }
 
 .expression .course {
-	display: flex;
+	display: grid;
+	grid-template-columns: max-content max-content;
 	cursor: inherit;
 	font-variant-numeric: lining-nums;
+	flex: 1;
 
 	font-size: 0.9em;
 
@@ -20,6 +22,7 @@
 		display: flex;
 		flex-flow: column nowrap;
 		text-align: center;
+		flex: 1;
 	}
 
 	.temporal {

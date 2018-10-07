@@ -1,7 +1,7 @@
 // @flow
+
 import React from 'react'
-import cx from 'classnames'
-import Link from 'react-router/lib/Link'
+import {Link} from '@reach/router'
 import groupBy from 'lodash/groupBy'
 import map from 'lodash/map'
 import {sortStudiesByType} from '@gob/object-student'
@@ -10,6 +10,7 @@ import {FlatButton} from '../../components/button'
 import {Icon} from '../../components/icon'
 import {iosTrashOutline, iosArrowForward} from '../../icons/ionicons'
 import * as theme from '../../theme'
+import {type IndividualStudentState} from '../../redux/students/reducers'
 
 const Container = styled.div`
 	display: flex;
@@ -18,17 +19,6 @@ const Container = styled.div`
 
 	& + & {
 		border-top: ${theme.materialDivider};
-	}
-
-	border-left: solid 3px transparent;
-	&.loading {
-		border-left-color: ${theme.blue300};
-	}
-	&.can-graduate {
-		border-left-color: ${theme.green300};
-	}
-	&.cannot-graduate {
-		border-left-color: ${theme.red300};
 	}
 `
 
@@ -46,8 +36,8 @@ const DeleteButton = styled(FlatButton)`
 
 	&:hover {
 		color: white;
-		border-color: ${theme.red900};
-		background-color: ${theme.red500};
+		border-color: var(--red-900);
+		background-color: var(--red-500);
 	}
 `
 
@@ -85,7 +75,7 @@ const ListItemLink = styled(Link)`
 	${theme.linkUndecorated};
 	background-color: white;
 	&.is-selected {
-		background-color: ${theme.blue50};
+		background-color: var(--blue-50);
 	}
 
 	flex: 1;
@@ -102,34 +92,22 @@ const ListItemLink = styled(Link)`
 	&:hover,
 	&:focus {
 		outline: none;
-		background-color: ${theme.blue50};
-		border-color: ${theme.blue};
+		background-color: var(--blue-50);
+		border-color: var(--blue);
 	}
 `
 
 type Props = {
 	destroyStudent: string => any,
 	isEditing: boolean,
-	student: Object,
+	student: IndividualStudentState,
 	as?: string,
 }
 
 export default function StudentListItem(props: Props) {
 	const {student, isEditing, destroyStudent, as} = props
 
-	const isLoading =
-		student.isLoading ||
-		student.isFetching ||
-		student.isValdiating ||
-		student.isChecking
-
-	const classes: Object = {loading: isLoading}
-	if (!isLoading) {
-		classes['can-graduate'] = student.data.present.canGraduate
-		classes['cannot-graduate'] = !student.data.present.canGraduate
-	}
-
-	const sortedStudies = sortStudiesByType(student.data.present.studies)
+	const sortedStudies = sortStudiesByType([...student.present.studies])
 	const groupedStudies = groupBy(sortedStudies, s => s.type)
 
 	const areas = map(groupedStudies, (group, type) => (
@@ -141,22 +119,22 @@ export default function StudentListItem(props: Props) {
 	))
 
 	return (
-		<Container as={as} className={cx(classes)}>
+		<Container as={as}>
 			{isEditing && (
 				<DeleteButton
-					onClick={() => destroyStudent(student.data.present.id)}
+					onClick={() => destroyStudent(student.present.id)}
 				>
 					<Icon large>{iosTrashOutline}</Icon>
 					Delete
 				</DeleteButton>
 			)}
 
-			<ListItemLink to={`/s/${student.data.present.id}/`}>
+			<ListItemLink to={`/student/${student.present.id}/`}>
 				<StudentInfo>
 					<StudentName>
-						{student.data.present.name}
+						{student.present.name}
 						{process.env.NODE_ENV !== 'production'
-							? ` (${student.data.present.id})`
+							? ` (${student.present.id})`
 							: ''}
 					</StudentName>
 					<StudentAreas>{areas}</StudentAreas>

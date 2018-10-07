@@ -1,7 +1,6 @@
 // @flow
-import debug from 'debug'
+
 import delay from 'delay'
-const log = debug('web:redux:notifications')
 
 import {
 	LOG_MESSAGE,
@@ -15,7 +14,7 @@ export function removeNotification(id: string, delayBy: number = 0) {
 	if (delayBy) {
 		return {
 			type: REMOVE_NOTIFICATION,
-			payload: delay(delayBy, {id}),
+			payload: delay(delayBy).then(() => ({id})),
 		}
 	}
 	return {type: REMOVE_NOTIFICATION, payload: {id}}
@@ -29,7 +28,7 @@ export function logError(
 	{id, error}: {id: string, error: string},
 	...args: any[]
 ) {
-	log(error, ...args)
+	if (!global.TESTING) console.error(error, ...args)
 	// istanbul ignore if
 	if (global.Bugsnag) global.Bugsnag.notifyException(error)
 	return {type: LOG_ERROR, payload: {id, error, args}}

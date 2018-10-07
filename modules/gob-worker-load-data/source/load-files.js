@@ -3,13 +3,11 @@
 import startsWith from 'lodash/startsWith'
 import series from 'p-series'
 import {status, json} from '@gob/lib'
-import debug from 'debug'
-import {refreshCourses, refreshAreas, Notification} from './lib-dispatch'
+import {Notification} from './lib-dispatch'
 import needsUpdate from './needs-update'
 import updateDatabase from './update-database'
 import removeDuplicateAreas from './remove-duplicate-areas'
 import type {InfoFileTypeEnum, InfoFileRef, InfoIndexFile} from './types'
-const log = debug('worker:load-data:load-files')
 
 const fetchJson = (...args): Promise<mixed> => {
 	return fetch(...args)
@@ -25,7 +23,7 @@ type Args = {|
 |}
 
 export default function loadFiles(url: string, baseUrl: string) {
-	log(url)
+	console.log(`fetching ${url}`)
 
 	return fetchJson(url)
 		.then(data => proceedWithUpdate(baseUrl, ((data: any): InfoIndexFile)))
@@ -80,11 +78,11 @@ export function slurpIntoDatabase(
 ) {
 	// Exit early if nothing needs to happen
 	if (files.length === 0) {
-		log(`[${type}] no files need loading`)
+		console.log(`[${type}] no files need loading`)
 		return
 	}
 
-	log(`[${type}] these files need loading:`, ...files)
+	console.log(`[${type}] these files need loading:`, ...files)
 
 	// Fire off the progress bar
 	notification.start(files.length)
@@ -102,23 +100,14 @@ export function deduplicateAreas({type}: Args) {
 	}
 }
 
-export function finishUp({type, notification}: Args) {
-	log(`[${type}] done loading`)
-
+export function finishUp({notification}: Args) {
 	// Remove the progress bar after 1.5 seconds
 	notification.remove()
-
-	// istanbul ignore else
-	if (type === 'courses') {
-		return refreshCourses()
-	} else if (type === 'areas') {
-		return refreshAreas()
-	}
 }
 
 function handleErrors(err: Error, url: string) {
 	if (startsWith(err.message, 'Failed to fetch')) {
-		log(`Failed to fetch ${url}`)
+		console.log(`Failed to fetch ${url}`)
 		return
 	}
 	throw err

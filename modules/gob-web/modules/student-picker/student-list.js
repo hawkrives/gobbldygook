@@ -1,61 +1,70 @@
+// @flow
+
 import React from 'react'
-import PropTypes from 'prop-types'
-import filter from 'lodash/filter'
-import sortBy from 'lodash/sortBy'
 import fuzzysearch from 'fuzzysearch'
 import styled from 'styled-components'
-import List from '../../components/list'
+import {Card} from '../../components/card'
+import {PlainList} from '../../components/list'
 import StudentListItem from './student-list-item'
-import * as theme from '../../theme'
+import {type SORT_BY_ENUM} from './types'
+import {Map} from 'immutable'
+import type {State as StudentState} from '../../redux/students/reducers'
 
-const ListOfStudents = styled(List)`
-	${theme.card};
+const OuterCard = styled(Card)`
 	max-width: 35em;
 	width: 100%;
-	margin: 0 auto;
+	margin: 0 auto 2em;
 	overflow: hidden;
 `
 
-export default function StudentList(props) {
-	const {isEditing, destroyStudent, students} = props
+type Props = {
+	destroyStudent: string => mixed,
+	filter?: string,
+	groupBy: string,
+	isEditing: boolean,
+	sortBy: SORT_BY_ENUM,
+	students: StudentState,
+}
 
+export default function StudentList(props: Props) {
 	let {
-		filter: filterText,
+		isEditing,
+		destroyStudent,
+		students = {},
+		filter: filterText = '',
 		sortBy: sortByKey,
 		// groupBy: groupByKey,
 	} = props
 
 	filterText = filterText.toLowerCase()
-	let filtered = filter(students, s =>
-		fuzzysearch(filterText, (s.data.present.name || '').toLowerCase()),
-	)
-
-	const studentObjects = sortBy(filtered, s => s.data.present[sortByKey]).map(
-		(student, i) => (
+	let filtered = Map(students)
+		.filter(s =>
+			fuzzysearch(filterText, (s.present.name || '').toLowerCase()),
+		)
+		.toList()
+		.sortBy(s => {
+			switch (sortByKey) {
+				case 'name':
+					return s.present.name
+				case 'dateLastModified':
+					return s.present.dateLastModified
+				default:
+					;(sortByKey: empty)
+			}
+		})
+		.map((student, i) => (
 			<StudentListItem
-				key={student.data.present.id || i}
+				key={student.present.id || i}
 				as="li"
 				student={student}
 				destroyStudent={destroyStudent}
 				isEditing={isEditing}
 			/>
-		),
+		))
+
+	return (
+		<OuterCard>
+			<PlainList>{[...filtered]}</PlainList>
+		</OuterCard>
 	)
-
-	return <ListOfStudents type="plain">{studentObjects}</ListOfStudents>
-}
-
-StudentList.propTypes = {
-	destroyStudent: PropTypes.func.isRequired,
-	filter: PropTypes.string.isRequired,
-	groupBy: PropTypes.string.isRequired,
-	isEditing: PropTypes.bool.isRequired,
-	sortBy: PropTypes.oneOf(['dateLastModified', 'name', 'canGraduate'])
-		.isRequired,
-	students: PropTypes.object.isRequired,
-}
-
-StudentList.defaultProps = {
-	filter: '',
-	students: {},
 }

@@ -1,12 +1,8 @@
 // @flow
 import isEqualWith from 'lodash/isEqualWith'
-import every from 'lodash/every'
-import keys from 'lodash/keys'
-import filter from 'lodash/filter'
-import includes from 'lodash/includes'
 import type {Course} from './types'
 
-const baseKeys = [
+const baseKeys = new Set([
 	'department',
 	'international',
 	'level',
@@ -15,7 +11,7 @@ const baseKeys = [
 	'semester',
 	'type',
 	'year',
-]
+])
 
 /**
  * Used as a customizer for `isEqualWith`; checks if the left-side is a wildcard,
@@ -55,11 +51,11 @@ export default function compareCourseToCourse(
 	// this should accomplish the same effect as
 	// `intersection(keys(query), baseKeys)`,
 	// but it benchmarks quite a bit faster.
-	const keysToCheck = filter(keys(query), key => includes(baseKeys, key))
+	const keysToCheck = Object.keys(query).filter(key => baseKeys.has(key))
 
 	// We only check the specified keys.
 	// If any of them are not equal, we return false.
-	return every(keysToCheck, key =>
+	return keysToCheck.every(key =>
 		isEqualWith(query[key], other[key], wildcard),
 	)
 }

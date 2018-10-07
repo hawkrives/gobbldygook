@@ -1,17 +1,17 @@
 #!/bin/bash
 
-cd modules/ || exit 1
+cp package.json package-root.json
 
-for module in *; do
+for module in modules/*; do
 	echo "$module"
 
-	cd $module || exit 1
+	cp "$module/package.json" ./package.json
+	yarn add --dev flow-bin@^0.81.0
 
-	flow-typed update --libdefDir ../../flow-typed/ --packageDir ../../
-
-	cd .. || exit 1
+	flow-typed update
 done
 
-cd .. || exit 1
+mv package-root.json package.json
+rm package-root.json
 
 bash scripts/trim-flow-typed-generic-defs.sh
