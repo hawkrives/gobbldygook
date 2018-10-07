@@ -51,6 +51,10 @@ You can file an issue via [github](https://github.com/hawkrives/gobbldygook/issu
 
 ## Screenshots
 
+### 2018 – October
+
+![Screenshot, october 2018](./screenshots/october-2018.png)
+
 ### 2015 – September
 
 ![Screenshot, september 2015](./screenshots/september-2015.png)
