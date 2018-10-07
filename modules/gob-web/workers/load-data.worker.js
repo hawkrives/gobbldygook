@@ -21,7 +21,7 @@ function sendMessage(params: {id: string, [key: string]: mixed}) {
 }
 
 async function main({data}) {
-	let message: LoadDataMessage = JSON.parse(data)
+	let message = JSON.parse(data)
 
 	switch (message.type) {
 		case 'check-idb-in-worker-support': {
@@ -30,13 +30,11 @@ async function main({data}) {
 			return
 		}
 		case 'load-from-info': {
-			// $FlowFixMe figure out why flow can't distinguish this switch case
 			let {url, path} = message
 			await loadFiles(url, path)
 			break
 		}
 		case 'load-term-data': {
-			// $FlowFixMe figure out why flow can't distinguish this switch case
 			let {term, courseInfoUrl, path} = message
 			await loadTerm(term, courseInfoUrl, path)
 			break
