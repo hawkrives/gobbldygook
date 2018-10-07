@@ -21,6 +21,7 @@ export type FabricationType = {|
 	+number: number,
 	+section: string,
 	+semester: number,
+	+term: number,
 	+year: number,
 |}
 
