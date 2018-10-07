@@ -24,6 +24,8 @@ export function removeStudentFromCache(studentId: string) {
 }
 
 export async function saveStudent(student: Student) {
+	console.info(`saving ${student.id} (${student.name})`)
+
 	student = student.set('dateLastModified', new Date())
 	let str = stringify(student)
 	localStorage.setItem(student.id, str)
