@@ -28,6 +28,7 @@ import {
 } from '../../redux/students/actions/change'
 import {CourseList} from './course-list'
 import styled from 'styled-components'
+import {loadDataForTerm} from '../../workers/load-data'
 
 const Container = styled.div`
 	${theme.card};
@@ -172,6 +173,7 @@ class Semester extends React.Component<Props, State> {
 	}
 
 	componentDidMount() {
+		this.ensureDataExists()
 		this.prepare(this.props)
 	}
 
@@ -179,6 +181,10 @@ class Semester extends React.Component<Props, State> {
 		if (this.props.schedule !== prevProps.schedule) {
 			this.prepare(this.props)
 		}
+	}
+
+	ensureDataExists = async () => {
+		await loadDataForTerm(parseInt(this.props.schedule.getTerm()))
 	}
 
 	prepare = async props => {
