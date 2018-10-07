@@ -44,10 +44,14 @@ const DeleteButton = styled(FlatButton)`
 const GoIcon = styled(Icon)`
 	margin-left: 1em;
 	margin-right: 0.5em;
+	flex-shrink: 0;
 `
 
 const StudentName = styled.div`
 	line-height: 1.5;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 `
 
 const StudentAreas = styled.div`
@@ -69,6 +73,7 @@ const AreaName = styled.span`
 const StudentInfo = styled.span`
 	flex: 1;
 	margin-left: 0.5em;
+	max-width: 90%;
 `
 
 const ListItemLink = styled(Link)`
@@ -81,6 +86,7 @@ const ListItemLink = styled(Link)`
 	flex: 1;
 	display: flex;
 	align-items: center;
+	width: 100%;
 
 	padding: 0.75em 0.5em;
 	position: relative;
