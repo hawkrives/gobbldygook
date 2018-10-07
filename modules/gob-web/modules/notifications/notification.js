@@ -29,7 +29,7 @@ let ProgressBar = styled(BasicProgressBar)`
 let Percentage = styled.output`
 	color: var(--gray-300);
 	margin-left: 0.5em;
-	font-variant-numeric: lining-nums;
+	font-variant-numeric: lining-nums tabular-nums;
 `
 
 let Message = styled.h1`
