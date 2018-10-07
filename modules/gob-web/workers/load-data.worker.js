@@ -1,33 +1,55 @@
 // @flow
 
-import serializeError from 'serialize-error'
-import {loadFiles} from '@gob/worker-load-data'
+import {loadFiles, loadTerm} from '@gob/worker-load-data'
 import {IS_WORKER} from './lib'
 
+import type {LoadDataMessage} from './load-data'
+
 declare var self: DedicatedWorkerGlobalScope
-const CHECK_IDB_IN_WORKER_SUPPORT = '__check-idb-worker-support'
 
 function checkIdbInWorkerSupport() {
 	if ((self: any).IDBCursor) {
-		return Promise.resolve(true)
+		return true
 	}
-	return Promise.resolve(false)
+	return false
 }
 
-function main({data}) {
-	const [id, ...args] = JSON.parse(data)
-	// console.log('received message:', ...args)
+function sendMessage(params: {id: string, [key: string]: mixed}) {
+	let {id, type, ...args} = params
+	let strMessage = JSON.stringify({id, type, ...args})
+	self.postMessage(strMessage)
+}
 
-	if (id === CHECK_IDB_IN_WORKER_SUPPORT) {
-		checkIdbInWorkerSupport()
-			.then(result => self.postMessage([id, 'result', result]))
-			.catch(err => self.postMessage([id, 'error', serializeError(err)]))
-		return
+async function main({data}) {
+	let message: LoadDataMessage = JSON.parse(data)
+
+	switch (message.type) {
+		case 'check-idb-in-worker-support': {
+			let supportState = await checkIdbInWorkerSupport()
+			await sendMessage({id: message.id, supported: supportState})
+			return
+		}
+		case 'load-from-info': {
+			// $FlowFixMe figure out why flow can't distinguish this switch case
+			let {url, path} = message
+			await loadFiles(url, path)
+			break
+		}
+		case 'load-term-data': {
+			// $FlowFixMe figure out why flow can't distinguish this switch case
+			let {term, courseInfoUrl, path} = message
+			await loadTerm(term, courseInfoUrl, path)
+			break
+		}
+		case 'dispatch': {
+			break
+		}
+		default: {
+			;(message.type: empty)
+		}
 	}
 
-	loadFiles(...args)
-		.then(result => self.postMessage([id, 'result', result]))
-		.catch(err => self.postMessage([id, 'error', serializeError(err)]))
+	sendMessage({id: message.id})
 }
 
 if (IS_WORKER) {

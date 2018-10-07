@@ -1,8 +1,8 @@
 // @flow
 
 function dispatch(type: string, action: string, ...args: any[]) {
-	const toDispatch = [null, 'dispatch', {type, action, args}]
-	self.postMessage(toDispatch)
+	const toDispatch = {type: 'dispatch', message: {type, action, args}}
+	self.postMessage(JSON.stringify(toDispatch))
 }
 
 export const quotaExceededError = (dbName: string) => {
@@ -18,8 +18,8 @@ export class Notification {
 	length = 1
 	store = 'notifications'
 
-	constructor(notificationType: string) {
-		this.id = notificationType
+	constructor(notificationType: string, id?: string) {
+		this.id = id || notificationType
 		this.type = notificationType
 	}
 
