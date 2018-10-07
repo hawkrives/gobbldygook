@@ -62,6 +62,10 @@ export default function StudentList(props: Props) {
 			/>
 		))
 
+	if (sortByKey === 'dateLastModified') {
+		filtered = filtered.reverse()
+	}
+
 	return (
 		<OuterCard>
 			<PlainList>{[...filtered]}</PlainList>
