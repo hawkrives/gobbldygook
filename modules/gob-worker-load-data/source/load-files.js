@@ -1,7 +1,7 @@
 // @flow
 
-import startsWith from 'lodash/startsWith'
 import series from 'p-series'
+import uniqueId from 'lodash/uniqueId'
 import {status, json} from '@gob/lib'
 import {Notification} from './lib-dispatch'
 import needsUpdate from './needs-update'
@@ -9,23 +9,18 @@ import updateDatabase from './update-database'
 import removeDuplicateAreas from './remove-duplicate-areas'
 import type {InfoFileTypeEnum, InfoFileRef, InfoIndexFile} from './types'
 
-const fetchJson = (...args): Promise<mixed> => {
-	return fetch(...args)
-		.then(status)
-		.then(json)
-}
-
 type Args = {|
 	baseUrl: string,
 	notification: Notification,
-	oldestYear: number,
 	type: InfoFileTypeEnum,
 |}
 
 export default function loadFiles(url: string, baseUrl: string) {
 	console.log(`fetching ${url}`)
 
-	return fetchJson(url)
+	return fetch(url)
+		.then(status)
+		.then(json)
 		.then(data => proceedWithUpdate(baseUrl, ((data: any): InfoIndexFile)))
 		.catch(err => handleErrors(err, url))
 }
@@ -34,17 +29,43 @@ export async function proceedWithUpdate(baseUrl: string, data: InfoIndexFile) {
 	const type: InfoFileTypeEnum = data.type
 	const notification = new Notification(type)
 	const oldestYear = new Date().getFullYear() - 5
-	const args = {type, notification, baseUrl, oldestYear}
+	const args = {type, notification, baseUrl}
 
-	const files = await getFilesToLoad(args, data)
-	const filtered = await filterFiles(args, files)
+	const files = await getFilesToLoad(type, oldestYear, data)
+	const filtered = await filterFiles(type, files)
 	await slurpIntoDatabase(args, filtered)
 
 	await deduplicateAreas(args)
 	await finishUp(args)
 }
 
-export function getFilesToLoad({type, oldestYear}: Args, data: InfoIndexFile) {
+export async function loadTerm(
+	term: number,
+	courseInfoUrl: string,
+	baseUrl: string,
+) {
+	let data: InfoIndexFile = (await fetch(courseInfoUrl)
+		.then(status)
+		.then(json): any)
+
+	const type: InfoFileTypeEnum = data.type
+	const notification = new Notification(type, String(uniqueId()))
+
+	const args = {type, notification, baseUrl}
+
+	const files = data.files.filter(f => f.type === 'json' && f.term === term)
+	const filtered = await filterFiles(type, files)
+	await slurpIntoDatabase(args, filtered)
+
+	await deduplicateAreas(args)
+	await finishUp(args)
+}
+
+export function getFilesToLoad(
+	type: InfoFileTypeEnum,
+	oldestYear: number,
+	data: InfoIndexFile,
+) {
 	let files = data.files
 
 	if (type === 'courses') {
@@ -55,7 +76,7 @@ export function getFilesToLoad({type, oldestYear}: Args, data: InfoIndexFile) {
 }
 
 export async function filterFiles(
-	{type}: Args,
+	type: InfoFileTypeEnum,
 	files: InfoFileRef[],
 ): Promise<Array<InfoFileRef>> {
 	// For each file, see if it needs loading. We then update each promise
@@ -106,7 +127,7 @@ export function finishUp({notification}: Args) {
 }
 
 function handleErrors(err: Error, url: string) {
-	if (startsWith(err.message, 'Failed to fetch')) {
+	if (err.message.startsWith('Failed to fetch')) {
 		console.log(`Failed to fetch ${url}`)
 		return
 	}
