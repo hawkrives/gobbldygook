@@ -23,7 +23,7 @@ type State = {
 
 const SizedCard = styled(Card)`
 	width: 300px;
-	height: 200px;
+	min-height: 200px;
 
 	margin: auto;
 	padding: 1em;

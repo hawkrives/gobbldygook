@@ -1,35 +1,43 @@
 @import '../../styles/variables.scss';
 
-.manual .autosize-input > input {
-	border: 0;
-	border-bottom: 1px solid $gray-400;
-	// padding: 0 0.125em 0 0;
-	padding: 0 0.0625em 0 0.125em;
-
-	&:focus {
-		outline: 0;
-		background-color: $blue-50;
-		border-bottom-color: $blue-400;
-	}
-}
-
-.manual .invalid > input {
-	border-color: red;
-}
-
-.manual .areas {
+.manual .student-editor {
 	display: grid;
 	grid-template-columns: max-content 1fr;
+	align-items: center;
 	grid-column-gap: 1em;
 	grid-row-gap: 1em;
-	align-items: center;
+
+	padding-left: 0.5em;
+	padding-right: 0.25em;
+	margin-bottom: 1em;
 
 	label {
 		grid-column: 1;
 		text-align: right;
 	}
-	.react-select {
+
+	.react-select,
+	input {
 		grid-column: 2;
+	}
+
+	& > input {
+		width: 100%;
+		border-radius: 0.2em;
+		padding: 6px 10px;
+		border: solid 1px hsl(0, 0%, 80%); // custom color to match react-select
+
+		--edge-color: var(--blue-500);
+
+		&:focus {
+			box-shadow: var(--edge-color) 0 0 0 1px;
+			border-color: var(--edge-color);
+			outline: 0;
+		}
+
+		&.invalid {
+			--edge-color: var(--red-500);
+		}
 	}
 }
 
