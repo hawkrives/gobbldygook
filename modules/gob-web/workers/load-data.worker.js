@@ -3,8 +3,6 @@
 import {loadFiles, loadTerm} from '@gob/worker-load-data'
 import {IS_WORKER} from './lib'
 
-import type {LoadDataMessage} from './load-data'
-
 declare var self: DedicatedWorkerGlobalScope
 
 function checkIdbInWorkerSupport() {
