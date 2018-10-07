@@ -1,3 +1,3 @@
 // @flow
 
-export {default as loadFiles} from './source/load-files'
+export {default as loadFiles, loadTerm} from './source/load-files'

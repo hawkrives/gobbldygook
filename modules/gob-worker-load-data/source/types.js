@@ -10,6 +10,7 @@ export type InfoIndexFile = {
 export type InfoFileRef = {
 	type: 'json' | 'xml' | 'csv' | 'yaml',
 	year?: number,
+	term?: number,
 	path: string,
 	hash: string,
 }
