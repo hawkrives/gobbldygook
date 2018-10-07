@@ -181,7 +181,6 @@ describe('filterFiles', () => {
 
 describe('getFilesToLoad', () => {
 	test('returns the input array if loading areas', async () => {
-		const args = mockArgs('areas')
 		const index = {
 			type: 'areas',
 			files: [
@@ -191,13 +190,11 @@ describe('getFilesToLoad', () => {
 				{type: 'yaml', path: '4.json', hash: ''},
 			],
 		}
-		const actual = await load.getFilesToLoad(args, index)
+		const actual = await load.getFilesToLoad('areas', 0, index)
 		expect(actual).toBe(index.files)
 	})
 
 	test('filters the input array if loading courses', async () => {
-		const args = mockArgs('courses')
-		args.oldestYear = 2002
 		const index = {
 			type: 'courses',
 			files: [
@@ -207,7 +204,7 @@ describe('getFilesToLoad', () => {
 				{type: 'json', year: 2003, path: '4.json', hash: ''},
 			],
 		}
-		const actual = await load.getFilesToLoad(args, index)
+		const actual = await load.getFilesToLoad('courses', 2002, index)
 		const expected = index.files.filter(f => f.year >= 2002)
 		expect(actual).toEqual(expected)
 	})
