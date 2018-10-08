@@ -4,7 +4,7 @@
     publish = "modules/gob-web/build/"
     [build.environment]
         NODE_VERSION = "10"
-        YARN_VERSION = "1.7.0"
+        YARN_VERSION = "1.10.1"
         YARN_FLAGS = "--production=false"
 
 # Production context: All deploys to the main
@@ -16,19 +16,9 @@
 
 # respond to all requests with the SPA
 [[redirects]]
-    from = "/s/*"
-    to = "/index.html"
-    status = 200
-
-[[redirects]]
-    from = "/create/*"
-    to = "/index.html"
-    status = 200
-
-[[redirects]]
-    from = "/search/*"
-    to = "/index.html"
-    status = 200
+from = "/*"
+to = "/index.html"
+status = 200
 
 # set headers for the app
 [[headers]]

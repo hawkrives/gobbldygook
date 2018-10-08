@@ -66,8 +66,13 @@ let Student = Loadable({
 	loading: LoadingComponent,
 })
 
+let CourseSearcher = Loadable({
+	loader: () => import('./screens/search'),
+	loading: LoadingComponent,
+})
+
 // needs to be a stateful component: otherwise DragDropContext can't assign a ref, which it needs
-class App extends React.Component<any> {
+class App extends React.Component<{}> {
 	render() {
 		return (
 			<div>
@@ -80,7 +85,8 @@ class App extends React.Component<any> {
 					<AreaEditor path="/areas" />
 					<Student path="/student/:studentId/*" />
 					<CreateStudent path="/create/*" />
-					<StudentPicker path="/*" />
+					<CourseSearcher path="/search/*" />
+					<StudentPicker path="/" />
 				</Router>
 			</div>
 		)
