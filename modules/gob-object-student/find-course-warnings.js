@@ -5,7 +5,7 @@ import ordinal from 'ord'
 import oxford from 'listify'
 import {findTimeConflicts} from '@gob/schedule-conflicts'
 import {expandYear, semesterName} from '@gob/school-st-olaf-college'
-import type {Course as CourseType, CourseError} from '@gob/types'
+import type {Course as CourseType} from '@gob/types'
 import {Schedule} from './schedule'
 
 export type WarningTypeEnum =
@@ -102,16 +102,13 @@ export function checkForTimeConflicts(
 }
 
 export function findWarnings(
-	courses: List<CourseType | CourseError>,
+	courses: List<CourseType>,
 	schedule: Schedule,
 ): Map<string, List<WarningType>> {
 	let {year, semester} = schedule
 
-	let noErrors: List<any> = courses.filterNot((c: any) => c.error)
-	let onlyCourses: List<CourseType> = noErrors
-
-	let warningsOfInvalidity = checkForInvalidity(onlyCourses, {year, semester})
-	let timeConflicts = checkForTimeConflicts(onlyCourses)
+	let warningsOfInvalidity = checkForInvalidity(courses, {year, semester})
+	let timeConflicts = checkForTimeConflicts(courses)
 
 	return Map()
 		.mergeDeep(warningsOfInvalidity, timeConflicts)

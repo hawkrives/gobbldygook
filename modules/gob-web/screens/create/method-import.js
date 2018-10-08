@@ -9,18 +9,17 @@ import {
 	type PartialStudent,
 } from '@gob/school-st-olaf-college'
 import {Map, List} from 'immutable'
-import {getOnlyCourse, getCourse} from '../../helpers/get-courses'
+import {getCourse} from '../../helpers/get-courses'
 import {StudentSummary} from '../../modules/student/student-summary'
 import {
 	action as initStudent,
 	type ActionCreator as InitStudentFunc,
 } from '../../redux/students/actions/init-student'
 import {connect} from 'react-redux'
-import type {Course as CourseType, CourseError} from '@gob/types'
+import type {Course as CourseType, Result} from '@gob/types'
+import {Student, Schedule} from '@gob/object-student'
 import {Header} from './components'
 import './method-import.scss'
-
-import {Student, Schedule, type FabricationType} from '@gob/object-student'
 
 type Props = {
 	+initStudent: InitStudentFunc, // redux
@@ -58,7 +57,7 @@ class SISImportScreen extends React.Component<Props, State> {
 		this.setState(() => ({status: 'processing'}))
 
 		try {
-			let student = await convertStudent(parsedStudentText, getOnlyCourse)
+			let student = await convertStudent(parsedStudentText, getCourse)
 			this.setState(() => ({student}))
 		} catch (error) {
 			console.warn(error)
@@ -202,7 +201,7 @@ const StudentInfo = ({student}: {student: Student}) => (
 
 const ScheduleListing = (props: {
 	schedules: Map<string, Schedule>,
-	fabrications: List<FabricationType>,
+	fabrications: List<CourseType>,
 }) => {
 	let {schedules = Map(), fabrications = List()} = props
 
@@ -226,15 +225,15 @@ const ScheduleListing = (props: {
 }
 
 class AbbreviatedCourseListing extends React.Component<
-	{schedule: Schedule, fabrications: List<FabricationType>},
-	{courses: List<CourseType | FabricationType | CourseError>},
+	{schedule: Schedule, fabrications: List<CourseType>},
+	{courses: List<Result<CourseType>>},
 > {
 	state = {courses: List()}
 	componentDidMount() {
 		this.fetchCourses()
 	}
 	fetchCourses = async () => {
-		let courses = await this.props.schedule.getCourses(
+		let courses = await this.props.schedule.getCoursesWithErrors(
 			getCourse,
 			this.props.fabrications,
 		)
@@ -246,13 +245,17 @@ class AbbreviatedCourseListing extends React.Component<
 		return (
 			<ul>
 				{courses
-					// TODO: replace any with handling of CourseError
-					.map((course: any) => (
-						<li key={course.clbid}>
-							{course.department} {course.number}
-							{course.section} – {course.name}
-						</li>
-					))
+					.map(
+						(r, i) =>
+							r.error ? (
+								<li key={i}>{r.result.message}</li>
+							) : (
+								<li key={r.result.clbid}>
+									{r.result.department} {r.result.number}
+									{r.result.section} – {r.result.name}
+								</li>
+							),
+					)
 					.toArray()}
 			</ul>
 		)

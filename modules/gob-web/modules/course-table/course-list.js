@@ -7,9 +7,9 @@ import {DraggableCourse} from '../course'
 import {PlainList, ListItem} from '../../components/list'
 import MissingCourse from './missing-course'
 import EmptyCourseSlot from './empty-course-slot'
-import {type WarningType, type FabricationType} from '@gob/object-student'
+import {type WarningType} from '@gob/object-student'
 import {Map, List as IList} from 'immutable'
-import type {Course as CourseType, CourseError} from '@gob/types'
+import type {Course as CourseType, Result} from '@gob/types'
 
 const courseStyles = css`
 	padding: var(--block-edge-padding) var(--semester-side-padding);
@@ -42,7 +42,7 @@ const Empty = styled(EmptyCourseSlot)`
 `
 
 type Props = {
-	courses: Array<CourseType | CourseError | FabricationType>,
+	courses: Array<Result<CourseType>>,
 	usedSlots: number,
 	warnings: Map<string, IList<WarningType>>,
 	maxSlots: number,
@@ -54,13 +54,17 @@ export function CourseList(props: Props) {
 	const courseObjects = props.courses.map(
 		(course, i) =>
 			course.error ? (
-				<Missing key={i} clbid={course.clbid} error={course.error} />
+				<Missing
+					key={i}
+					clbid={course.meta ? course.meta.clbid : null}
+					error={course.error}
+				/>
 			) : (
 				<Course
 					key={i}
 					index={i}
-					course={course}
-					conflicts={props.warnings.get(course.clbid)}
+					course={course.result}
+					conflicts={props.warnings.get(course.result.clbid)}
 					scheduleId={props.scheduleId}
 					studentId={props.studentId}
 				/>

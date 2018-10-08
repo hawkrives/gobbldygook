@@ -2,15 +2,10 @@
 
 import uuid from 'uuid/v4'
 import {randomChar} from '@gob/lib'
+import type {Result} from '@gob/types'
 
 import {List, Map, Record} from 'immutable'
-import type {
-	CourseLookupFunc,
-	OnlyCourseLookupFunc,
-	FabricationType,
-	CourseType,
-	CourseError,
-} from './types'
+import type {CourseLookupFunc, CourseType} from './types'
 import {
 	validateSchedule,
 	type Result as ValidationResult,
@@ -131,25 +126,29 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
 		return 1
 	}
 
-	async getCourses(
+	async getCoursesWithErrors(
 		getCourse: CourseLookupFunc,
-		fabrications?: Array<FabricationType> | List<FabricationType>,
-	): Promise<List<CourseType | FabricationType | CourseError>> {
+		fabrications?: Array<CourseType> | List<CourseType>,
+	): Promise<List<Result<CourseType>>> {
 		let term = this.getTerm()
 		let promises = this.clbids.map(clbid =>
-			getCourse({clbid, term}, fabrications),
+			getCourse(clbid, term, fabrications),
 		)
 		return Promise.all(promises).then(List)
 	}
 
-	async getOnlyCourses(
-		getCourse: OnlyCourseLookupFunc,
+	async getCourses(
+		getCourse: CourseLookupFunc,
+		fabrications?: Array<CourseType> | List<CourseType>,
 	): Promise<List<CourseType>> {
-		let term = this.getTerm()
-		let promises = this.clbids.map(clbid => getCourse({clbid, term}))
-		let results = await Promise.all(promises)
-		// remove null results
-		return List(results).filter(Boolean)
+		let coursesWithErrors = await this.getCoursesWithErrors(
+			getCourse,
+			fabrications,
+		)
+
+		return coursesWithErrors
+			.map(r => (r.error ? null : r.result))
+			.filter(Boolean)
 	}
 
 	isSpecificTerm(year: number, semester: number): boolean {

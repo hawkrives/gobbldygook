@@ -17,11 +17,7 @@ export type OverrideType = mixed
 export type FulfillmentType = {||}
 
 export type CourseLookupFunc = (
-	{clbid: string, term?: ?number},
-	?(Array<FabricationType> | List<FabricationType>),
-) => Promise<CourseType | FabricationType | CourseError>
-
-export type OnlyCourseLookupFunc = ({
 	clbid: string,
-	term: number,
-}) => Promise<?CourseType>
+	term?: ?number,
+	fabrications?: ?(Array<CourseType> | List<CourseType>),
+) => Promise<Result<CourseType>>
