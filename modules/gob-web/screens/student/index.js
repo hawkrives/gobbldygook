@@ -53,16 +53,10 @@ const SemesterDetail = Loadable({
 	loading: LoadingComponent,
 })
 
-const TermSidebar = ({student}: {student: Undoable<Student>}) => (
-	<Sidebar>
-		<ConnectedSidebarToolbar
-			backTo="picker"
-			search={false}
-			share={true}
-			student={student}
-		/>
-	</Sidebar>
-)
+const TermDetailSidebar = Loadable({
+	loader: () => import('../../modules/term-detail/sidebar'),
+	loading: LoadingComponent,
+})
 
 export default function StudentIndex(props: {
 	studentId?: string,
@@ -88,7 +82,7 @@ export default function StudentIndex(props: {
 					<Router>
 						<StatusSidebar default student={student} />
 
-						<TermSidebar
+						<TermDetailSidebar
 							path="/term/:term"
 							student={student}
 							navigate={navigate}

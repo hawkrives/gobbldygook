@@ -1,14 +1,12 @@
 // @flow
+
 import React from 'react'
 import DocumentTitle from 'react-document-title'
 import {semesterName} from '@gob/school-st-olaf-college'
-import styled from 'styled-components'
 import {Student} from '@gob/object-student'
-
-const DetailText = styled.pre`
-	background-color: white;
-	margin: 0;
-`
+import {Card} from '../../components/card'
+import {ScheduleProvider} from '../../components/providers/schedule'
+import {WeekCalendar} from './week-calendar'
 
 type RouterProps = {
 	term?: string,
@@ -22,16 +20,16 @@ type ReactProps = {
 
 type Props = RouterProps & ReactProps
 
-type State = {}
-
-export class TermDetail extends React.Component<Props, State> {
-	state = {}
-
+export class TermDetail extends React.Component<Props> {
 	render() {
 		let {term, student} = this.props
 
 		if (!term) {
-			return <p>Unknown term</p>
+			return (
+				<Card>
+					<p>Unknown term</p>
+				</Card>
+			)
 		}
 
 		let year = parseInt(term.substr(0, 4), 10)
@@ -39,18 +37,41 @@ export class TermDetail extends React.Component<Props, State> {
 
 		let schedules = student.findSchedulesForTerm({year, semester})
 
+		if (!schedules.size) {
+			return (
+				<Card>
+					<p>
+						Could not find any schedules for term{' '}
+						<code>{term}</code>.
+					</p>
+				</Card>
+			)
+		}
+
 		let sem = semesterName(semester)
 		let name = this.props.student.name
-		let title = `${sem} ${year} • ${name} | Gobbldygook`
 
 		return (
 			<>
-				<DocumentTitle title={title} />
-				<DetailText>
-					{this.props.uri || ''}
-					{'\n'}
-					{JSON.stringify(schedules.toJSON(), null, 2)}
-				</DetailText>
+				<DocumentTitle
+					title={`${sem} ${year} • ${name} | Gobbldygook`}
+				/>
+				{schedules.map(s => (
+					<Card key={s.id}>
+						<ScheduleProvider schedule={s} student={student}>
+							{({courses, hasConflict, credits, warnings}) => (
+								<WeekCalendar
+									//warnings={warnings}
+									hasConflict={hasConflict}
+									student={student}
+									schedule={s}
+									courses={courses}
+									credits={credits}
+								/>
+							)}
+						</ScheduleProvider>
+					</Card>
+				))}
 			</>
 		)
 	}
