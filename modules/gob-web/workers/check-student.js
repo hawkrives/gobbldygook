@@ -5,7 +5,7 @@ import CheckStudentWorker from './check-student.worker'
 import {type ParsedHansonFile} from '@gob/hanson-format'
 import {type EvaluationResult} from '@gob/examine-student'
 import {Student} from '@gob/object-student'
-import {getOnlyCourse} from '../helpers/get-courses'
+import {getCourse} from '../helpers/get-courses'
 import mem from 'mem'
 import QuickLRU from 'quick-lru'
 
@@ -49,7 +49,8 @@ async function checkStudentAgainstArea(
 		 * > We know that serialization/deserialization is slow. It's actually faster to
 		 * > JSON.stringify() then postMessage() a string than to postMessage() an object. :(
 		 */
-		let courses = await student.activeCourses(getOnlyCourse)
+		let courses = await student.activeCourses(getCourse)
+
 		let {fulfillments, overrides, name} = student
 		let msg = JSON.stringify({
 			id: sourceId,
