@@ -55,7 +55,7 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
 			semester,
 			active,
 			index,
-			title,
+			title = `Schedule ${randomChar()}`,
 		} = data
 
 		if (!List.isList(clbids)) {
