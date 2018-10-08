@@ -48,7 +48,8 @@ const ShareStudentOverlay = Loadable({
 })
 
 const SemesterDetail = Loadable({
-	loader: () => import('../../modules/semester-detail'),
+	loader: () =>
+		import('../../modules/term-detail').then(mod => mod.TermDetail),
 	loading: LoadingComponent,
 })
 

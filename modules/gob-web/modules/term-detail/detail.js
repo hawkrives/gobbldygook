@@ -24,7 +24,7 @@ type Props = RouterProps & ReactProps
 
 type State = {}
 
-export class SemesterDetail extends React.Component<Props, State> {
+export class TermDetail extends React.Component<Props, State> {
 	state = {}
 
 	render() {
