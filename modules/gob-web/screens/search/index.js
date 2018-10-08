@@ -16,7 +16,7 @@ let Container = styled.div`
 	}
 `
 
-export default function CourseSearcherScreen(props: {}) {
+export default function CourseSearcherScreen() {
 	return (
 		<>
 			<RaisedButton as={Link} to="/" style={{margin: '1rem'}}>

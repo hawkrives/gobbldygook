@@ -1,7 +1,6 @@
 // @flow
 
 import * as React from 'react'
-import {Router} from '@reach/router'
 import Loadable from 'react-loadable'
 import {LoadingComponent} from '../../components/loading-comp'
 
