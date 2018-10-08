@@ -18,5 +18,5 @@ export async function getActiveCourses(
 
 	let courses = List(await Promise.all(promises)).flatMap(courses => courses)
 
-	return uniqBy([...courses], course => course.clbid)
+	return [...courses]
 }
