@@ -1,7 +1,8 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
-import map from 'lodash/map'
+import values from 'lodash/values'
+import sortBy from 'lodash/sortBy'
 import {connect} from 'react-redux'
 import {removeNotification} from './redux/actions'
 import type {Notification as Notif} from './types'
@@ -25,11 +26,11 @@ type Props = {
 
 export const Notifications = ({notifications, removeNotification}: Props) => (
 	<NotificationList>
-		{map(notifications, (n, i) => (
+		{sortBy(values(notifications), n => n.id).map(n => (
 			<Notification
 				notification={n}
-				key={i}
-				onClose={() => removeNotification(i)}
+				key={n.id}
+				onClose={() => removeNotification(n.id)}
 			/>
 		))}
 	</NotificationList>
