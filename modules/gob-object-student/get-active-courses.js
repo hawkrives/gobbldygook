@@ -1,6 +1,5 @@
 // @flow
 
-import uniqBy from 'lodash/uniqBy'
 import {List} from 'immutable'
 import {Student} from './student'
 import type {Course as CourseType} from '@gob/types'

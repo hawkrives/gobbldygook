@@ -96,7 +96,6 @@ class StudentSummary extends React.Component<Props, State> {
 
 	countCredits = async (props: Props) => {
 		let {student} = props
-		let {schedules, fabrications} = student
 		let courses = await student.activeCourses(getCourse)
 		let credits = countCredits(courses)
 		this.setState(() => ({creditsTaken: credits}))
