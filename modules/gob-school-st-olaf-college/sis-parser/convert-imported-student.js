@@ -67,7 +67,7 @@ function fleshOutSisFabrication(input: PartialCourse): CourseType {
 	let notes = ''
 	let description = []
 	let level = Math.floor(
-		(parseInt(number.replace(/^[0-9]/g, '')) / 100) * 100,
+		(parseInt(String(number).replace(/^[0-9]/g, '')) / 100) * 100,
 	)
 
 	return {
