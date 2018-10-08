@@ -1,20 +1,16 @@
 // @flow
 
 import * as React from 'react'
+import cx from 'classnames'
 import CourseExpression from './expression--course'
 import ResultIndicator from './result-indicator'
-
 import type {
 	Qualifier,
 	Qualification,
 	QualificationValue,
 } from '@gob/examine-student'
-
-import has from 'lodash/has'
 import plur from 'plur'
 import {humanizeOperator} from '@gob/examine-student'
-import debug from 'debug'
-const log = debug('web:react')
 
 import type {Course} from '@gob/types'
 
@@ -194,7 +190,7 @@ export default function Expression(props: Props) {
 
 	const computationResult = expr._result
 	const isFulfillment = expr._isFulfillment
-	const wasUsed = has(expr, '_result') && computationResult
+	const wasUsed = Boolean(expr._result)
 	const wasTaken = expr._taken
 	const wasEvaluated = expr._checked
 
@@ -227,19 +223,18 @@ export default function Expression(props: Props) {
 	} else if ($type === 'occurrence') {
 		;({description, contents} = makeOccurrenceExpression(props))
 	} else {
-		log(`<Expression />: type not handled: ${$type}`)
-		log(props)
+		console.warn(`<Expression />: type not handled: ${$type}`, props)
 		contents = JSON.stringify(expr, null, 2)
 	}
 
-	const className = [
+	const className = cx([
 		'expression',
 		`expression--${$type}`,
 		wasEvaluated ? 'evaluated' : 'not-evaluated',
 		isFulfillment ? 'fulfillment' : '',
 		wasTaken ? 'taken' : 'not-taken',
 		wasUsed ? 'used' : 'not-used',
-	].join(' ')
+	])
 
 	return (
 		<span className={className}>
@@ -251,7 +246,11 @@ export default function Expression(props: Props) {
 			)}
 			{contents && (
 				<span className="expression--contents">
-					{contents}
+					{typeof contents === 'string' ? (
+						<span className="expression--label">{contents}</span>
+					) : (
+						contents
+					)}
 					{props.hideIndicator || expr._isFulfillment ? null : result}
 				</span>
 			)}
