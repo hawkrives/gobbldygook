@@ -3,6 +3,7 @@
 import * as React from 'react'
 import toPairs from 'lodash/toPairs'
 import styled from 'styled-components'
+import {BulletedList, ListItem} from '../../components/list'
 import type {Course as CourseType} from '@gob/types'
 
 type Props = {
@@ -30,17 +31,17 @@ export class Revisions extends React.Component<Props> {
 			)
 
 			return (
-				<ul key={index}>
+				<BulletedList key={index}>
 					<RevisionTitle>{revisionDate}</RevisionTitle>
 					{toPairs(items).map(
 						([key, value]) =>
 							key !== '_updated' ? (
-								<li key={key + index}>
+								<ListItem key={key + index}>
 									{key}: {value}
-								</li>
+								</ListItem>
 							) : null,
 					)}
-				</ul>
+				</BulletedList>
 			)
 		})
 
