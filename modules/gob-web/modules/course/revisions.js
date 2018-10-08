@@ -13,10 +13,6 @@ const RevisionTitle = styled.div`
 	font-weight: bold;
 `
 
-const Summary = styled.summary`
-	outline-style: none;
-`
-
 export class Revisions extends React.Component<Props> {
 	render() {
 		const {course} = this.props
@@ -49,7 +45,7 @@ export class Revisions extends React.Component<Props> {
 
 		return (
 			<details>
-				<Summary>Revisions</Summary>
+				<summary>Revisions</summary>
 				{RevisionsList}
 			</details>
 		)
