@@ -31,11 +31,11 @@ export class Revisions extends React.Component<Props> {
 			return (
 				<ul key={index}>
 					<RevisionTitle>{revisionDate}</RevisionTitle>
-					{Object.keys(items).map(
-						key =>
+					{Object.entries(items).map(
+						([key, value]) =>
 							key !== '_updated' ? (
 								<li key={key + index}>
-									{key}: {items[key]}
+									{key}: {value}
 								</li>
 							) : null,
 					)}
