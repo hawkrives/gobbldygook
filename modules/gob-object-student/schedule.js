@@ -155,7 +155,7 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
 		return this.year === year && this.semester === semester
 	}
 
-	async validate(getCourse: OnlyCourseLookupFunc): Promise<ValidationResult> {
-		return validateSchedule(this, getCourse)
+	async validate(courses: List<CourseType>): Promise<ValidationResult> {
+		return validateSchedule(this, courses)
 	}
 }
