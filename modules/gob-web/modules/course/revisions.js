@@ -1,6 +1,7 @@
 // @flow
 
 import * as React from 'react'
+import toPairs from 'lodash/toPairs'
 import styled from 'styled-components'
 import type {Course as CourseType} from '@gob/types'
 
@@ -31,7 +32,7 @@ export class Revisions extends React.Component<Props> {
 			return (
 				<ul key={index}>
 					<RevisionTitle>{revisionDate}</RevisionTitle>
-					{Object.entries(items).map(
+					{toPairs(items).map(
 						([key, value]) =>
 							key !== '_updated' ? (
 								<li key={key + index}>
