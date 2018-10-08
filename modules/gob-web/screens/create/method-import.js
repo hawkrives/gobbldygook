@@ -183,6 +183,7 @@ const StudentInfo = ({student}: {student: Student}) => (
 
 		<ul>
 			{student.schedules
+				.sortBy(s => s.getTerm())
 				.groupBy(s => s.year)
 				.map((schedules, year) => (
 					<li key={year}>
