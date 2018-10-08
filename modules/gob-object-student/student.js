@@ -6,10 +6,9 @@ import {Record, OrderedMap, Map, List} from 'immutable'
 import type {
 	AreaQuery,
 	OverrideType,
-	FabricationType,
 	FulfillmentType,
 	CourseType,
-	OnlyCourseLookupFunc,
+	CourseLookupFunc,
 } from './types'
 
 import {Schedule} from './schedule'
@@ -31,7 +30,7 @@ type StudentType = {
 	studies: List<AreaQuery>,
 	schedules: OrderedMap<string, Schedule>,
 	overrides: OrderedMap<string, OverrideType>,
-	fabrications: List<FabricationType>,
+	fabrications: List<CourseType>,
 	fulfillments: OrderedMap<string, FulfillmentType>,
 
 	settings: OrderedMap<string, mixed>,
@@ -444,17 +443,17 @@ export class Student extends StudentRecord<StudentType> {
 	 * Provide a description of fabrications here
 	 */
 
-	get fabrications(): List<FabricationType> {
+	get fabrications(): List<CourseType> {
 		return this.get('fabrications')
 	}
 
-	addFabrication(fabrication: FabricationType): this {
+	addFabrication(fabrication: CourseType): this {
 		return this.update('fabrications', list => {
 			return list.push(fabrication)
 		})
 	}
 
-	getFabrication(fabricationId: string): ?FabricationType {
+	getFabrication(fabricationId: string): ?CourseType {
 		return this.fabrications.find(({clbid}) => clbid === fabricationId)
 	}
 
@@ -488,7 +487,7 @@ export class Student extends StudentRecord<StudentType> {
 	/// Helpers
 	/////
 
-	activeCourses(getCourse: OnlyCourseLookupFunc): Promise<Array<CourseType>> {
+	activeCourses(getCourse: CourseLookupFunc): Promise<Array<CourseType>> {
 		return getActiveCourses(this, getCourse)
 	}
 

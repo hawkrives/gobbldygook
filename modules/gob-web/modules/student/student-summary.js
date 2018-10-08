@@ -4,7 +4,7 @@ import React from 'react'
 import cx from 'classnames'
 import listify from 'listify'
 import sample from 'lodash/sample'
-import {List, Set} from 'immutable'
+import {List} from 'immutable'
 import {connect} from 'react-redux'
 import {Card} from '../../components/card'
 import {AvatarLetter} from '../../components/avatar-letter'
@@ -96,12 +96,8 @@ class StudentSummary extends React.Component<Props, State> {
 
 	countCredits = async (props: Props) => {
 		let {student} = props
-		let {schedules, fabrications} = student
-		let promises = Set(schedules.toList().flatMap(s => s.clbids)).map(
-			clbid => getCourse({clbid}, fabrications),
-		)
-		let courses = await Promise.all(promises)
-		let credits = countCredits([...courses])
+		let courses = await student.activeCourses(getCourse)
+		let credits = countCredits(courses)
 		this.setState(() => ({creditsTaken: credits}))
 	}
 
@@ -137,8 +133,9 @@ class StudentSummary extends React.Component<Props, State> {
 		let {studies} = student
 		let gradClassName = canGraduate ? 'can-graduate' : 'cannot-graduate'
 		let message = this.state.message
-
 		let {creditsNeeded} = student
+
+		canGraduate = canGraduate && Number(creditsTaken) >= creditsNeeded
 
 		return (
 			<Card

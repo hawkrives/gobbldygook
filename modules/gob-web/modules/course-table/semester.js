@@ -18,10 +18,9 @@ import {
 	Student,
 	Schedule,
 	type WarningType,
-	type FabricationType,
 } from '@gob/object-student'
-import type {Course as CourseType, CourseError} from '@gob/types'
-import {getOnlyCourse, getCourse} from '../../helpers/get-courses'
+import type {Course as CourseType, Result} from '@gob/types'
+import {getCourse} from '../../helpers/get-courses'
 import {
 	changeStudent,
 	type ChangeStudentFunc,
@@ -33,7 +32,7 @@ import {loadDataForTerm} from '../../workers/load-data'
 const Container = styled.div`
 	${theme.card};
 	flex: 1 0;
-	min-width: 14em;
+	min-width: 13em;
 	margin: var(--semester-spacing);
 	overflow: hidden;
 
@@ -156,7 +155,7 @@ type Props = ReduxProps & DnDProps & ReactProps
 type State = {
 	loading: boolean,
 	checking: boolean,
-	courses: List<CourseType | FabricationType | CourseError>,
+	courses: List<Result<CourseType>>,
 	warnings: Map<string, List<WarningType>>,
 	hasConflict: boolean,
 	credits: number,
@@ -191,15 +190,19 @@ class Semester extends React.Component<Props, State> {
 		this.setState(() => ({loading: true, checking: true}))
 
 		let {schedule} = props
-		let courses = await schedule.getCourses(
+		let courses = await schedule.getCoursesWithErrors(
 			getCourse,
 			props.student.fabrications,
 		)
-		let credits = countCredits([...courses])
+
+		let onlyCourses = courses
+			.map(r => (r.error ? null : r.result))
+			.filter(Boolean)
+		let credits = countCredits([...onlyCourses])
 
 		this.setState(() => ({courses, credits, loading: false}))
 
-		let {warnings, hasConflict} = await schedule.validate(getOnlyCourse)
+		let {warnings, hasConflict} = await schedule.validate(onlyCourses)
 
 		this.setState(() => ({warnings, hasConflict, checking: false}))
 	}

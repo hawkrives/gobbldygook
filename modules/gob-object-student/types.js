@@ -1,7 +1,9 @@
 // @flow
 
-import type {CourseError, Course as CourseType} from '@gob/types'
-export type {CourseError, CourseType}
+import type {Course as CourseType, Result} from '@gob/types'
+
+export type {CourseType}
+
 import {List} from 'immutable'
 
 export type AreaQuery = {
@@ -12,27 +14,10 @@ export type AreaQuery = {
 
 export type OverrideType = mixed
 
-export type FabricationType = {|
-	+clbid: string,
-	+credits: number,
-	+department: string,
-	+gereqs: Array<string>,
-	+name: string,
-	+number: number,
-	+section: string,
-	+semester: number,
-	+term: number,
-	+year: number,
-|}
-
 export type FulfillmentType = {||}
 
 export type CourseLookupFunc = (
-	{clbid: string, term?: ?number},
-	?(Array<FabricationType> | List<FabricationType>),
-) => Promise<CourseType | FabricationType | CourseError>
-
-export type OnlyCourseLookupFunc = ({
 	clbid: string,
-	term: number,
-}) => Promise<?CourseType>
+	term?: ?number,
+	fabrications?: ?(Array<CourseType> | List<CourseType>),
+) => Promise<Result<CourseType>>

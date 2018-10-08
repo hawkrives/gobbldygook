@@ -10,7 +10,7 @@
 export function buildDeptNum(
 	course: {
 		+department: string,
-		+number: number,
+		+number: number | string,
 		+section?: string,
 		+type?: string,
 	},

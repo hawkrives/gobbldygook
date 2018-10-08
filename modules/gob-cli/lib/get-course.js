@@ -1,8 +1,8 @@
 // @flow
 
 import got from 'got'
-import type {FabricationType} from '@gob/object-student'
-import type {Course as CourseType} from '@gob/types'
+import type {Course as CourseType, Result} from '@gob/types'
+import {List} from 'immutable'
 
 const Keyv = require('keyv')
 const KeyvFile = require('keyv-file')
@@ -10,12 +10,6 @@ const KeyvFile = require('keyv-file')
 const keyv = new Keyv({
 	store: new KeyvFile(),
 })
-
-type ErrorType = {
-	clbid: string,
-	term: number,
-	error: string,
-}
 
 const baseUrl = 'https://stodevx.github.io/course-data'
 
@@ -28,25 +22,29 @@ export async function getCourseFromNetwork(clbid: string) {
 	return (await got(path, {json: true, cache: keyv})).body
 }
 
-export function getCourse(
-	{clbid, term}: {clbid: string, term: number},
-	fabrications?: ?{[key: string]: FabricationType} = {},
-): Promise<CourseType | FabricationType | ErrorType> {
-	if (fabrications && clbid in fabrications) {
-		return Promise.resolve(fabrications[clbid])
+export async function getCourse(
+	clbid: string,
+	term?: ?number,
+	fabrications?: ?(Array<CourseType> | List<CourseType>) = [],
+): Promise<Result<CourseType>> {
+	if (fabrications) {
+		let fab = fabrications.find(c => c.clbid === clbid)
+		if (fab) {
+			return {error: false, result: fab, meta: {fabrication: true}}
+		}
 	}
 
-	return getCourseFromNetwork(clbid)
-		.then(
-			course => course || {clbid, term, error: `Could not find ${clbid}`},
-		)
-		.catch(error => ({clbid, term, error: error.message}))
-}
-
-export function getOnlyCourse(args: {
-	clbid: string,
-	term: number,
-}): Promise<CourseType | null> {
-	let {clbid} = args
-	return getCourseFromNetwork(clbid).catch(() => null)
+	try {
+		let course = await getCourseFromNetwork(clbid)
+		if (!course) {
+			return {
+				error: true,
+				result: new Error(`Could not find ${clbid}`),
+				meta: {clbid, term},
+			}
+		}
+		return {error: false, result: course}
+	} catch (error) {
+		return {error: true, result: error}
+	}
 }

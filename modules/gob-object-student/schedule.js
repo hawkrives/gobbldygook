@@ -2,30 +2,14 @@
 
 import uuid from 'uuid/v4'
 import {randomChar} from '@gob/lib'
+import type {Result} from '@gob/types'
 
 import {List, Map, Record} from 'immutable'
-import type {
-	CourseLookupFunc,
-	OnlyCourseLookupFunc,
-	FabricationType,
-	CourseType,
-	CourseError,
-} from './types'
+import type {CourseLookupFunc, CourseType} from './types'
 import {
 	validateSchedule,
 	type Result as ValidationResult,
 } from './validate-schedule'
-
-type InputSchedule = {
-	id?: string,
-	active?: boolean,
-	index?: number,
-	title?: string,
-	clbids?: Array<string>,
-	year?: number,
-	semester?: number,
-	metadata?: Object,
-}
 
 type ScheduleType = {
 	id: string,
@@ -71,7 +55,7 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
 			semester,
 			active,
 			index,
-			title,
+			title = `Schedule ${randomChar()}`,
 		} = data
 
 		if (!List.isList(clbids)) {
@@ -142,58 +126,36 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
 		return 1
 	}
 
-	async getCourses(
+	async getCoursesWithErrors(
 		getCourse: CourseLookupFunc,
-		fabrications?: Array<FabricationType> | List<FabricationType>,
-	): Promise<List<CourseType | FabricationType | CourseError>> {
+		fabrications?: Array<CourseType> | List<CourseType>,
+	): Promise<List<Result<CourseType>>> {
 		let term = this.getTerm()
 		let promises = this.clbids.map(clbid =>
-			getCourse({clbid, term}, fabrications),
+			getCourse(clbid, term, fabrications),
 		)
 		return Promise.all(promises).then(List)
 	}
 
-	async getOnlyCourses(
-		getCourse: OnlyCourseLookupFunc,
+	async getCourses(
+		getCourse: CourseLookupFunc,
+		fabrications?: Array<CourseType> | List<CourseType>,
 	): Promise<List<CourseType>> {
-		let term = this.getTerm()
-		let promises = this.clbids.map(clbid => getCourse({clbid, term}))
-		let results = await Promise.all(promises)
-		// remove null results
-		return List(results).filter(Boolean)
+		let coursesWithErrors = await this.getCoursesWithErrors(
+			getCourse,
+			fabrications,
+		)
+
+		return coursesWithErrors
+			.map(r => (r.error ? null : r.result))
+			.filter(Boolean)
 	}
 
 	isSpecificTerm(year: number, semester: number): boolean {
 		return this.year === year && this.semester === semester
 	}
 
-	async validate(getCourse: OnlyCourseLookupFunc): Promise<ValidationResult> {
-		return validateSchedule(this, getCourse)
+	async validate(courses: List<CourseType>): Promise<ValidationResult> {
+		return validateSchedule(this, courses)
 	}
-}
-
-export function createSchedule(sched: InputSchedule = {}) {
-	let {
-		id = uuid(),
-		active = false,
-		index = 0,
-		title = `Schedule ${randomChar().toUpperCase()}`,
-		clbids = [],
-		year = 0,
-		semester = 0,
-		metadata = {},
-	} = sched
-
-	if (clbids.some(id => typeof id === 'number')) {
-		clbids = clbids.map(
-			id => (typeof id !== 'string' ? String(id).padStart(10, '0') : id),
-		)
-	}
-
-	clbids = List(clbids)
-	metadata = Map(metadata)
-
-	let data = {id, active, index, title, clbids, metadata, year, semester}
-
-	return new Schedule(data)
 }

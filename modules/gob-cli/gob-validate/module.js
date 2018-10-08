@@ -8,8 +8,8 @@ validates the schedules of the given student
 import meow from 'meow'
 import stdin from 'get-stdin'
 import loadJsonFile from 'load-json-file'
-import {getOnlyCourse} from '../lib/get-course'
-import {validateSchedule, Student} from '@gob/object-student'
+import {getCourse} from '../lib/get-course'
+import {Student} from '@gob/object-student'
 import {toPrettyTerm, buildDeptNum} from '@gob/school-st-olaf-college'
 const {version} = require('../package.json')
 
@@ -34,8 +34,8 @@ export default async function main() {
 
 	let promises = student.schedules.map(async schedule => {
 		let [courses, conflictInfo] = await Promise.all([
-			schedule.getOnlyCourses(getOnlyCourse),
-			validateSchedule(schedule, getOnlyCourse),
+			schedule.getCourses(getCourse),
+			schedule.validate(getCourse),
 		])
 
 		let {hasConflict, warnings} = conflictInfo

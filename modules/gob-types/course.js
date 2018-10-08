@@ -12,7 +12,7 @@ export type Course = {
 	+clbid: string,
 	+credits: number,
 	+crsid: string,
-	+description: string,
+	+description: Array<string>,
 	+department: string,
 	+enrolled: number,
 	+gereqs: Array<string>,
@@ -21,7 +21,7 @@ export type Course = {
 	+level: number,
 	+max: number,
 	+name: string,
-	+number: number,
+	+number: number | string,
 	+pf: boolean,
 	+prerequisites: false | string,
 	+section: string,
@@ -36,9 +36,3 @@ export type Course = {
 		+_updated: string,
 	|}>,
 }
-
-export type CourseError = {|
-	+type: 'error',
-	+error: string | Error,
-	+clbid: string,
-|}

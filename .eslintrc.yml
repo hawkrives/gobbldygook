@@ -70,6 +70,7 @@ rules:
     - args: 'after-used'
       varsIgnorePattern: '^_'
       argsIgnorePattern: '^_'
+      ignoreRestSiblings: true
   no-useless-constructor: error
   no-var: error
   prefer-spread: warn

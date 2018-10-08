@@ -1,23 +1,21 @@
 // @flow
 
-import uniqBy from 'lodash/uniqBy'
-import flatten from 'lodash/flatten'
+import {List} from 'immutable'
 import {Student} from './student'
 import type {Course as CourseType} from '@gob/types'
-import type {OnlyCourseLookupFunc} from './types'
+import type {CourseLookupFunc} from './types'
 
 export async function getActiveCourses(
 	student: Student,
-	getCourse: OnlyCourseLookupFunc,
+	getCourse: CourseLookupFunc,
 ): Promise<Array<CourseType>> {
 	let activeSchedules = student.schedules.filter(s => s.active)
 
 	let promises = activeSchedules
-		.map(s => s.getOnlyCourses(getCourse).then(l => l.toArray()))
 		.toList()
-		.toArray()
+		.map(s => s.getCourses(getCourse, student.fabrications))
 
-	let courses: Array<Array<CourseType>> = await Promise.all(promises)
+	let courses = List(await Promise.all(promises)).flatMap(courses => courses)
 
-	return uniqBy(flatten(courses), course => course.clbid)
+	return [...courses]
 }
