@@ -36,9 +36,3 @@ export type Course = {
 		+_updated: string,
 	|}>,
 }
-
-export type CourseError = {|
-	+type: 'error',
-	+error: string | Error,
-	+clbid: string,
-|}
