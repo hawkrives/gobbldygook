@@ -33,7 +33,7 @@ import {loadDataForTerm} from '../../workers/load-data'
 const Container = styled.div`
 	${theme.card};
 	flex: 1 0;
-	min-width: 14em;
+	min-width: 13em;
 	margin: var(--semester-spacing);
 	overflow: hidden;
 
