@@ -29,7 +29,7 @@ export class Revisions extends React.Component<Props> {
 
 		const RevisionsList = revisions.map((items, index) => {
 			let revisionDate = new Intl.DateTimeFormat('en-US').format(
-				new Date(revisions[index]['_updated']),
+				new Date(items['_updated']),
 			)
 
 			return (
