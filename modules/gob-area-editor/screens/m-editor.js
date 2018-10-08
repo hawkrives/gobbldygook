@@ -41,7 +41,14 @@ const StyledEditor = styled(CodeMirror)`
 	border: solid 1px #444;
 	border-radius: 4px;
 	margin: 1em;
-	padding: 0 0.5em;
+	padding: 0;
+
+	display: flex;
+	flex-flow: column;
+
+	.CodeMirror {
+		flex: 1;
+	}
 `
 
 const Layout = styled.div`
