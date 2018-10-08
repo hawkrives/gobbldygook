@@ -202,7 +202,7 @@ class Semester extends React.Component<Props, State> {
 
 		this.setState(() => ({courses, credits, loading: false}))
 
-		let {warnings, hasConflict} = await schedule.validate(getOnlyCourse)
+		let {warnings, hasConflict} = await schedule.validate(onlyCourses)
 
 		this.setState(() => ({warnings, hasConflict, checking: false}))
 	}
