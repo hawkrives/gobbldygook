@@ -2,15 +2,16 @@
 
 import {db} from './db'
 import {status, json} from '@gob/lib'
-import type {FabricationType} from '@gob/object-student'
-import type {Course as CourseType, CourseError as ErrorType} from '@gob/types'
+import type {Course as CourseType, Result} from '@gob/types'
 import {List} from 'immutable'
 
 const baseUrl = 'https://stodevx.github.io/course-data'
-const networkCache = Object.create(null)
-export function getCourseFromNetwork(clbid: string) {
-	if (clbid in networkCache) {
-		return networkCache[clbid]
+
+const networkCache: Map<string, Promise<CourseType>> = new Map()
+export function getCourseFromNetwork(clbid: string): Promise<CourseType> {
+	let cached = networkCache.get(clbid)
+	if (cached) {
+		return cached
 	}
 
 	const id = clbid
@@ -18,41 +19,50 @@ export function getCourseFromNetwork(clbid: string) {
 
 	const path = `${baseUrl}/courses/${dir}/${id}.json`
 
-	networkCache[clbid] = fetch(path)
+	let request: Promise<any> = fetch(path)
 		.then(status)
 		.then(json)
 
-	return networkCache[clbid]
+	networkCache.set(clbid, request)
+
+	return request.then(course => {
+		networkCache.delete(clbid)
+		return (course: any)
+	})
 }
 
-const courseCache = Object.create(null)
-export function getCourseFromDatabase(clbid: string) {
-	if (clbid in courseCache) {
-		return courseCache[clbid]
+const courseCache: Map<string, Promise<CourseType>> = new Map()
+export function getCourseFromDatabase(clbid: string): Promise<CourseType> {
+	let cached = courseCache.get(clbid)
+	if (cached) {
+		return cached
 	}
 
-	courseCache[clbid] = db
+	let dbRequest = db
 		.store('courses')
 		.index('clbid')
 		.get(clbid)
 		.then(course => (course ? course : getCourseFromNetwork(clbid)))
-		.then(({profWords: _p, words: _w, sourcePath: _s, ...course}) => course)
+		.then(({profWords, words, sourcePath, ...course}) => course)
 
-	return courseCache[clbid].then(course => {
-		delete courseCache[clbid]
+	courseCache.set(clbid, dbRequest)
+
+	return dbRequest.then(course => {
+		courseCache.delete(clbid)
 		return course
 	})
 }
 
 // Gets a course from the database.
-export function getCourse(
-	{clbid, term}: {clbid: string, term?: ?number},
-	fabrications?: ?(Array<FabricationType> | List<FabricationType>) = [],
-): Promise<CourseType | FabricationType | ErrorType> {
+export async function getCourse(
+	clbid: string,
+	term?: ?number,
+	fabrications?: ?(Array<CourseType> | List<CourseType>) = [],
+): Promise<Result<CourseType>> {
 	if (fabrications) {
 		let fab = fabrications.find(c => c.clbid === clbid)
 		if (fab) {
-			return Promise.resolve(fab)
+			return {error: false, result: fab, meta: {fabrication: true}}
 		}
 	}
 
@@ -61,23 +71,17 @@ export function getCourse(
 		getCourseFrom = getCourseFromNetwork
 	}
 
-	return getCourseFrom(clbid)
-		.then(
-			course => course || {clbid, term, error: `Could not find ${clbid}`},
-		)
-		.catch(error => ({clbid, term, error: error.message}))
-}
-
-export function getOnlyCourse(args: {
-	clbid: string,
-	term: number,
-}): Promise<?CourseType> {
-	let {clbid} = args
-
-	let getCourseFrom = getCourseFromDatabase
-	if (global.useNetworkOnly) {
-		getCourseFrom = getCourseFromNetwork
+	try {
+		let course = await getCourseFrom(clbid)
+		if (!course) {
+			return {
+				error: true,
+				result: new Error(`Could not find ${clbid}`),
+				meta: {clbid, term},
+			}
+		}
+		return {error: false, result: course}
+	} catch (error) {
+		return {error: true, result: error}
 	}
-
-	return getCourseFrom(clbid).catch(() => null)
 }
