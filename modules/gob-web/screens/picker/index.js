@@ -10,19 +10,10 @@ const StudentPicker = Loadable({
 	loading: LoadingComponent,
 })
 
-let CourseSearcherOverlay = Loadable({
-	loader: () => import('./search'),
-	loading: LoadingComponent,
-})
-
 export default function() {
 	return (
 		<>
 			<StudentPicker />
-
-			<Router>
-				<CourseSearcherOverlay path="search" />
-			</Router>
 		</>
 	)
 }

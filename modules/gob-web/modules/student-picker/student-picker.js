@@ -138,7 +138,7 @@ export default function StudentPicker(props: PropTypes) {
 
 			<StudentListToolbarWrapper>
 				<StudentListToolbar>
-					<StudentListButton as={Link} to="search/">
+					<StudentListButton as={Link} to="/search">
 						<Icon block>{androidSearch}</Icon>
 						Courses
 					</StudentListButton>
@@ -165,7 +165,7 @@ export default function StudentPicker(props: PropTypes) {
 						Edit
 					</StudentListButton>
 
-					<StudentListButton as={Link} to="create/">
+					<StudentListButton as={Link} to="/create">
 						<Icon block>{androidAdd}</Icon>
 						New
 					</StudentListButton>
