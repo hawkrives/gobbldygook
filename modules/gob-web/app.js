@@ -80,7 +80,8 @@ class App extends React.Component<any> {
 					<AreaEditor path="/areas" />
 					<Student path="/student/:studentId/*" />
 					<CreateStudent path="/create/*" />
-					<StudentPicker path="/*" />
+					<StudentPicker path="/" />
+					<StudentPicker path="/search" />
 				</Router>
 			</div>
 		)
