@@ -14,6 +14,10 @@
 	flex: 1;
 }
 
+.expression--label {
+	flex: 1;
+}
+
 .expression--description {
 	text-align: center;
 	display: inline-block;
@@ -116,5 +120,5 @@
 	display: inline;
 }
 .expression--reference > .expression--contents {
-	display: inline;
+	display: inline-flex;
 }

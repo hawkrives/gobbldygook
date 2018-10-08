@@ -251,7 +251,11 @@ export default function Expression(props: Props) {
 			)}
 			{contents && (
 				<span className="expression--contents">
-					{contents}
+					{typeof contents === 'string' ? (
+						<span className="expression--label">{contents}</span>
+					) : (
+						contents
+					)}
 					{props.hideIndicator || expr._isFulfillment ? null : result}
 				</span>
 			)}
