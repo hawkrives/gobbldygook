@@ -16,17 +16,6 @@ import {
 	type Result as ValidationResult,
 } from './validate-schedule'
 
-type InputSchedule = {
-	id?: string,
-	active?: boolean,
-	index?: number,
-	title?: string,
-	clbids?: Array<string>,
-	year?: number,
-	semester?: number,
-	metadata?: Object,
-}
-
 type ScheduleType = {
 	id: string,
 	active: boolean,
@@ -170,30 +159,4 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
 	async validate(getCourse: OnlyCourseLookupFunc): Promise<ValidationResult> {
 		return validateSchedule(this, getCourse)
 	}
-}
-
-export function createSchedule(sched: InputSchedule = {}) {
-	let {
-		id = uuid(),
-		active = false,
-		index = 0,
-		title = `Schedule ${randomChar().toUpperCase()}`,
-		clbids = [],
-		year = 0,
-		semester = 0,
-		metadata = {},
-	} = sched
-
-	if (clbids.some(id => typeof id === 'number')) {
-		clbids = clbids.map(
-			id => (typeof id !== 'string' ? String(id).padStart(10, '0') : id),
-		)
-	}
-
-	clbids = List(clbids)
-	metadata = Map(metadata)
-
-	let data = {id, active, index, title, clbids, metadata, year, semester}
-
-	return new Schedule(data)
 }
