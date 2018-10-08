@@ -35,7 +35,7 @@ export class Revisions extends React.Component<Props> {
 					<RevisionTitle>{revisionDate}</RevisionTitle>
 					{toPairs(items).map(
 						([key, value]) =>
-							key !== '_updated' ? (
+							key === 'offerings' ? null : key !== '_updated' ? (
 								<ListItem key={key + index}>
 									{key}: {value}
 								</ListItem>
