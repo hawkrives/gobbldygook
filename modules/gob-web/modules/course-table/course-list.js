@@ -42,7 +42,7 @@ const Empty = styled(EmptyCourseSlot)`
 `
 
 type Props = {
-	courses: Array<CourseType | CourseError | FabricationType>,
+	courses: IList<CourseType | CourseError | FabricationType>,
 	usedSlots: number,
 	warnings: Map<string, IList<WarningType>>,
 	maxSlots: number,
@@ -51,7 +51,7 @@ type Props = {
 }
 
 export function CourseList(props: Props) {
-	const courseObjects = props.courses.map(
+	let courseObjects = props.courses.map(
 		(course, i) =>
 			course.error ? (
 				<Missing key={i} clbid={course.clbid} error={course.error} />
@@ -76,11 +76,11 @@ export function CourseList(props: Props) {
 		usedSlots < props.maxSlots ? range(usedSlots, props.maxSlots) : []
 	emptySlots = emptySlots.map(n => <Empty key={n} />)
 
+	let children = courseObjects.push(...emptySlots)
+
 	return (
 		<List className="course-list">
-			{[...courseObjects, ...emptySlots].map((child, i) => (
-				<Item key={i}>{child}</Item>
-			))}
+			{children.map((child, i) => <Item key={i}>{child}</Item>).toArray()}
 		</List>
 	)
 }

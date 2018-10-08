@@ -13,6 +13,7 @@ import {
 	type ChangeStudentFunc,
 } from '../../redux/students/actions/change'
 import styled from 'styled-components'
+import {ScheduleProvider} from '../../components/providers/schedule'
 
 const Container = styled.div`
 	margin-bottom: var(--page-edge-padding);
@@ -150,13 +151,31 @@ class Year extends React.Component<Props> {
 
 				<SemesterList>
 					{schedules.map(schedule => (
-						<Semester
-							key={schedule.semester}
+						<ScheduleProvider
+							key={schedule.id}
 							schedule={schedule}
-							semester={schedule.semester}
 							student={student}
-							year={year}
-						/>
+						>
+							{({
+								loading,
+								checking,
+								courses,
+								warnings,
+								hasConflict,
+								credits,
+							}) => (
+								<Semester
+									loading={loading}
+									checking={checking}
+									courses={courses}
+									warnings={warnings}
+									hasConflict={hasConflict}
+									credits={credits}
+									schedule={schedule}
+									student={student}
+								/>
+							)}
+						</ScheduleProvider>
 					))}
 				</SemesterList>
 			</Container>

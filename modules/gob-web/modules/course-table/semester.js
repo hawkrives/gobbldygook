@@ -5,10 +5,10 @@ import cx from 'classnames'
 import {connect} from 'react-redux'
 import {Link} from '@reach/router'
 import {List, Map} from 'immutable'
-import {countCredits} from '@gob/examine-student'
 import {semesterName} from '@gob/school-st-olaf-college'
 import {DropTarget} from 'react-dnd'
 import * as theme from '../../theme'
+import {Card} from '../../components/card'
 import {FlatButton} from '../../components/button'
 import {Icon} from '../../components/icon'
 import {InlineList, InlineListItem} from '../../components/list'
@@ -21,17 +21,14 @@ import {
 	type FabricationType,
 } from '@gob/object-student'
 import type {Course as CourseType, CourseError} from '@gob/types'
-import {getOnlyCourse, getCourse} from '../../helpers/get-courses'
 import {
 	changeStudent,
 	type ChangeStudentFunc,
 } from '../../redux/students/actions/change'
 import {CourseList} from './course-list'
 import styled from 'styled-components'
-import {loadDataForTerm} from '../../workers/load-data'
 
-const Container = styled.div`
-	${theme.card};
+const Container = styled(Card)`
 	flex: 1 0;
 	min-width: 14em;
 	margin: var(--semester-spacing);
@@ -145,77 +142,41 @@ type ReduxProps = {
 }
 
 type ReactProps = {
+	checking?: boolean,
+	courses: List<CourseType | FabricationType | CourseError>,
+	credits?: number,
+	hasConflict?: boolean,
+	loading?: boolean,
 	schedule: Schedule,
-	semester: number,
 	student: Student,
-	year: number,
+	warnings: Map<string, List<WarningType>>,
 }
 
 type Props = ReduxProps & DnDProps & ReactProps
 
-type State = {
-	loading: boolean,
-	checking: boolean,
-	courses: List<CourseType | FabricationType | CourseError>,
-	warnings: Map<string, List<WarningType>>,
-	hasConflict: boolean,
-	credits: number,
-}
-
-class Semester extends React.Component<Props, State> {
-	state = {
-		loading: true,
-		checking: true,
-		courses: List(),
-		warnings: Map(),
-		hasConflict: false,
-		credits: 0,
-	}
-
-	componentDidMount() {
-		this.ensureDataExists()
-		this.prepare(this.props)
-	}
-
-	componentDidUpdate(prevProps: Props) {
-		if (this.props.schedule !== prevProps.schedule) {
-			this.prepare(this.props)
-		}
-	}
-
-	ensureDataExists = async () => {
-		await loadDataForTerm(parseInt(this.props.schedule.getTerm()))
-	}
-
-	prepare = async props => {
-		this.setState(() => ({loading: true, checking: true}))
-
-		let {schedule} = props
-		let courses = await schedule.getCourses(
-			getCourse,
-			props.student.fabrications,
-		)
-		let credits = countCredits([...courses])
-
-		this.setState(() => ({courses, credits, loading: false}))
-
-		let {warnings, hasConflict} = await schedule.validate(getOnlyCourse)
-
-		this.setState(() => ({warnings, hasConflict, checking: false}))
-	}
-
+class Semester extends React.Component<Props> {
 	removeSemester = () => {
-		const {student, semester, year} = this.props
+		let {student, schedule} = this.props
+		let {year, semester} = schedule
 		let s = student.destroySchedulesForTerm({year, semester})
 		this.props.changeStudent(s)
 	}
 
 	render() {
-		let props = this.props
-		let {student, semester, year, canDrop} = props
+		let {
+			canDrop,
+			courses,
+			credits = 0,
+			hasConflict = false,
+			loading = false,
+			schedule,
+			student,
+			warnings,
+		} = this.props
 
-		let schedule = this.props.schedule
-		let {courses, credits, warnings, hasConflict, loading} = this.state
+		let {year, semester} = schedule
+		let name = semesterName(semester)
+		let term = schedule.getTerm()
 
 		let {recommendedCredits} = schedule
 		let creditsPerCourse = 1
@@ -244,19 +205,14 @@ class Semester extends React.Component<Props, State> {
 			loading: loading,
 		})
 
-		let name = semesterName(semester)
-
 		return (
 			<Container
 				className={className}
-				ref={ref => props.connectDropTarget(ref)}
+				ref={ref => this.props.connectDropTarget(ref)}
 			>
 				<Header>
 					{hasConflict && <Icon>{alertCircled}</Icon>}
-					<Title
-						to={`./term/${year}${semester}`}
-						title={`Details for ${name}`}
-					>
+					<Title to={`./term/${term}`} title={`Details for ${name}`}>
 						<TitleText>{name}</TitleText>
 						<InfoList>
 							{infoBar.map(item => (
@@ -267,9 +223,7 @@ class Semester extends React.Component<Props, State> {
 
 					<TitleButton
 						as={Link}
-						to={`/student/${
-							student.id
-						}/search?term=${year}${semester}`}
+						to={`/student/${student.id}/search?term=${term}`}
 						title="Search for courses"
 					>
 						<Icon>{search}</Icon> Course
@@ -285,7 +239,7 @@ class Semester extends React.Component<Props, State> {
 
 				{schedule && (
 					<CourseList
-						courses={[...courses]}
+						courses={courses}
 						usedSlots={credits / creditsPerCourse}
 						maxSlots={recommendedSlots / creditsPerCourse}
 						warnings={warnings}
