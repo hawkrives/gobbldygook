@@ -26,7 +26,7 @@ export class Revisions extends React.Component<Props> {
 		const revisions = [...course.revisions].reverse()
 
 		const RevisionsList = revisions.map((items, index) => {
-			let revisionDate = new Intl.DateTimeFormat('en-US').format(
+			const revisionDate = new Intl.DateTimeFormat('en-US').format(
 				new Date(items['_updated']),
 			)
 
