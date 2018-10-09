@@ -21,7 +21,6 @@ describe('Schedule', () => {
 			clbids: ['1'],
 			year: 2018,
 			semester: 59,
-			metadata: {key: 'value'},
 		})
 		let copy = new Schedule(initial)
 
@@ -32,7 +31,6 @@ describe('Schedule', () => {
 		expect(copy.clbids).toBe(initial.clbids)
 		expect(copy.year).toBe(initial.year)
 		expect(copy.semester).toBe(initial.semester)
-		expect(copy.metadata).toBe(initial.metadata)
 	})
 
 	it('uses the ID that you give it', () => {

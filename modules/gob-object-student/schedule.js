@@ -19,7 +19,6 @@ type ScheduleType = {
 	clbids: List<string>,
 	year: number,
 	semester: number,
-	metadata: Map<string, mixed>,
 }
 
 const defaultValues: ScheduleType = {
@@ -30,27 +29,15 @@ const defaultValues: ScheduleType = {
 	clbids: List(),
 	year: 0,
 	semester: 0,
-	metadata: Map(),
 }
 
 const ScheduleRecord = Record(defaultValues)
 
-type ScheduleInput = {
-	[key: $Keys<ScheduleType>]: mixed,
-	year?: number,
-	semester?: number,
-	index?: number,
-	active?: boolean,
-	title?: string,
-	id?: string,
-}
-
 export class Schedule extends ScheduleRecord<ScheduleType> {
-	constructor(data: ScheduleInput = {}) {
+	constructor(data: any = {}) {
 		let {
 			id = uuid(),
 			clbids = [],
-			metadata = {},
 			year,
 			semester,
 			active,
@@ -66,10 +53,6 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
 			clbids = (clbids: any).map(id => String(id).padStart(10, '0'))
 		}
 
-		if (!Map.isMap(metadata)) {
-			metadata = Map((metadata: any))
-		}
-
 		super({
 			year,
 			semester,
@@ -78,7 +61,6 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
 			title,
 			id,
 			clbids: (clbids: any),
-			metadata: (metadata: any),
 		})
 	}
 
