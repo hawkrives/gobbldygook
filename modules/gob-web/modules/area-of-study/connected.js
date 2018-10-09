@@ -72,14 +72,14 @@ class AreaOfStudyConnector extends React.Component<Props, State> {
 		}
 	}
 
-	removeArea = (ev: SyntheticEvent<HTMLButtonElement>) => {
+	removeArea = (ev: Event) => {
 		ev.stopPropagation()
 		let s = this.props.student.removeArea(this.props.areaOfStudy)
 		this.props.changeStudent(s)
 	}
 
 	render() {
-		let {areaOfStudy, student} = this.props
+		let {areaOfStudy, student, showCloseButton, showEditButton} = this.props
 
 		return (
 			<AreaOfStudyProvider areaOfStudy={areaOfStudy} student={student}>
@@ -90,6 +90,7 @@ class AreaOfStudyConnector extends React.Component<Props, State> {
 							error={error}
 							examining={examining}
 							results={results}
+							isOpen={this.state.isOpen}
 							onToggleOpen={this.toggleAreaExpansion}
 							onRemove={this.removeArea}
 							onAddOverride={this.addOverride}
@@ -97,6 +98,9 @@ class AreaOfStudyConnector extends React.Component<Props, State> {
 							onToggleOverride={this.toggleOverride}
 							onRemovalStart={this.startRemovalConfirmation}
 							onRemovalCancel={this.endRemovalConfirmation}
+							showCloseButton={showCloseButton}
+							showEditButton={showEditButton}
+							showConfirmRemoval={this.state.confirmRemoval}
 						/>
 					)
 				}}
