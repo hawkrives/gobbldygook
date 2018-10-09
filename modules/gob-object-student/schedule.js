@@ -4,7 +4,7 @@ import uuid from 'uuid/v4'
 import {randomChar} from '@gob/lib'
 import type {Result} from '@gob/types'
 
-import {List, Map, Record} from 'immutable'
+import {List, Record} from 'immutable'
 import type {CourseLookupFunc, CourseType} from './types'
 import {
 	validateSchedule,
