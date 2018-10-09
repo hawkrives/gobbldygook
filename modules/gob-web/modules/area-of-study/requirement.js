@@ -68,9 +68,8 @@ function Requirement(props: RequirementProps) {
 	let title = (
 		<h2 className="heading" title={props.name} onClick={props.onToggleOpen}>
 			<span className="title">
-				{' '}
-				{props.name}
 				<span className="status">{status}</span>
+				{props.name}
 			</span>
 			<span className="manual-override">
 				<span className="overridden-msg">
