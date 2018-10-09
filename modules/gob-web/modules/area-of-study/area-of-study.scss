@@ -115,7 +115,8 @@
 	height: 4px;
 	margin: 0 auto;
 
-	.area--summary:focus &, .area--summary:active & {
+	.area--summary:focus &,
+	.area--summary:active & {
 		box-shadow: 0 0 0 2px white;
 	}
 

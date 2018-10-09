@@ -51,8 +51,8 @@
 }
 
 .result > .expression {
-		display: block;
-	}
+	display: block;
+}
 
 .requirement .requirement .result,
 .requirement .requirement .message,
@@ -100,7 +100,6 @@
 .requirement.result-failure {
 	--requirement-primary-color: var(--gray-300);
 }
-
 
 .requirement .requirement .heading {
 	font-size: 0.9em;
