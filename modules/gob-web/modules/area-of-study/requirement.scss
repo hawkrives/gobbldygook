@@ -3,7 +3,6 @@
 @import './variables-expression.scss';
 
 .requirement {
-	margin: 0.25em;
 	box-sizing: border-box;
 	font-variant-numeric: oldstyle-nums;
 
@@ -11,15 +10,7 @@
 	border: 0.5em solid var(--requirement-primary-color);
 	color: var(--requirement-text-color);
 
-	margin-left: 0.75em;
-
-	&:last-child {
-		margin-bottom: 0.5em;
-	}
-
-	& + & {
-		margin-top: 0.75em;
-	}
+	margin: 0.25em 0.5em 0.75em;
 
 	&.is-closed > *:not(.heading) {
 		display: none;

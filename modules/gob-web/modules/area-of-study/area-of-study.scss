@@ -16,6 +16,11 @@
 	--requirement-primary-color: var(--gray-300);
 	--requirement-text-color: var(--text-color);
 	--requirement-accent-color: var(--text-color);
+
+	& > .children > .requirement {
+		margin-left: 0.75em;
+		margin-right: 0.75em;
+	}
 }
 
 .area .message {
