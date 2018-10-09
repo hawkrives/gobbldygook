@@ -8,4 +8,3 @@ export {
 	quacksLikeDeptNum,
 	splitDeptNum,
 } from './deptnums'
-
