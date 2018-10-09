@@ -42,7 +42,7 @@ let GlobalStyle = createGlobalStyle`
 let NotFound = () => <h1>404 Not Found</h1>
 
 let AreaEditor = Loadable({
-	loader: () => import('@gob/area-editor').then(mod => mod.Editor),
+	loader: () => import('./screens/area-editor'),
 	loading: LoadingComponent,
 })
 

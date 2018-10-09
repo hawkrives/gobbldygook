@@ -2,130 +2,57 @@
 
 import React from 'react'
 import cx from 'classnames'
-import {connect} from 'react-redux'
 import {FlatButton} from '../../components/button'
 import {Icon} from '../../components/icon'
 import Requirement from './requirement'
 import ProgressBar from '../../components/progress-bar'
 import {close, chevronUp, chevronDown} from '../../icons/ionicons'
-import {pathToOverride, type EvaluationResult} from '@gob/examine-student'
-import {Student, type AreaQuery} from '@gob/object-student'
-import {checkStudentAgainstArea} from '../../workers/check-student'
-import {loadArea} from '../../helpers/load-area'
-import {
-	changeStudent,
-	type ChangeStudentFunc,
-} from '../../redux/students/actions/change'
+import {type EvaluationResult} from '@gob/examine-student'
+import {type AreaQuery} from '@gob/object-student'
 
 import './area-of-study.scss'
 
 type Props = {
+	showCloseButton?: boolean,
+	showEditButton?: boolean,
+	isOpen?: boolean,
+	showConfirmRemoval?: boolean,
+	style?: {},
+
 	areaOfStudy: AreaQuery,
-	showCloseButton: boolean,
-	showEditButton: boolean,
-	student: Student,
-	changeStudent: ChangeStudentFunc,
+	error?: ?string,
+	examining?: boolean,
+	results: ?EvaluationResult,
+	onToggleOpen?: Event => mixed,
+	onRemove?: Event => mixed,
+	onAddOverride?: (Array<string>, Event) => mixed,
+	onRemoveOverride?: (Array<string>, Event) => mixed,
+	onToggleOverride?: (Array<string>, Event) => mixed,
+	onRemovalStart?: Event => mixed,
+	onRemovalCancel?: Event => mixed,
 }
 
-type State = {|
-	isOpen: boolean,
-	confirmRemoval: boolean,
-	examining: boolean,
-	results: ?EvaluationResult,
-	error: ?string,
-|}
-
-class AreaOfStudy extends React.Component<Props, State> {
-	state = {
-		isOpen: false,
-		confirmRemoval: false,
-		examining: false,
-		results: null,
-		error: null,
-	}
-
-	componentDidMount() {
-		this.startExamination()
-	}
-
-	componentDidUpdate(prevProps: Props) {
-		if (
-			this.props.student !== prevProps.student ||
-			this.props.areaOfStudy !== prevProps.areaOfStudy
-		) {
-			this.startExamination()
-		}
-	}
-
-	startExamination = async () => {
-		this.setState(() => ({examining: true}))
-		let area = await loadArea(this.props.areaOfStudy)
-
-		if (area.error) {
-			this.setState(() => ({examining: false, error: area.message}))
-			return
-		}
-
-		let results = await checkStudentAgainstArea(
-			this.props.student,
-			area.data,
-		)
-		this.setState(() => ({examining: false, results}))
-	}
-
-	startRemovalConfirmation = (ev: Event) => {
-		ev.stopPropagation()
-		this.setState({confirmRemoval: true})
-	}
-
-	endRemovalConfirmation = (ev: Event) => {
-		ev.stopPropagation()
-		this.setState({confirmRemoval: false})
-	}
-
-	toggleAreaExpansion = (ev: Event) => {
-		ev.stopPropagation()
-		this.setState({isOpen: !this.state.isOpen})
-	}
-
-	addOverride = (path: string[], ev: Event) => {
-		ev.stopPropagation()
-		const codifiedPath = pathToOverride(path)
-		let s = this.props.student.setOverride(codifiedPath, true)
-		this.props.changeStudent(s)
-	}
-
-	removeOverride = (path: string[], ev: Event) => {
-		ev.stopPropagation()
-		const codifiedPath = pathToOverride(path)
-		let s = this.props.student.removeOverride(codifiedPath)
-		this.props.changeStudent(s)
-	}
-
-	toggleOverride = (path: string[], ev: Event) => {
-		ev.stopPropagation()
-		const codifiedPath = pathToOverride(path)
-
-		if (this.props.student.hasOverride(codifiedPath)) {
-			let s = this.props.student.removeOverride(codifiedPath)
-			this.props.changeStudent(s)
-		} else {
-			let s = this.props.student.setOverride(codifiedPath, true)
-			this.props.changeStudent(s)
-		}
-	}
-
-	removeArea = (ev: SyntheticEvent<HTMLButtonElement>) => {
-		ev.stopPropagation()
-		let s = this.props.student.removeArea(this.props.areaOfStudy)
-		this.props.changeStudent(s)
-	}
-
+export class AreaOfStudy extends React.Component<Props> {
 	render() {
-		let props = this.props
-		let {isOpen, confirmRemoval: showConfirmRemoval} = this.state
+		let {
+			isOpen = true,
+			showConfirmRemoval = false,
+			results,
+			error = null,
+			examining = false,
+			areaOfStudy,
+			onToggleOpen = () => {},
+			showCloseButton = false,
+			onRemovalStart = () => {},
+			onRemove = () => {},
+			onRemovalCancel = () => {},
+			onAddOverride = () => {},
+			onRemoveOverride = () => {},
+			onToggleOverride = () => {},
+			style,
+		} = this.props
 
-		let {name = 'Unknown Area'} = props.areaOfStudy
+		let {name = 'Unknown Area'} = areaOfStudy
 
 		// TODO: fix slugs
 		// let slug = ''
@@ -136,39 +63,28 @@ class AreaOfStudy extends React.Component<Props, State> {
 		let progressAt = 0
 		let progressOf = 1
 
-		let error = false
-
-		if (this.state.results && this.state.results.progress) {
-			progressAt = this.state.results.progress.at
-			progressOf = this.state.results.progress.of
+		if (results && results.progress) {
+			progressAt = results.progress.at
+			progressOf = results.progress.of
 		}
 
-		if (this.state.results && this.state.results.error) {
-			error = this.state.results.error
-		}
-
-		let areaDetails = this.state.results
-
-		const className = cx('area', {
+		let className = cx('area', {
 			errored: Boolean(error),
-			loading: this.state.examining,
+			loading: examining,
 		})
 
 		return (
-			<div className={className}>
-				<div
-					className="area--summary"
-					onClick={this.toggleAreaExpansion}
-				>
+			<div className={className} style={style}>
+				<div className="area--summary" onClick={onToggleOpen}>
 					<div className="area--summary-row">
 						<h1 className="area--title">
 							<CatalogLink slug={'' /*slug*/} name={name} />
 						</h1>
 						<span className="icons">
-							{props.showCloseButton && (
+							{showCloseButton && (
 								<FlatButton
 									className="area--remove-button"
-									onClick={this.startRemovalConfirmation}
+									onClick={onRemovalStart}
 								>
 									<Icon>{close}</Icon>
 								</FlatButton>
@@ -189,22 +105,11 @@ class AreaOfStudy extends React.Component<Props, State> {
 				</div>
 
 				{showConfirmRemoval && (
-					<div className="area--confirm-removal">
-						<p>
-							Remove <strong>{name}</strong>?
-						</p>
-						<span className="button-group">
-							<FlatButton
-								className="area--actually-remove-area"
-								onClick={this.removeArea}
-							>
-								Remove
-							</FlatButton>
-							<FlatButton onClick={this.endRemovalConfirmation}>
-								Cancel
-							</FlatButton>
-						</span>
-					</div>
+					<RemovalConfirmation
+						name={name}
+						onRemove={onRemove}
+						onCancel={onRemovalCancel}
+					/>
 				)}
 
 				{error && (
@@ -213,18 +118,18 @@ class AreaOfStudy extends React.Component<Props, State> {
 					</p>
 				)}
 
-				{isOpen && this.state.examining ? (
+				{isOpen && examining ? (
 					<p className="message area--loading">Loading…</p>
 				) : null}
 
 				{isOpen ? (
 					<Requirement
-						info={(areaDetails: any)}
+						info={(results: any)}
 						topLevel
-						onAddOverride={this.addOverride}
-						onRemoveOverride={this.removeOverride}
-						onToggleOverride={this.toggleOverride}
-						path={[this.props.areaOfStudy.type, name]}
+						onAddOverride={onAddOverride}
+						onRemoveOverride={onRemoveOverride}
+						onToggleOverride={onToggleOverride}
+						path={[areaOfStudy.type, name]}
 					/>
 				) : null}
 			</div>
@@ -250,9 +155,26 @@ const CatalogLink = ({slug, name}: {slug: ?string, name: string}) => {
 	)
 }
 
-const connected = connect(
-	undefined,
-	{changeStudent},
-)(AreaOfStudy)
-
-export {connected as AreaOfStudy}
+const RemovalConfirmation = (props: {
+	name: string,
+	onRemove: Event => mixed,
+	onCancel: Event => mixed,
+}) => {
+	let {name, onRemove, onCancel} = props
+	return (
+		<div className="area--confirm-removal">
+			<p>
+				Remove <strong>{name}</strong>?
+			</p>
+			<span className="button-group">
+				<FlatButton
+					className="area--actually-remove-area"
+					onClick={onRemove}
+				>
+					Remove
+				</FlatButton>
+				<FlatButton onClick={onCancel}>Cancel</FlatButton>
+			</span>
+		</div>
+	)
+}
