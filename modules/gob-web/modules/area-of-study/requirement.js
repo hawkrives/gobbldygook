@@ -1,6 +1,6 @@
 // @flow
 import React, {Component} from 'react'
-
+import cx from 'classnames'
 import {isRequirementName} from '@gob/examine-student'
 
 import {Icon} from '../../components/icon'
@@ -38,35 +38,34 @@ type RequirementProps = Props & {
 }
 
 function Requirement(props: RequirementProps) {
-	const {topLevel = false} = props
 	let info = props.info || {}
 
-	const childKeys = Object.keys(info).filter(isRequirementName)
+	let childKeys = Object.keys(info).filter(isRequirementName)
 
-	const wasEvaluated = info.result && info.result._checked
-	const computationClassName = wasEvaluated
+	let wasEvaluated = info.result && info.result._checked
+	let computationClassName = wasEvaluated
 		? info.computed
 			? 'result-success'
 			: 'result-failure'
 		: ''
-	const status = <ResultIndicator result={info.computed} />
+	let status = <ResultIndicator result={info.computed} />
 
-	const extraClasses = [info.overridden ? 'overridden' : '']
+	let extraClasses = [info.overridden ? 'overridden' : '']
 
-	const result = info.result && (
+	let result = info.result && (
 		<div className="result">
 			<Expression expr={info.result} ctx={info} />
 		</div>
 	)
 
-	const message = info.message && <p className="message">{info.message}</p>
-	const description = info.description && (
+	let message = info.message && <p className="message">{info.message}</p>
+	let description = info.description && (
 		<p className="description">{info.description}</p>
 	)
 
-	const filterEl = info.filter && <Filter expr={info.filter} ctx={info} />
+	let filterEl = info.filter && <Filter expr={info.filter} ctx={info} />
 
-	const title = !topLevel && (
+	let title = (
 		<h2 className="heading" title={props.name} onClick={props.onToggleOpen}>
 			<span className="title">
 				{' '}
@@ -89,7 +88,7 @@ function Requirement(props: RequirementProps) {
 		</h2>
 	)
 
-	const children = childKeys.map(key => (
+	let children = childKeys.map(key => (
 		<ExpandableRequirement
 			key={key}
 			name={key}
@@ -101,7 +100,7 @@ function Requirement(props: RequirementProps) {
 		/>
 	))
 
-	const overrideButtons = info.message &&
+	let overrideButtons = info.message &&
 		!info.result && (
 			<span className="required-override-buttons button-group">
 				<FlatButton
@@ -115,12 +114,12 @@ function Requirement(props: RequirementProps) {
 			</span>
 		)
 
-	let className = [
+	let className = cx(
 		'requirement',
-		extraClasses.join(' '),
+		...extraClasses,
 		computationClassName,
 		props.isOpen ? 'is-open' : 'is-closed',
-	].join(' ')
+	)
 
 	return (
 		<div className={className}>
@@ -143,7 +142,7 @@ type State = {
 
 export default class ExpandableRequirement extends Component<Props, State> {
 	state = {
-		open: true,
+		open: false,
 	}
 
 	handleToggleOpen = () => {
@@ -159,4 +158,32 @@ export default class ExpandableRequirement extends Component<Props, State> {
 			/>
 		)
 	}
+}
+
+export function TopLevelRequirement(props: Props) {
+	let info = props.info || {}
+	let childKeys = Object.keys(info).filter(isRequirementName)
+	let children = childKeys.map(key => (
+		<ExpandableRequirement
+			key={key}
+			name={key}
+			info={((info[key]: any): RequirementInfo)}
+			path={props.path.concat(key)}
+			onAddOverride={props.onAddOverride}
+			onToggleOverride={props.onToggleOverride}
+			onRemoveOverride={props.onRemoveOverride}
+		/>
+	))
+
+	return (
+		<>
+			{info.filter && <Filter expr={info.filter} ctx={info} />}
+			{info.result && (
+				<div className="result">
+					<Expression expr={info.result} ctx={info} />
+				</div>
+			)}
+			{children.length && <div className="children">{children}</div>}
+		</>
+	)
 }
