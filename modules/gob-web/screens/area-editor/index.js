@@ -1,6 +1,7 @@
 // @flow
 
 import * as React from 'react'
+import styled from 'styled-components'
 import {Router, Link} from '@reach/router'
 import {RaisedButton} from '../../components/button'
 import Loadable from 'react-loadable'
@@ -13,9 +14,16 @@ const Editor = Loadable({
 	loading: LoadingComponent,
 })
 
+const Container = styled.div`
+	display: grid;
+	align-items: stretch;
+	grid-template-rows: max-content 1fr;
+	height: calc(100vh - 1rem);
+`
+
 export default function() {
 	return (
-		<div>
+		<Container>
 			<header>
 				<RaisedButton as={Link} to="/" style={{margin: '1rem'}}>
 					Home
@@ -30,7 +38,7 @@ export default function() {
 				<NotFound default />
 				<Editor path="/" />
 			</Router>
-		</div>
+		</Container>
 	)
 }
 

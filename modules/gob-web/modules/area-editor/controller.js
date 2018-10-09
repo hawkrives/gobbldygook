@@ -1,6 +1,7 @@
 // @flow
 
 import * as React from 'react'
+import {Card} from '../../components/card'
 import styled from 'styled-components'
 import {enhanceHanson} from '@gob/hanson-format'
 import yaml from 'js-yaml'
@@ -8,6 +9,7 @@ import Component2 from '@reach/component-component'
 import stabilize from 'stabilize'
 import LZString from 'lz-string'
 import {Editor} from './editor'
+import {PlainAreaOfStudy} from '../area-of-study'
 
 function read() {
 	const hash = document.location.hash.slice(1)
@@ -76,11 +78,45 @@ class AreaCompiledViewer extends React.Component<any> {
 	}
 }
 
+class AreaInfoViewer extends React.Component<any> {
+	render() {
+		if (!this.props.value) {
+			return <p>No data entered</p>
+		}
+
+		try {
+			let data: any = yaml.safeLoad(this.props.value || '')
+			data = enhanceHanson(data)
+
+			let {name, revision, type} = data
+			let areaOfStudy = {name, revision, type}
+
+			return (
+				<Card>
+					<PlainAreaOfStudy
+						areaOfStudy={areaOfStudy}
+						results={(data: any)}
+						style={{flex: 1}}
+					/>
+				</Card>
+			)
+		} catch (err) {
+			return (
+				<Card>
+					<p style={{whiteSpace: 'pre-wrap'}}>{err.message}</p>
+				</Card>
+			)
+		}
+	}
+}
+
 const Layout = styled.div`
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	margin: 0 1em 1em;
+	grid-template-columns: 1fr 1fr 280px;
 	grid-column-gap: 1em;
-	align-content: center;
+	align-content: stretch;
+	height: 100%;
 `
 
 export let Controller = () => (
@@ -100,6 +136,7 @@ export let Controller = () => (
 							onChange={value => setState({content: value})}
 						/>
 						<AreaCompiledViewer value={content} />
+						<AreaInfoViewer value={content} />
 					</>
 				)
 			}}
