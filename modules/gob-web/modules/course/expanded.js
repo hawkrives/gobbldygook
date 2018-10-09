@@ -62,7 +62,11 @@ export default class ExpandedCourse extends React.PureComponent<Props> {
 				{course.description && (
 					<Description>
 						<Heading>Description</Heading>
-						<p>{course.description}</p>
+						<p>
+							{course.description.map((d, i) => (
+								<p key={i}>{d}</p>
+							))}
+						</p>
 					</Description>
 				)}
 
