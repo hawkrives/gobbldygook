@@ -3,7 +3,6 @@
 import {db} from './db'
 import range from 'idb-range'
 import fromPairs from 'lodash/fromPairs'
-import map from 'lodash/map'
 import getCacheStoreName from './get-cache-store-name'
 import type {InfoFileTypeEnum} from './types'
 
@@ -12,7 +11,7 @@ export function getPriorCourses(path: string) {
 		.store('courses')
 		.index('sourcePath')
 		.getAll(range({eq: path}))
-		.then(oldItems => fromPairs(map(oldItems, item => [item.clbid, null])))
+		.then(oldItems => fromPairs(oldItems.map(item => [item.clbid, null])))
 }
 
 export function getPriorAreas(path: string) {
@@ -20,7 +19,7 @@ export function getPriorAreas(path: string) {
 		.store('areas')
 		.getAll(range({eq: path}))
 		.then(oldItems =>
-			fromPairs(map(oldItems, item => [item.sourcePath, null])),
+			fromPairs(oldItems.map(item => [item.sourcePath, null])),
 		)
 }
 
