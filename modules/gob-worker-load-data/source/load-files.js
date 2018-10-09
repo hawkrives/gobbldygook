@@ -1,6 +1,5 @@
 // @flow
 
-import series from 'p-series'
 import uniqueId from 'lodash/uniqueId'
 import {status, json} from '@gob/lib'
 import {Notification} from './lib-dispatch'
@@ -93,7 +92,7 @@ export async function filterFiles(
 	return (await Promise.all(promises)).filter(Boolean)
 }
 
-export function slurpIntoDatabase(
+export async function slurpIntoDatabase(
 	{type, baseUrl, notification}: Args,
 	files: Array<InfoFileRef>,
 ) {
@@ -109,9 +108,11 @@ export function slurpIntoDatabase(
 	notification.start(files.length)
 
 	// Load them into the database
-	const runUpdate = file => () =>
-		updateDatabase(type, baseUrl, notification, file)
-	return series(files.map(runUpdate))
+	for (let file of files) {
+		// We need to run these sequentially, so we'll await within a loop.
+		// eslint-disable-next-line no-await-in-loop
+		await updateDatabase(type, baseUrl, notification, file)
+	}
 }
 
 export function deduplicateAreas({type}: Args) {
