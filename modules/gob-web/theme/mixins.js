@@ -1,7 +1,6 @@
 // @flow
 
 import {css} from 'styled-components'
-import * as vars from './variables'
 
 export const materialShadow = `
 	border: 1px solid;
@@ -23,7 +22,7 @@ export const cardContent = `
 `
 
 export const cardActions = css`
-	border-top: ${vars.materialDivider};
+	border-top: 1px solid rgba(160, 160, 160, 0.2);
 	padding: 1em;
 `
 

@@ -21,7 +21,6 @@ describe('Schedule', () => {
 			clbids: ['1'],
 			year: 2018,
 			semester: 59,
-			metadata: {key: 'value'},
 		})
 		let copy = new Schedule(initial)
 
@@ -32,7 +31,6 @@ describe('Schedule', () => {
 		expect(copy.clbids).toBe(initial.clbids)
 		expect(copy.year).toBe(initial.year)
 		expect(copy.semester).toBe(initial.semester)
-		expect(copy.metadata).toBe(initial.metadata)
 	})
 
 	it('uses the ID that you give it', () => {
@@ -69,7 +67,6 @@ Immutable.Record {
   ],
   "year": 1994,
   "semester": 3,
-  "metadata": Immutable.Map {},
 }
 `)
 	})
@@ -77,7 +74,7 @@ Immutable.Record {
 	it('can turn into JSON', () => {
 		let result = stringify(new Schedule({id: '1', title: 'Schedule 6'}))
 		expect(result).toMatchInlineSnapshot(
-			`"{\\"active\\":false,\\"clbids\\":[],\\"id\\":\\"1\\",\\"index\\":1,\\"metadata\\":{},\\"semester\\":0,\\"title\\":\\"Schedule 6\\",\\"year\\":0}"`,
+			`"{\\"active\\":false,\\"clbids\\":[],\\"id\\":\\"1\\",\\"index\\":1,\\"semester\\":0,\\"title\\":\\"Schedule 6\\",\\"year\\":0}"`,
 		)
 	})
 

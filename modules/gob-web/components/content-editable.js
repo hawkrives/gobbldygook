@@ -1,8 +1,6 @@
 // @flow
 import * as React from 'react'
 import cx from 'classnames'
-import debug from 'debug'
-const log = debug('web:react')
 
 type Props = {|
 	className?: string,
@@ -72,7 +70,6 @@ class ContentEditable extends React.Component<Props, State> {
 	}
 
 	render() {
-		log('ContentEditable#render')
 		return (
 			<span
 				className={cx('contenteditable', this.props.className)}

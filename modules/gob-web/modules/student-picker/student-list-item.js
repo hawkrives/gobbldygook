@@ -18,7 +18,7 @@ const Container = styled.div`
 	align-items: stretch;
 
 	& + & {
-		border-top: ${theme.materialDivider};
+		border-top: 1px solid rgba(160, 160, 160, 0.2);
 	}
 `
 

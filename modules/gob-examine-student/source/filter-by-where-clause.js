@@ -16,8 +16,6 @@ import type {
 	Counter,
 	QualificationFunctionValue,
 } from './types'
-import debug from 'debug'
-const log = debug('examine-student:filter-by-where-clause')
 
 export default function filterByWhereClause(
 	baseList: Course[],
@@ -175,9 +173,9 @@ function applyQualifictionFunction({
 	const items = map(filtered, c => c[value.$prop])
 	const computed = func(items)
 
-	log('looked at', completeList)
-	log('reduced to', filtered)
-	log('came up with', computed)
+	// console.log('looked at', completeList)
+	// console.log('reduced to', filtered)
+	// console.log('came up with', computed)
 
 	value['$computed-value'] = computed
 }

@@ -4,7 +4,6 @@
 
 const pkg = require('./package.json')
 const webpack = require('webpack')
-const Stylish = require('webpack-stylish')
 
 const babelConfig = require('../../babel.config.js')
 
@@ -117,10 +116,10 @@ function config() {
 		// to support the !!js/function type. We don't use and have no need for it, so
 		// tell webpack to ignore it.
 		new NormalModuleReplacementPlugin(/schema\/default_full$/, result => {
-			result.request = result.request.replace(
-				'default_full',
-				'default_safe',
-			)
+			result.request = result.request.replace('default_full', 'core')
+		}),
+		new NormalModuleReplacementPlugin(/schema\/default_safe$/, result => {
+			result.request = result.request.replace('default_safe', 'core')
 		}),
 
 		// DefinePlugin makes some variables available to the code.
@@ -141,8 +140,6 @@ function config() {
 
 		// copy files – into the webpack {output} directory
 		new CopyWebpackPlugin([{from: './static/*', flatten: true}]),
-
-		new Stylish(),
 	]
 
 	if (isProduction) {

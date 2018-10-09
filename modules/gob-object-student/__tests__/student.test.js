@@ -224,7 +224,6 @@ Immutable.Record {
   "clbids": Immutable.List [],
   "year": 0,
   "semester": 0,
-  "metadata": Immutable.Map {},
 }
 `)
 	})

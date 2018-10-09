@@ -3,10 +3,8 @@
 import {db} from './db'
 import groupBy from 'lodash/groupBy'
 import filter from 'lodash/filter'
-import forEach from 'lodash/forEach'
 import fromPairs from 'lodash/fromPairs'
 import sortBy from 'lodash/sortBy'
-import map from 'lodash/map'
 
 type AreaOfStudy = {
 	name: string,
@@ -16,7 +14,7 @@ type AreaOfStudy = {
 }
 
 export function buildRemoveAreaOps(areas: AreaOfStudy[]) {
-	return fromPairs(map(areas, item => [item.sourcePath, null]))
+	return fromPairs(areas.map(item => [item.sourcePath, null]))
 }
 
 // TODO: add logging to this function
@@ -34,7 +32,7 @@ export function generateOps(allAreas: AreaOfStudy[]) {
 	const duplicateGroup = filter(grouped, list => list.length > 1)
 
 	let ops = {}
-	forEach(duplicateGroup, dupsList => {
+	for (let dupsList of duplicateGroup) {
 		// I *believe* that removing the shortest sourcePath allows us to
 		// remove a duplicate when a major adds a new revision, when it hadn't
 		// had any before, so the stored major will then exist in two places:
@@ -45,7 +43,7 @@ export function generateOps(allAreas: AreaOfStudy[]) {
 		const toRemove = list.slice(0, -1)
 
 		ops = {...ops, ...buildRemoveAreaOps(toRemove)}
-	})
+	}
 
 	// remove any that are invalid
 	// --- something about any values that aren't objects

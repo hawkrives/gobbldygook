@@ -1,14 +1,12 @@
 {
-  "name": "@gob/examine-student",
+  "name": "@gob/school-st-olaf-college-sis-import",
   "version": "3.0.0-rc.2",
   "main": "index.js",
   "repository": "hawkrives/gobbldygook",
   "author": "Hawken MacKay Rives",
   "license": "MIT",
   "dependencies": {
-    "@gob/hanson-format": "^3.0.0-rc.2",
-    "@gob/lib": "^3.0.0-rc.2",
-    "lodash": "^4.17.11",
-    "stabilize": "^1.0.0"
+    "@gob/object-student": "^3.0.0-rc.2",
+    "immutable": "^4.0.0-rc.10"
   }
 }

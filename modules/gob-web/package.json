@@ -32,7 +32,6 @@
     "@reach/router": "^1.2.1",
     "bugsnag-js": "^4.7.3",
     "classnames": "^2.2.6",
-    "debug": "^4.0.1",
     "delay": "^4.0.1",
     "fuzzysearch": "^1.0.3",
     "js-yaml": "^3.12.0",
@@ -42,7 +41,6 @@
     "mem": "^4.0.0",
     "ord": "^0.1.1",
     "p-props": "^1.2.0",
-    "p-series": "^1.1.0",
     "p-settle": "^2.1.0",
     "plur": "^3.0.1",
     "polished": "^2.2.0",
@@ -100,7 +98,7 @@
     "enzyme-adapter-react-16": "^1.6.0",
     "fake-indexeddb": "^2.0.4",
     "file-loader": "^2.0.0",
-    "jest-enzyme": "^6.1.2",
+    "jest-enzyme": "^7.0.0",
     "jest-styled-components": "^6.2.1",
     "junk": "^2.1.0",
     "mini-css-extract-plugin": "^0.4.3",
@@ -110,12 +108,11 @@
     "redux-freeze": "^0.1.7",
     "redux-logger": "^3.0.6",
     "sass-loader": "^7.1.0",
-    "style-loader": "^0.23.0",
+    "style-loader": "^0.23.1",
     "url-loader": "^1.1.1",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.9",
-    "webpack-stylish": "^0.1.8",
     "worker-loader": "^2.0.0"
   }
 }

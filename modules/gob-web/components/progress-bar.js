@@ -20,7 +20,7 @@ const colorMap = {
 
 const Bar = styled.div`
 	border: 1px solid currentColor;
-	border-radius: ${theme.baseBorderRadius};
+	border-radius: 3px;
 	background-color: white;
 	width: 100%;
 

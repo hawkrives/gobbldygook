@@ -32,7 +32,7 @@ const ContainerModal = styled(Modal)`
 
 const BottomToolbar = styled.div`
 	padding: 0 20px;
-	border-top: ${theme.materialDivider};
+	border-top: 1px solid rgba(160, 160, 160, 0.2);
 	margin-top: 0.5em;
 	padding-top: 0.5em;
 	display: flex;
@@ -42,13 +42,13 @@ const BottomToolbar = styled.div`
 `
 
 const RemoveCourseButton = styled(FlatButton)`
-	color: ${theme.red500};
+	color: var(--red-500);
 	padding-left: 0.5em;
 	padding-right: 0.5em;
 	font-size: 0.85em;
 	&:hover {
-		background-color: ${theme.red50};
-		border-color: ${theme.red500};
+		background-color: var(--red-50);
+		border-color: var(--red-500);
 	}
 `
 

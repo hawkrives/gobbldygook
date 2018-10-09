@@ -3,11 +3,11 @@
 import React from 'react'
 import serializeError from 'serialize-error'
 import {RaisedButton} from '../../components/button'
+import {semesterName} from '@gob/school-st-olaf-college'
 import {
 	convertStudent,
-	semesterName,
 	type PartialStudent,
-} from '@gob/school-st-olaf-college'
+} from '@gob/school-st-olaf-college-sis-import'
 import {Map, List} from 'immutable'
 import {getCourse} from '../../helpers/get-courses'
 import {StudentSummary} from '../../modules/student/student-summary'
