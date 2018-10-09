@@ -19,27 +19,27 @@ export function LoadingComponent(props: {
 }) {
 	if (props.error) {
 		return (
-			<Card>
+			<CenteredCard>
 				<p>Error!</p>
 				<RaisedButton onClick={props.retry}>Retry</RaisedButton>
-			</Card>
+			</CenteredCard>
 		)
 	}
 
 	if (props.timedOut) {
 		return (
-			<Card>
+			<CenteredCard>
 				<p>Taking a long time…</p>
 				<RaisedButton onClick={props.retry}>Retry</RaisedButton>
-			</Card>
+			</CenteredCard>
 		)
 	}
 
 	if (props.pastDelay) {
 		return (
-			<Card>
+			<CenteredCard>
 				<p>Loading…</p>
-			</Card>
+			</CenteredCard>
 		)
 	}
 
