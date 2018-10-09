@@ -4,14 +4,18 @@
 	font-size: 0.85em;
 
 	&.errored {
-		background-color: $red-50;
-		color: $red-900;
+		background-color: var(--red-50);
+		color: var(--red-900);
 	}
 
 	&:not(.errored).loading {
 		opacity: 0.75;
 		color: gray;
 	}
+
+	--requirement-primary-color: var(--gray-300);
+	--requirement-text-color: var(--text-color);
+	--requirement-accent-color: var(--text-color);
 }
 
 .area .message {
@@ -83,7 +87,7 @@
 		text-decoration: none;
 	}
 
-	@nest .area[open] & a {
+	.area[open] & a {
 		text-decoration: underline;
 	}
 }
@@ -106,7 +110,7 @@
 	height: 4px;
 	margin: 0 auto;
 
-	@nest .area--summary:focus &, .area--summary:active & {
+	.area--summary:focus &, .area--summary:active & {
 		box-shadow: 0 0 0 2px white;
 	}
 
