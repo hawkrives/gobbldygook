@@ -40,6 +40,10 @@ export const InlineListItem = styled.li`
 	display: inline-block;
 `
 
+export const IndentedListItem = styled.li`
+	margin-left: 24px;
+`
+
 type ListProps = {
 	children?: any,
 	className?: string,

@@ -3,16 +3,15 @@
 import * as React from 'react'
 import toPairs from 'lodash/toPairs'
 import styled from 'styled-components'
-import {BulletedList, ListItem} from '../../components/list'
+import {BulletedList, ListItem, IndentedListItem} from '../../components/list'
 import type {Course as CourseType} from '@gob/types'
 
 type Props = {
 	course: CourseType,
 }
 
-const RevisionTitle = styled.div`
-	padding-top: 16px;
-	font-weight: bold;
+const ListContainer = styled.div`
+	margin-left: 36px;
 `
 
 export class Revisions extends React.Component<Props> {
@@ -31,17 +30,20 @@ export class Revisions extends React.Component<Props> {
 			)
 
 			return (
-				<BulletedList key={index}>
-					<RevisionTitle>{revisionDate}</RevisionTitle>
-					{toPairs(items).map(
-						([key, value]) =>
-							key === 'offerings' ? null : key !== '_updated' ? (
-								<ListItem key={key + index}>
-									{key}: {value}
-								</ListItem>
-							) : null,
-					)}
-				</BulletedList>
+				<ListContainer key={index}>
+					<BulletedList>
+						<ListItem>{revisionDate}</ListItem>
+						{toPairs(items).map(
+							([key, value]) =>
+								key === 'offerings' ? null : key !==
+								'_updated' ? (
+									<IndentedListItem key={key + index}>
+										{key}: {value}
+									</IndentedListItem>
+								) : null,
+						)}
+					</BulletedList>
+				</ListContainer>
 			)
 		})
 
