@@ -6,7 +6,7 @@ import oxford from 'listify'
 import {BulletedList, ListItem} from '../../components/list'
 import CourseTitle from './course-title'
 import {semesterName, buildDeptNum} from '@gob/school-st-olaf-college'
-import {to12HourTime} from '@gob/lib'
+import {consolidateExpandedOfferings} from './offerings'
 import type {Course} from '@gob/types'
 
 const Heading = styled.h2`
@@ -94,23 +94,11 @@ export default class ExpandedCourse extends React.PureComponent<Props> {
 								: 'Offerings'}
 						</Heading>
 						<BulletedList>
-							{course.offerings.map(
-								({day, start, end, location}) => {
-									return (
-										<ListItem
-											key={`${day}-${start}-${end}`}
-										>
-											{day}
-											{' from '}
-											{to12HourTime(start)}
-											{' to '}
-											{to12HourTime(end)}
-											{', in '}
-											{location}
-										</ListItem>
-									)
-								},
-							)}
+							{consolidateExpandedOfferings(
+								course.offerings || [],
+							).map(offering => (
+								<ListItem key={offering}>{offering}</ListItem>
+							))}
 						</BulletedList>
 					</div>
 				)}
