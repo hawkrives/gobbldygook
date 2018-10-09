@@ -118,7 +118,13 @@ function config() {
 		new NormalModuleReplacementPlugin(/schema\/default_full$/, result => {
 			result.request = result.request.replace(
 				'default_full',
+				'core',
+			)
+		}),
+		new NormalModuleReplacementPlugin(/schema\/default_safe$/, result => {
+			result.request = result.request.replace(
 				'default_safe',
+				'core',
 			)
 		}),
 
