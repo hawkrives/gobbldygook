@@ -12,6 +12,8 @@ const DAYS = Map({
 	Fr: 'F',
 })
 
+const nbsp = '\u00a0'
+
 export function consolidateOfferings(
 	offerings: Array<Offering>,
 ): Array<?string> {
@@ -43,12 +45,16 @@ export function consolidateExpandedOfferings(
 
 			let days = groupedOffers.map(({day}) => DAYS.get(day)).join('/')
 			let {start, end, location} = groupedOffers.first()
-			let nbsp = '\u00a0'
-			location = location.replace(/ /g, nbsp)
 
-			return `${days} from ${to12HourTime(start)} to ${to12HourTime(
-				end,
-			)}, in${nbsp}${location}`
+			start = to12HourTime(start)
+			end = to12HourTime(end)
+
+			if (location) {
+				location = location.replace(/ /g, nbsp)
+				return `${days} from ${start} to ${end}, in${nbsp}${location}`
+			}
+
+			return `${days} from ${start} to ${end}`
 		})
 		.toList()
 		.toArray()
