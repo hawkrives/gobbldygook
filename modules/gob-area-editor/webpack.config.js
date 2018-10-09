@@ -4,7 +4,6 @@
 
 const pkg = require('./package.json')
 const webpack = require('webpack')
-const Stylish = require('webpack-stylish')
 
 const babelConfig = require('../../babel.config.js')
 
@@ -128,8 +127,6 @@ function config() {
 
 		// copy files – into the webpack {output} directory
 		new CopyWebpackPlugin([]),
-
-		new Stylish(),
 	]
 
 	if (isProduction) {
