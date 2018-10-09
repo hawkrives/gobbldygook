@@ -1,1 +1,1 @@
-extends: ../../../../.eslintrc-test.yml
+extends: ../../../.eslintrc-test.yml
