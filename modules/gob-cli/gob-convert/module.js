@@ -9,7 +9,7 @@ import meow from 'meow'
 import stdin from 'get-stdin'
 import loadJsonFile from 'load-json-file'
 import {getCourse} from '../lib/get-course'
-import {convertStudent} from '@gob/school-st-olaf-college'
+import {convertStudent} from '@gob/school-st-olaf-college-sis-import'
 const {version} = require('../package.json')
 
 global.VERSION = version
