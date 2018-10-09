@@ -67,7 +67,6 @@ Immutable.Record {
   ],
   "year": 1994,
   "semester": 3,
-  "metadata": Immutable.Map {},
 }
 `)
 	})
@@ -75,7 +74,7 @@ Immutable.Record {
 	it('can turn into JSON', () => {
 		let result = stringify(new Schedule({id: '1', title: 'Schedule 6'}))
 		expect(result).toMatchInlineSnapshot(
-			`"{\\"active\\":false,\\"clbids\\":[],\\"id\\":\\"1\\",\\"index\\":1,\\"metadata\\":{},\\"semester\\":0,\\"title\\":\\"Schedule 6\\",\\"year\\":0}"`,
+			`"{\\"active\\":false,\\"clbids\\":[],\\"id\\":\\"1\\",\\"index\\":1,\\"semester\\":0,\\"title\\":\\"Schedule 6\\",\\"year\\":0}"`,
 		)
 	})
 
