@@ -7,7 +7,6 @@
     "@gob/lib": "^3.0.0-rc.2",
     "@gob/school-st-olaf-college": "^3.0.0-rc.2",
     "@gob/web-database": "^3.0.0-rc.2",
-    "debug": "^4.0.1",
     "idb-range": "^3.1.3",
     "js-yaml": "^3.12.0",
     "lodash": "^4.17.11",

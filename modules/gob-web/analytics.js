@@ -1,7 +1,5 @@
 // @flow
-import debug from 'debug'
 import bugsnag from 'bugsnag-js'
-const log = debug('web')
 const BUGSNAG_KEY = '7e393deddaeb885f5b140b4320ecef6b'
 
 export function isogram() {
@@ -30,7 +28,7 @@ export function ga(...args: any[]) {
 
 export default function start() {
 	if (process.env.NODE_ENV === 'production') {
-		log('Initializing analytics 📊')
+		console.log('Initializing analytics 📊')
 		isogram()
 		bugsnag(BUGSNAG_KEY)
 	}

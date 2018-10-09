@@ -7,9 +7,6 @@ import './styles/normalize.scss'
 import './styles/css-colors.scss'
 import './styles/css-variables.scss'
 
-import debug from 'debug'
-const log = debug('web')
-
 // Include React and react-dom.render
 import React from 'react'
 import {render} from 'react-dom'
@@ -23,7 +20,7 @@ import loadData from './workers/load-data'
 loadData().catch(err => console.error(err))
 
 // Kick off the GUI
-log('3. 2.. 1... Blast off! 🚀')
+console.log('3. 2.. 1... Blast off! 🚀')
 
 import App from './app'
 
