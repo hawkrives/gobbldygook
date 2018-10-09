@@ -61,6 +61,34 @@ let keywordMappings = {
 	time: 'times',
 }
 
+let gereqs = new Set([
+	'ALS-A',
+	'ALS-L',
+	'AQR',
+	'BTS-B',
+	'BTS-T',
+	'EIN',
+	'FOL-C',
+	'FOL-F',
+	'FOL-G',
+	'FOL-J',
+	'FOL-K',
+	'FOL-L',
+	'FOL-N',
+	'FOL-R',
+	'FOL-S',
+	'FYW',
+	'HBS',
+	'HWC',
+	'IST',
+	'MCD',
+	'MCG',
+	'ORC',
+	'SED',
+	'SPM',
+	'WRI',
+])
+
 function organizeValues([key, values], words = false, profWords = false) {
 	let organizedValues = values.map(val => {
 		// handle $OR and $AND and other boolean operators
@@ -171,6 +199,9 @@ export function buildQueryFromString(
 				values.push(section)
 			}
 		}
+	} else if (gereqs.has(stringThing.toUpperCase())) {
+		keys.push('gereqs')
+		values.push(stringThing)
 	} else if (stringThing) {
 		keys.push('words')
 		values.push(stringThing)
