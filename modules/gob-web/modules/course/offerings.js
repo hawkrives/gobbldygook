@@ -16,14 +16,10 @@ const nbsp = '\u00a0'
 
 export function consolidateOfferings(
 	offerings: Array<Offering>,
-): Array<?string> {
+): Array<string> {
 	return List(offerings)
 		.groupBy(({start, end}) => `${start} ${end}`)
 		.map(groupedOffers => {
-			if (groupedOffers.size < 1) {
-				return null
-			}
-
 			let days = groupedOffers.map(({day}) => DAYS.get(day)).join('')
 			let {start, end} = groupedOffers.first()
 
@@ -35,14 +31,10 @@ export function consolidateOfferings(
 
 export function consolidateExpandedOfferings(
 	offerings: Array<Offering>,
-): Array<?string> {
+): Array<string> {
 	return List(offerings)
 		.groupBy(({start, end}) => `${start} ${end}`)
 		.map(groupedOffers => {
-			if (groupedOffers.size < 1) {
-				return null
-			}
-
 			let days = groupedOffers.map(({day}) => DAYS.get(day)).join('/')
 			let {start, end, location} = groupedOffers.first()
 
