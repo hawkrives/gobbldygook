@@ -140,6 +140,13 @@ export class CourseSearcher extends React.Component<Props, State> {
 						let filters = (
 							<Card className="search-filters">
 								<LabelledSelect
+									label="Limit to:"
+									options={potentialYearLimits}
+									onChange={this.handleLimitToChange}
+									value={limitTo}
+								/>
+
+								<LabelledSelect
 									label="Sort by:"
 									options={toPairs(SORT_BY)}
 									onChange={this.handleSortChange}
@@ -158,13 +165,6 @@ export class CourseSearcher extends React.Component<Props, State> {
 									options={potentialFilters}
 									onChange={this.handleFilterByChange}
 									value={filterBy}
-								/>
-
-								<LabelledSelect
-									label="Limit to:"
-									options={potentialYearLimits}
-									onChange={this.handleLimitToChange}
-									value={limitTo}
 								/>
 							</Card>
 						)
