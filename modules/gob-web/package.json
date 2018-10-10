@@ -105,7 +105,7 @@
     "jest-enzyme": "^7.0.0",
     "jest-styled-components": "^6.2.1",
     "junk": "^2.1.0",
-    "mini-css-extract-plugin": "^0.4.3",
+    "mini-css-extract-plugin": "^0.4.4",
     "mkdirp": "^0.5.1",
     "prop-types": "^15.6.2",
     "react-test-renderer": "^16.5.2",
