@@ -6,25 +6,9 @@ import {List} from 'immutable'
 import {Card} from '../../components/card'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import {DraggableCourse} from '../course'
-import {
-	toPrettyTerm,
-	expandYear,
-	semesterName,
-} from '@gob/school-st-olaf-college'
 import styled from 'styled-components'
 import {type Course as CourseType} from '@gob/types'
 import type {GROUP_BY_KEY} from './constants'
-
-const GROUP_BY_TO_TITLE: {[key: GROUP_BY_KEY]: (string) => string} = {
-	day: days => days,
-	department: depts => depts,
-	gened: gereqs => gereqs,
-	semester: sem => semesterName(sem),
-	term: term => toPrettyTerm(term),
-	time: times => times,
-	year: year => expandYear(year),
-	none: () => '',
-}
 
 type Results = List<string | CourseType>
 
@@ -119,12 +103,11 @@ export class CourseResultsList extends React.Component<Props> {
 		return getRowHeight(item)
 	}
 
-	renderHeader = (groupTitle: string, {style}: {style: Object}) => {
-		if (!groupTitle) {
+	renderHeader = (title: string, {style}: {style: Object}) => {
+		if (!title) {
 			return null
 		}
 
-		const title = GROUP_BY_TO_TITLE[this.props.groupedBy](groupTitle)
 		return (
 			<CourseGroupTitle style={style} title={title}>
 				<span>{title}</span>

@@ -5,6 +5,11 @@ import {List, Set} from 'immutable'
 import oxford from 'listify'
 import flatten from 'lodash/flatten'
 import {to12HourTime as to12} from '@gob/lib'
+import {
+	toPrettyTerm,
+	expandYear,
+	semesterName,
+} from '@gob/school-st-olaf-college'
 import {type SORT_BY_KEY, type GROUP_BY_KEY} from './constants'
 
 const ALL_DAYS = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']
@@ -78,6 +83,17 @@ const SORT_BY_TO_KEY: {[key: SORT_BY_KEY]: Array<(CourseType) => string>} = {
 	time: [TIME_OF_DAY, DEPARTMENT, NUMBER, SECTION],
 }
 
+const GROUP_BY_TO_TITLE: {[key: GROUP_BY_KEY]: (string) => string} = {
+	day: days => days,
+	department: depts => depts,
+	gened: gereqs => gereqs,
+	semester: sem => semesterName(sem),
+	term: term => toPrettyTerm(term),
+	time: times => times,
+	year: year => expandYear(year),
+	none: () => '',
+}
+
 const REVERSE_ORDER: Set<GROUP_BY_KEY> = Set.of('year', 'term', 'semester')
 
 export function sortAndGroup(
@@ -100,13 +116,15 @@ export function sortAndGroup(
 	}
 
 	let grouper = GROUP_BY_TO_KEY[grouping]
-	if (!grouper) {
+	let titleGrouper = GROUP_BY_TO_TITLE[grouping]
+	if (!grouper || !titleGrouper) {
 		throw new Error(`unknown grouping function "${grouping}"`)
 	}
 
 	let nestedResults = results
 		.groupBy(grouper)
 		.sortBy((_, key) => key)
+		.mapKeys(titleGrouper)
 		.toOrderedMap()
 
 	if (REVERSE_ORDER.has(grouping)) {
