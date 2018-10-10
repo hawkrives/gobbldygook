@@ -82,8 +82,6 @@ class AreaOfStudyGroup extends React.PureComponent<Props> {
 					<AreaOfStudy
 						areaOfStudy={area}
 						key={`${area.name}${String(area.revision)}`}
-						showCloseButton={showAreaPicker}
-						showEditButton={showAreaPicker}
 						student={this.props.student}
 					/>
 				))}

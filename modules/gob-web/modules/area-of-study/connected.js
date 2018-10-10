@@ -13,31 +13,17 @@ import {
 
 type Props = {
 	areaOfStudy: AreaQuery,
-	showCloseButton: boolean,
-	showEditButton: boolean,
 	student: Student,
 	changeStudent: ChangeStudentFunc,
 }
 
 type State = {|
 	isOpen: boolean,
-	confirmRemoval: boolean,
 |}
 
 class AreaOfStudyConnector extends React.Component<Props, State> {
 	state = {
 		isOpen: false,
-		confirmRemoval: false,
-	}
-
-	startRemovalConfirmation = (ev: Event) => {
-		ev.stopPropagation()
-		this.setState({confirmRemoval: true})
-	}
-
-	endRemovalConfirmation = (ev: Event) => {
-		ev.stopPropagation()
-		this.setState({confirmRemoval: false})
 	}
 
 	toggleAreaExpansion = (ev: Event) => {
@@ -72,14 +58,8 @@ class AreaOfStudyConnector extends React.Component<Props, State> {
 		}
 	}
 
-	removeArea = (ev: Event) => {
-		ev.stopPropagation()
-		let s = this.props.student.removeArea(this.props.areaOfStudy)
-		this.props.changeStudent(s)
-	}
-
 	render() {
-		let {areaOfStudy, student, showCloseButton, showEditButton} = this.props
+		let {areaOfStudy, student} = this.props
 
 		return (
 			<AreaOfStudyProvider areaOfStudy={areaOfStudy} student={student}>
@@ -92,15 +72,9 @@ class AreaOfStudyConnector extends React.Component<Props, State> {
 							results={results}
 							isOpen={this.state.isOpen}
 							onToggleOpen={this.toggleAreaExpansion}
-							onRemove={this.removeArea}
 							onAddOverride={this.addOverride}
 							onRemoveOverride={this.removeOverride}
 							onToggleOverride={this.toggleOverride}
-							onRemovalStart={this.startRemovalConfirmation}
-							onRemovalCancel={this.endRemovalConfirmation}
-							showCloseButton={showCloseButton}
-							showEditButton={showEditButton}
-							showConfirmRemoval={this.state.confirmRemoval}
 						/>
 					)
 				}}
