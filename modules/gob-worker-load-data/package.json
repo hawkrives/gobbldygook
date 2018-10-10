@@ -11,6 +11,6 @@
     "js-yaml": "^3.12.0",
     "lodash": "^4.17.11",
     "present": "^1.0.0",
-    "serialize-error": "^2.1.0"
+    "serialize-error": "^3.0.0"
   }
 }
