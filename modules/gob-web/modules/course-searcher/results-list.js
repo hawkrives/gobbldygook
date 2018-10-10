@@ -65,7 +65,7 @@ const CourseListItem = styled(DraggableCourse)`
 function getRowHeight(item: string | CourseType) {
 	if (typeof item === 'string') {
 		// heading
-		return 45
+		return 65
 	}
 
 	let firstRowHeight = 20
