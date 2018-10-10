@@ -111,7 +111,7 @@ export function sortAndGroup(
 	let {sorting, grouping, filtering, limiting} = args
 	console.time('query: grouping/sorting')
 
-	let years = results.map(c => c.year).toSet()
+	let years = results.map(c => c.year).toSet().sort()
 	if (limiting) {
 		let year = parseInt(limiting, 10)
 		results = results.filter(c => c.year === year)
