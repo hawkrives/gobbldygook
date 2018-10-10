@@ -50,7 +50,7 @@ export class CourseSearcher extends React.Component<Props, State> {
 
 	handleGroupByChange = (ev: SyntheticEvent<HTMLSelectElement>) => {
 		let value: string = ev.currentTarget.value
-		this.setState(() => ({groupBy: (value: any)}))
+		this.setState(() => ({groupBy: (value: any), filterBy: ''}))
 	}
 
 	handleFilterByChange = (ev: SyntheticEvent<HTMLSelectElement>) => {
