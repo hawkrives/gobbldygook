@@ -61,9 +61,14 @@ function makeOfExpression({expr, ctx}) {
 				expr.$count.$operator,
 		  )} ${expr.$count.$num} from among`
 
-	const contents = expr.$of.map((ex, i) => (
+	let contents = expr.$of.map((ex, i) => (
 		<Expression key={i} expr={ex} ctx={ctx} />
 	))
+
+	let allAreReferences = expr.$of.every(expr => expr.$type === 'reference')
+	if (allAreReferences) {
+		contents = []
+	}
 
 	return {description, contents}
 }

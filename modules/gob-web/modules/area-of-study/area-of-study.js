@@ -4,7 +4,7 @@ import React from 'react'
 import cx from 'classnames'
 import {FlatButton} from '../../components/button'
 import {Icon} from '../../components/icon'
-import Requirement from './requirement'
+import {TopLevelRequirement} from './requirement'
 import ProgressBar from '../../components/progress-bar'
 import {close, chevronUp, chevronDown} from '../../icons/ionicons'
 import {type EvaluationResult} from '@gob/examine-student'
@@ -123,9 +123,8 @@ export class AreaOfStudy extends React.Component<Props> {
 				) : null}
 
 				{isOpen ? (
-					<Requirement
+					<TopLevelRequirement
 						info={(results: any)}
-						topLevel
 						onAddOverride={onAddOverride}
 						onRemoveOverride={onRemoveOverride}
 						onToggleOverride={onToggleOverride}
