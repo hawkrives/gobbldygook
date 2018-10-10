@@ -16,7 +16,7 @@ type Props = {
 		error: ?string,
 		inProgress: boolean,
 		didSearch: boolean,
-		results: Array<string | CourseType>,
+		results: List<string | CourseType>,
 	}) => React.Node,
 	groupBy: GROUP_BY_KEY,
 	sortBy: SORT_BY_KEY,

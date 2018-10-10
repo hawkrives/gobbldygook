@@ -82,8 +82,13 @@ const REVERSE_ORDER: Set<GROUP_BY_KEY> = Set.of('year', 'term', 'semester')
 
 export function sortAndGroup(
 	results: List<CourseType>,
-	args: {sorting: SORT_BY_KEY, grouping: GROUP_BY_KEY},
-): Array<string | CourseType> {
+	args: {
+		sorting: SORT_BY_KEY,
+		grouping: GROUP_BY_KEY,
+		filtering: string,
+		limiting: string,
+	},
+): List<string | CourseType> {
 	let {sorting, grouping} = args
 	console.time('query: grouping/sorting')
 
@@ -112,9 +117,7 @@ export function sortAndGroup(
 	nestedResults = nestedResults
 		.map((val, key) => [key, val])
 		.toList()
-		.toJS()
-
-	nestedResults = flatten((flatten(nestedResults): any))
+		.flatMap(([k, v]) => [k, ...v])
 
 	console.timeEnd('query: grouping/sorting')
 

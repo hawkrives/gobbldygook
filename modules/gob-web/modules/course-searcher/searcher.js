@@ -133,7 +133,7 @@ export class CourseSearcher extends React.Component<Props, State> {
 							)
 						}
 
-						if (results.length === 0) {
+						if (results.size === 0) {
 							if (!didSearch) {
 								return (
 									<Card className="course-results--notice">

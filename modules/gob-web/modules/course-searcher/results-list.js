@@ -1,7 +1,8 @@
 // @flow
 
 import * as React from 'react'
-import {VariableSizeList as List} from 'react-window'
+import {VariableSizeList} from 'react-window'
+import {List} from 'immutable'
 import {Card} from '../../components/card'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import {DraggableCourse} from '../course'
@@ -25,7 +26,7 @@ const GROUP_BY_TO_TITLE: {[key: GROUP_BY_KEY]: (string) => string} = {
 	none: () => '',
 }
 
-type Results = Array<string | CourseType>
+type Results = List<string | CourseType>
 
 type Props = {
 	groupedBy: GROUP_BY_KEY,
@@ -33,7 +34,7 @@ type Props = {
 	studentId?: string,
 }
 
-const TermList = styled(List)`
+const TermList = styled(VariableSizeList)`
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -109,7 +110,7 @@ function getRowHeight(item: string | CourseType) {
 
 export class CourseResultsList extends React.Component<Props> {
 	getRowHeight = (index: number) => {
-		let item = this.props.results[index]
+		let item = this.props.results.get(index)
 
 		if (!item) {
 			return null
@@ -133,7 +134,7 @@ export class CourseResultsList extends React.Component<Props> {
 
 	renderRow = (args: {index: number, style: Object}) => {
 		let {index, style} = args
-		let item = this.props.results[index]
+		let item = this.props.results.get(index)
 
 		if (!item) {
 			return null
@@ -155,7 +156,7 @@ export class CourseResultsList extends React.Component<Props> {
 					{({height, width}) => (
 						<TermList
 							height={height}
-							itemCount={this.props.results.length}
+							itemCount={this.props.results.size}
 							itemSize={this.getRowHeight}
 							width={width}
 						>
