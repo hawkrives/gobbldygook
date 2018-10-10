@@ -137,6 +137,13 @@ export class CourseSearcher extends React.Component<Props, State> {
 							.toArray()
 						potentialYearLimits.unshift(['', 'All Years'])
 
+						if (limitTo && !years.has(parseInt(limitTo, 10))) {
+							potentialYearLimits.push([
+								limitTo,
+								expandYear(limitTo),
+							])
+						}
+
 						let filters = (
 							<Card className="search-filters">
 								<LabelledSelect
