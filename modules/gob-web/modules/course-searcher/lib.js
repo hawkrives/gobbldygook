@@ -147,7 +147,9 @@ export function sortAndGroup(
 
 	if (filtering) {
 		finalResults = nestedResults.get(filtering, List())
-		finalResults = finalResults.unshift(filtering)
+		if (finalResults.size) {
+			finalResults = finalResults.unshift(filtering)
+		}
 	} else {
 		finalResults = nestedResults
 			.map((val, key) => [key, val])
