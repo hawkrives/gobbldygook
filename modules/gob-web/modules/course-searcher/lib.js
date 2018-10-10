@@ -3,7 +3,6 @@
 import type {Course as CourseType} from '@gob/types'
 import {List, Set} from 'immutable'
 import oxford from 'listify'
-import flatten from 'lodash/flatten'
 import {to12HourTime as to12} from '@gob/lib'
 import {
 	toPrettyTerm,
@@ -104,9 +103,19 @@ export function sortAndGroup(
 		filtering: string,
 		limiting: string,
 	},
-): List<string | CourseType> {
-	let {sorting, grouping} = args
+): {
+	results: List<string | CourseType>,
+	keys: Array<string>,
+	years: Set<number>,
+} {
+	let {sorting, grouping, filtering, limiting} = args
 	console.time('query: grouping/sorting')
+
+	let years = results.map(c => c.year).toSet()
+	if (limiting) {
+		let year = parseInt(limiting, 10)
+		results = results.filter(c => c.year === year)
+	}
 
 	for (let comparator of SORT_BY_TO_KEY[sorting]) {
 		if (!comparator) {
@@ -132,12 +141,21 @@ export function sortAndGroup(
 		nestedResults = nestedResults.reverse()
 	}
 
-	nestedResults = nestedResults
-		.map((val, key) => [key, val])
-		.toList()
-		.flatMap(([k, v]) => [k, ...v])
+	let filterableKeys = [...nestedResults.keys()].map(String)
+
+	let finalResults = undefined
+
+	if (filtering) {
+		finalResults = nestedResults.get(filtering, List())
+		finalResults = finalResults.unshift(filtering)
+	} else {
+		finalResults = nestedResults
+			.map((val, key) => [key, val])
+			.toList()
+			.flatMap(([k, v]) => [k, ...v])
+	}
 
 	console.timeEnd('query: grouping/sorting')
 
-	return nestedResults
+	return {results: finalResults, keys: filterableKeys, years}
 }

@@ -6,7 +6,7 @@ import {queryCourseDatabase} from '../../helpers/query-course-database'
 import mem from 'mem'
 import {sortAndGroup} from './lib'
 import {ga} from '../../analytics'
-import {List} from 'immutable'
+import {List, Set} from 'immutable'
 import type {GROUP_BY_KEY, SORT_BY_KEY} from './constants'
 
 type Props = {
@@ -17,9 +17,13 @@ type Props = {
 		inProgress: boolean,
 		didSearch: boolean,
 		results: List<string | CourseType>,
+		keys: Array<string>,
+		years: Set<number>,
 	}) => React.Node,
 	groupBy: GROUP_BY_KEY,
 	sortBy: SORT_BY_KEY,
+	limitTo: string,
+	filterBy: string,
 }
 
 type State = {|
@@ -106,14 +110,28 @@ export class Querent extends React.Component<Props, State> {
 
 	render() {
 		let {error, inProgress, results, didSearch} = this.state
-		let {sortBy: sorting, groupBy: grouping} = this.props
-		let grouped = memSortAndGroup(results, {sorting, grouping})
+
+		let {
+			sortBy: sorting,
+			groupBy: grouping,
+			filterBy: filtering,
+			limitTo: limiting,
+		} = this.props
+
+		let {results: grouped, years, keys} = memSortAndGroup(results, {
+			sorting,
+			grouping,
+			filtering,
+			limiting,
+		})
 
 		return this.props.children({
 			error,
 			inProgress,
 			didSearch,
 			results: grouped,
+			years,
+			keys,
 		})
 	}
 }
