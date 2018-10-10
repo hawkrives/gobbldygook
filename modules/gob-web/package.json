@@ -67,7 +67,7 @@
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
     "redux-undo": "^0.6.1",
-    "serialize-error": "^2.1.0",
+    "serialize-error": "^3.0.0",
     "stabilize": "^1.0.0",
     "sto-course-related-data": "^4.0.2",
     "styled-components": "^4.0.0-beta.8",
