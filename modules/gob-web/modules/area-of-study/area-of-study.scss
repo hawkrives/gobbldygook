@@ -106,8 +106,12 @@
 
 	.area--open-indicator {
 		margin-right: 0.5em;
-		margin-bottom: 0.5em;
+		margin-bottom: 1em;
 		cursor: pointer;
+	}
+
+	svg:not(:root) {
+		margin-top: 0.5em;
 	}
 }
 
