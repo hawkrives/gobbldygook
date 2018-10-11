@@ -33,7 +33,7 @@ const ContainerModal = styled(Modal)`
 `
 
 const BottomToolbar = styled.div`
-	padding: 0 20px;
+	padding: 10px 20px;
 	border-top: 1px solid rgba(160, 160, 160, 0.2);
 	margin-top: 0.5em;
 	padding-top: 0.5em;
