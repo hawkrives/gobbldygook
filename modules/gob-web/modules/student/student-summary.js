@@ -27,13 +27,14 @@ const welcomeMessages = [
 	'Hello, ',
 	'こんにちは、', // japanese
 	'ようこそ、', // japanese
-	'Fram! Fram! ',
-	'Salut, ',
+	'Fram! Fram! ', // new norwegian
+	'Salut, ', // french
 	'Aloha, ', // hawaiian
-	'Привет, ',
-	'Вітаю, ',
-	'Sawubona, ',
-	'Hei, ',
+	'Привет, ', // russian
+	'Вітаю, ', // ukrainian
+	'Sawubona, ', // zulu
+	'Hei, ', // norwegian
+	'Hej, ', // polish, swedish
 	'Hola, ', // spanish
 	'Bonjour, ', // french
 	'Hallo, ', // german
@@ -44,6 +45,15 @@ const welcomeMessages = [
 	'halo, ', // indonesian
 	'Salve, ', // latin
 	'Χαῖρε! ', // ancient greek
+	'Zdravo, ', // bosnian
+	'Bok, ', // croatian
+	'ahoj, ', // czech, slovak
+	'Tere, ', // estonian
+	'Bula, ', // fijian
+	'Zdravo, ', // serbian
+	'Hujambo, ', // swahili
+	'Xin chào, ', // vietnamese
+	'Sholem, ', // yiddish
 ]
 
 const welcomeMessage = welcomeMessages[2]
