@@ -10,9 +10,9 @@ function Student({undo, redo, student}) {
 		return <div>Loading student…</div>
 	}
 
-	const canUndo = student.data.past.length
-	const canRedo = student.data.future.length
-	const present = student.data.present
+	const canUndo = student.past.length
+	const canRedo = student.future.length
+	const present = student.present
 
 	return (
 		<div>
@@ -50,8 +50,8 @@ function Degub(props) {
 				<li key={i}>
 					<Student
 						student={s}
-						undo={() => props.undo(s.data.present.id)}
-						redo={() => props.redo(s.data.present.id)}
+						undo={() => props.undo(s.present.id)}
+						redo={() => props.redo(s.present.id)}
 					/>
 				</li>
 			))}
