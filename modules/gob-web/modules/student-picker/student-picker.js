@@ -14,6 +14,7 @@ import {FlatButton, RaisedButton} from '../../components/button'
 import {Icon} from '../../components/icon'
 import StudentList from './student-list'
 import styled from 'styled-components'
+import {AppTitle} from '../../components/app-title'
 import type {State as StudentState} from '../../redux/students/reducers'
 
 import {type SORT_BY_ENUM} from './types'
@@ -49,27 +50,6 @@ const StudentListToolbarWrapper = styled.div`
 	align-items: center;
 	justify-content: space-around;
 	margin-bottom: 1em;
-`
-
-const AppTitle = styled.header`
-	margin-top: 3em;
-	text-align: center;
-
-	& h1,
-	& h2 {
-		margin: 0;
-		font-variant-caps: small-caps;
-	}
-
-	& h1 {
-		font-weight: 300;
-	}
-
-	& h2 {
-		margin-bottom: 1em;
-		font-weight: 400;
-		font-size: 1em;
-	}
 `
 
 const MakeStudentButton = styled(RaisedButton)`
@@ -128,13 +108,7 @@ export default function StudentPicker(props: PropTypes) {
 
 	return (
 		<Overview>
-			<AppTitle>
-				<h1>GobbldygooK</h1>
-				<h2>A Course Scheduling Helper</h2>
-				<small>
-					<code>{process.env.TRAVIS_COMMIT}</code>
-				</small>
-			</AppTitle>
+			<AppTitle />
 
 			<StudentListToolbarWrapper>
 				<StudentListToolbar>
