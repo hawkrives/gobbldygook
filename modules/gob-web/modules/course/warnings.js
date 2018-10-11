@@ -24,7 +24,7 @@ const ExpandedWarningList = styled(PlainList)`
 	font-size: 0.85em;
 	font-variant-numeric: oldstyle-nums;
 	display: flex;
-	flex-flow: column wrap;
+	flex-flow: column nowrap;
 `
 
 const WarningItem = styled(ListItem)`
