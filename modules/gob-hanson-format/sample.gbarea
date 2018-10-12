@@ -1,0 +1,13 @@
+type: major
+name: Asian Studies
+revision: 2012-14
+
+result: Requirement & CSCI 121
+
+Requirement:
+    Asian Studies: ASIAN 130
+
+    Dance:
+        result: DANCE 101
+
+    result: all of (Asian Studies, Dance)

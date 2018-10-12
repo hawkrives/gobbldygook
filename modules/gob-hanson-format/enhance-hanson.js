@@ -86,24 +86,20 @@ export function enhanceHanson(data: HansonFile): ParsedHansonFile {
 		startRule: 'Result',
 	})
 
-	let enhanced = toPairs(data).map(([key, value]) => {
-		if (isRequirementName(key)) {
-			return [key, enhanceRequirement(value)]
-		}
-		return [key, value]
+	let enhanced = toPairs(data).filter(([n]) => isRequirementName(n)).map(([key, value]) => {
+		return enhanceRequirement(value, key)
 	})
 
-	let requirements: Mapped<ParsedHansonRequirement> = fromPairs(enhanced)
+	let requirements: Array<ParsedHansonRequirement> = enhanced
 	let {name, type, revision, dateAdded, 'available through': available} = data
 
 	let returnValue: ParsedHansonFile = {
-		...requirements,
-		$type: 'requirement',
 		name,
 		type,
 		revision,
 		slug,
 		result,
+		children: requirements,
 	}
 
 	if (dateAdded) {
@@ -119,6 +115,7 @@ export function enhanceHanson(data: HansonFile): ParsedHansonFile {
 
 function enhanceRequirement(
 	value: string | HansonRequirement,
+	name: string,
 ): ParsedHansonRequirement {
 	// 1. adds 'result' key, if missing
 	// 2. parses the 'result' and 'filter' keys
@@ -183,19 +180,21 @@ function enhanceRequirement(
 		  })
 		: null
 
-	let enhanced = toPairs(requirements).map(
-		([key: string, value: HansonRequirement]) => {
-			if (lowerLevelWhitelist.has(key)) {
-				return [key, value]
-			}
-
-			return [key, enhanceRequirement(value)]
-		},
-	)
+	let children = toPairs(requirements)
+		.filter(([key]) => isRequirementName(key))
+		.map(([key: string, value: HansonRequirement]) => {
+			return enhanceRequirement(value, key)
+		})
 
 	let returnedValue: ParsedHansonRequirement = {
-		...fromPairs(enhanced),
-		$type: 'requirement',
+		name: name,
+		'children share courses': value['children share courses'],
+		'student selected': value['student selected'],
+		'contract': value['contract'],
+		'declare': value['declare'],
+		'description': value['description'],
+		'message': value['message'],
+		children: children,
 	}
 
 	if (parsedResult) {

@@ -23,8 +23,7 @@ export type ParsedHansonFile = {
 	dateAdded?: string,
 	sourcePath?: string,
 	'available through'?: number,
-	$type: 'requirement',
-	[key: string]: Mapped<ParsedHansonRequirement>,
+	children: Array<ParsedHansonRequirement>,
 }
 
 export type HansonRequirement = {
@@ -40,7 +39,7 @@ export type HansonRequirement = {
 }
 
 export type ParsedHansonRequirement = {
-	$type: 'requirement',
+	name: string,
 	'children share courses'?: boolean,
 	'student selected'?: boolean,
 	contract?: boolean,
@@ -49,5 +48,5 @@ export type ParsedHansonRequirement = {
 	filter: ?Mapped<ParsedHansonRequirement>,
 	message: ?string,
 	result: ?Mapped<ParsedHansonRequirement>,
-	[key: string]: Mapped<ParsedHansonRequirement>,
+	children: Array<ParsedHansonRequirement>,
 }

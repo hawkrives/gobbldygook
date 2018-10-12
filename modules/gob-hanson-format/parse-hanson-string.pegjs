@@ -41,27 +41,27 @@ OptionalS
 Where
   = count:Counter _ distinct:IsDistinct _ 'course' OptionalS _ 'where' _ where:Qualifier
   { return {
-      $type: 'where',
-      $count: count,
-      $where: where,
-      $distinct: distinct,
+      type: 'where',
+      count: count,
+      qualifier: where,
+      distinct: distinct,
   } }
 
 
 Filter
   = 'only' _ distinct:IsDistinct _ 'courses' _ filter:(
-      'where' _ where:Qualifier { return {$where: where, $filterType: 'where'} }
-    / 'from' _ ofList:OfCourseList { return {$of: ofList, $filterType: 'of'} }
+      'where' _ where:Qualifier { return {qualifier: where, type: 'FilterWhere'} }
+    / 'from' _ ofList:OfCourseList { return {of: ofList, type: 'FilterOf'} }
   )
-  { return assign({}, filter, {$distinct: distinct, $type: 'filter'}) }
+  { return {type: 'filter', ...filter, distinct: distinct} }
 
 
 Occurrence
   = count:Counter _ 'occurrence' OptionalS _ 'of' _ course:Course
     { return {
-        $type: 'occurrence',
-        $count: count,
-        $course: course.$course,
+        type: 'occurrence',
+        count: count,
+        course: course,
     } }
 
 
@@ -75,9 +75,8 @@ Qualifier
 OrQualification 'qualification-or'
   = lhs:AndQualification _ '|' _ rhs:OrQualification
     { return {
-      $type: 'boolean',
-      $booleanType: 'or',
-      $or: [lhs].concat('$or' in rhs ? rhs.$or : [rhs]),
+      type: 'BooleanOr',
+      values: [lhs, ...(rhs.values || [rhs])],
     } }
   / AndQualification
 
@@ -85,9 +84,8 @@ OrQualification 'qualification-or'
 AndQualification 'qualification-and'
   = lhs:ParentheticalQualification _ '&' _ rhs:AndQualification
     { return {
-      $type: 'boolean',
-      $booleanType: 'and',
-      $and: [lhs].concat('$and' in rhs ? rhs.$and : [rhs]),
+      type: 'BooleanAnd',
+      values: [lhs, ...(rhs.values || [rhs])],
     } }
   / ParentheticalQualification
 
@@ -101,15 +99,15 @@ Qualification
   = key:Word _
     op:Operator _
     value:(
-        f:Function _ 'from' _ 'courses' _ 'where' _ q:Qualifier  { return assign({}, f, {$where: q}) }
+        f:Function _ 'from' _ 'courses' _ 'where' _ q:Qualifier  { return {...f, qualifier: q} }
       / word:QualificationValue
       / list:ParentheticalQualificationValue
     )
     { return {
-        $type: 'qualification',
-        $key: key,
-        $operator: op,
-        $value: value,
+        type: 'qualification',
+        key: key,
+        operator: op,
+        value: value,
     } }
 
 
@@ -120,9 +118,8 @@ ParentheticalQualificationValue
 OrQualificationValue
   = lhs:AndQualificationValue _ '|' _ rhs:OrQualificationValue
     { return {
-      $type: 'boolean',
-      $booleanType: 'or',
-      $or: [lhs].concat(rhs.$or ? rhs.$or : [rhs]),
+      type: 'BooleanOr',
+      values: [lhs, ...(rhs.values || [rhs])],
     } }
   / AndQualificationValue
 
@@ -130,9 +127,8 @@ OrQualificationValue
 AndQualificationValue
   = lhs:QualificationValue _ '&' _ rhs:AndQualificationValue
     { return {
-      $type: 'boolean',
-      $booleanType: 'and',
-      $and: [lhs].concat(rhs.$and ? rhs.$and : [rhs]),
+      type: 'BooleanAnd',
+      values: [lhs, ...(rhs.values || [rhs])],
     } }
   / QualificationValue
 
@@ -145,19 +141,19 @@ QualificationValue
 Function
   = name:Word _ OpenParen _ prop:Word _ CloseParen
     { return {
-      $name: name,
-      $prop: prop,
-      $type: 'function',
+      name: name,
+      prop: prop,
+      type: 'function',
     } }
 
 
 Operator
-  = ('<=')       { return '$lte' }
-  / ('<')        { return '$lt'  }
-  / ('==' / '=') { return '$eq'  }
-  / ('>=')       { return '$gte' }
-  / ('>')        { return '$gt'  }
-  / ('!=')       { return '$ne'  }
+  = ('<=')       { return 'Lte' }
+  / ('<')        { return 'Lt'  }
+  / ('==' / '=') { return 'Eq'  }
+  / ('>=')       { return 'Gte' }
+  / ('>')        { return 'Gt'  }
+  / ('!=')       { return 'Ne'  }
 
 
 _ 'whitespace'
@@ -165,25 +161,25 @@ _ 'whitespace'
 
 
 Counter
-  = count:EnglishInteger             { return { $operator: '$gte', $num: count } }
-  / 'at most' _ count:EnglishInteger { return { $operator: '$lte', $num: count } }
-  / 'exactly' _ count:EnglishInteger { return { $operator: '$eq',  $num: count } }
+  = count:EnglishInteger             { return { operator: 'Gte', num: count } }
+  / 'at most' _ count:EnglishInteger { return { operator: 'Lte', num: count } }
+  / 'exactly' _ count:EnglishInteger { return { operator: 'Eq',  num: count } }
 
 
 EnglishInteger
   = num:(
-        'zero'
-      / 'one-point-five'
-      / 'one'
-      / 'two'
-      / 'three'
-      / 'four'
-      / 'five'
-      / 'six'
-      / 'seven'
-      / 'eight'
-      / 'nine'
-      / 'ten'
+        '0' / 'zero'
+      / '1.5' / 'one-point-five'
+      / '1' / 'one'
+      / '2' / 'two'
+      / '3' / 'three'
+      / '4' / 'four'
+      / '5' / 'five'
+      / '6' / 'six'
+      / '7' / 'seven'
+      / '8' / 'eight'
+      / '9' / 'nine'
+      / '10' / 'ten'
     )
     {
            if (num === 'zero')  { return 0 }
@@ -208,8 +204,8 @@ EnglishInteger
 Not
   = '!' _ value:Expression
     { return {
-      $type: 'boolean',
-      $not: value
+      type: 'BooleanNot',
+      not: value
     } }
 
 
@@ -220,9 +216,8 @@ Parenthetical
 Or
   = lhs:And _ '|' _ rhs:Or
     { return {
-      $type: 'boolean',
-      $booleanType: 'or',
-      $or: [lhs].concat('$or' in rhs ? rhs.$or : [rhs]),
+      type: 'BooleanOr',
+      values: [lhs, ...(rhs.values || [rhs])],
     } }
   / And
 
@@ -230,9 +225,8 @@ Or
 And
   = lhs:Expression _ '&' _ rhs:And
     { return {
-      $type: 'boolean',
-      $booleanType: 'and',
-      $and: [lhs].concat('$and' in rhs ? rhs.$and : [rhs]),
+      type: 'BooleanAnd',
+      values: [lhs, ...(rhs.values || [rhs])],
     } }
   / Expression
 
@@ -258,24 +252,24 @@ OfList
 Of
   = count:(
         Counter
-      / 'all'  { return { $operator: '$eq', $was: 'all' } }
-      / 'any'  { return { $operator: '$gte', $num: 1, $was: 'any' } }
-      / 'none' { return { $operator: '$eq', $num: 0, $was: 'none' } }
+      / 'all'  { return { operator: 'Eq', was: 'all' } }
+      / 'any'  { return { operator: 'Gte', num: 1, was: 'any' } }
+      / 'none' { return { operator: 'Eq', num: 0, was: 'none' } }
     )
     _ 'of' _ ofList:OfList
     {
-      if (count.$was === 'all') {
-        count.$num = ofList.length
+      if (count.was === 'all') {
+        count.num = ofList.length
       }
 
-      if (ofList.length < count.$num) {
-        throw new Error(`you requested ${count.$num} items, but only gave ${ofList.length} options (${JSON.stringify(ofList)}).`)
+      if (ofList.length < count.num) {
+        throw new Error(`you requested ${count.num} items, but only gave ${ofList.length} options (${JSON.stringify(ofList)}).`)
       }
 
       return {
-        $type: 'of',
-        $count: count,
-        $of: ofList,
+        type: 'Of',
+        count: count,
+        of: ofList,
       }
     }
 
@@ -284,7 +278,7 @@ ChildList  // select a few requirements to apply the modifier to.
   = OpenParen _ reqs:(
     val:Reference
     rest:( _ ',' _ second:Reference { return second } )*
-    { return [val].concat(rest) }
+    { return [val, ...rest] }
   )+ _ ','? _ CloseParen
   { return flatten(reqs) }
 
@@ -298,36 +292,37 @@ Modifier
       / 'term'
     ) OptionalS _ besides:Besides? _ 'from' _
     from:(
-        'children' _ 'where' _ where:Qualifier { return { $from: 'children-where', $where: where, $children: '$all' } }
-      / 'children'                             { return { $from: 'children', $children: '$all' }}
-      / 'filter' _ 'where' _ where:Qualifier   { return { $from: 'filter-where', $where: where }}
-      / 'filter'                               { return { $from: 'filter' }}
-      / 'courses' _ 'where' _ where:Qualifier  { return { $from: 'where', $where: where } }
-      / c:ChildList _ 'where' _ w:Qualifier    { return { $from: 'children-where', $where: w, $children: c } }
-      / children:ChildList                     { return { $from: 'children', $children: children} }  // an alternative to "from [all] children"
-      / child:Reference                        { return { $from: 'children', $children: [child]} }
+        'children' _ 'where' _ where:Qualifier { return { from: 'children-where', qualifier: where, children: '$all' } }
+      / 'children'                             { return { from: 'children', children: '$all' }}
+      / 'filter' _ 'where' _ where:Qualifier   { return { from: 'filter-where', qualifier: where }}
+      / 'filter'                               { return { from: 'filter' }}
+      / 'courses' _ 'where' _ where:Qualifier  { return { from: 'where', qualifier: where } }
+      / c:ChildList _ 'where' _ w:Qualifier    { return { from: 'children-where', qualifier: w, children: c } }
+      / children:ChildList                     { return { from: 'children', children: children} }  // an alternative to "from [all] children"
+      / child:Reference                        { return { from: 'children', children: [child]} }
     )
     {
-      if (from.$from === 'where' && what === 'department') {
+      if (from.from === 'where' && what === 'department') {
         throw new Error('cannot use a modifier with "departments" or "department"')
       }
-      if (from.$from === 'where' && what === 'term') {
+      if (from.from === 'where' && what === 'term') {
         throw new Error('cannot use a modifier with "terms" or "term"')
       }
-      if (from.$from === 'children-where' && what !== 'course') {
+      if (from.from === 'children-where' && what !== 'course') {
         throw new Error('must use "courses from" with "children where"')
       }
-      if (count.$operator !== '$gte' && what !== 'course') {
+      if (count.operator !== 'Gte' && what !== 'course') {
         throw new Error('can only use at-least style counters with non-course requests')
       }
 
-      let result = assign({}, from, {
-        $type: 'modifier',
-        $count: count,
-        $what: what,
-      })
+      let result = {
+        ...from,
+        type: 'Modifier',
+        count: count,
+        what: what,
+      }
       if (besides) {
-        result.$besides = besides
+        result.besides = besides
       }
       return result
     }
@@ -360,8 +355,8 @@ Reference 'requirement reference'
         title = options.titles[title]
       }
       return {
-        $type: 'reference',
-        $requirement: title,
+        type: 'Reference',
+        requirement: title,
       }
     }
 
@@ -380,8 +375,10 @@ Course
     )?
   {
     return {
-      $type: 'course',
-      $course: assign({}, details, (dept || fetchDept()), num),
+      type: 'Course',
+      ...details,
+      ...(dept || fetchDept()),
+      ...num,
     }
   }
 
