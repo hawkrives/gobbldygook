@@ -252,9 +252,9 @@ OfList
 Of
   = count:(
         Counter
-      / 'all'  { return { operator: 'Eq', was: 'all' } }
-      / 'any'  { return { operator: 'Gte', num: 1, was: 'any' } }
-      / 'none' { return { operator: 'Eq', num: 0, was: 'none' } }
+      / 'all'  { return { operator: 'Eq', was: 'All' } }
+      / 'any'  { return { operator: 'Gte', num: 1, was: 'Any' } }
+      / 'none' { return { operator: 'Eq', num: 0, was: 'None' } }
     )
     _ 'of' _ ofList:OfList
     {

@@ -365,17 +365,17 @@ function peg$parse(input, options) {
 		peg$c131 = 'all',
 		peg$c132 = peg$literalExpectation('all', false),
 		peg$c133 = function peg$c133() {
-			return {operator: 'Eq', was: 'all'}
+			return {operator: 'Eq', was: 'All'}
 		},
 		peg$c134 = 'any',
 		peg$c135 = peg$literalExpectation('any', false),
 		peg$c136 = function peg$c136() {
-			return {operator: 'Gte', num: 1, was: 'any'}
+			return {operator: 'Gte', num: 1, was: 'Any'}
 		},
 		peg$c137 = 'none',
 		peg$c138 = peg$literalExpectation('none', false),
 		peg$c139 = function peg$c139() {
-			return {operator: 'Eq', num: 0, was: 'none'}
+			return {operator: 'Eq', num: 0, was: 'None'}
 		},
 		peg$c140 = function peg$c140(count, ofList) {
 			if (count.was === 'all') {
