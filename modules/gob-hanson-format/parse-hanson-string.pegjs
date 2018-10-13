@@ -96,7 +96,7 @@ ParentheticalQualification
 
 
 Qualification
-  = key:Word _
+  = key:QualificationField _
     op:Operator _
     value:(
         f:Function _ 'from' _ 'courses' _ 'where' _ q:Qualifier  { return {...f, qualifier: q} }
@@ -104,7 +104,7 @@ Qualification
       / list:ParentheticalQualificationValue
     )
     { return {
-        type: 'qualification',
+        type: 'Qualification',
         key: key,
         operator: op,
         value: value,
@@ -134,12 +134,15 @@ AndQualificationValue
 
 
 QualificationValue
-  = num:Integer         { return num }
-  / word:[a-z0-9_\-]i+  { return word.join('') }
+  = num:Integer         { return {type: 'Number', value: num }}
+  / word:[a-z0-9_\-]i+  { return {type: 'String', value: word.join('')} }
 
+
+QualificationField
+  = 'gereqs' / 'year' / 'department' / 'level'
 
 Function
-  = name:Word _ OpenParen _ prop:Word _ CloseParen
+  = name:('max' / 'min') _ OpenParen _ prop:QualificationField _ CloseParen
     { return {
       name: name,
       prop: prop,
@@ -292,14 +295,14 @@ Modifier
       / 'term'
     ) OptionalS _ besides:Besides? _ 'from' _
     from:(
-        'children' _ 'where' _ where:Qualifier { return { from: 'children-where', qualifier: where, children: '$all' } }
-      / 'children'                             { return { from: 'children', children: '$all' }}
-      / 'filter' _ 'where' _ where:Qualifier   { return { from: 'filter-where', qualifier: where }}
-      / 'filter'                               { return { from: 'filter' }}
-      / 'courses' _ 'where' _ where:Qualifier  { return { from: 'where', qualifier: where } }
-      / c:ChildList _ 'where' _ w:Qualifier    { return { from: 'children-where', qualifier: w, children: c } }
-      / children:ChildList                     { return { from: 'children', children: children} }  // an alternative to "from [all] children"
-      / child:Reference                        { return { from: 'children', children: [child]} }
+        'children' _ 'where' _ where:Qualifier { return { from: 'ChildrenWhere', qualifier: where, children: '$all' } }
+      / 'children'                             { return { from: 'Children', children: '$all' }}
+      / 'filter' _ 'where' _ where:Qualifier   { return { from: 'FilterWhere', qualifier: where }}
+      / 'filter'                               { return { from: 'Filter' }}
+      / 'courses' _ 'where' _ where:Qualifier  { return { from: 'Where', qualifier: where } }
+      / c:ChildList _ 'where' _ w:Qualifier    { return { from: 'ChildrenWhere', qualifier: w, children: c } }
+      / children:ChildList                     { return { from: 'Children', children: children} }  // an alternative to "from [all] children"
+      / child:Reference                        { return { from: 'Children', children: [child]} }
     )
     {
       if (from.from === 'where' && what === 'department') {
@@ -314,6 +317,8 @@ Modifier
       if (count.operator !== 'Gte' && what !== 'course') {
         throw new Error('can only use at-least style counters with non-course requests')
       }
+
+      what = what[0].toUpperCase() + what.slice(1)
 
       let result = {
         ...from,
@@ -386,7 +391,7 @@ Course
 CourseDepartment
   = dept:[A-Z/]+
     {
-      let department = {department: dept.join('')}
+      let department = {department: dept.join('').split('/')}
       storeDept(department)
       return department
     }
