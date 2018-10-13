@@ -7,6 +7,7 @@ import {type IndividualStudentState} from '../../redux/students/reducers'
 import {Student as StudentObject} from '@gob/object-student'
 import type {Undoable} from '../../types'
 import styled from 'styled-components'
+import {Card} from '../../components/card'
 
 const Container = styled.div`
 	display: grid;
@@ -19,6 +20,17 @@ const Container = styled.div`
 	@media all and (min-width: 900px) {
 		grid-template-columns: 280px minmax(0, 1fr) 280px;
 	}
+`
+
+const CouldNotLoadCard = styled(Card)`
+	margin: 40px auto;
+
+	max-width: 40em;
+	width: 100%;
+
+	padding: 20px;
+
+	text-align: center;
 `
 
 type Props = {
@@ -39,7 +51,12 @@ export class Student extends React.Component<Props, State> {
 
 	render() {
 		if (!this.props.student) {
-			return <p>Student {this.props.studentId} could not be loaded.</p>
+			return (
+				<CouldNotLoadCard>
+					<h1>Could not load student</h1>
+					<p>Student {this.props.studentId} could not be loaded.</p>
+				</CouldNotLoadCard>
+			)
 		}
 
 		let {student} = this.props
