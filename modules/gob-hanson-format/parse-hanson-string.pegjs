@@ -43,14 +43,14 @@ Where
   { return {
       type: 'where',
       count: count,
-      qualifier: where,
+      qualification: where,
       distinct: distinct,
   } }
 
 
 Filter
   = 'only' _ distinct:IsDistinct _ 'courses' _ filter:(
-      'where' _ where:Qualifier { return {qualifier: where, type: 'FilterWhere'} }
+      'where' _ where:Qualifier { return {where: where, type: 'FilterWhere'} }
     / 'from' _ ofList:OfCourseList { return {of: ofList, type: 'FilterOf'} }
   )
   { return {type: 'filter', ...filter, distinct: distinct} }
@@ -99,7 +99,7 @@ Qualification
   = key:QualificationField _
     op:Operator _
     value:(
-        f:Function _ 'from' _ 'courses' _ 'where' _ q:Qualifier  { return {...f, qualifier: q} }
+        f:Function _ 'from' _ 'courses' _ 'where' _ q:Qualifier  { return {...f, qualification: q} }
       / word:QualificationValue
       / list:ParentheticalQualificationValue
     )
@@ -295,12 +295,12 @@ Modifier
       / 'term'
     ) OptionalS _ besides:Besides? _ 'from' _
     from:(
-        'children' _ 'where' _ where:Qualifier { return { from: 'ChildrenWhere', qualifier: where, children: '$all' } }
+        'children' _ 'where' _ where:Qualifier { return { from: 'ChildrenWhere', qualification: where, children: '$all' } }
       / 'children'                             { return { from: 'Children', children: '$all' }}
-      / 'filter' _ 'where' _ where:Qualifier   { return { from: 'FilterWhere', qualifier: where }}
+      / 'filter' _ 'where' _ where:Qualifier   { return { from: 'FilterWhere', qualification: where }}
       / 'filter'                               { return { from: 'Filter' }}
-      / 'courses' _ 'where' _ where:Qualifier  { return { from: 'Where', qualifier: where } }
-      / c:ChildList _ 'where' _ w:Qualifier    { return { from: 'ChildrenWhere', qualifier: w, children: c } }
+      / 'courses' _ 'where' _ where:Qualifier  { return { from: 'Where', qualification: where } }
+      / c:ChildList _ 'where' _ w:Qualifier    { return { from: 'ChildrenWhere', qualification: w, children: c } }
       / children:ChildList                     { return { from: 'Children', children: children} }  // an alternative to "from [all] children"
       / child:Reference                        { return { from: 'Children', children: [child]} }
     )
@@ -372,11 +372,9 @@ Course
   = dept:CourseDepartment? _
     num:CourseNumber
     details:(
-      '.' section:CourseSection sub:(
-        '.' year:CourseYear sub:(
-          '.' semester:CourseSemester { return {semester} }
-        )? { return assign({}, sub, {year}) }
-      )? { return assign({}, sub, {section}) }
+      '.' year:CourseYear sub:(
+        '.' semester:CourseSemester { return {semester} }
+      )? { return assign({}, sub, {year}) }
     )?
   {
     return {
@@ -414,12 +412,6 @@ CourseNumber 'course number'
 
       return assign({}, result, {number})
     }
-
-
-CourseSection
-  = UppercaseLetter
-  / Asterisk
-  / Else { throw new SyntaxError('A course section must be either an uppercase letter [A-Z] or an asterisk [*].')}
 
 
 CourseYear
