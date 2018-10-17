@@ -44,7 +44,7 @@ const Container = styled.div`
 
 	--background-color: var(--white);
 	--background-color-hover: var(--gray-200);
-	--separator-color: var(--gray-200);
+	--separator-color: rgba(0,0,0,0.4);
 
 	&.loading {
 	}

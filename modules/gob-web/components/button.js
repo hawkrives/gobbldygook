@@ -59,7 +59,8 @@ export const RaisedButton = styled(BaseButton)`
 
 	&[disabled] {
 		cursor: default;
-		color: var(--gray-500);
+		background-color: var(--disabled-background);
+		color: var(--disabled-foreground);
 	}
 `
 
@@ -80,7 +81,7 @@ export const FlatButton = styled(BaseButton)`
 
 	&[disabled] {
 		cursor: default;
-		color: var(--disabled-foreground--light);
+		color: var(--disabled-foreground);
 
 		&:hover,
 		&:focus,

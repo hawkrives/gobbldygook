@@ -35,7 +35,9 @@ const html = ({cssHref, scriptSrc}) => {
 ${cssLink}
 <script async type="module" src="${scriptSrc}"></script>
 
+<body class="dark">
 <main id="gobbldygook"></main>
+</body>
 </html>
 `.trim()
 }

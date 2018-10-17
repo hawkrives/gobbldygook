@@ -17,8 +17,6 @@ let GlobalStyle = createGlobalStyle`
 
     html {
         font-family: var(--sans-font-stack);
-        color: var(--text-color);
-
         box-sizing: border-box;
 
         min-height: 100vh;
@@ -31,6 +29,7 @@ let GlobalStyle = createGlobalStyle`
 
     body {
         background: var(--background);
+        color: var(--text-color);
         height: 100%;
     }
 

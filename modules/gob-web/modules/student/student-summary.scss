@@ -2,22 +2,29 @@
 	text-align: center;
 	hyphens: none;
 	font-variant-numeric: oldstyle-nums tabular-nums;
-	text-shadow: 0 1px rgba(white, 0.5);
 	font-size: 0.85em;
 	padding: calc(var(--block-edge-padding) * 2);
 
 	&.cannot-graduate .graduation-message {
-		color: var(--deep-orange-500);
+		body:not(.dark) & {
+			color: var(--deep-orange-500);
+		}
 	}
 
 	&.can-graduate .graduation-message {
-		color: var(--light-green-800);
+		body:not(.dark) & {
+			color: var(--light-green-800);
+		}
 	}
 
 	&.can-graduate {
-		background-color: var(--light-green-50);
+		body:not(.dark) & {
+			background-color: var(--light-green-50);
+		}
 		&::selection {
-			background-color: var(--light-green-900);
+			body:not(.dark) & {
+				background-color: var(--light-green-900);
+			}
 		}
 	}
 
@@ -31,6 +38,9 @@
 
 	.student-summary--header {
 		color: var(--black);
+		body.dark & {
+			color: var(--inherit);
+		}
 
 		margin-bottom: calc(var(--block-edge-padding) * 2);
 		font-style: italic;

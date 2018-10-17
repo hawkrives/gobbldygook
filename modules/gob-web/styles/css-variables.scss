@@ -30,4 +30,19 @@
 	--semester-spacing: 4px;
 	--semester-side-padding: calc(var(--block-edge-padding) * 1.5);
 	--semester-padding: var(--block-edge-padding) var(--semester-side-padding);
+
+	--disabled-foreground: var(--disabled-foreground--light);
+	--disabled-background: var(--disabled-background--light);
+
+	--card-background: var(--white);
+}
+
+body.dark {
+	--background: #0e1e25;
+	--text-color: rgb(250,250,250);
+
+	--disabled-foreground: var(--disabled-foreground--dark);
+	--disabled-background: var(--disabled-background--dark);
+
+	--card-background: #717e83;
 }
