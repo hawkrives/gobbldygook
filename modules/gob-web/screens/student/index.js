@@ -10,58 +10,13 @@ import {Sidebar} from '../../components/sidebar'
 
 import StudentOverview from '../../modules/student'
 
-const SearchSidebar = Loadable({
-	loader: () =>
-		import('../../components/sidebar--course-search').then(
-			mod => mod.CourseSearcherSidebar,
-		),
-	loading: LoadingComponent,
-})
-
-import CourseRemovalBox from '../../components/course-removal-box'
-import {ConnectedSidebarToolbar} from '../../components/sidebar-toolbar'
-import {AreaOfStudySidebar} from '../../modules/student/area-of-study-sidebar'
-import {StudentSummary} from '../../modules/student/student-summary'
-
-const StatusSidebar = ({student}: {student: Undoable<Student>}) => (
-	<Sidebar>
-		<ConnectedSidebarToolbar
-			backTo="picker"
-			search={false}
-			share={true}
-			student={student}
-		/>
-		<CourseRemovalBox student={student.present} />
-		<StudentSummary student={student.present} randomizeHello={true} />
-		<AreaOfStudySidebar student={student.present} />
-	</Sidebar>
-)
-
-const CourseTable = Loadable({
-	loader: () => import('../../modules/course-table'),
-	loading: LoadingComponent,
-})
-
-const ShareStudentOverlay = Loadable({
-	loader: () => import('./share-student'),
-	loading: LoadingComponent,
-})
+import CourseTable from '../../modules/course-table'
+import {StudentToolbar} from '../../modules/student/toolbar'
 
 const SemesterDetail = Loadable({
 	loader: () => import('../../modules/semester-detail'),
 	loading: LoadingComponent,
 })
-
-const TermSidebar = ({student}: {student: Undoable<Student>}) => (
-	<Sidebar>
-		<ConnectedSidebarToolbar
-			backTo="picker"
-			search={false}
-			share={true}
-			student={student}
-		/>
-	</Sidebar>
-)
 
 export default function StudentIndex(props: {
 	studentId?: string,
@@ -84,38 +39,16 @@ export default function StudentIndex(props: {
 		<StudentOverview studentId={props.studentId}>
 			{({student}) => (
 				<>
-					<Router>
-						<StatusSidebar default student={student} />
-
-						<TermSidebar
-							path="/term/:term"
-							student={student}
-							navigate={navigate}
-						/>
-					</Router>
+					<StudentToolbar student={student.present} />
 
 					<Router>
 						<CourseTable default student={student.present} />
 
 						<SemesterDetail
-							student={student.present}
 							path="/term/:term"
+							student={student.present}
 						/>
 					</Router>
-
-					<SearchSidebar
-						term={params.get('term')}
-						student={student}
-						navigate={navigate}
-					/>
-
-					{params.has('share') && (
-						<ShareStudentOverlay
-							student={student.present}
-							navigate={navigate}
-							location={location}
-						/>
-					)}
 				</>
 			)}
 		</StudentOverview>
