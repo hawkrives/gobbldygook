@@ -14,7 +14,7 @@ type Props = {
 	queryString?: string,
 }
 
-export function CourseSearcherSidebar(props: Props) {
+export default function CourseSearcherSidebar(props: Props) {
 	let {student, navigate, queryString = window.location.search} = props
 
 	let {term} = props
@@ -32,7 +32,7 @@ export function CourseSearcherSidebar(props: Props) {
 		<Sidebar>
 			<CourseRemovalBox student={student.present} />
 			<CourseSearcher
-				studentId={student.present.id}
+				student={student.present}
 				term={term}
 				onCloseSearcher={boundCloseModal}
 			/>
