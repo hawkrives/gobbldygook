@@ -19,6 +19,7 @@ const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const PacktrackerPlugin = require('@packtracker/webpack-plugin')
 
 const isCI = Boolean(process.env.CI)
 const outputFolder = __dirname + '/build/'
@@ -153,6 +154,16 @@ function config() {
 				minimize: true,
 			}),
 			new DuplicatePackageCheckerPlugin(),
+		]
+	}
+
+	if (isCI) {
+		plugins = [
+			...plugins,
+			new PacktrackerPlugin({
+				project_token: process.env.PACKTRACKER_API_KEY,
+				upload: true,
+			}),
 		]
 	}
 
