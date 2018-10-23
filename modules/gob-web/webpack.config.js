@@ -161,6 +161,7 @@ function config() {
 		plugins = [
 			...plugins,
 			new PacktrackerPlugin({
+				// eslint-disable-next-line camelcase
 				project_token: process.env.PACKTRACKER_API_KEY,
 				upload: true,
 			}),
