@@ -158,14 +158,13 @@ function config() {
 	}
 
 	if (isCI) {
-		plugins = [
-			...plugins,
+		plugins.push(
 			new PacktrackerPlugin({
 				// eslint-disable-next-line camelcase
 				project_token: process.env.PACKTRACKER_API_KEY,
 				upload: true,
 			}),
-		]
+		)
 	}
 
 	const babelLoader = {
