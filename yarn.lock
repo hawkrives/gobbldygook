@@ -800,6 +800,13 @@
   resolved "https://registry.yarnpkg.com/@emotion/utils/-/utils-0.8.2.tgz#576ff7fb1230185b619a75d258cbc98f0867a8dc"
   integrity sha512-rLu3wcBWH4P5q1CGoSSH/i9hrXs7SlbRLkoq9IGuoPYNGQvDJ3pt/wmOM+XgYjIDRMVIdkUWt0RsfzF50JfnCw==
 
+"@packtracker/webpack-plugin@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@packtracker/webpack-plugin/-/webpack-plugin-1.0.1.tgz#42e7880214d16562486a4c3d7c67da6f4e56ca2b"
+  integrity sha512-VIQSJULFCmLcNVwRCe5dtal++PSPaG7Ny3L1nt3dlkyUQb092+XRbGA4mVmZvBXnZmLviA1ZzoCzfcXExfEjDg==
+  dependencies:
+    tiny-json-http "^7.0.0"
+
 "@reach/component-component@^0.1.1":
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/@reach/component-component/-/component-component-0.1.1.tgz#62ea2ec290da32f5e3a9872fb51f9a3ae4370cc4"
@@ -8792,6 +8799,11 @@ timers-browserify@^2.0.4:
   integrity sha512-uZYhyU3EX8O7HQP+J9fTVYwsq90Vr68xPEFo7yrVImIxYvHgukBEgOB/SgGoorWVTzGM/3Z+wUNnboA4M8jWrg==
   dependencies:
     setimmediate "^1.0.4"
+
+tiny-json-http@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/tiny-json-http/-/tiny-json-http-7.0.0.tgz#1b1240efa591cd0faa5845f844694e79563ac2a2"
+  integrity sha512-g3S2RiSmoZDJOMDTX6uj8GjVsiH4s0W0tb1YKYARoP4cosgIb4CB2i7Cdzn9UJqOrI1b1aNK+cgScPx4TwolQg==
 
 tmp@^0.0.33:
   version "0.0.33"
