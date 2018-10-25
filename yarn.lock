@@ -800,12 +800,12 @@
   resolved "https://registry.yarnpkg.com/@emotion/utils/-/utils-0.8.2.tgz#576ff7fb1230185b619a75d258cbc98f0867a8dc"
   integrity sha512-rLu3wcBWH4P5q1CGoSSH/i9hrXs7SlbRLkoq9IGuoPYNGQvDJ3pt/wmOM+XgYjIDRMVIdkUWt0RsfzF50JfnCw==
 
-"@packtracker/webpack-plugin@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@packtracker/webpack-plugin/-/webpack-plugin-1.0.1.tgz#42e7880214d16562486a4c3d7c67da6f4e56ca2b"
-  integrity sha512-VIQSJULFCmLcNVwRCe5dtal++PSPaG7Ny3L1nt3dlkyUQb092+XRbGA4mVmZvBXnZmLviA1ZzoCzfcXExfEjDg==
+"@packtracker/webpack-plugin@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@packtracker/webpack-plugin/-/webpack-plugin-1.1.1.tgz#246dc286fb2d807cd145d5a077a86f6e637949fb"
+  integrity sha512-KWx3TFEZ0lj/XU7iVajVXC5+FF4sfe0WCnCd/iIM2Xa95ToRBGGsz9Y2BsNDyclxJoFN/nhtWUk4z4XDQOwjAw==
   dependencies:
-    tiny-json-http "^7.0.0"
+    tiny-json-http "^7.0.2"
 
 "@reach/component-component@^0.1.1":
   version "0.1.1"
@@ -8793,10 +8793,10 @@ timers-browserify@^2.0.4:
   dependencies:
     setimmediate "^1.0.4"
 
-tiny-json-http@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/tiny-json-http/-/tiny-json-http-7.0.0.tgz#1b1240efa591cd0faa5845f844694e79563ac2a2"
-  integrity sha512-g3S2RiSmoZDJOMDTX6uj8GjVsiH4s0W0tb1YKYARoP4cosgIb4CB2i7Cdzn9UJqOrI1b1aNK+cgScPx4TwolQg==
+tiny-json-http@^7.0.2:
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/tiny-json-http/-/tiny-json-http-7.0.2.tgz#be5a52d75d4a92046bc1c5c99a928b49eee1cd6b"
+  integrity sha512-5MsAvlq5tvgCY98Y7iQPmpP5ZqLzESrv/S5AwXWIvHL0Z0zVVAfWku7WC6V4rHJb+judXhd28KBnE5+FLOVYaQ==
 
 tmp@^0.0.33:
   version "0.0.33"
