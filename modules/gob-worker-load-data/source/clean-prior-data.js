@@ -1,23 +1,29 @@
 // @flow
 
 import {db} from './db'
-import range from 'idb-range'
 import fromPairs from 'lodash/fromPairs'
 import getCacheStoreName from './get-cache-store-name'
 import type {InfoFileTypeEnum} from './types'
 
-export function getPriorCourses(path: string) {
-	return db
+export async function getPriorCourses(path: string) {
+	let numericClbids = db
+		.store('courses')
+		.getAll(IDBKeyRange.bound(-Infinity, Infinity))
+		.then(oldItems => fromPairs(oldItems.map(item => [item.clbid, null])))
+
+	let oldClbids = db
 		.store('courses')
 		.index('sourcePath')
-		.getAll(range({eq: path}))
+		.getAll(IDBKeyRange.only(path))
 		.then(oldItems => fromPairs(oldItems.map(item => [item.clbid, null])))
+
+	return [...new Set([...numericClbids, ...oldClbids])]
 }
 
 export function getPriorAreas(path: string) {
 	return db
 		.store('areas')
-		.getAll(range({eq: path}))
+		.getAll(IDBKeyRange.only(path))
 		.then(oldItems =>
 			fromPairs(oldItems.map(item => [item.sourcePath, null])),
 		)
