@@ -184,7 +184,7 @@ function enhanceRequirement(
 		: null
 
 	let enhanced = toPairs(requirements).map(
-		([key: string, value: HansonRequirement]) => {
+		([key, value]: [string, HansonRequirement]) => {
 			if (lowerLevelWhitelist.has(key)) {
 				return [key, value]
 			}
