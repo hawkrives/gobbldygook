@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react'
+import range from 'lodash/range'
 import cx from 'classnames'
 import listify from 'listify'
 import sample from 'lodash/sample'
@@ -18,6 +19,7 @@ import {loadArea} from '../../helpers/load-area'
 import uniqueId from 'lodash/uniqueId'
 import {getCourse} from '../../helpers/get-courses'
 import {countCredits} from '@gob/examine-student'
+import {expandYear} from '@gob/school-st-olaf-college/'
 
 import './student-summary.scss'
 
@@ -147,11 +149,26 @@ class StudentSummary extends React.Component<Props, State> {
 
 		canGraduate = canGraduate && Number(creditsTaken) >= creditsNeeded
 
+		let url = new URLSearchParams(window.location.search)
+
 		return (
 			<Card
 				as="article"
 				className={cx('student-summary', gradClassName, {checking})}
 			>
+				{url.has('ferpa') ? (
+					<div
+						style={{
+							backgroundColor: 'var(--red)',
+							textShadow: 'none',
+							color: 'white',
+							marginBottom: '1em',
+						}}
+					>
+						FERPA restrictions enabled
+					</div>
+				) : null}
+
 				{showEditor && <ConnectedEditor student={student} />}
 
 				{showAvatar && (
@@ -255,6 +272,7 @@ class Editor extends React.Component<EditorProps, EditorState> {
 	render() {
 		return (
 			<form onSubmit={this.onSubmit} className="student-summary--editor">
+				{/*
 				<label htmlFor={this.nameLabelId}>Name:</label>
 				<input
 					id={this.nameLabelId}
@@ -263,9 +281,7 @@ class Editor extends React.Component<EditorProps, EditorState> {
 					value={this.state.name}
 				/>
 
-				<label htmlFor={this.matriculationLabelId}>
-					Matriculation:
-				</label>
+				<label htmlFor={this.matriculationLabelId}>Matriculation:</label>
 				<input
 					id={this.matriculationLabelId}
 					onChange={this.changeMatriculation}
@@ -280,6 +296,21 @@ class Editor extends React.Component<EditorProps, EditorState> {
 					onBlur={this.onSubmit}
 					value={this.state.graduation}
 				/>
+
+				<label htmlFor={this.nameLabelId}>Catalog Year:</label>
+				<select value={this.state.matriculation}>
+					{range(
+						parseInt(this.state.matriculation),
+						parseInt(this.state.graduation),
+					).map(y => {
+						return (
+							<option key={y} value={y}>
+								{expandYear(y)}
+							</option>
+						)
+					})}
+				</select>
+				*/}
 			</form>
 		)
 	}
