@@ -48,15 +48,15 @@ const Container = styled.div`
 	--separator-color: var(--gray-100);
 	--background-color-hover: var(--separator-color);
 
-	//&.past {
-	//	--background-color: var(--teal-50);
-	//	--separator-color: var(--teal-100);
-	//}
-	//
-	//&.in-progress {
-	//	--background-color: var(--light-green-50);
-	//	--separator-color: var(--light-green-100);
-	//}
+	&.past {
+		--background-color: var(--teal-50);
+		--separator-color: var(--teal-100);
+	}
+
+	&.in-progress {
+		--background-color: var(--light-green-50);
+		--separator-color: var(--light-green-100);
+	}
 
 	&.invalid {
 		--background-color: var(--amber-50);
@@ -145,7 +145,7 @@ function discoverSemesterStatus(args: {
 	semester: number,
 	now: Date,
 }): 'past' | 'in-progress' | 'future' | 'unknown' {
-	let {year, semester: _semester, now} = args
+	let {year, semester, now} = args
 	if (year < now.getFullYear()) {
 		return 'past'
 	}
@@ -289,7 +289,10 @@ class Semester extends React.Component<Props, State> {
 			>
 				<Header>
 					{hasConflict && <Icon>{alertCircled}</Icon>}
-					<Title to={`./term/${year}${semester}`} title={`Details for ${name}`}>
+					<Title
+						to={`./term/${year}${semester}`}
+						title={`Details for ${name}`}
+					>
 						<TitleText>{name}</TitleText>
 						<InfoList>
 							{infoBar.map(item => (
@@ -300,7 +303,9 @@ class Semester extends React.Component<Props, State> {
 
 					<TitleButton
 						as={Link}
-						to={`/student/${student.id}/search?term=${year}${semester}`}
+						to={`/student/${
+							student.id
+						}/search?term=${year}${semester}`}
 						title="Search for courses"
 					>
 						<Icon>{search}</Icon> Course
