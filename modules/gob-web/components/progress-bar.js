@@ -24,10 +24,7 @@ const Bar = styled.div`
 	background-color: white;
 	width: 100%;
 
-	color: ${props =>
-		props.colorful && colorMap[props.percent]
-			? colorMap[props.percent]
-			: theme.gray300};
+	color: var(--gray-400);
 `
 
 const BarTrack = styled.div`
