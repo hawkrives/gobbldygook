@@ -140,6 +140,24 @@ const TitleText = styled.h1`
 	color: black;
 `
 
+function discoverSemesterStatus(args: {
+	year: number,
+	semester: number,
+	now: Date,
+}): 'past' | 'in-progress' | 'future' | 'unknown' {
+	let {year, semester, now} = args
+	if (year < now.getFullYear()) {
+		return 'past'
+	}
+	if (year === now.getFullYear()) {
+		return 'in-progress'
+	}
+	if (year > now.getFullYear()) {
+		return 'future'
+	}
+	return 'unknown'
+}
+
 type DnDProps = {
 	canDrop?: boolean,
 	connectDropTarget: Function,
@@ -248,10 +266,18 @@ class Semester extends React.Component<Props, State> {
 			infoBar.unshift('Loading…')
 		}
 
+		let semesterStatus = discoverSemesterStatus({
+			year,
+			semester,
+			now: new Date(),
+		})
+
 		const className = cx('semester', {
 			invalid: hasConflict,
 			'can-drop': canDrop,
 			loading: loading,
+			past: semesterStatus === 'past',
+			'in-progress': semesterStatus === 'in-progress',
 		})
 
 		let name = semesterName(semester)
