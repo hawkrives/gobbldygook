@@ -800,10 +800,10 @@
   resolved "https://registry.yarnpkg.com/@emotion/utils/-/utils-0.8.2.tgz#576ff7fb1230185b619a75d258cbc98f0867a8dc"
   integrity sha512-rLu3wcBWH4P5q1CGoSSH/i9hrXs7SlbRLkoq9IGuoPYNGQvDJ3pt/wmOM+XgYjIDRMVIdkUWt0RsfzF50JfnCw==
 
-"@packtracker/webpack-plugin@1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@packtracker/webpack-plugin/-/webpack-plugin-1.1.1.tgz#246dc286fb2d807cd145d5a077a86f6e637949fb"
-  integrity sha512-KWx3TFEZ0lj/XU7iVajVXC5+FF4sfe0WCnCd/iIM2Xa95ToRBGGsz9Y2BsNDyclxJoFN/nhtWUk4z4XDQOwjAw==
+"@packtracker/webpack-plugin@1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@packtracker/webpack-plugin/-/webpack-plugin-1.1.2.tgz#5355d909e75df4cac93ad9b68cf275908bbc7c76"
+  integrity sha512-N79DgTXOJC1kntad68WZd63DjAGhcIhyT3JFrcfHm083aCi8C6Qrx7PTGPQoN0i+wQElrVAHJrLVLcwMsl093w==
   dependencies:
     tiny-json-http "^7.0.2"
 
