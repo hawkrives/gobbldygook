@@ -13,6 +13,6 @@
     "lodash": "^4.17.11"
   },
   "devDependencies": {
-    "pegjs": "^0.10.0"
+    "pegjs": "0.10.0"
   }
 }
