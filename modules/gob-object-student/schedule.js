@@ -105,6 +105,9 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
 		if (semester === 1 || semester === 3) {
 			return 4
 		}
+		if (semester === 4 || semester === 5) {
+			return 2.5
+		}
 		return 1
 	}
 
