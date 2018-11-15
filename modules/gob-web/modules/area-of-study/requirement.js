@@ -99,19 +99,16 @@ function Requirement(props: RequirementProps) {
 		/>
 	))
 
-	let overrideButtons = info.message &&
-		!info.result && (
-			<span className="required-override-buttons button-group">
-				<FlatButton
-					onClick={ev => props.onRemoveOverride(props.path, ev)}
-				>
-					Not yet…
-				</FlatButton>
-				<FlatButton onClick={ev => props.onAddOverride(props.path, ev)}>
-					Done!
-				</FlatButton>
-			</span>
-		)
+	let overrideButtons = info.message && !info.result && (
+		<span className="required-override-buttons button-group">
+			<FlatButton onClick={ev => props.onRemoveOverride(props.path, ev)}>
+				Not yet…
+			</FlatButton>
+			<FlatButton onClick={ev => props.onAddOverride(props.path, ev)}>
+				Done!
+			</FlatButton>
+		</span>
+	)
 
 	let className = cx(
 		'requirement',

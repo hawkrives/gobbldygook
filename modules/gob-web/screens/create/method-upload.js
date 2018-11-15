@@ -101,23 +101,22 @@ class UploadFileScreen extends React.Component {
 				</DropZone>
 
 				<List type="plain" className="upload-results">
-					{actions.map(
-						stu =>
-							stu.payload ? (
-								<li key={stu.payload.id}>
-									<StudentSummary
-										student={stu.payload}
-										showEditor={false}
-										showMessage={false}
-										showAvatar={false}
-										randomizeHello
-									/>
-								</li>
-							) : (
-								<li key={stu.name}>
-									{stu.name} returned the error "{stu.error}"
-								</li>
-							),
+					{actions.map(stu =>
+						stu.payload ? (
+							<li key={stu.payload.id}>
+								<StudentSummary
+									student={stu.payload}
+									showEditor={false}
+									showMessage={false}
+									showAvatar={false}
+									randomizeHello
+								/>
+							</li>
+						) : (
+							<li key={stu.name}>
+								{stu.name} returned the error "{stu.error}"
+							</li>
+						),
 					)}
 					{files.map(file => (
 						<li key={file.name}>{file.name}</li>

@@ -31,10 +31,9 @@ export default function CourseExpression(props: Props) {
 		props.lab ||
 		(props.type === 'Lab' && <span className="course--lab">L</span>)
 
-	const section = props.section &&
-		props.section !== '*' && (
-			<span className="course--section">[{props.section}]</span>
-		)
+	const section = props.section && props.section !== '*' && (
+		<span className="course--section">[{props.section}]</span>
+	)
 
 	const year = props.year && (
 		<span className="course--year">{props.year}</span>
