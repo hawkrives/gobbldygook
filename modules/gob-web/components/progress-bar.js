@@ -24,7 +24,7 @@ const Bar = styled.div`
 	background-color: white;
 	width: 100%;
 
-	color: var(--gray-400);
+	color: var(--gray-500);
 `
 
 const BarTrack = styled.div`
