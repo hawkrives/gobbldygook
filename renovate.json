@@ -1,5 +1,5 @@
 {
-  "extends": ["config:base"],
-  "statusCheckVerify": true,
-  "ignoreDeps": ["history"]
+	"extends": ["config:base"],
+	"statusCheckVerify": true,
+	"ignoreDeps": ["history"]
 }
