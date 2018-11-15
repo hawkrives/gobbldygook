@@ -22,7 +22,7 @@ workflows:
       - flow: {requires: [cache-yarn]}
       - jest: {requires: [cache-yarn]}
       - prettier: {requires: [cache-yarn]}
-      - eslint: {requires: [cache-yarn]}
+      # - eslint: {requires: [cache-yarn]}
       - build: {requires: [cache-yarn]}
 
 jobs:
