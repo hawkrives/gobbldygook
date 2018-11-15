@@ -272,7 +272,6 @@ class Editor extends React.Component<EditorProps, EditorState> {
 	render() {
 		return (
 			<form onSubmit={this.onSubmit} className="student-summary--editor">
-				{/*
 				<label htmlFor={this.nameLabelId}>Name:</label>
 				<input
 					id={this.nameLabelId}
@@ -281,7 +280,9 @@ class Editor extends React.Component<EditorProps, EditorState> {
 					value={this.state.name}
 				/>
 
-				<label htmlFor={this.matriculationLabelId}>Matriculation:</label>
+				<label htmlFor={this.matriculationLabelId}>
+					Matriculation:
+				</label>
 				<input
 					id={this.matriculationLabelId}
 					onChange={this.changeMatriculation}
@@ -310,7 +311,6 @@ class Editor extends React.Component<EditorProps, EditorState> {
 						)
 					})}
 				</select>
-				*/}
 			</form>
 		)
 	}

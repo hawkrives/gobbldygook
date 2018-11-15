@@ -145,7 +145,7 @@ function discoverSemesterStatus(args: {
 	semester: number,
 	now: Date,
 }): 'past' | 'in-progress' | 'future' | 'unknown' {
-	let {year, semester, now} = args
+	let {year, now} = args
 	if (year < now.getFullYear()) {
 		return 'past'
 	}
