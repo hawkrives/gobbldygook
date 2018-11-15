@@ -51,24 +51,23 @@ type Props = {
 }
 
 export function CourseList(props: Props) {
-	const courseObjects = props.courses.map(
-		(course, i) =>
-			course.error ? (
-				<Missing
-					key={i}
-					clbid={course.meta ? course.meta.clbid : null}
-					error={course.error}
-				/>
-			) : (
-				<Course
-					key={i}
-					index={i}
-					course={course.result}
-					conflicts={props.warnings.get(course.result.clbid)}
-					scheduleId={props.scheduleId}
-					studentId={props.studentId}
-				/>
-			),
+	const courseObjects = props.courses.map((course, i) =>
+		course.error ? (
+			<Missing
+				key={i}
+				clbid={course.meta ? course.meta.clbid : null}
+				error={course.error}
+			/>
+		) : (
+			<Course
+				key={i}
+				index={i}
+				course={course.result}
+				conflicts={props.warnings.get(course.result.clbid)}
+				scheduleId={props.scheduleId}
+				studentId={props.studentId}
+			/>
+		),
 	)
 
 	if (props.usedSlots < 0 || props.maxSlots < 0) {

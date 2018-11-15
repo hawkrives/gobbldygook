@@ -128,16 +128,15 @@ class Year extends React.Component<Props> {
 				<Header>
 					<TitleText>{niceYear}</TitleText>
 					<>
-						{!isAddSemesterDisabled &&
-							nextSemester != null && (
-								<TitleButton
-									type="flat"
-									title="Add Semester"
-									onClick={this.addSemester}
-								>
-									Add ‘{semesterName(nextSemester)}’
-								</TitleButton>
-							)}
+						{!isAddSemesterDisabled && nextSemester != null && (
+							<TitleButton
+								type="flat"
+								title="Add Semester"
+								onClick={this.addSemester}
+							>
+								Add ‘{semesterName(nextSemester)}’
+							</TitleButton>
+						)}
 						<RemoveYearButton
 							type="flat"
 							title={`Remove the year ${niceYear}`}
