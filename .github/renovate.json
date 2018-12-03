@@ -6,6 +6,8 @@
   "lockFileMaintenance": {
     "schedule": ["after 5pm on every weekday"]
   },
+  "statusCheckVerify": true,
+	"ignoreDeps": ["history"]
   "timezone": "America/Chicago",
   "labels": [
     "renovate"
