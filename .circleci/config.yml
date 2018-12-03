@@ -53,7 +53,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace: *attach-workspace-node_modules
-      - run: yarn run --silent test --coverage
+      - run: yarn run --silent test --runInBand --coverage
       - run:
           name: coveralls
           command: |

@@ -1,0 +1,25 @@
+{
+  "extends": [
+    "config:base",
+    ":semanticCommitsDisabled"
+  ],
+  "lockFileMaintenance": {
+    "schedule": ["after 5pm on every weekday"]
+  },
+  "statusCheckVerify": true,
+  "ignoreDeps": ["history"],
+  "timezone": "America/Chicago",
+  "labels": [
+    "renovate"
+  ],
+  "packageRules": [
+    {
+      "packagePatterns": ["^react-dnd"],
+      "groupName": "react-dnd packages"
+    },
+    {
+      "packageNames": ["redux", "react-redux"],
+      "groupName": "redux packages"
+    }
+  ]
+}
