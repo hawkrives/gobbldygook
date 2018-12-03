@@ -7,7 +7,7 @@
     "schedule": ["after 5pm on every weekday"]
   },
   "statusCheckVerify": true,
-	"ignoreDeps": ["history"]
+  "ignoreDeps": ["history"],
   "timezone": "America/Chicago",
   "labels": [
     "renovate"
