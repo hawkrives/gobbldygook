@@ -52,7 +52,7 @@
     "quick-lru": "2.0.0",
     "react": "16.6.3",
     "react-codemirror2": "5.1.0",
-    "react-dnd": "7.0.1",
+    "react-dnd": "7.0.2",
     "react-dnd-html5-backend": "7.0.1",
     "react-document-title": "2.0.3",
     "react-dom": "16.6.3",
