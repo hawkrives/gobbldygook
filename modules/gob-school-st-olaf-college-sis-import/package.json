@@ -7,6 +7,6 @@
   "license": "MIT",
   "dependencies": {
     "@gob/object-student": "^3.0.0-rc.2",
-    "immutable": "^4.0.0-rc.10"
+    "immutable": "^4.0.0-rc.12"
   }
 }
