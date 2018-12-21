@@ -14,7 +14,7 @@
     "stats-dev": "webpack --bail --profile --json > stats.json && echo 'open http://webpack.github.io/analyse/'"
   },
   "dependencies": {
-    "@babel/polyfill": "7.2.3",
+    "@babel/polyfill": "7.2.5",
     "@babel/runtime": "7.2.0",
     "@gob/colors": "^3.0.0-rc.2",
     "@gob/examine-student": "^3.0.0-rc.2",
