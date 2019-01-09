@@ -7388,7 +7388,14 @@ pn@^1.1.0:
   resolved "https://registry.yarnpkg.com/pn/-/pn-1.1.0.tgz#e2f4cef0e219f463c179ab37463e4e1ecdccbafb"
   integrity sha512-2qHaIQr2VLRFoxe2nASzsV6ef4yOOH+Fi9FBOVH6cqeSgUnoyySPZkxzLuzd+RYOQTRpROA0ztTMqxROKSb/nA==
 
-polished@2.3.1, polished@^2.3.1:
+polished@2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/polished/-/polished-2.3.2.tgz#7b879a65ab2c89ccefac2b306efdf40d5251e7f9"
+  integrity sha512-rEU+rAGjCw9mve3uOtkjfZqCDfLtCp4YC9Y/xIfYkkcAB5nb8pGXx23UQlWDwlWcHTasb1w9XYAebQw8XWHstQ==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+
+polished@^2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/polished/-/polished-2.3.1.tgz#557ea07e5bcb1b9c7d71935a01d0315831234d48"
   integrity sha512-0mGyvVrHVRN92wfohriBWmMF4JLEnGgpZbpwPrNDhpB8NrX6lYI8GGWXEfrmrF+ZXg52Jkwd+D0rxViOvXM9RQ==
