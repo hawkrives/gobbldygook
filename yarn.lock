@@ -2811,10 +2811,10 @@ cyclist@~0.2.2:
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-0.2.2.tgz#1b33792e11e914a2fd6d6ed6447464444e5fa640"
   integrity sha1-GzN5LhHpFKL9bW7WRHRkRE5fpkA=
 
-dart-sass@1.15.3:
-  version "1.15.3"
-  resolved "https://registry.yarnpkg.com/dart-sass/-/dart-sass-1.15.3.tgz#0d574ad24ca3e5fc0affc29ba34fc157833a60f2"
-  integrity sha512-uPR8I7p0wvUSR5fwTH0dNG9uXGPx5uTKIa+d3mi1yBHt6Opz0ECsgd6JA/CcAiUkyAxq2LiH9ioumFFdBPJn7g==
+dart-sass@1.16.0:
+  version "1.16.0"
+  resolved "https://registry.yarnpkg.com/dart-sass/-/dart-sass-1.16.0.tgz#fd911a29d10c6703e998e8e10ffbea6998e81704"
+  integrity sha512-o/TLB8oPn0CV99GI7NE6bgQIC9jGhAVNgu9+cPHEBMjL8YSA6FDLQ376bzJgsG8Rsbi3ch/hgNlZoqbLITClTQ==
   dependencies:
     chokidar "^2.0.0"
 
