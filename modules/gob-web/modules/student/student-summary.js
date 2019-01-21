@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react'
+import range from 'lodash/range'
 import cx from 'classnames'
 import listify from 'listify'
 import sample from 'lodash/sample'
@@ -18,6 +19,7 @@ import {loadArea} from '../../helpers/load-area'
 import uniqueId from 'lodash/uniqueId'
 import {getCourse} from '../../helpers/get-courses'
 import {countCredits} from '@gob/examine-student'
+import {expandYear} from '@gob/school-st-olaf-college/'
 
 import './student-summary.scss'
 
@@ -27,13 +29,14 @@ const welcomeMessages = [
 	'Hello, ',
 	'こんにちは、', // japanese
 	'ようこそ、', // japanese
-	'Fram! Fram! ',
-	'Salut, ',
+	'Fram! Fram! ', // new norwegian
+	'Salut, ', // french
 	'Aloha, ', // hawaiian
-	'Привет, ',
-	'Вітаю, ',
-	'Sawubona, ',
-	'Hei, ',
+	'Привет, ', // russian
+	'Вітаю, ', // ukrainian
+	'Sawubona, ', // zulu
+	'Hei, ', // norwegian
+	'Hej, ', // polish, swedish
 	'Hola, ', // spanish
 	'Bonjour, ', // french
 	'Hallo, ', // german
@@ -44,6 +47,15 @@ const welcomeMessages = [
 	'halo, ', // indonesian
 	'Salve, ', // latin
 	'Χαῖρε! ', // ancient greek
+	'Zdravo, ', // bosnian
+	'Bok, ', // croatian
+	'ahoj, ', // czech, slovak
+	'Tere, ', // estonian
+	'Bula, ', // fijian
+	'Zdravo, ', // serbian
+	'Hujambo, ', // swahili
+	'Xin chào, ', // vietnamese
+	'Sholem, ', // yiddish
 ]
 
 const welcomeMessage = welcomeMessages[2]
@@ -137,11 +149,26 @@ class StudentSummary extends React.Component<Props, State> {
 
 		canGraduate = canGraduate && Number(creditsTaken) >= creditsNeeded
 
+		let url = new URLSearchParams(window.location.search)
+
 		return (
 			<Card
 				as="article"
 				className={cx('student-summary', gradClassName, {checking})}
 			>
+				{url.has('ferpa') ? (
+					<div
+						style={{
+							backgroundColor: 'var(--red)',
+							textShadow: 'none',
+							color: 'white',
+							marginBottom: '1em',
+						}}
+					>
+						FERPA restrictions enabled
+					</div>
+				) : null}
+
 				{showEditor && <ConnectedEditor student={student} />}
 
 				{showAvatar && (
@@ -270,6 +297,20 @@ class Editor extends React.Component<EditorProps, EditorState> {
 					onBlur={this.onSubmit}
 					value={this.state.graduation}
 				/>
+
+				<label htmlFor={this.nameLabelId}>Catalog Year:</label>
+				<select value={this.state.matriculation}>
+					{range(
+						parseInt(this.state.matriculation),
+						parseInt(this.state.graduation),
+					).map(y => {
+						return (
+							<option key={y} value={y}>
+								{expandYear(y)}
+							</option>
+						)
+					})}
+				</select>
 			</form>
 		)
 	}

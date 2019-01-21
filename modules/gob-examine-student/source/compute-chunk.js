@@ -384,8 +384,8 @@ export function computeModifier({expr, ctx, courses}: ModifierChunkArgs) {
 		filtered = take(filtered, expr.$count.$num)
 	}
 
-	filtered = filtered.map(
-		course => ('$course' in course ? (course: any).$course : course),
+	filtered = filtered.map(course =>
+		'$course' in course ? (course: any).$course : course,
 	)
 
 	if (expr.$besides) {

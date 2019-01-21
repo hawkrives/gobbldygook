@@ -8,6 +8,9 @@ import CourseTitle from './course-title'
 import {semesterName, buildDeptNum} from '@gob/school-st-olaf-college'
 import {consolidateExpandedOfferings} from './offerings'
 import {Revisions} from './revisions'
+import {List} from 'immutable'
+import {ExpandedCourseWarnings} from './warnings'
+import {type WarningType} from '../../../gob-object-student/find-course-warnings'
 import type {Course} from '@gob/types'
 
 const Heading = styled.h2`
@@ -56,19 +59,22 @@ const SummaryThing = styled.div`
 
 type Props = {
 	className?: string,
+	conflicts: ?List<WarningType>,
 	course: Course,
 }
 
 export default class ExpandedCourse extends React.PureComponent<Props> {
 	render() {
-		const {course, className} = this.props
+		const {course, conflicts, className} = this.props
 
 		const infoColumn = (
 			<Column>
 				{course.description && (
 					<Description>
 						<Heading>Description</Heading>
-						<p>{course.description}</p>
+						{course.description.map((d, i) => (
+							<p key={i}>{d}</p>
+						))}
 					</Description>
 				)}
 
@@ -147,6 +153,8 @@ export default class ExpandedCourse extends React.PureComponent<Props> {
 						<span className="type">{course.type}</span>
 					</SummaryThing>
 				</InfoSegment>
+
+				{conflicts && <ExpandedCourseWarnings warnings={conflicts} />}
 
 				<ColumnsWrapper>
 					{infoColumn}

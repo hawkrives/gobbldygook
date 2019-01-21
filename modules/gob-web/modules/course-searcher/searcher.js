@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 
-import {toPrettyTerm} from '@gob/school-st-olaf-college'
+import {toPrettyTerm, expandYear} from '@gob/school-st-olaf-college'
 import {Card} from '../../components/card'
 import {LabelledSelect} from './labelled-select'
 import {FlatButton} from '../../components/button'
@@ -28,6 +28,8 @@ type State = {
 	query: string,
 	groupBy: GROUP_BY_KEY,
 	sortBy: SORT_BY_KEY,
+	limitTo: string,
+	filterBy: string,
 	hasQueried: boolean,
 }
 
@@ -35,6 +37,8 @@ export class CourseSearcher extends React.Component<Props, State> {
 	state = {
 		groupBy: 'term',
 		sortBy: 'title',
+		limitTo: '',
+		filterBy: '',
 		query: '',
 		hasQueried: false,
 	}
@@ -46,7 +50,17 @@ export class CourseSearcher extends React.Component<Props, State> {
 
 	handleGroupByChange = (ev: SyntheticEvent<HTMLSelectElement>) => {
 		let value: string = ev.currentTarget.value
-		this.setState(() => ({groupBy: (value: any)}))
+		this.setState(() => ({groupBy: (value: any), filterBy: ''}))
+	}
+
+	handleFilterByChange = (ev: SyntheticEvent<HTMLSelectElement>) => {
+		let value: string = ev.currentTarget.value
+		this.setState(() => ({filterBy: (value: any)}))
+	}
+
+	handleLimitToChange = (ev: SyntheticEvent<HTMLSelectElement>) => {
+		let value: string = ev.currentTarget.value
+		this.setState(() => ({limitTo: (value: any)}))
 	}
 
 	updateQuery = (query: string) => {
@@ -58,9 +72,13 @@ export class CourseSearcher extends React.Component<Props, State> {
 	}
 
 	render() {
-		let {groupBy, query, sortBy} = this.state
+		let {groupBy, query, sortBy, filterBy, limitTo} = this.state
 
 		let {onCloseSearcher, studentId, term} = this.props
+
+		// This tells React to unmount and recreate the search hierarchy, so that it all updates as we type
+		let termKey = String(term)
+		let key = `${query}-${termKey}-${groupBy}-${sortBy}-${filterBy}-${limitTo}`
 
 		return (
 			<>
@@ -93,30 +111,16 @@ export class CourseSearcher extends React.Component<Props, State> {
 					/>
 				</Card>
 
-				<Card className="search-filters">
-					<LabelledSelect
-						label="Sort by:"
-						options={toPairs(SORT_BY)}
-						onChange={this.handleSortChange}
-						value={sortBy}
-					/>
-
-					<LabelledSelect
-						label="Group by:"
-						options={toPairs(GROUP_BY)}
-						onChange={this.handleGroupByChange}
-						value={groupBy}
-					/>
-				</Card>
-
 				<Querent
-					key={`${query}-${String(term)}-${groupBy}-${sortBy}`}
+					key={key}
 					query={query}
 					groupBy={groupBy}
 					sortBy={sortBy}
 					term={term}
+					filterBy={filterBy}
+					limitTo={limitTo}
 				>
-					{({error, inProgress, results, didSearch}) => {
+					{({error, inProgress, results, didSearch, keys, years}) => {
 						if (error) {
 							return (
 								<Card className="course-results--notice">
@@ -125,15 +129,65 @@ export class CourseSearcher extends React.Component<Props, State> {
 							)
 						}
 
+						let potentialFilters = keys.map(k => [k, k])
+						potentialFilters.unshift(['', 'No Filter'])
+
+						let potentialYearLimits = years
+							.map(k => [String(k), expandYear(k)])
+							.toArray()
+						potentialYearLimits.unshift(['', 'All Years'])
+
+						if (limitTo && !years.has(parseInt(limitTo, 10))) {
+							potentialYearLimits.push([
+								limitTo,
+								expandYear(limitTo),
+							])
+						}
+
+						let filters = (
+							<Card className="search-filters">
+								<LabelledSelect
+									label="Limit to:"
+									options={potentialYearLimits}
+									onChange={this.handleLimitToChange}
+									value={limitTo}
+								/>
+
+								<LabelledSelect
+									label="Sort by:"
+									options={toPairs(SORT_BY)}
+									onChange={this.handleSortChange}
+									value={sortBy}
+								/>
+
+								<LabelledSelect
+									label="Group by:"
+									options={toPairs(GROUP_BY)}
+									onChange={this.handleGroupByChange}
+									value={groupBy}
+								/>
+
+								<LabelledSelect
+									label="Filter by:"
+									options={potentialFilters}
+									onChange={this.handleFilterByChange}
+									value={filterBy}
+								/>
+							</Card>
+						)
+
 						if (inProgress) {
 							return (
-								<Card className="course-results--notice">
-									<Loading>Searching…</Loading>
-								</Card>
+								<>
+									{filters}
+									<Card className="course-results--notice">
+										<Loading>Searching…</Loading>
+									</Card>
+								</>
 							)
 						}
 
-						if (results.length === 0) {
+						if (results.size === 0) {
 							if (!didSearch) {
 								return (
 									<Card className="course-results--notice">
@@ -142,18 +196,25 @@ export class CourseSearcher extends React.Component<Props, State> {
 								)
 							}
 							return (
-								<Card className="course-results--notice">
-									No Results Found
-								</Card>
+								<>
+									{filters}
+									<Card className="course-results--notice">
+										No Results Found
+									</Card>
+								</>
 							)
 						}
 
 						return (
-							<CourseResultsList
-								groupedBy={groupBy}
-								studentId={studentId}
-								results={results}
-							/>
+							<>
+								{filters}
+
+								<CourseResultsList
+									groupedBy={groupBy}
+									studentId={studentId}
+									results={results}
+								/>
+							</>
 						)
 					}}
 				</Querent>

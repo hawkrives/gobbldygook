@@ -104,8 +104,13 @@ export function checkForTimeConflicts(
 export function findWarnings(
 	courses: List<CourseType>,
 	schedule: Schedule,
+	thisYear: number = new Date().getFullYear(),
 ): Map<string, List<WarningType>> {
 	let {year, semester} = schedule
+
+	if (schedule.year > thisYear) {
+		return new Map()
+	}
 
 	let warningsOfInvalidity = checkForInvalidity(courses, {year, semester})
 	let timeConflicts = checkForTimeConflicts(courses)

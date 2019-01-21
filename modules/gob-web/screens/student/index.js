@@ -32,7 +32,7 @@ const StatusSidebar = ({student}: {student: Undoable<Student>}) => (
 			student={student}
 		/>
 		<CourseRemovalBox student={student.present} />
-		<StudentSummary student={student.present} />
+		<StudentSummary student={student.present} randomizeHello={true} />
 		<AreaOfStudySidebar student={student.present} />
 	</Sidebar>
 )

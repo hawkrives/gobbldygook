@@ -10,6 +10,8 @@ import {SemesterSelector} from './semester-selector'
 import ExpandedCourse from './expanded'
 import * as theme from '../../theme'
 import type {Course as CourseType} from '@gob/types'
+import {List} from 'immutable'
+import {type WarningType} from '../../../gob-object-student/find-course-warnings'
 import {Student} from '@gob/object-student'
 import {connect} from 'react-redux'
 import {
@@ -31,7 +33,7 @@ const ContainerModal = styled(Modal)`
 `
 
 const BottomToolbar = styled.div`
-	padding: 0 20px;
+	padding: 10px 20px;
 	border-top: 1px solid rgba(160, 160, 160, 0.2);
 	margin-top: 0.5em;
 	padding-top: 0.5em;
@@ -58,6 +60,7 @@ const Course = styled(ExpandedCourse)`
 
 type Props = {
 	course: CourseType,
+	conflicts: ?List<WarningType>,
 	onClose: () => any,
 	scheduleId?: string,
 	studentId?: string,
@@ -76,7 +79,7 @@ class ModalCourse extends React.Component<Props> {
 	}
 
 	render() {
-		let {course, student, scheduleId, onClose} = this.props
+		let {course, student, scheduleId, onClose, conflicts} = this.props
 
 		return (
 			<ContainerModal onClose={onClose} contentLabel="Course">
@@ -85,7 +88,7 @@ class ModalCourse extends React.Component<Props> {
 					<RaisedButton onClick={onClose}>Close</RaisedButton>
 				</Toolbar>
 
-				<Course course={course} />
+				<Course conflicts={conflicts} course={course} />
 
 				<BottomToolbar>
 					{scheduleId && student ? (

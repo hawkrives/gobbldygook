@@ -5,9 +5,10 @@ import {Router} from '@reach/router'
 import DocumentTitle from 'react-document-title'
 import HTML5Backend from 'react-dnd-html5-backend'
 import {DragDropContext} from 'react-dnd'
-import {createGlobalStyle} from 'styled-components'
+import styled, {createGlobalStyle} from 'styled-components'
 import Loadable from 'react-loadable'
 import {LoadingComponent} from './components/loading-comp'
+import {Card} from './components/card'
 
 let GlobalStyle = createGlobalStyle`
     *, *::before, *::after {
@@ -39,7 +40,23 @@ let GlobalStyle = createGlobalStyle`
     }
 `
 
-let NotFound = () => <h1>404 Not Found</h1>
+const NotFoundCard = styled(Card)`
+	margin: 40px auto;
+
+	max-width: 40em;
+	width: 100%;
+
+	padding: 20px;
+
+	text-align: center;
+`
+
+let NotFound = () => (
+	<NotFoundCard>
+		<h1>404 Not Found</h1>
+		<p>It looks like nothing was found at this location.</p>
+	</NotFoundCard>
+)
 
 let AreaEditor = Loadable({
 	loader: () => import('./screens/area-editor'),

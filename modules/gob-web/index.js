@@ -19,6 +19,10 @@ startAnalytics()
 import loadData from './workers/load-data'
 loadData().catch(err => console.error(err))
 
+// ... attach the db for debugging
+import {db} from './helpers/db'
+global._db = db
+
 // Kick off the GUI
 console.log('3. 2.. 1... Blast off! 🚀')
 

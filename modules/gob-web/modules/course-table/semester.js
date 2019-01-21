@@ -35,6 +35,7 @@ const Container = styled.div`
 	min-width: 13em;
 	margin: var(--semester-spacing);
 	overflow: hidden;
+	color: var(--text-color);
 
 	&.can-drop {
 		cursor: copy;
@@ -43,15 +44,22 @@ const Container = styled.div`
 	}
 
 	--background-color: var(--white);
-	--background-color-hover: var(--gray-200);
-	--separator-color: var(--gray-200);
+	--text-color: var(--black);
+	--separator-color: var(--gray-100);
+	--background-color-hover: var(--separator-color);
 
-	&.loading {
+	&.past {
+		--background-color: var(--teal-50);
+		--separator-color: var(--teal-100);
+	}
+
+	&.in-progress {
+		--background-color: var(--light-green-50);
+		--separator-color: var(--light-green-100);
 	}
 
 	&.invalid {
 		--background-color: var(--amber-50);
-		--background-color-hover: var(--amber-100);
 		--separator-color: var(--amber-100);
 	}
 `
@@ -66,7 +74,7 @@ const TitleButton = styled(FlatButton)`
 	transition: 0.15s;
 
 	&:hover {
-		background-color: var(--background-color-hover, var(--gray-100));
+		background-color: var(--background-color-hover);
 	}
 
 	& + & {
@@ -90,7 +98,6 @@ const Header = styled.header`
 	display: flex;
 	flex-flow: row nowrap;
 	align-items: stretch;
-	color: var(--header-fg-color, --gray-500);
 
 	overflow: hidden;
 
@@ -132,6 +139,24 @@ const TitleText = styled.h1`
 	display: inline-block;
 	color: black;
 `
+
+function discoverSemesterStatus(args: {
+	year: number,
+	semester: number,
+	now: Date,
+}): 'past' | 'in-progress' | 'future' | 'unknown' {
+	let {year, now} = args
+	if (year < now.getFullYear()) {
+		return 'past'
+	}
+	if (year === now.getFullYear()) {
+		return 'in-progress'
+	}
+	if (year > now.getFullYear()) {
+		return 'future'
+	}
+	return 'unknown'
+}
 
 type DnDProps = {
 	canDrop?: boolean,
@@ -241,10 +266,18 @@ class Semester extends React.Component<Props, State> {
 			infoBar.unshift('Loading…')
 		}
 
+		let semesterStatus = discoverSemesterStatus({
+			year,
+			semester,
+			now: new Date(),
+		})
+
 		const className = cx('semester', {
 			invalid: hasConflict,
 			'can-drop': canDrop,
 			loading: loading,
+			past: semesterStatus === 'past',
+			'in-progress': semesterStatus === 'in-progress',
 		})
 
 		let name = semesterName(semester)

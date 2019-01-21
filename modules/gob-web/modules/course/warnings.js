@@ -20,6 +20,13 @@ const WarningList = styled(PlainList)`
 	flex-flow: row wrap;
 `
 
+const ExpandedWarningList = styled(PlainList)`
+	font-size: 0.85em;
+	font-variant-numeric: oldstyle-nums;
+	display: flex;
+	flex-flow: column nowrap;
+`
+
 const WarningItem = styled(ListItem)`
 	display: inline-flex;
 	flex: 1;
@@ -72,6 +79,29 @@ export default class CourseWarnings extends React.Component<Props> {
 					))
 					.toArray()}
 			</WarningList>
+		)
+	}
+}
+
+export class ExpandedCourseWarnings extends React.Component<Props> {
+	render() {
+		let {warnings = List()} = this.props
+
+		if (!warnings.size) {
+			return null
+		}
+
+		return (
+			<ExpandedWarningList>
+				{warnings
+					.map(w => (
+						<WarningItem title={w.msg} key={w.msg}>
+							<WarningIcon>{icons[w.type]}</WarningIcon>
+							<WarningMessage>{w.msg}</WarningMessage>
+						</WarningItem>
+					))
+					.toArray()}
+			</ExpandedWarningList>
 		)
 	}
 }

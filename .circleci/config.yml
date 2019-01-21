@@ -53,7 +53,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace: *attach-workspace-node_modules
-      - run: yarn run --silent test --coverage
+      - run: yarn run --silent test --runInBand --coverage
       - run:
           name: coveralls
           command: |
@@ -99,7 +99,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace: *attach-workspace-node_modules
-      - run: yarn run --silent build
+      - run: cd modules/gob-web && yarn run --silent build --no-progress
       - run: node scripts/rearrange-for-circle.js
       - store_artifacts:
           path: ./modules/gob-web/build

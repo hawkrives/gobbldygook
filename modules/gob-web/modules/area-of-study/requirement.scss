@@ -3,102 +3,102 @@
 @import './variables-expression.scss';
 
 .requirement {
-	margin: 0.25em;
 	box-sizing: border-box;
 	font-variant-numeric: oldstyle-nums;
-}
 
-.requirement.is-closed > *:not(.heading) {
-	display: none;
-}
-
-.requirement .requirement {
-	margin-left: 0.5em;
-}
-
-.requirement + .requirement {
-	margin-top: 0.75em;
-}
-
-.requirement:last-child {
-	margin-bottom: 0.5em;
-}
-
-.requirement .requirement {
-	border: 1px solid #e9ebeb;
 	border-radius: 4px;
+	border: 0.5em solid var(--requirement-primary-color);
+	color: var(--requirement-text-color);
+
+	margin: 0.25em 0.5em 0.75em;
+
+	&.is-closed > *:not(.heading) {
+		display: none;
+	}
+	&.is-open {
+		margin-bottom: 1em;
+	}
+
+	&.is-open > .heading {
+		padding-bottom: 0.7em;
+	}
+
+	.override-button {
+		padding: 0.25em 0.5em;
+		margin-right: 0.25em;
+		color: $gray-500;
+	}
+
+	.result {
+		padding-left: 0.25em;
+		padding-right: 0.25em;
+
+		display: flex;
+		justify-content: center;
+	}
+
+	.status {
+		margin-right: 0.5em;
+
+		.result-indicator {
+			margin-right: 0;
+		}
+	}
+
+	&.result-success > .heading .status {
+		color: $result-success-color;
+	}
 }
 
-.override-button {
-	padding: 0.25em 0.5em;
-	margin-right: 0.25em;
-	color: $gray-500;
+.result > .expression {
+	display: block;
 }
 
-.result {
-	padding-left: 0.25em;
-	padding-right: 0.25em;
-
-	display: flex;
-	justify-content: center;
-}
-
-.requirement .requirement .requirement .result,
-.requirement .requirement .requirement .message,
-.requirement .requirement .requirement .description,
-.requirement .requirement .requirement .filter {
+.requirement .requirement .result,
+.requirement .requirement .message,
+.requirement .requirement .description,
+.requirement .requirement .filter {
 	padding-left: $area-edge-padding;
 }
 
-.heading {
+.requirement .heading {
+	margin: 0;
 	font-size: 1em;
 	font-weight: 500;
 
-	border-bottom: $material-divider;
 	padding: 0.2em 0.15em 0.2em 0.25em;
 
 	display: flex;
 	flex-flow: row nowrap;
 	align-items: center;
 	justify-content: space-between;
+
+	background-color: var(--requirement-primary-color);
+
+	cursor: pointer;
 }
 
-.title {
+.requirement .title {
 	flex: 1;
-	padding: 0.45em 0.25em;
-}
-
-.heading .manual-override {
+	padding: 0;
 }
 
 .heading .manual-override button {
-	padding-left: 0.25em;
-	padding-right: 0.25em;
+	padding: 0 0.25em;
 }
 
-.title,
 .override-text {
 	padding: 0.45em 0.25em;
-}
-
-.override-text {
 	margin-left: 0.35em;
 	font-weight: normal;
 }
 
-.requirement.result-success > .heading {
-	background-color: $result-success-background;
+.requirement.result-success {
+	--requirement-primary-color: #{$result-success-background};
 }
 
-.status {
-	margin-left: 0.5em;
-
-	.result-indicator {
-		margin-left: 0;
-	}
-}
-.result-success > .heading .status {
-	color: $result-success-color;
+.requirement.result-failure {
+	--requirement-primary-color: var(--gray-300);
 }
 
 .requirement .requirement .heading {
