@@ -28,7 +28,7 @@
     "@gob/webpack-plugin-html": "^1.0.0",
     "@gob/worker-check-student": "^3.0.0-rc.2",
     "@gob/worker-load-data": "^3.0.0-rc.2",
-    "@reach/component-component": "0.1.1",
+    "@reach/component-component": "0.1.2",
     "@reach/dialog": "0.1.2",
     "@reach/router": "1.2.1",
     "bugsnag-js": "4.7.3",
