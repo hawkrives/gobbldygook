@@ -990,7 +990,12 @@
   dependencies:
     tiny-json-http "^7.0.2"
 
-"@reach/component-component@0.1.1", "@reach/component-component@^0.1.1":
+"@reach/component-component@0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@reach/component-component/-/component-component-0.1.2.tgz#f3c2a53de56d54c8f0ee398485d5831d66e3cc34"
+  integrity sha512-LSsLxBA13qLsfjLtytiuB0siVJSTp0h3hhlJybr90Ynx1SuQ4pRtMi5aUIk7HM3wDswj22YbGC2zOpzibNyN3w==
+
+"@reach/component-component@^0.1.1":
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/@reach/component-component/-/component-component-0.1.1.tgz#62ea2ec290da32f5e3a9872fb51f9a3ae4370cc4"
   integrity sha512-4HxyyOLo/nDg0LlgYvzgqpTGaxqKmrZB8/y5wWhtyvGzgKAb1DJzSnYRaFsgGGgkQAQmhwPXKZ0H/rOAkxXJ8Q==
