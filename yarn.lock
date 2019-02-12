@@ -998,32 +998,27 @@
   dependencies:
     tiny-json-http "^7.0.2"
 
-"@reach/component-component@0.1.2":
+"@reach/component-component@0.1.2", "@reach/component-component@^0.1.2":
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/@reach/component-component/-/component-component-0.1.2.tgz#f3c2a53de56d54c8f0ee398485d5831d66e3cc34"
   integrity sha512-LSsLxBA13qLsfjLtytiuB0siVJSTp0h3hhlJybr90Ynx1SuQ4pRtMi5aUIk7HM3wDswj22YbGC2zOpzibNyN3w==
 
-"@reach/component-component@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@reach/component-component/-/component-component-0.1.1.tgz#62ea2ec290da32f5e3a9872fb51f9a3ae4370cc4"
-  integrity sha512-4HxyyOLo/nDg0LlgYvzgqpTGaxqKmrZB8/y5wWhtyvGzgKAb1DJzSnYRaFsgGGgkQAQmhwPXKZ0H/rOAkxXJ8Q==
-
-"@reach/dialog@0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@reach/dialog/-/dialog-0.1.2.tgz#46a3639c01928e125110fd5ccb753281172e844d"
-  integrity sha512-aaBS2a4ZNKGpqsjCdZukYhjf1x75sZ1lQrYg9mJq21Nfz9kk0Yx6zn4LR7ZYxgqkGj5/CQOSciGuUPF+Z8k9nA==
+"@reach/dialog@0.1.3":
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@reach/dialog/-/dialog-0.1.3.tgz#7d17570305a036c9c93ebbd93390dd2da91def1f"
+  integrity sha512-G5yLyqANY0MwiqD9fYY1DJQoauQhWoQAMS1DmmjUX0dKf5yJFP0+2IplfkIopx9xop6Xz3psleofydU0ygBboA==
   dependencies:
-    "@reach/component-component" "^0.1.1"
-    "@reach/portal" "^0.1.1"
+    "@reach/component-component" "^0.1.2"
+    "@reach/portal" "^0.1.2"
     "@reach/utils" "^0.1.2"
     focus-trap "^3.0.0"
 
-"@reach/portal@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@reach/portal/-/portal-0.1.1.tgz#94f3f9b999c5a0dfb819309912ec23e36807e70b"
-  integrity sha512-AWsOH2TLfetlUzw3wbpy6n8trnuFI7N/HB2jYjrBRP5IbG/PmgrVQiL/HFP/OsCbbOo0rK7AsKnG7qyOf0r4Tg==
+"@reach/portal@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@reach/portal/-/portal-0.1.2.tgz#4c3cb4e587be73f172362c4938d7526794adc2c0"
+  integrity sha512-9jvdmlThI4l5MpNiN2S0235TmzN99pafD6K6tKMUHsEzIhmIIn5qap6Yx06LE96bHj2D2LARbQV5oVBzaKjLFg==
   dependencies:
-    "@reach/component-component" "^0.1.1"
+    "@reach/component-component" "^0.1.2"
 
 "@reach/router@1.2.1":
   version "1.2.1"
