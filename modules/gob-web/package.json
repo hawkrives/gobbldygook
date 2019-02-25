@@ -117,7 +117,7 @@
     "url-loader": "1.1.2",
     "webpack": "4.29.5",
     "webpack-cli": "3.2.3",
-    "webpack-dev-server": "3.2.0",
+    "webpack-dev-server": "3.2.1",
     "worker-loader": "2.0.0"
   }
 }
