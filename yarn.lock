@@ -3336,10 +3336,10 @@ discontinuous-range@1.0.0:
   resolved "https://registry.yarnpkg.com/discontinuous-range/-/discontinuous-range-1.0.0.tgz#e38331f0844bba49b9a9cb71c771585aab1bc65a"
   integrity sha1-44Mx8IRLukm5qctxx3FYWqsbxlo=
 
-dnd-core@^7.1.0:
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/dnd-core/-/dnd-core-7.1.0.tgz#fb0a51a2a2b0b47da900e3762e6bb92084dfa827"
-  integrity sha512-5ar9HY0PkF8RJZMoTBzzWwe5hMqsu3+pyCcqOFYTbwnkJByEKhXIFLIe5ALBmzgOJ+kbcddLx3UqcI+yWCU8bQ==
+dnd-core@^7.2.0:
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/dnd-core/-/dnd-core-7.2.0.tgz#70d4ab6c0c6f90423c27b1711624b5d834025bf3"
+  integrity sha512-KUCI+m2Q4k3QlWWsiyUu2R/d0nJo3oGHknM/lGOD4u1XPA4O+LJyYe7PQBzY4J6ehaHGoQ/soTUu/KfaLSOL8w==
   dependencies:
     asap "^2.0.6"
     invariant "^2.2.4"
@@ -8283,20 +8283,20 @@ react-codemirror2@5.1.0:
   resolved "https://registry.yarnpkg.com/react-codemirror2/-/react-codemirror2-5.1.0.tgz#62de4460178adea40eb52eabf7491669bf3794b8"
   integrity sha512-Cksbgbviuf2mJfMyrKmcu7ycK6zX/ukuQO8dvRZdFWqATf5joalhjFc6etnBdGCcPA2LbhIwz+OPnQxLN/j1Fw==
 
-react-dnd-html5-backend@7.1.0:
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/react-dnd-html5-backend/-/react-dnd-html5-backend-7.1.0.tgz#fa4cd9a67078baee1baf4381772072b40281d428"
-  integrity sha512-DcmDSgR6C0VXPIILahfCoX9rr/0Jk+59bH0qRBvwDhvw+aJuK908cekxBTKHj2IJ4bmhR/hh1ab1WsffoulWmQ==
+react-dnd-html5-backend@7.2.0:
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/react-dnd-html5-backend/-/react-dnd-html5-backend-7.2.0.tgz#4cde55fb690020d98d7b6f3d4400c56b2ae82dfa"
+  integrity sha512-1cyyiE1TRd7cTtPWvWWNxQdWxpv4ikyrvBn+fJwKqLjsRhhSdjlANZeJBYtBTO7Zf25YLzxVyO17nwFLMdjFAA==
   dependencies:
-    dnd-core "^7.1.0"
+    dnd-core "^7.2.0"
     lodash "^4.17.11"
 
-react-dnd@7.1.0:
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/react-dnd/-/react-dnd-7.1.0.tgz#2a4d01383d821a46e573f56cba727796eb59aaf0"
-  integrity sha512-4rj5+edYIci7Ila+wRWUau6e7N2ddJZElnhB6xw6hM4wLrzMPu1iB7CnKZfe8aTVcmN8Sbs2i4scy1QHcGJilw==
+react-dnd@7.2.0:
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/react-dnd/-/react-dnd-7.2.0.tgz#0ca0a1dae5952cc794d383826b4573ec0b5f9831"
+  integrity sha512-ZAZ207jvtQm+KIbzAmfUxwVQNBrq+P2agyo12YUbRHuOQES61XDPib9oW8s5qedZjUf6EowokzJbYG07O7YAGA==
   dependencies:
-    dnd-core "^7.1.0"
+    dnd-core "^7.2.0"
     hoist-non-react-statics "^3.3.0"
     invariant "^2.1.0"
     lodash "^4.17.11"
