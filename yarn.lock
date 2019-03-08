@@ -8139,10 +8139,10 @@ react-dnd-html5-backend@7.2.0:
     dnd-core "^7.2.0"
     lodash "^4.17.11"
 
-react-dnd@7.2.0:
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/react-dnd/-/react-dnd-7.2.0.tgz#0ca0a1dae5952cc794d383826b4573ec0b5f9831"
-  integrity sha512-ZAZ207jvtQm+KIbzAmfUxwVQNBrq+P2agyo12YUbRHuOQES61XDPib9oW8s5qedZjUf6EowokzJbYG07O7YAGA==
+react-dnd@7.2.1:
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/react-dnd/-/react-dnd-7.2.1.tgz#1fa2b759bfd33402410ded2ed7b221d21af33a25"
+  integrity sha512-L6lbnSO+7GxrMCr3glCHV6CX7+UcsTW/eMkT9vfFQjfdDytZ+OJqnF2qiYJfffjs14SLMvLYOhbCSpA0giwNgg==
   dependencies:
     dnd-core "^7.2.0"
     hoist-non-react-statics "^3.3.0"
