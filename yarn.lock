@@ -7447,10 +7447,10 @@ optionator@^0.8.1, optionator@^0.8.2:
     type-check "~0.3.2"
     wordwrap "~1.0.0"
 
-ord@0.1.1, ord@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/ord/-/ord-0.1.1.tgz#20f23f2ce6f2962520d65de3ea6f32cbeef745ae"
-  integrity sha1-IPI/LObyliUg1l3j6m8yy+73Ra4=
+ord@1.0.1, ord@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/ord/-/ord-1.0.1.tgz#9a6626ccb5798d7ce15fb2841eaef8162039dbad"
+  integrity sha512-p+ixgyW5hPNUb67tT+iR6qGV8pQRyrbYwyq5LzAF/bPZh7xFbOkeM7J7t3+F1lMSRj0Hedob7uedAEZk0I/TbQ==
 
 original@^1.0.0:
   version "1.0.2"
