@@ -97,7 +97,7 @@
     "copy-webpack-plugin": "4.6.0",
     "cross-env": "5.2.0",
     "css-loader": "2.1.1",
-    "dart-sass": "1.17.2",
+    "dart-sass": "1.17.3",
     "duplicate-package-checker-webpack-plugin": "3.0.0",
     "enzyme": "3.9.0",
     "enzyme-adapter-react-16": "1.11.2",
