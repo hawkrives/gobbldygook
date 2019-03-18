@@ -1239,32 +1239,27 @@
     tiny-json-http "^7.0.2"
     webpack-bundle-analyzer "^3.0.4"
 
-"@reach/component-component@0.1.3":
+"@reach/component-component@0.1.3", "@reach/component-component@^0.1.3":
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/@reach/component-component/-/component-component-0.1.3.tgz#5d156319572dc38995b246f81878bc2577c517e5"
   integrity sha512-a1USH7L3bEfDdPN4iNZGvMEFuBfkdG+QNybeyDv8RloVFgZYRoM+KGXyy2KOfEnTUM8QWDRSROwaL3+ts5Angg==
 
-"@reach/component-component@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@reach/component-component/-/component-component-0.1.2.tgz#f3c2a53de56d54c8f0ee398485d5831d66e3cc34"
-  integrity sha512-LSsLxBA13qLsfjLtytiuB0siVJSTp0h3hhlJybr90Ynx1SuQ4pRtMi5aUIk7HM3wDswj22YbGC2zOpzibNyN3w==
-
-"@reach/dialog@0.1.3":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@reach/dialog/-/dialog-0.1.3.tgz#7d17570305a036c9c93ebbd93390dd2da91def1f"
-  integrity sha512-G5yLyqANY0MwiqD9fYY1DJQoauQhWoQAMS1DmmjUX0dKf5yJFP0+2IplfkIopx9xop6Xz3psleofydU0ygBboA==
+"@reach/dialog@0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@reach/dialog/-/dialog-0.1.4.tgz#d915ab3720f8821f9906d46a4a011f873882ae5a"
+  integrity sha512-W9hE4XMlQlmA6Q6B5P1TDpZtDeFqXLRjk3AD5JF1aC6dyoEookIE5tioAMkPrWOQIGCHjcsG961aQWxW6pKgOw==
   dependencies:
-    "@reach/component-component" "^0.1.2"
-    "@reach/portal" "^0.1.2"
-    "@reach/utils" "^0.1.2"
+    "@reach/component-component" "^0.1.3"
+    "@reach/portal" "^0.1.3"
+    "@reach/utils" "^0.2.0"
     focus-trap "^3.0.0"
 
-"@reach/portal@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@reach/portal/-/portal-0.1.2.tgz#4c3cb4e587be73f172362c4938d7526794adc2c0"
-  integrity sha512-9jvdmlThI4l5MpNiN2S0235TmzN99pafD6K6tKMUHsEzIhmIIn5qap6Yx06LE96bHj2D2LARbQV5oVBzaKjLFg==
+"@reach/portal@^0.1.3":
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@reach/portal/-/portal-0.1.3.tgz#31d820f31bbab73570d5b5a449e2b0fa6457802f"
+  integrity sha512-yDcu5XZWfWKmKvbOs/uS7vITPVFXmn+XY5V6YcGhlz20KgwG+aJX2c7yvYzO++Zr0qvmtQCmxA4EGEciqIys6g==
   dependencies:
-    "@reach/component-component" "^0.1.2"
+    "@reach/component-component" "^0.1.3"
 
 "@reach/router@1.2.1":
   version "1.2.1"
@@ -1277,10 +1272,10 @@
     react-lifecycles-compat "^3.0.4"
     warning "^3.0.0"
 
-"@reach/utils@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@reach/utils/-/utils-0.1.2.tgz#72f547b5c9b0401a56de303d9e508abf6d3fa56a"
-  integrity sha512-HpDR5BeCApr3HufQtpg0P5b9sl0S66zikZSMtC/2jZBvrDzjVaT9O8PbKTQqW0PdkMNrnBkX1UtlrrM1TN3/Og==
+"@reach/utils@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@reach/utils/-/utils-0.2.0.tgz#504e84613b4aed7adf189aaa6b9d110b282ec523"
+  integrity sha512-AIfX18Ska78d4SjLt4awYHsgXEIVHhOUxLtxze2XT0D5aPOPx1XJl0seRZfQI0EVod4K1KVvHJnskEYSXqKQQg==
 
 "@sindresorhus/is@^0.12.0":
   version "0.12.0"
