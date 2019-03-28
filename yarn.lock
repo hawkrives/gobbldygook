@@ -1264,10 +1264,10 @@
     "@types/istanbul-lib-coverage" "^1.1.0"
     "@types/yargs" "^12.0.9"
 
-"@packtracker/webpack-plugin@2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@packtracker/webpack-plugin/-/webpack-plugin-2.0.0.tgz#c3e27e7986baa05135337d680460eb5bf2c2a910"
-  integrity sha512-sl02dU1qyd/dIIbUaaSi7cU44COAwelP8yqtgZzxrdrTYxwWTj/be6iRaBpO0oj/Rx5l5+pU0XeupKJjqLMQhA==
+"@packtracker/webpack-plugin@2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@packtracker/webpack-plugin/-/webpack-plugin-2.0.1.tgz#bd188431f724b759231f844fad031b20bb4616f3"
+  integrity sha512-OjzXfDsEjQuxLqPpSwjDIktIDBV7ygw58j2vNk41cJo/lDS/aPuBwKCmcbW7PraL5y+gQ0yxurVSKdda9t5LgA==
   dependencies:
     lodash "^4.17.11"
     minimist "^1.2.0"
