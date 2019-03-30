@@ -5,7 +5,7 @@ import {status, json} from '@gob/lib'
 import type {Course as CourseType, Result} from '@gob/types'
 import {List} from 'immutable'
 
-const baseUrl = 'https://stodevx.github.io/course-data'
+const baseUrl = 'https://stolaf.dev/course-data'
 
 const networkCache: Map<string, Promise<CourseType>> = new Map()
 export function getCourseFromNetwork(clbid: string): Promise<CourseType> {
