@@ -8005,7 +8005,14 @@ pkg-dir@^3.0.0:
   dependencies:
     find-up "^3.0.0"
 
-plur@3.0.1, plur@^3.0.1:
+plur@3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/plur/-/plur-3.1.0.tgz#b0b1303dd222c048096f12bff8d2479d0a9c8675"
+  integrity sha512-EBCU+gNrgTdRztjhitImWE5phOl1ioM7bq89pqwqB9qplvog79rHJ8ec+RCl7Isd2N5YNCQjqe7GE8ekm0weCw==
+  dependencies:
+    irregular-plurals "^2.0.0"
+
+plur@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/plur/-/plur-3.0.1.tgz#268652d605f816699b42b86248de73c9acd06a7c"
   integrity sha512-lJl0ojUynAM1BZn58Pas2WT/TXeC1+bS+UqShl0x9+49AtOn7DixRXVzaC8qrDOIxNDmepKnLuMTH7NQmkX0PA==
