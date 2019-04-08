@@ -8040,10 +8040,10 @@ pkg-dir@^3.0.0:
   dependencies:
     find-up "^3.0.0"
 
-plur@3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/plur/-/plur-3.1.0.tgz#b0b1303dd222c048096f12bff8d2479d0a9c8675"
-  integrity sha512-EBCU+gNrgTdRztjhitImWE5phOl1ioM7bq89pqwqB9qplvog79rHJ8ec+RCl7Isd2N5YNCQjqe7GE8ekm0weCw==
+plur@3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/plur/-/plur-3.1.1.tgz#60267967866a8d811504fe58f2faaba237546a5b"
+  integrity sha512-t1Ax8KUvV3FFII8ltczPn2tJdjqbd1sIzu6t4JL7nQ3EyeL/lTrj5PWKb06ic5/6XYDr65rQ4uzQEGN70/6X5w==
   dependencies:
     irregular-plurals "^2.0.0"
 
