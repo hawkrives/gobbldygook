@@ -18,6 +18,6 @@ describe('destroyStudent action', () => {
 		expect(action).toHaveProperty('type', DESTROY_STUDENT)
 		expect(action.payload).toEqual({id: 'student'})
 
-		expect(localStorage.hasItem('student')).toBe(false)
+		expect(localStorage.getItem('student')).toBe(null)
 	})
 })
