@@ -9,13 +9,14 @@ import {DraggableCourse} from '../course'
 import styled from 'styled-components'
 import {type Course as CourseType} from '@gob/types'
 import type {GROUP_BY_KEY} from './constants'
+import {Student} from '@gob/object-student'
 
 type Results = List<string | CourseType>
 
 type Props = {
 	groupedBy: GROUP_BY_KEY,
 	results: Results,
-	studentId?: string,
+	student?: Student,
 }
 
 const TermList = styled(VariableSizeList)`
@@ -127,9 +128,9 @@ export class CourseResultsList extends React.Component<Props> {
 			return this.renderHeader(item, {style})
 		}
 
-		let {studentId: id} = this.props
+		let {student} = this.props
 
-		return <CourseListItem style={style} course={item} studentId={id} />
+		return <CourseListItem style={style} course={item} student={student} />
 	}
 
 	render() {

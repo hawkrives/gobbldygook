@@ -11,10 +11,7 @@ import {Sidebar} from '../../components/sidebar'
 import StudentOverview from '../../modules/student'
 
 const SearchSidebar = Loadable({
-	loader: () =>
-		import('../../components/sidebar--course-search').then(
-			mod => mod.CourseSearcherSidebar,
-		),
+	loader: () => import('../../components/sidebar--course-search'),
 	loading: LoadingComponent,
 })
 

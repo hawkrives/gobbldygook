@@ -15,13 +15,14 @@ import {
 } from './constants'
 import {CourseResultsList} from './results-list'
 import {Querent} from './querent'
+import {Student} from '@gob/object-student'
 
 import './searcher.scss'
 
 type Props = {
 	onCloseSearcher?: ?() => mixed,
 	term?: ?number,
-	studentId?: string,
+	student?: Student,
 }
 
 type State = {
@@ -74,7 +75,7 @@ export class CourseSearcher extends React.Component<Props, State> {
 	render() {
 		let {groupBy, query, sortBy, filterBy, limitTo} = this.state
 
-		let {onCloseSearcher, studentId, term} = this.props
+		let {onCloseSearcher, student, term} = this.props
 
 		// This tells React to unmount and recreate the search hierarchy, so that it all updates as we type
 		let termKey = String(term)
@@ -211,7 +212,7 @@ export class CourseSearcher extends React.Component<Props, State> {
 
 								<CourseResultsList
 									groupedBy={groupBy}
-									studentId={studentId}
+									student={student}
 									results={results}
 								/>
 							</>
