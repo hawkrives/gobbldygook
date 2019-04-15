@@ -23,7 +23,7 @@
     "chalk": "^2.4.1",
     "esm": "^3.0.84",
     "flow-remove-types": "^1.2.3",
-    "get-stdin": "^6.0.0",
+    "get-stdin": "^7.0.0",
     "got": "^9.4.0",
     "js-yaml": "^3.12.0",
     "keyv": "^3.1.0",
