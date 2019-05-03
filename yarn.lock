@@ -8268,12 +8268,12 @@ source-map@^0.7.2:
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.7.3.tgz#5302f8169031735226544092e64981f751750383"
   integrity sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==
 
-sparkly@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/sparkly/-/sparkly-4.0.0.tgz#74b4613e8b6e10ea5411869cd951d114150548a3"
-  integrity sha512-MsR6itEPqEAajGZXgAFk3aqPaL0/V9AMqJ92omK9fbTrUWN43oIb34La4+H1Z+4geehQOBTSnFNe/yd6KtLqIQ==
+sparkly@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/sparkly/-/sparkly-5.0.0.tgz#7c649c8a3d7a50f23a96a9afd499c7f1b572ece3"
+  integrity sha512-lUyRXSbzXn0A/tnAPPWjTJ/gtq4qq6RJ4+1tGwnjUb+TmeJfxr1Ata36rxvCYrD90yDB2xRSxhpgmusuR8ep3w==
   dependencies:
-    chalk "^2.4.1"
+    chalk "^2.4.2"
 
 spdx-correct@^3.0.0:
   version "3.1.0"
