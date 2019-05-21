@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "7.4.4",
-    "@babel/runtime": "7.4.4",
+    "@babel/runtime": "7.4.5",
     "@gob/colors": "^3.0.0-rc.2",
     "@gob/examine-student": "^3.0.0-rc.2",
     "@gob/hanson-format": "^3.0.0-rc.2",
@@ -75,7 +75,7 @@
     "uuid": "3.3.2"
   },
   "devDependencies": {
-    "@babel/core": "7.4.4",
+    "@babel/core": "7.4.5",
     "@babel/plugin-proposal-class-properties": "7.4.4",
     "@babel/plugin-proposal-object-rest-spread": "7.4.4",
     "@babel/plugin-syntax-dynamic-import": "7.2.0",
@@ -84,7 +84,7 @@
     "@babel/plugin-transform-react-display-name": "7.2.0",
     "@babel/plugin-transform-react-inline-elements": "7.2.0",
     "@babel/plugin-transform-runtime": "7.4.4",
-    "@babel/preset-env": "7.4.4",
+    "@babel/preset-env": "7.4.5",
     "@babel/preset-flow": "7.0.0",
     "@babel/preset-react": "7.0.0",
     "@packtracker/webpack-plugin": "2.0.1",
