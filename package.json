@@ -90,7 +90,7 @@
     "flow-remove-types": "2.114.0",
     "jest": "24.8.0",
     "jest-matcher-utils": "24.8.0",
-    "prettier": "1.15.3",
+    "prettier": "1.19.1",
     "pretty-quick": "1.11.1"
   }
 }
