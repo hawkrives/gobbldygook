@@ -4249,7 +4249,21 @@ flow-parser@^0.114.0:
   resolved "https://registry.yarnpkg.com/flow-parser/-/flow-parser-0.114.0.tgz#c4cc7201f456c5fdfbb3bf3ea29282bd0386add6"
   integrity sha512-Qt9HT3v507bCerJfp4FX4N5E7ysinBzxjpK1rL7bJ/Bw12puF6lva2MAIXYS1d83bV7BT/F7EDk+faJQY5MpRA==
 
-flow-remove-types@2.114.0, flow-remove-types@^2.0.0:
+flow-parser@^0.116.0:
+  version "0.116.0"
+  resolved "https://registry.yarnpkg.com/flow-parser/-/flow-parser-0.116.0.tgz#7c08e4559a37863d95870e3ffb5523c5fc3525b1"
+  integrity sha512-sHiUjYI9U7H94diCN8BdzwYFJIkyCy2GN73UDFbKHTIuLdfROfZZwD6jAv2qWMl7lcPrBK9YAVeArLLbekxVeg==
+
+flow-remove-types@2.116.0:
+  version "2.116.0"
+  resolved "https://registry.yarnpkg.com/flow-remove-types/-/flow-remove-types-2.116.0.tgz#b3b0e3c4d8d558cd48507e4d819806df180ba09f"
+  integrity sha512-Qx5aweN5VujWMBmNWT4EeRYBrfY1qbCNUlUnmL8RAADDyVPI0gKAMr4QeL8ppUbxKGXkOlc8xnHMvATB3RL1ew==
+  dependencies:
+    flow-parser "^0.116.0"
+    pirates "^3.0.2"
+    vlq "^0.2.1"
+
+flow-remove-types@^2.0.0:
   version "2.114.0"
   resolved "https://registry.yarnpkg.com/flow-remove-types/-/flow-remove-types-2.114.0.tgz#693038a1217c8e922afe0612bade53d085d0a8d8"
   integrity sha512-ckon8RO7tFcVGW3Ll0jAWgULVrNa/cEN0JXp2I7XmzWT/GCQghSb+0312NjtAb+y3W9iXpPxkVMI86+SDU0E0Q==
