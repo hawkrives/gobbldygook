@@ -102,7 +102,7 @@
     "enzyme": "3.9.0",
     "enzyme-adapter-react-16": "1.12.1",
     "fake-indexeddb": "2.1.0",
-    "file-loader": "3.0.1",
+    "file-loader": "5.0.2",
     "jest-enzyme": "7.0.2",
     "jest-styled-components": "6.3.1",
     "junk": "3.1.0",
