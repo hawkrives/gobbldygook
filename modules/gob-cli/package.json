@@ -22,7 +22,7 @@
     "@gob/school-st-olaf-college": "^3.0.0-rc.2",
     "chalk": "^2.4.1",
     "esm": "^3.0.84",
-    "flow-remove-types": "^2.0.0",
+    "flow-remove-types": "^2.116.1",
     "get-stdin": "^7.0.0",
     "got": "^10.2.2",
     "js-yaml": "^3.12.0",
