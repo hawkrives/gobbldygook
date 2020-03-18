@@ -94,7 +94,7 @@
     "babel-plugin-styled-components": "1.10.0",
     "case-sensitive-paths-webpack-plugin": "2.3.0",
     "clean-webpack-plugin": "1.0.1",
-    "copy-webpack-plugin": "4.6.0",
+    "copy-webpack-plugin": "5.1.1",
     "cross-env": "5.2.0",
     "css-loader": "3.4.2",
     "dart-sass": "1.24.0",
