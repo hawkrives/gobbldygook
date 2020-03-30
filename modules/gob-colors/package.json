@@ -4,6 +4,6 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "polished": "^3.0.0"
+    "polished": "^3.5.1"
   }
 }
