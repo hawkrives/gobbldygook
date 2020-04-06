@@ -49,7 +49,7 @@
     "polished": "3.5.1",
     "present": "1.0.0",
     "pretty-ms": "6.0.1",
-    "quick-lru": "4.0.1",
+    "quick-lru": "5.1.0",
     "react": "16.8.6",
     "react-codemirror2": "5.1.0",
     "react-dnd": "7.4.5",
