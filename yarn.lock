@@ -1300,23 +1300,24 @@
   resolved "https://registry.yarnpkg.com/@reach/component-component/-/component-component-0.1.3.tgz#5d156319572dc38995b246f81878bc2577c517e5"
   integrity sha512-a1USH7L3bEfDdPN4iNZGvMEFuBfkdG+QNybeyDv8RloVFgZYRoM+KGXyy2KOfEnTUM8QWDRSROwaL3+ts5Angg==
 
-"@reach/dialog@0.8.5":
-  version "0.8.5"
-  resolved "https://registry.yarnpkg.com/@reach/dialog/-/dialog-0.8.5.tgz#e6768897656b3322159ff0e3cb839124f4a9c6c2"
-  integrity sha512-2PqYVTKwGWGGA0O5wc/2+KBsBTqNxbO2P/fW0KWVH6expfDMr5TtBTiHxeF9VS8KmAlSFn2OrUXDIAXozL0zuQ==
+"@reach/dialog@0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@reach/dialog/-/dialog-0.10.0.tgz#85d4c9d7dea34a2ecfcd4c704f46ed86359d8bdf"
+  integrity sha512-RqO+J0R6TNdxKuTKwRzB7lBs5RjG/X8m4owLgZuunFRUSX1kWcXp7j8oCHJWwkDTwerrt6Ob96xCeUsalIUALQ==
   dependencies:
-    "@reach/portal" "^0.8.5"
-    "@reach/utils" "^0.8.5"
+    "@reach/portal" "^0.10.0"
+    "@reach/utils" "^0.10.0"
     prop-types "^15.7.2"
     react-focus-lock "^2.2.1"
     react-remove-scroll "^2.2.0"
     tslib "^1.10.0"
 
-"@reach/portal@^0.8.5":
-  version "0.8.5"
-  resolved "https://registry.yarnpkg.com/@reach/portal/-/portal-0.8.5.tgz#586e8686e9ba34368b1df3fc9a84c3ef923dd2d3"
-  integrity sha512-YRQgItjxw6DznndN4T3YS6Ikuq+FPZg8fekXeM1feuQSnMlAtEAyYVaMhpAKSD65+Yc9Zu0Utfxp5ji+wO+FLg==
+"@reach/portal@^0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@reach/portal/-/portal-0.10.0.tgz#ed119d796de1b5ea7c975007fa6b2e507bc7567e"
+  integrity sha512-soXCiLDWcyXMgs1pArjdt67d+IARu1rpkOmHWD3c7XDE2hanWVeQiGC4L8UVNrm51pWrCDtLH1R446tG6uNz2Q==
   dependencies:
+    "@reach/utils" "^0.10.0"
     tslib "^1.10.0"
 
 "@reach/router@1.2.1":
@@ -1330,10 +1331,10 @@
     react-lifecycles-compat "^3.0.4"
     warning "^3.0.0"
 
-"@reach/utils@^0.8.5":
-  version "0.8.5"
-  resolved "https://registry.yarnpkg.com/@reach/utils/-/utils-0.8.5.tgz#6675d6f81054c8dce1b9d535280b0e3c5174fe7d"
-  integrity sha512-nc84exIqBa+EohJPBFjePQP88dBAP4l+tChxwWszzZ+R6tTtSgOg40WyQ5EjPYJFbltnbZIbASHefcEBrFxqng==
+"@reach/utils@^0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@reach/utils/-/utils-0.10.0.tgz#480332433f9d0232aff2c36374cf9a2fe559990b"
+  integrity sha512-qPiwjw8jcT7JYrVT+ZO7bLTVEdp9KyvY0RO1emyCxqpYVr4s9oSZ3XG6n7G+bvnKeyjpbpIfCVfxYvPF1Uq2DQ==
   dependencies:
     tslib "^1.10.0"
     warning "^4.0.3"
