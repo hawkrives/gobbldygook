@@ -50,7 +50,7 @@
     "present": "1.0.0",
     "pretty-ms": "6.0.1",
     "quick-lru": "5.1.0",
-    "react": "16.8.6",
+    "react": "16.13.1",
     "react-codemirror2": "5.1.0",
     "react-dnd": "7.4.5",
     "react-dnd-html5-backend": "7.4.4",
