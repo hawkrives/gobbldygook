@@ -33,7 +33,7 @@
     "@reach/router": "1.2.1",
     "bugsnag-js": "4.7.3",
     "classnames": "2.2.6",
-    "codemirror": "5.52.2",
+    "codemirror": "5.53.2",
     "delay": "4.3.0",
     "fuzzysearch": "1.0.3",
     "js-yaml": "3.13.1",
