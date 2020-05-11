@@ -91,6 +91,6 @@
     "jest": "25.1.0",
     "jest-matcher-utils": "25.4.0",
     "prettier": "1.15.3",
-    "pretty-quick": "1.11.1"
+    "pretty-quick": "2.0.1"
   }
 }
