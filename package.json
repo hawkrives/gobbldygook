@@ -89,7 +89,7 @@
     "flow-bin": "0.82.0",
     "flow-remove-types": "2.122.0",
     "jest": "25.1.0",
-    "jest-matcher-utils": "25.4.0",
+    "jest-matcher-utils": "26.0.1",
     "prettier": "1.15.3",
     "pretty-quick": "2.0.1"
   }
