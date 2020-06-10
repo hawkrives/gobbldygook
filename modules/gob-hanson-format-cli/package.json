@@ -7,7 +7,7 @@
   "license": "MIT",
   "dependencies": {
     "@gob/hanson-format": "^3.0.0-rc.2",
-    "get-stdin": "^7.0.0",
+    "get-stdin": "^8.0.0",
     "js-yaml": "^3.14.0",
     "lodash": "^4.17.11",
     "nomnom": "^1.8.1"
