@@ -1342,10 +1342,12 @@
     tiny-json-http "^7.1.2"
     webpack-bundle-analyzer "^3.4.1"
 
-"@reach/component-component@0.1.3":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@reach/component-component/-/component-component-0.1.3.tgz#5d156319572dc38995b246f81878bc2577c517e5"
-  integrity sha512-a1USH7L3bEfDdPN4iNZGvMEFuBfkdG+QNybeyDv8RloVFgZYRoM+KGXyy2KOfEnTUM8QWDRSROwaL3+ts5Angg==
+"@reach/component-component@0.10.1":
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/@reach/component-component/-/component-component-0.10.1.tgz#670d3f6e0d6f553fe2285743bf29806904d6e5a0"
+  integrity sha512-oMybFLG4fgZ58RHRJdA8cXP5sD04fR1GPXvwjncabhIdaM1trcZVa7K74E8Wy5GGTPW4olJRzmJRVSPfwVLOJw==
+  dependencies:
+    prop-types "^15.7.2"
 
 "@reach/dialog@0.10.0":
   version "0.10.0"
