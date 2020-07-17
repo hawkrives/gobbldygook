@@ -9,7 +9,7 @@
     "@gob/web-database": "^3.0.0-rc.2",
     "idb-range": "^3.1.3",
     "js-yaml": "^3.14.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "present": "^1.0.0"
   }
 }
