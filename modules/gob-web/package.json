@@ -72,7 +72,7 @@
     "sto-course-related-data": "4.0.2",
     "styled-components": "4.4.0",
     "typeface-fira-sans": "0.0.54",
-    "uuid": "3.3.2"
+    "uuid": "8.2.0"
   },
   "devDependencies": {
     "@babel/core": "7.9.6",
