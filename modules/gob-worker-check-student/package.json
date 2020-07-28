@@ -8,6 +8,6 @@
     "@gob/examine-student": "^3.0.0-rc.2",
     "@gob/lib": "^3.0.0-rc.2",
     "@gob/object-student": "^3.0.0-rc.2",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.19"
   }
 }
