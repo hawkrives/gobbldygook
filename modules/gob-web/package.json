@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "7.8.7",
-    "@babel/runtime": "7.7.7",
+    "@babel/runtime": "7.12.1",
     "@gob/colors": "^3.0.0-rc.2",
     "@gob/examine-student": "^3.0.0-rc.2",
     "@gob/hanson-format": "^3.0.0-rc.2",
