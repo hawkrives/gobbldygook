@@ -1324,10 +1324,12 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@reach/component-component@0.1.3":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@reach/component-component/-/component-component-0.1.3.tgz#5d156319572dc38995b246f81878bc2577c517e5"
-  integrity sha512-a1USH7L3bEfDdPN4iNZGvMEFuBfkdG+QNybeyDv8RloVFgZYRoM+KGXyy2KOfEnTUM8QWDRSROwaL3+ts5Angg==
+"@reach/component-component@0.14.0":
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/@reach/component-component/-/component-component-0.14.0.tgz#d6e3debfa851c185eaaea52317a012ca54d41d9b"
+  integrity sha512-QdcVh0NrV7BG28smxsS1DbJSQheENVpqR9CyHyFsC1HKYBcckDtPUInFA7MH4/vTsM/3nsFLwnv7UrSQg9cF3A==
+  dependencies:
+    prop-types "^15.7.2"
 
 "@reach/dialog@0.10.0":
   version "0.10.0"
