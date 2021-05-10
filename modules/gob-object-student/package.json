@@ -10,7 +10,7 @@
     "@gob/lib": "^3.0.0-rc.2",
     "immutable": "^4.0.0-rc.12",
     "listify": "^1.0.3",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "ord": "^1.0.0",
     "stabilize": "^1.0.0",
     "uuid": "^3.3.2"
