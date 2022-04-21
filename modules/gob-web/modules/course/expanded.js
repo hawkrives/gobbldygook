@@ -7,6 +7,7 @@ import {BulletedList, ListItem} from '../../components/list'
 import CourseTitle from './course-title'
 import {semesterName, buildDeptNum} from '@gob/school-st-olaf-college'
 import {consolidateExpandedOfferings} from './offerings'
+import {Revisions} from './revisions'
 import {List} from 'immutable'
 import {ExpandedCourseWarnings} from './warnings'
 import {type WarningType} from '../../../gob-object-student/find-course-warnings'
@@ -35,6 +36,11 @@ const Column = styled.div`
 `
 
 const InfoSegment = styled.div`
+	padding-bottom: 20px;
+`
+
+const BottomInfoSegment = styled.div`
+	padding-top: 20px;
 	padding-bottom: 20px;
 `
 
@@ -154,6 +160,10 @@ export default class ExpandedCourse extends React.PureComponent<Props> {
 					{infoColumn}
 					{detailColumn}
 				</ColumnsWrapper>
+
+				<BottomInfoSegment>
+					<Revisions course={course} />
+				</BottomInfoSegment>
 			</div>
 		)
 	}
