@@ -185,7 +185,9 @@ export class Revisions extends React.Component<Props> {
 
 		const revisions = [...course.revisions]
 
-		const today = new Date()
+		const latestRevisionDate = revisions.length > 0 ? new Date(revisions[0]['_updated']) : null
+		const dateForCurrentState = latestRevisionDate || new Date()
+
 		const courseStates = revisions.reduce((states, revision) => {
 			const revisionDate = formatDate(revision['_updated'])
 			const prevState = {...states[states.length - 1].state}
@@ -201,7 +203,7 @@ export class Revisions extends React.Component<Props> {
 				state: prevState
 			}]
 		}, [{
-			date: formatDate(today),
+			date: formatDate(dateForCurrentState),
 			state: currentState
 		}])
 
