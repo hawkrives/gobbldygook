@@ -11,7 +11,7 @@ const keyv = new Keyv({
 	store: new KeyvFile(),
 })
 
-const baseUrl = 'https://stodevx.github.io/course-data'
+const baseUrl = 'https://stolaf.dev/course-data'
 
 export async function getCourseFromNetwork(clbid: string) {
 	const id = clbid

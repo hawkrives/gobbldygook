@@ -32,8 +32,8 @@ A browser needs to support:
 - Prerequisites: [node.js, at least v7](https://nodejs.org) and [git](https://git-scm.com).
 - `git clone https://github.com/hawkrives/gobbldygook.git`
 - `cd gobbldygook`
-- `npm install`
-- `npm start`
+- `yarn install`
+- `yarn start`
 
 You can see additional commands by executing `npm run` with no arguments.
 

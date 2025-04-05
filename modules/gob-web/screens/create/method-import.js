@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import serializeError from 'serialize-error'
+import {serializeError} from 'serialize-error'
 import {RaisedButton} from '../../components/button'
 import {semesterName} from '@gob/school-st-olaf-college'
 import {

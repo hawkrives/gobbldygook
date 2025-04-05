@@ -4,6 +4,7 @@
     ":semanticCommitsDisabled"
   ],
   "lockFileMaintenance": {
+    "enabled": true,
     "schedule": ["after 5pm on every weekday"]
   },
   "statusCheckVerify": true,
