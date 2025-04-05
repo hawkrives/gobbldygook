@@ -184,8 +184,9 @@ export class Revisions extends React.Component<Props> {
 		delete currentState.revisions
 
 		const revisions = [...course.revisions]
-
-		const latestRevisionDate = revisions.length > 0 ? new Date(revisions[0]['_updated']) : null
+		const latestRevisionDate = revisions.length > 0 
+			? new Date(Math.max(...revisions.map(rev => new Date(rev['_updated']).getTime())))
+			: null
 		const dateForCurrentState = latestRevisionDate || new Date()
 
 		const courseStates = revisions.reduce((states, revision) => {
