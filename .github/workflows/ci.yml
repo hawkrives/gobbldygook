@@ -18,13 +18,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "16"
-          cache: "yarn"
+          cache: "npm"
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm ci
 
       - name: Run Flow
-        run: yarn run --silent flow check --quiet
+        run: npm run flow check --quiet
 
   test:
     name: Jest Tests
@@ -36,13 +36,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "16"
-          cache: "yarn"
+          cache: "npm"
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm ci
 
       - name: Run tests
-        run: yarn run --silent test --runInBand --coverage
+        run: npm run test --runInBand --coverage
 
       # - name: Upload coverage to Coveralls
       #   uses: coverallsapp/github-action@v2
@@ -57,13 +57,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "16"
-          cache: "yarn"
+          cache: "npm"
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm ci
 
       - name: Run ESLint
-        run: yarn run --silent lint
+        run: npm run lint
 
   format:
     name: Prettier
@@ -75,10 +75,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "16"
-          cache: "yarn"
+          cache: "npm"
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm ci
 
       - name: Check formatting
         run: |
@@ -95,13 +95,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "16"
-          cache: "yarn"
+          cache: "npm"
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm ci
 
       - name: Build
-        run: cd modules/gob-web && yarn run --silent build --no-progress
+        run: cd modules/gob-web && npm run build --no-progress
 
       - name: Rearrange files
         run: node scripts/rearrange-for-circle.js
