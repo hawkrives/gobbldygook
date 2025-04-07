@@ -4,9 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@gob/lib": "^3.0.0-rc.2",
-    "@gob/school-st-olaf-college": "^3.0.0-rc.2",
-    "@gob/web-database": "^3.0.0-rc.2",
+    "@gob/lib": "file:../gob-lib",
+    "@gob/school-st-olaf-college": "file:../gob-school-st-olaf-college",
+    "@gob/web-database": "file:../gob-web-database",
     "idb-range": "^3.1.3",
     "js-yaml": "^3.14.0",
     "lodash": "^4.17.21",

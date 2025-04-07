@@ -6,8 +6,8 @@
   "author": "Hawken MacKay Rives",
   "license": "MIT",
   "dependencies": {
-    "@gob/lib": "^3.0.0-rc.2",
-    "@gob/school-st-olaf-college": "^3.0.0-rc.2",
+    "@gob/lib": "file:../gob-lib",
+    "@gob/school-st-olaf-college": "file:../gob-school-st-olaf-college",
     "lodash": "^4.17.21",
     "p-props": "^4.0.0",
     "uuid": "^3.3.2"

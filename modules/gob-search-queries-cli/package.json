@@ -6,8 +6,8 @@
   "author": "Hawken MacKay Rives",
   "license": "MIT",
   "dependencies": {
-    "@gob/cli": "^3.0.0-rc.2",
-    "@gob/search-queries": "^3.0.0-rc.2",
+    "@gob/cli": "file:../gob-cli",
+    "@gob/search-queries": "file:../gob-search-queries",
     "js-yaml": "^3.14.0",
     "nomnom": "^1.8.1",
     "stabilize": "^1.0.0"

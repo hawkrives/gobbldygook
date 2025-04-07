@@ -4,8 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@gob/treo-plugin-batch-get": "^3.0.0-rc.2",
-    "@gob/treo-plugin-query": "^3.0.0-rc.2",
+    "@gob/treo-plugin-batch-get": "file:../gob-treo-plugin-batch-get",
+    "@gob/treo-plugin-query": "file:../gob-treo-plugin-query",
     "es6-promise": "^4.2.5",
     "treo": "^0.6.0-rc2"
   },

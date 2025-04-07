@@ -4,10 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@gob/courses": "^3.0.0-rc.2",
-    "@gob/examine-student": "^3.0.0-rc.2",
-    "@gob/lib": "^3.0.0-rc.2",
-    "@gob/object-student": "^3.0.0-rc.2",
+    "@gob/courses": "file:../gob-courses",
+    "@gob/examine-student": "file:../gob-examine-student",
+    "@gob/lib": "file:../gob-lib",
+    "@gob/object-student": "file:../gob-object-student",
     "lodash": "^4.17.21"
   }
 }
