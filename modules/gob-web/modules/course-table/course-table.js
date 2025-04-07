@@ -2,7 +2,7 @@
 
 import React from 'react'
 import {connect} from 'react-redux'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {expandYear} from '@gob/school-st-olaf-college'
 import {findFirstAvailableYear} from '../../helpers/find-first-available-year'
 import {FlatButton} from '../../components/button'

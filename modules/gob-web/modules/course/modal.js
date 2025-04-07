@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import Modal from '../../components/modal'
 import Separator from '../../components/separator'
 import {Toolbar} from '../../components/toolbar'

@@ -3,7 +3,7 @@
 import React from 'react'
 import {Card} from './card'
 import {RaisedButton} from './button'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 
 let CenteredCard = styled(Card)`
 	margin: 3rem auto 1rem;

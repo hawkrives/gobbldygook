@@ -2,7 +2,7 @@
 import React from 'react'
 import DocumentTitle from 'react-document-title'
 import {semesterName} from '@gob/school-st-olaf-college'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {Student} from '@gob/object-student'
 
 const DetailText = styled.pre`

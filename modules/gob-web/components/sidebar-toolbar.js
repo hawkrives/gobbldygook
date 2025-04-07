@@ -17,7 +17,7 @@ import {
 	iosUploadOutline,
 	grid,
 } from '../icons/ionicons'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {Student} from '@gob/object-student'
 import type {Undoable} from '../types'
 

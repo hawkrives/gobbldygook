@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {Card} from '../../components/card'
 import {FlatButton} from '../../components/button'
 import {Icon} from '../../components/icon'

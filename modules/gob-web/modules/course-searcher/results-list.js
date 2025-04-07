@@ -6,7 +6,7 @@ import {List} from 'immutable'
 import {Card} from '../../components/card'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import {DraggableCourse} from '../course'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {type Course as CourseType} from '@gob/types'
 import type {GROUP_BY_KEY} from './constants'
 

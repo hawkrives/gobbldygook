@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import {Card} from '../../components/card'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {enhanceHanson} from '@gob/hanson-format'
 import yaml from 'js-yaml'
 import Component2 from '@reach/component-component'

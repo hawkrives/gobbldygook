@@ -1,6 +1,6 @@
 // @flow
 import React from 'react'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {findWordForProgress} from '@gob/lib'
 import * as theme from '../theme'
 

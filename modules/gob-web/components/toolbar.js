@@ -1,6 +1,6 @@
 // @flow
 
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {FlatButton} from './button'
 import {Icon} from './icon'
 

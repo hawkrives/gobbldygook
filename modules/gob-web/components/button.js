@@ -1,6 +1,6 @@
 // @flow
 
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import * as theme from '../theme'
 
 const BaseButton = styled.button.attrs({type: 'button'})`

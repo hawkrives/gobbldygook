@@ -3,7 +3,7 @@ import React from 'react'
 import round from 'lodash/round'
 import {FlatButton} from '../../components/button'
 import BasicProgressBar from '../../components/progress-bar'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {type Notification as NotificationType} from './types'
 
 type Props = {

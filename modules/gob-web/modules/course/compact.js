@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import noop from 'lodash/noop'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {InlineList, InlineListItem} from '../../components/list'
 import CourseTitle from './course-title'
 import {buildDeptNum} from '@gob/school-st-olaf-college'

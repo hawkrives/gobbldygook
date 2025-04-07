@@ -4,7 +4,7 @@ import React from 'react'
 import {Link} from '@reach/router'
 import {RaisedButton} from '../../components/button'
 import {CourseSearcher} from '../../modules/course-searcher'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 
 let Container = styled.div`
 	max-width: 40em;

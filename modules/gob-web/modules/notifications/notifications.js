@@ -1,6 +1,6 @@
 // @flow
 import React from 'react'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import map from 'lodash/map'
 import {connect} from 'react-redux'
 import {removeNotification} from './redux/actions'

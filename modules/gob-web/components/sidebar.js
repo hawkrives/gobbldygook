@@ -1,6 +1,6 @@
 // @flow
 
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 
 export const Sidebar = styled.aside`
 	@media all and (min-width: 900px) {

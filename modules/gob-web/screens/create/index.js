@@ -3,7 +3,7 @@
 import * as React from 'react'
 import Loadable from 'react-loadable'
 import {LoadingComponent} from '../../components/loading-comp'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {Card} from '../../components/card'
 import {Router} from '@reach/router'
 

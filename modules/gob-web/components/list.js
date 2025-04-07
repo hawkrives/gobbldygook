@@ -5,7 +5,7 @@ import React, {
 	cloneElement,
 } from 'react'
 import cx from 'classnames'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 
 const BaseList = `
     margin: 0;

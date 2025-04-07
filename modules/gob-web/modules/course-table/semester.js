@@ -26,7 +26,7 @@ import {
 	type ChangeStudentFunc,
 } from '../../redux/students/actions/change'
 import {CourseList} from './course-list'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {loadDataForTerm} from '../../workers/load-data'
 
 const Container = styled.div`

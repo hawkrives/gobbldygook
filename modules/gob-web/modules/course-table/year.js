@@ -12,7 +12,7 @@ import {
 	changeStudent,
 	type ChangeStudentFunc,
 } from '../../redux/students/actions/change'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 
 const Container = styled.div`
 	margin-bottom: var(--page-edge-padding);

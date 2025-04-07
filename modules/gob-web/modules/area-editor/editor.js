@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {Controlled as CodeMirror} from 'react-codemirror2'
 import {Card} from '../../components/card'
 

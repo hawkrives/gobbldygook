@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 import {Router, Link} from '@reach/router'
 import {RaisedButton} from '../../components/button'
 import Loadable from 'react-loadable'
