@@ -34,6 +34,7 @@
       "lcov",
       "text-summary"
     ],
+    "testEnvironment": "jsdom",
     "globals": {
       "TESTING": true,
       "VERSION": "3.0.0-test"
@@ -45,7 +46,6 @@
     "setupFiles": [
       "./config/test-harness.js"
     ],
-    "setupFilesAfterEnv": ["./node_modules/jest-enzyme/lib/index.js"],
     "testPathIgnorePatterns": [
       "\\.support.js$",
       "__support__"
@@ -74,7 +74,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "7.9.6",
+    "@babel/core": "7.26.10",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.1.0",
     "babel-jest": "29.7.0",
@@ -89,6 +89,7 @@
     "flow-bin": "0.82.0",
     "flow-remove-types": "2.122.0",
     "jest": "29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "jest-matcher-utils": "29.7.0",
     "prettier": "1.15.3",
     "pretty-quick": "2.0.1"

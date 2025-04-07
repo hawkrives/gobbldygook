@@ -9,83 +9,88 @@ import {
 	Footer,
 	Header,
 } from '../student-summary'
-import {shallow} from 'enzyme'
+import {render} from '@testing-library/react'
 import {List} from 'immutable'
 
 describe('CreditSummary', () => {
 	it('renders shallowly', () => {
-		const tree = shallow(
+		const {container} = render(
 			<CreditSummary currentCredits={5} neededCredits={10} />,
 		)
 
-		expect(tree).toMatchSnapshot()
+		expect(container.firstChild).toMatchSnapshot()
 	})
 
 	it('handles having fewer credits than needed', () => {
-		const tree = shallow(
+		const {container} = render(
 			<CreditSummary currentCredits={5} neededCredits={10} />,
 		)
 
-		expect(tree).toMatchSnapshot()
-		expect(tree.text()).not.toContain('Good job!')
+		expect(container.firstChild).toMatchSnapshot()
+		expect(container.textContent).not.toContain('Good job!')
 	})
 
 	it('handles having exactly the right number of credits', () => {
-		const tree = shallow(
+		const {container} = render(
 			<CreditSummary currentCredits={10} neededCredits={10} />,
 		)
 
-		expect(tree).toMatchSnapshot()
-		expect(tree.text()).toContain('Good job!')
+		expect(container.firstChild).toMatchSnapshot()
+		expect(container.textContent).toContain('Good job!')
 	})
 
 	it('handles having more credits than needed', () => {
-		const tree = shallow(
+		const {container} = render(
 			<CreditSummary currentCredits={15} neededCredits={10} />,
 		)
 
-		expect(tree).toMatchSnapshot()
-		expect(tree.text()).toContain('Good job!')
+		expect(container.firstChild).toMatchSnapshot()
+		expect(container.textContent).toContain('Good job!')
 	})
 })
 
 describe('DateSummary', () => {
 	it('renders', () => {
-		const tree = shallow(
+		const {container} = render(
 			<DateSummary matriculation={2012} graduation={2016} />,
 		)
 
-		expect(tree).toMatchSnapshot()
+		expect(container.firstChild).toMatchSnapshot()
 	})
 
 	it('handles graduating before matriculation', () => {
-		expect(
-			shallow(<DateSummary matriculation={2016} graduation={2012} />),
-		).toMatchSnapshot()
+		const {container} = render(
+			<DateSummary matriculation={2016} graduation={2012} />,
+		)
+		expect(container.firstChild).toMatchSnapshot()
 	})
 
 	it('handles graduating in three years', () => {
-		expect(
-			shallow(<DateSummary matriculation={2000} graduation={2003} />),
-		).toMatchSnapshot()
+		const {container} = render(
+			<DateSummary matriculation={2000} graduation={2003} />,
+		)
+		expect(container.firstChild).toMatchSnapshot()
 	})
 
 	it('handles graduating in four years', () => {
-		expect(
-			shallow(<DateSummary matriculation={2000} graduation={2004} />),
-		).toMatchSnapshot()
+		const {container} = render(
+			<DateSummary matriculation={2000} graduation={2004} />,
+		)
+		expect(container.firstChild).toMatchSnapshot()
 	})
 
 	it('handles graduating in five years', () => {
-		expect(
-			shallow(<DateSummary matriculation={2000} graduation={2005} />),
-		).toMatchSnapshot()
+		const {container} = render(
+			<DateSummary matriculation={2000} graduation={2005} />,
+		)
+		expect(container.firstChild).toMatchSnapshot()
 	})
 
 	it('handles graduating in six years', () => {
-		expect(
-			shallow(<DateSummary matriculation={2000} graduation={2006} />),
-		).toMatchSnapshot()
+		const {container} = render(
+			<DateSummary matriculation={2000} graduation={2006} />,
+		)
+		expect(container.firstChild).toMatchSnapshot()
 	})
 })
 
@@ -114,8 +119,8 @@ describe('DegreeSummary', () => {
 	])
 
 	it('renders', () => {
-		const tree = shallow(<DegreeSummary studies={List()} />)
-		expect(tree).toMatchSnapshot()
+		const {container} = render(<DegreeSummary studies={List()} />)
+		expect(container.firstChild).toMatchSnapshot()
 	})
 
 	for (const degreeCount of [0, 1, 2, 3]) {
@@ -123,7 +128,7 @@ describe('DegreeSummary', () => {
 			for (const concentrationCount of [0, 1, 2, 3]) {
 				for (const emphasisCount of [0, 1, 2, 3]) {
 					it(`handles ${degreeCount} degrees, ${majorCount} majors, ${concentrationCount} concentrations, and ${emphasisCount} emphases`, () => {
-						const tree = shallow(
+						const {container} = render(
 							<DegreeSummary
 								studies={List([
 									...studies
@@ -142,7 +147,7 @@ describe('DegreeSummary', () => {
 							/>,
 						)
 
-						expect(tree.text()).toMatchSnapshot()
+						expect(container.textContent).toMatchSnapshot()
 					})
 				}
 			}
@@ -154,31 +159,31 @@ describe('Footer', () => {
 	const goodMessage = "It looks like you'll make it!"
 	const badMessage = "You haven't planned everything out yet."
 	it('renders', () => {
-		const tree = shallow(<Footer canGraduate={true} />)
+		const {container} = render(<Footer canGraduate={true} />)
 
-		expect(tree).toMatchSnapshot()
+		expect(container.firstChild).toMatchSnapshot()
 	})
 
 	it('handles the "can graduate" status', () => {
-		const tree = shallow(<Footer canGraduate={true} />)
+		const {container} = render(<Footer canGraduate={true} />)
 
-		expect(tree).toMatchSnapshot()
-		expect(tree.text()).toContain(goodMessage)
-		expect(tree.text()).not.toContain(badMessage)
+		expect(container.firstChild).toMatchSnapshot()
+		expect(container.textContent).toContain(goodMessage)
+		expect(container.textContent).not.toContain(badMessage)
 	})
 
 	it('handles the "cannot graduate" status', () => {
-		const tree = shallow(<Footer canGraduate={false} />)
+		const {container} = render(<Footer canGraduate={false} />)
 
-		expect(tree).toMatchSnapshot()
-		expect(tree.text()).toContain(badMessage)
-		expect(tree.text()).not.toContain(goodMessage)
+		expect(container.firstChild).toMatchSnapshot()
+		expect(container.textContent).toContain(badMessage)
+		expect(container.textContent).not.toContain(goodMessage)
 	})
 })
 
 describe('Header', () => {
 	it('renders', () => {
-		const tree = shallow(
+		const {container} = render(
 			<Header
 				canGraduate={true}
 				name="Susan"
@@ -187,11 +192,11 @@ describe('Header', () => {
 			/>,
 		)
 
-		expect(tree).toMatchSnapshot()
+		expect(container.firstChild).toMatchSnapshot()
 	})
 
 	it('handles the "can graduate" status', () => {
-		const tree = shallow(
+		const {container} = render(
 			<Header
 				canGraduate={true}
 				name="Susan"
@@ -200,10 +205,10 @@ describe('Header', () => {
 			/>,
 		)
 
-		expect(tree).toMatchSnapshot()
+		expect(container.firstChild).toMatchSnapshot()
 	})
 	it('handles the "cannot graduate" status', () => {
-		const tree = shallow(
+		const {container} = render(
 			<Header
 				canGraduate={false}
 				name="Susan"
@@ -212,6 +217,6 @@ describe('Header', () => {
 			/>,
 		)
 
-		expect(tree).toMatchSnapshot()
+		expect(container.firstChild).toMatchSnapshot()
 	})
 })
