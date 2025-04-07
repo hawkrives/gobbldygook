@@ -6,6 +6,7 @@ on:
   pull_request:
     branches: [trunk]
   workflow_dispatch:
+  merge_group:
 
 jobs:
   flow:
