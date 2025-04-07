@@ -3,7 +3,6 @@
 import uniqueId from 'lodash/uniqueId'
 import {status, text} from '@gob/lib'
 import * as notificationActions from '../modules/notifications/redux/actions'
-import LoadDataWorker from './load-data.worker'
 import mem from 'mem'
 
 const COURSE_URL = APP_BASE + 'courseData.url'
@@ -13,7 +12,7 @@ const actions = {
 	notifications: notificationActions,
 }
 
-const worker = new LoadDataWorker()
+const worker = new Worker(new URL('./load-data.worker.js', import.meta.url))
 
 let fetchText = (...args) =>
 	fetch(...args)
@@ -22,7 +21,7 @@ let fetchText = (...args) =>
 
 const memFetchText: typeof fetchText = mem(fetchText)
 
-worker.addEventListener('error', msg =>
+worker.addEventListener('error', (msg) =>
 	console.warn('[main] received error from load-data worker:', msg),
 )
 
@@ -57,7 +56,7 @@ function messageWorker(
 ): Promise<{type: string, [key: string]: mixed}> {
 	let sourceId = uniqueId()
 
-	return new Promise(resolve => {
+	return new Promise((resolve) => {
 		// This is inside of the function so that it doesn't get unregistered too early
 		function onMessage({data}: {data: string}) {
 			let {id: resultId, ...args} = JSON.parse(data)
@@ -78,7 +77,7 @@ function messageWorker(
 async function loadDataFile(url) {
 	let nonce = Date.now()
 
-	let path = await memFetchText(url).then(path => path.trim())
+	let path = await memFetchText(url).then((path) => path.trim())
 
 	await messageWorker({
 		type: 'load-from-info',
@@ -101,7 +100,7 @@ export async function loadDataForTerm(term: number): Promise<mixed> {
 		return
 	}
 
-	let path = await memFetchText(COURSE_URL).then(path => path.trim())
+	let path = await memFetchText(COURSE_URL).then((path) => path.trim())
 
 	await messageWorker({
 		type: 'load-term-data',

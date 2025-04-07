@@ -7,18 +7,15 @@ const webpack = require('webpack')
 
 const babelConfig = require('../../babel.config.js')
 
-const {
-	DefinePlugin,
-	LoaderOptionsPlugin,
-	NormalModuleReplacementPlugin,
-} = webpack
+const {DefinePlugin, LoaderOptionsPlugin, NormalModuleReplacementPlugin} =
+	webpack
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const HtmlPlugin = require('@gob/webpack-plugin-html')
+const HtmlPlugin = require('html-webpack-plugin')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 
 const isCI = Boolean(process.env.CI)
 const outputFolder = __dirname + '/build/'
@@ -67,8 +64,7 @@ function config() {
 		path: outputFolder,
 		publicPath: publicPath,
 
-		// extract-text-plugin uses [contenthash], and webpack uses [hash].
-		filename: isDevelopment ? 'app.js' : 'app.[hash].js',
+		filename: isDevelopment ? 'app.js' : 'app.[contenthash].js',
 		chunkFilename: 'chunk.[name].[chunkhash].js',
 
 		// Add /*filename*/ comments to generated require()s in the output.
@@ -96,29 +92,36 @@ function config() {
 
 	let plugins = [
 		// clean out the build folder between builds
-		new CleanWebpackPlugin([outputFolder]),
+		new CleanWebpackPlugin(),
 
 		// Generates an index.html for us.
-		new HtmlPlugin(entryPointName, context => {
-			let cssHref = context.htmlPluginCss
-				? `${publicPath}${context.htmlPluginCss}`
-				: null
-			let scriptSrc = `${publicPath}${context.htmlPluginJs}`
-
-			if (isDevelopment && !context.htmlPluginJs) {
-				scriptSrc = `${publicPath}app.js`
-			}
-
-			return html({cssHref, scriptSrc})
+		new HtmlPlugin({
+			title: 'Gobbldygook',
+			scriptLoading: 'module',
+			meta: {
+				viewport: 'width=device-width, initial-scale=1.0',
+			},
 		}),
+		// new HtmlPlugin(entryPointName, (context) => {
+		// 	let cssHref = context.htmlPluginCss
+		// 		? `${publicPath}${context.htmlPluginCss}`
+		// 		: null
+		// 	let scriptSrc = `${publicPath}${context.htmlPluginJs}`
+
+		// 	if (isDevelopment && !context.htmlPluginJs) {
+		// 		scriptSrc = `${publicPath}app.js`
+		// 	}
+
+		// 	return html({cssHref, scriptSrc})
+		// }),
 
 		// Ignore the "full" schema in js-yaml's module, because it brings in esprima
 		// to support the !!js/function type. We don't use and have no need for it, so
 		// tell webpack to ignore it.
-		new NormalModuleReplacementPlugin(/schema\/default_full$/, result => {
+		new NormalModuleReplacementPlugin(/schema\/default_full$/, (result) => {
 			result.request = result.request.replace('default_full', 'core')
 		}),
-		new NormalModuleReplacementPlugin(/schema\/default_safe$/, result => {
+		new NormalModuleReplacementPlugin(/schema\/default_safe$/, (result) => {
 			result.request = result.request.replace('default_safe', 'core')
 		}),
 
@@ -139,7 +142,9 @@ function config() {
 		new CaseSensitivePathsPlugin(),
 
 		// copy files – into the webpack {output} directory
-		new CopyWebpackPlugin([{from: './static/*', flatten: true}]),
+		new CopyWebpackPlugin({
+			patterns: [{from: './static/*', to: '[name][ext]'}],
+		}),
 	]
 
 	if (isProduction) {
@@ -173,31 +178,6 @@ function config() {
 				exclude: /node_modules/,
 				use: [babelLoader],
 			},
-			// {
-			// 	test: /\.worker\.js$/,
-			// 	exclude: /node_modules/,
-			// 	use: ['worker-loader', babelLoader],
-			// },
-			{
-				test: /check-student\.worker\.js$/,
-				use: [
-					{
-						loader: 'worker-loader',
-						options: {name: 'worker.check-student.[hash].js'},
-					},
-					babelLoader,
-				],
-			},
-			{
-				test: /load-data\.worker\.js$/,
-				use: [
-					{
-						loader: 'worker-loader',
-						options: {name: 'worker.load-data.[hash].js'},
-					},
-					babelLoader,
-				],
-			},
 			{
 				test: /\.otf|eot|ttf|woff2?$/,
 				use: [urlLoader],
@@ -211,12 +191,7 @@ function config() {
 				use: [
 					isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
 					'css-loader',
-					{
-						loader: 'sass-loader',
-						options: {
-							implementation: require('dart-sass'),
-						},
-					},
+					'sass-loader',
 				],
 			},
 		],

@@ -7,9 +7,8 @@ module.exports = {
 			{
 				modules: false,
 				useBuiltIns: 'entry',
-				targets: {
-					esmodules: true,
-				},
+				corejs: '3',
+				targets: {esmodules: true},
 			},
 		],
 	],

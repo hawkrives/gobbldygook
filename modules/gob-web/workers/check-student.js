@@ -1,7 +1,6 @@
 // @flow
 
 import uniqueId from 'lodash/uniqueId'
-import CheckStudentWorker from './check-student.worker'
 import {type ParsedHansonFile} from '@gob/hanson-format'
 import {type EvaluationResult} from '@gob/examine-student'
 import {Student} from '@gob/object-student'
@@ -9,9 +8,9 @@ import {getCourse} from '../helpers/get-courses'
 import mem from 'mem'
 import QuickLRU from 'quick-lru'
 
-const worker = new CheckStudentWorker()
+const worker = new Worker(new URL('./check-student.worker.js', import.meta.url))
 
-worker.addEventListener('error', function(event: Event) {
+worker.addEventListener('error', function (event: Event) {
 	console.warn('received error from check-student worker:', event)
 })
 
@@ -20,7 +19,7 @@ async function checkStudentAgainstArea(
 	student: Student,
 	area: ParsedHansonFile,
 ): Promise<EvaluationResult> {
-	return new Promise(async resolve => {
+	return new Promise(async (resolve) => {
 		const sourceId = uniqueId()
 
 		// This is inside of the function so that it doesn't get unregistered too early
