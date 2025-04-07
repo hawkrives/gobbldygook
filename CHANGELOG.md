@@ -1,6 +1,12 @@
 # CHANGELOG
 
-## [Unreleased]
+## Unreleased
+
+- replace webpack with Vite
+- move from CircleCI to GitHub Actions
+- upgrade many dependencies
+
+## [3.0.0-beta7] - unreleased
 
 - Removed sto-sis-time-parser, as it's now integrated into the data source
 - Updated SIS import procedure to use server-side code; allowed removal of htmlparser2 and css-select
