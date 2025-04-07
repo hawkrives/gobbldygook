@@ -7,8 +7,8 @@ Set {
 `;
 
 exports[`computeCourse checks if a course exists in the list of courses 1`] = `
-Object {
-  "department": Array [
+{
+  "department": [
     "ART",
   ],
   "number": 250,
@@ -18,12 +18,12 @@ Object {
 exports[`computeCourse does not add the course to the dirty set if it did not match 1`] = `Set {}`;
 
 exports[`computeCourse merges a query and the found course 1`] = `
-Object {
-  "_extraKeys": Array [
+{
+  "_extraKeys": [
     "crsid",
   ],
   "crsid": 20951,
-  "department": Array [
+  "department": [
     "ART",
   ],
   "number": 250,
@@ -31,8 +31,8 @@ Object {
 `;
 
 exports[`computeCourse returns false if the course is in the dirty set 1`] = `
-Object {
-  "department": Array [
+{
+  "department": [
     "ART",
   ],
   "number": 130,

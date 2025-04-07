@@ -71,7 +71,7 @@ describe('cleanPriorData', () => {
 			await cleanPriorData('path', 'invalid_type')
 		} catch (err) {
 			expect(err.message).toMatchInlineSnapshot(
-				`"\\"invalid_type\\" is not a valid store type"`,
+				`""invalid_type" is not a valid store type"`,
 			)
 		}
 	})

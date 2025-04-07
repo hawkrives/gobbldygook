@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`applyFilter filters a list of courses 1`] = `
-Array [
-  Object {
-    "department": Array [
+[
+  {
+    "department": [
       "CSCI",
     ],
     "number": 121,
   },
-  Object {
-    "department": Array [
+  {
+    "department": [
       "ART",
       "ASIAN",
     ],
@@ -19,9 +19,9 @@ Array [
 `;
 
 exports[`applyFilter filters by list-of-valid-courses queries 1`] = `
-Array [
-  Object {
-    "department": Array [
+[
+  {
+    "department": [
       "CSCI",
     ],
     "number": 121,
@@ -30,15 +30,15 @@ Array [
 `;
 
 exports[`applyFilter filters by where-style queries 1`] = `
-Array [
-  Object {
-    "department": Array [
+[
+  {
+    "department": [
       "CSCI",
     ],
     "number": 121,
   },
-  Object {
-    "department": Array [
+  {
+    "department": [
       "ART",
       "ASIAN",
     ],
@@ -47,18 +47,18 @@ Array [
 ]
 `;
 
-exports[`applyFilter returns an empty list when not presented with a filter 1`] = `Array []`;
+exports[`applyFilter returns an empty list when not presented with a filter 1`] = `[]`;
 
 exports[`applyFilter returns the matches on the expression 1`] = `
-Array [
-  Object {
-    "department": Array [
+[
+  {
+    "department": [
       "CSCI",
     ],
     "number": 121,
   },
-  Object {
-    "department": Array [
+  {
+    "department": [
       "ART",
       "ASIAN",
     ],
@@ -68,15 +68,15 @@ Array [
 `;
 
 exports[`applyFilter returns the matches on the expression 2`] = `
-Array [
-  Object {
-    "department": Array [
+[
+  {
+    "department": [
       "CSCI",
     ],
     "number": 121,
   },
-  Object {
-    "department": Array [
+  {
+    "department": [
       "ART",
       "ASIAN",
     ],
