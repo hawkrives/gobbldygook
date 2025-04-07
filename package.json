@@ -45,7 +45,7 @@
     "setupFiles": [
       "./config/test-harness.js"
     ],
-    "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js",
+    "setupFilesAfterEnv": ["./node_modules/jest-enzyme/lib/index.js"],
     "testPathIgnorePatterns": [
       "\\.support.js$",
       "__support__"
@@ -77,7 +77,7 @@
     "@babel/core": "7.9.6",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.1.0",
-    "babel-jest": "26.0.1",
+    "babel-jest": "29.7.0",
     "babel-stdin": "2.0.0",
     "cross-env": "7.0.2",
     "eslint": "5.16.0",
@@ -88,8 +88,8 @@
     "eslint-plugin-react": "7.21.5",
     "flow-bin": "0.82.0",
     "flow-remove-types": "2.122.0",
-    "jest": "25.1.0",
-    "jest-matcher-utils": "26.0.1",
+    "jest": "29.7.0",
+    "jest-matcher-utils": "29.7.0",
     "prettier": "1.15.3",
     "pretty-quick": "2.0.1"
   }
