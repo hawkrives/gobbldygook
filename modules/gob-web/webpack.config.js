@@ -7,8 +7,11 @@ const webpack = require('webpack')
 
 const babelConfig = require('../../babel.config.js')
 
-const {DefinePlugin, LoaderOptionsPlugin, NormalModuleReplacementPlugin} =
-	webpack
+const {
+	DefinePlugin,
+	LoaderOptionsPlugin,
+	NormalModuleReplacementPlugin,
+} = webpack
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlPlugin = require('html-webpack-plugin')
@@ -118,10 +121,10 @@ function config() {
 		// Ignore the "full" schema in js-yaml's module, because it brings in esprima
 		// to support the !!js/function type. We don't use and have no need for it, so
 		// tell webpack to ignore it.
-		new NormalModuleReplacementPlugin(/schema\/default_full$/, (result) => {
+		new NormalModuleReplacementPlugin(/schema\/default_full$/, result => {
 			result.request = result.request.replace('default_full', 'core')
 		}),
-		new NormalModuleReplacementPlugin(/schema\/default_safe$/, (result) => {
+		new NormalModuleReplacementPlugin(/schema\/default_safe$/, result => {
 			result.request = result.request.replace('default_safe', 'core')
 		}),
 

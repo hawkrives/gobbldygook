@@ -1,18 +1,11 @@
 {
-  "extends": [
-    "./tsconfig-base.json"
-  ],
-  "include": [
-    "*.mjs",
-    "*.mts",
-    "*.js",
-    "*.ts"
-  ],
-  "compilerOptions": {
-    "composite": true,
-    "isolatedDeclarations": false,
-    "noEmit": true,
-    "allowJs": true,
-    "checkJs": true
-  }
+	"extends": ["./tsconfig-base.json"],
+	"include": ["*.mjs", "*.mts", "*.js", "*.ts"],
+	"compilerOptions": {
+		"composite": true,
+		"isolatedDeclarations": false,
+		"noEmit": true,
+		"allowJs": true,
+		"checkJs": true
+	}
 }

@@ -38,7 +38,7 @@ const store = configureStore()
 global._dispatch = store.dispatch
 global._store = store
 
-let node = document.createElement('main');
+let node = document.createElement('main')
 node.id = 'gobbldygook'
 document.body.appendChild(node)
 
