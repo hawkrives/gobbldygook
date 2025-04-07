@@ -23,23 +23,6 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const isCI = Boolean(process.env.CI)
 const outputFolder = __dirname + '/build/'
 
-const html = ({cssHref, scriptSrc}) => {
-	let cssLink = cssHref ? `<link rel="stylesheet" href="${cssHref}">` : ''
-
-	return `
-<!DOCTYPE html>
-<html lang="en-US">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gobbldygook</title>
-${cssLink}
-<script async type="module" src="${scriptSrc}"></script>
-
-<main id="gobbldygook"></main>
-</html>
-`.trim()
-}
-
 const entryPointName = 'main'
 
 function config() {
@@ -105,18 +88,6 @@ function config() {
 				viewport: 'width=device-width, initial-scale=1.0',
 			},
 		}),
-		// new HtmlPlugin(entryPointName, (context) => {
-		// 	let cssHref = context.htmlPluginCss
-		// 		? `${publicPath}${context.htmlPluginCss}`
-		// 		: null
-		// 	let scriptSrc = `${publicPath}${context.htmlPluginJs}`
-
-		// 	if (isDevelopment && !context.htmlPluginJs) {
-		// 		scriptSrc = `${publicPath}app.js`
-		// 	}
-
-		// 	return html({cssHref, scriptSrc})
-		// }),
 
 		// Ignore the "full" schema in js-yaml's module, because it brings in esprima
 		// to support the !!js/function type. We don't use and have no need for it, so
