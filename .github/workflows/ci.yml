@@ -83,7 +83,7 @@ jobs:
 
       - name: Check formatting
         run: |
-          yarn run pretty
+          npm run pretty
           git diff --exit-code
 
   build:
