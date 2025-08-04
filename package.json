@@ -45,7 +45,7 @@
     "setupFiles": [
       "./config/test-harness.js"
     ],
-    "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js",
+    "setupFilesAfterEnv": ["./node_modules/jest-enzyme/lib/index.js"],
     "testPathIgnorePatterns": [
       "\\.support.js$",
       "__support__"
