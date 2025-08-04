@@ -28,7 +28,7 @@ export function alterForEvaluation(course: Course): TrimmedCourse {
 	course = {...course}
 
 	for (let [fromKey, toKey] of mapping.entries()) {
-		if (course.hasOwnProperty(fromKey)) {
+		if (Object.prototype.hasOwnProperty.call(course, fromKey)) {
 			course[toKey] = course[fromKey]
 		}
 	}
