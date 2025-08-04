@@ -126,7 +126,7 @@ export class Revisions extends React.Component<Props, State> {
 		isOpen: false,
 	}
 
-	handleToggle = (e: SyntheticEvent<HTMLDetailsElement>) => {
+	handleToggle = (_e: SyntheticEvent<HTMLDetailsElement>) => {
 		this.setState(prevState => ({
 			isOpen: !prevState.isOpen,
 		}))
