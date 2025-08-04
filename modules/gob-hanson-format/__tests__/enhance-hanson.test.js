@@ -8,19 +8,19 @@ describe('enhanceHanson', () => {
 			result: 'Requirement',
 		})
 		expect(actual).toMatchInlineSnapshot(`
-Object {
-  "$type": "requirement",
-  "message": "have a nice day",
-  "name": "test",
-  "result": Object {
-    "$requirement": "Requirement",
-    "$type": "reference",
-  },
-  "revision": undefined,
-  "slug": "test",
-  "type": undefined,
-}
-`)
+		{
+		  "$type": "requirement",
+		  "message": "have a nice day",
+		  "name": "test",
+		  "result": {
+		    "$requirement": "Requirement",
+		    "$type": "reference",
+		  },
+		  "revision": undefined,
+		  "slug": "test",
+		  "type": undefined,
+		}
+	`)
 		expect(actual.slug).toBe('test')
 	})
 
@@ -30,19 +30,19 @@ Object {
 			result: 'Requirement',
 		})
 		expect(actual).toMatchInlineSnapshot(`
-Object {
-  "$type": "requirement",
-  "message": "have a nice day",
-  "name": undefined,
-  "result": Object {
-    "$requirement": "Requirement",
-    "$type": "reference",
-  },
-  "revision": undefined,
-  "slug": "",
-  "type": undefined,
-}
-`)
+		{
+		  "$type": "requirement",
+		  "message": "have a nice day",
+		  "name": undefined,
+		  "result": {
+		    "$requirement": "Requirement",
+		    "$type": "reference",
+		  },
+		  "revision": undefined,
+		  "slug": "",
+		  "type": undefined,
+		}
+	`)
 		expect(actual.$type).toBe('requirement')
 	})
 

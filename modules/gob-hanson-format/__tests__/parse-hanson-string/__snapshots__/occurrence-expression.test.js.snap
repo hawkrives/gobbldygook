@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`OccurrenceExpression requires a course to check for occurrences of 1`] = `
-Object {
-  "$count": Object {
+{
+  "$count": {
     "$num": 1,
     "$operator": "$gte",
   },
-  "$course": Object {
+  "$course": {
     "department": "CSCI",
     "number": 121,
   },
