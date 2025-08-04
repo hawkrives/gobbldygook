@@ -7,7 +7,7 @@ export type Offering = {|
 	+end: string,
 |}
 
-export type Course = {
+export type Course = {|
 	+type: 'course',
 	+clbid: string,
 	+credits: number,
@@ -18,9 +18,11 @@ export type Course = {
 	+gereqs: Array<string>,
 	+groupid: string,
 	+instructors: Array<string>,
+	+lab?: boolean,
 	+level: number,
 	+max: number,
 	+name: string,
+	+notes?: string,
 	+number: number | string,
 	+pf: boolean,
 	+prerequisites: false | string,
@@ -30,9 +32,9 @@ export type Course = {
 	+title?: string,
 	+type: string,
 	+year: number,
+	+term?: number,
 	+offerings?: Array<Offering>,
 	+revisions: Array<{|
-		...$Exact<Course>,
 		+_updated: string,
 	|}>,
-}
+|}
