@@ -12,9 +12,9 @@ import {
 import {List} from 'immutable'
 
 describe('CreditSummary', () => {
-	it('renders', () => {
+	it('renders planned vs required', () => {
 		render(<CreditSummary currentCredits={5} neededCredits={10} />)
-		expect(screen.getByText(/./)).toBeTruthy()
+		expect(screen.getByText(/You have currently planned for 5 of your 10 required credits/)).toBeInTheDocument()
 	})
 
 	it('handles having fewer credits than needed', () => {
@@ -24,20 +24,20 @@ describe('CreditSummary', () => {
 
 	it('handles having exactly the right number of credits', () => {
 		render(<CreditSummary currentCredits={10} neededCredits={10} />)
-		expect(screen.getByText(/./)).toBeTruthy()
+		expect(screen.getByText(/You have currently planned for 10 of your 10 required credits/)).toBeInTheDocument()
 	})
 
 	it('handles having more credits than needed', () => {
 		render(<CreditSummary currentCredits={15} neededCredits={10} />)
-		expect(screen.getByText(/./)).toBeTruthy()
+		expect(screen.getByText(/You have currently planned for 15 of your 10 required credits/)).toBeInTheDocument()
 	})
 })
 
 describe('DateSummary', () => {
-	it('renders', () => {
+	it('renders years', () => {
 		render(<DateSummary matriculation={2012} graduation={2016} />)
-		expect(screen.getByText(/./)).toBeTruthy()
-		expect(screen.getByText(/./)).toBeTruthy()
+		expect(screen.getByText(/matriculating in 2012/)).toBeInTheDocument()
+		expect(screen.getByText(/graduate in 2016/)).toBeInTheDocument()
 	})
 })
 
@@ -49,16 +49,8 @@ describe('DegreeSummary', () => {
 		{type: 'major', name: 'Asian Studies', revision: 'latest'},
 		{type: 'major', name: 'Biology', revision: 'latest'},
 		{type: 'major', name: 'Computer Science', revision: 'latest'},
-		{
-			type: 'concentration',
-			name: 'Africa and the Americas',
-			revision: 'latest',
-		},
-		{
-			type: 'concentration',
-			name: 'Biomolecular Science',
-			revision: 'latest',
-		},
+		{type: 'concentration', name: 'Africa and the Americas', revision: 'latest'},
+		{type: 'concentration', name: 'Biomolecular Science', revision: 'latest'},
 		{type: 'concentration', name: 'China Studies', revision: 'latest'},
 		{type: 'emphasis', name: 'Emphasis 1', revision: 'latest'},
 		{type: 'emphasis', name: 'Emphasis 2', revision: 'latest'},
@@ -67,7 +59,7 @@ describe('DegreeSummary', () => {
 
 	it('renders empty', () => {
 		render(<DegreeSummary studies={List()} />)
-		expect(screen.getByText(/./)).toBeTruthy()
+		expect(screen.getByText(/You are planning on no degrees/)).toBeInTheDocument()
 	})
 
 	it('renders counts', () => {
@@ -83,7 +75,7 @@ describe('DegreeSummary', () => {
 				])}
 			/>,
 		)
-		expect(screen.getByText(/./)).toBeTruthy()
+		expect(screen.getByText(/You are planning on/)).toBeInTheDocument()
 	})
 })
 
@@ -92,19 +84,19 @@ describe('Footer', () => {
 	const badMessage = "You haven't planned everything out yet."
 	it('handles the "can graduate" status', () => {
 		render(<Footer canGraduate={true} />)
-		expect(screen.getByText(/./)).toBeTruthy()
-		expect(screen.queryByText(badMessage)).toBeNull()
+		expect(screen.getByText(goodMessage, {exact: false})).toBeInTheDocument()
+		expect(screen.queryByText(badMessage, {exact: false})).toBeNull()
 	})
 
 	it('handles the "cannot graduate" status', () => {
 		render(<Footer canGraduate={false} />)
-		expect(screen.getByText(/./)).toBeTruthy()
-		expect(screen.queryByText(goodMessage)).toBeNull()
+		expect(screen.getByText(badMessage, {exact: false})).toBeInTheDocument()
+		expect(screen.queryByText(goodMessage, {exact: false})).toBeNull()
 	})
 })
 
 describe('Header', () => {
-	it('renders', () => {
+	it('renders greeting with name', () => {
 		render(
 			<Header
 				canGraduate={true}
@@ -113,6 +105,6 @@ describe('Header', () => {
 				showAvatar={true}
 			/>,
 		)
-		expect(screen.getByText(/./)).toBeTruthy()
+		expect(screen.getByText(/^Welcome, Susan!$/)).toBeInTheDocument()
 	})
 })
