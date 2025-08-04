@@ -1,8 +1,4 @@
-import Enzyme from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
-
-Enzyme.configure({adapter: new Adapter()})
-
+import '@testing-library/jest-dom'
 global.fetch = () => Promise.resolve({})
 
 global.localStorage = {
