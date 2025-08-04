@@ -3,7 +3,9 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import CodeMirror from '@uiw/react-codemirror'
+// $FlowFixMe
 import {javascript} from '@codemirror/lang-javascript'
+// $FlowFixMe
 import {oneDark} from '@codemirror/theme-one-dark'
 import {Card} from '../../components/card'
 
