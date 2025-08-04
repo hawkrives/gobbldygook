@@ -14,7 +14,11 @@ import {List} from 'immutable'
 describe('CreditSummary', () => {
 	it('renders planned vs required', () => {
 		render(<CreditSummary currentCredits={5} neededCredits={10} />)
-		expect(screen.getByText(/You have currently planned for 5 of your 10 required credits/)).toBeInTheDocument()
+		expect(
+			screen.getByText(
+				/You have currently planned for 5 of your 10 required credits/,
+			),
+		).toBeInTheDocument()
 	})
 
 	it('handles having fewer credits than needed', () => {
@@ -24,12 +28,20 @@ describe('CreditSummary', () => {
 
 	it('handles having exactly the right number of credits', () => {
 		render(<CreditSummary currentCredits={10} neededCredits={10} />)
-		expect(screen.getByText(/You have currently planned for 10 of your 10 required credits/)).toBeInTheDocument()
+		expect(
+			screen.getByText(
+				/You have currently planned for 10 of your 10 required credits/,
+			),
+		).toBeInTheDocument()
 	})
 
 	it('handles having more credits than needed', () => {
 		render(<CreditSummary currentCredits={15} neededCredits={10} />)
-		expect(screen.getByText(/You have currently planned for 15 of your 10 required credits/)).toBeInTheDocument()
+		expect(
+			screen.getByText(
+				/You have currently planned for 15 of your 10 required credits/,
+			),
+		).toBeInTheDocument()
 	})
 })
 
@@ -49,8 +61,16 @@ describe('DegreeSummary', () => {
 		{type: 'major', name: 'Asian Studies', revision: 'latest'},
 		{type: 'major', name: 'Biology', revision: 'latest'},
 		{type: 'major', name: 'Computer Science', revision: 'latest'},
-		{type: 'concentration', name: 'Africa and the Americas', revision: 'latest'},
-		{type: 'concentration', name: 'Biomolecular Science', revision: 'latest'},
+		{
+			type: 'concentration',
+			name: 'Africa and the Americas',
+			revision: 'latest',
+		},
+		{
+			type: 'concentration',
+			name: 'Biomolecular Science',
+			revision: 'latest',
+		},
 		{type: 'concentration', name: 'China Studies', revision: 'latest'},
 		{type: 'emphasis', name: 'Emphasis 1', revision: 'latest'},
 		{type: 'emphasis', name: 'Emphasis 2', revision: 'latest'},
@@ -59,7 +79,9 @@ describe('DegreeSummary', () => {
 
 	it('renders empty', () => {
 		render(<DegreeSummary studies={List()} />)
-		expect(screen.getByText(/You are planning on no degrees/)).toBeInTheDocument()
+		expect(
+			screen.getByText(/You are planning on no degrees/),
+		).toBeInTheDocument()
 	})
 
 	it('renders counts', () => {
@@ -84,7 +106,9 @@ describe('Footer', () => {
 	const badMessage = "You haven't planned everything out yet."
 	it('handles the "can graduate" status', () => {
 		render(<Footer canGraduate={true} />)
-		expect(screen.getByText(goodMessage, {exact: false})).toBeInTheDocument()
+		expect(
+			screen.getByText(goodMessage, {exact: false}),
+		).toBeInTheDocument()
 		expect(screen.queryByText(badMessage, {exact: false})).toBeNull()
 	})
 
