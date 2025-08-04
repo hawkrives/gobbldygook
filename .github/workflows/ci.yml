@@ -101,7 +101,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Build
-        run: cd modules/gob-web && CI=true yarn run --silent build --no-stats
+        run: cd modules/gob-web && CI=true yarn run --silent build
 
       - name: Rearrange files
         run: node scripts/rearrange-for-circle.js
