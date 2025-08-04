@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import {Router} from '@reach/router'
-import DocumentTitle from 'react-document-title'
+import { Helmet } from 'react-helmet'
 import HTML5Backend from 'react-dnd-html5-backend'
 import {DragDropContext} from 'react-dnd'
 import styled, {createGlobalStyle} from 'styled-components'
@@ -94,7 +94,7 @@ class App extends React.Component<{}> {
 		return (
 			<div>
 				<GlobalStyle />
-				<DocumentTitle title="Gobbldygook" />
+				<Helmet><title>Gobbldygook</title></Helmet>
 				<Router>
 					<NotFound default />
 

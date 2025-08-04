@@ -1,4 +1,4 @@
-/* global module, __dirname */
+/* global __dirname */
 // @flow
 'use strict'
 
@@ -18,7 +18,7 @@ const HtmlPlugin = require('@gob/webpack-plugin-html')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const isCI = Boolean(process.env.CI)
 const outputFolder = __dirname + '/build/'
@@ -60,7 +60,7 @@ function config() {
 
 	if (isDevelopment) {
 		// add dev server client-side code
-		entry[entryPointName].unshift('webpack-dev-server/client?/')
+		entry[entryPointName].unshift('webpack-dev-server/client')
 	}
 
 	const output = {
@@ -78,15 +78,9 @@ function config() {
 	const devServer = {
 		port: 3000, // for webpack-dev-server
 
-		stats: {
-			assets: false,
-			version: false,
-			hash: false,
-			timings: false,
-			chunks: false,
-			chunkModules: false,
+		static: {
+			directory: outputFolder,
 		},
-		contentBase: outputFolder,
 
 		// Makes webpack serve /index.html as the response to any request to
 		// webpack-dev-server, so GET / and GET /s/1234 both get the index
@@ -96,7 +90,7 @@ function config() {
 
 	let plugins = [
 		// clean out the build folder between builds
-		new CleanWebpackPlugin([outputFolder]),
+		new CleanWebpackPlugin(),
 
 		// Generates an index.html for us.
 		new HtmlPlugin(entryPointName, context => {
@@ -131,8 +125,7 @@ function config() {
 			'process.env.TRAVIS_COMMIT': JSON.stringify(
 				process.env.TRAVIS_COMMIT || process.env.COMMIT_REF,
 			),
-			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-		}),
+					}),
 
 		// Watcher doesn't work well if you mistype casing in a path so we use
 		// a plugin that prints an error when you attempt to do this.
@@ -164,8 +157,7 @@ function config() {
 		},
 	}
 
-	const urlLoader = {loader: 'url-loader', options: {limit: 10000}}
-
+	
 	const module = {
 		rules: [
 			{
@@ -200,11 +192,11 @@ function config() {
 			},
 			{
 				test: /\.otf|eot|ttf|woff2?$/,
-				use: [urlLoader],
+				type: 'asset', parser: { dataUrlCondition: { maxSize: 10000 } },
 			},
 			{
 				test: /\.jpe?g|png|gif$/,
-				use: [urlLoader],
+				type: 'asset', parser: { dataUrlCondition: { maxSize: 10000 } },
 			},
 			{
 				test: /\.s?css$/,

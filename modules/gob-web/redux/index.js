@@ -1,5 +1,4 @@
 // @flow
-/* globals module */
 
 if (process.env.NODE_ENV === 'production') {
 	module.exports = require('./index-production').default
