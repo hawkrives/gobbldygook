@@ -14,7 +14,7 @@
     "cover": "jest --coverage && open coverage/index.html",
     "flow": "flow",
     "lint": "eslint --cache --report-unused-disable-directives --max-warnings=0 modules/",
-    "netlify": "npm run build -- -- --no-progress && npm run bugsnag",
+    "netlify": "npm run build && npm run bugsnag",
     "pretty": "prettier --write '{*,.*,{.circleci,modules,config,scripts}/**/*}.{js,json,scss,yml,yaml,md}'",
     "p": "pretty-quick",
     "start": "cd modules/gob-web && npm start",
