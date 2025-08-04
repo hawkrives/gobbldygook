@@ -20,54 +20,32 @@ async function checkStudentAgainstArea(
 	student: Student,
 	area: ParsedHansonFile,
 ): Promise<EvaluationResult> {
-	return new Promise(async resolve => {
+	return new Promise(resolve => {
 		const sourceId = uniqueId()
-
-		// This is inside of the function so that it doesn't get unregistered too early
 		function onMessage({data: messageData}) {
 			const {id: resultId, type, data} = JSON.parse(messageData)
-
 			if (resultId === sourceId) {
 				worker.removeEventListener('message', onMessage)
-
 				if (type === 'result') {
 					resolve(data)
 				} else if (type === 'error') {
-					resolve({
-						$type: 'requirement',
-						computed: false,
-						error: data.message,
-						progress: {at: 0, of: 1},
-					})
+					resolve({ $type: 'requirement', computed: false, error: data.message, progress: {at: 0, of: 1} })
 				}
 			}
 		}
-
 		worker.addEventListener('message', onMessage)
-
-		/* why stringify? from https://code.google.com/p/chromium/issues/detail?id=536620#c11:
-		 * > We know that serialization/deserialization is slow. It's actually faster to
-		 * > JSON.stringify() then postMessage() a string than to postMessage() an object. :(
-		 */
-		let courses = await student.activeCourses(getCourse)
-
-		let {fulfillments, overrides, name} = student
-		let msg = JSON.stringify({
-			id: sourceId,
-			area,
-			courses,
-			fulfillments,
-			overrides,
-			name,
+		student.activeCourses(getCourse).then(courses => {
+			let {fulfillments, overrides, name} = student
+			let msg = JSON.stringify({ id: sourceId, area, courses, fulfillments, overrides, name })
+			worker.postMessage(msg)
 		})
-		worker.postMessage(msg)
 	})
 }
 
 const memoized: typeof checkStudentAgainstArea = mem(checkStudentAgainstArea, {
 	cache: new QuickLRU({maxSize: 8}),
 	cacheKey: (student: Student, area: ParsedHansonFile) =>
-		JSON.stringify([student.hashCode(), area]),
+		JSON.stringify([student.id, area]),
 	maxAge: 60000,
 })
 
