@@ -7,7 +7,7 @@
   "author": "Hawken MacKay Rives",
   "license": "MIT",
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack --bail --progress",
+    "build": "cross-env NODE_ENV=production webpack --bail --progress=profile",
     "build-dev": "webpack --bail --progress --devtool=source-map",
     "start": "webpack-dev-server --progress",
     "stats": "cross-env NODE_ENV=production npm run stats-dev",
