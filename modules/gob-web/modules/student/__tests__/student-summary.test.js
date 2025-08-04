@@ -54,7 +54,7 @@ describe('DateSummary', () => {
 })
 
 describe('DegreeSummary', () => {
-	const studies = List([
+	const _studies = List([
 		{type: 'degree', name: 'Bachelor of Science', revision: 'latest'},
 		{type: 'degree', name: 'Bachelor of Music', revision: 'latest'},
 		{type: 'degree', name: 'Bachelor of Arts', revision: 'latest'},
@@ -85,14 +85,24 @@ describe('DegreeSummary', () => {
 	})
 
 	it('renders counts', () => {
-		render(<DegreeSummary
+		render(
+			<DegreeSummary
 				studies={List([
-					{type: 'degree', name: 'Bachelor of Arts', revision: 'latest'},
+					{
+						type: 'degree',
+						name: 'Bachelor of Arts',
+						revision: 'latest',
+					},
 					{type: 'major', name: 'Biology', revision: 'latest'},
-					{type: 'concentration', name: 'China Studies', revision: 'latest'},
+					{
+						type: 'concentration',
+						name: 'China Studies',
+						revision: 'latest',
+					},
 					{type: 'emphasis', name: 'Emphasis 1', revision: 'latest'},
 				])}
-			/>)
+			/>,
+		)
 		expect(() => screen.getByText(/You are planning on/)).not.toThrow()
 	})
 })
