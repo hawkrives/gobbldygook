@@ -3,5 +3,7 @@
   "version": "3.0.0-rc.2",
   "main": "index.js",
   "license": "MIT",
-  "engines": { "node": ">=22" }
+  "engines": {
+    "node": ">=22"
+  }
 }

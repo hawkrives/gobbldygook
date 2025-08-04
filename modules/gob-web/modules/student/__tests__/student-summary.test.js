@@ -2,7 +2,13 @@
 import 'jest-styled-components'
 import React from 'react'
 import {render, screen} from '@testing-library/react'
-import {CreditSummary, DateSummary, DegreeSummary, Footer, Header} from '../student-summary'
+import {
+	CreditSummary,
+	DateSummary,
+	DegreeSummary,
+	Footer,
+	Header,
+} from '../student-summary'
 import {List} from 'immutable'
 
 describe('CreditSummary', () => {
@@ -43,8 +49,16 @@ describe('DegreeSummary', () => {
 		{type: 'major', name: 'Asian Studies', revision: 'latest'},
 		{type: 'major', name: 'Biology', revision: 'latest'},
 		{type: 'major', name: 'Computer Science', revision: 'latest'},
-		{type: 'concentration', name: 'Africa and the Americas', revision: 'latest'},
-		{type: 'concentration', name: 'Biomolecular Science', revision: 'latest'},
+		{
+			type: 'concentration',
+			name: 'Africa and the Americas',
+			revision: 'latest',
+		},
+		{
+			type: 'concentration',
+			name: 'Biomolecular Science',
+			revision: 'latest',
+		},
 		{type: 'concentration', name: 'China Studies', revision: 'latest'},
 		{type: 'emphasis', name: 'Emphasis 1', revision: 'latest'},
 		{type: 'emphasis', name: 'Emphasis 2', revision: 'latest'},
@@ -62,7 +76,9 @@ describe('DegreeSummary', () => {
 				studies={List([
 					...studies.filter(s => s.type === 'degree').slice(0, 2),
 					...studies.filter(s => s.type === 'major').slice(0, 2),
-					...studies.filter(s => s.type === 'concentration').slice(0, 1),
+					...studies
+						.filter(s => s.type === 'concentration')
+						.slice(0, 1),
 					...studies.filter(s => s.type === 'emphasis').slice(0, 1),
 				])}
 			/>,
@@ -89,7 +105,14 @@ describe('Footer', () => {
 
 describe('Header', () => {
 	it('renders', () => {
-		render(<Header canGraduate={true} name={'Susan'} helloMessage={'Welcome, '} showAvatar={true} />)
+		render(
+			<Header
+				canGraduate={true}
+				name={'Susan'}
+				helloMessage={'Welcome, '}
+				showAvatar={true}
+			/>,
+		)
 		expect(screen.getByText(/./)).toBeTruthy()
 	})
 })

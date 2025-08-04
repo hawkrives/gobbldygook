@@ -18,7 +18,7 @@ const HtmlPlugin = require('@gob/webpack-plugin-html')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 
 const isCI = Boolean(process.env.CI)
 const outputFolder = __dirname + '/build/'
@@ -125,7 +125,7 @@ function config() {
 			'process.env.TRAVIS_COMMIT': JSON.stringify(
 				process.env.TRAVIS_COMMIT || process.env.COMMIT_REF,
 			),
-					}),
+		}),
 
 		// Watcher doesn't work well if you mistype casing in a path so we use
 		// a plugin that prints an error when you attempt to do this.
@@ -157,7 +157,6 @@ function config() {
 		},
 	}
 
-	
 	const module = {
 		rules: [
 			{
@@ -192,11 +191,13 @@ function config() {
 			},
 			{
 				test: /\.otf|eot|ttf|woff2?$/,
-				type: 'asset', parser: { dataUrlCondition: { maxSize: 10000 } },
+				type: 'asset',
+				parser: {dataUrlCondition: {maxSize: 10000}},
 			},
 			{
 				test: /\.jpe?g|png|gif$/,
-				type: 'asset', parser: { dataUrlCondition: { maxSize: 10000 } },
+				type: 'asset',
+				parser: {dataUrlCondition: {maxSize: 10000}},
 			},
 			{
 				test: /\.s?css$/,

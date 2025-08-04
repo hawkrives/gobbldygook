@@ -6,5 +6,7 @@
   "author": "Hawken MacKay Rives",
   "license": "MIT",
   "dependencies": {},
-  "engines": { "node": ">=22" }
+  "engines": {
+    "node": ">=22"
+  }
 }

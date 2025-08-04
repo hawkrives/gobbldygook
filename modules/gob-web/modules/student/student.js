@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react'
-import { Helmet } from 'react-helmet'
+import {Helmet} from 'react-helmet'
 import {connect} from 'react-redux'
 import {loadStudent} from '../../redux/students/actions/load-student'
 import {type IndividualStudentState} from '../../redux/students/reducers'
@@ -67,7 +67,9 @@ export class Student extends React.Component<Props, State> {
 
 		return (
 			<Container>
-				<Helmet><title>{title}</title></Helmet>
+				<Helmet>
+					<title>{title}</title>
+				</Helmet>
 
 				{this.props.children({student})}
 			</Container>

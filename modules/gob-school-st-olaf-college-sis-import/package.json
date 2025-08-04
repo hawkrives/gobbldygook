@@ -9,5 +9,7 @@
     "@gob/object-student": "^3.0.0-rc.2",
     "immutable": "^4.0.0-rc.12"
   },
-  "engines": { "node": ">=22" }
+  "engines": {
+    "node": ">=22"
+  }
 }

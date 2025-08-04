@@ -12,5 +12,7 @@
     "lodash": "^4.17.21",
     "present": "^1.0.0"
   },
-  "engines": { "node": ">=22" }
+  "engines": {
+    "node": ">=22"
+  }
 }

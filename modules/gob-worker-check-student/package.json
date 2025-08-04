@@ -10,5 +10,7 @@
     "@gob/object-student": "^3.0.0-rc.2",
     "lodash": "^4.17.21"
   },
-  "engines": { "node": ">=22" }
+  "engines": {
+    "node": ">=22"
+  }
 }

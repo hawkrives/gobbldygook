@@ -6,5 +6,7 @@
   "dependencies": {
     "idb-request": "^3.2.0"
   },
-  "engines": { "node": ">=22" }
+  "engines": {
+    "node": ">=22"
+  }
 }

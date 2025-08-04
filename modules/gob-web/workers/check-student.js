@@ -29,14 +29,26 @@ async function checkStudentAgainstArea(
 				if (type === 'result') {
 					resolve(data)
 				} else if (type === 'error') {
-					resolve({ $type: 'requirement', computed: false, error: data.message, progress: {at: 0, of: 1} })
+					resolve({
+						$type: 'requirement',
+						computed: false,
+						error: data.message,
+						progress: {at: 0, of: 1},
+					})
 				}
 			}
 		}
 		worker.addEventListener('message', onMessage)
 		student.activeCourses(getCourse).then(courses => {
 			let {fulfillments, overrides, name} = student
-			let msg = JSON.stringify({ id: sourceId, area, courses, fulfillments, overrides, name })
+			let msg = JSON.stringify({
+				id: sourceId,
+				area,
+				courses,
+				fulfillments,
+				overrides,
+				name,
+			})
 			worker.postMessage(msg)
 		})
 	})
