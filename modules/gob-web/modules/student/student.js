@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react'
-import {Helmet} from 'react-helmet'
+import {Helmet} from 'react-helmet-async'
 import {connect} from 'react-redux'
 import {loadStudent} from '../../redux/students/actions/load-student'
 import {type IndividualStudentState} from '../../redux/students/reducers'

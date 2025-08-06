@@ -1,6 +1,6 @@
 // @flow
 import React from 'react'
-import {Helmet} from 'react-helmet'
+import {Helmet} from 'react-helmet-async'
 import {semesterName} from '@gob/school-st-olaf-college'
 import styled from 'styled-components'
 import {Student} from '@gob/object-student'

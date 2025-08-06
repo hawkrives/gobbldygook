@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import {Router} from '@reach/router'
-import {Helmet} from 'react-helmet'
+import {Helmet, HelmetProvider} from 'react-helmet-async'
 import HTML5Backend from 'react-dnd-html5-backend'
 import {DragDropContext} from 'react-dnd'
 import styled, {createGlobalStyle} from 'styled-components'
@@ -92,22 +92,24 @@ let CourseSearcher = Loadable({
 class App extends React.Component<{}> {
 	render() {
 		return (
-			<div>
-				<GlobalStyle />
-				<Helmet>
-					<title>Gobbldygook</title>
-				</Helmet>
-				<Router>
-					<NotFound default />
+			<HelmetProvider>
+				<div>
+					<GlobalStyle />
+					<Helmet>
+						<title>Gobbldygook</title>
+					</Helmet>
+					<Router>
+						<NotFound default />
 
-					<Degubber path="/degub" />
-					<AreaEditor path="/areas" />
-					<Student path="/student/:studentId/*" />
-					<CreateStudent path="/create/*" />
-					<CourseSearcher path="/search/*" />
-					<StudentPicker path="/" />
-				</Router>
-			</div>
+						<Degubber path="/degub" />
+						<AreaEditor path="/areas" />
+						<Student path="/student/:studentId/*" />
+						<CreateStudent path="/create/*" />
+						<CourseSearcher path="/search/*" />
+						<StudentPicker path="/" />
+					</Router>
+				</div>
+			</HelmetProvider>
 		)
 	}
 }
