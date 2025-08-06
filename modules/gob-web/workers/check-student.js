@@ -56,28 +56,8 @@ async function checkStudentAgainstArea(
 
 const memoized: typeof checkStudentAgainstArea = mem(checkStudentAgainstArea, {
 	cache: new QuickLRU({maxSize: 8}),
-	cacheKey: (student: Student, area: ParsedHansonFile) => {
-		let studentHash
-
-		if (typeof student.hashCode === 'function') {
-			studentHash = student.hashCode()
-		} else {
-			const id = student.id || 'unknown'
-			let timestamp = Date.now()
-
-			if (student.dateLastModified) {
-				if (student.dateLastModified instanceof Date) {
-					timestamp = student.dateLastModified.getTime()
-				} else if (typeof student.dateLastModified === 'string') {
-					timestamp = new Date(student.dateLastModified).getTime()
-				}
-			}
-
-			studentHash = `${id}-${timestamp}`
-		}
-
-		return JSON.stringify([studentHash, area])
-	},
+	cacheKey: (student: Student, area: ParsedHansonFile) =>
+		JSON.stringify([student.id, area]),
 	maxAge: 60000,
 })
 
