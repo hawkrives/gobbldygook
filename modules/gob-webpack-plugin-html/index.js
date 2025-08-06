@@ -1,4 +1,3 @@
-/* global module */
 'use strict'
 
 // Main export
@@ -19,22 +18,20 @@ function HJSPlugin(entryName, renderFunc) {
 HJSPlugin.prototype.apply = function(compiler) {
 	this.compiler = compiler
 
-	compiler.plugin('emit', (compiler, callback) => {
+	compiler.hooks.emit.tapAsync('HJSPlugin', (compilation, callback) => {
 		// store stats on this
-		this.stats = compiler.getStats().toJson()
+		this.stats = compilation.getStats().toJson()
 		const context = this.getAssets()
-
 		// access to stats
 		context.stats = this.stats
-
-		this.addAssets(compiler, this.render(context))
+		this.addAssets(compilation, this.render(context))
 		callback()
 	})
 }
 
 // Oddly enough we have to pass in the compiler here
 // it's changed from when it was stored on `this` previously
-HJSPlugin.prototype.addAssets = function(compiler, data) {
+HJSPlugin.prototype.addAssets = function(compilation, data) {
 	let pages
 	// if it's a string, we assume it's an html string for the index file
 	if (typeof data === 'string') {
@@ -47,7 +44,7 @@ HJSPlugin.prototype.addAssets = function(compiler, data) {
 	}
 
 	Object.entries(pages).forEach(([name, asset]) => {
-		compiler.assets[name] = {
+		compilation.assets[name] = {
 			source: () => asset,
 			size: () => asset.length,
 		}

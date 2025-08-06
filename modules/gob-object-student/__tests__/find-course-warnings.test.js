@@ -7,12 +7,12 @@ describe('checkForInvalidYear', () => {
 	it('checks for an invalid year on a course', () => {
 		expect(checkForInvalidYear({year: 1994, semester: 1}, 2012))
 			.toMatchInlineSnapshot(`
-Object {
-  "msg": "Wrong Year (originally from 1994–95)",
-  "type": "invalid-year",
-  "warning": true,
-}
-`)
+		{
+		  "msg": "Wrong Year (originally from 1994–95)",
+		  "type": "invalid-year",
+		  "warning": true,
+		}
+	`)
 	})
 
 	it('returns null if no semester is present', () => {
@@ -28,12 +28,12 @@ describe('checkForInvalidSemester', () => {
 	it('checks for an invalid semester on a course', () => {
 		expect(checkForInvalidSemester({semester: 2}, 5))
 			.toMatchInlineSnapshot(`
-Object {
-  "msg": "Wrong Semester (originally from Interim)",
-  "type": "invalid-semester",
-  "warning": true,
-}
-`)
+		{
+		  "msg": "Wrong Semester (originally from Interim)",
+		  "type": "invalid-semester",
+		  "warning": true,
+		}
+	`)
 	})
 })
 

@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CourseExpression parses courses with a single department 1`] = `
-Object {
-  "$course": Object {
+{
+  "$course": {
     "department": "CSCI",
     "number": 121,
   },
@@ -11,8 +11,8 @@ Object {
 `;
 
 exports[`CourseExpression parses courses with a two departments 1`] = `
-Object {
-  "$course": Object {
+{
+  "$course": {
     "department": "AS/ES",
     "number": 121,
   },
@@ -21,8 +21,8 @@ Object {
 `;
 
 exports[`CourseExpression parses courses with no departments as having no department 1`] = `
-Object {
-  "$course": Object {
+{
+  "$course": {
     "number": 121,
   },
   "$type": "course",
@@ -30,8 +30,8 @@ Object {
 `;
 
 exports[`CourseExpression parses courses with sections 1`] = `
-Object {
-  "$course": Object {
+{
+  "$course": {
     "department": "CSCI",
     "number": 121,
     "section": "A",
@@ -41,8 +41,8 @@ Object {
 `;
 
 exports[`CourseExpression parses courses with semesters 1`] = `
-Object {
-  "$course": Object {
+{
+  "$course": {
     "department": "CSCI",
     "number": 121,
     "section": "A",
@@ -54,8 +54,8 @@ Object {
 `;
 
 exports[`CourseExpression parses courses with years 1`] = `
-Object {
-  "$course": Object {
+{
+  "$course": {
     "department": "CSCI",
     "number": 121,
     "section": "A",
@@ -66,8 +66,8 @@ Object {
 `;
 
 exports[`CourseExpression supports international courses 1`] = `
-Object {
-  "$course": Object {
+{
+  "$course": {
     "department": "CSCI",
     "international": true,
     "number": 121,
@@ -77,8 +77,8 @@ Object {
 `;
 
 exports[`CourseExpression supports international labs 1`] = `
-Object {
-  "$course": Object {
+{
+  "$course": {
     "department": "CSCI",
     "international": true,
     "number": 121,
@@ -89,8 +89,8 @@ Object {
 `;
 
 exports[`CourseExpression supports labs 1`] = `
-Object {
-  "$course": Object {
+{
+  "$course": {
     "department": "CSCI",
     "number": 121,
     "type": "Lab",
@@ -100,8 +100,8 @@ Object {
 `;
 
 exports[`CourseExpression supports wildcard sections 1`] = `
-Object {
-  "$course": Object {
+{
+  "$course": {
     "department": "CSCI",
     "number": 121,
     "section": "*",
@@ -111,8 +111,8 @@ Object {
 `;
 
 exports[`CourseExpression supports wildcard semesters 1`] = `
-Object {
-  "$course": Object {
+{
+  "$course": {
     "department": "CSCI",
     "number": 121,
     "section": "*",
@@ -124,8 +124,8 @@ Object {
 `;
 
 exports[`CourseExpression supports wildcard years 1`] = `
-Object {
-  "$course": Object {
+{
+  "$course": {
     "department": "CSCI",
     "number": 121,
     "section": "*",

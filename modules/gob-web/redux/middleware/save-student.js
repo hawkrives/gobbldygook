@@ -42,7 +42,7 @@ const saveStudentsMiddleware = store => next => action => {
 
 	// get any student whose identity has changed
 	let toSave = studentIds.filter(id => {
-		if (!oldStudents.hasOwnProperty(id)) {
+		if (!Object.prototype.hasOwnProperty.call(oldStudents, id)) {
 			return true
 		}
 		return newStudents[id].present !== oldStudents[id].present

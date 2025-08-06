@@ -1,22 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`OfExpression allows "n" to be "all" 1`] = `
-Object {
-  "$count": Object {
+{
+  "$count": {
     "$num": 3,
     "$operator": "$eq",
     "$was": "all",
   },
-  "$of": Array [
-    Object {
+  "$of": [
+    {
       "$requirement": "A",
       "$type": "reference",
     },
-    Object {
+    {
       "$requirement": "B",
       "$type": "reference",
     },
-    Object {
+    {
       "$requirement": "C",
       "$type": "reference",
     },
@@ -26,22 +26,22 @@ Object {
 `;
 
 exports[`OfExpression allows "n" to be "any" 1`] = `
-Object {
-  "$count": Object {
+{
+  "$count": {
     "$num": 1,
     "$operator": "$gte",
     "$was": "any",
   },
-  "$of": Array [
-    Object {
+  "$of": [
+    {
       "$requirement": "A",
       "$type": "reference",
     },
-    Object {
+    {
       "$requirement": "B",
       "$type": "reference",
     },
-    Object {
+    {
       "$requirement": "C",
       "$type": "reference",
     },
@@ -51,22 +51,22 @@ Object {
 `;
 
 exports[`OfExpression allows "n" to be "none" 1`] = `
-Object {
-  "$count": Object {
+{
+  "$count": {
     "$num": 0,
     "$operator": "$eq",
     "$was": "none",
   },
-  "$of": Array [
-    Object {
+  "$of": [
+    {
       "$requirement": "A",
       "$type": "reference",
     },
-    Object {
+    {
       "$requirement": "B",
       "$type": "reference",
     },
-    Object {
+    {
       "$requirement": "C",
       "$type": "reference",
     },
@@ -76,21 +76,21 @@ Object {
 `;
 
 exports[`OfExpression allows "n" to be a counter 1`] = `
-Object {
-  "$count": Object {
+{
+  "$count": {
     "$num": 3,
     "$operator": "$gte",
   },
-  "$of": Array [
-    Object {
+  "$of": [
+    {
       "$requirement": "A",
       "$type": "reference",
     },
-    Object {
+    {
       "$requirement": "B",
       "$type": "reference",
     },
-    Object {
+    {
       "$requirement": "C",
       "$type": "reference",
     },
@@ -100,22 +100,22 @@ Object {
 `;
 
 exports[`OfExpression if n is "all", it is the number of items in the of-parens 1`] = `
-Object {
-  "$count": Object {
+{
+  "$count": {
     "$num": 3,
     "$operator": "$eq",
     "$was": "all",
   },
-  "$of": Array [
-    Object {
+  "$of": [
+    {
       "$requirement": "A",
       "$type": "reference",
     },
-    Object {
+    {
       "$requirement": "B",
       "$type": "reference",
     },
-    Object {
+    {
       "$requirement": "C",
       "$type": "reference",
     },
@@ -125,26 +125,26 @@ Object {
 `;
 
 exports[`OfExpression supports boolean statements within the parens 1`] = `
-Object {
-  "$count": Object {
+{
+  "$count": {
     "$num": 1,
     "$operator": "$gte",
   },
-  "$of": Array [
-    Object {
+  "$of": [
+    {
       "$booleanType": "or",
-      "$or": Array [
-        Object {
+      "$or": [
+        {
           "$requirement": "A",
           "$type": "reference",
         },
-        Object {
-          "$and": Array [
-            Object {
+        {
+          "$and": [
+            {
               "$requirement": "B",
               "$type": "reference",
             },
-            Object {
+            {
               "$requirement": "C",
               "$type": "reference",
             },
@@ -155,7 +155,7 @@ Object {
       ],
       "$type": "boolean",
     },
-    Object {
+    {
       "$requirement": "D",
       "$type": "reference",
     },
@@ -165,14 +165,14 @@ Object {
 `;
 
 exports[`OfExpression supports courses within the parens 1`] = `
-Object {
-  "$count": Object {
+{
+  "$count": {
     "$num": 1,
     "$operator": "$gte",
   },
-  "$of": Array [
-    Object {
-      "$course": Object {
+  "$of": [
+    {
+      "$course": {
         "department": "CSCI",
         "number": 121,
       },
@@ -184,15 +184,15 @@ Object {
 `;
 
 exports[`OfExpression supports modifiers within the parens 1`] = `
-Object {
-  "$count": Object {
+{
+  "$count": {
     "$num": 1,
     "$operator": "$gte",
   },
-  "$of": Array [
-    Object {
+  "$of": [
+    {
       "$children": "$all",
-      "$count": Object {
+      "$count": {
         "$num": 2,
         "$operator": "$gte",
       },
@@ -200,8 +200,8 @@ Object {
       "$type": "modifier",
       "$what": "course",
     },
-    Object {
-      "$count": Object {
+    {
+      "$count": {
         "$num": 2,
         "$operator": "$gte",
       },
@@ -209,15 +209,15 @@ Object {
       "$type": "modifier",
       "$what": "course",
     },
-    Object {
-      "$count": Object {
+    {
+      "$count": {
         "$num": 2,
         "$operator": "$gte",
       },
       "$from": "where",
       "$type": "modifier",
       "$what": "credit",
-      "$where": Object {
+      "$where": {
         "$key": "year",
         "$operator": "$lte",
         "$type": "qualification",
@@ -230,25 +230,25 @@ Object {
 `;
 
 exports[`OfExpression supports occurrences within the parens 1`] = `
-Object {
-  "$count": Object {
+{
+  "$count": {
     "$num": 1,
     "$operator": "$gte",
   },
-  "$of": Array [
-    Object {
-      "$count": Object {
+  "$of": [
+    {
+      "$count": {
         "$num": 2,
         "$operator": "$gte",
       },
-      "$course": Object {
+      "$course": {
         "department": "CSCI",
         "number": 121,
       },
       "$type": "occurrence",
     },
-    Object {
-      "$course": Object {
+    {
+      "$course": {
         "department": "CSCI",
         "number": 308,
       },
@@ -260,14 +260,14 @@ Object {
 `;
 
 exports[`OfExpression supports of-statements of the form "n of ()" 1`] = `
-Object {
-  "$count": Object {
+{
+  "$count": {
     "$num": 1,
     "$operator": "$gte",
   },
-  "$of": Array [
-    Object {
-      "$course": Object {
+  "$of": [
+    {
+      "$course": {
         "department": "CHEM",
         "number": 121,
       },
@@ -279,25 +279,25 @@ Object {
 `;
 
 exports[`OfExpression supports references within the parens 1`] = `
-Object {
-  "$count": Object {
+{
+  "$count": {
     "$num": 1,
     "$operator": "$gte",
   },
-  "$of": Array [
-    Object {
+  "$of": [
+    {
       "$requirement": "A",
       "$type": "reference",
     },
-    Object {
+    {
       "$requirement": "B",
       "$type": "reference",
     },
-    Object {
+    {
       "$requirement": "C",
       "$type": "reference",
     },
-    Object {
+    {
       "$requirement": "D",
       "$type": "reference",
     },
@@ -307,14 +307,14 @@ Object {
 `;
 
 exports[`OfExpression supports trailing commas 1`] = `
-Object {
-  "$count": Object {
+{
+  "$count": {
     "$num": 1,
     "$operator": "$gte",
   },
-  "$of": Array [
-    Object {
-      "$course": Object {
+  "$of": [
+    {
+      "$course": {
         "number": 121,
       },
       "$type": "course",
@@ -325,27 +325,27 @@ Object {
 `;
 
 exports[`OfExpression supports where-clauses within the parens 1`] = `
-Object {
-  "$count": Object {
+{
+  "$count": {
     "$num": 1,
     "$operator": "$gte",
   },
-  "$of": Array [
-    Object {
-      "$course": Object {
+  "$of": [
+    {
+      "$course": {
         "department": "CSCI",
         "number": 121,
       },
       "$type": "course",
     },
-    Object {
-      "$count": Object {
+    {
+      "$count": {
         "$num": 1,
         "$operator": "$gte",
       },
       "$distinct": false,
       "$type": "where",
-      "$where": Object {
+      "$where": {
         "$key": "gereqs",
         "$operator": "$eq",
         "$type": "qualification",

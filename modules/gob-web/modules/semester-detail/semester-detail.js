@@ -1,6 +1,6 @@
 // @flow
 import React from 'react'
-import DocumentTitle from 'react-document-title'
+import {Helmet} from 'react-helmet-async'
 import {semesterName} from '@gob/school-st-olaf-college'
 import styled from 'styled-components'
 import {Student} from '@gob/object-student'
@@ -45,7 +45,9 @@ export class SemesterDetail extends React.Component<Props, State> {
 
 		return (
 			<>
-				<DocumentTitle title={title} />
+				<Helmet>
+					<title>{title}</title>
+				</Helmet>
 				<DetailText>
 					{this.props.uri || ''}
 					{'\n'}

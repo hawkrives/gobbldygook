@@ -1,74 +1,74 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`enhanceHanson allows defining variables in result 1`] = `
-Object {
+{
   "$type": "requirement",
-  "Req": Object {
+  "Req": {
     "$type": "requirement",
-    "result": Object {
-      "$count": Object {
+    "result": {
+      "$count": {
         "$num": 1,
         "$operator": "$gte",
       },
-      "$of": Array [
-        Object {
-          "$course": Object {
+      "$of": [
+        {
+          "$course": {
             "department": "MATH",
             "number": 330,
           },
           "$type": "course",
         },
-        Object {
-          "$course": Object {
+        {
+          "$course": {
             "department": "MATH",
             "number": 340,
           },
           "$type": "course",
         },
-        Object {
-          "$course": Object {
+        {
+          "$course": {
             "department": "MATH",
             "number": 344,
           },
           "$type": "course",
         },
-        Object {
-          "$course": Object {
+        {
+          "$course": {
             "department": "MATH",
             "number": 348,
           },
           "$type": "course",
         },
-        Object {
-          "$course": Object {
+        {
+          "$course": {
             "department": "MATH",
             "number": 351,
           },
           "$type": "course",
         },
-        Object {
-          "$course": Object {
+        {
+          "$course": {
             "department": "MATH",
             "number": 356,
           },
           "$type": "course",
         },
-        Object {
-          "$course": Object {
+        {
+          "$course": {
             "department": "MATH",
             "number": 364,
           },
           "$type": "course",
         },
-        Object {
-          "$course": Object {
+        {
+          "$course": {
             "department": "MATH",
             "number": 382,
           },
           "$type": "course",
         },
-        Object {
-          "$course": Object {
+        {
+          "$course": {
             "department": "MATH",
             "number": 384,
           },
@@ -79,7 +79,7 @@ Object {
     },
   },
   "name": undefined,
-  "result": Object {
+  "result": {
     "$requirement": "Req",
     "$type": "reference",
   },
@@ -90,72 +90,72 @@ Object {
 `;
 
 exports[`enhanceHanson allows using variables in the filter 1`] = `
-Object {
+{
   "$type": "requirement",
-  "Req": Object {
+  "Req": {
     "$type": "requirement",
-    "filter": Object {
+    "filter": {
       "$distinct": false,
       "$filterType": "of",
-      "$of": Array [
-        Object {
-          "$course": Object {
+      "$of": [
+        {
+          "$course": {
             "department": "MATH",
             "number": 330,
           },
           "$type": "course",
         },
-        Object {
-          "$course": Object {
+        {
+          "$course": {
             "department": "MATH",
             "number": 340,
           },
           "$type": "course",
         },
-        Object {
-          "$course": Object {
+        {
+          "$course": {
             "department": "MATH",
             "number": 344,
           },
           "$type": "course",
         },
-        Object {
-          "$course": Object {
+        {
+          "$course": {
             "department": "MATH",
             "number": 348,
           },
           "$type": "course",
         },
-        Object {
-          "$course": Object {
+        {
+          "$course": {
             "department": "MATH",
             "number": 351,
           },
           "$type": "course",
         },
-        Object {
-          "$course": Object {
+        {
+          "$course": {
             "department": "MATH",
             "number": 356,
           },
           "$type": "course",
         },
-        Object {
-          "$course": Object {
+        {
+          "$course": {
             "department": "MATH",
             "number": 364,
           },
           "$type": "course",
         },
-        Object {
-          "$course": Object {
+        {
+          "$course": {
             "department": "MATH",
             "number": 382,
           },
           "$type": "course",
         },
-        Object {
-          "$course": Object {
+        {
+          "$course": {
             "department": "MATH",
             "number": 384,
           },
@@ -166,7 +166,7 @@ Object {
     },
   },
   "name": undefined,
-  "result": Object {
+  "result": {
     "$requirement": "Req",
     "$type": "reference",
   },
@@ -177,12 +177,12 @@ Object {
 `;
 
 exports[`enhanceHanson expands string-only keys into objects with a "result" key 1`] = `
-Object {
+{
   "$type": "requirement",
-  "Requirement": Object {
+  "Requirement": {
     "$type": "requirement",
-    "result": Object {
-      "$course": Object {
+    "result": {
+      "$course": {
         "department": "CSCI",
         "number": 121,
       },
@@ -190,7 +190,7 @@ Object {
     },
   },
   "name": undefined,
-  "result": Object {
+  "result": {
     "$requirement": "Requirement",
     "$type": "reference",
   },
@@ -201,16 +201,16 @@ Object {
 `;
 
 exports[`enhanceHanson parses "filter" strings with the Filter PEG rule 1`] = `
-Object {
+{
   "$type": "requirement",
-  "Req": Object {
+  "Req": {
     "$type": "requirement",
-    "filter": Object {
+    "filter": {
       "$distinct": false,
       "$filterType": "of",
-      "$of": Array [
-        Object {
-          "$course": Object {
+      "$of": [
+        {
+          "$course": {
             "department": "CSCI",
             "number": 121,
           },
@@ -221,7 +221,7 @@ Object {
     },
   },
   "name": undefined,
-  "result": Object {
+  "result": {
     "$requirement": "Req",
     "$type": "reference",
   },
@@ -232,18 +232,18 @@ Object {
 `;
 
 exports[`enhanceHanson parses "result" strings with the Result PEG rule 1`] = `
-Object {
+{
   "$type": "requirement",
-  "Req": Object {
+  "Req": {
     "$type": "requirement",
-    "result": Object {
-      "$count": Object {
+    "result": {
+      "$count": {
         "$num": 1,
         "$operator": "$gte",
       },
-      "$of": Array [
-        Object {
-          "$course": Object {
+      "$of": [
+        {
+          "$course": {
             "department": "CSCI",
             "number": 121,
           },
@@ -254,7 +254,7 @@ Object {
     },
   },
   "name": undefined,
-  "result": Object {
+  "result": {
     "$requirement": "Req",
     "$type": "reference",
   },

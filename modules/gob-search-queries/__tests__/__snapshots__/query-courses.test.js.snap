@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`queryCourses properly handles a list of five years 1`] = `
-Array [
-  Object {
-    "departments": Array [
+[
+  {
+    "departments": [
       "AMCON",
     ],
     "year": 2013,
   },
-  Object {
-    "departments": Array [
+  {
+    "departments": [
       "ASIAN",
     ],
     "year": 2012,
@@ -18,9 +18,9 @@ Array [
 `;
 
 exports[`queryCourses queries a list of courses 1`] = `
-Array [
-  Object {
-    "departments": Array [
+[
+  {
+    "departments": [
       "AMCON",
     ],
     "year": 2013,

@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`buildQueryFromString builds a query string even with no keys 1`] = `
-Object {
-  "words": Array [
+{
+  "words": [
     "$AND",
     "history",
     "of",
@@ -12,52 +12,52 @@ Object {
 `;
 
 exports[`buildQueryFromString builds a query string even with somewhat unconventional input 1`] = `
-Object {
-  "department": Array [
+{
+  "department": [
     "AMCON",
   ],
-  "name": Array [
+  "name": [
     "Independence",
   ],
-  "times": Array [
+  "times": [
     "TUESDAYS AFTER 12",
   ],
-  "year": Array [
+  "year": [
     2014,
   ],
 }
 `;
 
 exports[`buildQueryFromString builds a query string while deduplicating synonyms of keys 1`] = `
-Object {
-  "gereqs": Array [
+{
+  "gereqs": [
     "$AND",
     "HWC",
     "HBS",
   ],
-  "semester": Array [
+  "semester": [
     3,
   ],
-  "year": Array [
+  "year": [
     2014,
   ],
 }
 `;
 
 exports[`buildQueryFromString builds a query string with multiple keys into a query object 1`] = `
-Object {
-  "department": Array [
+{
+  "department": [
     "$AND",
     "CSCI",
     "ASIAN",
   ],
-  "level": Array [
+  "level": [
     300,
   ],
-  "name": Array [
+  "name": [
     "Parallel",
   ],
-  "year": Array [
+  "year": [
     "$OR",
     2013,
     2014,
@@ -66,128 +66,128 @@ Object {
 `;
 
 exports[`buildQueryFromString builds a query string with variable-case keys into a query object 1`] = `
-Object {
-  "department": Array [
+{
+  "department": [
     "$AND",
     "ASIAN",
     "REL",
   ],
-  "level": Array [
+  "level": [
     200,
   ],
-  "semester": Array [
+  "semester": [
     "$OR",
     3,
     1,
   ],
-  "title": Array [
-    "\\"Japan*\\"",
+  "title": [
+    ""Japan*"",
   ],
-  "year": Array [
+  "year": [
     2014,
   ],
 }
 `;
 
 exports[`buildQueryFromString can also search for deptnums even with no keys 1`] = `
-Object {
-  "department": Array [
+{
+  "department": [
     "ASIAN",
   ],
-  "number": Array [
+  "number": [
     220,
   ],
 }
 `;
 
 exports[`buildQueryFromString can also search for deptnums with sections even with no keys 1`] = `
-Object {
-  "department": Array [
+{
+  "department": [
     "AS/RE",
   ],
-  "number": Array [
+  "number": [
     220,
   ],
-  "section": Array [
+  "section": [
     "A",
   ],
 }
 `;
 
 exports[`buildQueryFromString conjoins a deptnum and a department key 1`] = `
-Object {
-  "department": Array [
+{
+  "department": [
     "$AND",
     "MUSIC",
     "AR/AS",
   ],
-  "number": Array [
+  "number": [
     102,
   ],
 }
 `;
 
 exports[`buildQueryFromString handles a otherwise-valid string that ends with a colon 1`] = `
-Object {
-  "deptnum": Array [
+{
+  "deptnum": [
     "ENGL 200",
   ],
 }
 `;
 
 exports[`buildQueryFromString handles a single key and no value 1`] = `
-Object {
-  "department": Array [
+{
+  "department": [
     "ENGL",
   ],
-  "number": Array [
+  "number": [
     200,
   ],
 }
 `;
 
 exports[`buildQueryFromString handles a string that ends with a colon 1`] = `
-Object {
-  "deptnum": Array [
+{
+  "deptnum": [
     "ENGL 200 VALID",
   ],
 }
 `;
 
-exports[`buildQueryFromString handles an empty string 1`] = `Object {}`;
+exports[`buildQueryFromString handles an empty string 1`] = `{}`;
 
-exports[`buildQueryFromString handles an invalid second arg 1`] = `Object {}`;
+exports[`buildQueryFromString handles an invalid second arg 1`] = `{}`;
 
 exports[`buildQueryFromString handles multiple colons in a querystring 1`] = `
-Object {
-  "csci": Array [
+{
+  "csci": [
     "helloworld",
   ],
-  "test": Array [
+  "test": [
     "foo",
   ],
 }
 `;
 
-exports[`buildQueryFromString handles no arguments as an empty string 1`] = `Object {}`;
+exports[`buildQueryFromString handles no arguments as an empty string 1`] = `{}`;
 
 exports[`buildQueryFromString ignores subsequent deptnums in a non-keyed query 1`] = `
-Object {
-  "department": Array [
+{
+  "department": [
     "AS/RE",
   ],
-  "number": Array [
+  "number": [
     220,
   ],
-  "section": Array [
+  "section": [
     "A",
   ],
 }
 `;
 
 exports[`buildQueryFromString infers $AND from a list of multiple things 1`] = `
-Object {
-  "year": Array [
+{
+  "year": [
     "$AND",
     2010,
     2011,
@@ -199,16 +199,16 @@ Object {
 `;
 
 exports[`buildQueryFromString makes professors properly title-cased 1`] = `
-Object {
-  "instructors": Array [
+{
+  "instructors": [
     "Katherine Tegtmeyer-pak",
   ],
 }
 `;
 
 exports[`buildQueryFromString makes professors properly title-cased 2`] = `
-Object {
-  "profWords": Array [
+{
+  "profWords": [
     "$AND",
     "katherine",
     "tegtmeyer",
@@ -218,16 +218,16 @@ Object {
 `;
 
 exports[`buildQueryFromString makes professors properly title-cased 3`] = `
-Object {
-  "instructors": Array [
+{
+  "instructors": [
     "olaf a. hall-holt",
   ],
 }
 `;
 
 exports[`buildQueryFromString makes professors properly title-cased 4`] = `
-Object {
-  "profWords": Array [
+{
+  "profWords": [
     "$AND",
     "olaf",
     "a",
@@ -238,8 +238,8 @@ Object {
 `;
 
 exports[`buildQueryFromString maps multiple multi-word queries to the same words array 1`] = `
-Object {
-  "words": Array [
+{
+  "words": [
     "$AND",
     "japan",
     "otaku",
@@ -248,8 +248,8 @@ Object {
 `;
 
 exports[`buildQueryFromString parses credits correctly 1`] = `
-Object {
-  "credits": Array [
+{
+  "credits": [
     "$OR",
     1,
     0.25,
@@ -258,8 +258,8 @@ Object {
 `;
 
 exports[`buildQueryFromString removes duplicate values for a key 1`] = `
-Object {
-  "credits": Array [
+{
+  "credits": [
     "$OR",
     1,
     0.25,
@@ -267,19 +267,19 @@ Object {
 }
 `;
 
-exports[`buildQueryFromString returns an empty object when given nothing but whitespace 1`] = `Object {}`;
+exports[`buildQueryFromString returns an empty object when given nothing but whitespace 1`] = `{}`;
 
-exports[`buildQueryFromString returns an empty object when given nothing but whitespace 2`] = `Object {}`;
+exports[`buildQueryFromString returns an empty object when given nothing but whitespace 2`] = `{}`;
 
-exports[`buildQueryFromString returns an empty object when given nothing but whitespace 3`] = `Object {}`;
+exports[`buildQueryFromString returns an empty object when given nothing but whitespace 3`] = `{}`;
 
-exports[`buildQueryFromString returns an empty object when given nothing but whitespace 4`] = `Object {}`;
+exports[`buildQueryFromString returns an empty object when given nothing but whitespace 4`] = `{}`;
 
-exports[`buildQueryFromString returns an empty object when given nothing but whitespace 5`] = `Object {}`;
+exports[`buildQueryFromString returns an empty object when given nothing but whitespace 5`] = `{}`;
 
 exports[`buildQueryFromString sorts a five-year token string correctly 1`] = `
-Object {
-  "year": Array [
+{
+  "year": [
     "$OR",
     2010,
     2011,
@@ -291,8 +291,8 @@ Object {
 `;
 
 exports[`buildQueryFromString turns pf from a "true" string into a boolean 1`] = `
-Object {
-  "pf": Array [
+{
+  "pf": [
     true,
   ],
 }
