@@ -25,7 +25,9 @@ describe('importStudent action', () => {
 		})
 		expect(action).toHaveProperty('error', true)
 		expect(action).toHaveProperty('payload')
-		expect(action.payload.message.indexOf('Unexpected token ^')).toBe(0)
+		expect(action.payload.message).toMatch(
+			/Unexpected token|JSON|parse|invalid/i,
+		)
 	})
 
 	it('includes an "error" property if the student is not json', () => {

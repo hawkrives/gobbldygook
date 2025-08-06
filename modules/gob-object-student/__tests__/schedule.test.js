@@ -55,26 +55,26 @@ describe('Schedule', () => {
 			clbids: ['123', '234', '345'],
 		})
 		expect(sched).toMatchInlineSnapshot(`
-Immutable.Record {
-  "id": "1",
-  "active": true,
-  "index": 2,
-  "title": "My Schedule",
-  "clbids": Immutable.List [
-    "123",
-    "234",
-    "345",
-  ],
-  "year": 1994,
-  "semester": 3,
-}
-`)
+		Immutable.Record {
+		  "id": "1",
+		  "active": true,
+		  "index": 2,
+		  "title": "My Schedule",
+		  "clbids": Immutable.List [
+		    "123",
+		    "234",
+		    "345",
+		  ],
+		  "year": 1994,
+		  "semester": 3,
+		}
+	`)
 	})
 
 	it('can turn into JSON', () => {
 		let result = stringify(new Schedule({id: '1', title: 'Schedule 6'}))
 		expect(result).toMatchInlineSnapshot(
-			`"{\\"active\\":false,\\"clbids\\":[],\\"id\\":\\"1\\",\\"index\\":1,\\"semester\\":0,\\"title\\":\\"Schedule 6\\",\\"year\\":0}"`,
+			`"{"active":false,"clbids":[],"id":"1","index":1,"semester":0,"title":"Schedule 6","year":0}"`,
 		)
 	})
 

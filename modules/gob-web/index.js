@@ -1,6 +1,7 @@
 // @flow
 
-import '@babel/polyfill'
+import 'core-js/stable'
+import 'regenerator-runtime/runtime'
 
 import 'typeface-fira-sans'
 import './styles/normalize.scss'

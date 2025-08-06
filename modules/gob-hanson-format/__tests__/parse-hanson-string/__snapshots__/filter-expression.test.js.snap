@@ -1,19 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FilterExpression allows a "distinct" modifier 1`] = `
-Object {
+{
   "$distinct": true,
   "$filterType": "of",
-  "$of": Array [
-    Object {
-      "$course": Object {
+  "$of": [
+    {
+      "$course": {
         "department": "CSCI",
         "number": 121,
       },
       "$type": "course",
     },
-    Object {
-      "$course": Object {
+    {
+      "$course": {
         "department": "CSCI",
         "number": 125,
       },
@@ -25,19 +25,19 @@ Object {
 `;
 
 exports[`FilterExpression allows filtering by a list of valid courses 1`] = `
-Object {
+{
   "$distinct": false,
   "$filterType": "of",
-  "$of": Array [
-    Object {
-      "$course": Object {
+  "$of": [
+    {
+      "$course": {
         "department": "CSCI",
         "number": 121,
       },
       "$type": "course",
     },
-    Object {
-      "$course": Object {
+    {
+      "$course": {
         "department": "CSCI",
         "number": 125,
       },
@@ -49,11 +49,11 @@ Object {
 `;
 
 exports[`FilterExpression allows filtering by a where-expression 1`] = `
-Object {
+{
   "$distinct": false,
   "$filterType": "where",
   "$type": "filter",
-  "$where": Object {
+  "$where": {
     "$key": "dept",
     "$operator": "$eq",
     "$type": "qualification",

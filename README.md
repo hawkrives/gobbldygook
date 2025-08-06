@@ -29,7 +29,7 @@ A browser needs to support:
 
 ## Hacking
 
-- Prerequisites: [node.js, at least v7](https://nodejs.org) and [git](https://git-scm.com).
+- Prerequisites: Node.js v22 (use .nvmrc) and [git](https://git-scm.com).
 - `git clone https://github.com/hawkrives/gobbldygook.git`
 - `cd gobbldygook`
 - `yarn install`

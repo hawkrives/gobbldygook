@@ -7,6 +7,7 @@ module.exports = {
 			{
 				modules: false,
 				useBuiltIns: 'entry',
+				corejs: 3,
 				targets: {
 					esmodules: true,
 				},

@@ -1,24 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`computeModifier can be used to ensure that the student has taken two courses across two departments 1`] = `
-Array [
-  Object {
-    "_extraKeys": Array [
+[
+  {
+    "_extraKeys": [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
+    "department": [
       "CHEM",
       "BIO",
     ],
     "number": 111,
   },
-  Object {
-    "_extraKeys": Array [
+  {
+    "_extraKeys": [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
+    "department": [
       "CHEM",
       "BIO",
     ],
@@ -28,24 +28,24 @@ Array [
 `;
 
 exports[`computeModifier can be used to ensure that the student has taken two courses across two departments 2`] = `
-Array [
-  Object {
-    "_extraKeys": Array [
+[
+  {
+    "_extraKeys": [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
+    "department": [
       "CHEM",
       "BIO",
     ],
     "number": 111,
   },
-  Object {
-    "_extraKeys": Array [
+  {
+    "_extraKeys": [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
+    "department": [
       "CHEM",
       "BIO",
     ],
@@ -55,9 +55,9 @@ Array [
 `;
 
 exports[`computeModifier checks for <things> from all children 1`] = `
-Array [
-  Object {
-    "department": Array [
+[
+  {
+    "department": [
       "REL",
     ],
     "number": 111,
@@ -66,9 +66,9 @@ Array [
 `;
 
 exports[`computeModifier checks for <things> from all children 2`] = `
-Object {
+{
   "$children": "$all",
-  "$count": Object {
+  "$count": {
     "$num": 1,
     "$operator": "$gte",
   },
@@ -79,9 +79,9 @@ Object {
 `;
 
 exports[`computeModifier checks for <things> from specified children 1`] = `
-Array [
-  Object {
-    "department": Array [
+[
+  {
+    "department": [
       "REL",
     ],
     "number": 111,
@@ -90,14 +90,14 @@ Array [
 `;
 
 exports[`computeModifier checks for <things> from specified children 2`] = `
-Object {
-  "$children": Array [
-    Object {
+{
+  "$children": [
+    {
       "$requirement": "Bible",
       "$type": "reference",
     },
   ],
-  "$count": Object {
+  "$count": {
     "$num": 1,
     "$operator": "$gte",
   },
@@ -108,15 +108,15 @@ Object {
 `;
 
 exports[`computeModifier checks for <things> from the filter 1`] = `
-Array [
-  Object {
-    "department": Array [
+[
+  {
+    "department": [
       "REL",
     ],
     "number": 111,
   },
-  Object {
-    "department": Array [
+  {
+    "department": [
       "REL",
     ],
     "number": 112,
@@ -125,8 +125,8 @@ Array [
 `;
 
 exports[`computeModifier checks for <things> from the filter 2`] = `
-Object {
-  "$count": Object {
+{
+  "$count": {
     "$num": 1,
     "$operator": "$gte",
   },
@@ -137,15 +137,15 @@ Object {
 `;
 
 exports[`computeModifier checks for <things> from the given where-clause 1`] = `
-Array [
-  Object {
-    "department": Array [
+[
+  {
+    "department": [
       "REL",
     ],
     "number": 111,
   },
-  Object {
-    "department": Array [
+  {
+    "department": [
       "REL",
     ],
     "number": 112,
@@ -154,15 +154,15 @@ Array [
 `;
 
 exports[`computeModifier checks for <things> from the given where-clause 2`] = `
-Object {
-  "$count": Object {
+{
+  "$count": {
     "$num": 1,
     "$operator": "$gte",
   },
   "$from": "where",
   "$type": "modifier",
   "$what": "course",
-  "$where": Object {
+  "$where": {
     "$key": "department",
     "$operator": "$eq",
     "$type": "qualification",
@@ -172,33 +172,33 @@ Object {
 `;
 
 exports[`computeModifier supports counting courses 1`] = `
-Array [
-  Object {
-    "_extraKeys": Array [
+[
+  {
+    "_extraKeys": [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
+    "department": [
       "REL",
     ],
     "number": 111,
   },
-  Object {
-    "_extraKeys": Array [
+  {
+    "_extraKeys": [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
+    "department": [
       "REL",
     ],
     "number": 112,
   },
-  Object {
-    "_extraKeys": Array [
+  {
+    "_extraKeys": [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
+    "department": [
       "CSCI",
     ],
     "number": 251,
@@ -207,9 +207,9 @@ Array [
 `;
 
 exports[`computeModifier supports counting courses 2`] = `
-Object {
+{
   "$children": "$all",
-  "$count": Object {
+  "$count": {
     "$num": 3,
     "$operator": "$gte",
   },
@@ -220,23 +220,23 @@ Object {
 `;
 
 exports[`computeModifier supports counting credits 1`] = `
-Array [
-  Object {
-    "_extraKeys": Array [
+[
+  {
+    "_extraKeys": [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
+    "department": [
       "REL",
     ],
     "number": 111,
   },
-  Object {
-    "_extraKeys": Array [
+  {
+    "_extraKeys": [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
+    "department": [
       "CSCI",
     ],
     "number": 251,
@@ -245,9 +245,9 @@ Array [
 `;
 
 exports[`computeModifier supports counting credits 2`] = `
-Object {
+{
   "$children": "$all",
-  "$count": Object {
+  "$count": {
     "$num": 2,
     "$operator": "$gte",
   },
@@ -258,35 +258,35 @@ Object {
 `;
 
 exports[`computeModifier supports counting departments 1`] = `
-Array [
-  Object {
-    "_extraKeys": Array [
+[
+  {
+    "_extraKeys": [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
+    "department": [
       "CHEM",
       "BIO",
     ],
     "number": 111,
   },
-  Object {
-    "_extraKeys": Array [
+  {
+    "_extraKeys": [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
+    "department": [
       "CHEM",
       "BIO",
     ],
     "number": 112,
   },
-  Object {
-    "_extraKeys": Array [
+  {
+    "_extraKeys": [
       "credits",
     ],
     "credits": 1,
-    "department": Array [
+    "department": [
       "CSCI",
     ],
     "number": 251,
@@ -295,9 +295,9 @@ Array [
 `;
 
 exports[`computeModifier supports counting departments 2`] = `
-Object {
+{
   "$children": "$all",
-  "$count": Object {
+  "$count": {
     "$num": 3,
     "$operator": "$gte",
   },

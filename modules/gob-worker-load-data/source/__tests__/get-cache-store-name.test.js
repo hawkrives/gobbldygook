@@ -24,6 +24,6 @@ test('getCacheStoreName throws an error on unexpected values', () => {
 		// $FlowExpectedError
 		getCacheStoreName('invalid'),
 	).toThrowErrorMatchingInlineSnapshot(
-		`"\\"invalid\\" is not a valid store type"`,
+		`""invalid" is not a valid store type"`,
 	)
 })

@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": ">=22"
+  },
   "name": "@gob/colors",
   "version": "3.0.0-rc.2",
   "main": "index.js",

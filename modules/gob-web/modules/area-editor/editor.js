@@ -2,13 +2,12 @@
 
 import * as React from 'react'
 import styled from 'styled-components'
-import {Controlled as CodeMirror} from 'react-codemirror2'
+import CodeMirror from '@uiw/react-codemirror'
+// $FlowFixMe
+import {javascript} from '@codemirror/lang-javascript'
+// $FlowFixMe
+import {oneDark} from '@codemirror/theme-one-dark'
 import {Card} from '../../components/card'
-
-import 'codemirror/mode/javascript/javascript'
-import 'codemirror/mode/yaml/yaml'
-import 'codemirror/lib/codemirror.css'
-import 'codemirror/theme/material.css'
 
 const StyledEditor = styled(CodeMirror)`
 	padding: 0;
@@ -25,17 +24,6 @@ const StyledEditor = styled(CodeMirror)`
 
 export const Editor = (props: any) => (
 	<Card style={{overflow: 'hidden', display: 'flex'}}>
-		<StyledEditor
-			{...props}
-			options={{
-				lineNumbers: true,
-				extraKeys: {
-					Tab(cm) {
-						cm.replaceSelection('   ', 'end')
-					},
-				},
-				...(props.options || {}),
-			}}
-		/>
+		<StyledEditor {...props} extensions={[javascript()]} theme={oneDark} />
 	</Card>
 )

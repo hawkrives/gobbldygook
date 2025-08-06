@@ -9,6 +9,9 @@
     "gob-lint-area": "./gob-lint-area/index.js",
     "gob-validate": "./gob-validate/index.js"
   },
+  "engines": {
+    "node": ">=22"
+  },
   "description": "A course scheduling app for St. Olaf College",
   "homepage": "https://gobbldygook.site/",
   "repository": "https://github.com/hawkrives/gobbldygook",
