@@ -13,36 +13,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-          cache: "yarn"
+      - uses: jdx/mise-action@v2
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm ci
 
       - name: Run Flow
-        run: yarn run --silent flow check --quiet
+        run: node --run flow check --quiet
 
   test:
     name: Jest Tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-          cache: "yarn"
+      - uses: jdx/mise-action@v2
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm ci
 
       - name: Run tests
-        run: yarn run --silent test --runInBand --coverage
+        run: node --run test --runInBand --coverage
 
       # - name: Upload coverage to Coveralls
       #   uses: coverallsapp/github-action@v2
@@ -52,37 +42,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-          cache: "yarn"
+      - uses: jdx/mise-action@v2
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm ci
 
       - name: Run ESLint
-        run: yarn run --silent lint
+        run: node --run lint
 
   format:
     name: Prettier
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-          cache: "yarn"
+      - uses: jdx/mise-action@v2
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm ci
 
       - name: Check formatting
         run: |
-          yarn run pretty
+          node --run pretty
           git diff --exit-code
 
   build:
@@ -90,18 +70,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-          cache: "yarn"
+      - uses: jdx/mise-action@v2
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm ci
 
       - name: Build
-        run: cd modules/gob-web && CI=true yarn run --silent build
+        working-directory: modules/gob-web
+        run: node --run build
 
       - name: Rearrange files
         run: node scripts/rearrange-for-circle.js
