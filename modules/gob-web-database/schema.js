@@ -1,4 +1,4 @@
-import treo from 'treo'
+import treo from "treo"
 
 // prettier-ignore
 export default new treo.schema()

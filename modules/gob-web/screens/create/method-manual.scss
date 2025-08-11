@@ -1,53 +1,53 @@
-@import '../../styles/variables.scss';
+@import "../../styles/variables.scss";
 
 .manual .student-editor {
-	display: grid;
-	grid-template-columns: max-content 1fr;
-	align-items: center;
-	grid-column-gap: 1em;
-	grid-row-gap: 1em;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  align-items: center;
+  grid-column-gap: 1em;
+  grid-row-gap: 1em;
 
-	padding-left: 0.5em;
-	padding-right: 0.25em;
-	margin-bottom: 1em;
+  padding-left: 0.5em;
+  padding-right: 0.25em;
+  margin-bottom: 1em;
 
-	label {
-		grid-column: 1;
-		text-align: right;
-	}
+  label {
+    grid-column: 1;
+    text-align: right;
+  }
 
-	.react-select,
-	input {
-		grid-column: 2;
-	}
+  .react-select,
+  input {
+    grid-column: 2;
+  }
 
-	& > input {
-		width: 100%;
-		border-radius: 0.2em;
-		padding: 6px 10px;
-		border: solid 1px hsl(0, 0%, 80%); // custom color to match react-select
+  & > input {
+    width: 100%;
+    border-radius: 0.2em;
+    padding: 6px 10px;
+    border: solid 1px hsl(0, 0%, 80%); // custom color to match react-select
 
-		--edge-color: var(--blue-500);
+    --edge-color: var(--blue-500);
 
-		&:focus {
-			box-shadow: var(--edge-color) 0 0 0 1px;
-			border-color: var(--edge-color);
-			outline: 0;
-		}
+    &:focus {
+      box-shadow: var(--edge-color) 0 0 0 1px;
+      border-color: var(--edge-color);
+      outline: 0;
+    }
 
-		&.invalid {
-			--edge-color: var(--red-500);
-		}
-	}
+    &.invalid {
+      --edge-color: var(--red-500);
+    }
+  }
 }
 
 .manual .intro {
-	text-align: center;
-	margin-bottom: 1em;
+  text-align: center;
+  margin-bottom: 1em;
 }
 
 .manual .actions {
-	margin-top: 1em;
-	display: flex;
-	justify-content: center;
+  margin-top: 1em;
+  display: flex;
+  justify-content: center;
 }

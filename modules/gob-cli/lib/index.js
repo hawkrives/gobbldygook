@@ -1,3 +1,3 @@
 // @flow
 
-export {getCourse} from './get-course'
+export { getCourse } from "./get-course"

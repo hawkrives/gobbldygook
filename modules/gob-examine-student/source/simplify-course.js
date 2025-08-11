@@ -1,7 +1,7 @@
 // @flow
 // import memoize from 'lodash/memoize'
 // import identity from 'lodash/identity'
-import type {Course} from './types'
+import type { Course } from "./types"
 
 /**
  * Simplifies a course to just the department/number combo.
@@ -30,7 +30,7 @@ import type {Course} from './types'
  * @returns {string} - the stringified, simplified course
  */
 function simplifyCourse(course: Course): string {
-	return `${course.department} ${course.number} ${course.type}`
+  return `${course.department} ${course.number} ${course.type}`
 }
 
 export default simplifyCourse

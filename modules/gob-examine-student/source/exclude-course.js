@@ -1,7 +1,7 @@
 // @flow
-import reject from 'lodash/reject'
-import compareCourseToCourse from './compare-course-to-course'
-import type {Course} from './types'
+import reject from "lodash/reject"
+import compareCourseToCourse from "./compare-course-to-course"
+import type { Course } from "./types"
 
 /**
  * Removes a course from a list of courses
@@ -11,5 +11,5 @@ import type {Course} from './types'
  * @returns {Course[]} - the filtered list of courses
  */
 export default function excludeCourse(query: Course, courses: Course[]) {
-	return reject(courses, course => compareCourseToCourse(query, course))
+  return reject(courses, (course) => compareCourseToCourse(query, course))
 }

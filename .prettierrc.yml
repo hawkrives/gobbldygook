@@ -1,18 +1,14 @@
-trailingComma: 'all'
-tabWidth: 4
-useTabs: true
-singleQuote: true
+trailingComma: "all"
 semi: false
-bracketSpacing: false
+experimentalTernaries: true
 
 overrides:
-  - files: '{.*,*}.{yml,yaml}'
+  - files: "{.*,*}.{yml,yaml}"
     options:
       tabWidth: 2
-  - files: '*.md'
+  - files: "*.md"
     options:
       tabWidth: 2
-  - files: '**/package.json'
+  - files: "*.js"
     options:
-      useTabs: false
-      tabWidth: 2
+      parser: "babel-flow"

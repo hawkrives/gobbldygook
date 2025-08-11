@@ -1,86 +1,88 @@
 .student-summary {
-	text-align: center;
-	hyphens: none;
-	font-variant-numeric: oldstyle-nums tabular-nums;
-	text-shadow: 0 1px rgba(white, 0.5);
-	font-size: 0.85em;
-	padding: calc(var(--block-edge-padding) * 2);
+  text-align: center;
+  hyphens: none;
+  font-variant-numeric: oldstyle-nums tabular-nums;
+  text-shadow: 0 1px rgba(white, 0.5);
+  font-size: 0.85em;
+  padding: calc(var(--block-edge-padding) * 2);
 
-	&.cannot-graduate .graduation-message {
-		color: var(--deep-orange-500);
-	}
+  &.cannot-graduate .graduation-message {
+    color: var(--deep-orange-500);
+  }
 
-	&.can-graduate .graduation-message {
-		color: var(--light-green-800);
-	}
+  &.can-graduate .graduation-message {
+    color: var(--light-green-800);
+  }
 
-	&.can-graduate {
-		background-color: var(--light-green-50);
-		&::selection {
-			background-color: var(--light-green-900);
-		}
-	}
+  &.can-graduate {
+    background-color: var(--light-green-50);
+    &::selection {
+      background-color: var(--light-green-900);
+    }
+  }
 
-	.paragraph {
-		margin: 0;
-	}
+  .paragraph {
+    margin: 0;
+  }
 
-	.paragraph + .paragraph {
-		margin-top: calc(var(--block-edge-padding) * 2);
-	}
+  .paragraph + .paragraph {
+    margin-top: calc(var(--block-edge-padding) * 2);
+  }
 
-	.student-summary--header {
-		color: var(--black);
+  .student-summary--header {
+    color: var(--black);
 
-		margin-bottom: calc(var(--block-edge-padding) * 2);
-		font-style: italic;
-		line-height: 1.6em;
-	}
+    margin-bottom: calc(var(--block-edge-padding) * 2);
+    font-style: italic;
+    line-height: 1.6em;
+  }
 }
 
 .student-summary--editor {
-	display: grid;
-	grid-template-columns: max-content 1fr;
-	align-items: center;
-	grid-column-gap: 0.5em;
-	grid-row-gap: 0.5em;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  align-items: center;
+  grid-column-gap: 0.5em;
+  grid-row-gap: 0.5em;
 
-	padding-left: 0.5em;
-	padding-right: 0.25em;
+  padding-left: 0.5em;
+  padding-right: 0.25em;
 
-	label {
-		text-align: right;
-	}
+  label {
+    text-align: right;
+  }
 
-	input {
-		width: 100%;
-		border-radius: 0.2em;
-		padding: 2px 6px;
-		border: solid 1px var(--gray-300);
+  input {
+    width: 100%;
+    border-radius: 0.2em;
+    padding: 2px 6px;
+    border: solid 1px var(--gray-300);
 
-		&:focus {
-			box-shadow: var(--blue-500) 0 0 0 1px;
-			border-color: var(--blue-500);
-			outline: 0;
-		}
-	}
+    &:focus {
+      box-shadow: var(--blue-500) 0 0 0 1px;
+      border-color: var(--blue-500);
+      outline: 0;
+    }
+  }
 
-	margin-bottom: 1em;
+  margin-bottom: 1em;
 }
 
 .student-letter {
-	display: block;
-	margin: var(--block-edge-padding) auto calc(var(--block-edge-padding) * 2);
+  display: block;
+  margin: var(--block-edge-padding) auto calc(var(--block-edge-padding) * 2);
 
-	border: solid 1px;
-	background-color: white;
+  border: solid 1px;
+  background-color: white;
 
-	&.cannot-graduate {
-		color: var(--deep-orange-500);
-	}
+  &.cannot-graduate {
+    color: var(--deep-orange-500);
+  }
 
-	&.can-graduate {
-		color: var(--light-green-800);
-		box-shadow: 0 0 0 5px white, 0 0 0 6px var(--light-green-100);
-	}
+  &.can-graduate {
+    color: var(--light-green-800);
+    box-shadow:
+      0 0 0 5px white,
+      0 0 0 6px var(--light-green-100);
+  }
 }

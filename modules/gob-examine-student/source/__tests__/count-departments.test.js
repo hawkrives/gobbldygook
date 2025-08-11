@@ -1,13 +1,13 @@
-import countDepartments from '../count-departments'
+import countDepartments from "../count-departments"
 
-describe('countDepartments', () => {
-	it('counts the number of distinct departments in an array of courses', () => {
-		const courses = [
-			{department: 'ART'},
-			{department: 'AR/AS'},
-			{department: 'AR/AS'},
-			{department: 'CH/BI'},
-		]
-		expect(countDepartments(courses)).toBe(3)
-	})
+describe("countDepartments", () => {
+  it("counts the number of distinct departments in an array of courses", () => {
+    const courses = [
+      { department: "ART" },
+      { department: "AR/AS" },
+      { department: "AR/AS" },
+      { department: "CH/BI" },
+    ]
+    expect(countDepartments(courses)).toBe(3)
+  })
 })

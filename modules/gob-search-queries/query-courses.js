@@ -1,8 +1,8 @@
 // @flow
 
-import filter from 'lodash/filter'
-import {checkCourseAgainstQuery} from './check-course-against-query'
-import type {Course} from '@gob/types'
+import filter from "lodash/filter"
+import { checkCourseAgainstQuery } from "./check-course-against-query"
+import type { Course } from "@gob/types"
 
 /**
  * Queries the database for courses.
@@ -12,5 +12,5 @@ import type {Course} from '@gob/types'
  * @returns {Array<Course>} - the courses that matched the query
  */
 export function queryCourses(queryObj: Object, courses: Array<Course>) {
-	return filter(courses, c => checkCourseAgainstQuery(queryObj, c))
+  return filter(courses, (c) => checkCourseAgainstQuery(queryObj, c))
 }

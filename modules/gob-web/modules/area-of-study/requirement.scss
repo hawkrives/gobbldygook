@@ -1,109 +1,109 @@
-@import '../../styles/variables.scss';
-@import '../../styles/mixins.scss';
-@import './variables-expression.scss';
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+@import "./variables-expression.scss";
 
 .requirement {
-	box-sizing: border-box;
-	font-variant-numeric: oldstyle-nums;
+  box-sizing: border-box;
+  font-variant-numeric: oldstyle-nums;
 
-	border-radius: 4px;
-	border: 0.5em solid var(--requirement-primary-color);
-	color: var(--requirement-text-color);
+  border-radius: 4px;
+  border: 0.5em solid var(--requirement-primary-color);
+  color: var(--requirement-text-color);
 
-	margin: 0.25em 0.5em 0.75em;
+  margin: 0.25em 0.5em 0.75em;
 
-	&.is-closed > *:not(.heading) {
-		display: none;
-	}
-	&.is-open {
-		margin-bottom: 1em;
-	}
+  &.is-closed > *:not(.heading) {
+    display: none;
+  }
+  &.is-open {
+    margin-bottom: 1em;
+  }
 
-	&.is-open > .heading {
-		padding-bottom: 0.7em;
-	}
+  &.is-open > .heading {
+    padding-bottom: 0.7em;
+  }
 
-	.override-button {
-		padding: 0.25em 0.5em;
-		margin-right: 0.25em;
-		color: $gray-500;
-	}
+  .override-button {
+    padding: 0.25em 0.5em;
+    margin-right: 0.25em;
+    color: $gray-500;
+  }
 
-	.result {
-		padding-left: 0.25em;
-		padding-right: 0.25em;
+  .result {
+    padding-left: 0.25em;
+    padding-right: 0.25em;
 
-		display: flex;
-		justify-content: center;
-	}
+    display: flex;
+    justify-content: center;
+  }
 
-	.status {
-		margin-right: 0.5em;
+  .status {
+    margin-right: 0.5em;
 
-		.result-indicator {
-			margin-right: 0;
-		}
-	}
+    .result-indicator {
+      margin-right: 0;
+    }
+  }
 
-	&.result-success > .heading .status {
-		color: $result-success-color;
-	}
+  &.result-success > .heading .status {
+    color: $result-success-color;
+  }
 }
 
 .result > .expression {
-	display: block;
+  display: block;
 }
 
 .requirement .requirement .result,
 .requirement .requirement .message,
 .requirement .requirement .description,
 .requirement .requirement .filter {
-	padding-left: $area-edge-padding;
+  padding-left: $area-edge-padding;
 }
 
 .requirement .heading {
-	margin: 0;
-	font-size: 1em;
-	font-weight: 500;
+  margin: 0;
+  font-size: 1em;
+  font-weight: 500;
 
-	padding: 0.2em 0.15em 0.2em 0.25em;
+  padding: 0.2em 0.15em 0.2em 0.25em;
 
-	display: flex;
-	flex-flow: row nowrap;
-	align-items: center;
-	justify-content: space-between;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
 
-	background-color: var(--requirement-primary-color);
+  background-color: var(--requirement-primary-color);
 
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .requirement .title {
-	flex: 1;
-	padding: 0;
+  flex: 1;
+  padding: 0;
 }
 
 .heading .manual-override button {
-	padding: 0 0.25em;
+  padding: 0 0.25em;
 }
 
 .override-text {
-	padding: 0.45em 0.25em;
-	margin-left: 0.35em;
-	font-weight: normal;
+  padding: 0.45em 0.25em;
+  margin-left: 0.35em;
+  font-weight: normal;
 }
 
 .requirement.result-success {
-	--requirement-primary-color: #{$result-success-background};
+  --requirement-primary-color: #{$result-success-background};
 }
 
 .requirement.result-failure {
-	--requirement-primary-color: var(--gray-300);
+  --requirement-primary-color: var(--gray-300);
 }
 
 .requirement .requirement .heading {
-	font-size: 0.9em;
-	margin: 0;
+  font-size: 0.9em;
+  margin: 0;
 }
 
 .heading,
@@ -112,120 +112,120 @@
 .message,
 .filter,
 .required-override-buttons {
-	width: 100%;
-	padding-top: 0.2em;
-	padding-bottom: 0.2em;
+  width: 100%;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
 }
 
 .filter {
-	padding-left: 0.5em;
-	padding-right: 0.5em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 
-	h4 {
-		margin: 0;
-		padding: 0;
-	}
+  h4 {
+    margin: 0;
+    padding: 0;
+  }
 }
 
 .filter--of {
-	display: grid;
-	grid-column-gap: 0.2em;
-	grid-row-gap: 0.2em;
-	grid-template-columns: repeat(auto-fit, 46px);
-	justify-content: space-between;
+  display: grid;
+  grid-column-gap: 0.2em;
+  grid-row-gap: 0.2em;
+  grid-template-columns: repeat(auto-fit, 46px);
+  justify-content: space-between;
 
-	h4 {
-		grid-row: 1;
-		grid-column: 1 / -1;
-	}
+  h4 {
+    grid-row: 1;
+    grid-column: 1 / -1;
+  }
 
-	.expression--course {
-		grid-column: span 1;
-	}
-	.expression--course.big {
-		grid-column: span 2;
-	}
+  .expression--course {
+    grid-column: span 1;
+  }
+  .expression--course.big {
+    grid-column: span 2;
+  }
 }
 
 .message,
 .description {
-	margin-top: 0;
-	margin-bottom: 0;
-	padding-left: $area-edge-padding;
-	padding-right: $area-edge-padding;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: $area-edge-padding;
+  padding-right: $area-edge-padding;
 
-	font-variant-numeric: oldstyle-nums;
+  font-variant-numeric: oldstyle-nums;
 }
 
 .message,
 .description,
 .result > .expression > .expression--description {
-	margin-top: 0.5em;
+  margin-top: 0.5em;
 }
 
 .requirement .requirement .requirement .message,
 .requirement .requirement .requirement .description {
-	/* padding-left: 0; */
+  /* padding-left: 0; */
 }
 
 .required-override-buttons {
-	display: flex;
-	justify-content: space-around;
-	flex-flow: row wrap;
+  display: flex;
+  justify-content: space-around;
+  flex-flow: row wrap;
 
-	margin-top: 0.25em;
+  margin-top: 0.25em;
 
-	.button {
-		flex-grow: 1;
-		border: solid 1px $gray-500;
+  .button {
+    flex-grow: 1;
+    border: solid 1px $gray-500;
 
-		margin: 0 0.5em 0.5em;
-	}
+    margin: 0 0.5em 0.5em;
+  }
 }
 
 .compact-results {
-	.override-text {
-		padding-right: 0;
-	}
+  .override-text {
+    padding-right: 0;
+  }
 
-	.heading {
-		flex: 0 1 auto;
-		width: auto;
-		display: flex;
-		border-bottom: 0;
-		padding: 0 !important;
+  .heading {
+    flex: 0 1 auto;
+    width: auto;
+    display: flex;
+    border-bottom: 0;
+    padding: 0 !important;
 
-		.override-button {
-			margin-left: 0.25em;
-		}
+    .override-button {
+      margin-left: 0.25em;
+    }
 
-		.title {
-			flex: auto;
-		}
-	}
+    .title {
+      flex: auto;
+    }
+  }
 
-	.result {
-		flex: 1 0 auto;
-		width: auto;
-		padding: 0;
+  .result {
+    flex: 1 0 auto;
+    width: auto;
+    padding: 0;
 
-		justify-content: flex-end;
+    justify-content: flex-end;
 
-		.expression--course {
-			background-color: white;
-			flex-shrink: 0;
-		}
-	}
+    .expression--course {
+      background-color: white;
+      flex-shrink: 0;
+    }
+  }
 
-	display: flex;
-	flex-flow: row wrap;
-	padding: 0.2em 0.2em 0.2em 0;
+  display: flex;
+  flex-flow: row wrap;
+  padding: 0.2em 0.2em 0.2em 0;
 
-	&.result-success {
-		background-color: $result-success-background;
-	}
+  &.result-success {
+    background-color: $result-success-background;
+  }
 }
 
 .overridden-msg {
-	font-weight: normal;
+  font-weight: normal;
 }

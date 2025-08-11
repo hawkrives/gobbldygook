@@ -1,6 +1,6 @@
 // @flow
 
-import {css} from 'styled-components'
+import { css } from "styled-components"
 
 export const materialShadow = `
 	border: 1px solid;
@@ -8,13 +8,13 @@ export const materialShadow = `
 `
 
 export const baseCard = css`
-	background-color: var(--background-color, white);
-	border-radius: var(--base-border-radius);
+  background-color: var(--background-color, white);
+  border-radius: var(--base-border-radius);
 `
 
 export const card = css`
-	${baseCard};
-	box-shadow: 0 2px 4px 0 rgba(14, 30, 37, 0.12);
+  ${baseCard};
+  box-shadow: 0 2px 4px 0 rgba(14, 30, 37, 0.12);
 `
 
 export const cardContent = `
@@ -22,8 +22,8 @@ export const cardContent = `
 `
 
 export const cardActions = css`
-	border-top: 1px solid rgba(160, 160, 160, 0.2);
-	padding: 1em;
+  border-top: 1px solid rgba(160, 160, 160, 0.2);
+  padding: 1em;
 `
 
 export const headingNeutral = `

@@ -1,3 +1,3 @@
 // @flow
 
-export {alterForEvaluation as alterCourse} from '@gob/courses'
+export { alterForEvaluation as alterCourse } from "@gob/courses"
