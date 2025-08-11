@@ -1,25 +1,23 @@
-'use strict'
+"use strict"
 
-const nom = require('nomnom')
-const fs = require('graceful-fs')
-const yaml = require('js-yaml')
-const {enhanceHanson} = require('@gob/hanson-format')
+const nom = require("nomnom")
+const fs = require("graceful-fs")
+const yaml = require("js-yaml")
+const { enhanceHanson } = require("@gob/hanson-format")
 
 function compileStudent(args, data) {
-	let obj = yaml.safeLoad(data)
-	return enhanceHanson(obj)
+  let obj = yaml.safeLoad(data)
+  return enhanceHanson(obj)
 }
 
 module.exports = function cli() {
-	let args = nom()
-		.script('compile-student')
-		.option('filename', {
-			position: 0,
-			required: true,
-			help: 'the file to process',
-		})
+  let args = nom().script("compile-student").option("filename", {
+    position: 0,
+    required: true,
+    help: "the file to process",
+  })
 
-	let data = fs.readFileSync(args.filename, {encoding: 'utf-8'})
-	let student = compileStudent(args, data)
-	console.log(JSON.stringify(student, null, 2))
+  let data = fs.readFileSync(args.filename, { encoding: "utf-8" })
+  let student = compileStudent(args, data)
+  console.log(JSON.stringify(student, null, 2))
 }

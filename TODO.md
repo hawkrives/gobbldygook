@@ -97,8 +97,8 @@ op:: $and
 value:
   - op: $and
     value:
-      - {op: $ne, key: 'dept', value: 'AMCON'}
-      - {op: $ne, key: 'dept', value: 'GCON'}
+      - { op: $ne, key: "dept", value: "AMCON" }
+      - { op: $ne, key: "dept", value: "GCON" }
   - op: $eq
     key: gereq
     value: HWC
@@ -112,8 +112,8 @@ query: `dept: !AMCON and !GCON`
 ```yaml
 op: $and
 value:
-  - {op: $ne, key: 'dept', value: 'AMCON'}
-  - {op: $ne, key: 'dept', value: 'GCON'}
+  - { op: $ne, key: "dept", value: "AMCON" }
+  - { op: $ne, key: "dept", value: "GCON" }
 ```
 
 query: `dept: !AMCON or !GCON`
@@ -121,8 +121,8 @@ query: `dept: !AMCON or !GCON`
 ```yaml
 op: $or
 value:
-  - {op: $ne, key: 'dept', value: 'AMCON'}
-  - {op: $ne, key: 'dept', value: 'GCON'}
+  - { op: $ne, key: "dept", value: "AMCON" }
+  - { op: $ne, key: "dept", value: "GCON" }
 ```
 
 query: `dept: !(AMCON or GCON)`
@@ -132,6 +132,6 @@ op: $not
 value:
   - op: $or
     value:
-      - {op: $ne, key: 'dept', value: 'AMCON'}
-      - {op: $ne, key: 'dept', value: 'GCON'}
+      - { op: $ne, key: "dept", value: "AMCON" }
+      - { op: $ne, key: "dept", value: "GCON" }
 ```

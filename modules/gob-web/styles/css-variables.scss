@@ -1,33 +1,33 @@
-@import './variables.scss';
+@import "./variables.scss";
 
 :root {
-	/* colors */
-	--background: #{$background};
-	--text-color: #{$text-color};
+  /* colors */
+  --background: #{$background};
+  --text-color: #{$text-color};
 
-	/* fonts */
-	--sans-font-stack: #{$sans-font-stack};
-	--body-font-stack: #{$body-font-stack};
-	--heading-font-stack: #{$heading-font-stack};
+  /* fonts */
+  --sans-font-stack: #{$sans-font-stack};
+  --body-font-stack: #{$body-font-stack};
+  --heading-font-stack: #{$heading-font-stack};
 
-	/* spacing */
-	--page-edge-padding: #{$page-edge-padding};
-	--block-edge-padding: #{$block-edge-padding};
-	--area-edge-padding: #{$area-edge-padding};
+  /* spacing */
+  --page-edge-padding: #{$page-edge-padding};
+  --block-edge-padding: #{$block-edge-padding};
+  --area-edge-padding: #{$area-edge-padding};
 
-	/* z-indices */
-	--z-sidebar: #{$z-sidebar};
-	--z-floating-button: #{$z-floating-button};
+  /* z-indices */
+  --z-sidebar: #{$z-sidebar};
+  --z-floating-button: #{$z-floating-button};
 
-	/* media queries */
-	--single-column-width: #{$single-column-width};
-	--year-collapse-width: #{$year-collapse-width};
+  /* media queries */
+  --single-column-width: #{$single-column-width};
+  --year-collapse-width: #{$year-collapse-width};
 
-	--material-divider: #{$material-divider};
-	--base-border-radius: #{$base-border-radius};
-	--sidebar-width: #{$sidebar-width};
+  --material-divider: #{$material-divider};
+  --base-border-radius: #{$base-border-radius};
+  --sidebar-width: #{$sidebar-width};
 
-	--semester-spacing: 4px;
-	--semester-side-padding: calc(var(--block-edge-padding) * 1.5);
-	--semester-padding: var(--block-edge-padding) var(--semester-side-padding);
+  --semester-spacing: 4px;
+  --semester-side-padding: calc(var(--block-edge-padding) * 1.5);
+  --semester-padding: var(--block-edge-padding) var(--semester-side-padding);
 }

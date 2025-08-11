@@ -1,201 +1,201 @@
 {
-	"name": "Hawken MacKay Rives",
-	"matriculation": 2012,
-	"graduation": 2016,
+  "name": "Hawken MacKay Rives",
+  "matriculation": 2012,
+  "graduation": 2016,
 
-	"id": "demo",
-	"dateCreated": "2017-01-29T20:21:22.411Z",
+  "id": "demo",
+  "dateCreated": "2017-01-29T20:21:22.411Z",
 
-	"studies": [
-		{"type": "degree", "name": "Bachelor of Arts", "revision": "latest"},
-		{"type": "major", "name": "Computer Science", "revision": "latest"},
-		{"type": "major", "name": "Asian Studies", "revision": "latest"},
-		{"type": "major", "name": "Physics", "revision": "latest"},
-		{"type": "major", "name": "Mathematics", "revision": "latest"},
-		{
-			"type": "concentration",
-			"name": "Japan Studies",
-			"revision": "latest"
-		},
-		{"type": "concentration", "name": "Statistics", "revision": "latest"},
-		{
-			"type": "emphasis",
-			"name": "Custom!",
-			"revision": "1",
-			"isCustom": true,
-			"source": "name: Custom!\ntype: emphasis\nrevision: '1'\nresult: Requirement Title Goes Here\n\nRequirement Title Goes Here:\n  CSCI 121 & CSCI 251"
-		}
-	],
+  "studies": [
+    { "type": "degree", "name": "Bachelor of Arts", "revision": "latest" },
+    { "type": "major", "name": "Computer Science", "revision": "latest" },
+    { "type": "major", "name": "Asian Studies", "revision": "latest" },
+    { "type": "major", "name": "Physics", "revision": "latest" },
+    { "type": "major", "name": "Mathematics", "revision": "latest" },
+    {
+      "type": "concentration",
+      "name": "Japan Studies",
+      "revision": "latest"
+    },
+    { "type": "concentration", "name": "Statistics", "revision": "latest" },
+    {
+      "type": "emphasis",
+      "name": "Custom!",
+      "revision": "1",
+      "isCustom": true,
+      "source": "name: Custom!\ntype: emphasis\nrevision: '1'\nresult: Requirement Title Goes Here\n\nRequirement Title Goes Here:\n  CSCI 121 & CSCI 251"
+    }
+  ],
 
-	"schedules": {
-		"1": {
-			"id": "1",
-			"year": 2012,
-			"semester": 1,
-			"title": "Schedule 1",
-			"index": 1,
-			"clbids": ["0000082908", "0000082768", "0000082792", "0000083505"],
-			"active": true
-		},
-		"2": {
-			"id": "2",
-			"year": 2012,
-			"semester": 2,
-			"title": "Schedule 1",
-			"index": 1,
-			"clbids": ["0000085898"],
-			"active": true
-		},
-		"3": {
-			"id": "3",
-			"year": 2012,
-			"semester": 3,
-			"title": "Schedule 1",
-			"index": 1,
-			"clbids": [
-				"0000084512",
-				"0000084461",
-				"0000084378",
-				"0000085991",
-				"0000085992"
-			],
-			"active": true
-		},
-		"4": {
-			"id": "4",
-			"year": 2013,
-			"semester": 1,
-			"title": "Schedule 1",
-			"index": 1,
-			"clbids": [
-				"0000089090",
-				"0000088273",
-				"0000088681",
-				"0000088593",
-				"0000088630"
-			],
-			"active": true
-		},
-		"5": {
-			"id": "5",
-			"year": 2013,
-			"semester": 2,
-			"title": "Schedule 1",
-			"index": 1,
-			"clbids": ["0000089466"],
-			"active": true
-		},
-		"6": {
-			"id": "6",
-			"year": 2013,
-			"semester": 3,
-			"title": "Schedule 1",
-			"index": 1,
-			"clbids": ["0000090719", "0000089957", "0000090339", "0000090172"],
-			"active": true
-		},
-		"7": {
-			"id": "7",
-			"year": 2014,
-			"semester": 1,
-			"title": "Schedule 1",
-			"index": 1,
-			"clbids": ["0000097217", "0000097120", "0000097119", "0000097125"],
-			"active": true
-		},
-		"8": {
-			"id": "8",
-			"year": 2014,
-			"semester": 2,
-			"title": "Schedule 1",
-			"index": 1,
-			"clbids": ["0000099351"],
-			"active": true
-		},
-		"9": {
-			"id": "9",
-			"year": 2014,
-			"semester": 2,
-			"title": "Schedule 2",
-			"index": 2,
-			"clbids": ["0000097174"],
-			"active": false
-		},
-		"10": {
-			"id": "10",
-			"year": 2014,
-			"semester": 3,
-			"title": "Schedule 1",
-			"index": 1,
-			"clbids": [
-				"0000095842",
-				"0000097333",
-				"0000095594",
-				"0000097582",
-				"0000097407"
-			],
-			"active": true
-		},
-		"11": {
-			"id": "11",
-			"year": 2015,
-			"semester": 1,
-			"title": "Schedule 1",
-			"index": 1,
-			"clbids": [
-				"0000102748",
-				"0000100423",
-				"0000100346",
-				"0000099504",
-				"0000103276"
-			],
-			"active": true
-		},
-		"12": {
-			"id": "12",
-			"year": 2015,
-			"semester": 2,
-			"title": "Schedule 1",
-			"index": 1,
-			"clbids": ["0000101017", "0000101018"],
-			"active": true
-		},
-		"13": {
-			"id": "13",
-			"year": 2015,
-			"semester": 3,
-			"title": "Schedule 1",
-			"index": 1,
-			"clbids": ["0000101230", "0000103170", "0000102161", "0000102075"],
-			"active": true
-		},
-		"14": {
-			"id": "14",
-			"year": 2012,
-			"semester": 1,
-			"title": "Schedule 2",
-			"index": 2,
-			"clbids": ["0000082908", "0000091746", "0000092908", "0000097217"],
-			"active": false
-		}
-	},
+  "schedules": {
+    "1": {
+      "id": "1",
+      "year": 2012,
+      "semester": 1,
+      "title": "Schedule 1",
+      "index": 1,
+      "clbids": ["0000082908", "0000082768", "0000082792", "0000083505"],
+      "active": true
+    },
+    "2": {
+      "id": "2",
+      "year": 2012,
+      "semester": 2,
+      "title": "Schedule 1",
+      "index": 1,
+      "clbids": ["0000085898"],
+      "active": true
+    },
+    "3": {
+      "id": "3",
+      "year": 2012,
+      "semester": 3,
+      "title": "Schedule 1",
+      "index": 1,
+      "clbids": [
+        "0000084512",
+        "0000084461",
+        "0000084378",
+        "0000085991",
+        "0000085992"
+      ],
+      "active": true
+    },
+    "4": {
+      "id": "4",
+      "year": 2013,
+      "semester": 1,
+      "title": "Schedule 1",
+      "index": 1,
+      "clbids": [
+        "0000089090",
+        "0000088273",
+        "0000088681",
+        "0000088593",
+        "0000088630"
+      ],
+      "active": true
+    },
+    "5": {
+      "id": "5",
+      "year": 2013,
+      "semester": 2,
+      "title": "Schedule 1",
+      "index": 1,
+      "clbids": ["0000089466"],
+      "active": true
+    },
+    "6": {
+      "id": "6",
+      "year": 2013,
+      "semester": 3,
+      "title": "Schedule 1",
+      "index": 1,
+      "clbids": ["0000090719", "0000089957", "0000090339", "0000090172"],
+      "active": true
+    },
+    "7": {
+      "id": "7",
+      "year": 2014,
+      "semester": 1,
+      "title": "Schedule 1",
+      "index": 1,
+      "clbids": ["0000097217", "0000097120", "0000097119", "0000097125"],
+      "active": true
+    },
+    "8": {
+      "id": "8",
+      "year": 2014,
+      "semester": 2,
+      "title": "Schedule 1",
+      "index": 1,
+      "clbids": ["0000099351"],
+      "active": true
+    },
+    "9": {
+      "id": "9",
+      "year": 2014,
+      "semester": 2,
+      "title": "Schedule 2",
+      "index": 2,
+      "clbids": ["0000097174"],
+      "active": false
+    },
+    "10": {
+      "id": "10",
+      "year": 2014,
+      "semester": 3,
+      "title": "Schedule 1",
+      "index": 1,
+      "clbids": [
+        "0000095842",
+        "0000097333",
+        "0000095594",
+        "0000097582",
+        "0000097407"
+      ],
+      "active": true
+    },
+    "11": {
+      "id": "11",
+      "year": 2015,
+      "semester": 1,
+      "title": "Schedule 1",
+      "index": 1,
+      "clbids": [
+        "0000102748",
+        "0000100423",
+        "0000100346",
+        "0000099504",
+        "0000103276"
+      ],
+      "active": true
+    },
+    "12": {
+      "id": "12",
+      "year": 2015,
+      "semester": 2,
+      "title": "Schedule 1",
+      "index": 1,
+      "clbids": ["0000101017", "0000101018"],
+      "active": true
+    },
+    "13": {
+      "id": "13",
+      "year": 2015,
+      "semester": 3,
+      "title": "Schedule 1",
+      "index": 1,
+      "clbids": ["0000101230", "0000103170", "0000102161", "0000102075"],
+      "active": true
+    },
+    "14": {
+      "id": "14",
+      "year": 2012,
+      "semester": 1,
+      "title": "Schedule 2",
+      "index": 2,
+      "clbids": ["0000082908", "0000091746", "0000092908", "0000097217"],
+      "active": false
+    }
+  },
 
-	"overrides": {
-		"credits.taken": 1,
-		"credits.needed": 35,
-		"major.csci.foundation.cs1": true,
-		"degree.ba.education.foundation.firstYearWriting": true,
-		"degree.bm.graduation.courses": true,
-		"degree.ba.graduation": true,
-		"course.623423.prerequisites.263234": true,
-		"concentration.bmed.practicalApplication": 52412,
-		"concentration.bmed.ethicalConsiderations": 52215,
-		"concentration.bmed.highLevelElective": 52341
-	},
+  "overrides": {
+    "credits.taken": 1,
+    "credits.needed": 35,
+    "major.csci.foundation.cs1": true,
+    "degree.ba.education.foundation.firstYearWriting": true,
+    "degree.bm.graduation.courses": true,
+    "degree.ba.graduation": true,
+    "course.623423.prerequisites.263234": true,
+    "concentration.bmed.practicalApplication": 52412,
+    "concentration.bmed.ethicalConsiderations": 52215,
+    "concentration.bmed.highLevelElective": 52341
+  },
 
-	"fabrications": [],
+  "fabrications": [],
 
-	"settings": {
-		"exampleSetting": true
-	}
+  "settings": {
+    "exampleSetting": true
+  }
 }

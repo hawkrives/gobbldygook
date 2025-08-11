@@ -1,3 +1,3 @@
 // @flow
 
-export type SORT_BY_ENUM = 'dateLastModified' | 'name'
+export type SORT_BY_ENUM = "dateLastModified" | "name"

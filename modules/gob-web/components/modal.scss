@@ -1,23 +1,23 @@
 .modal--content {
-	margin: 10vh auto;
+  margin: 10vh auto;
 
-	&:focus {
-		outline: none;
-	}
+  &:focus {
+    outline: none;
+  }
 }
 
 .modal--backdrop {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 
-	background-color: rgba(68, 68, 68, 0.35);
-	overflow: auto;
+  background-color: rgba(68, 68, 68, 0.35);
+  overflow: auto;
 
-	// slightly buggy; see https://bugs.chromium.org/p/chromium/issues/detail?id=813094
-	overscroll-behavior: contain;
+  // slightly buggy; see https://bugs.chromium.org/p/chromium/issues/detail?id=813094
+  overscroll-behavior: contain;
 
-	z-index: 100;
+  z-index: 100;
 }

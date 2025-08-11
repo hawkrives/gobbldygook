@@ -1,8 +1,8 @@
 // @flow
-import uniqBy from 'lodash/uniqBy'
-import size from 'lodash/size'
-import simplifyCourse from './simplify-course'
-import type {Course} from './types'
+import uniqBy from "lodash/uniqBy"
+import size from "lodash/size"
+import simplifyCourse from "./simplify-course"
+import type { Course } from "./types"
 
 /**
  * Counts the number of unique courses in a list of courses
@@ -12,5 +12,5 @@ import type {Course} from './types'
  * @returns {number} - the number of unique courses
  */
 export default function countCourses(courses: Course[]) {
-	return size(uniqBy(courses, simplifyCourse))
+  return size(uniqBy(courses, simplifyCourse))
 }

@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /* eslint-disable no-global-assign */
 
-require = require('esm')(module /*, options*/)
+require = require("esm")(module /*, options*/)
 
-require('flow-remove-types/register')({excludes: null})
+require("flow-remove-types/register")({ excludes: null })
 
-require('./module.js').default()
+require("./module.js").default()

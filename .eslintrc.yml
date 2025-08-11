@@ -1,13 +1,13 @@
 %YAML 1.2
 ---
-parser: '@babel/eslint-parser'
+parser: "@babel/eslint-parser"
 parserOptions:
   requireConfigFile: false
   babelOptions:
     presets:
-      - '@babel/preset-react'
-      - '@babel/preset-flow'
-      - '@babel/preset-env'
+      - "@babel/preset-react"
+      - "@babel/preset-flow"
+      - "@babel/preset-env"
 
 extends:
   - eslint:recommended
@@ -20,8 +20,8 @@ plugins:
   - flowtype
 settings:
   react:
-    version: '16.5'
-    flowVersion: '0.81'
+    version: "16.5"
+    flowVersion: "0.81"
 
 env:
   browser: true
@@ -56,10 +56,10 @@ rules:
   no-div-regex: error
   no-extra-label: error
   no-fallthrough: error
-  no-implicit-coercion: [error, {boolean: true, number: true, string: true}]
+  no-implicit-coercion: [error, { boolean: true, number: true, string: true }]
   no-implicit-globals: error
   no-new-symbol: error
-  no-redeclare: ['error', {builtinGlobals: true}]
+  no-redeclare: ["error", { builtinGlobals: true }]
   no-restricted-syntax: [error, WithStatement]
   no-self-assign: warn
   no-undef-init: off
@@ -67,10 +67,10 @@ rules:
   no-unmodified-loop-condition: error
   no-unused-labels: error
   no-unused-vars:
-    - 'warn'
-    - args: 'after-used'
-      varsIgnorePattern: '^_'
-      argsIgnorePattern: '^_'
+    - "warn"
+    - args: "after-used"
+      varsIgnorePattern: "^_"
+      argsIgnorePattern: "^_"
       ignoreRestSiblings: true
   no-useless-constructor: error
   no-var: error
@@ -92,4 +92,4 @@ rules:
   # jsdoc
   valid-jsdoc:
     - warn
-    - prefer: {return: 'returns', arg: 'param', argument: 'param'}
+    - prefer: { return: "returns", arg: "param", argument: "param" }

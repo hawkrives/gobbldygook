@@ -1,17 +1,17 @@
-import {encodeStudent} from '../encode-student'
+import { encodeStudent } from "../encode-student"
 
-const newEncode = require('querystring').stringify
+const newEncode = require("querystring").stringify
 const oldEncode = global.encodeURIComponent
 
-describe('encodeStudent', () => {
-	beforeAll(() => {
-		global.encodeURIComponent = newEncode
-	})
-	afterAll(() => {
-		global.encodeURIComponent = oldEncode
-	})
+describe("encodeStudent", () => {
+  beforeAll(() => {
+    global.encodeURIComponent = newEncode
+  })
+  afterAll(() => {
+    global.encodeURIComponent = oldEncode
+  })
 
-	it('encodes a student', () => {
-		expect(encodeStudent({name: 's'})).toBe('')
-	})
+  it("encodes a student", () => {
+    expect(encodeStudent({ name: "s" })).toBe("")
+  })
 })

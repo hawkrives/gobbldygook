@@ -8,28 +8,28 @@
  * @returns {String} - the deptnum string
  */
 export function buildDeptNum(
-	course: {
-		+department: string,
-		+number: number | string,
-		+section?: string,
-		+type?: string,
-	},
-	includeSection?: boolean = false,
+  course: {
+    +department: string,
+    +number: number | string,
+    +section?: string,
+    +type?: string,
+  },
+  includeSection?: boolean = false,
 ) {
-	let {department, number, section = '', type = null} = course
+  let { department, number, section = "", type = null } = course
 
-	const deptnumString = `${department} ${number}`
+  const deptnumString = `${department} ${number}`
 
-	if (includeSection) {
-		if (type && type === 'Lab') {
-			return `${deptnumString}${section}[L]`
-		}
-		return `${deptnumString}${section}`
-	}
+  if (includeSection) {
+    if (type && type === "Lab") {
+      return `${deptnumString}${section}[L]`
+    }
+    return `${deptnumString}${section}`
+  }
 
-	if (type && type === 'Lab') {
-		return `${deptnumString}[L]`
-	}
+  if (type && type === "Lab") {
+    return `${deptnumString}[L]`
+  }
 
-	return deptnumString
+  return deptnumString
 }

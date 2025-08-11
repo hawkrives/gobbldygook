@@ -1,32 +1,29 @@
 /* global __dirname */
 // @flow
-'use strict'
+"use strict"
 
-const pkg = require('./package.json')
-const webpack = require('webpack')
+const pkg = require("./package.json")
+const webpack = require("webpack")
 
-const babelConfig = require('../../babel.config.js')
+const babelConfig = require("../../babel.config.js")
 
-const {
-	DefinePlugin,
-	LoaderOptionsPlugin,
-	NormalModuleReplacementPlugin,
-} = webpack
+const { DefinePlugin, LoaderOptionsPlugin, NormalModuleReplacementPlugin } =
+  webpack
 
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const HtmlPlugin = require('@gob/webpack-plugin-html')
-const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
-const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const HtmlPlugin = require("@gob/webpack-plugin-html")
+const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin")
+const DuplicatePackageCheckerPlugin = require("duplicate-package-checker-webpack-plugin")
+const CopyWebpackPlugin = require("copy-webpack-plugin")
+const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 
 const isCI = Boolean(process.env.CI)
-const outputFolder = __dirname + '/build/'
+const outputFolder = __dirname + "/build/"
 
-const html = ({cssHref, scriptSrc}) => {
-	let cssLink = cssHref ? `<link rel="stylesheet" href="${cssHref}">` : ''
+const html = ({ cssHref, scriptSrc }) => {
+  let cssLink = cssHref ? `<link rel="stylesheet" href="${cssHref}">` : ""
 
-	return `
+  return `
 <!DOCTYPE html>
 <html lang="en-US">
 <meta charset="UTF-8">
@@ -40,192 +37,192 @@ ${cssLink}
 `.trim()
 }
 
-const entryPointName = 'main'
+const entryPointName = "main"
 
 function config() {
-	const isProduction = process.env.NODE_ENV === 'production'
-	const isDevelopment = !isProduction
-	const publicPath = '/'
+  const isProduction = process.env.NODE_ENV === "production"
+  const isDevelopment = !isProduction
+  const publicPath = "/"
 
-	const devtool = isProduction ? 'source-map' : 'eval'
+  const devtool = isProduction ? "source-map" : "eval"
 
-	const stats = {}
-	if (isProduction) {
-		stats.children = false
-	}
+  const stats = {}
+  if (isProduction) {
+    stats.children = false
+  }
 
-	const entry = {
-		[entryPointName]: ['./index.js'],
-	}
+  const entry = {
+    [entryPointName]: ["./index.js"],
+  }
 
-	if (isDevelopment) {
-		// add dev server client-side code
-		entry[entryPointName].unshift('webpack-dev-server/client')
-	}
+  if (isDevelopment) {
+    // add dev server client-side code
+    entry[entryPointName].unshift("webpack-dev-server/client")
+  }
 
-	const output = {
-		path: outputFolder,
-		publicPath: publicPath,
+  const output = {
+    path: outputFolder,
+    publicPath: publicPath,
 
-		// extract-text-plugin uses [contenthash], and webpack uses [hash].
-		filename: isDevelopment ? 'app.js' : 'app.[hash].js',
-		chunkFilename: 'chunk.[name].[chunkhash].js',
+    // extract-text-plugin uses [contenthash], and webpack uses [hash].
+    filename: isDevelopment ? "app.js" : "app.[hash].js",
+    chunkFilename: "chunk.[name].[chunkhash].js",
 
-		// Add /*filename*/ comments to generated require()s in the output.
-		pathinfo: true,
-	}
+    // Add /*filename*/ comments to generated require()s in the output.
+    pathinfo: true,
+  }
 
-	const devServer = {
-		port: 3000, // for webpack-dev-server
+  const devServer = {
+    port: 3000, // for webpack-dev-server
 
-		static: {
-			directory: outputFolder,
-		},
+    static: {
+      directory: outputFolder,
+    },
 
-		// Makes webpack serve /index.html as the response to any request to
-		// webpack-dev-server, so GET / and GET /s/1234 both get the index
-		// page.
-		historyApiFallback: true,
-	}
+    // Makes webpack serve /index.html as the response to any request to
+    // webpack-dev-server, so GET / and GET /s/1234 both get the index
+    // page.
+    historyApiFallback: true,
+  }
 
-	let plugins = [
-		// clean out the build folder between builds
-		new CleanWebpackPlugin(),
+  let plugins = [
+    // clean out the build folder between builds
+    new CleanWebpackPlugin(),
 
-		// Generates an index.html for us.
-		new HtmlPlugin(entryPointName, context => {
-			let cssHref = context.htmlPluginCss
-				? `${publicPath}${context.htmlPluginCss}`
-				: null
-			let scriptSrc = `${publicPath}${context.htmlPluginJs}`
+    // Generates an index.html for us.
+    new HtmlPlugin(entryPointName, (context) => {
+      let cssHref = context.htmlPluginCss
+        ? `${publicPath}${context.htmlPluginCss}`
+        : null
+      let scriptSrc = `${publicPath}${context.htmlPluginJs}`
 
-			if (isDevelopment && !context.htmlPluginJs) {
-				scriptSrc = `${publicPath}app.js`
-			}
+      if (isDevelopment && !context.htmlPluginJs) {
+        scriptSrc = `${publicPath}app.js`
+      }
 
-			return html({cssHref, scriptSrc})
-		}),
+      return html({ cssHref, scriptSrc })
+    }),
 
-		// Ignore the "full" schema in js-yaml's module, because it brings in esprima
-		// to support the !!js/function type. We don't use and have no need for it, so
-		// tell webpack to ignore it.
-		new NormalModuleReplacementPlugin(/schema\/default_full$/, result => {
-			result.request = result.request.replace('default_full', 'core')
-		}),
-		new NormalModuleReplacementPlugin(/schema\/default_safe$/, result => {
-			result.request = result.request.replace('default_safe', 'core')
-		}),
+    // Ignore the "full" schema in js-yaml's module, because it brings in esprima
+    // to support the !!js/function type. We don't use and have no need for it, so
+    // tell webpack to ignore it.
+    new NormalModuleReplacementPlugin(/schema\/default_full$/, (result) => {
+      result.request = result.request.replace("default_full", "core")
+    }),
+    new NormalModuleReplacementPlugin(/schema\/default_safe$/, (result) => {
+      result.request = result.request.replace("default_safe", "core")
+    }),
 
-		// DefinePlugin makes some variables available to the code.
-		new DefinePlugin({
-			VERSION: JSON.stringify(pkg.version),
-			// APP_BASE is used in react-router, to set its base appropriately
-			// across both local dev and gh-pages.
-			APP_BASE: JSON.stringify(publicPath),
-			'process.env.TRAVIS_COMMIT': JSON.stringify(
-				process.env.TRAVIS_COMMIT || process.env.COMMIT_REF,
-			),
-		}),
+    // DefinePlugin makes some variables available to the code.
+    new DefinePlugin({
+      VERSION: JSON.stringify(pkg.version),
+      // APP_BASE is used in react-router, to set its base appropriately
+      // across both local dev and gh-pages.
+      APP_BASE: JSON.stringify(publicPath),
+      "process.env.TRAVIS_COMMIT": JSON.stringify(
+        process.env.TRAVIS_COMMIT || process.env.COMMIT_REF,
+      ),
+    }),
 
-		// Watcher doesn't work well if you mistype casing in a path so we use
-		// a plugin that prints an error when you attempt to do this.
-		new CaseSensitivePathsPlugin(),
+    // Watcher doesn't work well if you mistype casing in a path so we use
+    // a plugin that prints an error when you attempt to do this.
+    new CaseSensitivePathsPlugin(),
 
-		// copy files – into the webpack {output} directory
-		new CopyWebpackPlugin([{from: './static/*', flatten: true}]),
-	]
+    // copy files – into the webpack {output} directory
+    new CopyWebpackPlugin([{ from: "./static/*", flatten: true }]),
+  ]
 
-	if (isProduction) {
-		plugins = [
-			...plugins,
-			new MiniCssExtractPlugin({
-				filename: isDevelopment ? 'app.css' : 'app.[contenthash].css',
-				chunkFilename: 'chunk.[name].[chunkhash].css',
-			}),
-			new LoaderOptionsPlugin({
-				minimize: true,
-			}),
-			new DuplicatePackageCheckerPlugin(),
-		]
-	}
+  if (isProduction) {
+    plugins = [
+      ...plugins,
+      new MiniCssExtractPlugin({
+        filename: isDevelopment ? "app.css" : "app.[contenthash].css",
+        chunkFilename: "chunk.[name].[chunkhash].css",
+      }),
+      new LoaderOptionsPlugin({
+        minimize: true,
+      }),
+      new DuplicatePackageCheckerPlugin(),
+    ]
+  }
 
-	const babelLoader = {
-		loader: 'babel-loader',
-		options: {
-			cacheDirectory: !isCI,
-			...babelConfig,
-		},
-	}
+  const babelLoader = {
+    loader: "babel-loader",
+    options: {
+      cacheDirectory: !isCI,
+      ...babelConfig,
+    },
+  }
 
-	const module = {
-		rules: [
-			{
-				test: /\.js$/,
-				exclude: /node_modules/,
-				use: [babelLoader],
-			},
-			// {
-			// 	test: /\.worker\.js$/,
-			// 	exclude: /node_modules/,
-			// 	use: ['worker-loader', babelLoader],
-			// },
-			{
-				test: /check-student\.worker\.js$/,
-				use: [
-					{
-						loader: 'worker-loader',
-						options: {name: 'worker.check-student.[hash].js'},
-					},
-					babelLoader,
-				],
-			},
-			{
-				test: /load-data\.worker\.js$/,
-				use: [
-					{
-						loader: 'worker-loader',
-						options: {name: 'worker.load-data.[hash].js'},
-					},
-					babelLoader,
-				],
-			},
-			{
-				test: /\.otf|eot|ttf|woff2?$/,
-				type: 'asset',
-				parser: {dataUrlCondition: {maxSize: 10000}},
-			},
-			{
-				test: /\.jpe?g|png|gif$/,
-				type: 'asset',
-				parser: {dataUrlCondition: {maxSize: 10000}},
-			},
-			{
-				test: /\.s?css$/,
-				use: [
-					isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
-					'css-loader',
-					{
-						loader: 'sass-loader',
-						options: {
-							implementation: require('dart-sass'),
-						},
-					},
-				],
-			},
-		],
-	}
+  const module = {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [babelLoader],
+      },
+      // {
+      // 	test: /\.worker\.js$/,
+      // 	exclude: /node_modules/,
+      // 	use: ['worker-loader', babelLoader],
+      // },
+      {
+        test: /check-student\.worker\.js$/,
+        use: [
+          {
+            loader: "worker-loader",
+            options: { name: "worker.check-student.[hash].js" },
+          },
+          babelLoader,
+        ],
+      },
+      {
+        test: /load-data\.worker\.js$/,
+        use: [
+          {
+            loader: "worker-loader",
+            options: { name: "worker.load-data.[hash].js" },
+          },
+          babelLoader,
+        ],
+      },
+      {
+        test: /\.otf|eot|ttf|woff2?$/,
+        type: "asset",
+        parser: { dataUrlCondition: { maxSize: 10000 } },
+      },
+      {
+        test: /\.jpe?g|png|gif$/,
+        type: "asset",
+        parser: { dataUrlCondition: { maxSize: 10000 } },
+      },
+      {
+        test: /\.s?css$/,
+        use: [
+          isProduction ? MiniCssExtractPlugin.loader : "style-loader",
+          "css-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              implementation: require("dart-sass"),
+            },
+          },
+        ],
+      },
+    ],
+  }
 
-	return {
-		mode: isProduction ? 'production' : 'development',
-		target: 'web',
-		devtool,
-		stats,
-		entry,
-		output,
-		devServer,
-		plugins,
-		module,
-	}
+  return {
+    mode: isProduction ? "production" : "development",
+    target: "web",
+    devtool,
+    stats,
+    entry,
+    output,
+    devServer,
+    plugins,
+    module,
+  }
 }
 
 module.exports = config

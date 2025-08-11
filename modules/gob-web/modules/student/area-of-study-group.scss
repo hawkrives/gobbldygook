@@ -1,49 +1,49 @@
-@import '../../styles/variables.scss';
-@import '../../styles/mixins.scss';
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
 
 .area-of-study-group {
-	@include card();
-	margin-top: 1em;
+  @include card();
+  margin-top: 1em;
 
-	.area {
-		border-top: $material-divider;
-	}
+  .area {
+    border-top: $material-divider;
+  }
 
-	.area:last-child {
-		margin-bottom: 0.15em;
-	}
+  .area:last-child {
+    margin-bottom: 0.15em;
+  }
 
-	.react-select {
-		margin: 0 0.5em 0.5em;
-	}
+  .react-select {
+    margin: 0 0.5em 0.5em;
+  }
 }
 
 .area-type-heading {
-	@include heading-neutral();
+  @include heading-neutral();
 
-	font-size: 0.765em;
-	font-weight: normal;
-	margin-top: 0.1em;
-	margin-bottom: 0.15em;
-	margin-left: 0.45em;
+  font-size: 0.765em;
+  font-weight: normal;
+  margin-top: 0.1em;
+  margin-bottom: 0.15em;
+  margin-left: 0.45em;
 
-	display: flex;
-	align-items: baseline;
-	justify-content: space-between;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
 }
 
 .add-area-of-study {
-	text-decoration: underline;
+  text-decoration: underline;
 
-	padding: 0.25em calc(var(--block-edge-padding) * 1.5);
-	margin-left: 0.5em;
+  padding: 0.25em calc(var(--block-edge-padding) * 1.5);
+  margin-left: 0.5em;
 
-	text-transform: lowercase;
+  text-transform: lowercase;
 
-	color: var(--gray-600);
-	border: 0;
+  color: var(--gray-600);
+  border: 0;
 
-	&:hover {
-		background-color: inherit;
-	}
+  &:hover {
+    background-color: inherit;
+  }
 }

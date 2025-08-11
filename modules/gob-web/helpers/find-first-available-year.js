@@ -1,9 +1,9 @@
 // @flow
-import uniq from 'lodash/uniq'
-import sortBy from 'lodash/sortBy'
-import max from 'lodash/max'
-import {findMissingNumber} from '@gob/lib'
-import {Schedule} from '@gob/object-student'
+import uniq from "lodash/uniq"
+import sortBy from "lodash/sortBy"
+import max from "lodash/max"
+import { findMissingNumber } from "@gob/lib"
+import { Schedule } from "@gob/object-student"
 
 /**
  * Takes a list of schedules and finds the first open year.
@@ -17,29 +17,29 @@ import {Schedule} from '@gob/object-student'
  * @returns {Number} - the first available semester slot
  */
 export function findFirstAvailableYear(
-	schedules: Array<Schedule>,
-	matriculation: number,
+  schedules: Array<Schedule>,
+  matriculation: number,
 ) {
-	if (schedules && schedules.length === 0 && matriculation == null) {
-		return new Date().getFullYear()
-	}
+  if (schedules && schedules.length === 0 && matriculation == null) {
+    return new Date().getFullYear()
+  }
 
-	let years = schedules.map(s => s.year)
+  let years = schedules.map((s) => s.year)
 
-	// put the matriculation year at the front to give a starting point
-	if (matriculation != null && !years.includes(matriculation)) {
-		years.unshift(matriculation - 1)
-	}
+  // put the matriculation year at the front to give a starting point
+  if (matriculation != null && !years.includes(matriculation)) {
+    years.unshift(matriculation - 1)
+  }
 
-	years = sortBy(years)
+  years = sortBy(years)
 
-	// only uniq after we're done messing with the contents
-	years = uniq(years)
+  // only uniq after we're done messing with the contents
+  years = uniq(years)
 
-	let missingNo = findMissingNumber(years)
-	if (missingNo !== null) {
-		return missingNo
-	}
+  let missingNo = findMissingNumber(years)
+  if (missingNo !== null) {
+    return missingNo
+  }
 
-	return max(years) + 1
+  return max(years) + 1
 }

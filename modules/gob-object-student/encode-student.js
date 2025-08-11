@@ -1,8 +1,8 @@
 // @flow
 
-import stringify from 'stabilize'
-import {Student} from './student'
+import stringify from "stabilize"
+import { Student } from "./student"
 
 export function encodeStudent(student: Student) {
-	return encodeURIComponent(stringify(student))
+  return encodeURIComponent(stringify(student))
 }

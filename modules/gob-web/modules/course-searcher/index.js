@@ -1,3 +1,3 @@
 // @flow
 
-export {CourseSearcher} from './searcher'
+export { CourseSearcher } from "./searcher"
