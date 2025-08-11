@@ -53,23 +53,21 @@ export function SidebarToolbar(props: Props) {
   return (
     <ToolsCard>
       <Toolbar>
-        {toPicker ? (
+        {toPicker ?
           <ToolbarButton as={Link} to="/" title="Students">
             <Icon block large>
               {iosPeopleOutline}
             </Icon>
           </ToolbarButton>
-        ) : toOverview ? (
+        : toOverview ?
           <ToolbarButton as={Link} to={`/student/${studentId}`} title="Courses">
             <Icon block large>
               {grid}
             </Icon>
           </ToolbarButton>
-        ) : (
-          <div />
-        )}
+        : <div />}
 
-        {search ? (
+        {search ?
           <ToolbarButton
             as={Link}
             to={`/student/${studentId}/search`}
@@ -79,9 +77,7 @@ export function SidebarToolbar(props: Props) {
               {iosSearch}
             </Icon>
           </ToolbarButton>
-        ) : (
-          <div />
-        )}
+        : <div />}
 
         <ToolbarButton
           title="Undo"
@@ -103,15 +99,13 @@ export function SidebarToolbar(props: Props) {
           </Icon>
         </ToolbarButton>
 
-        {share ? (
+        {share ?
           <ToolbarButton as={Link} to="?share" title="Share">
             <Icon block large>
               {iosUploadOutline}
             </Icon>
           </ToolbarButton>
-        ) : (
-          <div />
-        )}
+        : <div />}
       </Toolbar>
     </ToolsCard>
   )

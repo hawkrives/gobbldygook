@@ -16,7 +16,7 @@ export function semesterName(semester: string | number): string {
     semester = String(semester)
   }
 
-  return Object.prototype.hasOwnProperty.call(SEMESTERS, semester)
-    ? SEMESTERS[semester]
+  return Object.prototype.hasOwnProperty.call(SEMESTERS, semester) ?
+      SEMESTERS[semester]
     : `Unknown (${semester})`
 }

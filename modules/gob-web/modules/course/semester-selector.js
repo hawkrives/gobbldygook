@@ -67,11 +67,10 @@ class SemesterSelector extends React.Component<Props> {
   render() {
     let { scheduleId, student } = this.props
 
-    let specialOption = scheduleId ? (
-      <option value={REMOVE_FROM_SCHEDULE}>Remove from Schedule</option>
-    ) : (
-      <option value={NO_SCHEDULE}>No Schedule</option>
-    )
+    let specialOption =
+      scheduleId ?
+        <option value={REMOVE_FROM_SCHEDULE}>Remove from Schedule</option>
+      : <option value={NO_SCHEDULE}>No Schedule</option>
 
     let semesters = semesterList(student)
     let options = semesters.map((group, year) => (

@@ -104,7 +104,7 @@ class UploadFileScreen extends React.Component {
 
         <List type="plain" className="upload-results">
           {actions.map((stu) =>
-            stu.payload ? (
+            stu.payload ?
               <li key={stu.payload.id}>
                 <StudentSummary
                   student={stu.payload}
@@ -114,11 +114,9 @@ class UploadFileScreen extends React.Component {
                   randomizeHello
                 />
               </li>
-            ) : (
-              <li key={stu.name}>
+            : <li key={stu.name}>
                 {stu.name} returned the error "{stu.error}"
-              </li>
-            ),
+              </li>,
           )}
           {files.map((file) => (
             <li key={file.name}>{file.name}</li>

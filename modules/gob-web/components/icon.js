@@ -12,12 +12,12 @@ export const Icon = styled.svg.attrs({
   height: 1em;
 
   ${(props) =>
-    props.large
-      ? css`
-          width: 1.5em;
-          height: 1.5em;
-        `
-      : ""};
+    props.large ?
+      css`
+        width: 1.5em;
+        height: 1.5em;
+      `
+    : ""};
 
   fill: currentColor;
   display: inline-block;
@@ -26,9 +26,9 @@ export const Icon = styled.svg.attrs({
   margin: auto;
 
   ${(props) =>
-    props.block
-      ? css`
-          display: block;
-        `
-      : ""};
+    props.block ?
+      css`
+        display: block;
+      `
+    : ""};
 `

@@ -38,9 +38,9 @@ export default function CourseExpression(props: Props) {
   const year = props.year && <span className="course--year">{props.year}</span>
   const semester = props.semester && (
     <span className="course--semester">
-      {props.semester === "*"
-        ? "ANY"
-        : semesterName(props.semester).toUpperCase()}
+      {props.semester === "*" ?
+        "ANY"
+      : semesterName(props.semester).toUpperCase()}
     </span>
   )
 

@@ -119,9 +119,8 @@ function stringifyModifier(expr) {
   }
 
   const word = plur(expr.$what, expr.$count.$num)
-  const besides = expr.$besides
-    ? `[besides ${condenseCourse(expr.$besides.$course)}] `
-    : ""
+  const besides =
+    expr.$besides ? `[besides ${condenseCourse(expr.$besides.$course)}] ` : ""
   return `${expr.$count.$num} ${word} ${besides}from ${modifier}`
 }
 
@@ -330,9 +329,8 @@ export default async function main() {
 
   let { input, flags } = args
 
-  let data = input.length
-    ? await loadJsonFile(input[0])
-    : JSON.parse(await stdin())
+  let data =
+    input.length ? await loadJsonFile(input[0]) : JSON.parse(await stdin())
 
   run(data, flags)
 }

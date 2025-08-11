@@ -49,12 +49,12 @@ type ListProps = {
 export default function List(props: ListProps) {
   const { className, children, type = "inline" } = props
   const contents = ReactChildren.map(children, (child) =>
-    isValidElement(child)
-      ? cloneElement(child, {
-          ...child.props,
-          className: cx("list-item", child.props.className),
-        })
-      : child,
+    isValidElement(child) ?
+      cloneElement(child, {
+        ...child.props,
+        className: cx("list-item", child.props.className),
+      })
+    : child,
   )
 
   let ListType = PlainList

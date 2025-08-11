@@ -29,8 +29,9 @@ export function splitDeptNum(
   }
 
   let deptNum: DeptNum = {
-    department: matches[1].includes("/")
-      ? [matches[2], matches[3]].join("/")
+    department:
+      matches[1].includes("/") ?
+        [matches[2], matches[3]].join("/")
       : matches[1],
     number: parseInt(matches[4], 10),
   }

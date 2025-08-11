@@ -91,18 +91,18 @@ class ModalCourse extends React.Component<Props> {
         <Course conflicts={conflicts} course={course} />
 
         <BottomToolbar>
-          {scheduleId && student ? (
+          {scheduleId && student ?
             <SemesterSelector
               scheduleId={scheduleId}
               student={student}
               clbid={course.clbid}
             />
-          ) : null}
-          {scheduleId && student ? (
+          : null}
+          {scheduleId && student ?
             <RemoveCourseButton onClick={this.remove}>
               Remove Course
             </RemoveCourseButton>
-          ) : null}
+          : null}
         </BottomToolbar>
       </ContainerModal>
     )
@@ -111,9 +111,9 @@ class ModalCourse extends React.Component<Props> {
 
 const connected = connect(
   (state, ownProps) =>
-    ownProps.studentId && ownProps.studentId in state.students
-      ? { student: state.students[ownProps.studentId].present }
-      : { student: undefined },
+    ownProps.studentId && ownProps.studentId in state.students ?
+      { student: state.students[ownProps.studentId].present }
+    : { student: undefined },
   { changeStudent },
 )(ModalCourse)
 

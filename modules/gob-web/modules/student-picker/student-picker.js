@@ -181,7 +181,7 @@ export default function StudentPicker(props: PropTypes) {
         </div>
       </StudentListToolbarWrapper>
 
-      {Object.keys(students).length > 0 ? (
+      {Object.keys(students).length > 0 ?
         <StudentList
           destroyStudent={destroyStudent}
           filter={filterText}
@@ -190,11 +190,10 @@ export default function StudentPicker(props: PropTypes) {
           groupBy={groupBy}
           students={students}
         />
-      ) : (
-        <MakeStudentButton as={Link} to="create/">
+      : <MakeStudentButton as={Link} to="create/">
           Add a Student
         </MakeStudentButton>
-      )}
+      }
     </Overview>
   )
 }

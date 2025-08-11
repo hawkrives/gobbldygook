@@ -241,14 +241,12 @@ class AbbreviatedCourseListing extends React.Component<
       <ul>
         {courses
           .map((r, i) =>
-            r.error ? (
+            r.error ?
               <li key={i}>{r.result.message}</li>
-            ) : (
-              <li key={r.result.clbid}>
+            : <li key={r.result.clbid}>
                 {r.result.department} {r.result.number}
                 {r.result.section} – {r.result.name}
-              </li>
-            ),
+              </li>,
           )
           .toArray()}
       </ul>

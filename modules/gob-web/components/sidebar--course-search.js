@@ -19,8 +19,9 @@ export function CourseSearcherSidebar(props: Props) {
 
   let { term } = props
 
-  let boundCloseModal = term
-    ? () => {
+  let boundCloseModal =
+    term ?
+      () => {
         let params = new URLSearchParams(queryString)
         params.delete("term")
         navigate(`/student/${student.present.id}?${params.toString()}`)

@@ -84,11 +84,11 @@ export class AreaOfStudy extends React.Component<Props> {
           </p>
         )}
 
-        {isOpen && examining ? (
+        {isOpen && examining ?
           <p className="message area--loading">Loading…</p>
-        ) : null}
+        : null}
 
-        {isOpen ? (
+        {isOpen ?
           <TopLevelRequirement
             info={(results: any)}
             onAddOverride={onAddOverride}
@@ -96,7 +96,7 @@ export class AreaOfStudy extends React.Component<Props> {
             onToggleOverride={onToggleOverride}
             path={[areaOfStudy.type, name]}
           />
-        ) : null}
+        : null}
       </div>
     )
   }

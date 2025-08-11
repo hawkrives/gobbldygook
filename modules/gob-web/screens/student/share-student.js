@@ -89,13 +89,12 @@ export class ShareSheet extends React.Component<Props, State> {
           <p>
             {`Share "${student.name}":`}
             <br />
-            {loading ? (
+            {loading ?
               <span>Preparing download…</span>
-            ) : (
-              <a download={`${student.name}.gbstudent`} href={encoded}>
+            : <a download={`${student.name}.gbstudent`} href={encoded}>
                 Download file
               </a>
-            )}
+            }
           </p>
         </SizedCard>
       </Modal>

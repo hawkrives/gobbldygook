@@ -165,8 +165,9 @@ function enhanceRequirement(
   // mapping.
   let { declare: variables = {}, result, filter, ...requirements } = value
 
-  let parsedFilter = filter
-    ? parseWithPeg(filter, {
+  let parsedFilter =
+    filter ?
+      parseWithPeg(filter, {
         abbreviations,
         titles,
         variables,
@@ -174,8 +175,9 @@ function enhanceRequirement(
       })
     : null
 
-  let parsedResult = result
-    ? parseWithPeg(result, {
+  let parsedResult =
+    result ?
+      parseWithPeg(result, {
         abbreviations,
         titles,
         variables,

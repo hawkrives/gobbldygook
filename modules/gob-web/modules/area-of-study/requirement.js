@@ -43,9 +43,10 @@ function Requirement(props: RequirementProps) {
   let childKeys = Object.keys(info).filter(isRequirementName)
 
   let wasEvaluated = info.result && info.result._checked
-  let computationClassName = wasEvaluated
-    ? info.computed
-      ? "result-success"
+  let computationClassName =
+    wasEvaluated ?
+      info.computed ?
+        "result-success"
       : "result-failure"
     : ""
   let status = <ResultIndicator result={info.computed} />
@@ -125,7 +126,9 @@ function Requirement(props: RequirementProps) {
       {overrideButtons}
       {filterEl}
       {result}
-      {children.length ? <div className="children">{children}</div> : null}
+      {children.length ?
+        <div className="children">{children}</div>
+      : null}
     </div>
   )
 }

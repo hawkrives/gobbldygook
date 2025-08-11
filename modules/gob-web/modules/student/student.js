@@ -61,9 +61,8 @@ export class Student extends React.Component<Props, State> {
 
     let { student } = this.props
 
-    let title: string = student
-      ? `${student.present.name} | Gobbldygook`
-      : "Gobbldygook"
+    let title: string =
+      student ? `${student.present.name} | Gobbldygook` : "Gobbldygook"
 
     return (
       <Container>
@@ -79,9 +78,9 @@ export class Student extends React.Component<Props, State> {
 
 const connected = connect(
   (state, ownProps) =>
-    ownProps.studentId
-      ? { student: state.students[ownProps.studentId] }
-      : { student: undefined },
+    ownProps.studentId ?
+      { student: state.students[ownProps.studentId] }
+    : { student: undefined },
   { loadStudent },
 )(Student)
 

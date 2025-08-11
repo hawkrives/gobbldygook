@@ -78,9 +78,8 @@ type State = {
 
 class StudentSummary extends React.Component<Props, State> {
   state = {
-    message: this.props.randomizeHello
-      ? sample(welcomeMessages)
-      : welcomeMessage,
+    message:
+      this.props.randomizeHello ? sample(welcomeMessages) : welcomeMessage,
     checking: true,
     canGraduate: false,
     creditsNeeded: null,
@@ -156,7 +155,7 @@ class StudentSummary extends React.Component<Props, State> {
         as="article"
         className={cx("student-summary", gradClassName, { checking })}
       >
-        {url.has("ferpa") ? (
+        {url.has("ferpa") ?
           <div
             style={{
               backgroundColor: "var(--red)",
@@ -167,7 +166,7 @@ class StudentSummary extends React.Component<Props, State> {
           >
             FERPA restrictions enabled
           </div>
-        ) : null}
+        : null}
 
         {showEditor && <ConnectedEditor student={student} />}
 
@@ -201,7 +200,9 @@ class StudentSummary extends React.Component<Props, State> {
           neededCredits={creditsNeeded}
         />
 
-        {showMessage ? <Footer canGraduate={canGraduate} /> : null}
+        {showMessage ?
+          <Footer canGraduate={canGraduate} />
+        : null}
       </Card>
     )
   }
@@ -353,9 +354,8 @@ const badGraduationMessage =
 
 export class Footer extends React.Component<FooterProps> {
   render() {
-    const msg = this.props.canGraduate
-      ? goodGraduationMessage
-      : badGraduationMessage
+    const msg =
+      this.props.canGraduate ? goodGraduationMessage : badGraduationMessage
 
     return <p className="paragraph graduation-message">{msg}</p>
   }
@@ -420,11 +420,11 @@ export class DegreeSummary extends React.Component<DegreeSummaryProps> {
       <p className="paragraph">
         You are planning on{" "}
         {dCount > 0 ? `${dEmph}${dList} ${dWord}` : `no ${dWord}`}
-        {mCount || cCount || eCount
-          ? mCount && (cCount || eCount)
-            ? ", "
-            : " and "
-          : ""}
+        {mCount || cCount || eCount ?
+          mCount && (cCount || eCount) ?
+            ", "
+          : " and "
+        : ""}
         {mCount ? `${mEmph}${mWord} in ${mList}` : ""}
         {mCount && cCount ? ", and " : ""}
         {cCount ? `${cEmph}${cWord} in ${cList}` : ""}

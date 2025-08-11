@@ -91,9 +91,8 @@ function config() {
 
     // Generates an index.html for us.
     new HtmlPlugin(entryPointName, (context) => {
-      let cssHref = context.htmlPluginCss
-        ? `${publicPath}${context.htmlPluginCss}`
-        : null
+      let cssHref =
+        context.htmlPluginCss ? `${publicPath}${context.htmlPluginCss}` : null
       let scriptSrc = `${publicPath}${context.htmlPluginJs}`
 
       if (isDevelopment && !context.htmlPluginJs) {

@@ -101,9 +101,9 @@ export default class ExpandedCourse extends React.PureComponent<Props> {
         {course.offerings && (
           <div>
             <Heading>
-              {course.offerings && course.offerings.length === 1
-                ? "Offering"
-                : "Offerings"}
+              {course.offerings && course.offerings.length === 1 ?
+                "Offering"
+              : "Offerings"}
             </Heading>
             <BulletedList>
               {consolidateExpandedOfferings(course.offerings || []).map(
@@ -118,9 +118,9 @@ export default class ExpandedCourse extends React.PureComponent<Props> {
         {course.instructors && (
           <div>
             <Heading>
-              {course.instructors && course.instructors.length === 1
-                ? "Instructor"
-                : "Instructors"}
+              {course.instructors && course.instructors.length === 1 ?
+                "Instructor"
+              : "Instructors"}
             </Heading>
             <div>{oxford(course.instructors)}</div>
           </div>

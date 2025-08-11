@@ -40,11 +40,11 @@ peg$SyntaxError.buildMessage = function (expected, found) {
 
       for (i = 0; i < expectation.parts.length; i++) {
         escapedParts +=
-          expectation.parts[i] instanceof Array
-            ? classEscape(expectation.parts[i][0]) +
-              "-" +
-              classEscape(expectation.parts[i][1])
-            : classEscape(expectation.parts[i])
+          expectation.parts[i] instanceof Array ?
+            classEscape(expectation.parts[i][0]) +
+            "-" +
+            classEscape(expectation.parts[i][1])
+          : classEscape(expectation.parts[i])
       }
 
       return "[" + (expectation.inverted ? "^" : "") + escapedParts + "]"
@@ -664,9 +664,9 @@ function peg$parse(input, options) {
 
   function expected(description, location) {
     location =
-      location !== void 0
-        ? location
-        : peg$computeLocation(peg$savedPos, peg$currPos)
+      location !== void 0 ? location : (
+        peg$computeLocation(peg$savedPos, peg$currPos)
+      )
 
     throw peg$buildStructuredError(
       [peg$otherExpectation(description)],
@@ -677,9 +677,9 @@ function peg$parse(input, options) {
 
   function error(message, location) {
     location =
-      location !== void 0
-        ? location
-        : peg$computeLocation(peg$savedPos, peg$currPos)
+      location !== void 0 ? location : (
+        peg$computeLocation(peg$savedPos, peg$currPos)
+      )
 
     throw peg$buildSimpleError(message, location)
   }
@@ -4301,9 +4301,9 @@ function peg$parse(input, options) {
     throw peg$buildStructuredError(
       peg$maxFailExpected,
       peg$maxFailPos < input.length ? input.charAt(peg$maxFailPos) : null,
-      peg$maxFailPos < input.length
-        ? peg$computeLocation(peg$maxFailPos, peg$maxFailPos + 1)
-        : peg$computeLocation(peg$maxFailPos, peg$maxFailPos),
+      peg$maxFailPos < input.length ?
+        peg$computeLocation(peg$maxFailPos, peg$maxFailPos + 1)
+      : peg$computeLocation(peg$maxFailPos, peg$maxFailPos),
     )
   }
 }

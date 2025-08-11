@@ -46,9 +46,8 @@ class AreaOfStudyGroup extends React.PureComponent<Props> {
 
   render() {
     let { showAreaPicker = false, areas = [] } = this.props
-    let showOrHidePicker = showAreaPicker
-      ? this.props.onEndAddArea
-      : this.props.onInitiateAddArea
+    let showOrHidePicker =
+      showAreaPicker ? this.props.onEndAddArea : this.props.onInitiateAddArea
 
     return (
       <section className="area-of-study-group">
@@ -62,7 +61,7 @@ class AreaOfStudyGroup extends React.PureComponent<Props> {
           </FlatButton>
         </h1>
 
-        {showAreaPicker ? (
+        {showAreaPicker ?
           <AreaPicker
             type={this.props.type}
             onChange={this.handleChange}
@@ -79,7 +78,7 @@ class AreaOfStudyGroup extends React.PureComponent<Props> {
               .toArray()}
             availableThrough={this.props.student.graduation}
           />
-        ) : null}
+        : null}
 
         {areas.map((area) => (
           <AreaOfStudy

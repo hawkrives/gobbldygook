@@ -1,5 +1,6 @@
 trailingComma: "all"
 semi: false
+experimentalTernaries: true
 
 overrides:
   - files: "{.*,*}.{yml,yaml}"

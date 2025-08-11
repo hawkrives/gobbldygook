@@ -137,9 +137,9 @@ export default function StudentListItem(props: Props) {
         <StudentInfo>
           <StudentName>
             {student.present.name}
-            {process.env.NODE_ENV !== "production"
-              ? ` (${student.present.id})`
-              : ""}
+            {process.env.NODE_ENV !== "production" ?
+              ` (${student.present.id})`
+            : ""}
           </StudentName>
           <StudentAreas>{areas}</StudentAreas>
         </StudentInfo>

@@ -191,13 +191,13 @@ export class Revisions extends React.Component<Props, State> {
 
     const revisions = [...course.revisions]
     const latestRevisionDate =
-      revisions.length > 0
-        ? new Date(
-            Math.max(
-              ...revisions.map((rev) => new Date(rev["_updated"]).getTime()),
-            ),
-          )
-        : null
+      revisions.length > 0 ?
+        new Date(
+          Math.max(
+            ...revisions.map((rev) => new Date(rev["_updated"]).getTime()),
+          ),
+        )
+      : null
     const dateForCurrentState = latestRevisionDate || new Date()
 
     const courseStates = revisions.reduce(
@@ -242,9 +242,9 @@ export class Revisions extends React.Component<Props, State> {
           const olderVal = older[key]
 
           const isDifferent =
-            Array.isArray(newerVal) && Array.isArray(olderVal)
-              ? JSON.stringify(newerVal) !== JSON.stringify(olderVal)
-              : newerVal !== olderVal
+            Array.isArray(newerVal) && Array.isArray(olderVal) ?
+              JSON.stringify(newerVal) !== JSON.stringify(olderVal)
+            : newerVal !== olderVal
 
           if (isDifferent) {
             allChanges.push({
