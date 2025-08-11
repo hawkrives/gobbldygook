@@ -19,7 +19,7 @@ jobs:
         run: npm ci
 
       - name: Run Flow
-        run: node --run flow check --quiet
+        run: mise run flow check --quiet
 
   test:
     name: Jest Tests
@@ -32,7 +32,7 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: node --run test --runInBand --coverage
+        run: mise run test -- --runInBand --coverage
 
       # - name: Upload coverage to Coveralls
       #   uses: coverallsapp/github-action@v2
@@ -48,7 +48,7 @@ jobs:
         run: npm ci
 
       - name: Run ESLint
-        run: node --run lint
+        run: mise run lint
 
   format:
     name: Prettier
@@ -62,7 +62,7 @@ jobs:
 
       - name: Check formatting
         run: |
-          node --run pretty
+          mise run pretty
           git diff --exit-code
 
   build:
@@ -77,7 +77,7 @@ jobs:
 
       - name: Build
         working-directory: modules/gob-web
-        run: node --run build
+        run: mise run build
 
       - name: Rearrange files
         run: node scripts/rearrange-for-circle.js
