@@ -9,3 +9,6 @@ overrides:
   - files: "*.md"
     options:
       tabWidth: 2
+  - files: "*.js"
+    options:
+      parser: "babel-flow"
