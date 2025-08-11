@@ -83,9 +83,6 @@ class AreaOfStudyConnector extends React.Component<Props, State> {
 	}
 }
 
-const connected = connect(
-	undefined,
-	{changeStudent},
-)(AreaOfStudyConnector)
+const connected = connect(undefined, {changeStudent})(AreaOfStudyConnector)
 
 export {connected as ConnectedAreaOfStudy}

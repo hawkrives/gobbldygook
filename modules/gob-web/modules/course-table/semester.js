@@ -303,9 +303,7 @@ class Semester extends React.Component<Props, State> {
 
 					<TitleButton
 						as={Link}
-						to={`/student/${
-							student.id
-						}/search?term=${year}${semester}`}
+						to={`/student/${student.id}/search?term=${year}${semester}`}
 						title="Search for courses"
 					>
 						<Icon>{search}</Icon> Course
@@ -370,9 +368,6 @@ function collect(connect, monitor) {
 
 const droppable = DropTarget(IDENT_COURSE, semesterTarget, collect)(Semester)
 
-const connected = connect(
-	undefined,
-	{changeStudent},
-)(droppable)
+const connected = connect(undefined, {changeStudent})(droppable)
 
 export default connected

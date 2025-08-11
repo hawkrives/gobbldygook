@@ -97,13 +97,12 @@ function collect(connect, monitor) {
 	}
 }
 
-const droppable = DropTarget(IDENT_COURSE, removeCourseTarget, collect)(
-	CourseRemovalBox,
-)
+const droppable = DropTarget(
+	IDENT_COURSE,
+	removeCourseTarget,
+	collect,
+)(CourseRemovalBox)
 
-const connected = connect(
-	undefined,
-	{changeStudent},
-)(droppable)
+const connected = connect(undefined, {changeStudent})(droppable)
 
 export default connected

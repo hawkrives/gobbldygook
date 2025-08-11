@@ -106,9 +106,6 @@ class CourseTable extends React.Component<Props> {
 	}
 }
 
-const connected = connect(
-	undefined,
-	{changeStudent},
-)(CourseTable)
+const connected = connect(undefined, {changeStudent})(CourseTable)
 
 export {connected as CourseTable}

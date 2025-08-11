@@ -133,9 +133,7 @@ export default function computeChunk({
 	} else {
 		;(expr.$type: empty)
 		throw new TypeError(
-			`computeChunk(): the type "${
-				expr.$type
-			}" is not a valid expression type.`,
+			`computeChunk(): the type "${expr.$type}" is not a valid expression type.`,
 		)
 	}
 
@@ -557,9 +555,7 @@ export function computeReference({
 
 	if (!(expr.$requirement in ctx)) {
 		throw new ReferenceError(
-			`computeReference(): the requirement "${
-				expr.$requirement
-			}" does not exist in the provided requirement context`,
+			`computeReference(): the requirement "${expr.$requirement}" does not exist in the provided requirement context`,
 		)
 	}
 

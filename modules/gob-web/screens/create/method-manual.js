@@ -235,7 +235,4 @@ class ManualCreationScreen extends React.Component<Props, State> {
 	}
 }
 
-export default connect(
-	undefined,
-	{initStudent},
-)(ManualCreationScreen)
+export default connect(undefined, {initStudent})(ManualCreationScreen)

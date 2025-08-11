@@ -98,9 +98,6 @@ class SemesterSelector extends React.Component<Props> {
 	}
 }
 
-const connected = connect(
-	undefined,
-	{changeStudent},
-)(SemesterSelector)
+const connected = connect(undefined, {changeStudent})(SemesterSelector)
 
 export {connected as SemesterSelector}

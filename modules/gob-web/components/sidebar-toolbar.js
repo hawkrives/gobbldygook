@@ -121,7 +121,6 @@ export function SidebarToolbar(props: Props) {
 	)
 }
 
-export const ConnectedSidebarToolbar = connect(
-	undefined,
-	{undo, redo},
-)(SidebarToolbar)
+export const ConnectedSidebarToolbar = connect(undefined, {undo, redo})(
+	SidebarToolbar,
+)

@@ -35,7 +35,6 @@ export const Notifications = ({notifications, removeNotification}: Props) => (
 	</NotificationList>
 )
 
-export default connect(
-	state => ({notifications: state.notifications}),
-	{removeNotification},
-)(Notifications)
+export default connect(state => ({notifications: state.notifications}), {
+	removeNotification,
+})(Notifications)

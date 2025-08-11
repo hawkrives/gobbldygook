@@ -78,7 +78,8 @@ class DegubContainer extends React.Component {
 	}
 }
 
-export default connect(
-	state => ({students: state.students}),
-	{undo, redo, loadStudents},
-)(DegubContainer)
+export default connect(state => ({students: state.students}), {
+	undo,
+	redo,
+	loadStudents,
+})(DegubContainer)

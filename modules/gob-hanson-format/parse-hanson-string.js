@@ -508,7 +508,14 @@ function peg$parse(input, options) {
 			return course
 		},
 		peg$c142 = /^[A-Z0-9]/,
-		peg$c143 = peg$classExpectation([['A', 'Z'], ['0', '9']], false, false),
+		peg$c143 = peg$classExpectation(
+			[
+				['A', 'Z'],
+				['0', '9'],
+			],
+			false,
+			false,
+		),
 		peg$c144 = /^[A-Za-z0-9_\- \/'.]/,
 		peg$c145 = peg$classExpectation(
 			[['A', 'Z'], ['a', 'z'], ['0', '9'], '_', '-', ' ', '/', "'", '.'],

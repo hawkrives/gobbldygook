@@ -90,9 +90,6 @@ class AreaOfStudyGroup extends React.PureComponent<Props> {
 	}
 }
 
-const connected = connect(
-	undefined,
-	{changeStudent},
-)(AreaOfStudyGroup)
+const connected = connect(undefined, {changeStudent})(AreaOfStudyGroup)
 
 export {connected as AreaOfStudyGroup}

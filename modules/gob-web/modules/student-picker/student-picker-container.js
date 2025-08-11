@@ -69,7 +69,7 @@ class StudentPickerContainer extends React.Component<Props, State> {
 	}
 }
 
-export default connect(
-	state => ({students: state.students}),
-	{destroyStudent, loadStudents},
-)(StudentPickerContainer)
+export default connect(state => ({students: state.students}), {
+	destroyStudent,
+	loadStudents,
+})(StudentPickerContainer)

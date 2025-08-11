@@ -210,7 +210,7 @@ export default function Expression(props: Props) {
 		// $course is the matched course. It's used mostly by where-expressions and the like.
 		contents = (
 			<CourseExpression
-				{...expr._request || expr.$course}
+				{...(expr._request || expr.$course)}
 				_taken={expr._taken}
 			/>
 		)

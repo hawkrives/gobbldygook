@@ -163,9 +163,6 @@ class Year extends React.Component<Props> {
 	}
 }
 
-const connected = connect(
-	undefined,
-	{changeStudent},
-)(Year)
+const connected = connect(undefined, {changeStudent})(Year)
 
 export {connected as Year}

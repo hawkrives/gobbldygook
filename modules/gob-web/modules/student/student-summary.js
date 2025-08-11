@@ -316,10 +316,7 @@ class Editor extends React.Component<EditorProps, EditorState> {
 	}
 }
 
-const ConnectedEditor = connect(
-	undefined,
-	{changeStudent},
-)(Editor)
+const ConnectedEditor = connect(undefined, {changeStudent})(Editor)
 
 type HeaderProps = {
 	canGraduate: boolean,

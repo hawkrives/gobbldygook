@@ -82,9 +82,7 @@ export default function filterByWhereClause(
 	} else {
 		// where-clauses *must* be either a 'boolean' or a 'qualification'
 		throw new TypeError(
-			`filterByWhereClause: wth kind of type is a "${
-				clause.$type
-			}" clause?`,
+			`filterByWhereClause: wth kind of type is a "${clause.$type}" clause?`,
 		)
 	}
 }
@@ -119,9 +117,7 @@ export function filterByQualification(
 			applyQualifictionFunction({value, fullList, list})
 		} else {
 			throw new TypeError(
-				`filterByQualification: ${
-					value.$type
-				} is not a valid type for a query.`,
+				`filterByQualification: ${value.$type} is not a valid type for a query.`,
 			)
 		}
 	}
@@ -159,9 +155,7 @@ function applyQualifictionFunction({
 
 	if (!func) {
 		throw new ReferenceError(
-			`applyQualifictionFunction: ${
-				value.$name
-			} is not a valid function name.`,
+			`applyQualifictionFunction: ${value.$name} is not a valid function name.`,
 		)
 	}
 

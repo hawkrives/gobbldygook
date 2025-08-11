@@ -261,7 +261,4 @@ class AbbreviatedCourseListing extends React.Component<
 	}
 }
 
-export default connect(
-	undefined,
-	{initStudent},
-)(SISImportScreen)
+export default connect(undefined, {initStudent})(SISImportScreen)

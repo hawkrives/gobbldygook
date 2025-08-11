@@ -84,7 +84,10 @@ test('uses `true` to indicate a conflict', () => {
 		{offerings: [{day: 'Mo', start: '13:00', end: '14:00'}]},
 	]
 
-	let conflicts = [[null, true], [true, null]]
+	let conflicts = [
+		[null, true],
+		[true, null],
+	]
 
 	expect(findTimeConflicts(schedule)).toEqual(conflicts)
 })
@@ -95,7 +98,10 @@ test('uses `false` to indicate not-a-conflict', () => {
 		{offerings: [{day: 'Mo', start: '13:00', end: '14:00'}]},
 	]
 
-	let conflicts = [[null, false], [false, null]]
+	let conflicts = [
+		[null, false],
+		[false, null],
+	]
 
 	expect(findTimeConflicts(schedule)).toEqual(conflicts)
 })

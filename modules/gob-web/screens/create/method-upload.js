@@ -34,7 +34,10 @@ class UploadFileScreen extends React.Component {
 				reader.readAsText(f)
 			}),
 		}))
-		this.setState(() => ({files}), () => this.convertFilesToStudents(files))
+		this.setState(
+			() => ({files}),
+			() => this.convertFilesToStudents(files),
+		)
 	}
 
 	handleOpenPicker = () => {
@@ -135,7 +138,4 @@ class UploadFileScreen extends React.Component {
 
 let mapDispatch = dispatch => ({dispatch})
 
-export default connect(
-	undefined,
-	mapDispatch,
-)(UploadFileScreen)
+export default connect(undefined, mapDispatch)(UploadFileScreen)
