@@ -1,18 +1,12 @@
 [build]
-    command = "npm run netlify"
-    # the directory to publish (relative to root of your repo)
-    publish = "modules/gob-web/build/"
-    [build.environment]
-        NODE_VERSION = "10"
-        YARN_VERSION = "1.10.1"
-        YARN_FLAGS = "--production=false"
+command = "curl https://mise.run | sh && mise i && mise run netlify"
+# the directory to publish (relative to root of your repo)
+publish = "modules/gob-web/build/"
 
 # Production context: All deploys to the main
 # repository branch will inherit these settings.
 [context.production]
-    command = "npm run netlify"
-    [context.production.environment]
-        NODE_ENV = "production"
+environment = { NODE_ENV = "production" }
 
 # respond to all requests with the SPA
 [[redirects]]
@@ -24,5 +18,5 @@ status = 200
 [[headers]]
 for = "/*"
 [headers.values]
-  X-Frame-Options = "DENY"
-  X-XSS-Protection = "1; mode=block"
+X-Frame-Options = "DENY"
+X-XSS-Protection = "1; mode=block"
