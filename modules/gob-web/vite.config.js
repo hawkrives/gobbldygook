@@ -18,7 +18,6 @@ export default defineConfig(({ mode }) => {
       port: 3000,
       host: true,
       // Enable SPA fallback for client-side routing
-      historyApiFallback: true,
       open: false, // Don't auto-open browser
       hmr: {
         port: 24678, // Use a different port for HMR
