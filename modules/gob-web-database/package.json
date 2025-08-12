@@ -13,6 +13,6 @@
     "treo": "^0.6.0-rc2"
   },
   "devDependencies": {
-    "fake-indexeddb": "3.0.0"
+    "fake-indexeddb": "3.1.8"
   }
 }
