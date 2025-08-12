@@ -6,19 +6,24 @@ module.exports = {
       "@babel/preset-env",
       {
         modules: false,
-        useBuiltIns: "entry",
+        useBuiltIns: "usage",
         corejs: 3,
         targets: {
           esmodules: true,
+          // The browsers list below is preserved for reference in case we need to target specific browsers in the future.
+          // browsers: [
+          //   "last 2 versions",
+          //   "not dead",
+          //   "not < 2%",
+          //   "not ie 11"
+          // ]
         },
+        bugfixes: true,
+        shippedProposals: true,
       },
     ],
   ],
   plugins: [
-    "@babel/plugin-syntax-dynamic-import",
-    "@babel/plugin-proposal-class-properties",
-    "@babel/plugin-proposal-object-rest-spread",
-    "@babel/plugin-transform-react-display-name",
     [
       "@babel/plugin-transform-runtime",
       {
@@ -37,8 +42,10 @@ module.exports = {
         [
           "@babel/preset-env",
           {
-            targets: { node: true },
+            targets: { node: "current" },
             modules: "commonjs",
+            useBuiltIns: "usage",
+            corejs: 3,
           },
         ],
       ],
