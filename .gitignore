@@ -7,6 +7,7 @@ stats.json
 .vscode/
 .eslintcache
 /D_*
+.serena/
 
 # Temp folders
 .sass-cache

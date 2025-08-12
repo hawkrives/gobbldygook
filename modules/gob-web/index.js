@@ -36,21 +36,19 @@ const store = configureStore()
 global._dispatch = store.dispatch
 global._store = store
 
-let renderFunc = (chosenStore) => {
-  let renderEl = document.getElementById("gobbldygook")
-  if (!renderEl) {
-    return
-  }
-
-  render(
-    <Provider store={chosenStore}>
-      <>
-        <App />
-        <Notifications />
-      </>
-    </Provider>,
-    renderEl,
+let renderEl = document.getElementById("gobbldygook")
+if (!renderEl) {
+  throw new Error(
+    "Could not find element with id 'gobbldygook' to render the app into.",
   )
 }
 
-renderFunc(store)
+render(
+  <Provider store={store}>
+    <>
+      <App />
+      <Notifications />
+    </>
+  </Provider>,
+  renderEl,
+)
