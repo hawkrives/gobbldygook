@@ -7,9 +7,7 @@ on:
   push:
     branches: [trunk]
   pull_request:
-    branches: [trunk]
   merge_group:
-    branches: [trunk]
   workflow_dispatch:
 
 jobs:
