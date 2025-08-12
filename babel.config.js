@@ -10,6 +10,7 @@ module.exports = {
         corejs: 3,
         targets: {
           esmodules: true,
+          // The browsers list below is preserved for reference in case we need to target specific browsers in the future.
           // browsers: [
           //   "last 2 versions",
           //   "not dead",
