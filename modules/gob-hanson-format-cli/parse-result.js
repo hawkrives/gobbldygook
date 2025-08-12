@@ -1,5 +1,5 @@
 const { parse } = require("@gob/hanson-format")
-const nom = require("nomnom")
+const { parseArgs } = require("node:util")
 const stringify = require("stabilize")
 const yaml = require("js-yaml")
 const util = require("util")
@@ -22,12 +22,25 @@ function parseString(args, string) {
 }
 
 module.exports.cli = function cli() {
-  const args = nom
-    .option("json", { flag: true, help: "Print the result as valid JSON" })
-    .option("yaml", { flag: true, help: "Print the result as YAML" })
-    .option("stdin", { flag: true, help: "Take input via STDIN" })
-    .option("string", { position: 0 })
-    .parse()
+  const { values: args, positionals } = parseArgs({
+    options: {
+      json: {
+        type: "boolean",
+        default: false,
+      },
+      yaml: {
+        type: "boolean",
+        default: false,
+      },
+      stdin: {
+        type: "boolean",
+        default: false,
+      },
+    },
+    allowPositionals: true,
+  })
+
+  args.string = positionals[0]
 
   if (args.stdin) {
     getStdin()
