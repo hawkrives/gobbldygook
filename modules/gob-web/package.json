@@ -73,7 +73,7 @@
     "stabilize": "1.0.0",
     "sto-course-related-data": "4.0.2",
     "styled-components": "4.4.1",
-    "typeface-fira-sans": "0.0.54",
+    "typeface-fira-sans": "0.0.75",
     "uuid": "3.3.2"
   },
   "engines": {
