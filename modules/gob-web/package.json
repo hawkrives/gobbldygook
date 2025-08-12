@@ -35,7 +35,7 @@
     "@uiw/react-codemirror": "^4.24.2",
     "bugsnag-js": "4.7.3",
     "classnames": "2.2.6",
-    "codemirror": "5.62.2",
+    "codemirror": "5.65.20",
     "delay": "4.3.0",
     "fuzzysearch": "1.0.3",
     "js-yaml": "3.14.1",
