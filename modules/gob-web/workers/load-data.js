@@ -3,8 +3,11 @@
 import uniqueId from "lodash/uniqueId"
 import { status, text } from "@gob/lib"
 import * as notificationActions from "../modules/notifications/redux/actions"
-import LoadDataWorker from "./load-data.worker"
 import mem from "mem"
+
+const worker = new Worker(new URL("./load-data.worker.js", import.meta.url), {
+  type: "module",
+})
 
 const COURSE_URL = APP_BASE + "courseData.url"
 const AREA_URL = APP_BASE + "areaData.url"
@@ -12,8 +15,6 @@ const AREA_URL = APP_BASE + "areaData.url"
 const actions = {
   notifications: notificationActions,
 }
-
-const worker = new LoadDataWorker()
 
 let fetchText = (...args) =>
   fetch(...args)
