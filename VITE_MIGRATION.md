@@ -31,7 +31,7 @@ Workers now use Vite's native worker support:
 import Worker from "./worker.js"
 
 // New (Vite)
-import Worker from "./worker.js?worker"
+const worker = new Worker(new URL('./worker.js', import.meta.url), { type: 'module' })
 ```
 
 ### Environment Variables
