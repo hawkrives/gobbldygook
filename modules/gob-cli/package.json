@@ -23,7 +23,7 @@
     "@gob/lib": "^3.0.0-rc.2",
     "@gob/object-student": "^3.0.0-rc.2",
     "@gob/school-st-olaf-college": "^3.0.0-rc.2",
-    "chalk": "^4.1.0",
+    "chalk": "^5.0.0",
     "esm": "^3.0.84",
     "flow-remove-types": "^2.122.0",
     "get-stdin": "^9.0.0",
