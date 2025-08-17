@@ -231,7 +231,7 @@ export async function cleanCourseCache(path) {
 
 export async function cleanAreaCache(path) {
   return db.transaction(async (tx) => {
-    await tx.exec(`DELETE FROM areaCache WHERE id = '${path}'`)
+    await tx.sql`DELETE FROM areaCache WHERE id = ${path}`
   })
 }
 
