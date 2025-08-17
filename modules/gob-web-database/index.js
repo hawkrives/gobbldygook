@@ -225,7 +225,7 @@ export async function cleanPriorAreas(path) {
 
 export async function cleanCourseCache(path) {
   return db.transaction(async (tx) => {
-    await tx.exec(`DELETE FROM courseCache WHERE id = '${path}'`)
+    await tx.sql`DELETE FROM courseCache WHERE id = ${path}`
   })
 }
 
