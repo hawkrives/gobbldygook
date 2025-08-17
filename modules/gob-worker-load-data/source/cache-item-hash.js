@@ -1,14 +1,5 @@
 // @flow
 
-import { db } from "./db"
-import getCacheStoreName from "./get-cache-store-name"
-import type { InfoFileTypeEnum } from "./types"
+import { cacheItemHash } from "@gob/web-database"
 
-export default function cacheItemHash(
-  path: string,
-  type: InfoFileTypeEnum,
-  hash: string,
-) {
-  console.log(`caching ${path}`)
-  return db.store(getCacheStoreName(type)).put({ id: path, path, hash })
-}
+export default cacheItemHash

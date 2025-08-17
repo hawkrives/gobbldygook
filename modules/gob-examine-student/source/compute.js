@@ -1,12 +1,12 @@
 // @flow
-import applyFilter from "./apply-filter"
-import applyFulfillmentToExpression from "./apply-fulfillment-to-expression"
-import computeChunk from "./compute-chunk"
-import getFulfillment from "./get-fulfillment"
-import getOverride from "./get-override"
-import hasOverride from "./has-override"
-import isRequirementName from "./is-requirement-name"
-import mapValues from "lodash/mapValues"
+import applyFilter from "./apply-filter.js"
+import applyFulfillmentToExpression from "./apply-fulfillment-to-expression.js"
+import computeChunk from "./compute-chunk.js"
+import getFulfillment from "./get-fulfillment.js"
+import getOverride from "./get-override.js"
+import hasOverride from "./has-override.js"
+import isRequirementName from "./is-requirement-name.js"
+import { mapValues } from "lodash"
 import type {
   ParsedHansonFile,
   ParsedHansonRequirement,
@@ -14,7 +14,7 @@ import type {
   Course,
   OverridesObject,
   FulfillmentsObject,
-} from "./types"
+} from "./types.js"
 
 // The overall computation is done by compute, which is in charge of computing
 // sub-requirements and such.

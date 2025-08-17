@@ -1,5 +1,5 @@
 // @flow
-import reject from "lodash/reject"
+import { reject } from "lodash"
 
 /**
  * Throws a ReferenceError if any requested key is missing.

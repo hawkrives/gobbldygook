@@ -1,7 +1,7 @@
 // @flow
 
-import compareCourseToCourse from "./compare-course-to-course"
-import type { Course } from "./types"
+import compareCourseToCourse from "./compare-course-to-course.js"
+import type { Course } from "./types.js"
 
 /**
  * Checks if a course exists in an array of courses

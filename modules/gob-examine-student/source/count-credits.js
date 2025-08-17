@@ -1,6 +1,6 @@
 // @flow
 
-import sumBy from "lodash/sumBy"
+import { sumBy } from "lodash"
 import { type Course as CourseType } from "@gob/types"
 
 // Sums up the number of credits offered by a set of courses

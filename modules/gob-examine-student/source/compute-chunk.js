@@ -1,24 +1,22 @@
 // @flow
-import keys from "lodash/keys"
-import take from "lodash/take"
-import xor from "lodash/xor"
+import { keys, take, xor } from "lodash"
 import stringify from "stabilize"
-import applyFulfillmentToResult from "./apply-fulfillment-to-result"
-import assertKeys from "./assert-keys"
-import collectMatches from "./collect-matches"
-import collectTakenCourses from "./collect-taken-courses"
-import computeCountWithOperator from "./compute-count-with-operator"
-import countCourses from "./count-courses"
-import { countCredits } from "./count-credits"
-import { countTerms } from "./count-terms"
-import countDepartments from "./count-departments"
-import excludeCourse from "./exclude-course"
-import filterByWhereClause from "./filter-by-where-clause"
-import findCourse from "./find-course"
-import getMatchesFromChildren from "./get-matches-from-children"
-import getMatchesFromFilter from "./get-matches-from-filter"
-import getOccurrences from "./get-occurrences"
-import simplifyCourse from "./simplify-course"
+import applyFulfillmentToResult from "./apply-fulfillment-to-result.js"
+import assertKeys from "./assert-keys.js"
+import collectMatches from "./collect-matches.js"
+import collectTakenCourses from "./collect-taken-courses.js"
+import computeCountWithOperator from "./compute-count-with-operator.js"
+import countCourses from "./count-courses.js"
+import { countCredits } from "./count-credits.js"
+import { countTerms } from "./count-terms.js"
+import countDepartments from "./count-departments.js"
+import excludeCourse from "./exclude-course.js"
+import filterByWhereClause from "./filter-by-where-clause.js"
+import findCourse from "./find-course.js"
+import getMatchesFromChildren from "./get-matches-from-children.js"
+import getMatchesFromFilter from "./get-matches-from-filter.js"
+import getOccurrences from "./get-occurrences.js"
+import simplifyCourse from "./simplify-course.js"
 
 import type {
   Expression,
@@ -32,7 +30,7 @@ import type {
   OfExpression,
   ReferenceExpression,
   WhereExpression,
-} from "./types"
+} from "./types.js"
 
 type StringifiedCourse = string
 

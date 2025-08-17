@@ -1,12 +1,7 @@
 // @flow
-import flatten from "lodash/flatten"
-import map from "lodash/map"
-import compact from "lodash/compact"
-import isPlainObject from "lodash/isPlainObject"
-import keys from "lodash/keys"
-import some from "lodash/some"
-import isRequirementName from "./is-requirement-name"
-import type { Requirement } from "./types"
+import { flatten, map, compact, isPlainObject, keys, some } from "lodash"
+import isRequirementName from "./is-requirement-name.js"
+import type { Requirement } from "./types.js"
 
 /**
  * Searches recursively through a requirement tree to find all of the

@@ -1,10 +1,9 @@
 // @flow
 
-import isRequirementName from "@gob/examine-student/source/is-requirement-name"
-import fromPairs from "lodash/fromPairs"
-import toPairs from "lodash/toPairs"
-import { makeAreaSlug } from "./make-area-slug"
-const { parse } = require("./parse-hanson-string")
+import { isRequirementName } from "@gob/examine-student"
+import { fromPairs, toPairs } from "lodash"
+import { makeAreaSlug } from "./make-area-slug.js"
+import { parse } from "./parse-hanson-string.js"
 
 type PegStartRule = "Filter" | "Result"
 

@@ -1,8 +1,7 @@
 // @flow
-import uniqBy from "lodash/uniqBy"
-import size from "lodash/size"
-import simplifyCourse from "./simplify-course"
-import type { Course } from "./types"
+import { uniqBy, size } from "lodash"
+import simplifyCourse from "./simplify-course.js"
+import type { Course } from "./types.js"
 
 /**
  * Counts the number of unique courses in a list of courses

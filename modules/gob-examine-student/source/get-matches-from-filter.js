@@ -1,6 +1,6 @@
 // @flow
-import assertKeys from "./assert-keys"
-import type { Requirement } from "./types"
+import assertKeys from "./assert-keys.js"
+import type { Requirement } from "./types.js"
 
 /**
  * Returns the list of matches from a requirement's filter

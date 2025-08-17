@@ -1,9 +1,6 @@
 // @flow
-import isPlainObject from "lodash/isPlainObject"
-import flattenDeep from "lodash/flattenDeep"
-import uniq from "lodash/uniq"
-import values from "lodash/values"
-import type { Expression, Course } from "./types"
+import { isPlainObject, flattenDeep, uniq, values } from "lodash"
+import type { Expression, Course } from "./types.js"
 
 export default function collectTakenCourses(expr: Expression): Course[] {
   // this function needs to end up with a list of all of the courses

@@ -1,5 +1,6 @@
 // @flow
-import type { CounterOperatorEnum } from "./types"
+import type { CounterOperatorEnum } from "./types.js"
+
 export default function computeCountWithOperator({
   comparator,
   has,

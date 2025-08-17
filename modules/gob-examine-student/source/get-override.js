@@ -1,6 +1,6 @@
 // @flow
-import pathToOverride from "./path-to-override"
-import type { OverridesPath, OverridesObject } from "./types"
+import pathToOverride from "./path-to-override.js"
+import type { OverridesPath, OverridesObject } from "./types.js"
 
 /**
  * Gets an override from an override object

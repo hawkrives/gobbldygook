@@ -1,21 +1,15 @@
 // @flow
-import filter from "lodash/filter"
-import forEach from "lodash/forEach"
-import map from "lodash/map"
-import max from "lodash/max"
-import min from "lodash/min"
-import take from "lodash/take"
-import uniqBy from "lodash/uniqBy"
-import assertKeys from "./assert-keys"
-import compareCourseToQualification from "./compare-course-to-qualification"
-import simplifyCourse from "./simplify-course"
+import { filter, forEach, map, max, min, take, uniqBy } from "lodash"
+import assertKeys from "./assert-keys.js"
+import compareCourseToQualification from "./compare-course-to-qualification.js"
+import simplifyCourse from "./simplify-course.js"
 import type {
   Course,
   Qualifier,
   Qualification,
   Counter,
   QualificationFunctionValue,
-} from "./types"
+} from "./types.js"
 
 export default function filterByWhereClause(
   baseList: Course[],

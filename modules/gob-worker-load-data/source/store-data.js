@@ -3,14 +3,14 @@
 import present from "present"
 import prepareCourse from "./lib-prepare-course"
 import { quotaExceededError } from "./lib-dispatch"
-import { db } from "./db"
+import { insertArea, insertCourses } from "@gob/web-database"
 import type { InfoFileTypeEnum } from "./types"
 import prettyMs from "pretty-ms"
 
 type BasicCourse = Object
 type BasicArea = { type: string }
 
-export function storeCourses(path: string, data: Array<BasicCourse>) {
+export async function storeCourses(path: string, data: Array<BasicCourse>) {
   console.log(`courses: storing ${path}`)
 
   let coursesToStore = data.map((course) => ({
@@ -19,15 +19,13 @@ export function storeCourses(path: string, data: Array<BasicCourse>) {
     sourcePath: path,
   }))
 
-  const start = present()
-
-  const onSuccess = () => {
+  try {
+    const start = present()
+    await insertCourses(coursesToStore)
     let time = present() - start
     console.log(`stored ${coursesToStore.length} courses in ${prettyMs(time)}.`)
-  }
-
-  // istanbul ignore next
-  const onFailure = (err) => {
+  } catch (err) {
+    // istanbul ignore next
     const db = err.target.db.name
     const errorName = err.target.error.name
 
@@ -35,14 +33,11 @@ export function storeCourses(path: string, data: Array<BasicCourse>) {
     if (errorName === "QuotaExceededError") {
       quotaExceededError(db)
     }
-
     throw err
   }
-
-  return db.store("courses").batch(coursesToStore).then(onSuccess, onFailure)
 }
 
-export function storeArea(path: string, data: BasicArea) {
+export async function storeArea(path: string, data: BasicArea) {
   console.log(`areas: storing ${path}`)
 
   const area = {
@@ -52,15 +47,13 @@ export function storeArea(path: string, data: BasicArea) {
     dateAdded: new Date(),
   }
 
-  const start = present()
-
-  const onSuccess = () => {
+  try {
+    const start = present()
+    await insertArea(area)
     let time = present() - start
     console.log(`stored area ${path} in ${prettyMs(time)}.`)
-  }
-
-  // istanbul ignore next
-  const onFailure = (err) => {
+  } catch (err) {
+    // istanbul ignore next
     const db = err.target.db.name
     const errorName = err.target.error.name
 
@@ -68,11 +61,8 @@ export function storeArea(path: string, data: BasicArea) {
     if (errorName === "QuotaExceededError") {
       quotaExceededError(db)
     }
-
     throw err
   }
-
-  return db.store("areas").put(area).then(onSuccess, onFailure)
 }
 
 export default function storeData(

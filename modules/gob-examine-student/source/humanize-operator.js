@@ -1,5 +1,6 @@
 // @flow
-import type { CounterOperatorEnum } from "./types"
+import type { CounterOperatorEnum } from "./types.js"
+
 export default function humanizeOperator(operator: CounterOperatorEnum) {
   if (operator === "$gte") {
     return ""
