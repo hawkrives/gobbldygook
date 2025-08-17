@@ -159,7 +159,9 @@ export async function removeAreas(ids) {
   await db.transaction(async (tx) => {
     await tx.exec(
       `DELETE FROM areas WHERE id IN (${ids.map((id) => `'${id}'`).join(", ")})`,
-    )
+    await tx.sql`
+      DELETE FROM areas WHERE id IN (${ids})
+    `
   })
 }
 
