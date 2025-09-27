@@ -11,9 +11,9 @@ import type { GROUP_BY_KEY } from "./constants"
 type Results = List<string | CourseType>
 
 type Props = {
-  groupedBy: GROUP_BY_KEY,
-  results: Results,
-  studentId?: string,
+  groupedBy: GROUP_BY_KEY
+  results: Results
+  studentId?: string
 }
 
 const TermList = styled(VariableSizeList)`
@@ -113,7 +113,7 @@ export class CourseResultsList extends React.Component<Props> {
     )
   }
 
-  renderRow = (args: { index: number, style: Object }) => {
+  renderRow = (args: { index: number; style: Object }) => {
     let { index, style } = args
     let item = this.props.results.get(index)
 

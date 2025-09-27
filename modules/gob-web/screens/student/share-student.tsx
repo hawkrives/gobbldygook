@@ -9,14 +9,14 @@ import { close } from "../../icons/ionicons"
 import { Student } from "@gob/object-student"
 
 type Props = {
-  navigate: (string) => mixed;
-  student: Student,
-  queryString?: string,
+  navigate: (string) => mixed
+  student: Student
+  queryString?: string
 }
 
 type State = {
-  encoded: ?string,
-  loading: boolean,
+  encoded: ?string
+  loading: boolean
 }
 
 const SizedCard = styled(Card)`

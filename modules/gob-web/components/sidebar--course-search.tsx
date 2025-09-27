@@ -6,10 +6,10 @@ import { Student } from "@gob/object-student"
 import type { Undoable } from "../types"
 
 type Props = {
-  term: ?string,
-  navigate: (string) => mixed;
-  student: Undoable<Student>,
-  queryString?: string,
+  term: ?string
+  navigate: (string) => mixed
+  student: Undoable<Student>
+  queryString?: string
 }
 
 export function CourseSearcherSidebar(props: Props) {

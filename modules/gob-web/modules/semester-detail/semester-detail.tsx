@@ -10,13 +10,13 @@ const DetailText = styled.pre`
 `
 
 type RouterProps = {
-  term?: string,
-  uri?: string, // TODO: not actually optional
+  term?: string
+  uri?: string // TODO: not actually optional
 }
 
 type ReactProps = {
-  className?: string,
-  student: Student,
+  className?: string
+  student: Student
 }
 
 type Props = RouterProps & ReactProps

@@ -21,7 +21,7 @@ export const cardContent = `
 
 export const cardActions = css`
   border-top: 1px solid rgba(160, 160, 160, 0.2);
-  padding: 1em,
+  padding: 1em;
 `
 
 export const headingNeutral = `

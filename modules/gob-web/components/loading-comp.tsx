@@ -10,10 +10,10 @@ let CenteredCard = styled(Card)`
 `
 
 export function LoadingComponent(props: {
-  error: ?Error,
-  retry: () => any;
-  timedOut: boolean,
-  pastDelay: boolean,
+  error: ?Error
+  retry: () => any
+  timedOut: boolean
+  pastDelay: boolean
 }) {
   if (props.error) {
     return (

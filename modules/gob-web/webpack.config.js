@@ -51,7 +51,7 @@ function config() {
   }
 
   const entry = {
-    [entryPointName]: ["./index.ts"],
+    [entryPointName]: ["./index.tsx"],
   }
 
   if (isDevelopment) {
@@ -155,7 +155,7 @@ function config() {
   const module = {
     rules: [
       {
-        test: /\.(js|ts)$/,
+        test: /\.(js|ts|tsx)$/,
         exclude: /node_modules/,
         use: [babelLoader],
       },
@@ -221,7 +221,7 @@ function config() {
     plugins,
     module,
     resolve: {
-      extensions: ['.ts', '.js', '.json'],
+      extensions: [".tsx", ".ts", ".js", ".json"],
     },
   }
 }

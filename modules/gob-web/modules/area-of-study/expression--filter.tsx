@@ -4,7 +4,7 @@ import Expression, { makeWhereQualifier } from "./expression"
 import type { OfExpression, WhereExpression } from "@gob/examine-student"
 import type { Props } from "./expression"
 
-function FilterOf({ expr, ctx }: { expr: OfExpression, ctx: unknown }) {
+function FilterOf({ expr, ctx }: { expr: OfExpression; ctx: unknown }) {
   return (
     <div className="filter filter--of">
       <h4>Filter:</h4>

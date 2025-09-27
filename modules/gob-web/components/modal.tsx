@@ -9,10 +9,10 @@ if (!global.TESTING) {
 import "./modal.scss"
 
 type ModalProps = {
-  backdropClassName?: string,
-  children?: any,
-  className?: string,
-  onClose: () => any;
+  backdropClassName?: string
+  children?: any
+  className?: string
+  onClose: () => any
 }
 
 export default function Modal(props: ModalProps) {

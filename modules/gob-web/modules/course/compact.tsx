@@ -51,19 +51,19 @@ const GeReqItem = styled(InlineListItem)`
 `
 
 const Identifier = styled.span`
-  font-variant-numeric: tabular-nums,
+  font-variant-numeric: tabular-nums;
 `
 
 const Type = styled.span``
 const Prereqs = styled.span``
 
 export type Props = {
-  className?: string,
-  conflicts?: ?List<WarningType>,
-  course: Course,
-  index?: number,
-  onClick?: (Event) => any;
-  style?: Object,
+  className?: string
+  conflicts?: ?List<WarningType>
+  course: Course
+  index?: number
+  onClick?: (Event) => any
+  style?: Object
 }
 
 export default class CompactCourse extends React.Component<Props> {

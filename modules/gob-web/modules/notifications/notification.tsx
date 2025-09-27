@@ -6,8 +6,8 @@ import styled from "styled-components"
 import { type Notification as NotificationType } from "./types"
 
 type Props = {
-  onClose: () => any;
-  notification: NotificationType,
+  onClose: () => any
+  notification: NotificationType
 }
 
 let ProgressContainer = styled.div`
@@ -38,7 +38,7 @@ let Message = styled.h1`
 `
 
 let Content = styled.div`
-  flex: 1,
+  flex: 1;
 `
 
 let CloseButton = styled(FlatButton)`

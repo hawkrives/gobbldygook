@@ -1,13 +1,11 @@
 import styled from "styled-components"
 
 export const Header = styled.header`
-  text-align: center,
-
-  h1 {
-    font-weight: 400,
+  text-align: center, h1 {
+    font-weight: 400;
   }
   h2 {
-    font-weight: 300,
+    font-weight: 300;
   }
 `
 

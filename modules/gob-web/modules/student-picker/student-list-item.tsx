@@ -53,18 +53,18 @@ const StudentName = styled.div`
 `
 
 const StudentAreas = styled.div`
-  font-size: 0.8em,
+  font-size: 0.8em;
 `
 
 const AreaGrouping = styled.span`
   & + &::before {
-    content: " | ",
+    content: " | ";
   }
 `
 
 const AreaName = styled.span`
   & + &::before {
-    content: " • ",
+    content: " • ";
   }
 `
 
@@ -102,10 +102,10 @@ const ListItemLink = styled(Link)`
 `
 
 type Props = {
-  destroyStudent: (string) => any;
-  isEditing: boolean,
-  student: IndividualStudentState,
-  as?: string,
+  destroyStudent: (string) => any
+  isEditing: boolean
+  student: IndividualStudentState
+  as?: string
 }
 
 export default function StudentListItem(props: Props) {

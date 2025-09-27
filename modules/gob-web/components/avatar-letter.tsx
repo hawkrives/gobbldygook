@@ -31,8 +31,8 @@ const Wrapper = styled.div`
 `
 
 type Props = {
-  className?: string,
-  value: string,
+  className?: string
+  value: string
 }
 
 export const AvatarLetter = ({ className, value = "" }: Props) => (

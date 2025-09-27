@@ -45,7 +45,7 @@ export function checkCoursesForTimeConflicts(
     // Two offerings cannot conflict if they are on different days
     altOfferings
       .filter((offer) => offer.day === mainOffer.day)
-      .some((altOffer) => checkOfferingForTimeConflict(mainOffer, altOffer))
+      .some((altOffer) => checkOfferingForTimeConflict(mainOffer, altOffer)),
   )
 }
 

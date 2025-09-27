@@ -3,7 +3,7 @@ import { Student, Schedule } from "@gob/object-student"
 import { INIT_STUDENT } from "../constants"
 import { saveStudent } from "../../../helpers/save-student"
 
-type Action = { type: typeof INIT_STUDENT, payload: Student }
+type Action = { type: typeof INIT_STUDENT; payload: Student }
 
 export type ActionCreator = (any) => Action
 

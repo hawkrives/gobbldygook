@@ -41,10 +41,10 @@ const BarFill = styled.div`
 `
 
 type Props = {
-  className?: string,
-  colorful?: boolean,
-  max?: number,
-  value: number,
+  className?: string
+  colorful?: boolean
+  max?: number
+  value: number
 }
 
 export default function ProgressBar(props: Props) {
