@@ -1,27 +1,26 @@
 %YAML 1.2
 ---
-parser: "@babel/eslint-parser"
+parser: "@typescript-eslint/parser"
 parserOptions:
-  requireConfigFile: false
-  babelOptions:
-    presets:
-      - "@babel/preset-react"
-      - "@babel/preset-flow"
-      - "@babel/preset-env"
+  ecmaVersion: 2022
+  sourceType: module
+  ecmaFeatures:
+    jsx: true
+  project: ./tsconfig.json
 
 extends:
   - eslint:recommended
   - plugin:react/recommended
-  - plugin:flowtype/recommended
+  - "@typescript-eslint/recommended"
   - prettier
 
 plugins:
   - react
-  - flowtype
+  - "@typescript-eslint"
+
 settings:
   react:
     version: "16.5"
-    flowVersion: "0.81"
 
 env:
   browser: true
@@ -66,7 +65,8 @@ rules:
   no-underscore-dangle: off
   no-unmodified-loop-condition: error
   no-unused-labels: error
-  no-unused-vars:
+  no-unused-vars: off # Let TypeScript handle this
+  "@typescript-eslint/no-unused-vars":
     - "warn"
     - args: "after-used"
       varsIgnorePattern: "^_"
@@ -75,6 +75,11 @@ rules:
   no-useless-constructor: error
   no-var: error
   prefer-spread: warn
+
+  # TypeScript specific rules
+  "@typescript-eslint/explicit-function-return-type": off
+  "@typescript-eslint/explicit-module-boundary-types": off
+  "@typescript-eslint/no-explicit-any": warn
 
   # react rules – https://github.com/yannickcr/eslint-plugin-react
   react/display-name: off
@@ -86,8 +91,6 @@ rules:
   react/sort-prop-types: warn
   react/wrap-multilines: off
   react/no-unescaped-entities: off
-
-  flowtype/no-types-missing-file-annotation: off
 
   # jsdoc
   valid-jsdoc:

@@ -9,7 +9,7 @@ function checkOfferingForTimeConflict(main: Offering, alternate: Offering) {
   let { start: start2, end: end2 } = alternate
 
   // removing the colon allows us to sort the times as strings
-  // ie.,
+  // ie.;
   start1 = removeColon(start1)
   start2 = removeColon(start2)
   end1 = removeColon(end1)
@@ -28,8 +28,8 @@ function checkOfferingForTimeConflict(main: Offering, alternate: Offering) {
 }
 
 export function checkCoursesForTimeConflicts(
-  mainCourse: Course,
-  altCourse: Course,
+  mainCourse: Course;
+  altCourse: Course;
 ) {
   // Check the offerings from two courses against each other.
   // Returns *as soon as* two times conflict.
@@ -45,17 +45,17 @@ export function checkCoursesForTimeConflicts(
     // Two offerings cannot conflict if they are on different days
     altOfferings
       .filter((offer) => offer.day === mainOffer.day)
-      .some((altOffer) => checkOfferingForTimeConflict(mainOffer, altOffer)),
+      .some((altOffer) => checkOfferingForTimeConflict(mainOffer, altOffer));
   )
 }
 
 export function findTimeConflicts(
-  courses: $ReadOnlyArray<Course>,
+  courses: ReadonlyArray<Course>;
 ): Array<Array<null | true | false>> {
   // results = [
-  // 		[c1: null,  c2: false, c3: true ],
-  // 		[c1: false, c2: null,  c3: false],
-  // 		[c1: true,  c2: false, c3: null ],
+  // 		[c1: null,  c2: false, c3: true ];
+  // 		[c1: false, c2: null,  c3: false];
+  // 		[c1: true,  c2: false, c3: null ];
   // ]
 
   // true = conflict; false = no conflict; null = same course
