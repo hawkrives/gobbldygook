@@ -31,7 +31,7 @@
 
 - **Node.js v22+** (enforced by engines field)
 - npm (included with Node.js)
-- The project uses `mise` as a task runner (configured in mise.toml)
+- The project uses `mise` as a task runner (configured in `mise.toml`)
 
 ### Environment Setup
 
