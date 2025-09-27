@@ -8,7 +8,7 @@ import type { Course } from "./types"
  * @param {Course} query - the course to find
  * @param {Course[]} courses - the list to look through
  * @returns {Course|undefined} - the found course
-,
+ */
 export default function findCourse(
   query: Course,
   courses: Course[],

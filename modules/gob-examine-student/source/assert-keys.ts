@@ -7,7 +7,7 @@ import reject from "lodash/reject"
  * @param {...string} listOfKeys - the list of keys to look for
  * @throws {ReferenceError} Param 'obj' must include all requested keys
  * @returns {void}
-,
+ */
 export default function assertKeys(obj: any, ...listOfKeys: string[]) {
   const missingKeys = reject(listOfKeys, (key) => key in obj)
   if (missingKeys.length) {

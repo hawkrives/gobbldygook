@@ -13,7 +13,7 @@ import type { Course, Qualification } from "./types"
  * @param {string} $operator - the operator to check against
  * @param {string} $value - the value compare to
  * @returns {boolean} - whether the course matched or not
-,
+ */
 export default function compareCourseToQualification(
   course: Course,
   { $key, $operator, $value, $type }: Qualification,

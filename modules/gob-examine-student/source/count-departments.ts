@@ -7,7 +7,7 @@ import type { Course } from "./types"
  * @private
  * @param {Course[]} courses - the list of courses
  * @returns {number} - the number of unique departments
-,
+ */
 export default function countDepartments(courses: Course[]) {
   // getDepartments does a uniq
   return compact(getDepartments(courses)).length

@@ -20,7 +20,7 @@ const baseKeys = new Set([
  * @private
  * @param {any} lhs - left-hand side of the comparison. rhs doesn't matter.
  * @returns {boolean} - if lhs was a wildcard
-,
+ */
 function wildcard(lhs) {
   if (lhs === "*") {
     return true
@@ -33,7 +33,7 @@ function wildcard(lhs) {
  * @param {Course} query - the course to compare
  * @param {Course} other - the course to compare against
  * @returns {boolean} - if the course matched
-,
+ */
 export default function compareCourseToCourse(
   query: Course,
   other: Course,

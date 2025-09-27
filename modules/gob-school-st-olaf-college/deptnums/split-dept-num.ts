@@ -13,7 +13,7 @@ export type DeptNum = {
  * @param {String} deptNumString - the deptnum to split
  * @param {Boolean} includeSection - include the section in the result?
  * @returns {Object} - the result
-,
+ */
 export function splitDeptNum(
   deptNumString: string,
   includeSection?: boolean = false,

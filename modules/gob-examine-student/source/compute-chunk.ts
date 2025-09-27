@@ -49,7 +49,7 @@ type StringifiedCourse = string
  * @param {Course[]} courses - the list of courses to search
  * @param {Course[]} dirty - the list of dirty courses
  * @returns {boolean} - the result of the expression
-,
+ */
 type Args = {
   expr: Expression,
   ctx: Requirement,
@@ -190,7 +190,7 @@ export default function computeChunk({
  * @param {Course[]} courses - the list of courses to search
  * @param {Course[]} dirty - the list of dirty courses
  * @returns {boolean} - the result of the modifier
-,
+ */
 type BooleanChunkArgs = {
   expr: BooleanExpression,
   ctx: Requirement,
@@ -267,7 +267,7 @@ export function computeBoolean({
  * @param {Course[]} courses - the list of courses to search
  * @param {Course[]} dirty - the list of dirty courses
  * @returns {boolean} - if the course was found or not
-,
+ */
 type CourseChunkArgs = {
   expr: CourseExpression,
   courses: Course[],
@@ -316,7 +316,7 @@ export function computeCourse({
  * @param {Requirement} ctx - the requirement context
  * @param {Course[]} courses - the list of courses to search
  * @returns {boolean} - the result of the modifier
-,
+ */
 type ModifierChunkArgs = {
   expr: ModifierExpression,
   ctx: Requirement,
@@ -427,7 +427,7 @@ export function computeModifier({ expr, ctx, courses }: ModifierChunkArgs) {
  * @param {Object} expr - the expression to process
  * @param {Course[]} courses - the list of courses to search
  * @returns {boolean} - the result of the occurrence
-,
+ */
 type OccurrenceChunkArgs = {
   expr: OccurrenceExpression,
   courses: Course[],
@@ -460,7 +460,7 @@ export function computeOccurrence({ expr, courses }: OccurrenceChunkArgs) {
  * @param {Course[]} courses - the list of courses to search
  * @param {Course[]} dirty - the list of dirty courses
  * @returns {boolean} - the result of the of-expression
-,
+ */
 type OfChunkArgs = {
   expr: OfExpression,
   ctx: Requirement,
@@ -547,7 +547,7 @@ export function computeOf({
  * @param {Object} expr - the expression to process
  * @param {Requirement} ctx - the requirement context
  * @returns {boolean} - the result of the reference expression
-,
+ */
 type ComputeReferenceResult = { matches: ?(Course[]), computedResult: boolean }
 type ReferenceChunkArgs = {
   expr: ReferenceExpression,
@@ -588,7 +588,7 @@ export function computeReference({
  * @param {Object} expr - the expression to process
  * @param {Course[]} courses - the list of courses to search
  * @returns {boolean} - the result of the where-expression
-,
+ */
 type WhereChunkArgs = {
   expr: WhereExpression,
   courses: Course[],

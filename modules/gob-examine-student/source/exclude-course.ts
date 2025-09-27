@@ -8,7 +8,7 @@ import type { Course } from "./types"
  * @param {Course} query - the course to remove
  * @param {Course[]} courses - the list to look through
  * @returns {Course[]} - the filtered list of courses
-,
+ */
 export default function excludeCourse(query: Course, courses: Course[]) {
   return reject(courses, (course) => compareCourseToCourse(query, course))
 }

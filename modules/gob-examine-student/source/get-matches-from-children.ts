@@ -17,7 +17,7 @@ import type {
  * @param {Object} expr - the current result expression
  * @param {Requirement} ctx - the host requirement
  * @returns {Course[]} - the list of matched courses
-,
+ */
 export default function getMatchesFromChildren(
   expr: ModifierChildrenExpression | ModifierChildrenWhereExpression,
   ctx: Requirement,

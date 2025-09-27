@@ -9,7 +9,7 @@ import type { Expression, Requirement, Course } from "./types"
  * @private
  * @param {Result} expr - the result object to extract matches from
  * @returns {Course[]} matches - the list of matched courses
-,
+ */
 export default function collectMatches(
   expr: Expression | Requirement,
 ): Course[] {

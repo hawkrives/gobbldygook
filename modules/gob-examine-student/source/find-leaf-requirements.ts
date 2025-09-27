@@ -13,7 +13,7 @@ import type { Requirement } from "./types"
  *
  * @param {Requirement} requirement - the root requirement
  * @returns {Course[]} - the leaf children
-,
+ */
 export default function findLeafRequirements(requirement: Requirement) {
   // Time to muse. Just what is a "requirement with no children?"
   // I think that it's just that – a requirement with no children,

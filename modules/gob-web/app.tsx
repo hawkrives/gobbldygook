@@ -10,26 +10,26 @@ import { Card } from "./components/card"
 
 let GlobalStyle = createGlobalStyle`
     *, *::before, *::after {
-        box-sizing: inherit,
+        box-sizing: inherit;
     }
 
     html {
-        font-family: var(--sans-font-stack),
-        color: var(--text-color),
+        font-family: var(--sans-font-stack);
+        color: var(--text-color);
 
-        box-sizing: border-box,
+        box-sizing: border-box;
 
-        min-height: 100vh,
+        min-height: 100vh;
 
-        line-height: 1.4,
+        line-height: 1.4;
 
-        font-variant-ligatures: common-ligatures,
-        hyphens: auto,
+        font-variant-ligatures: common-ligatures;
+        hyphens: auto;
     }
 
     body {
-        background: var(--background),
-        height: 100%,
+        background: var(--background);
+        height: 100%;
     }
 
     menu {
