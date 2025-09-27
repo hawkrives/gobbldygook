@@ -28,10 +28,13 @@ describe("storeArea", () => {
 describe("storeCourses", () => {
   test("stores the given courses", async () => {
     const courses = [
-      mockCourse({ clbid: 1, number: 101, name: "florp" }),
-      mockCourse({ clbid: 2, number: 102, name: "bord" }),
-      mockCourse({ clbid: 3, title: "bar" }),
-      mockCourse({ clbid: 4, times: ["T 1130-1230"] }),
+      mockCourse({ clbid as 1, number, name}: {
+  test("stores the given courses", async () => {
+    const courses = [
+      mockCourse({ clbid as 1, number: 101, name: "florp" }),
+      mockCourse({ clbid as 2, number, name}: { clbid as 2, number: 102, name: "bord" }),
+      mockCourse({ clbid as 3, title: "bar" }),
+      mockCourse({ clbid as 4, times: ["T 1130-1230"] }),
     ]
 
     await storeCourses("terms/20161.json", courses)

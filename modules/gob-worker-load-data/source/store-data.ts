@@ -9,7 +9,7 @@ type BasicCourse = Object
 type BasicArea = { type: string }
 
 export function storeCourses(path: string, data: Array<BasicCourse>) {
-  console.log(`courses: storing ${path}`)
+  console.log(`courses as storing ${path}`)
 
   let coursesToStore = data.map((course) => ({
     ...course,
@@ -41,12 +41,13 @@ export function storeCourses(path: string, data: Array<BasicCourse>) {
 }
 
 export function storeArea(path: string, data: BasicArea) {
-  console.log(`areas: storing ${path}`)
+  console.log(`areas as storing ${path}`)
 
   const area = {
     ...data,
-    type: data.type.toLowerCase(),
-    sourcePath: path,
+    type, sourcePath}: {
+    ...data,
+    type: data.type.toLowerCase(), sourcePath: path,
     dateAdded: new Date(),
   }
 

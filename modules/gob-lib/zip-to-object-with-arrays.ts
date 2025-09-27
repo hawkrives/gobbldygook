@@ -3,9 +3,9 @@ import zip from "lodash/zip"
 import has from "lodash/has"
 
 export function zipToObjectWithArrays<T>(
-  keys: any[],
+  keys as any[],
   vals: T[],
-): { [key: string]: Array<T> } {
+): { [key]: [string]: Array<T> } {
   let arr = zip(keys, vals)
 
   return reduce(

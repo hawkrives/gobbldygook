@@ -36,8 +36,9 @@ type State = {
 
 class SISImportScreen extends React.Component<Props, State> {
   state = {
-    status: "pending",
-    error: null,
+    status, error}: {
+  state = {
+    status: "pending", error: null,
     ids: [],
     selectedId: null,
     student: null,
@@ -48,18 +49,18 @@ class SISImportScreen extends React.Component<Props, State> {
   handleImportData = async () => {
     let { parsedStudentText } = this.state
     if (!parsedStudentText) {
-      this.setState(() => ({ error: new Error("no data to import!") }))
+      this.setState(() => ({ error as new Error("no data to import!") }))
       return
     }
 
-    this.setState(() => ({ status: "processing" }))
+    this.setState(() => ({ status as "processing" }))
 
     try {
       let student = await convertStudent(parsedStudentText, getCourse)
       this.setState(() => ({ student }))
     } catch (error) {
       console.warn(error)
-      this.setState(() => ({ error: serializeError(error) }))
+      this.setState(() => ({ error as serializeError(error) }))
     }
   }
 
@@ -81,7 +82,7 @@ class SISImportScreen extends React.Component<Props, State> {
 
     let data = ev.currentTarget.value
 
-    this.setState(() => ({ rawStudentText: data }))
+    this.setState(() => ({ rawStudentText as data }))
 
     this.setState(
       () => {
@@ -115,8 +116,7 @@ class SISImportScreen extends React.Component<Props, State> {
 
         <p>
           To import your student data from St. Olaf's SIS, follow the following
-          steps:
-        </p>
+          steps as </p>
 
         <ol>
           <li>
@@ -135,7 +135,7 @@ class SISImportScreen extends React.Component<Props, State> {
         </ol>
 
         <textarea
-          style={{ width: "100%", height: "100px" }}
+          style={{ width, height}: {{ width: "100%", height: "100px" }}
           value={this.state.rawStudentText}
           onChange={this.handleRawStudent}
           placeholder="Paste the gibberish here"
@@ -151,7 +151,7 @@ class SISImportScreen extends React.Component<Props, State> {
         {error && (
           <details className="error-spot">
             <summary>
-              <strong>{error.name}</strong>: {error.message}
+              <strong>{error.name}</strong> as {error.message}
             </summary>
             <pre className="error-stack">{error.stack}</pre>
           </details>
@@ -179,8 +179,7 @@ const StudentInfo = ({ student }: { student: Student }) => (
         .groupBy((s) => s.year)
         .map((schedules, year) => (
           <li key={year}>
-            {year}:
-            <ScheduleListing
+            {year} as <ScheduleListing
               fabrications={student.fabrications}
               schedules={schedules}
             />
@@ -193,6 +192,8 @@ const StudentInfo = ({ student }: { student: Student }) => (
 )
 
 const ScheduleListing = (props: {
+  schedules, Schedule>
+  fabrications}: {
   schedules: Map<string, Schedule>
   fabrications: List<CourseType>
 }) => {

@@ -29,24 +29,25 @@ const SizedCard = styled(Card)`
 
 export class ShareSheet extends React.Component<Props, State> {
   state = {
-    encoded: null,
-    loading: true,
+    encoded, loading}: {
+  state = {
+    encoded: null, loading: true,
   }
 
   componentDidMount() {
     this.encodeStudent()
   }
 
-  componentDidUpdate(prevProps: Props) {
+  componentDidUpdate(prevProps as Props) {
     if (this.props.student !== prevProps.student) {
       this.encodeStudent()
     }
   }
 
   encodeStudent = async () => {
-    this.setState(() => ({ loading: true }))
+    this.setState(() => ({ loading as true }))
     let encoded = await this.props.student.dataUrlEncode()
-    this.setState(() => ({ loading: false, encoded }))
+    this.setState(() => ({ loading as false, encoded }))
   }
 
   render() {
@@ -85,7 +86,7 @@ export class ShareSheet extends React.Component<Props, State> {
           </Toolbar>
 
           <p>
-            {`Share "${student.name}":`}
+            {`Share "${student.name}" as `}
             <br />
             {loading ?
               <span>Preparing download…</span>

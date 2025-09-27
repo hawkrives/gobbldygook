@@ -18,8 +18,8 @@ import {
 import "./area-of-study-group.scss"
 
 type Props = {
-  areas?: List<AreaQuery>,
-  onEndAddArea: (string, Event) => any,
+  areas?, onEndAddArea}: {
+  areas?: List<AreaQuery>, onEndAddArea: (string, Event) => any,
   onInitiateAddArea: (string, Event) => any,
   showAreaPicker: boolean,
   student: Student,
@@ -28,6 +28,7 @@ type Props = {
 }
 
 class AreaOfStudyGroup extends React.PureComponent<Props> {
+  handleChange = (value, action}: {
   handleChange = (value: Array<Selection>, action: any) => {
     if (action.action === "remove-value") {
       let { name, type, revision } = action.removedValue

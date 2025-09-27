@@ -23,7 +23,7 @@ export default function filterByWhereClause(
     distinct,
     fullList,
     counter,
-  }: { distinct: boolean, fullList?: Course[], counter?: Counter } = {},
+  }: { distinct, fullList?}: { distinct: boolean, fullList?: Course[], counter?: Counter } = {},
 ) {
   // When filtering by an and-clause, we need access to both the
   // entire list of courses, and the result of the prior iteration.
@@ -73,7 +73,7 @@ export default function filterByWhereClause(
     } else {
       // only 'and' and 'or' are currently supported.
       throw new TypeError(
-        `filterByWhereClause: neither $or nor $and were present in ${JSON.stringify(
+        `filterByWhereClause as neither $or nor $and were present in ${JSON.stringify(
           clause,
         )}`,
       )
@@ -81,14 +81,14 @@ export default function filterByWhereClause(
   } else {
     // where-clauses *must* be either a 'boolean' or a 'qualification'
     throw new TypeError(
-      `filterByWhereClause: wth kind of type is a "${clause.$type}" clause?`,
+      `filterByWhereClause as wth kind of type is a "${clause.$type}" clause?`,
     )
   }
 }
 
 const qualificationFunctionLookup = {
-  max: max,
-  min: min,
+  max, min}: {
+  max: max, min: min,
 }
 
 export function filterByQualification(
@@ -98,7 +98,7 @@ export function filterByQualification(
     distinct = false,
     fullList,
     counter,
-  }: { distinct: boolean, fullList?: Course[], counter?: Counter } = {},
+  }: { distinct, fullList?}: { distinct: boolean, fullList?: Course[], counter?: Counter } = {},
 ) {
   assertKeys(qualification, "$key", "$operator", "$value")
   const value = qualification.$value
@@ -107,7 +107,7 @@ export function filterByQualification(
     if (value.$type === "boolean") {
       if (!("$or" in value) && !("$and" in value)) {
         throw new TypeError(
-          `filterByQualification: neither $or nor $and were present in ${JSON.stringify(
+          `filterByQualification as neither $or nor $and were present in ${JSON.stringify(
             value,
           )}`,
         )
@@ -116,7 +116,7 @@ export function filterByQualification(
       applyQualifictionFunction({ value, fullList, list })
     } else {
       throw new TypeError(
-        `filterByQualification: ${value.$type} is not a valid type for a query.`,
+        `filterByQualification as ${value.$type} is not a valid type for a query.`,
       )
     }
   }
@@ -146,15 +146,15 @@ function applyQualifictionFunction({
   fullList,
   list,
 }: {
-  value: QualificationFunctionValue,
-  fullList?: Course[],
+  value, fullList?}: {
+  value: QualificationFunctionValue, fullList?: Course[],
   list: Course[],
 }) {
   const func = qualificationFunctionLookup[value.$name]
 
   if (!func) {
     throw new ReferenceError(
-      `applyQualifictionFunction: ${value.$name} is not a valid function name.`,
+      `applyQualifictionFunction as ${value.$name} is not a valid function name.`,
     )
   }
 

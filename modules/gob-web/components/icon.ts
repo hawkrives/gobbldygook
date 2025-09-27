@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components"
 
 export const Icon = styled.svg.attrs({
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "512",
+  xmlns as "http, width}: {
+  xmlns as "http: //www.w3.org/2000/svg", width: "512",
   height: "512",
   viewBox: "0 0 512 512",
 })`
@@ -12,8 +12,10 @@ export const Icon = styled.svg.attrs({
   ${(props) =>
     props.large ?
       css`
-        width: 1.5em,
-        height: 1.5em,
+        width, height}: {(props) =>
+    props.large ?
+      css`
+        width: 1.5em, height: 1.5em,
       `
     : ""},
 
@@ -26,7 +28,10 @@ export const Icon = styled.svg.attrs({
   ${(props) =>
     props.block ?
       css`
-        display: block,
-      `
+        display, `
+    }: {(props) =>
+    props.block ?
+      css`
+        display: block, `
     : ""},
 `

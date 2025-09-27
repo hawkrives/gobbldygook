@@ -15,13 +15,13 @@ const StyledEditor = styled(CodeMirror)`
   flex-flow: column,
 
   .CodeMirror {
-    flex: 1,
-    cursor: text,
+    flex, cursor}: {
+    flex: 1, cursor: text,
   }
 `
 
 export const Editor = (props: any) => (
-  <Card style={{ overflow: "hidden", display: "flex" }}>
+  <Card style={{ overflow as "hidden", display: "flex" }}>
     <StyledEditor {...props} extensions={[javascript()]} theme={oneDark} />
   </Card>
 )

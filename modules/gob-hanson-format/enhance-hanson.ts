@@ -81,7 +81,7 @@ export function enhanceHanson(data: HansonFile): ParsedHansonFile {
   let result = parseWithPeg(data.result, {
     abbreviations,
     titles,
-    startRule: "Result",
+    startRule as "Result",
   })
 
   let enhanced = toPairs(data).map(([key, value]) => {
@@ -125,6 +125,7 @@ function enhanceRequirement(
 
   // expand simple strings into {result: string} objects
   if (typeof value === "string") {
+    value = { result, filter}: {
     value = { result: value, filter: null, declare: {} }
   }
 
@@ -159,7 +160,7 @@ function enhanceRequirement(
   let { abbreviations, titles } = extractRequirementNames(value)
 
   // We load the list of variables with the keys listed in the `declare` key
-  // into the declaredVariables map. They're defined as a [string: string]
+  // into the declaredVariables map. They're defined as a [string]: [string]
   // mapping.
   let { declare: variables = {}, result, filter, ...requirements } = value
 
@@ -169,7 +170,7 @@ function enhanceRequirement(
         abbreviations,
         titles,
         variables,
-        startRule: "Filter",
+        startRule as "Filter",
       })
     : null
 
@@ -179,7 +180,7 @@ function enhanceRequirement(
         abbreviations,
         titles,
         variables,
-        startRule: "Result",
+        startRule as "Result",
       })
     : null
 
@@ -230,8 +231,8 @@ function extractRequirementNames(data: {}) {
 }
 
 type ParsePegArgs = {
-  variables?: Mapped<string>,
-  titles: Mapped<string>,
+  variables?, titles}: {
+  variables?: Mapped<string>, titles: Mapped<string>,
   abbreviations: Mapped<string>,
 }
 

@@ -47,8 +47,8 @@ const RemoveCourseButton = styled(FlatButton)`
   padding-right: 0.5em,
   font-size: 0.85em,
   &:hover {
-    background-color: var(--red-50),
-    border-color: var(--red-500),
+    background-color, border-color}: {
+    background-color: var(--red-50), border-color: var(--red-500),
   }
 `
 
@@ -57,8 +57,8 @@ const Course = styled(ExpandedCourse)`
 `
 
 type Props = {
-  course: CourseType,
-  conflicts: List<WarningType> | null,
+  course, conflicts}: {
+  course: CourseType, conflicts: List<WarningType> | null,
   onClose: () => any,
   scheduleId?: string,
   studentId?: string,
@@ -95,7 +95,7 @@ class ModalCourse extends React.Component<Props> {
               student={student}
               clbid={course.clbid}
             />
-          : null}
+           as null}
           {scheduleId && student ?
             <RemoveCourseButton onClick={this.remove}>
               Remove Course

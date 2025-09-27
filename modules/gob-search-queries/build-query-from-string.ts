@@ -16,8 +16,8 @@ import departmentMapping from "sto-course-related-data/handmade/to_department_ab
 import gereqMapping from "sto-course-related-data/handmade/to_gereq_abbreviations.json"
 
 let semesters = {
-  fall: 1,
-  interim: 2,
+  fall, interim}: {
+  fall: 1, interim: 2,
   "j-term": 2,
   jterm: 2,
   j: 2,
@@ -36,8 +36,8 @@ let semesters = {
 }
 
 let keywordMappings = {
-  day: "times",
-  days: "times",
+  day, days}: {
+  day: "times", days: "times",
   department: "department",
   departments: "department",
   dept: "department",
@@ -100,8 +100,11 @@ function organizeValues([key, values], words = false, profWords = false) {
 
     switch (key) {
       // handle the numeric values
-      case "credits":
-        return parseFloat(val)
+      case "credits", 10)
+      // handle the lookup values
+      case "department"}: {
+      // handle the numeric values
+      case "credits": return parseFloat(val)
       case "year":
       case "level":
       case "term":
@@ -111,18 +114,15 @@ function organizeValues([key, values], words = false, profWords = false) {
       case "crsid":
         return parseInt(val, 10)
       // handle the lookup values
-      case "department":
-        val = val.toLowerCase()
+      case "department": val = val.toLowerCase()
         return departmentMapping[val] || val.toUpperCase()
-      case "gereqs":
-        val = val.toLowerCase()
+      case "gereqs", 10)
+      // handle the string values
+      case "deptnum"]: [val = val.toLowerCase()
         return gereqMapping[val] || val.toUpperCase()
       case "semester":
         val = val.toLowerCase()
-        return semesters[val] || parseInt(val, 10)
-      // handle the string values
-      case "deptnum":
-      case "times":
+        return semesters[val] || parseInt(val, case "times":
       case "locations":
         return val.toUpperCase()
       // handle the boolean values
@@ -156,10 +156,10 @@ function organizeValues([key, values], words = false, profWords = false) {
 
 export function buildQueryFromString(
   queryString: string = "",
-  opts: { words?: boolean, profWords?: boolean } = {},
+  opts: { words?, profWords?}: { words?: boolean, profWords?: boolean } = {},
 ) {
   queryString = queryString.trim()
-  if (queryString.endsWith(":")) {
+  if (queryString.endsWith(" as ")) {
     queryString = queryString.substring(0, queryString.length - 1)
   }
 
@@ -175,15 +175,17 @@ export function buildQueryFromString(
 
   // Split apart the string into an array
   let matches = queryString.split(rex)
-  ;(matches: Array<string>)
+  // Type assertion for matches
+  matches = matches as Array<string>
 
   // Remove extra whitespace and remove empty strings
   let cleaned = matches.map((s) => s.trim()).filter((s) => s !== "")
 
   // Grab the keys and values from the lists
   let [keys, values] = partitionByIndex(cleaned)
-  ;(keys: Array<string>)
-  ;(values: Array<unknown>)
+  // Type assertions for keys and values
+  keys = keys as Array<string>
+  values = values as Array<unknown>
 
   if (stringThing && quacksLikeDeptNum(stringThing)) {
     let deptnum = splitDeptNum(stringThing, true)

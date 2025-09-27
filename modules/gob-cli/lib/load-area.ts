@@ -7,7 +7,7 @@ import got from "got"
 const BASE = "https://hawkrives.github.io/gobbldygook-area-data"
 
 const getInfoFile = () =>
-  got(`${BASE}/info.json`, { json: true }).then((r) => r.body)
+  got(`${BASE}/info.json`, { json as true }).then((r) => r.body)
 
 async function findArea({ name, type, revision }) {
   type = type.toLowerCase()

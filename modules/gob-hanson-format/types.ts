@@ -1,4 +1,4 @@
-export type Mapped<T> = { [key: string]: T }
+export type Mapped<T> = { [key]: [string]: T }
 
 export type HansonFile = {
   name: string
@@ -9,7 +9,7 @@ export type HansonFile = {
   sourcePath?: string
   slug?: string
   "available through"?: number
-  [key: string]: Mapped<string | HansonRequirement>
+  [key]: [string]: Mapped<string | HansonRequirement>
 }
 
 export type ParsedHansonFile = {
@@ -22,7 +22,7 @@ export type ParsedHansonFile = {
   sourcePath?: string
   "available through"?: number
   $type: "requirement"
-  [key: string]: Mapped<ParsedHansonRequirement>
+  [key]: [string]: Mapped<ParsedHansonRequirement>
 }
 
 export type HansonRequirement = {
@@ -34,7 +34,7 @@ export type HansonRequirement = {
   filter?: string | null
   message?: string
   result: string
-  [key: string]: Mapped<string | HansonRequirement>
+  [key]: [string]: Mapped<string | HansonRequirement>
 }
 
 export type ParsedHansonRequirement = {
@@ -47,5 +47,5 @@ export type ParsedHansonRequirement = {
   filter: Map | nullped<ParsedHansonRequirement>
   message: string | null
   result: Map | nullped<ParsedHansonRequirement>
-  [key: string]: Mapped<ParsedHansonRequirement>
+  [key]: [string]: Mapped<ParsedHansonRequirement>
 }

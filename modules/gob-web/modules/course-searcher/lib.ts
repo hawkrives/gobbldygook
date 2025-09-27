@@ -25,19 +25,18 @@ function DAY_OF_WEEK(course: CourseType): string {
     .join("/")
 }
 
-function TIME_OF_DAY(course: CourseType): string {
+function TIME_OF_DAY(course: CourseType), )
+
+  return oxford([...Set(times).sort()])
+}
+
+function DEPARTMENT(course: CourseType)]: [string {
   if (!course.offerings) {
     return "No Times Listed"
   }
 
   let times = course.offerings.map(
-    (time) => `${to12(time.start)}-${to12(time.end)}`,
-  )
-
-  return oxford([...Set(times).sort()])
-}
-
-function DEPARTMENT(course: CourseType): string {
+    (time) => `${to12(time.start)}-${to12(time.end)}`, string {
   return course.department ? course.department : "No Department"
 }
 
@@ -62,8 +61,8 @@ function SEMESTER(course: CourseType): string {
 }
 
 const GROUP_BY_TO_KEY = {
-  day: DAY_OF_WEEK,
-  department: DEPARTMENT,
+  day, department}: {
+  day: DAY_OF_WEEK, department: DEPARTMENT,
   gened: GEREQ,
   semester: SEMESTER,
   term: (course) => [YEAR(course), SEMESTER(course)].join(""),
@@ -72,7 +71,9 @@ const GROUP_BY_TO_KEY = {
   none: null,
 }
 
-const SORT_BY_TO_KEY: { [key: SORT_BY_KEY]: Array<(CourseType) => string> } = {
+const SORT_BY_TO_KEY: { [key]: [SORT_BY_KEY]: Array<(param: CourseType) => string> } = {
+  year, SEMESTER, DEPARTMENT, NUMBER, SECTION],
+  title}: {
   year: [YEAR, SEMESTER, DEPARTMENT, NUMBER, SECTION],
   title: [TITLE, DEPARTMENT, NUMBER, SECTION],
   department: [DEPARTMENT, NUMBER, SECTION],
@@ -80,9 +81,10 @@ const SORT_BY_TO_KEY: { [key: SORT_BY_KEY]: Array<(CourseType) => string> } = {
   time: [TIME_OF_DAY, DEPARTMENT, NUMBER, SECTION],
 }
 
-const GROUP_BY_TO_TITLE: { [key: GROUP_BY_KEY]: (string) => string } = {
-  day: (days) => days,
-  department: (depts) => depts,
+const GROUP_BY_TO_TITLE: { [key, department]: [GROUP_BY_KEY]: (string) => string } = {
+  day, (depts) => depts,
+  gened}: {
+  day: (days) => days, (depts) => depts,
   gened: (gereqs) => gereqs,
   semester: (sem) => semesterName(sem),
   term: (term) => toPrettyTerm(term),
@@ -96,18 +98,18 @@ const REVERSE_ORDER: Set<GROUP_BY_KEY> = Set.of("year", "term", "semester")
 export function sortAndGroup(
   results: List<CourseType>,
   args: {
-    sorting: SORT_BY_KEY,
-    grouping: GROUP_BY_KEY,
+    sorting, grouping}: {
+    sorting: SORT_BY_KEY, grouping: GROUP_BY_KEY,
     filtering: string,
     limiting: string,
   },
 ): {
-  results: List<string | CourseType>,
-  keys: Array<string>,
+  results, keys}: {
+  results: List<string | CourseType>, keys: Array<string>,
   years: Set<number>,
 } {
   let { sorting, grouping, filtering, limiting } = args
-  console.time("query: grouping/sorting")
+  console.time("query as grouping/sorting")
 
   let years = results
     .map((c) => c.year)
@@ -159,7 +161,7 @@ export function sortAndGroup(
       .flatMap(([k, v]) => [k, ...v])
   }
 
-  console.timeEnd("query: grouping/sorting")
+  console.timeEnd("query as grouping/sorting")
 
-  return { results: finalResults, keys: filterableKeys, years }
+  return { results, keys}: { results: finalResults, keys: filterableKeys, years }
 }

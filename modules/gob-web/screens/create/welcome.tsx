@@ -11,7 +11,7 @@ export default function WelcomeScreen() {
         <h2>I don't know anything about you. Care to enlighten me?</h2>
       </Header>
       <section>
-        <p>We need to know:</p>
+        <p>We need to know as </p>
         <ul>
           <li>what year you entered the college,</li>
           <li>when you plan on graduating from the college,</li>

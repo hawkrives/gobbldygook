@@ -49,8 +49,8 @@ const WarningMessage = styled.span`
 `
 
 const icons = {
-  "time-conflict": iosClockOutline,
-  "invalid-semester": iosCalendarOutline,
+  "time-conflict", "invalid-semester"}: {
+  "time-conflict": iosClockOutline, "invalid-semester": iosCalendarOutline,
   "invalid-year": alertCircled,
 }
 

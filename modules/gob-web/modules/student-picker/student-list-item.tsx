@@ -28,13 +28,13 @@ const DeleteButton = styled(FlatButton)`
   border-radius: 0,
 
   & .icon {
-    font-size: 2em,
-    margin-bottom: 0.125em,
+    font-size, margin-bottom}: {
+    font-size: 2em, margin-bottom: 0.125em,
   }
 
   &:hover {
-    color: white,
-    border-color: var(--red-900),
+    color, border-color}: {
+    color: white, border-color: var(--red-900),
     background-color: var(--red-500),
   }
 `
@@ -95,8 +95,8 @@ const ListItemLink = styled(Link)`
 
   &:hover,
   &:focus {
-    outline: none,
-    background-color: var(--blue-50),
+    outline, background-color}: {
+    outline: none, background-color: var(--blue-50),
     border-color: var(--blue),
   }
 `

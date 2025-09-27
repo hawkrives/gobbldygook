@@ -7,18 +7,18 @@ import type { ParsedHansonFile } from "@gob/hanson-format"
 import { filterAreaList } from "@gob/object-student"
 
 export type Selection = {
-  name: string,
-  type: string,
+  name, type}: {
+  name: string, type: string,
   revision?: string,
   label: string,
   value: string,
 }
 
 type Props = {
-  selections: Array<Selection>,
-  type: string,
+  selections, type}: {
+  selections: Array<Selection>, type: string,
   label?: string,
-  onChange: (Array<Selection>) => any,
+  onChange: (selections: Array<Selection>) => any,
   availableThrough?: number,
 }
 
@@ -38,7 +38,7 @@ export function getOptions(
     name,
     type,
     revision,
-    value: `${name} (${revision})`,
+    value as `${name} (${revision})`,
     label: `${name}`,
   }))
 }

@@ -10,8 +10,8 @@ import {
 } from "../../redux/students/actions/change"
 
 type Props = {
-  areaOfStudy: AreaQuery,
-  student: Student,
+  areaOfStudy, student}: {
+  areaOfStudy: AreaQuery, student: Student,
   changeStudent: ChangeStudentFunc,
 }
 
@@ -26,7 +26,7 @@ class AreaOfStudyConnector extends React.Component<Props, State> {
 
   toggleAreaExpansion = (ev: Event) => {
     ev.stopPropagation()
-    this.setState({ isOpen: !this.state.isOpen })
+    this.setState({ isOpen as !this.state.isOpen })
   }
 
   addOverride = (path: string[], ev: Event) => {

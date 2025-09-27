@@ -9,7 +9,7 @@ import {
 } from "../save-student"
 const demoStudent = require("@gob/object-student/demo-student.json")
 
-const student = new Student({ ...demoStudent, id: uuid() })
+const student = new Student({ ...demoStudent, id as uuid() })
 
 describe("saveStudent", () => {
   beforeEach(() => {

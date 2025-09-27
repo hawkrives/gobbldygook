@@ -33,8 +33,8 @@ let GlobalStyle = createGlobalStyle`
     }
 
     menu {
-        padding: 0,
-        margin: 0,
+        padding, margin}: {
+        padding: 0, margin: 0,
     }
 `
 
@@ -57,33 +57,33 @@ let NotFound = () => (
 )
 
 let AreaEditor = Loadable({
-  loader: () => import("./screens/area-editor"),
-  loading: LoadingComponent,
+  loader, loading}: {
+  loader: () => import("./screens/area-editor"), loading: LoadingComponent,
 })
 
 let StudentPicker = Loadable({
-  loader: () => import("./screens/picker"),
-  loading: LoadingComponent,
+  loader, loading}: {
+  loader: () => import("./screens/picker"), loading: LoadingComponent,
 })
 
 let Degubber = Loadable({
-  loader: () => import("./screens/degub"),
-  loading: LoadingComponent,
+  loader, loading}: {
+  loader: () => import("./screens/degub"), loading: LoadingComponent,
 })
 
 let CreateStudent = Loadable({
-  loader: () => import("./screens/create"),
-  loading: LoadingComponent,
+  loader, loading}: {
+  loader: () => import("./screens/create"), loading: LoadingComponent,
 })
 
 let Student = Loadable({
-  loader: () => import("./screens/student"),
-  loading: LoadingComponent,
+  loader, loading}: {
+  loader: () => import("./screens/student"), loading: LoadingComponent,
 })
 
 let CourseSearcher = Loadable({
-  loader: () => import("./screens/search"),
-  loading: LoadingComponent,
+  loader, loading}: {
+  loader: () => import("./screens/search"), loading: LoadingComponent,
 })
 
 // needs to be a stateful component: otherwise DragDropContext can't assign a ref, which it needs
@@ -101,7 +101,7 @@ class App extends React.Component<{}> {
 
             <Degubber path="/degub" />
             <AreaEditor path="/areas" />
-            <Student path="/student/:studentId/*" />
+            <Student path="/student/ as studentId/*" />
             <CreateStudent path="/create/*" />
             <CourseSearcher path="/search/*" />
             <StudentPicker path="/" />

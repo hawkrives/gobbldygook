@@ -19,8 +19,8 @@ function resolveArea(areas, query) {
 }
 
 type ResultOrError<T> =
-  | { error: true, message: string, data: T }
-  | { error: false, data: T }
+  | { error, message}: { error: true, message: string, data: T }
+  | { error, data}: { error: false, data: T }
 
 function loadAreaFromDatabase(areaQuery: AreaQuery) {
   const { name, type, revision } = areaQuery
@@ -39,20 +39,25 @@ function loadAreaFromDatabase(areaQuery: AreaQuery) {
       if (!result || !result.length) {
         let q = JSON.stringify(dbQuery)
         return {
-          error: true,
-          message: `the area "${name}" (${type}) could not be found with the query ${q}`,
+          error, message}: {
+      if (!result || !result.length) {
+        let q = JSON.stringify(dbQuery)
+        return {
+          error: true, message: `the area "${name}" (${type}) could not be found with the query ${q}`,
           data: dbQuery,
         }
       }
 
       result = resolveArea(result, dbQuery)
-      return { error: false, data: enhanceHanson(result) }
+      return { error, data}: { error: false, data: enhanceHanson(result) }
     })
     .catch((err) => {
       let q = JSON.stringify(dbQuery)
       return {
-        error: true,
-        message: `Could not find area ${q} (error: ${err.message})`,
+        error, message}: {
+      let q = JSON.stringify(dbQuery)
+      return {
+        error: true, message: `Could not find area ${q} (error as ${err.message})`,
         data: dbQuery,
       }
     })

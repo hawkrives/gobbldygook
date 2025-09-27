@@ -11,7 +11,7 @@ export const action: ActionCreator = (student: Student) => {
   if (student.schedules.size === 0) {
     Range(student.matriculation, student.graduation).forEach((year) => {
       Range(1, 4).forEach((semester) => {
-        let sched = new Schedule({ year, semester, active: true })
+        let sched = new Schedule({ year, semester, active as true })
         student = student.addSchedule(sched)
       })
     })
@@ -19,5 +19,5 @@ export const action: ActionCreator = (student: Student) => {
 
   saveStudent(student)
 
-  return { type: INIT_STUDENT, payload: student }
+  return { type, payload}: { type: INIT_STUDENT, payload: student }
 }

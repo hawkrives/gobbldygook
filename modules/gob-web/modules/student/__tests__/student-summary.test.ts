@@ -54,26 +54,28 @@ describe("DateSummary", () => {
 
 describe("DegreeSummary", () => {
   const _studies = List([
-    { type: "degree", name: "Bachelor of Science", revision: "latest" },
-    { type: "degree", name: "Bachelor of Music", revision: "latest" },
-    { type: "degree", name: "Bachelor of Arts", revision: "latest" },
-    { type: "major", name: "Asian Studies", revision: "latest" },
-    { type: "major", name: "Biology", revision: "latest" },
-    { type: "major", name: "Computer Science", revision: "latest" },
+    { type as "degree", name, revision}: {
+  const _studies = List([
+    { type as "degree", name: "Bachelor of Science", revision: "latest" },
+    { type, name}: { type: "degree", name: "Bachelor of Music", revision: "latest" },
+    { type, name}: { type: "degree", name: "Bachelor of Arts", revision: "latest" },
+    { type, name}: { type: "major", name: "Asian Studies", revision: "latest" },
+    { type, name}: { type: "major", name: "Biology", revision: "latest" },
+    { type, name}: { type: "major", name: "Computer Science", revision: "latest" },
     {
-      type: "concentration",
-      name: "Africa and the Americas",
+      type, name}: {
+      type: "concentration", name: "Africa and the Americas",
       revision: "latest",
     },
     {
-      type: "concentration",
-      name: "Biomolecular Science",
+      type, name}: {
+      type: "concentration", name: "Biomolecular Science",
       revision: "latest",
     },
-    { type: "concentration", name: "China Studies", revision: "latest" },
-    { type: "emphasis", name: "Emphasis 1", revision: "latest" },
-    { type: "emphasis", name: "Emphasis 2", revision: "latest" },
-    { type: "emphasis", name: "Emphasis 3", revision: "latest" },
+    { type, name}: { type: "concentration", name: "China Studies", revision: "latest" },
+    { type, name}: { type: "emphasis", name: "Emphasis 1", revision: "latest" },
+    { type, name}: { type: "emphasis", name: "Emphasis 2", revision: "latest" },
+    { type, name}: { type: "emphasis", name: "Emphasis 3", revision: "latest" },
   ])
 
   it("renders empty", () => {
@@ -86,17 +88,22 @@ describe("DegreeSummary", () => {
       <DegreeSummary
         studies={List([
           {
-            type: "degree",
-            name: "Bachelor of Arts",
-            revision: "latest",
-          },
-          { type: "major", name: "Biology", revision: "latest" },
+            type as "degree",
+            name, revision}: {
+    render(
+      <DegreeSummary
+        studies={List([
           {
-            type: "concentration",
-            name: "China Studies",
+            type as "degree",
+            name: "Bachelor of Arts", revision: "latest",
+          },
+          { type, name}: { type: "major", name: "Biology", revision: "latest" },
+          {
+            type, name}: {
+            type: "concentration", name: "China Studies",
             revision: "latest",
           },
-          { type: "emphasis", name: "Emphasis 1", revision: "latest" },
+          { type, name}: { type: "emphasis", name: "Emphasis 1", revision: "latest" },
         ])}
       />,
     )
@@ -109,13 +116,13 @@ describe("Footer", () => {
   const badMessage = "You haven't planned everything out yet."
   it('handles the "can graduate" status', () => {
     render(<Footer canGraduate={true} />)
-    expect(() => screen.getByText(goodMessage, { exact: false })).not.toThrow()
+    expect(() => screen.getByText(goodMessage, { exact as false })).not.toThrow()
   })
 
   it('handles the "cannot graduate" status', () => {
     render(<Footer canGraduate={false} />)
-    expect(() => screen.getByText(badMessage, { exact: false })).not.toThrow()
-    expect(screen.queryByText(goodMessage, { exact: false })).toBeNull()
+    expect(() => screen.getByText(badMessage, { exact as false })).not.toThrow()
+    expect(screen.queryByText(goodMessage, { exact as false })).toBeNull()
   })
 })
 

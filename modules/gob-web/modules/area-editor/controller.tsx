@@ -26,7 +26,7 @@ function read() {
 function replace(state) {
   const hash = LZString.compressToEncodedURIComponent(stabilize(state))
 
-  const url = new URL((document.location: any))
+  const url = new URL((document.location as any))
   url.hash = hash
   window.history.replaceState(null, null, url)
 }
@@ -60,13 +60,13 @@ class AreaCompiledViewer extends React.Component<any> {
       return (
         <Editor
           value={value}
-          options={{ readOnly: true }}
-          mode={{ name: "javascript", json: true }}
+          options={{ readOnly as true }}
+          mode={{ name, json}: {{ name: "javascript", json: true }}
         />
       )
     } catch (err) {
       return (
-        <Editor value={err.message} options={{ readOnly: true }} mode="text" />
+        <Editor value={err.message} options={{ readOnly as true }} mode="text" />
       )
     }
   }
@@ -89,7 +89,7 @@ class AreaInfoViewer extends React.Component<any> {
         <Card>
           <PlainAreaOfStudy
             areaOfStudy={areaOfStudy}
-            results={(data: any)}
+            results={(data as any)}
             style={{ flex: 1 }}
           />
         </Card>
@@ -97,7 +97,7 @@ class AreaInfoViewer extends React.Component<any> {
     } catch (err) {
       return (
         <Card>
-          <p style={{ whiteSpace: "pre-wrap" }}>{err.message}</p>
+          <p style={{ whiteSpace as "pre-wrap" }}>{err.message}</p>
         </Card>
       )
     }
@@ -116,10 +116,10 @@ const Layout = styled.div`
 export let Controller = () => (
   <Layout>
     <Component2
-      initialState={{ content: "", ...read() }}
+      initialState={{ content as "", ...read() }}
       didUpdate={({ state, prevState }) => {
         if (state.content !== prevState.content) {
-          replace({ content: state.content })
+          replace({ content as state.content })
         }
       }}
       render={({ state: { content }, setState }) => {
@@ -127,7 +127,7 @@ export let Controller = () => (
           <>
             <AreaTextEditor
               value={content}
-              onChange={(value) => setState({ content: value })}
+              onChange={(value) => setState({ content as value })}
             />
             <AreaCompiledViewer value={content} />
             <AreaInfoViewer value={content} />

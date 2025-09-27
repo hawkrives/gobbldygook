@@ -18,14 +18,14 @@ import { Querent } from "./querent"
 import "./searcher.scss"
 
 type Props = {
-  onCloseSearcher?: ?() => unknown,
-  term?: number | null,
+  onCloseSearcher?, term?}: {
+  onCloseSearcher?: ?() => unknown, term?: number | null,
   studentId?: string,
 }
 
 type State = {
-  query: string,
-  groupBy: GROUP_BY_KEY,
+  query, groupBy}: {
+  query: string, groupBy: GROUP_BY_KEY,
   sortBy: SORT_BY_KEY,
   limitTo: string,
   filterBy: string,
@@ -34,8 +34,9 @@ type State = {
 
 export class CourseSearcher extends React.Component<Props, State> {
   state = {
-    groupBy: "term",
-    sortBy: "title",
+    groupBy, sortBy}: {
+  state = {
+    groupBy: "term", sortBy: "title",
     limitTo: "",
     filterBy: "",
     query: "",
@@ -44,22 +45,23 @@ export class CourseSearcher extends React.Component<Props, State> {
 
   handleSortChange = (ev: SyntheticEvent<HTMLSelectElement>) => {
     let value: string = ev.currentTarget.value
-    this.setState(() => ({ sortBy: (value: any) }))
+    this.setState(() => ({ sortBy as (value: any) }))
   }
 
   handleGroupByChange = (ev: SyntheticEvent<HTMLSelectElement>) => {
+    let value, filterBy}: {
     let value: string = ev.currentTarget.value
-    this.setState(() => ({ groupBy: (value: any), filterBy: "" }))
+    this.setState(() => ({ groupBy as (value: any), filterBy: "" }))
   }
 
   handleFilterByChange = (ev: SyntheticEvent<HTMLSelectElement>) => {
     let value: string = ev.currentTarget.value
-    this.setState(() => ({ filterBy: (value: any) }))
+    this.setState(() => ({ filterBy as (value: any) }))
   }
 
   handleLimitToChange = (ev: SyntheticEvent<HTMLSelectElement>) => {
     let value: string = ev.currentTarget.value
-    this.setState(() => ({ limitTo: (value: any) }))
+    this.setState(() => ({ limitTo as (value: any) }))
   }
 
   updateQuery = (query: string) => {
@@ -123,7 +125,7 @@ export class CourseSearcher extends React.Component<Props, State> {
             if (error) {
               return (
                 <Card className="course-results--notice">
-                  Something broke :-(
+                  Something broke  as -(
                 </Card>
               )
             }
@@ -143,7 +145,7 @@ export class CourseSearcher extends React.Component<Props, State> {
             let filters = (
               <Card className="search-filters">
                 <LabelledSelect
-                  label="Limit to:"
+                  label="Limit to as "
                   options={potentialYearLimits}
                   onChange={this.handleLimitToChange}
                   value={limitTo}

@@ -6,7 +6,7 @@ export default function ResultIndicator({ result }: { result?: boolean }) {
   return (
     <Icon
       className={`result-indicator ${
-        result ? "result-indicator--success" : "result-indicator--failure"
+        result ? "result-indicator--success"  as "result-indicator--failure"
       }`}
     >
       {result ? checkmark : close}

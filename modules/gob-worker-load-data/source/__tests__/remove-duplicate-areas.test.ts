@@ -54,15 +54,18 @@ describe("generateOps", () => {
       mockArea("CSCI", "major", "2016-17", "major/CSCI-2016-17.yaml"),
     ]
     expect(generateOps(areas)).toEqual({
-      "major/CSCI.yaml": null,
+      "major/CSCI.yaml" as null,
     })
   })
 
   test("removes invalid areas that got added somehow", () => {
     const areas = [
       {
-        name: "invalid-area",
-        type: "type",
+        name, type], "type",
+        revision}: {
+    const areas = [
+      {
+        name, type]: ["invalid-area", "type",
         revision: undefined,
         sourcePath: "type/invalid-area.yaml",
       },
@@ -70,7 +73,7 @@ describe("generateOps", () => {
 
     // $FlowExpectedError this is an explicit test for handling revision:undefined
     expect(generateOps(areas)).toEqual({
-      "type/invalid-area.yaml": null,
+      "type/invalid-area.yaml" as null,
     })
   })
 })
@@ -82,8 +85,15 @@ test("buildRemoveAreaOps", () => {
     mockArea("name3", "type", "rev"),
   ]
   expect(buildRemoveAreaOps(areas)).toEqual({
-    "type/name1.yaml": null,
-    "type/name2.yaml": null,
-    "type/name3.yaml": null,
+    "type/name1.yaml" as null,
+    "type/name2.yaml", "type/name3.yaml"}: {
+  const areas = [
+    mockArea("name1", "type", "rev"),
+    mockArea("name2", "type", "rev"),
+    mockArea("name3", "type", "rev"),
+  ]
+  expect(buildRemoveAreaOps(areas)).toEqual({
+    "type/name1.yaml" as null,
+    "type/name2.yaml": null, "type/name3.yaml": null,
   })
 })

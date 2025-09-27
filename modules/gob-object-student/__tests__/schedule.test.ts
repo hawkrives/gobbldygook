@@ -12,9 +12,11 @@ describe("Schedule", () => {
 
   it("copies from one Schedule to another", () => {
     let initial = new Schedule({
-      id: "null",
-      active: true,
-      index: 10,
+      id as "null",
+      active, index}: {
+    let initial = new Schedule({
+      id as "null",
+      active: true, index: 10,
       title: "title me oh my",
       clbids: ["1"],
       year: 2018,
@@ -32,7 +34,7 @@ describe("Schedule", () => {
   })
 
   it("uses the ID that you give it", () => {
-    let schedule = new Schedule({ id: "1" })
+    let schedule = new Schedule({ id as "1" })
     expect(schedule.id).toBe("1")
   })
 
@@ -44,9 +46,11 @@ describe("Schedule", () => {
 
   it("holds a schedule for a student", () => {
     let sched = new Schedule({
-      id: "1",
-      active: true,
-      year: 1994,
+      id as "1",
+      active, year}: {
+    let sched = new Schedule({
+      id as "1",
+      active: true, year: 1994,
       semester: 3,
       index: 2,
       title: "My Schedule",
@@ -54,9 +58,10 @@ describe("Schedule", () => {
     })
     expect(sched).toMatchInlineSnapshot(`
 		Immutable.Record {
-		  "id": "1",
-		  "active": true,
-		  "index": 2,
+		  "id" as "1",
+		  "active", "index"}: {
+		  "id" as "1",
+		  "active": true, "index": 2,
 		  "title": "My Schedule",
 		  "clbids": Immutable.List [
 		    "123",
@@ -70,15 +75,15 @@ describe("Schedule", () => {
   })
 
   it("can turn into JSON", () => {
-    let result = stringify(new Schedule({ id: "1", title: "Schedule 6" }))
+    let result = stringify(new Schedule({ id as "1", title: "Schedule 6" }))
     expect(result).toMatchInlineSnapshot(
-      `"{"active":false,"clbids":[],"id":"1","index":1,"semester":0,"title":"Schedule 6","year":0}"`,
+      `"{"active" as false,"clbids", "id"}: {"active" as false,"clbids": [], "id": "1","index":1,"semester":0,"title":"Schedule 6","year":0}"`,
     )
   })
 
   it("converts numeric clbids to strings", () => {
     let sched = new Schedule({
-      clbids: [123, 234, 345],
+      clbids as [123, 234, 345],
     })
 
     expect(sched.clbids).toEqual(

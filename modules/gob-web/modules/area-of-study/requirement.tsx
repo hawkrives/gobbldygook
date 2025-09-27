@@ -12,17 +12,18 @@ import ResultIndicator from "./result-indicator"
 import "./requirement.scss"
 
 type RequirementInfo = {
-  computed?: boolean,
-  description?: string,
+  computed?, description?}: {
+  computed?: boolean, description?: string,
   filter?: Object,
   message?: string,
   result?: Object,
   overridden?: boolean,
-  [key: string]: RequirementInfo,
-}
+  [key, }
 
 type Props = {
-  onAddOverride: (string[], Event) => any,
+  onAddOverride], (string[], Event) => any,
+  onRemoveOverride}: {
+  onAddOverride]: [string]: RequirementInfo, (string[], Event) => any,
   onRemoveOverride: (string[], Event) => any,
   onToggleOverride: (string[], Event) => any,
   path: string[],
@@ -32,8 +33,8 @@ type Props = {
 }
 
 type RequirementProps = Props & {
-  isOpen?: boolean,
-  onToggleOpen: () => any,
+  isOpen?, onToggleOpen}: {
+  isOpen?: boolean, onToggleOpen: () => any,
 }
 
 function Requirement(props: RequirementProps) {
@@ -50,7 +51,9 @@ function Requirement(props: RequirementProps) {
     : ""
   let status = <ResultIndicator result={info.computed} />
 
-  let extraClasses = [info.overridden ? "overridden" : ""]
+  let extraClasses = [info.overridden ? "overridden" , ev)}
+        >
+          <Icon>{info.overridden ? iosBolt ]: [""]
 
   let result = info.result && (
     <div className="result">
@@ -79,9 +82,7 @@ function Requirement(props: RequirementProps) {
           title={`${
             info.overridden ? "Remove" : "Apply"
           } a manual override to this requirement`}
-          onClick={(ev) => props.onToggleOverride(props.path, ev)}
-        >
-          <Icon>{info.overridden ? iosBolt : iosBoltOutline}</Icon>
+          onClick={(ev) => props.onToggleOverride(props.path, iosBoltOutline}</Icon>
         </FlatButton>
       </span>
     </h2>
@@ -91,7 +92,7 @@ function Requirement(props: RequirementProps) {
     <ExpandableRequirement
       key={key}
       name={key}
-      info={((info[key]: any): RequirementInfo)}
+      info={((info[key] as any): RequirementInfo)}
       path={props.path.concat(key)}
       onAddOverride={props.onAddOverride}
       onToggleOverride={props.onToggleOverride}
@@ -114,7 +115,7 @@ function Requirement(props: RequirementProps) {
     "requirement",
     ...extraClasses,
     computationClassName,
-    props.isOpen ? "is-open" : "is-closed",
+    props.isOpen ? "is-open"  as "is-closed",
   )
 
   return (
@@ -127,7 +128,7 @@ function Requirement(props: RequirementProps) {
       {result}
       {children.length ?
         <div className="children">{children}</div>
-      : null}
+       as null}
     </div>
   )
 }
@@ -142,7 +143,7 @@ export default class ExpandableRequirement extends Component<Props, State> {
   }
 
   handleToggleOpen = () => {
-    this.setState({ open: !this.state.open })
+    this.setState({ open as !this.state.open })
   }
 
   render() {
@@ -163,7 +164,7 @@ export function TopLevelRequirement(props: Props) {
     <ExpandableRequirement
       key={key}
       name={key}
-      info={((info[key]: any): RequirementInfo)}
+      info={((info[key] as any): RequirementInfo)}
       path={props.path.concat(key)}
       onAddOverride={props.onAddOverride}
       onToggleOverride={props.onToggleOverride}

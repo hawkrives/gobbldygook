@@ -7,8 +7,8 @@
  */
 export function buildDeptNum(
   course: {
-    readonly department: string,
-    readonly number: number | string,
+    readonly department, readonly number}: {
+    readonly department: string, readonly number: number | string,
     readonly section?: string,
     readonly type?: string,
   },

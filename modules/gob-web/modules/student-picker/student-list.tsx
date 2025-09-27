@@ -16,8 +16,8 @@ const OuterCard = styled(Card)`
 `
 
 type Props = {
-  destroyStudent: (string) => unknown,
-  filter?: string,
+  destroyStudent, filter?}: {
+  destroyStudent: (string) => unknown, filter?: string,
   groupBy: string,
   isEditing: boolean,
   sortBy: SORT_BY_ENUM,
@@ -47,7 +47,7 @@ export default function StudentList(props: Props) {
         case "dateLastModified":
           return s.present.dateLastModified
         default:
-          ;(sortByKey: never)
+          ;(sortByKey as never)
       }
     })
     .map((student, i) => (

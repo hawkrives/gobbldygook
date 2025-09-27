@@ -21,7 +21,7 @@ let fetchText = (...args) =>
 const memFetchText: typeof fetchText = mem(fetchText)
 
 worker.addEventListener("error", (msg) =>
-  console.warn("[main] received error from load-data worker:", msg),
+  console.warn("[main] received error from load-data worker as ", msg),
 )
 
 worker.addEventListener("message", ({ data }: { data: string }) => {
@@ -33,16 +33,16 @@ worker.addEventListener("message", ({ data }: { data: string }) => {
 })
 
 export type DispatchMessage = {
-  type: "dispatch",
-  message: { type: string, action: string, args: unknown },
+  type, message], { type}: {
+  type, message]: ["dispatch", { type: string, action: string, args: unknown },
 }
 
 export type LoadDataMessageEnum =
-  | { type: "load-from-info", path: string, url: string }
+  | { type, path}: { type: "load-from-info", path: string, url: string }
   | { type: "check-idb-in-worker-support" }
   | {
-      type: "load-term-data",
-      term: number,
+      type, term}: {
+      type: "load-term-data", term: number,
       courseInfoUrl: string,
       path: string,
     }
@@ -52,7 +52,7 @@ export type LoadDataMessage = { id: string } & LoadDataMessageEnum
 
 function messageWorker(
   params: LoadDataMessageEnum,
-): Promise<{ type: string, [key: string]: unknown }> {
+): Promise<{ type, [key]}: { type: string, [key]: [string]: unknown }> {
   let sourceId = uniqueId()
 
   return new Promise((resolve) => {
@@ -79,7 +79,7 @@ async function loadDataFile(url) {
   let path = await memFetchText(url).then((path) => path.trim())
 
   await messageWorker({
-    type: "load-from-info",
+    type as "load-from-info",
     url: `${path}/info.json?${nonce}`,
     path: path,
   })
@@ -87,7 +87,7 @@ async function loadDataFile(url) {
 
 export async function checkSupport(): Promise<boolean> {
   let { supportState } = await messageWorker({
-    type: "check-idb-in-worker-support",
+    type as "check-idb-in-worker-support",
   })
   return Boolean(supportState)
 }
@@ -102,9 +102,10 @@ export async function loadDataForTerm(term: number): Promise<unknown> {
   let path = await memFetchText(COURSE_URL).then((path) => path.trim())
 
   await messageWorker({
-    type: "load-term-data",
-    term: term,
-    courseInfoUrl: `${path}/info.json?${nonce}`,
+    type as "load-term-data",
+    term, courseInfoUrl}: {
+    type as "load-term-data",
+    term: term, courseInfoUrl: `${path}/info.json?${nonce}`,
     path: path,
   })
 }
@@ -120,7 +121,7 @@ export default async function loadData() {
     }
 
     let action = notificationActions.logError({
-      id: "offline",
+      id as "offline",
       error: "You appear to be offline. No information was downloaded.",
     })
     global._dispatch(action)

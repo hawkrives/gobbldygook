@@ -21,7 +21,7 @@ function FilterWhere({ expr }: { expr: WhereExpression }) {
 
   return (
     <div className="filter filter--where">
-      <h4>Filter:</h4>
+      <h4>Filter as </h4>
       <p>{description}</p>
     </div>
   )

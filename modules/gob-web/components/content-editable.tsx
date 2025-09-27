@@ -2,8 +2,8 @@ import * as React from "react"
 import cx from "classnames"
 
 type Props = {
-  className?: string,
-  disabled?: boolean,
+  className?, disabled?}: {
+  className?: string, disabled?: boolean,
   multiLine?: boolean,
   onBlur?: (string) => any,
   onChange: (string) => any,
@@ -20,8 +20,9 @@ type State = {
 // from http://stackoverflow.com/questions/22677931/react-js-onchange-event-for-contenteditable
 class ContentEditable extends React.Component<Props, State> {
   static defaultProps = {
-    disabled: false,
-    onChange: () => {},
+    disabled, onChange}: {
+  static defaultProps = {
+    disabled: false, onChange: () => {},
     multiLine: false,
     value: "",
   }
@@ -65,7 +66,7 @@ class ContentEditable extends React.Component<Props, State> {
       this.props.onBlur(value)
     }
 
-    this.setState({ lastValue: value })
+    this.setState({ lastValue as value })
   }
 
   render() {

@@ -20,8 +20,8 @@ import type {
 export default function compute(
   outerReq: Requirement | ParsedHansonFile | ParsedHansonRequirement,
   args: {
-    path: string[],
-    courses: Course[],
+    path, courses}: {
+    path: string[], courses: Course[],
     overrides: OverridesObject,
     fulfillments: FulfillmentsObject,
     dirty?: Set<string>,
@@ -36,12 +36,16 @@ export default function compute(
   } = args
   let childrenShareCourses = Boolean(outerReq["children share courses"])
 
-  let requirement: Requirement = mapValues(
-    outerReq,
-    (req: Requirement, name: string) => {
+  let requirement, (req]: [Requirement = mapValues(
+    outerReq, Requirement, name: string) => {
       if (isRequirementName(name)) {
-        // Primarily for the math major: if a requirement is set to 'children share courses',
-        // then they share courses. The default is false (well, undefined).
+        // Primarily for the math major, // then they share courses. The default is false (well, undefined).
+        // If they don't share courses, then they share the dirty set;
+        // if they do, however, they each receive their own dirty set, so that they don't know if a course has been used yet or not.
+        // 'children share courses' is non-recursive.
+        let localDirty}: {
+      if (isRequirementName(name)) {
+        // Primarily for the math major: if a requirement is set to 'children share courses', // then they share courses. The default is false (well, undefined).
         // If they don't share courses, then they share the dirty set;
         // if they do, however, they each receive their own dirty set, so that they don't know if a course has been used yet or not.
         // 'children share courses' is non-recursive.
@@ -50,7 +54,7 @@ export default function compute(
           localDirty = new Set()
         }
         return compute(req, {
-          path: path.concat([name]),
+          path as path.concat([name]),
           courses,
           overrides,
           dirty: localDirty,
@@ -87,7 +91,7 @@ export default function compute(
     }
 
     computed = computeChunk({
-      expr: requirement.result,
+      expr as requirement.result,
       ctx: requirement,
       courses,
       dirty,

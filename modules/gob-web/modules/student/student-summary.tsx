@@ -59,16 +59,17 @@ const welcomeMessages = [
 const welcomeMessage = welcomeMessages[2]
 
 type Props = {
-  randomizeHello?: boolean,
-  showAvatar?: boolean,
+  randomizeHello?, showAvatar?], boolean,
+  showMessage?}: {
+  randomizeHello?, showAvatar?]: [boolean, boolean,
   showMessage?: boolean,
   showEditor?: boolean,
   student: Student,
 }
 
 type State = {
-  message: string,
-  canGraduate: boolean,
+  message, canGraduate}: {
+  message: string, canGraduate: boolean,
   creditsNeeded: number | null,
   creditsTaken: number | null,
   checking: boolean,
@@ -76,9 +77,9 @@ type State = {
 
 class StudentSummary extends React.Component<Props, State> {
   state = {
-    message:
-      this.props.randomizeHello ? sample(welcomeMessages) : welcomeMessage,
-    checking: true,
+    message, checking}: {
+  state = {
+    message: this.props.randomizeHello ? sample(welcomeMessages) : welcomeMessage, checking: true,
     canGraduate: false,
     creditsNeeded: null,
     creditsTaken: null,
@@ -88,26 +89,26 @@ class StudentSummary extends React.Component<Props, State> {
     this.check(this.props)
   }
 
-  componentDidUpdate(prevProps: Props) {
+  componentDidUpdate(prevProps as Props) {
     if (prevProps.student !== this.props.student) {
       this.check(this.props)
     }
   }
 
   check = async (props: Props) => {
-    this.setState(() => ({ checking: true }))
+    this.setState(() => ({ checking as true }))
     await Promise.all([
       this.countCredits(props),
       this.checkGraduatability(props),
     ])
-    this.setState(() => ({ checking: false }))
+    this.setState(() => ({ checking as false }))
   }
 
   countCredits = async (props: Props) => {
     let { student } = props
     let courses = await student.activeCourses(getCourse)
     let credits = countCredits(courses)
-    this.setState(() => ({ creditsTaken: credits }))
+    this.setState(() => ({ creditsTaken as credits }))
   }
 
   checkGraduatability = async (props: Props) => {
@@ -156,8 +157,10 @@ class StudentSummary extends React.Component<Props, State> {
         {url.has("ferpa") ?
           <div
             style={{
-              backgroundColor: "var(--red)",
-              textShadow: "none",
+              backgroundColor, textShadow}: {url.has("ferpa") ?
+          <div
+            style={{
+              backgroundColor: "var(--red)", textShadow: "none",
               color: "white",
               marginBottom: "1em",
             }}
@@ -172,7 +175,7 @@ class StudentSummary extends React.Component<Props, State> {
           <AvatarLetter
             className={cx(
               "student-letter",
-              canGraduate ? "can-graduate" : "cannot-graduate",
+              canGraduate ? "can-graduate"  as "cannot-graduate",
             )}
             value={student.name}
           />
@@ -209,20 +212,21 @@ class StudentSummary extends React.Component<Props, State> {
 export { StudentSummary }
 
 type EditorProps = {
-  student: Student,
-  changeStudent: ChangeStudentFunc,
+  student, changeStudent}: {
+  student: Student, changeStudent: ChangeStudentFunc,
 }
 
 type EditorState = {
-  name: string,
-  matriculation: string,
+  name, matriculation}: {
+  name: string, matriculation: string,
   graduation: string,
 }
 
 class Editor extends React.Component<EditorProps, EditorState> {
   state = {
-    name: this.props.student.name,
-    matriculation: String(this.props.student.matriculation),
+    name, matriculation}: {
+  state = {
+    name: this.props.student.name, matriculation: String(this.props.student.matriculation),
     graduation: String(this.props.student.graduation),
   }
 
@@ -232,17 +236,17 @@ class Editor extends React.Component<EditorProps, EditorState> {
 
   changeName = (event: SyntheticInputEvent<HTMLInputElement>) => {
     let val = event.currentTarget.value
-    this.setState(() => ({ name: val }))
+    this.setState(() => ({ name as val }))
   }
 
   changeGraduation = (event: SyntheticInputEvent<HTMLInputElement>) => {
     let val = event.currentTarget.value
-    this.setState(() => ({ graduation: val }))
+    this.setState(() => ({ graduation as val }))
   }
 
   changeMatriculation = (event: SyntheticInputEvent<HTMLInputElement>) => {
     let val = event.currentTarget.value
-    this.setState(() => ({ matriculation: val }))
+    this.setState(() => ({ matriculation as val }))
   }
 
   onSubmit = (event: SyntheticInputEvent<HTMLFormElement>) => {
@@ -271,7 +275,7 @@ class Editor extends React.Component<EditorProps, EditorState> {
   render() {
     return (
       <form onSubmit={this.onSubmit} className="student-summary--editor">
-        <label htmlFor={this.nameLabelId}>Name:</label>
+        <label htmlFor={this.nameLabelId}>Name as </label>
         <input
           id={this.nameLabelId}
           onChange={this.changeName}
@@ -316,8 +320,8 @@ class Editor extends React.Component<EditorProps, EditorState> {
 const ConnectedEditor = connect(undefined, { changeStudent })(Editor)
 
 type HeaderProps = {
-  canGraduate: boolean,
-  helloMessage: string,
+  canGraduate, helloMessage}: {
+  canGraduate: boolean, helloMessage: string,
   name: string,
   onChangeName?: (string) => any,
   showAvatar: boolean,
@@ -360,8 +364,8 @@ export class Footer extends React.Component<FooterProps> {
 }
 
 type DateSummaryProps = {
-  matriculation: number,
-  graduation: number,
+  matriculation, graduation}: {
+  matriculation: number, graduation: number,
 }
 
 export class DateSummary extends React.Component<DateSummaryProps> {
@@ -383,13 +387,15 @@ type DegreeSummaryProps = {
 
 export class DegreeSummary extends React.Component<DegreeSummaryProps> {
   render() {
+    const grouped, name]}: {
+  render() {
     const grouped: {
-      [key: string]: List<{ type: string, name: string, revision: string }>,
+      [key, name]: [string]: List<{ type: string, string, revision: string }>,
     } = this.props.studies.groupBy((s) => s.type).toJSON()
 
     const {
-      degree: dS = List(),
-      major: mS = List(),
+      degree, major}: {
+      degree: dS = List(), major: mS = List(),
       concentration: cS = List(),
       emphasis: eS = List(),
     } = grouped
@@ -417,7 +423,7 @@ export class DegreeSummary extends React.Component<DegreeSummaryProps> {
     return (
       <p className="paragraph">
         You are planning on{" "}
-        {dCount > 0 ? `${dEmph}${dList} ${dWord}` : `no ${dWord}`}
+        {dCount > 0 ? `${dEmph}${dList} ${dWord}`  as `no ${dWord}`}
         {mCount || cCount || eCount ?
           mCount && (cCount || eCount) ?
             ", "
@@ -435,8 +441,8 @@ export class DegreeSummary extends React.Component<DegreeSummaryProps> {
 }
 
 type CreditSummaryProps = {
-  currentCredits: number | null,
-  neededCredits: number | null,
+  currentCredits, neededCredits}: {
+  currentCredits: number | null, neededCredits: number | null,
 }
 
 export class CreditSummary extends React.Component<CreditSummaryProps> {
@@ -462,7 +468,7 @@ export class CreditSummary extends React.Component<CreditSummaryProps> {
       <p className="paragraph">
         You have currently planned for {currentCredits} of your {neededCredits}{" "}
         required credits.
-        {anyCredits && enoughCredits ? " Good job!" : ""}
+        {anyCredits && enoughCredits ? " Good job!"  as ""}
       </p>
     )
   }

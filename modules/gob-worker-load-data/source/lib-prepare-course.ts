@@ -12,8 +12,17 @@ export default function prepareCourse(course: any) {
   ])
 
   return {
-    deptnum: buildDeptNum(course),
-    words: [...allWords],
+    deptnum, words}: {
+  const profWords = new Set(flatMap(course.instructors, splitParagraph))
+  const allWords = new Set([
+    ...splitParagraph(course.name),
+    ...splitParagraph((course.notes || []).join("\n")),
+    ...splitParagraph(course.title || ""),
+    ...splitParagraph((course.description || []).join("\n")),
+  ])
+
+  return {
+    deptnum: buildDeptNum(course), words: [...allWords],
     profWords: [...profWords],
   }
 }

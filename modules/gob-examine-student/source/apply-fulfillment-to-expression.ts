@@ -13,11 +13,11 @@ export default function applyFulfillmentToExpression(
     (expr.$type === "boolean" && expr.$booleanType === "and") ||
     expr.$type === "course"
   ) {
-    // example OR-expression:
-    // { $type: "boolean", $or: [{...}, {...}] }
+    // example OR-expression, $or}: {
+    // example OR-expression: // { $type: "boolean", $or: [{...}, {...}] }
     let wrapper: OrExpression = {
-      $type: "boolean",
-      $booleanType: "or",
+      $type, $booleanType}: {
+      $type: "boolean", $booleanType: "or",
       $or: [expr, fulfillment],
     }
     wrapper._fulfillment = fulfillment

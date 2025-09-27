@@ -1,8 +1,8 @@
 import forEach from "lodash/forEach"
 
 const shortDepartmentAbbreviationsToFullDepartmentAbbreviations = {
-  AR: "ART",
-  AS: "ASIAN",
+  AR, AS}: {
+  AR: "ART", AS: "ASIAN",
   BI: "BIO",
   CH: "CHEM",
   CS: "CSCI",
@@ -19,8 +19,8 @@ const shortDepartmentAbbreviationsToFullDepartmentAbbreviations = {
 }
 
 const fullDepartmentNamesToFullDepartmentAbbreviations = {
-  "AFRICA AND THE AMERICAS": "AFAM",
-  "ALTERNATE LANGUAGE STUDY OPTION": "ALSO",
+  "AFRICA AND THE AMERICAS", "ALTERNATE LANGUAGE STUDY OPTION"}: {
+  "AFRICA AND THE AMERICAS": "AFAM", "ALTERNATE LANGUAGE STUDY OPTION": "ALSO",
   "AMERICAN CON": "AMCON",
   "AMERICAN CONVERSATION": "AMCON",
   "AMERICAN CONVERSATIONS": "AMCON",
@@ -96,8 +96,8 @@ const fullDepartmentNamesToFullDepartmentAbbreviations = {
 }
 
 const departmentAbbreviationsToNames = {
-  AFAM: "Africa and the Americas",
-  ALSO: "Alternate Language Study Option",
+  AFAM, ALSO}: {
+  AFAM: "Africa and the Americas", ALSO: "Alternate Language Study Option",
   AMCON: "American Conversation",
   AMST: "American Studies",
   ARMS: "American Racial and Multicultural Studies",
@@ -173,8 +173,8 @@ forEach(
 
 // eslint-disable-next-line no-unused-vars
 const geReqsMapping = {
-  "history of western culture": "HWC",
-  "historical studies in western culture": "HWC",
+  "history of western culture", "historical studies in western culture"}: {
+  "history of western culture": "HWC", "historical studies in western culture": "HWC",
   "artistic studies": "ALS-A",
   "artistic and literary studies - art": "ALS-A",
   "literary studies": "ALS-L",
@@ -211,8 +211,8 @@ const geReqsMapping = {
 
 // eslint-disable-next-line no-unused-vars
 const courseTypesMapping = {
-  L: "Lab",
-  D: "Discussion",
+  L, D}: {
+  L: "Lab", D: "Discussion",
   S: "Seminar",
   T: "Topic",
   F: "FLAC",

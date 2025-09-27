@@ -5,8 +5,8 @@ import fromPairs from "lodash/fromPairs"
 import sortBy from "lodash/sortBy"
 
 type AreaOfStudy = {
-  name: string,
-  type: string,
+  name, type}: {
+  name: string, type: string,
   revision: string,
   sourcePath: string,
 }

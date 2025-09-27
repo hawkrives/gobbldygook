@@ -26,8 +26,8 @@ const Subtitle = styled.h2`
 const independentRegex = /^I[RS]/
 
 type CourseTitleProps = {
-  className?: string,
-  name: string,
+  className?, name}: {
+  className?: string, name: string,
   title?: string,
   type?: string,
 }
@@ -48,7 +48,7 @@ export default function CourseTitle({
       courseName = courseName.substring(3)
     }
   } else if (type === "Topic") {
-    courseName = `${name.replace(/top.*:;gi, "")}`
+    courseName = `${name.replace(/top.* as ;gi, "")}`
     subtitle = title
   } else if (type === "Seminar") {
     courseName = title

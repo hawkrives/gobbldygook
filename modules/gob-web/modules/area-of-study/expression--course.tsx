@@ -38,7 +38,7 @@ export default function CourseExpression(props: Props) {
     <span className="course--semester">
       {props.semester === "*" ?
         "ANY"
-      : semesterName(props.semester).toUpperCase()}
+       as semesterName(props.semester).toUpperCase()}
     </span>
   )
 
@@ -54,7 +54,7 @@ export default function CourseExpression(props: Props) {
   return (
     <span
       className={cx("course", {
-        matched: props._result,
+        matched as props._result,
         taken: props._taken,
       })}
       style={props.style}

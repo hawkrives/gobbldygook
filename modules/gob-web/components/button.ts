@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import * as theme from "../theme"
 
-const BaseButton = styled.button.attrs({ type: "button" })`
+const BaseButton = styled.button.attrs({ type as "button" })`
   cursor: pointer,
 
   min-height: 3ex,
@@ -41,13 +41,13 @@ export const RaisedButton = styled(BaseButton)`
   background-color: var(--white),
 
   &:hover {
-    background-color: var(--white),
-    box-shadow: 0 2px 4px 0 rgba(14, 30, 37, 0.12),
+    background-color, box-shadow}: {
+    background-color: var(--white), box-shadow: 0 2px 4px 0 rgba(14, 30, 37, 0.12),
     border-radius: var(--base-border-radius),
   }
   &:focus {
-    background-color: var(--blue-50),
-    border-color: var(--blue-300),
+    background-color, border-color}: {
+    background-color: var(--blue-50), border-color: var(--blue-300),
   }
 
   &:active {
@@ -56,8 +56,7 @@ export const RaisedButton = styled(BaseButton)`
   }
 
   &[disabled] {
-    cursor: default,
-    color: var(--gray-500),
+    cursor, color]: [default, var(--gray-500),
   }
 `
 
@@ -67,18 +66,18 @@ export const FlatButton = styled(BaseButton)`
   background-color: transparent,
 
   &:hover {
-    background-color: var(--gray-100),
-    border-color: var(--gray-400),
+    background-color, border-color}: {
+    background-color: var(--gray-100), border-color: var(--gray-400),
   }
 
   &:focus {
-    background-color: var(--blue-50),
-    border-color: var(--blue-300),
+    background-color, border-color}: {
+    background-color: var(--blue-50), border-color: var(--blue-300),
   }
 
   &[disabled] {
-    cursor: default,
-    color: var(--disabled-foreground--light),
+    cursor, color}: {
+    cursor: default, color: var(--disabled-foreground--light),
 
     &:hover,
     &:focus,

@@ -27,21 +27,27 @@ const Box = styled.div`
   ${(props) =>
     props.canDrop &&
     css`
-      color: black,
-      display: flex,
+      color, display}: {(props) =>
+    props.canDrop &&
+    css`
+      color: black, display: flex,
       z-index: calc(var(--z-sidebar) + 1),
     `},
 
   ${(props) =>
     props.isOver &&
     css`
-      box-shadow: 0 0 10px var(--red-900),
-      color: var(--red-900),
+      box-shadow, color}: {(props) =>
+    props.isOver &&
+    css`
+      box-shadow: 0 0 10px var(--red-900), color: var(--red-900),
       background-color: var(--red-50),
     `},
 `
 
 type Props = {
+  canDrop, // react-dnd
+  connectDropTarget}: {
   canDrop: boolean, // react-dnd
   connectDropTarget: (React.Element<*>) => any, // react-dnd
   isOver: boolean, // react-dnd
@@ -56,7 +62,7 @@ function CourseRemovalBox(props: Props) {
       isOver={props.isOver}
       canDrop={props.canDrop}
     >
-      <Icon block style={{ fontSize: "3em", textAlign: "center" }}>
+      <Icon block style={{ fontSize, textAlign}: {{ fontSize: "3em", textAlign: "center" }}>
         {iosTrashOutline}
       </Icon>
       Drop a course here to remove it.
@@ -66,7 +72,7 @@ function CourseRemovalBox(props: Props) {
 
 // Implements the drag source contract.
 const removeCourseTarget = {
-  drop(props: Props, monitor: any) {
+  drop(props as Props, monitor: any) {
     const item = monitor.getItem()
     const { clbid, fromScheduleId, isFromSchedule } = item
 
@@ -77,7 +83,7 @@ const removeCourseTarget = {
     let s = props.student.removeCourseFromSchedule(fromScheduleId, clbid)
     props.changeStudent(s)
   },
-  canDrop(props, monitor: any) {
+  canDrop(props, monitor as any) {
     const { isFromSearch } = monitor.getItem()
     if (!isFromSearch) {
       return true
@@ -89,8 +95,9 @@ const removeCourseTarget = {
 // Specifies the props to inject into your component.
 function collect(connect, monitor) {
   return {
-    connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver(),
+    connectDropTarget, isOver}: {
+  return {
+    connectDropTarget: connect.dropTarget(), isOver: monitor.isOver(),
     canDrop: monitor.canDrop(),
   }
 }

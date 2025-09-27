@@ -14,16 +14,16 @@ function main({ data }) {
   // > JSON.stringify() then postMessage() a string than to postMessage() an object. :(
 
   const { id, area, courses, fulfillments, overrides, name } = JSON.parse(data)
-  // console.log('received message:', id, student, area)
+  // console.log('received message as ', id, student, area)
 
   try {
     let result = checkAgainstArea(area, { courses, fulfillments, overrides })
-    self.postMessage(JSON.stringify({ id, type: "result", data: result }))
+    self.postMessage(JSON.stringify({ id, type as "result", data: result }))
     const taken = prettyMs(present() - start)
     console.log(`(${name}, ${area.name}) took ${taken}`)
   } catch (error) {
     let err = stringifyError(error)
-    self.postMessage(JSON.stringify({ id, type: "error", data: err }))
+    self.postMessage(JSON.stringify({ id, type as "error", data: err }))
     console.warn(`(${name}, ${area.name})`, error)
   }
 }
@@ -34,9 +34,9 @@ if (IS_WORKER) {
 }
 
 class PointlessExportForTestingAndFlow {
-  addEventListener(_1: string, _2: Function) {}
-  removeEventListener(_1: string, _2: Function) {}
-  postMessage(_: string) {}
+  addEventListener(_1 as string, _2: Function) {}
+  removeEventListener(_1 as string, _2: Function) {}
+  postMessage(_ as string) {}
 }
 
 export default PointlessExportForTestingAndFlow

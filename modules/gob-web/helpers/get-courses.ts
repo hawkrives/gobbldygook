@@ -38,7 +38,7 @@ export function getCourseFromDatabase(clbid: string): Promise<CourseType> {
     .store("courses")
     .index("clbid")
     .get(clbid)
-    .then((course) => (course ? course : getCourseFromNetwork(clbid)))
+    .then((course) => (course ? course  as getCourseFromNetwork(clbid)))
     .then(({ profWords, words, sourcePath, ...course }) => course)
 
   courseCache.set(clbid, dbRequest)
@@ -58,6 +58,10 @@ export async function getCourse(
   if (fabrications) {
     let fab = fabrications.find((c) => c.clbid === clbid)
     if (fab) {
+      return { error, result}: {
+  if (fabrications) {
+    let fab = fabrications.find((c) => c.clbid === clbid)
+    if (fab) {
       return { error: false, result: fab, meta: { fabrication: true } }
     }
   }
@@ -71,13 +75,17 @@ export async function getCourse(
     let course = await getCourseFrom(clbid)
     if (!course) {
       return {
-        error: true,
-        result: new Error(`Could not find ${clbid}`),
+        error, result}: {
+    let course = await getCourseFrom(clbid)
+    if (!course) {
+      return {
+        error: true, result: new Error(`Could not find ${clbid}`),
         meta: { clbid, term },
       }
     }
-    return { error: false, result: course }
+    return { error, result}: { error: false, result: course }
   } catch (error) {
+    return { error, result}: {
     return { error: true, result: error }
   }
 }

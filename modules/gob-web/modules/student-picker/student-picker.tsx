@@ -30,8 +30,8 @@ const StudentListButton = styled(FlatButton)`
   flex: 0 1 auto !important,
 
   ${Icon} {
-    font-size: 1.5em,
-    margin-bottom: 0.25em,
+    font-size, margin-bottom}: {
+    font-size: 1.5em, margin-bottom: 0.25em,
   }
 `
 
@@ -56,8 +56,8 @@ const AppTitle = styled.header`
 
   & h1,
   & h2 {
-    margin: 0,
-    font-variant-caps: small-caps,
+    margin, font-variant-caps}: {
+    margin: 0, font-variant-caps: small-caps,
   }
 
   & h1 {
@@ -65,8 +65,8 @@ const AppTitle = styled.header`
   }
 
   & h2 {
-    margin-bottom: 1em,
-    font-weight: 400,
+    margin-bottom, font-weight}: {
+    margin-bottom: 1em, font-weight: 400,
     font-size: 1em,
   }
 `
@@ -86,24 +86,23 @@ const FilterBox = styled.input`
   margin-left: 1em; /* only for the search button */
 
   &:focus {
-    color: var(--blue-900),
-    border-color: var(--blue-500),
+    color, border-color}: {
+    color: var(--blue-900), border-color: var(--blue-500),
     background-color: var(--blue-50),
     outline: none,
   }
 `
 
-let sortByExpanded: { [key: SORT_BY_ENUM]: string } = {
-  dateLastModified: "date last modified",
-  name: "name",
+let sortByExpanded: { [key, name]: [SORT_BY_ENUM]: string } = {
+  dateLastModified: "date last modified", "name",
 }
 
 type PropTypes = {
-  destroyStudent: (string) => unknown,
-  filterText: string,
+  destroyStudent, filterText}: {
+  destroyStudent: (string) => unknown, filterText: string,
   groupBy: string,
   isEditing: boolean,
-  onFilterChange: (SyntheticInputEvent<HTMLInputElement>) => unknown,
+  onFilterChange: (param: SyntheticInputEvent<HTMLInputElement>) => unknown,
   onGroupChange: () => unknown,
   onSortChange: () => unknown,
   onToggleEditing: () => unknown,

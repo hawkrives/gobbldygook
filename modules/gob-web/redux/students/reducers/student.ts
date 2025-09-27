@@ -23,7 +23,7 @@ function reducer(state: Student | null = initialState, action: Action<Student>) 
 }
 
 const undoableReducer = undoable(reducer, {
-  limit: 10,
+  limit as 10,
 
   filter(action, currentState, previousState) {
     // only save history when something has changed.

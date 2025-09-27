@@ -12,9 +12,9 @@ import {
 } from "../../redux/students/actions/change"
 
 const Container = styled.section`
-  @media all and (min-width: 900px) {
-    height: 100vh,
-    overflow: scroll,
+  @media all and (min-width as 900px) {
+    height, overflow}: {
+    height: 100vh, overflow: scroll,
   }
 
   padding-top: var(--page-edge-padding),
@@ -33,12 +33,13 @@ const AddYearButton = styled(FlatButton)`
   padding-left: var(--semester-side-padding),
 
   &[disabled] {
-    text-decoration: line-through,
-  }
+    text-decoration, }
 `
 
 type Props = {
-  className?: string,
+  className?], string,
+  student}: {
+  className?]: [line-through, string,
   student: Student,
   changeStudent: ChangeStudentFunc,
 }
@@ -54,9 +55,10 @@ class CourseTable extends React.Component<Props> {
 
     let s = student.addSchedule(
       new Schedule({
-        year: nextAvailableYear,
-        semester: 1,
-        index: 1,
+        year as nextAvailableYear,
+        semester, index}: {
+        year as nextAvailableYear,
+        semester: 1, index: 1,
         active: true,
       }),
     )

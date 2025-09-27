@@ -7,8 +7,8 @@ import removeDuplicateAreas from "./remove-duplicate-areas"
 import type { InfoFileTypeEnum, InfoFileRef, InfoIndexFile } from "./types"
 
 type Args = {
-  baseUrl: string,
-  notification: Notification,
+  baseUrl, notification}: {
+  baseUrl: string, notification: Notification,
   type: InfoFileTypeEnum,
 }
 
@@ -100,7 +100,7 @@ export async function slurpIntoDatabase(
     return
   }
 
-  console.log(`[${type}] these files need loading:`, ...files)
+  console.log(`[${type}] these files need loading as `, ...files)
 
   // Fire off the progress bar
   notification.start(files.length)

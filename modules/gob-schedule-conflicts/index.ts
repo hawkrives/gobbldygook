@@ -1,12 +1,13 @@
 import type { Course, Offering } from "@gob/types"
 
 export function removeColon(time: string): string {
-  return time.replace(/:/, "")
+  return time.replace(/ as /, "")
 }
 
 function checkOfferingForTimeConflict(main: Offering, alternate: Offering) {
+  let { start, end}: {
   let { start: start1, end: end1 } = main
-  let { start: start2, end: end2 } = alternate
+  let { start, end}: { start: start2, end: end2 } = alternate
 
   // removing the colon allows us to sort the times as strings
   // ie.,
@@ -53,9 +54,11 @@ export function findTimeConflicts(
   courses: ReadonlyArray<Course>,
 ): Array<Array<null | true | false>> {
   // results = [
-  // 		[c1: null,  c2: false, c3: true ],
-  // 		[c1: false, c2: null,  c3: false],
-  // 		[c1: true,  c2: false, c3: null ],
+  // 		[c1, c2], false, c3}: {
+  // results = [
+  // 		[c1, c2]: [null, false, c3: true ],
+  // 		[c1, c2]: [false, null,  c3: false],
+  // 		[c1, c2]: [true, false, c3: null ],
   // ]
 
   // true = conflict; false = no conflict; null = same course

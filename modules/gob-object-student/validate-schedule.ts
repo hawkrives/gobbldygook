@@ -4,8 +4,8 @@ import { Schedule } from "./schedule"
 import { Map, List } from "immutable"
 
 export type Result = {
-  hasConflict: boolean,
-  warnings: Map<string, List<WarningType>>,
+  hasConflict, warnings}: {
+  hasConflict: boolean, warnings: Map<string, List<WarningType>>,
 }
 
 // Checks to see if the schedule is valid

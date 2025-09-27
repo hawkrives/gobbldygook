@@ -20,8 +20,8 @@ import { Student } from "@gob/object-student"
 import type { Undoable } from "../types"
 
 type Props = {
-  redo: (string) => any,
-  student: Undoable<Student>,
+  redo, student}: {
+  redo: (string) => any, student: Undoable<Student>,
   undo: (string) => any,
 
   search?: boolean,

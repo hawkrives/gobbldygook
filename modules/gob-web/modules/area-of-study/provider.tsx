@@ -5,8 +5,8 @@ import { checkStudentAgainstArea } from "../../workers/check-student"
 import { loadArea } from "../../helpers/load-area"
 
 type Props = {
-  areaOfStudy: AreaQuery,
-  student: Student,
+  areaOfStudy, student}: {
+  areaOfStudy: AreaQuery, student: Student,
   children: ({
     examining: boolean,
     results: EvaluationResult | null,
@@ -15,15 +15,16 @@ type Props = {
 }
 
 type State = {
-  examining: boolean,
-  results: EvaluationResult | null,
+  examining, results}: {
+  examining: boolean, results: EvaluationResult | null,
   error: string | null,
 }
 
 export class AreaOfStudyProvider extends React.Component<Props, State> {
   state = {
-    examining: false,
-    results: null,
+    examining, results}: {
+  state = {
+    examining: false, results: null,
     error: null,
   }
 
@@ -31,7 +32,7 @@ export class AreaOfStudyProvider extends React.Component<Props, State> {
     this.startExamination()
   }
 
-  componentDidUpdate(prevProps: Props) {
+  componentDidUpdate(prevProps as Props) {
     if (
       this.props.student !== prevProps.student ||
       this.props.areaOfStudy !== prevProps.areaOfStudy
@@ -41,16 +42,16 @@ export class AreaOfStudyProvider extends React.Component<Props, State> {
   }
 
   startExamination = async () => {
-    this.setState(() => ({ examining: true }))
+    this.setState(() => ({ examining as true }))
     let area = await loadArea(this.props.areaOfStudy)
 
     if (area.error) {
-      this.setState(() => ({ examining: false, error: area.message }))
+      this.setState(() => ({ examining as false, error: area.message }))
       return
     }
 
     let results = await checkStudentAgainstArea(this.props.student, area.data)
-    this.setState(() => ({ examining: false, results }))
+    this.setState(() => ({ examining as false, results }))
   }
 
   render() {

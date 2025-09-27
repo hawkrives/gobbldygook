@@ -4,21 +4,22 @@ import { db } from "../../helpers/db"
 import { type ParsedHansonFile } from "@gob/hanson-format"
 
 type Props = {
-  children: ({
-    loading: boolean,
-    areas: Array<ParsedHansonFile>,
+  children, areas}: {
+  children: (props: {
+    loading: boolean, areas: Array<ParsedHansonFile>,
   }) => React.ReactNode,
 }
 
 type State = {
-  loading: boolean,
-  areas: Array<ParsedHansonFile>,
+  loading, areas}: {
+  loading: boolean, areas: Array<ParsedHansonFile>,
 }
 
 export class AreaOfStudyProvider extends React.PureComponent<Props, State> {
   state = {
-    areas: [],
-    loading: true,
+    areas, loading}: {
+  state = {
+    areas: [], loading: true,
   }
 
   componentDidMount() {
@@ -28,7 +29,7 @@ export class AreaOfStudyProvider extends React.PureComponent<Props, State> {
   cacheAreas = async () => {
     let areas = await db.store("areas").getAll()
 
-    this.setState(() => ({ areas, loading: false }))
+    this.setState(() => ({ areas, loading as false }))
   }
 
   render() {

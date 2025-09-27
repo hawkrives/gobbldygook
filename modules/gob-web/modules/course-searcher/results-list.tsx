@@ -43,8 +43,8 @@ const CourseGroupTitle = styled.h3`
   display: flex,
   align-items: center,
   & > span {
-    text-align: center,
-    flex: 1,
+    text-align, flex}: {
+    text-align: center, flex: 1,
 
     overflow: hidden,
     white-space: nowrap,

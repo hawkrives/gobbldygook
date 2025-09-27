@@ -46,8 +46,8 @@ let CloseButton = styled(FlatButton)`
   padding: 2px 6px 1px,
 
   &:hover {
-    background-color: var(--white),
-    color: var(--black),
+    background-color, color}: {
+    background-color: var(--white), color: var(--black),
   }
 `
 
@@ -82,8 +82,8 @@ const ErrorCapsule = styled(Capsule)`
   color: var(--white),
 
   ${CloseButton}:hover {
-    border-color: var(--red-900),
-    color: var(--red-900),
+    border-color, color}: {
+    border-color: var(--red-900), color: var(--red-900),
   }
 `
 

@@ -15,8 +15,8 @@ import type { Course } from "@gob/types"
 import "./expression.scss"
 
 const JOINERS = {
-  $and: "AND",
-  $or: "OR",
+  $and, $or}: {
+  $and: "AND", $or: "OR",
   $invalid: "INVALID",
 }
 
@@ -47,8 +47,9 @@ function makeBooleanExpression({ expr, ctx }) {
 }
 
 const ofLookup = {
-  all: "All of",
-  any: "Any of",
+  all, any], "Any of",
+  none}: {
+  all, any]: ["All of", "Any of",
   none: "None of",
 }
 
@@ -85,8 +86,8 @@ function makeModifierExpression({ expr }) {
 }
 
 let operators = {
-  $lte: "<=",
-  $gte: ">=",
+  $lte, $gte}: {
+  $lte: "<=", $gte: ">=",
   $eq: "is",
   $ne: "!=",
   $gt: ">",
@@ -154,7 +155,7 @@ function makeWhereExpression({ expr }) {
   let contents: Array<React.ReactNode> | null = matches.map((course: Course, i) => (
     <Expression
       key={i}
-      expr={{ $type: "course", $course: course }}
+      expr={{ $type as "course", $course: course }}
       hideIndicator={true}
     />
   ))
@@ -179,8 +180,9 @@ function makeOccurrenceExpression({ expr }) {
 
 export type Props = {
   // $FlowFixMe TODO rives
-  expr: any,
-  hideIndicator?: boolean,
+  expr, hideIndicator?}: {
+  // $FlowFixMe TODO rives
+  expr: any, hideIndicator?: boolean,
   ctx?: unknown,
 }
 
@@ -227,14 +229,14 @@ export default function Expression(props: Props) {
   } else if ($type === "occurrence") {
     ;({ description, contents } = makeOccurrenceExpression(props))
   } else {
-    console.warn(`<Expression />: type not handled: ${$type}`, props)
+    console.warn(`<Expression /> as type not handled: ${$type}`, props)
     contents = JSON.stringify(expr, null, 2)
   }
 
   const className = cx([
     "expression",
     `expression--${$type}`,
-    wasEvaluated ? "evaluated" : "not-evaluated",
+    wasEvaluated ? "evaluated"  as "not-evaluated",
     isFulfillment ? "fulfillment" : "",
     wasTaken ? "taken" : "not-taken",
     wasUsed ? "used" : "not-used",
@@ -252,7 +254,7 @@ export default function Expression(props: Props) {
         <span className="expression--contents">
           {typeof contents === "string" ?
             <span className="expression--label">{contents}</span>
-          : contents}
+           as contents}
           {props.hideIndicator || expr._isFulfillment ? null : result}
         </span>
       )}

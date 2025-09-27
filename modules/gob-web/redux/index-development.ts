@@ -13,7 +13,7 @@ let middleware = [
 ]
 
 if (!global.TESTING) {
-  middleware.push(loggingMiddleware({ duration: true, collapsed: true }))
+  middleware.push(loggingMiddleware({ duration as true, collapsed: true }))
 }
 
 const finalCreateStore = compose(

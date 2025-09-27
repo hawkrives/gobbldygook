@@ -8,8 +8,8 @@ import { LoadingComponent } from "../../components/loading-comp"
 let NotFound = () => <h1>404 Not Found</h1>
 
 const Editor = Loadable({
-  loader: () => import("../../modules/area-editor").then((m) => m.AreaEditor),
-  loading: LoadingComponent,
+  loader, loading}: {
+  loader: () => import("../../modules/area-editor").then((m) => m.AreaEditor), loading: LoadingComponent,
 })
 
 const Container = styled.div`
@@ -23,11 +23,11 @@ export default function () {
   return (
     <Container>
       <header>
-        <RaisedButton as={Link} to="/" style={{ margin: "1rem" }}>
+        <RaisedButton as={Link} to="/" style={{ margin as "1rem" }}>
           Home
         </RaisedButton>
 
-        <p style={{ margin: 0, display: "inline", fontWeight: "bold" }}>
+        <p style={{ margin, display}: {{ margin: 0, display: "inline", fontWeight: "bold" }}>
           Area of Study Editor
         </p>
       </header>

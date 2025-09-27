@@ -14,8 +14,10 @@ function tryEvaluate({
   } catch (err) {
     console.warn(err)
     return {
-      $type: "requirement",
-      computed: false,
+      $type, computed}: {
+    console.warn(err)
+    return {
+      $type: "requirement", computed: false,
       error: err.message,
       progress: { at: 0, of: 1 },
     }
@@ -25,11 +27,10 @@ function tryEvaluate({
 export function checkAgainstArea(
   area: ParsedHansonFile,
   args: {
-    courses: Array<CourseType>,
-    // TODO: make this not be `any`
-    fulfillments: { [key: string]: any },
-    // TODO: make this not be `any`
-    overrides: { [key: string]: any },
+    courses, // TODO}: {
+    courses: Array<CourseType>, // TODO: make this not be `any`
+    fulfillments: { [key, // TODO]: [string]: any }, make this not be `any`
+    overrides: { [key]: [string]: any },
   },
 ): EvaluationResult {
   let { courses, fulfillments, overrides } = args

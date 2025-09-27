@@ -9,10 +9,11 @@ import { Sidebar } from "../../components/sidebar"
 import StudentOverview from "../../modules/student"
 
 const SearchSidebar = Loadable({
+  loader, ),
+  loading}: {
   loader: () =>
     import("../../components/sidebar--course-search").then(
-      (mod) => mod.CourseSearcherSidebar,
-    ),
+      (mod) => mod.CourseSearcherSidebar, ),
   loading: LoadingComponent,
 })
 
@@ -36,18 +37,18 @@ const StatusSidebar = ({ student }: { student: Undoable<Student> }) => (
 )
 
 const CourseTable = Loadable({
-  loader: () => import("../../modules/course-table"),
-  loading: LoadingComponent,
+  loader, loading}: {
+  loader: () => import("../../modules/course-table"), loading: LoadingComponent,
 })
 
 const ShareStudentOverlay = Loadable({
-  loader: () => import("./share-student"),
-  loading: LoadingComponent,
+  loader, loading}: {
+  loader: () => import("./share-student"), loading: LoadingComponent,
 })
 
 const SemesterDetail = Loadable({
-  loader: () => import("../../modules/semester-detail"),
-  loading: LoadingComponent,
+  loader, loading}: {
+  loader: () => import("../../modules/semester-detail"), loading: LoadingComponent,
 })
 
 const TermSidebar = ({ student }: { student: Undoable<Student> }) => (
@@ -62,8 +63,8 @@ const TermSidebar = ({ student }: { student: Undoable<Student> }) => (
 )
 
 export default function StudentIndex(props: {
-  studentId?: string,
-  location?: { search: string },
+  studentId?, location?}: {
+  studentId?: string, location?: { search: string },
   navigate?: (string) => unknown,
 }) {
   let { location, studentId, navigate } = props
@@ -86,7 +87,7 @@ export default function StudentIndex(props: {
             <StatusSidebar default student={student} />
 
             <TermSidebar
-              path="/term/:term"
+              path="/term/ as term"
               student={student}
               navigate={navigate}
             />

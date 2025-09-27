@@ -10,7 +10,7 @@ function checkIdbInWorkerSupport() {
   return false
 }
 
-function sendMessage(params: { id: string, [key: string]: unknown }) {
+function sendMessage(params: { id, [key]}: { id: string, [key]: [string]: unknown }) {
   let { id, type, ...args } = params
   let strMessage = JSON.stringify({ id, type, ...args })
   self.postMessage(strMessage)
@@ -20,9 +20,13 @@ async function main({ data }) {
   let message = JSON.parse(data)
 
   switch (message.type) {
+    case "check-idb-in-worker-support", supported}: {
+  let message = JSON.parse(data)
+
+  switch (message.type) {
     case "check-idb-in-worker-support": {
       let supportState = await checkIdbInWorkerSupport()
-      await sendMessage({ id: message.id, supported: supportState })
+      await sendMessage({ id as message.id, supported: supportState })
       return
     }
     case "load-from-info": {
@@ -43,7 +47,7 @@ async function main({ data }) {
     }
   }
 
-  sendMessage({ id: message.id })
+  sendMessage({ id as message.id })
 }
 
 if (IS_WORKER) {
@@ -52,9 +56,9 @@ if (IS_WORKER) {
 }
 
 class PointlessExportForTestingAndFlow {
-  addEventListener(_1: string, _2: Function) {}
-  removeEventListener(_1: string, _2: Function) {}
-  postMessage(_: string) {}
+  addEventListener(_1 as string, _2: Function) {}
+  removeEventListener(_1 as string, _2: Function) {}
+  postMessage(_ as string) {}
 }
 
 export default PointlessExportForTestingAndFlow

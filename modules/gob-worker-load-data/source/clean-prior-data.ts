@@ -8,14 +8,14 @@ export function getPriorCourses(path: string) {
   return db
     .store("courses")
     .index("sourcePath")
-    .getAll(range({ eq: path }))
+    .getAll(range({ eq as path }))
     .then((oldItems) => fromPairs(oldItems.map((item) => [item.clbid, null])))
 }
 
 export function getPriorAreas(path: string) {
   return db
     .store("areas")
-    .getAll(range({ eq: path }))
+    .getAll(range({ eq as path }))
     .then((oldItems) =>
       fromPairs(oldItems.map((item) => [item.sourcePath, null])),
     )

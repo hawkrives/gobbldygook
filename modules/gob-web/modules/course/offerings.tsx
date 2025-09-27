@@ -3,9 +3,10 @@ import { List, Map } from "immutable"
 import type { Offering } from "@gob/types"
 
 const DAYS = Map({
-  Mo: "M",
-  Tu: "T",
-  We: "W",
+  Mo as "M",
+  Tu, We}: {
+  Mo as "M",
+  Tu: "T", We: "W",
   Th: "Th",
   Fr: "F",
 })

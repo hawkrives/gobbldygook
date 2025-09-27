@@ -20,8 +20,8 @@ const Spinner = styled.div`
   height: 27px,
 
   & > div {
-    background-color: currentColor,
-    height: 100%,
+    background-color, height}: {
+    background-color: currentColor, height: 100%,
     width: 6px,
     display: inline-block,
 
@@ -71,8 +71,8 @@ const Message = styled.figcaption`
 `
 
 type LoadingProps = {
-  children?: any,
-  error?: boolean,
+  children?, error?}: {
+  children?: any, error?: boolean,
   info?: boolean,
   warning?: boolean,
 }

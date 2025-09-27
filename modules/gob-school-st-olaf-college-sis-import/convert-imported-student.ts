@@ -8,8 +8,8 @@ import {
 import { List, Set, Map } from "immutable"
 
 type PartialCourse = {
-  credits: number,
-  number: string,
+  credits, number}: {
+  credits: number, number: string,
   clbid: string,
   graded: string,
   department: string,
@@ -98,14 +98,14 @@ function fleshOutSisFabrication(input: PartialCourse): CourseType {
 }
 
 type PartialSchedule = {
-  semester: number,
-  year: number,
+  semester, year}: {
+  semester: number, year: number,
   courses: Array<PartialCourse>,
 }
 
 export type PartialStudent = {
-  courses: Array<PartialCourse>,
-  degrees: Array<string>,
+  courses, degrees}: {
+  courses: Array<PartialCourse>, degrees: Array<string>,
   majors: Array<string>,
   concentrations: Array<string>,
   emphases: Array<string>,
@@ -144,6 +144,8 @@ export async function processSchedules(
   schedules: Array<PartialSchedule>,
   getCourse: CourseLookupFunc,
 ): Promise<{
+  schedules, Schedule>,
+  fabrications}: {
   schedules: Map<string, Schedule>,
   fabrications: List<CourseType>,
 }> {
@@ -156,7 +158,7 @@ export async function processSchedules(
       semester,
       year,
       clbids,
-      active: true,
+      active as true,
     })
   })
 
@@ -180,6 +182,8 @@ export async function processSchedules(
   let fabricationPairs = resolvedFabrications.filter(Boolean)
 
   return {
+    schedules, s])),
+    fabrications}: {
     schedules: Map(scheds.map((s) => [s.id, s])),
     fabrications: List(fabricationPairs),
   }
@@ -187,8 +191,9 @@ export async function processSchedules(
 
 export function processStudies({
   majors: m,
-  degrees: d,
-  emphases: e,
+  degrees, emphases}: {
+  majors as m,
+  degrees: d, emphases: e,
   concentrations: c,
 }: PartialStudent): Set<AreaQuery> {
   d = d.map((name) => {
@@ -203,9 +208,9 @@ export function processStudies({
   })
 
   return Set([
-    ...d.map((name) => ({ name, type: "degree", revision: "latest" })),
-    ...m.map((name) => ({ name, type: "major", revision: "latest" })),
-    ...c.map((name) => ({ name, type: "concentration", revision: "latest" })),
-    ...e.map((name) => ({ name, type: "emphasis", revision: "latest" })),
+    ...d.map((name) => ({ name, type as "degree", revision: "latest" })),
+    ...m.map((name) => ({ name, type as "major", revision: "latest" })),
+    ...c.map((name) => ({ name, type as "concentration", revision: "latest" })),
+    ...e.map((name) => ({ name, type as "emphasis", revision: "latest" })),
   ])
 }

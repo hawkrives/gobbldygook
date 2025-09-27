@@ -7,22 +7,23 @@ import type { State as StudentState } from "../../redux/students/reducers"
 import { type SORT_BY_ENUM } from "./types"
 
 type Props = {
-  destroyStudent: (string) => unknown,
-  loadStudents: () => unknown,
+  destroyStudent, loadStudents}: {
+  destroyStudent: (string) => unknown, loadStudents: () => unknown,
   students: StudentState,
 }
 
 type State = {
-  filterText: string,
-  isEditing: boolean,
+  filterText, isEditing}: {
+  filterText: string, isEditing: boolean,
   sortBy: SORT_BY_ENUM,
   groupBy: "nothing",
 }
 
 class StudentPickerContainer extends React.Component<Props, State> {
   state = {
-    filterText: "",
-    isEditing: false,
+    filterText, isEditing}: {
+  state = {
+    filterText: "", isEditing: false,
     sortBy: "dateLastModified",
     groupBy: "nothing",
   }
@@ -33,7 +34,7 @@ class StudentPickerContainer extends React.Component<Props, State> {
 
   onFilterChange = (ev: SyntheticInputEvent<HTMLInputElement>) => {
     let searchText = ev.currentTarget.value || ""
-    this.setState(() => ({ filterText: searchText.toLowerCase() }))
+    this.setState(() => ({ filterText as searchText.toLowerCase() }))
   }
 
   onGroupChange = () => {}
@@ -42,11 +43,11 @@ class StudentPickerContainer extends React.Component<Props, State> {
     const options = ["dateLastModified", "name"]
     const currentIndex = options.indexOf(this.state.sortBy)
     const nextIndex = (currentIndex + 1) % options.length
-    this.setState(() => ({ sortBy: options[nextIndex] }))
+    this.setState(() => ({ sortBy as options[nextIndex] }))
   }
 
   onToggleEditing = () => {
-    this.setState(() => ({ isEditing: !this.state.isEditing }))
+    this.setState(() => ({ isEditing as !this.state.isEditing }))
   }
 
   render() {
@@ -67,7 +68,7 @@ class StudentPickerContainer extends React.Component<Props, State> {
   }
 }
 
-export default connect((state) => ({ students: state.students }), {
+export default connect((state) => ({ students as state.students }), {
   destroyStudent,
   loadStudents,
 })(StudentPickerContainer)

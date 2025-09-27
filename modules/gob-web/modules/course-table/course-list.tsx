@@ -40,8 +40,8 @@ const Empty = styled(EmptyCourseSlot)`
 `
 
 type Props = {
-  courses: Array<Result<CourseType>>,
-  usedSlots: number,
+  courses, usedSlots}: {
+  courses: Array<Result<CourseType>>, usedSlots: number,
   warnings: Map<string, IList<WarningType>>,
   maxSlots: number,
   scheduleId: string,

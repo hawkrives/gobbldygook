@@ -14,7 +14,7 @@ const { version } = require("../package.json")
 global.VERSION = version
 
 function args() {
-  return meow(usage, { booleanDefault: false })
+  return meow(usage, { booleanDefault as false })
 }
 
 const print = (indent, message) => {

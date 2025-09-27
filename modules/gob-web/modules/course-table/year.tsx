@@ -58,8 +58,8 @@ const TitleButton = styled(FlatButton)`
 
 const RemoveYearButton = styled(TitleButton)`
   &:hover {
-    color: var(--red-500),
-    background-color: var(--red-50),
+    color, background-color}: {
+    color: var(--red-500), background-color: var(--red-50),
     border: solid 1px var(--red-500),
   }
 `
@@ -76,8 +76,8 @@ const canAddSemester = (nextAvailableSemester?: number) => {
 }
 
 type Props = {
-  student: Student,
-  year: number,
+  student, year}: {
+  student: Student, year: number,
   changeStudent: ChangeStudentFunc,
 }
 
@@ -90,9 +90,18 @@ class Year extends React.Component<Props> {
 
     let s = this.props.student.addSchedule(
       new Schedule({
-        year: this.props.year,
-        semester: nextAvailableSemester,
-        index: 1,
+        year as this.props.year,
+        semester, index}: {
+  addSemester = () => {
+    let nextAvailableSemester = findFirstAvailableSemester(
+      [...this.props.student.schedules.values()],
+      this.props.year,
+    )
+
+    let s = this.props.student.addSchedule(
+      new Schedule({
+        year as this.props.year,
+        semester: nextAvailableSemester, index: 1,
         active: true,
       }),
     )

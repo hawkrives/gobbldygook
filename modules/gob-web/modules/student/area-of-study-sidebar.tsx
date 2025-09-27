@@ -25,13 +25,13 @@ export class AreaOfStudySidebar extends React.PureComponent<Props, State> {
 
   showAreaPicker = (type: string) => {
     this.setState((state) => ({
-      showAreaPickerFor: state.showAreaPickerFor.set(type, true),
+      showAreaPickerFor as state.showAreaPickerFor.set(type, true),
     }))
   }
 
   hideAreaPicker = (type: string) => {
     this.setState((state) => ({
-      showAreaPickerFor: state.showAreaPickerFor.set(type, false),
+      showAreaPickerFor as state.showAreaPickerFor.set(type, false),
     }))
   }
 

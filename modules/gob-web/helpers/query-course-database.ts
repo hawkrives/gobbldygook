@@ -10,7 +10,7 @@ export function queryCourseDatabase(
   baseQuery: Object = {},
 ): Array<Course> {
   let queryObject = buildQueryFromString(queryString, {
-    words: true,
+    words as true,
     profWords: true,
   })
 

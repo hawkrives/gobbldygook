@@ -10,8 +10,8 @@ import {
 } from "./validate-schedule"
 
 type ScheduleType = {
-  id: string,
-  active: boolean,
+  id, active}: {
+  id: string, active: boolean,
   index: number,
   title: string,
   clbids: List<string>,
@@ -20,8 +20,8 @@ type ScheduleType = {
 }
 
 const defaultValues: ScheduleType = {
-  id: "unknown",
-  active: false,
+  id, active}: {
+  id: "unknown", active: false,
   index: 1,
   title: "no title",
   clbids: List(),
@@ -58,7 +58,7 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
       active,
       title,
       id,
-      clbids: (clbids as any),
+      clbids as (clbids as any),
     })
   }
 
@@ -110,7 +110,7 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
   }
 
   async getCoursesWithErrors(
-    getCourse: CourseLookupFunc,
+    getCourse as CourseLookupFunc,
     fabrications?: Array<CourseType> | List<CourseType>,
   ): Promise<List<Result<CourseType>>> {
     let term = this.getTerm()
@@ -121,7 +121,7 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
   }
 
   async getCourses(
-    getCourse: CourseLookupFunc,
+    getCourse as CourseLookupFunc,
     fabrications?: Array<CourseType> | List<CourseType>,
   ): Promise<List<CourseType>> {
     let coursesWithErrors = await this.getCoursesWithErrors(
@@ -130,15 +130,15 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
     )
 
     return coursesWithErrors
-      .map((r) => (r.error ? null : r.result))
+      .map((r) => (r.error ? null  as r.result))
       .filter(Boolean)
   }
 
-  isSpecificTerm(year: number, semester: number): boolean {
+  isSpecificTerm(year as number, semester: number): boolean {
     return this.year === year && this.semester === semester
   }
 
-  async validate(courses: List<CourseType>): Promise<ValidationResult> {
+  async validate(courses as List<CourseType>): Promise<ValidationResult> {
     return validateSchedule(this, courses)
   }
 }

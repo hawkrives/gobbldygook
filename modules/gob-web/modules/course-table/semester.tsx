@@ -36,8 +36,8 @@ const Container = styled.div`
   color: var(--text-color),
 
   &.can-drop {
-    cursor: copy,
-    box-shadow: 0 0 4px var(--gray-500),
+    cursor, box-shadow}: {
+    cursor: copy, box-shadow: 0 0 4px var(--gray-500),
     z-index: 10,
   }
 
@@ -47,18 +47,18 @@ const Container = styled.div`
   --background-color-hover: var(--separator-color),
 
   &.past {
-    --background-color: var(--teal-50),
-    --separator-color: var(--teal-100),
+    --background-color, --separator-color}: {
+    --background-color: var(--teal-50), --separator-color: var(--teal-100),
   }
 
   &.in-progress {
-    --background-color: var(--light-green-50),
-    --separator-color: var(--light-green-100),
+    --background-color, --separator-color}: {
+    --background-color: var(--light-green-50), --separator-color: var(--light-green-100),
   }
 
   &.invalid {
-    --background-color: var(--amber-50),
-    --separator-color: var(--amber-100),
+    --background-color, --separator-color}: {
+    --background-color: var(--amber-50), --separator-color: var(--amber-100),
   }
 `
 
@@ -82,8 +82,8 @@ const TitleButton = styled(FlatButton)`
 
 const RemoveSemesterButton = styled(TitleButton)`
   &:hover {
-    color: var(--red-500),
-    border-color: var(--red-500),
+    color, border-color}: {
+    color: var(--red-500), border-color: var(--red-500),
     background-color: var(--red-50),
   }
 `
@@ -114,8 +114,8 @@ const InfoItem = styled(InlineListItem)`
   font-variant-numeric: oldstyle-nums,
 
   & + &::before {
-    content: " – ",
-    padding-left: 0.25em,
+    content, padding-left}: {
+    content: " – ", padding-left: 0.25em,
   }
 `
 
@@ -139,8 +139,8 @@ const TitleText = styled.h1`
 `
 
 function discoverSemesterStatus(args: {
-  year: number,
-  semester: number,
+  year, semester}: {
+  year: number, semester: number,
   now: Date,
 }): "past" | "in-progress" | "future" | "unknown" {
   let { year, now } = args
@@ -157,8 +157,8 @@ function discoverSemesterStatus(args: {
 }
 
 type DnDProps = {
-  canDrop?: boolean,
-  connectDropTarget: Function,
+  canDrop?, connectDropTarget}: {
+  canDrop?: boolean, connectDropTarget: Function,
   isOver: boolean,
 }
 
@@ -167,8 +167,8 @@ type ReduxProps = {
 }
 
 type ReactProps = {
-  schedule: Schedule,
-  semester: number,
+  schedule, semester}: {
+  schedule: Schedule, semester: number,
   student: Student,
   year: number,
 }
@@ -176,8 +176,8 @@ type ReactProps = {
 type Props = ReduxProps & DnDProps & ReactProps
 
 type State = {
-  loading: boolean,
-  checking: boolean,
+  loading, checking}: {
+  loading: boolean, checking: boolean,
   courses: List<Result<CourseType>>,
   warnings: Map<string, List<WarningType>>,
   hasConflict: boolean,
@@ -186,8 +186,9 @@ type State = {
 
 class Semester extends React.Component<Props, State> {
   state = {
-    loading: true,
-    checking: true,
+    loading, checking}: {
+  state = {
+    loading: true, checking: true,
     courses: List(),
     warnings: Map(),
     hasConflict: false,
@@ -199,7 +200,7 @@ class Semester extends React.Component<Props, State> {
     this.prepare(this.props)
   }
 
-  componentDidUpdate(prevProps: Props) {
+  componentDidUpdate(prevProps as Props) {
     if (this.props.schedule !== prevProps.schedule) {
       this.prepare(this.props)
     }
@@ -210,7 +211,7 @@ class Semester extends React.Component<Props, State> {
   }
 
   prepare = async (props) => {
-    this.setState(() => ({ loading: true, checking: true }))
+    this.setState(() => ({ loading as true, checking: true }))
 
     let { schedule } = props
     let courses = await schedule.getCoursesWithErrors(
@@ -219,15 +220,15 @@ class Semester extends React.Component<Props, State> {
     )
 
     let onlyCourses = courses
-      .map((r) => (r.error ? null : r.result))
+      .map((r) => (r.error ? null  as r.result))
       .filter(Boolean)
     let credits = countCredits([...onlyCourses])
 
-    this.setState(() => ({ courses, credits, loading: false }))
+    this.setState(() => ({ courses, credits, loading as false }))
 
     let { warnings, hasConflict } = await schedule.validate(onlyCourses)
 
-    this.setState(() => ({ warnings, hasConflict, checking: false }))
+    this.setState(() => ({ warnings, hasConflict, checking as false }))
   }
 
   removeSemester = () => {
@@ -254,10 +255,10 @@ class Semester extends React.Component<Props, State> {
     const infoBar = []
     if (courses.size) {
       // prettier-ignore
-      infoBar.push(`${courses.size} ${courses.size === 1 ? 'course' : 'courses'}`)
+      infoBar.push(`${courses.size} ${courses.size === 1 ? 'course'  as 'courses'}`)
 
       // prettier-ignore
-      infoBar.push(`${credits} ${credits === 1 ? 'credit' : 'credits'}`)
+      infoBar.push(`${credits} ${credits === 1 ? 'credit'  as 'credits'}`)
     }
 
     if (loading) {
@@ -267,13 +268,14 @@ class Semester extends React.Component<Props, State> {
     let semesterStatus = discoverSemesterStatus({
       year,
       semester,
-      now: new Date(),
+      now as new Date(),
     })
 
     const className = cx("semester", {
-      invalid: hasConflict,
-      "can-drop": canDrop,
-      loading: loading,
+      invalid as hasConflict,
+      "can-drop", loading}: {
+      invalid as hasConflict,
+      "can-drop": canDrop, loading: loading,
       past: semesterStatus === "past",
       "in-progress": semesterStatus === "in-progress",
     })
@@ -329,13 +331,13 @@ class Semester extends React.Component<Props, State> {
 
 // Implements the drag source contract.
 const semesterTarget = {
-  drop(props: ReactProps & ReduxProps, monitor) {
+  drop(props as ReactProps & ReduxProps, monitor) {
     let { clbid, fromScheduleId, isFromSchedule } = monitor.getItem()
     let { student, schedule } = props
 
     if (isFromSchedule) {
       let s = student.moveCourseToSchedule({
-        from: fromScheduleId,
+        from as fromScheduleId,
         to: schedule.id,
         clbid,
       })
@@ -345,7 +347,7 @@ const semesterTarget = {
       props.changeStudent(s)
     }
   },
-  canDrop(props: ReactProps, monitor) {
+  canDrop(props as ReactProps, monitor) {
     let item = monitor.getItem()
     let hasClbid = props.schedule.clbids.includes(item.clbid)
     return !hasClbid
@@ -355,8 +357,9 @@ const semesterTarget = {
 // Specifies the props to inject into your component.
 function collect(connect, monitor) {
   return {
-    connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver(),
+    connectDropTarget, isOver}: {
+  return {
+    connectDropTarget: connect.dropTarget(), isOver: monitor.isOver(),
     canDrop: monitor.canDrop(),
   }
 }

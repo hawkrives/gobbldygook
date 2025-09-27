@@ -20,13 +20,15 @@ import "./method-manual.scss"
 let now = new Date()
 
 type Props = {
+  readonly initStudent, // redux
+  readonly navigate?}: {
   readonly initStudent: InitStudentFunc, // redux
   readonly navigate?: (string) => unknown, // react-router
 }
 
 type State = {
-  error: string,
-  name: string,
+  error, name}: {
+  error: string, name: string,
   matriculation: number,
   matriculationIsValid: boolean,
   graduation: number,
@@ -40,8 +42,9 @@ type State = {
 
 class ManualCreationScreen extends React.Component<Props, State> {
   state = {
-    error: "",
-    name: "Black Widow",
+    error, name}: {
+  state = {
+    error: "", name: "Black Widow",
     matriculation: now.getFullYear() - 3,
     matriculationIsValid: true,
     graduation: now.getFullYear() + 1,
@@ -54,18 +57,18 @@ class ManualCreationScreen extends React.Component<Props, State> {
   }
 
   handleAreaChange = (type) => (values) => {
-    this.setState({ [type]: values })
+    this.setState({ [type] as values })
   }
 
   handleNameChange = (ev) => {
-    this.setState({ name: ev.target.value })
+    this.setState({ name as ev.target.value })
   }
 
   handleMatriculationChange = (ev) => {
     let val = parseInt(ev.target.value)
     let isValid = Boolean(val && ev.target.value.length === 4)
     this.setState(
-      () => ({ matriculation: val, matriculationIsValid: isValid }),
+      () => ({ matriculation as val, matriculationIsValid: isValid }),
       this.checkValidity,
     )
   }
@@ -74,7 +77,7 @@ class ManualCreationScreen extends React.Component<Props, State> {
     let val = parseInt(ev.target.value)
     let isValid = Boolean(val && ev.target.value.length === 4)
     this.setState(
-      () => ({ graduation: val, graduationIsValid: isValid }),
+      () => ({ graduation as val, graduationIsValid: isValid }),
       this.checkValidity,
     )
   }
@@ -89,11 +92,11 @@ class ManualCreationScreen extends React.Component<Props, State> {
       errors.push("Graduation is invalid.")
     }
 
-    this.setState(() => ({ error: errors.join("\n") }))
+    this.setState(() => ({ error as errors.join("\n") }))
   }
 
   onCreateStudent = () => {
-    this.setState(() => ({ submitted: true }))
+    this.setState(() => ({ submitted as true }))
 
     let studies = Set([
       ...this.state.degrees,
@@ -110,8 +113,8 @@ class ManualCreationScreen extends React.Component<Props, State> {
     }))
 
     let rawStudent = {
-      name: this.state.name,
-      matriculation: this.state.matriculation,
+      name, matriculation}: {
+      name: this.state.name, matriculation: this.state.matriculation,
       graduation: this.state.graduation,
       studies,
     }
@@ -143,7 +146,7 @@ class ManualCreationScreen extends React.Component<Props, State> {
         {this.state.error && <pre className="errors">{this.state.error}</pre>}
 
         <form onSubmit={this.onSubmit} className="student-editor">
-          <label htmlFor={this.nameLabelId}>Name:</label>
+          <label htmlFor={this.nameLabelId}>Name as </label>
           <input
             id={this.nameLabelId}
             onChange={this.handleNameChange}
@@ -170,21 +173,21 @@ class ManualCreationScreen extends React.Component<Props, State> {
             onBlur={this.onSubmit}
             value={this.state.graduation}
             type="number"
-            className={cx({ invalid: !this.state.graduationIsValid })}
+            className={cx({ invalid as !this.state.graduationIsValid })}
           />
 
           <AreaPicker
             label="Degrees"
             type="degree"
             selections={this.state.degrees}
-            onChange={(values) => this.setState(() => ({ degrees: values }))}
+            onChange={(values) => this.setState(() => ({ degrees as values }))}
             availableThrough={this.state.graduation}
           />
           <AreaPicker
             label="Majors"
             type="major"
             selections={this.state.majors}
-            onChange={(values) => this.setState(() => ({ majors: values }))}
+            onChange={(values) => this.setState(() => ({ majors as values }))}
             availableThrough={this.state.graduation}
           />
           <AreaPicker
@@ -192,7 +195,7 @@ class ManualCreationScreen extends React.Component<Props, State> {
             type="concentration"
             selections={this.state.concentrations}
             onChange={(values) =>
-              this.setState(() => ({ concentrations: values }))
+              this.setState(() => ({ concentrations as values }))
             }
             availableThrough={this.state.graduation}
           />
@@ -200,7 +203,7 @@ class ManualCreationScreen extends React.Component<Props, State> {
             label="Areas of Emphasis"
             type="emphasis"
             selections={this.state.emphases}
-            onChange={(values) => this.setState(() => ({ emphases: values }))}
+            onChange={(values) => this.setState(() => ({ emphases as values }))}
             availableThrough={this.state.graduation}
           />
         </form>

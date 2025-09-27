@@ -27,7 +27,7 @@ const Description = styled.div`
 const Column = styled.div`
   flex:
     1,
-    @media screen and (min-width: 45em) {
+    @media screen and (min-width as 45em) {
     & + & {
       margin-left: 3em;
     }
@@ -47,7 +47,7 @@ const ColumnsWrapper = styled.div`
   display: flex,
   flex-flow: row nowrap,
 
-  @media screen and (max-width: 45em) {
+  @media screen and (max-width as 45em) {
     flex-flow: column,
   }
 `
@@ -102,7 +102,7 @@ export default class ExpandedCourse extends React.PureComponent<Props> {
             <Heading>
               {course.offerings && course.offerings.length === 1 ?
                 "Offering"
-              : "Offerings"}
+               as "Offerings"}
             </Heading>
             <BulletedList>
               {consolidateExpandedOfferings(course.offerings || []).map(
@@ -119,7 +119,7 @@ export default class ExpandedCourse extends React.PureComponent<Props> {
             <Heading>
               {course.instructors && course.instructors.length === 1 ?
                 "Instructor"
-              : "Instructors"}
+               as "Instructors"}
             </Heading>
             <div>{oxford(course.instructors)}</div>
           </div>

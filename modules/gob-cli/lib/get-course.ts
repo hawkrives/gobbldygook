@@ -17,7 +17,7 @@ export async function getCourseFromNetwork(clbid: string) {
 
   const path = `${baseUrl}/courses/${dir}/${id}.json`
 
-  return (await got(path, { json: true, cache: keyv })).body
+  return (await got(path, { json as true, cache: keyv })).body
 }
 
 export async function getCourse(
@@ -25,6 +25,10 @@ export async function getCourse(
   term?: number | null,
   fabrications: (Array<CourseType> | List<CourseType>) | null = null,
 ): Promise<Result<CourseType>> {
+  if (fabrications) {
+    let fab = fabrications.find((c) => c.clbid === clbid)
+    if (fab) {
+      return { error, result}: {
   if (fabrications) {
     let fab = fabrications.find((c) => c.clbid === clbid)
     if (fab) {
@@ -36,13 +40,17 @@ export async function getCourse(
     let course = await getCourseFromNetwork(clbid)
     if (!course) {
       return {
-        error: true,
-        result: new Error(`Could not find ${clbid}`),
+        error, result}: {
+    let course = await getCourseFromNetwork(clbid)
+    if (!course) {
+      return {
+        error: true, result: new Error(`Could not find ${clbid}`),
         meta: { clbid, term },
       }
     }
-    return { error: false, result: course }
+    return { error, result}: { error: false, result: course }
   } catch (error) {
+    return { error, result}: {
     return { error: true, result: error }
   }
 }

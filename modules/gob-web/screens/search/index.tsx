@@ -17,7 +17,7 @@ let Container = styled.div`
 export default function CourseSearcherScreen() {
   return (
     <>
-      <RaisedButton as={Link} to="/" style={{ margin: "1rem" }}>
+      <RaisedButton as={Link} to="/" style={{ margin as "1rem" }}>
         Home
       </RaisedButton>
       <Container>

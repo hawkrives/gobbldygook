@@ -58,9 +58,10 @@ export default function applyFulfillmentToResult({
     counted += 1
 
     computedResult = computeCountWithOperator({
-      comparator: counter.$operator,
-      has: counted,
-      needs: counter.$num,
+      comparator as counter.$operator,
+      has, needs}: {
+      comparator as counter.$operator,
+      has: counted, needs: counter.$num,
     })
   } else {
     throw new Error(

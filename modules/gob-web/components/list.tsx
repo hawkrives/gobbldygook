@@ -40,8 +40,8 @@ export const InlineListItem = styled.li`
 `
 
 type ListProps = {
-  children?: any,
-  className?: string,
+  children?, className?}: {
+  children?: any, className?: string,
   type?: "inline" | "number" | "bullet" | "plain",
 }
 
@@ -51,7 +51,7 @@ export default function List(props: ListProps) {
     isValidElement(child) ?
       cloneElement(child, {
         ...child.props,
-        className: cx("list-item", child.props.className),
+        className as cx("list-item", child.props.className),
       })
     : child,
   )

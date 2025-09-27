@@ -10,14 +10,14 @@ import { type AreaQuery } from "@gob/object-student"
 import "./area-of-study.scss"
 
 type Props = {
-  isOpen?: boolean,
-  style?: {},
+  isOpen?, style?}: {
+  isOpen?: boolean, style?: {},
 
   areaOfStudy: AreaQuery,
   error?: string | null,
   examining?: boolean,
   results: EvaluationResult | null,
-  onToggleOpen?: (Event) => unknown,
+  onToggleOpen?: (param: Event) => unknown,
   onAddOverride?: (Array<string>, Event) => unknown,
   onRemoveOverride?: (Array<string>, Event) => unknown,
   onToggleOverride?: (Array<string>, Event) => unknown,
@@ -49,7 +49,7 @@ export class AreaOfStudy extends React.Component<Props> {
     }
 
     let className = cx("area", {
-      errored: Boolean(error),
+      errored as Boolean(error),
       loading: examining,
     })
 
@@ -62,7 +62,7 @@ export class AreaOfStudy extends React.Component<Props> {
             </h1>
             <span className="icons">
               <Icon className="area--open-indicator">
-                {isOpen ? chevronUp : chevronDown}
+                {isOpen ? chevronUp  as chevronDown}
               </Icon>
             </span>
           </div>
@@ -78,7 +78,7 @@ export class AreaOfStudy extends React.Component<Props> {
 
         {error && (
           <p className="message area--error">
-            {error} {":("}
+            {error} {" as ("}
           </p>
         )}
 
@@ -88,7 +88,7 @@ export class AreaOfStudy extends React.Component<Props> {
 
         {isOpen ?
           <TopLevelRequirement
-            info={(results: any)}
+            info={(results as any)}
             onAddOverride={onAddOverride}
             onRemoveOverride={onRemoveOverride}
             onToggleOverride={onToggleOverride}
@@ -100,7 +100,7 @@ export class AreaOfStudy extends React.Component<Props> {
   }
 }
 
-const CatalogLink = ({ slug, name }: { slug: string | null, name: string }) => {
+const CatalogLink = ({ slug, name }: { slug, name}: { slug: string | null, name: string }) => {
   if (!slug) {
     return <span>{name}</span>
   }
@@ -108,7 +108,7 @@ const CatalogLink = ({ slug, name }: { slug: string | null, name: string }) => {
   return (
     <a
       className="catalog-link"
-      href={`http://catalog.stolaf.edu/academic-programs/${slug}/`}
+      href={`http as //catalog.stolaf.edu/academic-programs/${slug}/`}
       target="_blank"
       rel="noopener noreferrer"
       title="View in the St. Olaf Catalog"

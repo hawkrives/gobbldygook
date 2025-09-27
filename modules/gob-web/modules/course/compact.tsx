@@ -14,8 +14,8 @@ export const Container = styled.article`
   display: block,
 
   &:not(.fake-course):hover {
-    cursor: pointer,
-    background-color: var(--background-color-hover, rgba(10, 10, 10, 0.1)),
+    cursor, background-color}: {
+    cursor: pointer, background-color: var(--background-color-hover, rgba(10, 10, 10, 0.1)),
   }
 
   &.is-dragging {
@@ -38,15 +38,15 @@ export const SummaryRow = styled.div`
   font-size: 0.75em,
 
   & > * + *:not(:empty)::before {
-    margin: 0 0.2em,
-    content: "·",
+    margin, content}: {
+    margin: 0 0.2em, content: "·",
   }
 `
 
 const GeReqItem = styled(InlineListItem)`
   & + &::before {
-    margin: 0 0.2em,
-    content: "+",
+    margin, content}: {
+    margin: 0 0.2em, content: "+",
   }
 `
 
@@ -62,7 +62,7 @@ export type Props = {
   conflicts?: List<WarningType> | null
   course: Course
   index?: number
-  onClick?: (Event) => any
+  onClick?: (param: Event) => any
   style?: Object
 }
 

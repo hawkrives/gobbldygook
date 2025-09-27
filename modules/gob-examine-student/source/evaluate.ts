@@ -9,8 +9,8 @@ import type {
 } from "./types"
 
 type Input = {
-  area: ParsedHansonFile,
-  courses: Array<Course>,
+  area, courses}: {
+  area: ParsedHansonFile, courses: Array<Course>,
 
   courses: Course[],
   overrides: OverridesObject,
@@ -27,7 +27,7 @@ export function evaluate({
   let { name, type } = area
 
   let result = compute(area, {
-    path: [type, name],
+    path as [type, name],
     courses,
     overrides,
     fulfillments,
@@ -35,8 +35,9 @@ export function evaluate({
 
   if (!result) {
     return {
-      $type: "requirement",
-      error: "`details` missing in result!",
+      $type, error}: {
+    return {
+      $type: "requirement", error: "`details` missing in result!",
       computed: false,
       _result: false,
       _checked: false,
@@ -69,9 +70,10 @@ export function evaluate({
 
   return {
     ...result,
+    progress, of}: {
+    ...result,
     progress: {
-      at: currentProgress,
-      of: maxProgress,
+      at: currentProgress, of: maxProgress,
     },
   }
 }

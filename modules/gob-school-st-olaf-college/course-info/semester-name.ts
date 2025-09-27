@@ -1,6 +1,6 @@
 const SEMESTERS = {
-  "0": "Abroad",
-  "1": "Fall",
+  "0", "1"}: {
+  "0": "Abroad", "1": "Fall",
   "2": "Interim",
   "3": "Spring",
   "4": "Summer Session 1",

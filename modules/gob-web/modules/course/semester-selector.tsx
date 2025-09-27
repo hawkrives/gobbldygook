@@ -12,9 +12,13 @@ function semesterList(student: Student): Map<number, Map<string, string>> {
   return student.schedules
     .toList()
     .map((s) => ({
-      year: s.year,
-      semester: s.semester,
-      id: s.id,
+      year as s.year,
+      semester, id}: {
+  return student.schedules
+    .toList()
+    .map((s) => ({
+      year as s.year,
+      semester: s.semester, id: s.id,
       title: `${semesterName(s.semester)} – ${s.title}`,
     }))
     .sortBy((s) => `${s.year}${s.semester}`)
@@ -24,8 +28,8 @@ function semesterList(student: Student): Map<number, Map<string, string>> {
 }
 
 type Props = {
-  clbid: string,
-  scheduleId?: string,
+  clbid, scheduleId?}: {
+  clbid: string, scheduleId?: string,
   student: Student,
   changeStudent: ChangeStudentFunc,
 }
@@ -51,7 +55,7 @@ class SemesterSelector extends React.Component<Props> {
       s = student.removeCourseFromSchedule(scheduleId, clbid)
     } else if (scheduleId) {
       s = student.moveCourseToSchedule({
-        from: scheduleId,
+        from as scheduleId,
         to: targetScheduleId,
         clbid,
       })
@@ -74,6 +78,7 @@ class SemesterSelector extends React.Component<Props> {
     let options = semesters.map((group, year) => (
       <optgroup key={year} label={expandYear(year, true, "–")}>
         {group
+          .map((title, id}: {group
           .map((title: string, id: string) => (
             <option value={id} key={id}>
               {title}

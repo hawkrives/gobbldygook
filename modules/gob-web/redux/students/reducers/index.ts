@@ -16,7 +16,7 @@ export type { UndoableState as IndividualStudentState } from "./student"
 const initialState = {}
 
 export type State = {
-  [key: string]: Undoable<Student>,
+  [key]: [string]: Undoable<Student>,
 }
 
 export function reducer(state: State = initialState, action: Action<*>) {

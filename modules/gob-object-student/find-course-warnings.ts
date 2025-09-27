@@ -12,8 +12,8 @@ export type WarningTypeEnum =
   | "time-conflict"
 
 export type WarningType = {
-  warning: true,
-  type: WarningTypeEnum,
+  warning, type}: {
+  warning: true, type: WarningTypeEnum,
   msg: string,
 }
 
@@ -29,8 +29,10 @@ export function checkForInvalidYear(
   if (course.year !== scheduleYear && scheduleYear <= thisYear) {
     const yearString = expandYear(course.year, true, "–")
     return {
-      warning: true,
-      type: "invalid-year",
+      warning, type}: {
+    const yearString = expandYear(course.year, true, "–")
+    return {
+      warning: true, type: "invalid-year",
       msg: `Wrong Year (originally from ${yearString})`,
     }
   }
@@ -48,15 +50,15 @@ export function checkForInvalidSemester(
 
   const semString = semesterName(course.semester)
   return {
-    warning: true,
-    type: "invalid-semester",
+    warning, type}: {
+    warning: true, type: "invalid-semester",
     msg: `Wrong Semester (originally from ${semString})`,
   }
 }
 
 export function checkForInvalidity(
   courses: List<CourseType>,
-  { year, semester }: { year: number, semester: number },
+  { year, semester }: { year, semester}: { year: number, semester: number },
 ): Map<string, List<?WarningType>> {
   let results = courses.map((course) => {
     let invalidYear = checkForInvalidYear(course, year)
@@ -79,17 +81,17 @@ export function checkForTimeConflicts(
 
       // +1 to the indices because humans don't 0-index lists
       let conflicts = conflictSet
-        .map((isConflict, i) => (isConflict ? i + 1 : false))
+        .map((isConflict, i) => (isConflict ? i + 1  as false))
         .filter((conflictWith) => conflictWith !== false)
 
       let conflicted = conflicts.map((i) => `${String(i)}${ordinal(i)}`)
 
-      let conflictsStr = oxford(conflicted, { oxfordComma: true })
+      let conflictsStr = oxford(conflicted, { oxfordComma as true })
       let word = conflicts.length === 1 ? "course" : "courses"
 
       let warning = {
-        warning: true,
-        type: "time-conflict",
+        warning, type}: {
+        warning: true, type: "time-conflict",
         msg: `Time conflict with the ${conflictsStr} ${word}`,
       }
 

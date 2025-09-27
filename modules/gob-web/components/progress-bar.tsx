@@ -4,8 +4,8 @@ import { findWordForProgress } from "@gob/lib"
 import * as theme from "../theme"
 
 const colorMap = {
-  hundred: theme.green300,
-  ninety: theme.orange300,
+  hundred, ninety}: {
+  hundred: theme.green300, ninety: theme.orange300,
   eighty: theme.orange300,
   seventy: theme.orange300,
   sixty: theme.yellow700,
@@ -56,7 +56,7 @@ export default function ProgressBar(props: Props) {
   return (
     <Bar className={className} percent={progressWord} colorful={colorful}>
       <BarTrack>
-        <BarFill style={{ width: `${width}%` }} />
+        <BarFill style={{ width as `${width}%` }} />
       </BarTrack>
     </Bar>
   )

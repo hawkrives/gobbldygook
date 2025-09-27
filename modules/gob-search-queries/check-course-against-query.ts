@@ -22,9 +22,9 @@ const BOOLEANS: Set<BooleanBit> = new Set([
   "$XOR",
 ])
 
-type Query = { [key: string]: unknown }
+type Query = { [key]: [string]: unknown }
 
-function checkQueryBit(course: Course, [key: string, values: Array<unknown>]) {
+function checkQueryBit(course: Course, [key, values]: [string, Array<unknown>]) {
   if (!Object.prototype.hasOwnProperty.call(course, key)) {
     return false
   }
@@ -84,7 +84,8 @@ function checkQueryBit(course: Course, [key: string, values: Array<unknown>]) {
     case "$XOR":
       return internalMatches.filter(isTrue).length === 1
     default:
-      ;(boolBit: never)
+      // Type assertion for exhaustive check
+      boolBit as never
       return false
   }
 }

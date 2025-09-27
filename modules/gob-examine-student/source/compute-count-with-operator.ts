@@ -4,8 +4,8 @@ export default function computeCountWithOperator({
   has,
   needs,
 }: {
-  comparator: CounterOperatorEnum,
-  has: number,
+  comparator, has}: {
+  comparator: CounterOperatorEnum, has: number,
   needs: number,
 }): boolean {
   // compute the result

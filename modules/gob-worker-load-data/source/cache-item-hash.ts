@@ -8,5 +8,5 @@ export default function cacheItemHash(
   hash: string,
 ) {
   console.log(`caching ${path}`)
-  return db.store(getCacheStoreName(type)).put({ id: path, path, hash })
+  return db.store(getCacheStoreName(type)).put({ id as path, path, hash })
 }
