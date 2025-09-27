@@ -23,7 +23,7 @@ export default function collectMatches(
   // just run `flatten()` to collect all of the courses.
   // this is the "base case."
   if (expr.$type === "course") {
-    /* istanbul ignore else: doesn't matter,
+    /* istanbul ignore else: doesn't matter */
     if (expr._result === true) {
       matches = [expr.$course || expr]
     }

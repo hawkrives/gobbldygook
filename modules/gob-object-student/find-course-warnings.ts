@@ -21,7 +21,7 @@ export function checkForInvalidYear(
   course: CourseType,
   scheduleYear: number,
   thisYear: number = new Date().getFullYear(),
-): ?WarningType {
+): WarningType | null {
   if (course.semester === 9 || course.semester === undefined) {
     return null
   }
@@ -41,7 +41,7 @@ export function checkForInvalidYear(
 export function checkForInvalidSemester(
   course: CourseType,
   scheduleSemester: number,
-): ?WarningType {
+): WarningType | null {
   if (course.semester === scheduleSemester) {
     return null
   }

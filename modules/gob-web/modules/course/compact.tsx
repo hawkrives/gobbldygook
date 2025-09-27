@@ -59,7 +59,7 @@ const Prereqs = styled.span``
 
 export type Props = {
   className?: string
-  conflicts?: ?List<WarningType>
+  conflicts?: List<WarningType> | null
   course: Course
   index?: number
   onClick?: (Event) => any

@@ -212,7 +212,7 @@ export function buildQueryFromString(
   // Process the keys, to clean them up somewhat
   keys = keys.map((key) => {
     key = key.toLowerCase()
-    /* istanbul ignore else,
+    /* istanbul ignore else */
     if (!key.startsWith("_")) {
       key = keywordMappings[key] || key
     }

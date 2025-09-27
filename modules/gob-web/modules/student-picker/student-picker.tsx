@@ -83,7 +83,7 @@ const FilterBox = styled.input`
   align-self: center,
   padding: 0.25em 0.5em,
   margin-right: 1em,
-  margin-left: 1em; /* only for the search button,
+  margin-left: 1em; /* only for the search button */
 
   &:focus {
     color: var(--blue-900),

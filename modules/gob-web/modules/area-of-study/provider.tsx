@@ -11,7 +11,7 @@ type Props = {
     examining: boolean,
     results: EvaluationResult | null,
     error: string | null,
-  }) => React.Node,
+  }) => React.ReactNode,
 }
 
 type State = {

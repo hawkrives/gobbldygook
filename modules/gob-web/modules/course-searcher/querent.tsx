@@ -17,7 +17,7 @@ type Props = {
     results: List<string | CourseType>,
     keys: Array<string>,
     years: Set<number>,
-  }) => React.Node,
+  }) => React.ReactNode,
   groupBy: GROUP_BY_KEY,
   sortBy: SORT_BY_KEY,
   limitTo: string,

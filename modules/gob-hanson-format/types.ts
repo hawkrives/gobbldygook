@@ -44,8 +44,8 @@ export type ParsedHansonRequirement = {
   contract?: boolean
   declare?: Mapped<string>
   description?: boolean
-  filter: ?Mapped<ParsedHansonRequirement>
+  filter: Map | nullped<ParsedHansonRequirement>
   message: string | null
-  result: ?Mapped<ParsedHansonRequirement>
+  result: Map | nullped<ParsedHansonRequirement>
   [key: string]: Mapped<ParsedHansonRequirement>
 }

@@ -17,7 +17,7 @@ export type DeptNum = {
 export function splitDeptNum(
   deptNumString: string,
   includeSection?: boolean = false,
-): ?DeptNum {
+): DeptNum | null {
   // "AS/RE 230A" -> ["AS/RE 230A", "AS/RE", "AS", "RE", "230", "A"]
   // -> {department: 'AS/RE', number: 230}
   let matches = deptNumRegex.exec(deptNumString)

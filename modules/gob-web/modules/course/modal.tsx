@@ -58,7 +58,7 @@ const Course = styled(ExpandedCourse)`
 
 type Props = {
   course: CourseType,
-  conflicts: ?List<WarningType>,
+  conflicts: List<WarningType> | null,
   onClose: () => any,
   scheduleId?: string,
   studentId?: string,

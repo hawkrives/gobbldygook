@@ -203,7 +203,7 @@ export class Student extends StudentRecord<StudentType> {
     return this.setIn(["schedules", schedule.id], schedule)
   }
 
-  getScheduleForTerm(args: { year: number, semester: number }): ?Schedule {
+  getScheduleForTerm(args: { year: number, semester: number }): Schedule | null {
     let { year, semester } = args
     return this.schedules.find(
       (s) => s.active === true && s.year === year && s.semester === semester,
@@ -445,7 +445,7 @@ export class Student extends StudentRecord<StudentType> {
     })
   }
 
-  getFabrication(fabricationId: string): ?CourseType {
+  getFabrication(fabricationId: string): CourseType | null {
     return this.fabrications.find(({ clbid }) => clbid === fabricationId)
   }
 

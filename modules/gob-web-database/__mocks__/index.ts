@@ -1,4 +1,4 @@
-/* global jest,
+/* global jest */
 
 import treo from "treo"
 

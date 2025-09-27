@@ -25,17 +25,17 @@ const Description = styled.div`
 `
 
 const Column = styled.div`
-  flex: 1,
-
-  @media screen and (min-width: 45em) {
+  flex:
+    1,
+    @media screen and (min-width: 45em) {
     & + & {
-      margin-left: 3em,
+      margin-left: 3em;
     }
   }
 `
 
 const InfoSegment = styled.div`
-  padding-bottom: 20px,
+  padding-bottom: 20px;
 `
 
 const BottomInfoSegment = styled.div`
@@ -53,13 +53,13 @@ const ColumnsWrapper = styled.div`
 `
 
 const SummaryThing = styled.div`
-  white-space: normal,
+  white-space: normal;
 `
 
 type Props = {
-  className?: string,
-  conflicts: ?List<WarningType>,
-  course: Course,
+  className?: string
+  conflicts: List<WarningType> | null
+  course: Course
 }
 
 export default class ExpandedCourse extends React.PureComponent<Props> {

@@ -11,7 +11,7 @@ type Args = {
   fulfillment: Fulfillment
   expr: Expression
   computedResult: boolean
-  matches: ?Course[]
+  matches: Course | null[]
   counted: number | null
 }
 

@@ -151,7 +151,7 @@ function makeWhereExpression({ expr }) {
   const description = `${counted} of ${needs} ${distinct}${word} from courses where ${qualifier}`
 
   let matches = expr._matches || []
-  let contents: Array<React.Node> | null = matches.map((course: Course, i) => (
+  let contents: Array<React.ReactNode> | null = matches.map((course: Course, i) => (
     <Expression
       key={i}
       expr={{ $type: "course", $course: course }}
