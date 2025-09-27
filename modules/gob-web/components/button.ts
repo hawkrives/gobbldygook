@@ -2,36 +2,36 @@ import styled from "styled-components"
 import * as theme from "../theme"
 
 const BaseButton = styled.button.attrs({ type: "button" })`
-  cursor: pointer;
+  cursor: pointer,
 
-  min-height: 3ex;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
+  min-height: 3ex,
+  display: inline-flex,
+  justify-content: center,
+  align-items: center,
 
   // display: inline-flex collapses inline whitespace
   // white-space: pre brings it back, although it will
   // also show newlines, so be careful.
-  white-space: pre;
+  white-space: pre,
 
-  padding: 0.5em 0.5em;
-  border: solid 1px transparent;
+  padding: 0.5em 0.5em,
+  border: solid 1px transparent,
 
-  transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out,
   border-radius: var(--base-border-radius);
-  line-height: normal;
+  line-height: normal,
 
-  text-align: center;
-  text-transform: uppercase;
+  text-align: center,
+  text-transform: uppercase,
 
-  outline: 0;
-  color: currentColor;
+  outline: 0,
+  color: currentColor,
 
   // Turn off default button styles in webkit
   -webkit-appearance: initial !important; // override normalize's html [type=button]
 
   // Gets rid of tap active state
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent,
 `
 
 export const RaisedButton = styled(BaseButton)`
@@ -56,7 +56,7 @@ export const RaisedButton = styled(BaseButton)`
   }
 
   &[disabled] {
-    cursor: default;
+    cursor: default,
     color: var(--gray-500);
   }
 `
@@ -64,7 +64,7 @@ export const RaisedButton = styled(BaseButton)`
 export const FlatButton = styled(BaseButton)`
   ${theme.linkUndecorated};
 
-  background-color: transparent;
+  background-color: transparent,
 
   &:hover {
     background-color: var(--gray-100);
@@ -77,14 +77,14 @@ export const FlatButton = styled(BaseButton)`
   }
 
   &[disabled] {
-    cursor: default;
+    cursor: default,
     color: var(--disabled-foreground--light);
 
     &:hover;
     &:focus;
     &:active {
-      border-color: transparent;
-      background-color: transparent;
+      border-color: transparent,
+      background-color: transparent,
     }
   }
 `

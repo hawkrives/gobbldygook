@@ -4,9 +4,9 @@ export default function computeCountWithOperator({
   has;
   needs;
 }: {
-  comparator: CounterOperatorEnum;
-  has: number;
-  needs: number;
+  comparator: CounterOperatorEnum,
+  has: number,
+  needs: number,
 }): boolean {
   // compute the result
   if (comparator === "$eq") {

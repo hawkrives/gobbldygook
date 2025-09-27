@@ -8,7 +8,7 @@ const COURSE_URL = APP_BASE + "courseData.url"
 const AREA_URL = APP_BASE + "areaData.url"
 
 const actions = {
-  notifications: notificationActions;
+  notifications: notificationActions,
 }
 
 const worker = new LoadDataWorker()
@@ -33,25 +33,25 @@ worker.addEventListener("message", ({ data }: { data: string }) => {
 })
 
 export type DispatchMessage = {
-  type: "dispatch";
-  message: { type: string, action: string, args: unknown };
+  type: "dispatch",
+  message: { type: string, action: string, args: unknown },
 }
 
 export type LoadDataMessageEnum =
   | { type: "load-from-info", path: string, url: string }
   | { type: "check-idb-in-worker-support" }
   | {
-      type: "load-term-data";
-      term: number;
-      courseInfoUrl: string;
-      path: string;
+      type: "load-term-data",
+      term: number,
+      courseInfoUrl: string,
+      path: string,
     }
   | DispatchMessage
 
 export type LoadDataMessage = { id: string } & LoadDataMessageEnum
 
 function messageWorker(
-  params: LoadDataMessageEnum;
+  params: LoadDataMessageEnum,
 ): Promise<{ type: string, [key: string]: unknown }> {
   let sourceId = uniqueId()
 
@@ -79,15 +79,15 @@ async function loadDataFile(url) {
   let path = await memFetchText(url).then((path) => path.trim())
 
   await messageWorker({
-    type: "load-from-info";
-    url: `${path}/info.json?${nonce}`;
-    path: path;
+    type: "load-from-info",
+    url: `${path}/info.json?${nonce}`,
+    path: path,
   })
 }
 
 export async function checkSupport(): Promise<boolean> {
   let { supportState } = await messageWorker({
-    type: "check-idb-in-worker-support";
+    type: "check-idb-in-worker-support",
   })
   return Boolean(supportState)
 }
@@ -102,10 +102,10 @@ export async function loadDataForTerm(term: number): Promise<mixed> {
   let path = await memFetchText(COURSE_URL).then((path) => path.trim())
 
   await messageWorker({
-    type: "load-term-data";
-    term: term;
-    courseInfoUrl: `${path}/info.json?${nonce}`;
-    path: path;
+    type: "load-term-data",
+    term: term,
+    courseInfoUrl: `${path}/info.json?${nonce}`,
+    path: path,
   })
 }
 
@@ -120,8 +120,8 @@ export default async function loadData() {
     }
 
     let action = notificationActions.logError({
-      id: "offline";
-      error: "You appear to be offline. No information was downloaded.";
+      id: "offline",
+      error: "You appear to be offline. No information was downloaded.",
     })
     global._dispatch(action)
   }

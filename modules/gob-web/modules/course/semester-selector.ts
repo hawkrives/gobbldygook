@@ -12,9 +12,9 @@ function semesterList(student: Student): Map<number, Map<string, string>> {
   return student.schedules
     .toList()
     .map((s) => ({
-      year: s.year;
-      semester: s.semester;
-      id: s.id;
+      year: s.year,
+      semester: s.semester,
+      id: s.id,
       title: `${semesterName(s.semester)} – ${s.title}`;
     }))
     .sortBy((s) => `${s.year}${s.semester}`)
@@ -24,10 +24,10 @@ function semesterList(student: Student): Map<number, Map<string, string>> {
 }
 
 type Props = {
-  clbid: string;
-  scheduleId?: string;
-  student: Student;
-  changeStudent: ChangeStudentFunc;
+  clbid: string,
+  scheduleId?: string,
+  student: Student,
+  changeStudent: ChangeStudentFunc,
 }
 
 const NO_SCHEDULE: "$none" = "$none"
@@ -51,8 +51,8 @@ class SemesterSelector extends React.Component<Props> {
       s = student.removeCourseFromSchedule(scheduleId, clbid)
     } else if (scheduleId) {
       s = student.moveCourseToSchedule({
-        from: scheduleId;
-        to: targetScheduleId;
+        from: scheduleId,
+        to: targetScheduleId,
         clbid;
       })
     } else {

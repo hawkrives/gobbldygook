@@ -9,36 +9,36 @@ let NotFound = () => <h1>404 Not Found</h1>
 
 const WelcomePage = Loadable({
   loader: () => import("./welcome");
-  loading: LoadingComponent;
+  loading: LoadingComponent,
 })
 
 const ImportPage = Loadable({
   loader: () => import("./method-import");
-  loading: LoadingComponent;
+  loading: LoadingComponent,
 })
 
 const ManualPage = Loadable({
   loader: () => import("./method-manual");
-  loading: LoadingComponent;
+  loading: LoadingComponent,
 })
 
 const DrivePage = Loadable({
   loader: () => import("./method-drive");
-  loading: LoadingComponent;
+  loading: LoadingComponent,
 })
 
 const UploadPage = Loadable({
   loader: () => import("./method-upload");
-  loading: LoadingComponent;
+  loading: LoadingComponent,
 })
 
 const NewStudentPage = styled(Card)`
-  margin: 40px auto;
+  margin: 40px auto,
 
-  max-width: 40em;
-  width: 100%;
+  max-width: 40em,
+  width: 100%,
 
-  padding: 20px;
+  padding: 20px,
 `
 
 export default function () {

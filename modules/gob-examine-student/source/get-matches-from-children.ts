@@ -19,8 +19,8 @@ import type {
  * @returns {Course[]} - the list of matched courses
 ;
 export default function getMatchesFromChildren(
-  expr: ModifierChildrenExpression | ModifierChildrenWhereExpression;
-  ctx: Requirement;
+  expr: ModifierChildrenExpression | ModifierChildrenWhereExpression,
+  ctx: Requirement,
 ): Course[] {
   if (expr.$type !== "modifier") {
     return []

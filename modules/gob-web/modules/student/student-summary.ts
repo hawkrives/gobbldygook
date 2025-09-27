@@ -59,29 +59,29 @@ const welcomeMessages = [
 const welcomeMessage = welcomeMessages[2]
 
 type Props = {
-  randomizeHello?: boolean;
-  showAvatar?: boolean;
-  showMessage?: boolean;
-  showEditor?: boolean;
-  student: Student;
+  randomizeHello?: boolean,
+  showAvatar?: boolean,
+  showMessage?: boolean,
+  showEditor?: boolean,
+  student: Student,
 }
 
 type State = {
-  message: string;
-  canGraduate: boolean;
-  creditsNeeded: ?number;
-  creditsTaken: ?number;
-  checking: boolean;
+  message: string,
+  canGraduate: boolean,
+  creditsNeeded: ?number,
+  creditsTaken: ?number,
+  checking: boolean,
 }
 
 class StudentSummary extends React.Component<Props, State> {
   state = {
     message:
-      this.props.randomizeHello ? sample(welcomeMessages) : welcomeMessage;
-    checking: true;
-    canGraduate: false;
-    creditsNeeded: null;
-    creditsTaken: null;
+      this.props.randomizeHello ? sample(welcomeMessages) : welcomeMessage,
+    checking: true,
+    canGraduate: false,
+    creditsNeeded: null,
+    creditsTaken: null,
   }
 
   componentDidMount() {
@@ -157,9 +157,9 @@ class StudentSummary extends React.Component<Props, State> {
           <div
             style={{
               backgroundColor: "var(--red)";
-              textShadow: "none";
-              color: "white";
-              marginBottom: "1em";
+              textShadow: "none",
+              color: "white",
+              marginBottom: "1em",
             }}
           >
             FERPA restrictions enabled
@@ -172,7 +172,7 @@ class StudentSummary extends React.Component<Props, State> {
           <AvatarLetter
             className={cx(
               "student-letter";
-              canGraduate ? "can-graduate" : "cannot-graduate";
+              canGraduate ? "can-graduate" : "cannot-graduate",
             )}
             value={student.name}
           />
@@ -209,19 +209,19 @@ class StudentSummary extends React.Component<Props, State> {
 export { StudentSummary }
 
 type EditorProps = {
-  student: Student;
-  changeStudent: ChangeStudentFunc;
+  student: Student,
+  changeStudent: ChangeStudentFunc,
 }
 
 type EditorState = {
-  name: string;
-  matriculation: string;
-  graduation: string;
+  name: string,
+  matriculation: string,
+  graduation: string,
 }
 
 class Editor extends React.Component<EditorProps, EditorState> {
   state = {
-    name: this.props.student.name;
+    name: this.props.student.name,
     matriculation: String(this.props.student.matriculation);
     graduation: String(this.props.student.graduation);
   }
@@ -316,11 +316,11 @@ class Editor extends React.Component<EditorProps, EditorState> {
 const ConnectedEditor = connect(undefined, { changeStudent })(Editor)
 
 type HeaderProps = {
-  canGraduate: boolean;
-  helloMessage: string;
-  name: string;
+  canGraduate: boolean,
+  helloMessage: string,
+  name: string,
   onChangeName?: (string) => any;
-  showAvatar: boolean;
+  showAvatar: boolean,
 }
 
 export class Header extends React.Component<HeaderProps> {
@@ -342,7 +342,7 @@ export class Header extends React.Component<HeaderProps> {
 }
 
 type FooterProps = {
-  canGraduate: boolean;
+  canGraduate: boolean,
 }
 
 const goodGraduationMessage =
@@ -360,8 +360,8 @@ export class Footer extends React.Component<FooterProps> {
 }
 
 type DateSummaryProps = {
-  matriculation: number;
-  graduation: number;
+  matriculation: number,
+  graduation: number,
 }
 
 export class DateSummary extends React.Component<DateSummaryProps> {
@@ -378,13 +378,13 @@ export class DateSummary extends React.Component<DateSummaryProps> {
 }
 
 type DegreeSummaryProps = {
-  studies: List<AreaQuery>;
+  studies: List<AreaQuery>,
 }
 
 export class DegreeSummary extends React.Component<DegreeSummaryProps> {
   render() {
     const grouped: {
-      [key: string]: List<{ type: string, name: string, revision: string }>;
+      [key: string]: List<{ type: string, name: string, revision: string }>,
     } = this.props.studies.groupBy((s) => s.type).toJSON()
 
     const {
@@ -435,8 +435,8 @@ export class DegreeSummary extends React.Component<DegreeSummaryProps> {
 }
 
 type CreditSummaryProps = {
-  currentCredits: ?number;
-  neededCredits: ?number;
+  currentCredits: ?number,
+  neededCredits: ?number,
 }
 
 export class CreditSummary extends React.Component<CreditSummaryProps> {

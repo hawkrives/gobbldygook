@@ -11,24 +11,24 @@ import {
 } from "../redux/students/actions/change"
 
 const Box = styled.div`
-  padding: 5em 1em;
+  padding: 5em 1em,
   color: var(--gray-500);
-  background-color: white;
-  border-radius: 5px;
+  background-color: white,
+  border-radius: 5px,
 
-  position: fixed;
+  position: fixed,
   top: calc(var(--page-edge-padding) * 2);
   left: calc(var(--page-edge-padding) * 2);
-  max-width: 240px;
+  max-width: 240px,
 
-  display: none;
-  box-shadow: 0 0 10px #444;
+  display: none,
+  box-shadow: 0 0 10px #444,
 
   ${(props) =>
     props.canDrop &&
     css`
-      color: black;
-      display: flex;
+      color: black,
+      display: flex,
       z-index: calc(var(--z-sidebar) + 1);
     `};
 
@@ -45,8 +45,8 @@ type Props = {
   canDrop: boolean, // react-dnd
   connectDropTarget: (React.Element<*>) => any, // react-dnd
   isOver: boolean, // react-dnd
-  changeStudent: ChangeStudentFunc;
-  student: Student;
+  changeStudent: ChangeStudentFunc,
+  student: Student,
 }
 
 function CourseRemovalBox(props: Props) {

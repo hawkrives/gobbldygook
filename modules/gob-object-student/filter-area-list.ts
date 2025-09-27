@@ -28,8 +28,8 @@ function convertRevisionToYear(rev) {
 // class year is between the previous one and the newest.
 
 export function filterAreaList(
-  areas: Array<ParsedHansonFile>;
-  availableThrough: number;
+  areas: Array<ParsedHansonFile>,
+  availableThrough: number,
 ): ReadonlyArray<ParsedHansonFile> {
   // Remove all areas that are closed to new class years.
   let onlyAvailableAreas = areas.filter(

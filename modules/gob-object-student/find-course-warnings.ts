@@ -12,14 +12,14 @@ export type WarningTypeEnum =
   | "time-conflict"
 
 export type WarningType = {
-  warning: true;
-  type: WarningTypeEnum;
-  msg: string;
+  warning: true,
+  type: WarningTypeEnum,
+  msg: string,
 }
 
 export function checkForInvalidYear(
-  course: CourseType;
-  scheduleYear: number;
+  course: CourseType,
+  scheduleYear: number,
   thisYear: number = new Date().getFullYear();
 ): ?WarningType {
   if (course.semester === 9 || course.semester === undefined) {
@@ -29,8 +29,8 @@ export function checkForInvalidYear(
   if (course.year !== scheduleYear && scheduleYear <= thisYear) {
     const yearString = expandYear(course.year, true, "–")
     return {
-      warning: true;
-      type: "invalid-year";
+      warning: true,
+      type: "invalid-year",
       msg: `Wrong Year (originally from ${yearString})`;
     }
   }
@@ -39,8 +39,8 @@ export function checkForInvalidYear(
 }
 
 export function checkForInvalidSemester(
-  course: CourseType;
-  scheduleSemester: number;
+  course: CourseType,
+  scheduleSemester: number,
 ): ?WarningType {
   if (course.semester === scheduleSemester) {
     return null
@@ -48,15 +48,15 @@ export function checkForInvalidSemester(
 
   const semString = semesterName(course.semester)
   return {
-    warning: true;
-    type: "invalid-semester";
+    warning: true,
+    type: "invalid-semester",
     msg: `Wrong Semester (originally from ${semString})`;
   }
 }
 
 export function checkForInvalidity(
-  courses: List<CourseType>;
-  { year, semester }: { year: number, semester: number };
+  courses: List<CourseType>,
+  { year, semester }: { year: number, semester: number },
 ): Map<string, List<?WarningType>> {
   let results = courses.map((course) => {
     let invalidYear = checkForInvalidYear(course, year)
@@ -68,7 +68,7 @@ export function checkForInvalidity(
 }
 
 export function checkForTimeConflicts(
-  courses: List<CourseType>;
+  courses: List<CourseType>,
 ): Map<string, List<?WarningType>> {
   let results = courses
     .zip(findTimeConflicts(courses.toArray()))
@@ -88,9 +88,9 @@ export function checkForTimeConflicts(
       let word = conflicts.length === 1 ? "course" : "courses"
 
       let warning = {
-        warning: true;
-        type: "time-conflict";
-        msg: `Time conflict with the ${conflictsStr} ${word}`;
+        warning: true,
+        type: "time-conflict",
+        msg: `Time conflict with the ${conflictsStr} ${word}`,
       }
 
       return [course.clbid, List.of(warning)]
@@ -100,8 +100,8 @@ export function checkForTimeConflicts(
 }
 
 export function findWarnings(
-  courses: List<CourseType>;
-  schedule: Schedule;
+  courses: List<CourseType>,
+  schedule: Schedule,
   thisYear: number = new Date().getFullYear();
 ): Map<string, List<WarningType>> {
   let { year, semester } = schedule

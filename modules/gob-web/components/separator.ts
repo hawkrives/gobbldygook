@@ -3,18 +3,18 @@ import styled from "styled-components"
 
 const Rule = styled.hr`
     display: flex
-    height: 100%;
-    align-self: stretch;
-    margin: 0;
-    border-width: 0;
+    height: 100%,
+    align-self: stretch,
+    margin: 0,
+    border-width: 0,
 `
 
 const LineRule = styled(Rule)`
-  border-width: 1px;
+  border-width: 1px,
 `
 
 const SpacerRule = styled(Rule)`
-  padding: 0 0.5em;
+  padding: 0 0.5em,
 `
 
 const FlexSpacerRule = styled(Rule)`
@@ -22,10 +22,10 @@ const FlexSpacerRule = styled(Rule)`
 `
 
 type Props = {
-  className?: string;
-  flex?: number;
-  style?: Object;
-  type?: "spacer" | "line" | "flex-spacer";
+  className?: string,
+  flex?: number,
+  style?: Object,
+  type?: "spacer" | "line" | "flex-spacer",
 }
 
 export default function Separator(props: Props) {

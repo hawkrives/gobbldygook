@@ -8,41 +8,41 @@ import { List, Set } from "immutable"
 import type { GROUP_BY_KEY, SORT_BY_KEY } from "./constants"
 
 type Props = {
-  query: string;
-  term?: ?number;
+  query: string,
+  term?: ?number,
   children: ({
-    error: ?string;
-    inProgress: boolean;
-    didSearch: boolean;
-    results: List<string | CourseType>;
-    keys: Array<string>;
-    years: Set<number>;
+    error: ?string,
+    inProgress: boolean,
+    didSearch: boolean,
+    results: List<string | CourseType>,
+    keys: Array<string>,
+    years: Set<number>,
   }) => React.Node;
-  groupBy: GROUP_BY_KEY;
-  sortBy: SORT_BY_KEY;
-  limitTo: string;
-  filterBy: string;
+  groupBy: GROUP_BY_KEY,
+  sortBy: SORT_BY_KEY,
+  limitTo: string,
+  filterBy: string,
 }
 
 type State = {
-  error: ?string;
-  inProgress: boolean;
-  didSearch: boolean;
-  results: List<CourseType>;
-  grouped: List<string | CourseType>;
+  error: ?string,
+  inProgress: boolean,
+  didSearch: boolean,
+  results: List<CourseType>,
+  grouped: List<string | CourseType>,
 }
 
 const memSortAndGroup: typeof sortAndGroup = mem(sortAndGroup, {
-  maxAge: 10000;
+  maxAge: 10000,
 })
 
 export class Querent extends React.Component<Props, State> {
   state = {
-    error: "";
-    inProgress: false;
+    error: "",
+    inProgress: false,
     results: List();
     grouped: List();
-    didSearch: false;
+    didSearch: false,
   }
 
   _isMounted: boolean = false
@@ -92,8 +92,8 @@ export class Querent extends React.Component<Props, State> {
       }
 
       this.setState(() => ({
-        didSearch: true;
-        inProgress: false;
+        didSearch: true,
+        inProgress: false,
         results: List(payload);
       }))
     } catch (error) {
@@ -101,9 +101,9 @@ export class Querent extends React.Component<Props, State> {
         return
       }
       this.setState(() => ({
-        didSearch: true;
-        inProgress: false;
-        error: error.message;
+        didSearch: true,
+        inProgress: false,
+        error: error.message,
       }))
     }
   }
@@ -112,14 +112,14 @@ export class Querent extends React.Component<Props, State> {
     let { error, inProgress, results, didSearch } = this.state
 
     let {
-      sortBy: sorting;
-      groupBy: grouping;
-      filterBy: filtering;
-      limitTo: limiting;
+      sortBy: sorting,
+      groupBy: grouping,
+      filterBy: filtering,
+      limitTo: limiting,
     } = this.props
 
     let {
-      results: grouped;
+      results: grouped,
       years;
       keys;
     } = memSortAndGroup(results, {
@@ -133,7 +133,7 @@ export class Querent extends React.Component<Props, State> {
       error;
       inProgress;
       didSearch;
-      results: grouped;
+      results: grouped,
       years;
       keys;
     })

@@ -5,10 +5,10 @@ import fromPairs from "lodash/fromPairs"
 import sortBy from "lodash/sortBy"
 
 type AreaOfStudy = {
-  name: string;
-  type: string;
-  revision: string;
-  sourcePath: string;
+  name: string,
+  type: string,
+  revision: string,
+  sourcePath: string,
 }
 
 export function buildRemoveAreaOps(areas: AreaOfStudy[]) {

@@ -5,26 +5,26 @@ import { checkStudentAgainstArea } from "../../workers/check-student"
 import { loadArea } from "../../helpers/load-area"
 
 type Props = {
-  areaOfStudy: AreaQuery;
-  student: Student;
+  areaOfStudy: AreaQuery,
+  student: Student,
   children: ({
-    examining: boolean;
-    results: ?EvaluationResult;
-    error: ?string;
+    examining: boolean,
+    results: ?EvaluationResult,
+    error: ?string,
   }) => React.Node;
 }
 
 type State = {
-  examining: boolean;
-  results: ?EvaluationResult;
-  error: ?string;
+  examining: boolean,
+  results: ?EvaluationResult,
+  error: ?string,
 }
 
 export class AreaOfStudyProvider extends React.Component<Props, State> {
   state = {
-    examining: false;
-    results: null;
-    error: null;
+    examining: false,
+    results: null,
+    error: null,
   }
 
   componentDidMount() {

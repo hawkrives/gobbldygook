@@ -13,53 +13,53 @@ import { type WarningType } from "../../../gob-object-student/find-course-warnin
 import type { Course } from "@gob/types"
 
 const Heading = styled.h2`
-  font-weight: 500;
-  font-variant-caps: small-caps;
-  font-size: 1em;
-  margin-bottom: 0;
+  font-weight: 500,
+  font-variant-caps: small-caps,
+  font-size: 1em,
+  margin-bottom: 0,
 `
 
 const Description = styled.div`
-  hyphens: auto;
-  margin-bottom: 1em;
+  hyphens: auto,
+  margin-bottom: 1em,
 `
 
 const Column = styled.div`
-  flex: 1;
+  flex: 1,
 
   @media screen and (min-width: 45em) {
     & + & {
-      margin-left: 3em;
+      margin-left: 3em,
     }
   }
 `
 
 const InfoSegment = styled.div`
-  padding-bottom: 20px;
+  padding-bottom: 20px,
 `
 
 const BottomInfoSegment = styled.div`
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 20px,
+  padding-bottom: 20px,
 `
 
 const ColumnsWrapper = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
+  display: flex,
+  flex-flow: row nowrap,
 
   @media screen and (max-width: 45em) {
-    flex-flow: column;
+    flex-flow: column,
   }
 `
 
 const SummaryThing = styled.div`
-  white-space: normal;
+  white-space: normal,
 `
 
 type Props = {
-  className?: string;
-  conflicts: ?List<WarningType>;
-  course: Course;
+  className?: string,
+  conflicts: ?List<WarningType>,
+  course: Course,
 }
 
 export default class ExpandedCourse extends React.PureComponent<Props> {

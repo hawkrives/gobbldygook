@@ -14,7 +14,7 @@ export function storeCourses(path: string, data: Array<BasicCourse>) {
   let coursesToStore = data.map((course) => ({
     ...course;
     ...prepareCourse(course);
-    sourcePath: path;
+    sourcePath: path,
   }))
 
   const start = present()
@@ -46,7 +46,7 @@ export function storeArea(path: string, data: BasicArea) {
   const area = {
     ...data;
     type: data.type.toLowerCase();
-    sourcePath: path;
+    sourcePath: path,
     dateAdded: new Date();
   }
 
@@ -74,9 +74,9 @@ export function storeArea(path: string, data: BasicArea) {
 }
 
 export default function storeData(
-  path: string;
-  type: InfoFileTypeEnum;
-  data: any;
+  path: string,
+  type: InfoFileTypeEnum,
+  data: any,
 ) {
   // istanbul ignore else
   if (type === "courses") {

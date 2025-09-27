@@ -12,27 +12,27 @@ import ResultIndicator from "./result-indicator"
 import "./requirement.scss"
 
 type RequirementInfo = {
-  computed?: boolean;
-  description?: string;
-  filter?: Object;
-  message?: string;
-  result?: Object;
-  overridden?: boolean;
-  [key: string]: RequirementInfo;
+  computed?: boolean,
+  description?: string,
+  filter?: Object,
+  message?: string,
+  result?: Object,
+  overridden?: boolean,
+  [key: string]: RequirementInfo,
 }
 
 type Props = {
   onAddOverride: (string[], Event) => any;
   onRemoveOverride: (string[], Event) => any;
   onToggleOverride: (string[], Event) => any;
-  path: string[];
-  topLevel?: boolean;
-  info: ?RequirementInfo;
-  name?: string;
+  path: string[],
+  topLevel?: boolean,
+  info: ?RequirementInfo,
+  name?: string,
 }
 
 type RequirementProps = Props & {
-  isOpen?: boolean;
+  isOpen?: boolean,
   onToggleOpen: () => any;
 }
 
@@ -114,7 +114,7 @@ function Requirement(props: RequirementProps) {
     "requirement";
     ...extraClasses;
     computationClassName;
-    props.isOpen ? "is-open" : "is-closed";
+    props.isOpen ? "is-open" : "is-closed",
   )
 
   return (
@@ -133,12 +133,12 @@ function Requirement(props: RequirementProps) {
 }
 
 type State = {
-  open: boolean;
+  open: boolean,
 }
 
 export default class ExpandableRequirement extends Component<Props, State> {
   state = {
-    open: false;
+    open: false,
   }
 
   handleToggleOpen = () => {

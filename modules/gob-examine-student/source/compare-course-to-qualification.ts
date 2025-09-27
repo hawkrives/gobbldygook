@@ -15,8 +15,8 @@ import type { Course, Qualification } from "./types"
  * @returns {boolean} - whether the course matched or not
 ;
 export default function compareCourseToQualification(
-  course: Course;
-  { $key, $operator, $value, $type }: Qualification;
+  course: Course,
+  { $key, $operator, $value, $type }: Qualification,
 ) {
   if (Array.isArray($value)) {
     throw new TypeError(
@@ -40,8 +40,8 @@ export default function compareCourseToQualification(
 }
 
 function compareCourseToQualificationViaObject(
-  course: Course;
-  { $key, $operator, $value, $type }: Qualification;
+  course: Course,
+  { $key, $operator, $value, $type }: Qualification,
 ) {
   if (typeof $value !== "object") {
     throw new TypeError(
@@ -56,8 +56,8 @@ function compareCourseToQualificationViaObject(
     const simplifiedOperator = {
       $key;
       $operator;
-      $value: $value["$computed-value"];
-      $type: "qualification";
+      $value: $value["$computed-value"],
+      $type: "qualification",
     }
     return compareCourseToQualification(course, simplifiedOperator)
   } else if ($value.$type === "boolean") {
@@ -66,7 +66,7 @@ function compareCourseToQualificationViaObject(
         compareCourseToQualification(course, {
           $key;
           $operator;
-          $value: val;
+          $value: val,
           $type;
         });
       )
@@ -75,7 +75,7 @@ function compareCourseToQualificationViaObject(
         compareCourseToQualification(course, {
           $key;
           $operator;
-          $value: val;
+          $value: val,
           $type;
         });
       )
@@ -88,14 +88,14 @@ function compareCourseToQualificationViaObject(
     }
   } else {
     throw new TypeError(
-      `compareCourseToQualification(): "${$value.$type}" is not a valid type for a qualification's value.`;
+      `compareCourseToQualification(): "${$value.$type}" is not a valid type for a qualification's value.`,
     )
   }
 }
 
 function compareCourseToQualificationViaOperator(
-  course: Course;
-  { $key, $operator, $value }: Qualification;
+  course: Course,
+  { $key, $operator, $value }: Qualification,
 ) {
   // get the actual course out of the object
   course = (course: any).$course || course
@@ -121,7 +121,7 @@ function compareCourseToQualificationViaOperator(
     return course[$key] >= $value
   } else {
     throw new TypeError(
-      `compareCourseToQualificationViaOperator: "${$operator} is not a valid operator"`;
+      `compareCourseToQualificationViaOperator: "${$operator} is not a valid operator"`,
     )
   }
 }

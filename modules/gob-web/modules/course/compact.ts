@@ -11,59 +11,59 @@ import { consolidateOfferings } from "./offerings"
 import { List } from "immutable"
 
 export const Container = styled.article`
-  display: block;
+  display: block,
 
   &:not(.fake-course):hover {
-    cursor: pointer;
+    cursor: pointer,
     background-color: var(--background-color-hover, rgba(10, 10, 10, 0.1));
   }
 
   &.is-dragging {
-    opacity: 0.5;
+    opacity: 0.5,
   }
 `
 
 export const Title = styled(CourseTitle)`
-  overflow: hidden;
-  line-height: 1.35;
+  overflow: hidden,
+  line-height: 1.35,
 `
 
 export const SummaryRow = styled.div`
-  overflow: hidden;
-  line-height: 1.35;
+  overflow: hidden,
+  line-height: 1.35,
 
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  font-size: 0.75em;
+  text-overflow: ellipsis,
+  white-space: nowrap,
+  overflow: hidden,
+  font-size: 0.75em,
 
   & > * + *:not(:empty)::before {
-    margin: 0 0.2em;
-    content: "·";
+    margin: 0 0.2em,
+    content: "·",
   }
 `
 
 const GeReqItem = styled(InlineListItem)`
   & + &::before {
-    margin: 0 0.2em;
-    content: "+";
+    margin: 0 0.2em,
+    content: "+",
   }
 `
 
 const Identifier = styled.span`
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: tabular-nums,
 `
 
 const Type = styled.span``
 const Prereqs = styled.span``
 
 export type Props = {
-  className?: string;
-  conflicts?: ?List<WarningType>;
-  course: Course;
-  index?: number;
+  className?: string,
+  conflicts?: ?List<WarningType>,
+  course: Course,
+  index?: number,
   onClick?: (Event) => any;
-  style?: Object;
+  style?: Object,
 }
 
 export default class CompactCourse extends React.Component<Props> {

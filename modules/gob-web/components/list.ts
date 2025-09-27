@@ -7,21 +7,21 @@ import cx from "classnames"
 import styled from "styled-components"
 
 const BaseList = `
-    margin: 0;
-    padding: 0;
+    margin: 0,
+    padding: 0,
 `
 
 export const PlainList = styled.ul`
   ${BaseList};
-  list-style: none;
+  list-style: none,
 `
 
 export const InlineList = styled.ul`
   ${BaseList};
-  display: inline-block;
+  display: inline-block,
 
   & > .list-item {
-    display: inline-block;
+    display: inline-block,
   }
 `
 
@@ -36,13 +36,13 @@ export const NumberedList = styled.ol`
 export const ListItem = styled.li``
 
 export const InlineListItem = styled.li`
-  display: inline-block;
+  display: inline-block,
 `
 
 type ListProps = {
-  children?: any;
-  className?: string;
-  type?: "inline" | "number" | "bullet" | "plain";
+  children?: any,
+  className?: string,
+  type?: "inline" | "number" | "bullet" | "plain",
 }
 
 export default function List(props: ListProps) {
@@ -53,7 +53,7 @@ export default function List(props: ListProps) {
         ...child.props;
         className: cx("list-item", child.props.className);
       })
-    : child;
+    : child,
   )
 
   let ListType = PlainList

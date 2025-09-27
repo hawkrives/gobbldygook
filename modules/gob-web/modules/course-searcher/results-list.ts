@@ -11,53 +11,53 @@ import type { GROUP_BY_KEY } from "./constants"
 type Results = List<string | CourseType>
 
 type Props = {
-  groupedBy: GROUP_BY_KEY;
-  results: Results;
-  studentId?: string;
+  groupedBy: GROUP_BY_KEY,
+  results: Results,
+  studentId?: string,
 }
 
 const TermList = styled(VariableSizeList)`
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  margin: 0,
+  padding: 0,
+  list-style: none,
 `
 
 const ResultsListSizer = styled(Card)`
-  flex: 1;
+  flex: 1,
 
   // for AutoSizer (react-virtualized):
   // > If the parent has style 'position: static' (default value), it changes to
   // > position: relative. It also injects a sibling div for size measuring.
-  position: relative;
+  position: relative,
 
-  overflow: hidden;
+  overflow: hidden,
 `
 
 const CourseGroupTitle = styled.h3`
-  margin: 0;
-  font-size: 1em;
-  font-weight: 400;
+  margin: 0,
+  font-size: 1em,
+  font-weight: 400,
 
-  padding: 0 0.5em;
+  padding: 0 0.5em,
 
-  display: flex;
-  align-items: center;
+  display: flex,
+  align-items: center,
   & > span {
-    text-align: center;
-    flex: 1;
+    text-align: center,
+    flex: 1,
 
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    overflow: hidden,
+    white-space: nowrap,
+    text-overflow: ellipsis,
   }
 `
 
 const CourseListItem = styled(DraggableCourse)`
-  padding: 0 0.5em;
+  padding: 0 0.5em,
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: flex,
+  flex-direction: column,
+  justify-content: center,
 `
 
 function getRowHeight(item: string | CourseType) {

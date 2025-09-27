@@ -9,30 +9,30 @@ const Wrapper = styled.div`
     Helvetica;
     Arial;
     sans-serif !important;
-  font-weight: 200;
-  font-style: normal;
+  font-weight: 200,
+  font-style: normal,
 
-  text-align: center;
-  text-transform: uppercase;
+  text-align: center,
+  text-transform: uppercase,
 
-  display: inline-block;
-  user-select: none;
+  display: inline-block,
+  user-select: none,
 
-  padding: 0;
+  padding: 0,
 
   ${({ size = "48px" }) => css`
-    width: ${size};
-    height: ${size};
-    line-height: ${size};
+    width: ${size},
+    height: ${size},
+    line-height: ${size},
     font-size: calc(${size} / 3 * 2);
 
-    border-radius: ${size};
+    border-radius: ${size},
   `};
 `
 
 type Props = {
-  className?: string;
-  value: string;
+  className?: string,
+  value: string,
 }
 
 export const AvatarLetter = ({ className, value = "" }: Props) => (

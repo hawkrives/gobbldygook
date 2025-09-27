@@ -81,7 +81,7 @@ export function enhanceHanson(data: HansonFile): ParsedHansonFile {
   let result = parseWithPeg(data.result, {
     abbreviations;
     titles;
-    startRule: "Result";
+    startRule: "Result",
   })
 
   let enhanced = toPairs(data).map(([key, value]) => {
@@ -96,7 +96,7 @@ export function enhanceHanson(data: HansonFile): ParsedHansonFile {
 
   let returnValue: ParsedHansonFile = {
     ...requirements;
-    $type: "requirement";
+    $type: "requirement",
     name;
     type;
     revision;
@@ -116,7 +116,7 @@ export function enhanceHanson(data: HansonFile): ParsedHansonFile {
 }
 
 function enhanceRequirement(
-  value: string | HansonRequirement;
+  value: string | HansonRequirement,
 ): ParsedHansonRequirement {
   // 1. adds 'result' key, if missing
   // 2. parses the 'result' and 'filter' keys
@@ -169,7 +169,7 @@ function enhanceRequirement(
         abbreviations;
         titles;
         variables;
-        startRule: "Filter";
+        startRule: "Filter",
       })
     : null
 
@@ -179,7 +179,7 @@ function enhanceRequirement(
         abbreviations;
         titles;
         variables;
-        startRule: "Result";
+        startRule: "Result",
       })
     : null
 
@@ -195,7 +195,7 @@ function enhanceRequirement(
 
   let returnedValue: ParsedHansonRequirement = {
     ...fromPairs(enhanced);
-    $type: "requirement";
+    $type: "requirement",
   }
 
   if (parsedResult) {
@@ -230,14 +230,14 @@ function extractRequirementNames(data: {}) {
 }
 
 type ParsePegArgs = {
-  variables?: Mapped<string>;
-  titles: Mapped<string>;
-  abbreviations: Mapped<string>;
+  variables?: Mapped<string>,
+  titles: Mapped<string>,
+  abbreviations: Mapped<string>,
 }
 
 function parseWithPeg(
-  value: string;
-  args: ParsePegArgs & { startRule: PegStartRule };
+  value: string,
+  args: ParsePegArgs & { startRule: PegStartRule },
 ): Object {
   let { variables = {}, titles, abbreviations, startRule } = args
 

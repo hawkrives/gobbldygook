@@ -11,7 +11,7 @@ import {
 import "./area-of-study-sidebar.scss"
 
 type Props = {
-  student: Student;
+  student: Student,
 }
 
 type State = {

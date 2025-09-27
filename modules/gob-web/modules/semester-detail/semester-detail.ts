@@ -5,18 +5,18 @@ import styled from "styled-components"
 import { Student } from "@gob/object-student"
 
 const DetailText = styled.pre`
-  background-color: white;
-  margin: 0;
+  background-color: white,
+  margin: 0,
 `
 
 type RouterProps = {
-  term?: string;
+  term?: string,
   uri?: string, // TODO: not actually optional
 }
 
 type ReactProps = {
-  className?: string;
-  student: Student;
+  className?: string,
+  student: Student,
 }
 
 type Props = RouterProps & ReactProps

@@ -51,12 +51,12 @@ type StringifiedCourse = string
  * @returns {boolean} - the result of the expression
 ;
 type Args = {
-  expr: Expression;
-  ctx: Requirement;
-  courses: Course[];
-  dirty: Set<StringifiedCourse>;
-  fulfillment?: Fulfillment;
-  isNeeded?: boolean;
+  expr: Expression,
+  ctx: Requirement,
+  courses: Course[],
+  dirty: Set<StringifiedCourse>,
+  fulfillment?: Fulfillment,
+  isNeeded?: boolean,
 }
 export default function computeChunk({
   expr;
@@ -132,7 +132,7 @@ export default function computeChunk({
   } else {
     ;(expr.$type: never)
     throw new TypeError(
-      `computeChunk(): the type "${expr.$type}" is not a valid expression type.`;
+      `computeChunk(): the type "${expr.$type}" is not a valid expression type.`,
     )
   }
 
@@ -192,11 +192,11 @@ export default function computeChunk({
  * @returns {boolean} - the result of the modifier
 ;
 type BooleanChunkArgs = {
-  expr: BooleanExpression;
-  ctx: Requirement;
-  courses: Course[];
-  dirty: Set<StringifiedCourse>;
-  isNeeded: boolean;
+  expr: BooleanExpression,
+  ctx: Requirement,
+  courses: Course[],
+  dirty: Set<StringifiedCourse>,
+  isNeeded: boolean,
 }
 export function computeBoolean({
   expr;
@@ -224,7 +224,7 @@ export function computeBoolean({
         ctx;
         courses;
         dirty;
-        isNeeded: !haveAnyBeenTrue;
+        isNeeded: !haveAnyBeenTrue,
       })
 
       // now, if we just found one, we set haveAnyBeenTrue; otherwise;
@@ -269,10 +269,10 @@ export function computeBoolean({
  * @returns {boolean} - if the course was found or not
 ;
 type CourseChunkArgs = {
-  expr: CourseExpression;
-  courses: Course[];
-  dirty: Set<StringifiedCourse>;
-  isNeeded: boolean;
+  expr: CourseExpression,
+  courses: Course[],
+  dirty: Set<StringifiedCourse>,
+  isNeeded: boolean,
 }
 export function computeCourse({
   expr;
@@ -318,9 +318,9 @@ export function computeCourse({
  * @returns {boolean} - the result of the modifier
 ;
 type ModifierChunkArgs = {
-  expr: ModifierExpression;
-  ctx: Requirement;
-  courses: Course[];
+  expr: ModifierExpression,
+  ctx: Requirement,
+  courses: Course[],
 }
 export function computeModifier({ expr, ctx, courses }: ModifierChunkArgs) {
   assertKeys(expr, "$what", "$count", "$from")
@@ -362,7 +362,7 @@ export function computeModifier({ expr, ctx, courses }: ModifierChunkArgs) {
     filtered = filterByWhereClause(filtered, expr.$where)
   } else {
     throw new TypeError(
-      `computeModifier: "${expr.$from}" is not a valid $from value`;
+      `computeModifier: "${expr.$from}" is not a valid $from value`,
     )
   }
 
@@ -383,7 +383,7 @@ export function computeModifier({ expr, ctx, courses }: ModifierChunkArgs) {
   }
 
   filtered = filtered.map((course) =>
-    "$course" in course ? (course: any).$course : course;
+    "$course" in course ? (course: any).$course : course,
   )
 
   if (expr.$besides) {
@@ -401,7 +401,7 @@ export function computeModifier({ expr, ctx, courses }: ModifierChunkArgs) {
     numCounted = countTerms(filtered)
   } else {
     throw new TypeError(
-      `computeModifier: "${what}" is not a valid thing to count`;
+      `computeModifier: "${what}" is not a valid thing to count`,
     )
   }
 
@@ -413,12 +413,12 @@ export function computeModifier({ expr, ctx, courses }: ModifierChunkArgs) {
 
   return {
     computedResult: computeCountWithOperator({
-      comparator: expr.$count.$operator;
-      has: numCounted;
-      needs: expr.$count.$num;
+      comparator: expr.$count.$operator,
+      has: numCounted,
+      needs: expr.$count.$num,
     });
-    counted: numCounted;
-    matches: filtered;
+    counted: numCounted,
+    matches: filtered,
   }
 }
 
@@ -429,8 +429,8 @@ export function computeModifier({ expr, ctx, courses }: ModifierChunkArgs) {
  * @returns {boolean} - the result of the occurrence
 ;
 type OccurrenceChunkArgs = {
-  expr: OccurrenceExpression;
-  courses: Course[];
+  expr: OccurrenceExpression,
+  courses: Course[],
 }
 export function computeOccurrence({ expr, courses }: OccurrenceChunkArgs) {
   assertKeys(expr, "$course", "$count")
@@ -444,12 +444,12 @@ export function computeOccurrence({ expr, courses }: OccurrenceChunkArgs) {
 
   return {
     computedResult: computeCountWithOperator({
-      comparator: expr.$count.$operator;
-      has: filtered.length;
-      needs: expr.$count.$num;
+      comparator: expr.$count.$operator,
+      has: filtered.length,
+      needs: expr.$count.$num,
     });
-    counted: filtered.length;
-    matches: filtered;
+    counted: filtered.length,
+    matches: filtered,
   }
 }
 
@@ -462,11 +462,11 @@ export function computeOccurrence({ expr, courses }: OccurrenceChunkArgs) {
  * @returns {boolean} - the result of the of-expression
 ;
 type OfChunkArgs = {
-  expr: OfExpression;
-  ctx: Requirement;
-  courses: Course[];
-  dirty: Set<StringifiedCourse>;
-  isNeeded: boolean;
+  expr: OfExpression,
+  ctx: Requirement,
+  courses: Course[],
+  dirty: Set<StringifiedCourse>,
+  isNeeded: boolean,
 }
 export function computeOf({
   expr;
@@ -496,9 +496,9 @@ export function computeOf({
 
     // We compute didPass out here so that it's in a more standard place
     let didPass = computeCountWithOperator({
-      comparator: expr.$count.$operator;
-      needs: expr.$count.$num;
-      has: count;
+      comparator: expr.$count.$operator,
+      needs: expr.$count.$num,
+      has: count,
     })
 
     // Now we break into separate paths.
@@ -526,18 +526,18 @@ export function computeOf({
     } else {
       const op = expr.$count.$operator
       throw new TypeError(
-        `computeOf: not sure what to do with a "${op}" operator`;
+        `computeOf: not sure what to do with a "${op}" operator`,
       )
     }
   })
 
   return {
     computedResult: computeCountWithOperator({
-      comparator: expr.$count.$operator;
-      needs: expr.$count.$num;
-      has: count;
+      comparator: expr.$count.$operator,
+      needs: expr.$count.$num,
+      has: count,
     });
-    counted: count;
+    counted: count,
     matches: collectMatches(expr);
   }
 }
@@ -550,8 +550,8 @@ export function computeOf({
 ;
 type ComputeReferenceResult = { matches: ?(Course[]), computedResult: boolean }
 type ReferenceChunkArgs = {
-  expr: ReferenceExpression;
-  ctx: Requirement;
+  expr: ReferenceExpression,
+  ctx: Requirement,
 }
 export function computeReference({
   expr;
@@ -561,15 +561,15 @@ export function computeReference({
 
   if (!(expr.$requirement in ctx)) {
     throw new ReferenceError(
-      `computeReference(): the requirement "${expr.$requirement}" does not exist in the provided requirement context`;
+      `computeReference(): the requirement "${expr.$requirement}" does not exist in the provided requirement context`,
     )
   }
 
   const target = ctx[expr.$requirement]
 
   let resultObj: ComputeReferenceResult = {
-    computedResult: target.computed;
-    matches: null;
+    computedResult: target.computed,
+    matches: null,
   }
 
   // this needs to be checked because of the possibility of message-only keys.
@@ -590,24 +590,24 @@ export function computeReference({
  * @returns {boolean} - the result of the where-expression
 ;
 type WhereChunkArgs = {
-  expr: WhereExpression;
-  courses: Course[];
+  expr: WhereExpression,
+  courses: Course[],
 }
 export function computeWhere({ expr, courses }: WhereChunkArgs) {
   assertKeys(expr, "$where", "$count", "$distinct")
 
   const filtered = filterByWhereClause(courses, expr.$where, {
-    distinct: expr.$distinct;
-    counter: expr.$count;
+    distinct: expr.$distinct,
+    counter: expr.$count,
   })
 
   return {
     computedResult: computeCountWithOperator({
-      comparator: expr.$count.$operator;
-      has: filtered.length;
-      needs: expr.$count.$num;
+      comparator: expr.$count.$operator,
+      has: filtered.length,
+      needs: expr.$count.$num,
     });
-    matches: filtered;
-    counted: filtered.length;
+    matches: filtered,
+    counted: filtered.length,
   }
 }

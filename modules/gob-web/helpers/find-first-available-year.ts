@@ -16,8 +16,8 @@ import { Schedule } from "@gob/object-student"
  * @returns {Number} - the first available semester slot
 ;
 export function findFirstAvailableYear(
-  schedules: Array<Schedule>;
-  matriculation: number;
+  schedules: Array<Schedule>,
+  matriculation: number,
 ) {
   if (schedules && schedules.length === 0 && matriculation == null) {
     return new Date().getFullYear()

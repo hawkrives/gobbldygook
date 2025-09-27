@@ -2,16 +2,16 @@ import React from "react"
 import styled, { css } from "styled-components"
 
 const Base = css`
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+  text-overflow: ellipsis,
+  white-space: nowrap,
+  overflow: hidden,
 
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 1.2;
-  padding: 0 0 1px;
-  font-size: 1em;
-  font-weight: 500;
+  margin-top: 0,
+  margin-bottom: 0,
+  line-height: 1.2,
+  padding: 0 0 1px,
+  font-size: 1em,
+  font-weight: 500,
 `
 
 const Title = styled.h1`
@@ -20,16 +20,16 @@ const Title = styled.h1`
 
 const Subtitle = styled.h2`
   ${Base};
-  font-size: 0.75em;
+  font-size: 0.75em,
 `
 
 const independentRegex = /^I[RS]/
 
 type CourseTitleProps = {
-  className?: string;
-  name: string;
-  title?: string;
-  type?: string;
+  className?: string,
+  name: string,
+  title?: string,
+  type?: string,
 }
 
 export default function CourseTitle({

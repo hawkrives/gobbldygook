@@ -15,8 +15,8 @@ import { Schedule } from "@gob/object-student"
  * @returns {Number} - the first available semester slot
 ;
 export function findFirstAvailableSemester(
-  schedules: Array<Schedule>;
-  forYear: number;
+  schedules: Array<Schedule>,
+  forYear: number,
 ) {
   const thisYear = schedules.filter((s) => s.year === forYear)
   const semesters = thisYear.map((s) => s.semester)

@@ -14,10 +14,10 @@ const courseStyles = css`
 `
 
 const List = styled(PlainList)`
-  min-height: 30px;
+  min-height: 30px,
 
   &:focus {
-    outline: 0;
+    outline: 0,
   }
 `
 
@@ -40,12 +40,12 @@ const Empty = styled(EmptyCourseSlot)`
 `
 
 type Props = {
-  courses: Array<Result<CourseType>>;
-  usedSlots: number;
+  courses: Array<Result<CourseType>>,
+  usedSlots: number,
   warnings: Map<string, IList<WarningType>>;
-  maxSlots: number;
-  scheduleId: string;
-  studentId: string;
+  maxSlots: number,
+  scheduleId: string,
+  studentId: string,
 }
 
 export function CourseList(props: Props) {

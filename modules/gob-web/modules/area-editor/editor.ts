@@ -8,15 +8,15 @@ import { oneDark } from "@codemirror/theme-one-dark"
 import { Card } from "../../components/card"
 
 const StyledEditor = styled(CodeMirror)`
-  padding: 0;
-  flex: 1;
+  padding: 0,
+  flex: 1,
 
-  display: flex;
-  flex-flow: column;
+  display: flex,
+  flex-flow: column,
 
   .CodeMirror {
-    flex: 1;
-    cursor: text;
+    flex: 1,
+    cursor: text,
   }
 `
 

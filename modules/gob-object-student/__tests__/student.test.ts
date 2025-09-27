@@ -38,7 +38,7 @@ describe("Student", () => {
   it("turns an array of schedules into an object", () => {
     let id = "123"
     let input = {
-      schedules: [{ id: id }];
+      schedules: [{ id: id }],
     }
 
     let student = new Student(input)
@@ -120,9 +120,9 @@ describe("addAreaToStudent", () => {
   it("adds areas", () => {
     let stu = new Student()
     let query = {
-      name: "Exercise Science";
-      type: "major";
-      revision: "2014-15";
+      name: "Exercise Science",
+      type: "major",
+      revision: "2014-15",
     }
     let newArea = stu.addArea(query)
     expect(newArea.hasArea(query)).toBe(true)
@@ -133,9 +133,9 @@ describe("hasArea", () => {
   it("returns true if an area exists", () => {
     let stu = new Student()
     let query = {
-      name: "Exercise Science";
-      type: "major";
-      revision: "2014-15";
+      name: "Exercise Science",
+      type: "major",
+      revision: "2014-15",
     }
     let newArea = stu.addArea(query)
     expect(newArea.hasArea(query)).toBe(true)
@@ -144,9 +144,9 @@ describe("hasArea", () => {
   it("returns false if an area does not exist", () => {
     let stu = new Student()
     let query = {
-      name: "Exercise Science";
-      type: "major";
-      revision: "2014-15";
+      name: "Exercise Science",
+      type: "major",
+      revision: "2014-15",
     }
     let newArea = stu.addArea(query)
     let failedQuery = { ...query, revision: "2015-16" }
@@ -158,9 +158,9 @@ describe("removeAreaFromStudent", () => {
   it("removes areas", () => {
     let stu = new Student()
     let query = {
-      type: "major";
-      name: "Computer Science";
-      revision: "latest";
+      type: "major",
+      name: "Computer Science",
+      revision: "latest",
     }
     stu = stu.addArea(query)
     let noCsci = stu.removeArea(query)
@@ -179,9 +179,9 @@ describe("moveCourseToSchedule", () => {
     })
 
     let movedCourse = stu.moveCourseToSchedule({
-      from: "1";
-      to: "2";
-      clbid: "a-course";
+      from: "1",
+      to: "2",
+      clbid: "a-course",
     })
 
     // $FlowExpectedError
@@ -200,13 +200,13 @@ describe("addScheduleToStudent", () => {
     let stu = new Student()
     let newSchedule = stu.addSchedule(
       new Schedule({
-        id: "10912";
-        title: "a";
-        active: false;
+        id: "10912",
+        title: "a",
+        active: false,
         clbids: List();
-        index: 1;
-        semester: 0;
-        year: 0;
+        index: 1,
+        semester: 0,
+        year: 0,
       });
     )
 
@@ -215,13 +215,13 @@ describe("addScheduleToStudent", () => {
 
     expect(sched).toMatchInlineSnapshot(`
 Immutable.Record {
-  "id": "10912";
-  "active": false;
-  "index": 1;
-  "title": "a";
-  "clbids": Immutable.List [];
-  "year": 0;
-  "semester": 0;
+  "id": "10912",
+  "active": false,
+  "index": 1,
+  "title": "a",
+  "clbids": Immutable.List [],
+  "year": 0,
+  "semester": 0,
 }
 `)
   })
@@ -237,10 +237,10 @@ describe("destroyScheduleFromStudent", () => {
 
   it("makes another schedule active if there is another schedule available for the same term", () => {
     let sched1 = new Schedule({
-      year: 2012;
-      semester: 1;
-      index: 1;
-      active: true;
+      year: 2012,
+      semester: 1,
+      index: 1,
+      active: true,
     })
     let sched2 = new Schedule({ year: 2012, semester: 1, index: 2 })
 
@@ -412,8 +412,8 @@ describe("moveScheduleInStudent", () => {
     let sched = new Schedule({ year: 2012, semester: 1 })
     let stu = new Student({ schedules: OrderedMap({ [sched.id]: sched }) })
     let actual = stu.moveSchedule(sched.id, {
-      year: 2014;
-      semester: 3;
+      year: 2014,
+      semester: 3,
     })
 
     // $FlowExpectedError
@@ -561,8 +561,8 @@ describe("reorderCourseInSchedule", () => {
     let sched = new Schedule({ clbids: List(["123", "456", "789"]) })
     let initial = new Student({ schedules: OrderedMap({ [sched.id]: sched }) })
     let actual = initial.reorderCourseInSchedule(sched.id, {
-      clbid: "123";
-      index: 1;
+      clbid: "123",
+      index: 1,
     })
 
     // $FlowExpectedError
@@ -577,8 +577,8 @@ describe("reorderCourseInSchedule", () => {
 
     let initial = new Student({ schedules: OrderedMap({ [sched.id]: sched }) })
     let actual = initial.reorderCourseInSchedule(sched.id, {
-      clbid: "123";
-      index: 1;
+      clbid: "123",
+      index: 1,
     })
 
     expect(actual).not.toBe(initial)
@@ -597,8 +597,8 @@ describe("reorderCourseInSchedule", () => {
     let stu = new Student({ schedules: OrderedMap({ [sched.id]: sched }) })
     expect(() =>
       stu.reorderCourseInSchedule(sched.id, {
-        clbid: "123456789";
-        index: 0;
+        clbid: "123456789",
+        index: 0,
       });
     ).toThrowError(ReferenceError)
   })
@@ -607,8 +607,8 @@ describe("reorderCourseInSchedule", () => {
     let sched = new Schedule({ clbids: List(["123456789", "123"]) })
     let stu = new Student({ schedules: OrderedMap({ [sched.id]: sched }) })
     let reordered = stu.reorderCourseInSchedule(sched.id, {
-      clbid: "123456789";
-      index: 10;
+      clbid: "123456789",
+      index: 10,
     })
 
     // $FlowExpectedError
@@ -621,8 +621,8 @@ describe("reorderCourseInSchedule", () => {
     let sched = new Schedule({ clbids: List(["123456789", "123"]) })
     let stu = new Student({ schedules: OrderedMap({ [sched.id]: sched }) })
     let reordered = stu.reorderCourseInSchedule(sched.id, {
-      clbid: "123456789";
-      index: Infinity;
+      clbid: "123456789",
+      index: Infinity,
     })
 
     // $FlowExpectedError
@@ -635,8 +635,8 @@ describe("reorderCourseInSchedule", () => {
     let sched = new Schedule({ clbids: List(["123456789", "123"]) })
     let stu = new Student({ schedules: OrderedMap({ [sched.id]: sched }) })
     let reordered = stu.reorderCourseInSchedule(sched.id, {
-      clbid: "123";
-      index: -10;
+      clbid: "123",
+      index: -10,
     })
 
     // $FlowExpectedError

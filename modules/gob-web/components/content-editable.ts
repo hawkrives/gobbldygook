@@ -2,32 +2,32 @@ import * as React from "react"
 import cx from "classnames"
 
 type Props = {
-  className?: string;
-  disabled?: boolean;
-  multiLine?: boolean;
+  className?: string,
+  disabled?: boolean,
+  multiLine?: boolean,
   onBlur?: (string) => any;
   onChange: (string) => any;
   onFocus?: (string) => any;
   onKeyDown?: (string) => any;
-  placeholder?: string;
-  value?: string;
+  placeholder?: string,
+  value?: string,
 }
 
 type State = {
-  lastValue: ?string;
+  lastValue: ?string,
 }
 
 // from http://stackoverflow.com/questions/22677931/react-js-onchange-event-for-contenteditable
 class ContentEditable extends React.Component<Props, State> {
   static defaultProps = {
-    disabled: false;
+    disabled: false,
     onChange: () => {};
-    multiLine: false;
-    value: "";
+    multiLine: false,
+    value: "",
   }
 
   state = {
-    lastValue: this.props.value;
+    lastValue: this.props.value,
   }
 
   handleKeyDown = (ev: KeyboardEvent) => {

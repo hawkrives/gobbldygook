@@ -10,27 +10,27 @@ import { Student } from "@gob/object-student"
 
 type Props = {
   navigate: (string) => mixed;
-  student: Student;
-  queryString?: string;
+  student: Student,
+  queryString?: string,
 }
 
 type State = {
-  encoded: ?string;
-  loading: boolean;
+  encoded: ?string,
+  loading: boolean,
 }
 
 const SizedCard = styled(Card)`
-  width: 300px;
-  min-height: 200px;
+  width: 300px,
+  min-height: 200px,
 
-  margin: auto;
-  padding: 1em;
+  margin: auto,
+  padding: 1em,
 `
 
 export class ShareSheet extends React.Component<Props, State> {
   state = {
-    encoded: null;
-    loading: true;
+    encoded: null,
+    loading: true,
   }
 
   componentDidMount() {

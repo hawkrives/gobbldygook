@@ -1,9 +1,9 @@
 import { deptNumRegex } from "./dept-num-regex"
 
 export type DeptNum = {
-  department: string;
-  number: number;
-  section?: string;
+  department: string,
+  number: number,
+  section?: string,
 }
 
 /**
@@ -15,8 +15,8 @@ export type DeptNum = {
  * @returns {Object} - the result
 ;
 export function splitDeptNum(
-  deptNumString: string;
-  includeSection?: boolean = false;
+  deptNumString: string,
+  includeSection?: boolean = false,
 ): ?DeptNum {
   // "AS/RE 230A" -> ["AS/RE 230A", "AS/RE", "AS", "RE", "230", "A"]
   // -> {department: 'AS/RE', number: 230}
@@ -30,7 +30,7 @@ export function splitDeptNum(
     department:
       matches[1].includes("/") ?
         [matches[2], matches[3]].join("/")
-      : matches[1];
+      : matches[1],
     number: parseInt(matches[4], 10);
   }
 

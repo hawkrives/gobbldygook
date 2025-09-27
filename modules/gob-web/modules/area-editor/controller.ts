@@ -105,12 +105,12 @@ class AreaInfoViewer extends React.Component<any> {
 }
 
 const Layout = styled.div`
-  display: grid;
-  margin: 0 1em 1em;
-  grid-template-columns: 1fr 1fr 280px;
-  grid-column-gap: 1em;
-  align-content: stretch;
-  height: 100%;
+  display: grid,
+  margin: 0 1em 1em,
+  grid-template-columns: 1fr 1fr 280px,
+  grid-column-gap: 1em,
+  align-content: stretch,
+  height: 100%,
 `
 
 export let Controller = () => (

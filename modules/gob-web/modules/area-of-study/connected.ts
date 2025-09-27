@@ -10,18 +10,18 @@ import {
 } from "../../redux/students/actions/change"
 
 type Props = {
-  areaOfStudy: AreaQuery;
-  student: Student;
-  changeStudent: ChangeStudentFunc;
+  areaOfStudy: AreaQuery,
+  student: Student,
+  changeStudent: ChangeStudentFunc,
 }
 
 type State = {
-  isOpen: boolean;
+  isOpen: boolean,
 }
 
 class AreaOfStudyConnector extends React.Component<Props, State> {
   state = {
-    isOpen: false;
+    isOpen: false,
   }
 
   toggleAreaExpansion = (ev: Event) => {

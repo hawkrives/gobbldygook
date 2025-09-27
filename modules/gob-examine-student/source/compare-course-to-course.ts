@@ -35,8 +35,8 @@ function wildcard(lhs) {
  * @returns {boolean} - if the course matched
 ;
 export default function compareCourseToCourse(
-  query: Course;
-  other: Course;
+  query: Course,
+  other: Course,
 ): boolean {
   // If the query is more specific than the one being compared to, and
   // things don't match, return false.

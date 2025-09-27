@@ -7,9 +7,9 @@ import removeDuplicateAreas from "./remove-duplicate-areas"
 import type { InfoFileTypeEnum, InfoFileRef, InfoIndexFile } from "./types"
 
 type Args = {
-  baseUrl: string;
-  notification: Notification;
-  type: InfoFileTypeEnum;
+  baseUrl: string,
+  notification: Notification,
+  type: InfoFileTypeEnum,
 }
 
 export default function loadFiles(url: string, baseUrl: string) {
@@ -37,9 +37,9 @@ export async function proceedWithUpdate(baseUrl: string, data: InfoIndexFile) {
 }
 
 export async function loadTerm(
-  term: number;
-  courseInfoUrl: string;
-  baseUrl: string;
+  term: number,
+  courseInfoUrl: string,
+  baseUrl: string,
 ) {
   let data: InfoIndexFile = (await fetch(courseInfoUrl)
     .then(status)
@@ -59,9 +59,9 @@ export async function loadTerm(
 }
 
 export function getFilesToLoad(
-  type: InfoFileTypeEnum;
-  oldestYear: number;
-  data: InfoIndexFile;
+  type: InfoFileTypeEnum,
+  oldestYear: number,
+  data: InfoIndexFile,
 ) {
   let files = data.files
 
@@ -73,8 +73,8 @@ export function getFilesToLoad(
 }
 
 export async function filterFiles(
-  type: InfoFileTypeEnum;
-  files: InfoFileRef[];
+  type: InfoFileTypeEnum,
+  files: InfoFileRef[],
 ): Promise<Array<InfoFileRef>> {
   // For each file, see if it needs loading. We then update each promise
   // with either the path or `null`.
@@ -91,8 +91,8 @@ export async function filterFiles(
 }
 
 export async function slurpIntoDatabase(
-  { type, baseUrl, notification }: Args;
-  files: Array<InfoFileRef>;
+  { type, baseUrl, notification }: Args,
+  files: Array<InfoFileRef>,
 ) {
   // Exit early if nothing needs to happen
   if (files.length === 0) {

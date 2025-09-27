@@ -10,13 +10,13 @@ import { type AreaQuery } from "@gob/object-student"
 import "./area-of-study.scss"
 
 type Props = {
-  isOpen?: boolean;
-  style?: {};
+  isOpen?: boolean,
+  style?: {},
 
-  areaOfStudy: AreaQuery;
-  error?: ?string;
-  examining?: boolean;
-  results: ?EvaluationResult;
+  areaOfStudy: AreaQuery,
+  error?: ?string,
+  examining?: boolean,
+  results: ?EvaluationResult,
   onToggleOpen?: (Event) => mixed;
   onAddOverride?: (Array<string>, Event) => mixed;
   onRemoveOverride?: (Array<string>, Event) => mixed;
@@ -50,7 +50,7 @@ export class AreaOfStudy extends React.Component<Props> {
 
     let className = cx("area", {
       errored: Boolean(error);
-      loading: examining;
+      loading: examining,
     })
 
     return (

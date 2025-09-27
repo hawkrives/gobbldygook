@@ -4,8 +4,8 @@ import { queryCourses } from "@gob/search-queries"
 import type { Course } from "@gob/types"
 
 export function comboHasCourses(
-  courses: Array<Course>;
-  combinationOfClasses: Array<Course>;
+  courses: Array<Course>,
+  combinationOfClasses: Array<Course>,
 ) {
   const these = takeWhile(
     courses;

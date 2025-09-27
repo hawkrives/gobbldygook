@@ -19,27 +19,27 @@ import "./searcher.scss"
 
 type Props = {
   onCloseSearcher?: ?() => mixed;
-  term?: ?number;
-  studentId?: string;
+  term?: ?number,
+  studentId?: string,
 }
 
 type State = {
-  query: string;
-  groupBy: GROUP_BY_KEY;
-  sortBy: SORT_BY_KEY;
-  limitTo: string;
-  filterBy: string;
-  hasQueried: boolean;
+  query: string,
+  groupBy: GROUP_BY_KEY,
+  sortBy: SORT_BY_KEY,
+  limitTo: string,
+  filterBy: string,
+  hasQueried: boolean,
 }
 
 export class CourseSearcher extends React.Component<Props, State> {
   state = {
-    groupBy: "term";
-    sortBy: "title";
-    limitTo: "";
-    filterBy: "";
-    query: "";
-    hasQueried: false;
+    groupBy: "term",
+    sortBy: "title",
+    limitTo: "",
+    filterBy: "",
+    query: "",
+    hasQueried: false,
   }
 
   handleSortChange = (ev: SyntheticEvent<HTMLSelectElement>) => {

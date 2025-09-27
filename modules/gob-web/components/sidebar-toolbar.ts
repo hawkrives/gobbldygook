@@ -21,20 +21,20 @@ import type { Undoable } from "../types"
 
 type Props = {
   redo: (string) => any;
-  student: Undoable<Student>;
+  student: Undoable<Student>,
   undo: (string) => any;
 
-  search?: boolean;
-  share?: boolean;
-  backTo?: "picker" | "overview";
+  search?: boolean,
+  share?: boolean,
+  backTo?: "picker" | "overview",
 }
 
 const ToolsCard = styled(Card)`
-  flex-shrink: 0;
-  margin-bottom: 1em;
-  position: sticky;
-  top: 0;
-  z-index: 1;
+  flex-shrink: 0,
+  margin-bottom: 1em,
+  position: sticky,
+  top: 0,
+  z-index: 1,
 `
 
 export function SidebarToolbar(props: Props) {

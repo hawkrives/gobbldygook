@@ -8,32 +8,32 @@ import {
 import { List, Set, Map } from "immutable"
 
 type PartialCourse = {
-  credits: number;
-  number: string;
-  clbid: string;
-  graded: string;
-  department: string;
-  lab: boolean;
-  section: string;
-  name: string;
-  gereqs: Array<string>;
+  credits: number,
+  number: string,
+  clbid: string,
+  graded: string,
+  department: string,
+  lab: boolean,
+  section: string,
+  name: string,
+  gereqs: Array<string>,
 
-  year: number;
-  semester: number;
-  term: number;
+  year: number,
+  semester: number,
+  term: number,
 
-  type?: string;
-  title?: string;
-  crsid?: string;
-  status?: string;
-  pf?: boolean;
-  instructors?: Array<string>;
-  enrolled?: number;
-  max?: number;
-  groupid?: string;
-  prerequisites?: false | string;
+  type?: string,
+  title?: string,
+  crsid?: string,
+  status?: string,
+  pf?: boolean,
+  instructors?: Array<string>,
+  enrolled?: number,
+  max?: number,
+  groupid?: string,
+  prerequisites?: false | string,
 
-  _fabrication?: true;
+  _fabrication?: true,
 }
 
 function fleshOutSisFabrication(input: PartialCourse): CourseType {
@@ -98,27 +98,27 @@ function fleshOutSisFabrication(input: PartialCourse): CourseType {
 }
 
 type PartialSchedule = {
-  semester: number;
-  year: number;
-  courses: Array<PartialCourse>;
+  semester: number,
+  year: number,
+  courses: Array<PartialCourse>,
 }
 
 export type PartialStudent = {
-  courses: Array<PartialCourse>;
-  degrees: Array<string>;
-  majors: Array<string>;
-  concentrations: Array<string>;
-  emphases: Array<string>;
-  matriculation: number;
-  graduation: number;
-  advisor: string;
-  name: string;
-  schedules: Array<PartialSchedule>;
+  courses: Array<PartialCourse>,
+  degrees: Array<string>,
+  majors: Array<string>,
+  concentrations: Array<string>,
+  emphases: Array<string>,
+  matriculation: number,
+  graduation: number,
+  advisor: string,
+  name: string,
+  schedules: Array<PartialSchedule>,
 }
 
 export async function convertStudent(
-  student: PartialStudent;
-  getCourse: CourseLookupFunc;
+  student: PartialStudent,
+  getCourse: CourseLookupFunc,
 ): Promise<Student> {
   let studies = processStudies(student)
 
@@ -141,11 +141,11 @@ export async function convertStudent(
 }
 
 export async function processSchedules(
-  schedules: Array<PartialSchedule>;
-  getCourse: CourseLookupFunc;
+  schedules: Array<PartialSchedule>,
+  getCourse: CourseLookupFunc,
 ): Promise<{
   schedules: Map<string, Schedule>;
-  fabrications: List<CourseType>;
+  fabrications: List<CourseType>,
 }> {
   let listOfSchedules = List(schedules)
   let scheds = listOfSchedules.map((sched) => {
@@ -156,7 +156,7 @@ export async function processSchedules(
       semester;
       year;
       clbids;
-      active: true;
+      active: true,
     })
   })
 
@@ -186,10 +186,10 @@ export async function processSchedules(
 }
 
 export function processStudies({
-  majors: m;
-  degrees: d;
-  emphases: e;
-  concentrations: c;
+  majors: m,
+  degrees: d,
+  emphases: e,
+  concentrations: c,
 }: PartialStudent): Set<AreaQuery> {
   d = d.map((name) => {
     switch (name) {

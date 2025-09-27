@@ -29,16 +29,16 @@ import { loadDataForTerm } from "../../workers/load-data"
 
 const Container = styled.div`
   ${theme.card};
-  flex: 1 0;
-  min-width: 13em;
+  flex: 1 0,
+  min-width: 13em,
   margin: var(--semester-spacing);
-  overflow: hidden;
+  overflow: hidden,
   color: var(--text-color);
 
   &.can-drop {
-    cursor: copy;
+    cursor: copy,
     box-shadow: 0 0 4px var(--gray-500);
-    z-index: 10;
+    z-index: 10,
   }
 
   --background-color: var(--white);
@@ -64,19 +64,19 @@ const Container = styled.div`
 
 const TitleButton = styled(FlatButton)`
   padding: var(--block-edge-padding) var(--semester-side-padding);
-  min-height: 0;
-  font-size: 0.9em;
+  min-height: 0,
+  font-size: 0.9em,
 
-  border: 0;
-  border-radius: 0;
-  transition: 0.15s;
+  border: 0,
+  border-radius: 0,
+  transition: 0.15s,
 
   &:hover {
     background-color: var(--background-color-hover);
   }
 
   & + & {
-    margin-left: 0.1em;
+    margin-left: 0.1em,
   }
 `
 
@@ -91,13 +91,13 @@ const RemoveSemesterButton = styled(TitleButton)`
 const Header = styled.header`
   border-bottom: solid 1px var(--separator-color, #eaeaea);
 
-  font-size: 0.85em;
+  font-size: 0.85em,
 
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: stretch;
+  display: flex,
+  flex-flow: row nowrap,
+  align-items: stretch,
 
-  overflow: hidden;
+  overflow: hidden,
 
   padding-left: var(--semester-side-padding);
 
@@ -107,41 +107,41 @@ const Header = styled.header`
 `
 
 const InfoList = styled(InlineList)`
-  font-size: 0.8em;
+  font-size: 0.8em,
 `
 
 const InfoItem = styled(InlineListItem)`
-  font-variant-numeric: oldstyle-nums;
+  font-variant-numeric: oldstyle-nums,
 
   & + &::before {
-    content: " – ";
-    padding-left: 0.25em;
+    content: " – ",
+    padding-left: 0.25em,
   }
 `
 
 const Title = styled(Link)`
   ${theme.linkUndecorated};
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+  flex: 1,
+  display: flex,
+  flex-direction: column,
   padding: var(--block-edge-padding) 0;
   padding-right: var(--semester-side-padding);
 
   &:hover {
-    text-decoration: underline;
+    text-decoration: underline,
   }
 `
 
 const TitleText = styled.h1`
   ${theme.headingNeutral};
-  display: inline-block;
-  color: black;
+  display: inline-block,
+  color: black,
 `
 
 function discoverSemesterStatus(args: {
-  year: number;
-  semester: number;
-  now: Date;
+  year: number,
+  semester: number,
+  now: Date,
 }): "past" | "in-progress" | "future" | "unknown" {
   let { year, now } = args
   if (year < now.getFullYear()) {
@@ -157,41 +157,41 @@ function discoverSemesterStatus(args: {
 }
 
 type DnDProps = {
-  canDrop?: boolean;
-  connectDropTarget: Function;
-  isOver: boolean;
+  canDrop?: boolean,
+  connectDropTarget: Function,
+  isOver: boolean,
 }
 
 type ReduxProps = {
-  changeStudent: ChangeStudentFunc;
+  changeStudent: ChangeStudentFunc,
 }
 
 type ReactProps = {
-  schedule: Schedule;
-  semester: number;
-  student: Student;
-  year: number;
+  schedule: Schedule,
+  semester: number,
+  student: Student,
+  year: number,
 }
 
 type Props = ReduxProps & DnDProps & ReactProps
 
 type State = {
-  loading: boolean;
-  checking: boolean;
-  courses: List<Result<CourseType>>;
+  loading: boolean,
+  checking: boolean,
+  courses: List<Result<CourseType>>,
   warnings: Map<string, List<WarningType>>;
-  hasConflict: boolean;
-  credits: number;
+  hasConflict: boolean,
+  credits: number,
 }
 
 class Semester extends React.Component<Props, State> {
   state = {
-    loading: true;
-    checking: true;
+    loading: true,
+    checking: true,
     courses: List();
     warnings: Map();
-    hasConflict: false;
-    credits: 0;
+    hasConflict: false,
+    credits: 0,
   }
 
   componentDidMount() {
@@ -271,11 +271,11 @@ class Semester extends React.Component<Props, State> {
     })
 
     const className = cx("semester", {
-      invalid: hasConflict;
-      "can-drop": canDrop;
-      loading: loading;
-      past: semesterStatus === "past";
-      "in-progress": semesterStatus === "in-progress";
+      invalid: hasConflict,
+      "can-drop": canDrop,
+      loading: loading,
+      past: semesterStatus === "past",
+      "in-progress": semesterStatus === "in-progress",
     })
 
     let name = semesterName(semester)
@@ -335,8 +335,8 @@ const semesterTarget = {
 
     if (isFromSchedule) {
       let s = student.moveCourseToSchedule({
-        from: fromScheduleId;
-        to: schedule.id;
+        from: fromScheduleId,
+        to: schedule.id,
         clbid;
       })
       props.changeStudent(s)

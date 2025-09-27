@@ -13,7 +13,7 @@ export default function prepareCourse(course: any) {
 
   return {
     deptnum: buildDeptNum(course);
-    words: [...allWords];
-    profWords: [...profWords];
+    words: [...allWords],
+    profWords: [...profWords],
   }
 }

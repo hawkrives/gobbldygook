@@ -25,24 +25,24 @@ type Props = {
 }
 
 type State = {
-  status: "pending" | "processing" | "ready";
-  error: ?Error;
-  ids: Array<mixed>;
-  selectedId: ?number;
-  student: ?Student;
-  rawStudentText: string;
-  parsedStudentText: ?PartialStudent;
+  status: "pending" | "processing" | "ready",
+  error: ?Error,
+  ids: Array<mixed>,
+  selectedId: ?number,
+  student: ?Student,
+  rawStudentText: string,
+  parsedStudentText: ?PartialStudent,
 }
 
 class SISImportScreen extends React.Component<Props, State> {
   state = {
-    status: "pending";
-    error: null;
-    ids: [];
-    selectedId: null;
-    student: null;
-    rawStudentText: "";
-    parsedStudentText: null;
+    status: "pending",
+    error: null,
+    ids: [],
+    selectedId: null,
+    student: null,
+    rawStudentText: "",
+    parsedStudentText: null,
   }
 
   handleImportData = async () => {
@@ -194,7 +194,7 @@ const StudentInfo = ({ student }: { student: Student }) => (
 
 const ScheduleListing = (props: {
   schedules: Map<string, Schedule>;
-  fabrications: List<CourseType>;
+  fabrications: List<CourseType>,
 }) => {
   let { schedules = Map(), fabrications = List() } = props
 
@@ -218,8 +218,8 @@ const ScheduleListing = (props: {
 }
 
 class AbbreviatedCourseListing extends React.Component<
-  { schedule: Schedule, fabrications: List<CourseType> };
-  { courses: List<Result<CourseType>> };
+  { schedule: Schedule, fabrications: List<CourseType> },
+  { courses: List<Result<CourseType>> },
 > {
   state = { courses: List() }
   componentDidMount() {

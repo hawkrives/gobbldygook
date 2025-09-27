@@ -10,23 +10,23 @@ import {
 } from "./validate-schedule"
 
 type ScheduleType = {
-  id: string;
-  active: boolean;
-  index: number;
-  title: string;
-  clbids: List<string>;
-  year: number;
-  semester: number;
+  id: string,
+  active: boolean,
+  index: number,
+  title: string,
+  clbids: List<string>,
+  year: number,
+  semester: number,
 }
 
 const defaultValues: ScheduleType = {
-  id: "unknown";
-  active: false;
-  index: 1;
-  title: "no title";
+  id: "unknown",
+  active: false,
+  index: 1,
+  title: "no title",
   clbids: List();
-  year: 0;
-  semester: 0;
+  year: 0,
+  semester: 0,
 }
 
 const ScheduleRecord = Record(defaultValues)
@@ -110,8 +110,8 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
   }
 
   async getCoursesWithErrors(
-    getCourse: CourseLookupFunc;
-    fabrications?: Array<CourseType> | List<CourseType>;
+    getCourse: CourseLookupFunc,
+    fabrications?: Array<CourseType> | List<CourseType>,
   ): Promise<List<Result<CourseType>>> {
     let term = this.getTerm()
     let promises = this.clbids.map((clbid) =>
@@ -121,8 +121,8 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
   }
 
   async getCourses(
-    getCourse: CourseLookupFunc;
-    fabrications?: Array<CourseType> | List<CourseType>;
+    getCourse: CourseLookupFunc,
+    fabrications?: Array<CourseType> | List<CourseType>,
   ): Promise<List<CourseType>> {
     let coursesWithErrors = await this.getCoursesWithErrors(
       getCourse;

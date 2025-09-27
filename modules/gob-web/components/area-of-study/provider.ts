@@ -5,20 +5,20 @@ import { type ParsedHansonFile } from "@gob/hanson-format"
 
 type Props = {
   children: ({
-    loading: boolean;
-    areas: Array<ParsedHansonFile>;
+    loading: boolean,
+    areas: Array<ParsedHansonFile>,
   }) => React.Node;
 }
 
 type State = {
-  loading: boolean;
-  areas: Array<ParsedHansonFile>;
+  loading: boolean,
+  areas: Array<ParsedHansonFile>,
 }
 
 export class AreaOfStudyProvider extends React.PureComponent<Props, State> {
   state = {
-    areas: [];
-    loading: true;
+    areas: [],
+    loading: true,
   }
 
   componentDidMount() {

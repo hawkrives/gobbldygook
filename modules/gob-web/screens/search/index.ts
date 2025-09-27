@@ -5,12 +5,12 @@ import { CourseSearcher } from "../../modules/course-searcher"
 import styled from "styled-components"
 
 let Container = styled.div`
-  max-width: 40em;
-  min-width: 320px;
-  margin: 3rem auto;
+  max-width: 40em,
+  min-width: 320px,
+  margin: 3rem auto,
 
   .course-search--results_sizer {
-    min-height: 350px;
+    min-height: 350px,
   }
 `
 

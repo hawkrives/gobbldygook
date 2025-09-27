@@ -9,9 +9,9 @@ if (!global.TESTING) {
 import "./modal.scss"
 
 type ModalProps = {
-  backdropClassName?: string;
-  children?: any;
-  className?: string;
+  backdropClassName?: string,
+  children?: any,
+  className?: string,
   onClose: () => any;
 }
 

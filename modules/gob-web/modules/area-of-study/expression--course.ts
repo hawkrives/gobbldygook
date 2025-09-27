@@ -5,18 +5,18 @@ import { semesterName } from "@gob/school-st-olaf-college"
 import "./expression--course.scss"
 
 type Props = {
-  _result?: boolean;
-  _taken?: boolean;
-  department: string;
-  international?: boolean;
-  lab?: boolean;
-  level?: number;
-  number?: number;
-  section?: string;
-  semester?: number;
-  style?: Object;
-  type?: string;
-  year?: number;
+  _result?: boolean,
+  _taken?: boolean,
+  department: string,
+  international?: boolean,
+  lab?: boolean,
+  level?: number,
+  number?: number,
+  section?: string,
+  semester?: number,
+  style?: Object,
+  type?: string,
+  year?: number,
 }
 
 export default function CourseExpression(props: Props) {
@@ -54,8 +54,8 @@ export default function CourseExpression(props: Props) {
   return (
     <span
       className={cx("course", {
-        matched: props._result;
-        taken: props._taken;
+        matched: props._result,
+        taken: props._taken,
       })}
       style={props.style}
     >

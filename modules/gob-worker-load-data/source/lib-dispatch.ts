@@ -5,8 +5,8 @@ function dispatch(type: string, action: string, ...args: any[]) {
 
 export const quotaExceededError = (dbName: string) => {
   dispatch("notifications", "logError", {
-    id: "db-storage-quota-exceeded";
-    message: `The database "${dbName}" has exceeded its storage quota.`;
+    id: "db-storage-quota-exceeded",
+    message: `The database "${dbName}" has exceeded its storage quota.`,
   })
 }
 

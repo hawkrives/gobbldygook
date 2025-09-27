@@ -22,8 +22,8 @@ export function getPriorAreas(path: string) {
 }
 
 export default async function cleanPriorData(
-  path: string;
-  type: InfoFileTypeEnum;
+  path: string,
+  type: InfoFileTypeEnum,
 ) {
   console.log(`cleaning ${path}`)
 

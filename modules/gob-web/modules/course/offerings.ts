@@ -3,17 +3,17 @@ import { List, Map } from "immutable"
 import type { Offering } from "@gob/types"
 
 const DAYS = Map({
-  Mo: "M";
-  Tu: "T";
-  We: "W";
-  Th: "Th";
-  Fr: "F";
+  Mo: "M",
+  Tu: "T",
+  We: "W",
+  Th: "Th",
+  Fr: "F",
 })
 
 const nbsp = "\u00a0"
 
 export function consolidateOfferings(
-  offerings: Array<Offering>;
+  offerings: Array<Offering>,
 ): Array<string> {
   return List(offerings)
     .groupBy(({ start, end }) => `${start} ${end}`)
@@ -28,7 +28,7 @@ export function consolidateOfferings(
 }
 
 export function consolidateExpandedOfferings(
-  offerings: Array<Offering>;
+  offerings: Array<Offering>,
 ): Array<string> {
   return List(offerings)
     .groupBy(({ start, end }) => `${start} ${end}`)

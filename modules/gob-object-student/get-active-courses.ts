@@ -4,8 +4,8 @@ import type { Course as CourseType } from "@gob/types"
 import type { CourseLookupFunc } from "./types"
 
 export async function getActiveCourses(
-  student: Student;
-  getCourse: CourseLookupFunc;
+  student: Student,
+  getCourse: CourseLookupFunc,
 ): Promise<Array<CourseType>> {
   let activeSchedules = student.schedules.filter((s) => s.active)
 

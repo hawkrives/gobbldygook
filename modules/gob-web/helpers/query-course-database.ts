@@ -6,12 +6,12 @@ import fromPairs from "lodash/fromPairs"
 import { type Course } from "@gob/types"
 
 export function queryCourseDatabase(
-  queryString: string;
-  baseQuery: Object = {};
+  queryString: string,
+  baseQuery: Object = {},
 ): Array<Course> {
   let queryObject = buildQueryFromString(queryString, {
-    words: true;
-    profWords: true;
+    words: true,
+    profWords: true,
   })
 
   // make sure that all values are wrapped in arrays

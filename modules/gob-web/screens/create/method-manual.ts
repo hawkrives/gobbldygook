@@ -25,32 +25,32 @@ type Props = {
 }
 
 type State = {
-  error: string;
-  name: string;
-  matriculation: number;
-  matriculationIsValid: boolean;
-  graduation: number;
-  graduationIsValid: boolean;
-  degrees: Array<Selection>;
-  majors: Array<Selection>;
-  concentrations: Array<Selection>;
-  emphases: Array<Selection>;
-  submitted: boolean;
+  error: string,
+  name: string,
+  matriculation: number,
+  matriculationIsValid: boolean,
+  graduation: number,
+  graduationIsValid: boolean,
+  degrees: Array<Selection>,
+  majors: Array<Selection>,
+  concentrations: Array<Selection>,
+  emphases: Array<Selection>,
+  submitted: boolean,
 }
 
 class ManualCreationScreen extends React.Component<Props, State> {
   state = {
-    error: "";
-    name: "Black Widow";
+    error: "",
+    name: "Black Widow",
     matriculation: now.getFullYear() - 3;
-    matriculationIsValid: true;
+    matriculationIsValid: true,
     graduation: now.getFullYear() + 1;
-    graduationIsValid: true;
-    degrees: [];
-    majors: [];
-    concentrations: [];
-    emphases: [];
-    submitted: false;
+    graduationIsValid: true,
+    degrees: [],
+    majors: [],
+    concentrations: [],
+    emphases: [],
+    submitted: false,
   }
 
   handleAreaChange = (type) => (values) => {
@@ -110,9 +110,9 @@ class ManualCreationScreen extends React.Component<Props, State> {
     }))
 
     let rawStudent = {
-      name: this.state.name;
-      matriculation: this.state.matriculation;
-      graduation: this.state.graduation;
+      name: this.state.name,
+      matriculation: this.state.matriculation,
+      graduation: this.state.graduation,
       studies;
     }
 
@@ -159,7 +159,7 @@ class ManualCreationScreen extends React.Component<Props, State> {
             value={this.state.matriculation}
             type="number"
             className={cx({
-              invalid: !this.state.matriculationIsValid;
+              invalid: !this.state.matriculationIsValid,
             })}
           />
 

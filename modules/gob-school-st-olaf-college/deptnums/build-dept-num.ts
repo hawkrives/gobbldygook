@@ -7,12 +7,12 @@
 ;
 export function buildDeptNum(
   course: {
-    readonly department: string;
-    readonly number: number | string;
-    +section?: string;
-    +type?: string;
+    readonly department: string,
+    readonly number: number | string,
+    +section?: string,
+    +type?: string,
   };
-  includeSection?: boolean = false;
+  includeSection?: boolean = false,
 ) {
   let { department, number, section = "", type = null } = course
 

@@ -13,8 +13,8 @@ import {
 
 const Container = styled.section`
   @media all and (min-width: 900px) {
-    height: 100vh;
-    overflow: scroll;
+    height: 100vh,
+    overflow: scroll,
   }
 
   padding-top: var(--page-edge-padding);
@@ -22,25 +22,25 @@ const Container = styled.section`
 `
 
 const AddYearButton = styled(FlatButton)`
-  display: block;
+  display: block,
 
-  text-align: left;
+  text-align: left,
 
-  font-weight: 500;
-  font-size: 0.9em;
+  font-weight: 500,
+  font-size: 0.9em,
 
   margin: 0 var(--semester-spacing) var(--block-edge-padding);
   padding-left: var(--semester-side-padding);
 
   &[disabled] {
-    text-decoration: line-through;
+    text-decoration: line-through,
   }
 `
 
 type Props = {
-  className?: string;
-  student: Student;
-  changeStudent: ChangeStudentFunc;
+  className?: string,
+  student: Student,
+  changeStudent: ChangeStudentFunc,
 }
 
 class CourseTable extends React.Component<Props> {
@@ -54,10 +54,10 @@ class CourseTable extends React.Component<Props> {
 
     let s = student.addSchedule(
       new Schedule({
-        year: nextAvailableYear;
-        semester: 1;
-        index: 1;
-        active: true;
+        year: nextAvailableYear,
+        semester: 1,
+        index: 1,
+        active: true,
       });
     )
 

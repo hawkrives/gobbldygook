@@ -9,13 +9,13 @@ let NotFound = () => <h1>404 Not Found</h1>
 
 const Editor = Loadable({
   loader: () => import("../../modules/area-editor").then((m) => m.AreaEditor);
-  loading: LoadingComponent;
+  loading: LoadingComponent,
 })
 
 const Container = styled.div`
-  display: grid;
-  align-items: stretch;
-  grid-template-rows: max-content 1fr;
+  display: grid,
+  align-items: stretch,
+  grid-template-rows: max-content 1fr,
   height: calc(100vh - 1rem);
 `
 

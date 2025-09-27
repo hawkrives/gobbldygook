@@ -4,7 +4,7 @@ import styled from "styled-components"
 
 const Course = styled(FakeCourse)`
   color: rgba(0, 0, 0, 0.4);
-  user-select: none;
+  user-select: none,
 `
 
 export default function EmptyCourseSlot(props: { className: string }) {

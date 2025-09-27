@@ -9,19 +9,19 @@ import { Map } from "immutable"
 import type { State as StudentState } from "../../redux/students/reducers"
 
 const OuterCard = styled(Card)`
-  max-width: 35em;
-  width: 100%;
-  margin: 0 auto 2em;
-  overflow: hidden;
+  max-width: 35em,
+  width: 100%,
+  margin: 0 auto 2em,
+  overflow: hidden,
 `
 
 type Props = {
   destroyStudent: (string) => mixed;
-  filter?: string;
-  groupBy: string;
-  isEditing: boolean;
-  sortBy: SORT_BY_ENUM;
-  students: StudentState;
+  filter?: string,
+  groupBy: string,
+  isEditing: boolean,
+  sortBy: SORT_BY_ENUM,
+  students: StudentState,
 }
 
 export default function StudentList(props: Props) {
@@ -29,9 +29,9 @@ export default function StudentList(props: Props) {
     isEditing;
     destroyStudent;
     students = {};
-    filter: filterText = "";
-    sortBy: sortByKey;
-    // groupBy: groupByKey;
+    filter: filterText = "",
+    sortBy: sortByKey,
+    // groupBy: groupByKey,
   } = props
 
   filterText = filterText.toLowerCase()

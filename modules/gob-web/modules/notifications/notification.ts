@@ -7,43 +7,43 @@ import { type Notification as NotificationType } from "./types"
 
 type Props = {
   onClose: () => any;
-  notification: NotificationType;
+  notification: NotificationType,
 }
 
 let ProgressContainer = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
+  display: flex,
+  flex-flow: row nowrap,
+  align-items: center,
 `
 
 let ProgressBar = styled(BasicProgressBar)`
-  flex: 1;
-  height: 10px;
-  overflow: hidden;
+  flex: 1,
+  height: 10px,
+  overflow: hidden,
   border: solid 1px var(--gray-300);
-  background-color: transparent;
+  background-color: transparent,
   color: var(--gray-300);
 `
 
 let Percentage = styled.output`
   color: var(--gray-300);
-  margin-left: 0.5em;
-  font-variant-numeric: lining-nums tabular-nums;
+  margin-left: 0.5em,
+  font-variant-numeric: lining-nums tabular-nums,
 `
 
 let Message = styled.h1`
-  font-weight: 500;
-  font-size: 1em;
-  margin: 0;
+  font-weight: 500,
+  font-size: 1em,
+  margin: 0,
 `
 
 let Content = styled.div`
-  flex: 1;
+  flex: 1,
 `
 
 let CloseButton = styled(FlatButton)`
-  margin-left: 0.9em;
-  padding: 2px 6px 1px;
+  margin-left: 0.9em,
+  padding: 2px 6px 1px,
 
   &:hover {
     background-color: var(--white);
@@ -52,28 +52,28 @@ let CloseButton = styled(FlatButton)`
 `
 
 const Capsule = styled.li`
-  position: relative;
+  position: relative,
 
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
+  display: flex,
+  flex-flow: row nowrap,
+  align-items: center,
 
   background: var(--black);
   color: var(--gray-300);
 
-  font-size: 0.9em;
+  font-size: 0.9em,
 
-  min-height: 46px;
-  min-width: 288px;
-  max-width: 350px;
+  min-height: 46px,
+  min-width: 288px,
+  max-width: 350px,
 
-  padding: 0.9em;
+  padding: 0.9em,
 
   box-shadow: 0 2px 6px var(--gray-700);
-  border-radius: 2px;
+  border-radius: 2px,
 
   & + & {
-    margin-top: 1em;
+    margin-top: 1em,
   }
 `
 

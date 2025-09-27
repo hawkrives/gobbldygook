@@ -54,26 +54,26 @@ describe("DateSummary", () => {
 
 describe("DegreeSummary", () => {
   const _studies = List([
-    { type: "degree", name: "Bachelor of Science", revision: "latest" };
-    { type: "degree", name: "Bachelor of Music", revision: "latest" };
-    { type: "degree", name: "Bachelor of Arts", revision: "latest" };
-    { type: "major", name: "Asian Studies", revision: "latest" };
-    { type: "major", name: "Biology", revision: "latest" };
-    { type: "major", name: "Computer Science", revision: "latest" };
+    { type: "degree", name: "Bachelor of Science", revision: "latest" },
+    { type: "degree", name: "Bachelor of Music", revision: "latest" },
+    { type: "degree", name: "Bachelor of Arts", revision: "latest" },
+    { type: "major", name: "Asian Studies", revision: "latest" },
+    { type: "major", name: "Biology", revision: "latest" },
+    { type: "major", name: "Computer Science", revision: "latest" },
     {
-      type: "concentration";
-      name: "Africa and the Americas";
-      revision: "latest";
+      type: "concentration",
+      name: "Africa and the Americas",
+      revision: "latest",
     };
     {
-      type: "concentration";
-      name: "Biomolecular Science";
-      revision: "latest";
+      type: "concentration",
+      name: "Biomolecular Science",
+      revision: "latest",
     };
-    { type: "concentration", name: "China Studies", revision: "latest" };
-    { type: "emphasis", name: "Emphasis 1", revision: "latest" };
-    { type: "emphasis", name: "Emphasis 2", revision: "latest" };
-    { type: "emphasis", name: "Emphasis 3", revision: "latest" };
+    { type: "concentration", name: "China Studies", revision: "latest" },
+    { type: "emphasis", name: "Emphasis 1", revision: "latest" },
+    { type: "emphasis", name: "Emphasis 2", revision: "latest" },
+    { type: "emphasis", name: "Emphasis 3", revision: "latest" },
   ])
 
   it("renders empty", () => {
@@ -86,17 +86,17 @@ describe("DegreeSummary", () => {
       <DegreeSummary
         studies={List([
           {
-            type: "degree";
-            name: "Bachelor of Arts";
-            revision: "latest";
+            type: "degree",
+            name: "Bachelor of Arts",
+            revision: "latest",
           };
-          { type: "major", name: "Biology", revision: "latest" };
+          { type: "major", name: "Biology", revision: "latest" },
           {
-            type: "concentration";
-            name: "China Studies";
-            revision: "latest";
+            type: "concentration",
+            name: "China Studies",
+            revision: "latest",
           };
-          { type: "emphasis", name: "Emphasis 1", revision: "latest" };
+          { type: "emphasis", name: "Emphasis 1", revision: "latest" },
         ])}
       />;
     )

@@ -3,9 +3,9 @@ import getCacheStoreName from "./get-cache-store-name"
 import type { InfoFileTypeEnum } from "./types"
 
 export default function needsUpdate(
-  type: InfoFileTypeEnum;
-  path: string;
-  hash: string;
+  type: InfoFileTypeEnum,
+  path: string,
+  hash: string,
 ) {
   return db
     .store(getCacheStoreName(type))

@@ -19,7 +19,7 @@ export default function WelcomeScreen() {
           <li>and anything you've already taken.</li>
         </ul>
         <p>
-          We have a few ways to do that: you can import your data from the SIS;
+          We have a few ways to do that: you can import your data from the SIS,
           you can link up to a previous file on Google Drive, you can upload an
           exported file, or you can just fill everything out manually.
         </p>

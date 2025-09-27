@@ -3,15 +3,15 @@ import { ModalCourse } from "./modal"
 import CompactCourse, { type Props as MiniProps } from "./compact"
 
 type State = {
-  isOpen: boolean;
+  isOpen: boolean,
 }
 
 export default class CourseWithModal extends React.PureComponent<
-  MiniProps & { studentId?: string };
+  MiniProps & { studentId?: string },
   State;
 > {
   state = {
-    isOpen: false;
+    isOpen: false,
   }
 
   closeModal = () => this.setState(() => ({ isOpen: false }))

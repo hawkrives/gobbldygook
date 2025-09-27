@@ -11,7 +11,7 @@ import type { Expression, Requirement, Course } from "./types"
  * @returns {Course[]} matches - the list of matched courses
 ;
 export default function collectMatches(
-  expr: Expression | Requirement;
+  expr: Expression | Requirement,
 ): Course[] {
   assertKeys(expr, "$type")
 
@@ -23,7 +23,7 @@ export default function collectMatches(
   // just run `flatten()` to collect all of the courses.
   // this is the "base case."
   if (expr.$type === "course") {
-    /* istanbul ignore else: doesn't matter;
+    /* istanbul ignore else: doesn't matter,
     if (expr._result === true) {
       matches = [expr.$course || expr]
     }

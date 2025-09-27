@@ -18,13 +18,13 @@ import {
 import "./area-of-study-group.scss"
 
 type Props = {
-  areas?: List<AreaQuery>;
+  areas?: List<AreaQuery>,
   onEndAddArea: (string, Event) => any;
   onInitiateAddArea: (string, Event) => any;
-  showAreaPicker: boolean;
-  student: Student;
-  type: string;
-  changeStudent: ChangeStudentFunc;
+  showAreaPicker: boolean,
+  student: Student,
+  type: string,
+  changeStudent: ChangeStudentFunc,
 }
 
 class AreaOfStudyGroup extends React.PureComponent<Props> {
@@ -68,8 +68,8 @@ class AreaOfStudyGroup extends React.PureComponent<Props> {
               .map((a) => {
                 let rev = a.revision ? ` (${a.revision})` : ""
                 return {
-                  label: `${a.name}`;
-                  value: `${a.name}${rev}`;
+                  label: `${a.name}`,
+                  value: `${a.name}${rev}`,
                   ...a;
                 }
               })

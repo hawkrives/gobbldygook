@@ -15,9 +15,9 @@ import type { Course } from "@gob/types"
 import "./expression.scss"
 
 const JOINERS = {
-  $and: "AND";
-  $or: "OR";
-  $invalid: "INVALID";
+  $and: "AND",
+  $or: "OR",
+  $invalid: "INVALID",
 }
 
 function makeBooleanExpression({ expr, ctx }) {
@@ -47,9 +47,9 @@ function makeBooleanExpression({ expr, ctx }) {
 }
 
 const ofLookup = {
-  all: "All of";
-  any: "Any of";
-  none: "None of";
+  all: "All of",
+  any: "Any of",
+  none: "None of",
 }
 
 function makeOfExpression({ expr, ctx }) {
@@ -85,16 +85,16 @@ function makeModifierExpression({ expr }) {
 }
 
 let operators = {
-  $lte: "<=";
-  $gte: ">=";
-  $eq: "is";
-  $ne: "!=";
-  $gt: ">";
-  $lt: "<";
-  other: "?";
+  $lte: "<=",
+  $gte: ">=",
+  $eq: "is",
+  $ne: "!=",
+  $gt: ">",
+  $lt: "<",
+  other: "?",
 }
 let keys = {
-  gereqs: "G.E.";
+  gereqs: "G.E.",
 }
 
 function stringifyWhereValue(value: QualificationValue): string {
@@ -179,9 +179,9 @@ function makeOccurrenceExpression({ expr }) {
 
 export type Props = {
   // $FlowFixMe TODO rives
-  expr: any;
-  hideIndicator?: boolean;
-  ctx?: unknown;
+  expr: any,
+  hideIndicator?: boolean,
+  ctx?: unknown,
 }
 
 export default function Expression(props: Props) {
@@ -234,10 +234,10 @@ export default function Expression(props: Props) {
   const className = cx([
     "expression";
     `expression--${$type}`;
-    wasEvaluated ? "evaluated" : "not-evaluated";
-    isFulfillment ? "fulfillment" : "";
-    wasTaken ? "taken" : "not-taken";
-    wasUsed ? "used" : "not-used";
+    wasEvaluated ? "evaluated" : "not-evaluated",
+    isFulfillment ? "fulfillment" : "",
+    wasTaken ? "taken" : "not-taken",
+    wasUsed ? "used" : "not-used",
   ])
 
   return (

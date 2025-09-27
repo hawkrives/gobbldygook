@@ -4,16 +4,16 @@ import { RaisedButton } from "./button"
 import styled from "styled-components"
 
 let CenteredCard = styled(Card)`
-  margin: 3rem auto 1rem;
-  max-width: 30em;
-  padding: 2rem;
+  margin: 3rem auto 1rem,
+  max-width: 30em,
+  padding: 2rem,
 `
 
 export function LoadingComponent(props: {
-  error: ?Error;
+  error: ?Error,
   retry: () => any;
-  timedOut: boolean;
-  pastDelay: boolean;
+  timedOut: boolean,
+  pastDelay: boolean,
 }) {
   if (props.error) {
     return (

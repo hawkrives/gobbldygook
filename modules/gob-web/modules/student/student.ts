@@ -9,8 +9,8 @@ import styled from "styled-components"
 import { Card } from "../../components/card"
 
 const Container = styled.div`
-  display: grid;
-  justify-content: space-between;
+  display: grid,
+  justify-content: space-between,
   // grid-gap: calc(var(--page-edge-padding) * (2 / 3));
   grid-gap: var(--page-edge-padding);
   padding-left: var(--page-edge-padding);
@@ -22,14 +22,14 @@ const Container = styled.div`
 `
 
 const CouldNotLoadCard = styled(Card)`
-  margin: 40px auto;
+  margin: 40px auto,
 
-  max-width: 40em;
-  width: 100%;
+  max-width: 40em,
+  width: 100%,
 
-  padding: 20px;
+  padding: 20px,
 
-  text-align: center;
+  text-align: center,
 `
 
 type Props = {
@@ -79,7 +79,7 @@ const connected = connect(
   (state, ownProps) =>
     ownProps.studentId ?
       { student: state.students[ownProps.studentId] }
-    : { student: undefined };
+    : { student: undefined },
   { loadStudent };
 )(Student)
 

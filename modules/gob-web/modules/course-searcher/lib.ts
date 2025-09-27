@@ -62,14 +62,14 @@ function SEMESTER(course: CourseType): string {
 }
 
 const GROUP_BY_TO_KEY = {
-  day: DAY_OF_WEEK;
-  department: DEPARTMENT;
-  gened: GEREQ;
-  semester: SEMESTER;
+  day: DAY_OF_WEEK,
+  department: DEPARTMENT,
+  gened: GEREQ,
+  semester: SEMESTER,
   term: (course) => [YEAR(course), SEMESTER(course)].join("");
-  time: TIME_OF_DAY;
-  year: YEAR;
-  none: null;
+  time: TIME_OF_DAY,
+  year: YEAR,
+  none: null,
 }
 
 const SORT_BY_TO_KEY: { [key: SORT_BY_KEY]: Array<(CourseType) => string> } = {
@@ -94,17 +94,17 @@ const GROUP_BY_TO_TITLE: { [key: GROUP_BY_KEY]: (string) => string } = {
 const REVERSE_ORDER: Set<GROUP_BY_KEY> = Set.of("year", "term", "semester")
 
 export function sortAndGroup(
-  results: List<CourseType>;
+  results: List<CourseType>,
   args: {
-    sorting: SORT_BY_KEY;
-    grouping: GROUP_BY_KEY;
-    filtering: string;
-    limiting: string;
+    sorting: SORT_BY_KEY,
+    grouping: GROUP_BY_KEY,
+    filtering: string,
+    limiting: string,
   };
 ): {
-  results: List<string | CourseType>;
-  keys: Array<string>;
-  years: Set<number>;
+  results: List<string | CourseType>,
+  keys: Array<string>,
+  years: Set<number>,
 } {
   let { sorting, grouping, filtering, limiting } = args
   console.time("query: grouping/sorting")

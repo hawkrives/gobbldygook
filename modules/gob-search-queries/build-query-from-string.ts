@@ -16,51 +16,51 @@ import departmentMapping from "sto-course-related-data/handmade/to_department_ab
 import gereqMapping from "sto-course-related-data/handmade/to_gereq_abbreviations.json"
 
 let semesters = {
-  fall: 1;
-  interim: 2;
-  "j-term": 2;
-  jterm: 2;
-  j: 2;
-  spring: 3;
-  "summer 1": 4;
-  summer1: 4;
-  early: 4;
-  "early summer": 4;
-  "summer session 1": 4;
-  "summer session 2": 5;
-  late: 5;
-  "late summer": 5;
-  summer2: 5;
-  "summer 2": 5;
+  fall: 1,
+  interim: 2,
+  "j-term": 2,
+  jterm: 2,
+  j: 2,
+  spring: 3,
+  "summer 1": 4,
+  summer1: 4,
+  early: 4,
+  "early summer": 4,
+  "summer session 1": 4,
+  "summer session 2": 5,
+  late: 5,
+  "late summer": 5,
+  summer2: 5,
+  "summer 2": 5,
   summers: ["$OR", 4, 5];
 }
 
 let keywordMappings = {
-  day: "times";
-  days: "times";
-  department: "department";
-  departments: "department";
-  dept: "department";
-  depts: "department";
-  ge: "gereqs";
-  gened: "gereqs";
-  geneds: "gereqs";
-  gereq: "gereqs";
-  ges: "gereqs";
-  inst: "instructors";
-  instructor: "instructors";
-  locations: "location";
-  num: "number";
-  place: "location";
-  places: "location";
-  prof: "instructors";
-  profs: "instructors";
-  professor: "instructors";
-  professors: "instructors";
-  sem: "semester";
-  teacher: "instructors";
-  teachers: "instructors";
-  time: "times";
+  day: "times",
+  days: "times",
+  department: "department",
+  departments: "department",
+  dept: "department",
+  depts: "department",
+  ge: "gereqs",
+  gened: "gereqs",
+  geneds: "gereqs",
+  gereq: "gereqs",
+  ges: "gereqs",
+  inst: "instructors",
+  instructor: "instructors",
+  locations: "location",
+  num: "number",
+  place: "location",
+  places: "location",
+  prof: "instructors",
+  profs: "instructors",
+  professor: "instructors",
+  professors: "instructors",
+  sem: "semester",
+  teacher: "instructors",
+  teachers: "instructors",
+  time: "times",
 }
 
 let gereqs = new Set([
@@ -155,8 +155,8 @@ function organizeValues([key, values], words = false, profWords = false) {
 }
 
 export function buildQueryFromString(
-  queryString: string = "";
-  opts: { words?: boolean, profWords?: boolean } = {};
+  queryString: string = "",
+  opts: { words?: boolean, profWords?: boolean } = {},
 ) {
   queryString = queryString.trim()
   if (queryString.endsWith(":")) {

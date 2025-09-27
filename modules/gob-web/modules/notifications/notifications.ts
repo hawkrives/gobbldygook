@@ -7,18 +7,18 @@ import type { Notification as Notif } from "./types"
 import Notification from "./notification"
 
 const NotificationList = styled.ul`
-  position: fixed;
-  bottom: 15px;
-  left: 15px;
+  position: fixed,
+  bottom: 15px,
+  left: 15px,
 
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  z-index: 10;
+  padding: 0,
+  margin: 0,
+  list-style: none,
+  z-index: 10,
 `
 
 type Props = {
-  notifications: { [key: string]: Notif };
+  notifications: { [key: string]: Notif },
   removeNotification: (id: string) => any;
 }
 

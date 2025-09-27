@@ -5,9 +5,9 @@ export type { CourseType }
 import { List } from "immutable"
 
 export type AreaQuery = {
-  type: string;
-  name: string;
-  revision: string;
+  type: string,
+  name: string,
+  revision: string,
 }
 
 export type OverrideType = mixed
@@ -15,7 +15,7 @@ export type OverrideType = mixed
 export type FulfillmentType = {}
 
 export type CourseLookupFunc = (
-  clbid: string;
-  term?: ?number;
+  clbid: string,
+  term?: ?number,
   fabrications?: ?(Array<CourseType> | List<CourseType>);
 ) => Promise<Result<CourseType>>

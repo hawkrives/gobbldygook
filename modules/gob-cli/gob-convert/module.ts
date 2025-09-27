@@ -14,7 +14,7 @@ global.VERSION = version
 
 function args() {
   return meow(usage, {
-    booleanDefault: false;
+    booleanDefault: false,
   })
 }
 

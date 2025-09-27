@@ -15,10 +15,10 @@ const fetchText = (...args): Promise<string> => {
 }
 
 export default function updateDatabase(
-  type: InfoFileTypeEnum;
-  infoFileBase: string;
-  notification: Notification;
-  { path, hash }: InfoFileRef;
+  type: InfoFileTypeEnum,
+  infoFileBase: string,
+  notification: Notification,
+  { path, hash }: InfoFileRef,
 ) {
   console.log(`fetching ${path}`)
 

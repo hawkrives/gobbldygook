@@ -18,13 +18,13 @@ import type {
 // The overall computation is done by compute, which is in charge of computing
 // sub-requirements and such.
 export default function compute(
-  outerReq: Requirement | ParsedHansonFile | ParsedHansonRequirement;
+  outerReq: Requirement | ParsedHansonFile | ParsedHansonRequirement,
   args: {
-    path: string[];
-    courses: Course[];
-    overrides: OverridesObject;
-    fulfillments: FulfillmentsObject;
-    dirty?: Set<string>;
+    path: string[],
+    courses: Course[],
+    overrides: OverridesObject,
+    fulfillments: FulfillmentsObject,
+    dirty?: Set<string>,
   };
 ) {
   let {
@@ -40,7 +40,7 @@ export default function compute(
     outerReq;
     (req: Requirement, name: string) => {
       if (isRequirementName(name)) {
-        // Primarily for the math major: if a requirement is set to 'children share courses';
+        // Primarily for the math major: if a requirement is set to 'children share courses',
         // then they share courses. The default is false (well, undefined).
         // If they don't share courses, then they share the dirty set;
         // if they do, however, they each receive their own dirty set, so that they don't know if a course has been used yet or not.
@@ -53,7 +53,7 @@ export default function compute(
           path: path.concat([name]);
           courses;
           overrides;
-          dirty: localDirty;
+          dirty: localDirty,
           fulfillments;
         })
       }
@@ -87,8 +87,8 @@ export default function compute(
     }
 
     computed = computeChunk({
-      expr: requirement.result;
-      ctx: requirement;
+      expr: requirement.result,
+      ctx: requirement,
       courses;
       dirty;
       fulfillment;

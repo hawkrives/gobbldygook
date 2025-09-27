@@ -2,9 +2,9 @@ import React from "react"
 import FakeCourse from "./fake-course"
 
 type Props = {
-  +className?: string;
-  readonly clbid: string;
-  readonly error: Error;
+  +className?: string,
+  readonly clbid: string,
+  readonly error: Error,
 }
 
 export default function MissingCourse(props: Props) {

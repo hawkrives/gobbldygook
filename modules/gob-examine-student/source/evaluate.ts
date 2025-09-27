@@ -9,12 +9,12 @@ import type {
 } from "./types"
 
 type Input = {
-  area: ParsedHansonFile;
-  courses: Array<Course>;
+  area: ParsedHansonFile,
+  courses: Array<Course>,
 
-  courses: Course[];
-  overrides: OverridesObject;
-  fulfillments: FulfillmentsObject;
+  courses: Course[],
+  overrides: OverridesObject,
+  fulfillments: FulfillmentsObject,
 }
 
 export function evaluate({
@@ -35,12 +35,12 @@ export function evaluate({
 
   if (!result) {
     return {
-      $type: "requirement";
-      error: "`details` missing in result!";
-      computed: false;
-      _result: false;
-      _checked: false;
-      progress: { at: 0, of: 1 };
+      $type: "requirement",
+      error: "`details` missing in result!",
+      computed: false,
+      _result: false,
+      _checked: false,
+      progress: { at: 0, of: 1 },
     }
   }
 
@@ -70,8 +70,8 @@ export function evaluate({
   return {
     ...result;
     progress: {
-      at: currentProgress;
-      of: maxProgress;
+      at: currentProgress,
+      of: maxProgress,
     };
   }
 }

@@ -19,33 +19,33 @@ import {
 
 const ContainerModal = styled(Modal)`
   ${theme.baseCard};
-  display: flex;
-  flex-flow: column;
-  max-width: 45em;
+  display: flex,
+  flex-flow: column,
+  max-width: 45em,
 
   p;
   ul;
   ol {
-    margin: 0;
+    margin: 0,
   }
 `
 
 const BottomToolbar = styled.div`
-  padding: 10px 20px;
+  padding: 10px 20px,
   border-top: 1px solid rgba(160, 160, 160, 0.2);
-  margin-top: 0.5em;
-  padding-top: 0.5em;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  align-items: center;
+  margin-top: 0.5em,
+  padding-top: 0.5em,
+  display: flex,
+  flex-flow: row nowrap,
+  justify-content: space-between,
+  align-items: center,
 `
 
 const RemoveCourseButton = styled(FlatButton)`
   color: var(--red-500);
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  font-size: 0.85em;
+  padding-left: 0.5em,
+  padding-right: 0.5em,
+  font-size: 0.85em,
   &:hover {
     background-color: var(--red-50);
     border-color: var(--red-500);
@@ -53,15 +53,15 @@ const RemoveCourseButton = styled(FlatButton)`
 `
 
 const Course = styled(ExpandedCourse)`
-  padding: 0 20px;
+  padding: 0 20px,
 `
 
 type Props = {
-  course: CourseType;
-  conflicts: ?List<WarningType>;
+  course: CourseType,
+  conflicts: ?List<WarningType>,
   onClose: () => any;
-  scheduleId?: string;
-  studentId?: string;
+  scheduleId?: string,
+  studentId?: string,
   student: ?Student, // redux
   changeStudent: ChangeStudentFunc, // redux
 }
@@ -111,7 +111,7 @@ const connected = connect(
   (state, ownProps) =>
     ownProps.studentId && ownProps.studentId in state.students ?
       { student: state.students[ownProps.studentId].present }
-    : { student: undefined };
+    : { student: undefined },
   { changeStudent };
 )(ModalCourse)
 

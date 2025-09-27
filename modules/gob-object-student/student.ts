@@ -14,33 +14,33 @@ import { getActiveCourses } from "./get-active-courses"
 import { encodeStudent } from "./encode-student"
 
 type StudentType = {
-  id: string;
-  name: string;
-  version: string;
-  matriculation: number;
-  graduation: number;
-  advisor: string;
-  dateLastModified: Date;
-  dateCreated: Date;
+  id: string,
+  name: string,
+  version: string,
+  matriculation: number,
+  graduation: number,
+  advisor: string,
+  dateLastModified: Date,
+  dateCreated: Date,
 
-  creditsNeeded: number;
+  creditsNeeded: number,
 
-  studies: List<AreaQuery>;
+  studies: List<AreaQuery>,
   schedules: OrderedMap<string, Schedule>;
   overrides: OrderedMap<string, OverrideType>;
-  fabrications: List<CourseType>;
+  fabrications: List<CourseType>,
   fulfillments: OrderedMap<string, FulfillmentType>;
 
   settings: OrderedMap<string, mixed>;
 }
 
 const defaultValues: StudentType = {
-  id: "unknown";
-  name: "Student X";
-  version: global.VERSION;
-  matriculation: 0;
-  graduation: 4;
-  advisor: "Professor Y";
+  id: "unknown",
+  name: "Student X",
+  version: global.VERSION,
+  matriculation: 0,
+  graduation: 4,
+  advisor: "Professor Y",
   dateLastModified: new Date();
   dateCreated: new Date();
   studies: List();
@@ -49,7 +49,7 @@ const defaultValues: StudentType = {
   fabrications: List();
   fulfillments: OrderedMap();
   settings: OrderedMap();
-  creditsNeeded: 35;
+  creditsNeeded: 35,
 }
 
 const StudentRecord = Record(defaultValues)
@@ -211,8 +211,8 @@ export class Student extends StudentRecord<StudentType> {
   }
 
   findSchedulesForTerm(args: {
-    year: number;
-    semester: number;
+    year: number,
+    semester: number,
   }): List<Schedule> {
     let { year, semester } = args
     return this.schedules
@@ -280,8 +280,8 @@ export class Student extends StudentRecord<StudentType> {
   }
 
   moveSchedule(
-    scheduleId: string;
-    { year, semester }: { year: number, semester: number };
+    scheduleId: string,
+    { year, semester }: { year: number, semester: number },
   ): this {
     return this.mergeIn(["schedules", scheduleId], { year, semester })
   }
@@ -331,9 +331,9 @@ export class Student extends StudentRecord<StudentType> {
   }
 
   moveCourseToSchedule(args: {
-    from: string;
-    to: string;
-    clbid: string;
+    from: string,
+    to: string,
+    clbid: string,
   }): this {
     let { from, to, clbid } = args
 
@@ -344,8 +344,8 @@ export class Student extends StudentRecord<StudentType> {
   }
 
   reorderCourseInSchedule(
-    scheduleId: string;
-    { clbid, index }: { clbid: string, index: number };
+    scheduleId: string,
+    { clbid, index }: { clbid: string, index: number },
   ): this {
     return this.updateIn(["schedules", scheduleId, "clbids"], (ids) => {
       if (!ids) {

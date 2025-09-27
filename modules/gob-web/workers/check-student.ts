@@ -15,8 +15,8 @@ worker.addEventListener("error", function (event: Event) {
 
 // Checks a student object against an area of study.
 async function checkStudentAgainstArea(
-  student: Student;
-  area: ParsedHansonFile;
+  student: Student,
+  area: ParsedHansonFile,
 ): Promise<EvaluationResult> {
   return new Promise((resolve) => {
     const sourceId = uniqueId()
@@ -28,10 +28,10 @@ async function checkStudentAgainstArea(
           resolve(data)
         } else if (type === "error") {
           resolve({
-            $type: "requirement";
-            computed: false;
-            error: data.message;
-            progress: { at: 0, of: 1 };
+            $type: "requirement",
+            computed: false,
+            error: data.message,
+            progress: { at: 0, of: 1 },
           })
         }
       }
@@ -40,7 +40,7 @@ async function checkStudentAgainstArea(
     student.activeCourses(getCourse).then((courses) => {
       let { fulfillments, overrides, name } = student
       let msg = JSON.stringify({
-        id: sourceId;
+        id: sourceId,
         area;
         courses;
         fulfillments;
@@ -56,7 +56,7 @@ const memoized: typeof checkStudentAgainstArea = mem(checkStudentAgainstArea, {
   cache: new QuickLRU({ maxSize: 8 });
   cacheKey: (student: Student, area: ParsedHansonFile) =>
     JSON.stringify([student.id, area]);
-  maxAge: 60000;
+  maxAge: 60000,
 })
 
 export { memoized as checkStudentAgainstArea }

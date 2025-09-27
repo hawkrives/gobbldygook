@@ -9,22 +9,22 @@ import { type SORT_BY_ENUM } from "./types"
 type Props = {
   destroyStudent: (string) => mixed;
   loadStudents: () => mixed;
-  students: StudentState;
+  students: StudentState,
 }
 
 type State = {
-  filterText: string;
-  isEditing: boolean;
-  sortBy: SORT_BY_ENUM;
-  groupBy: "nothing";
+  filterText: string,
+  isEditing: boolean,
+  sortBy: SORT_BY_ENUM,
+  groupBy: "nothing",
 }
 
 class StudentPickerContainer extends React.Component<Props, State> {
   state = {
-    filterText: "";
-    isEditing: false;
-    sortBy: "dateLastModified";
-    groupBy: "nothing";
+    filterText: "",
+    isEditing: false,
+    sortBy: "dateLastModified",
+    groupBy: "nothing",
   }
 
   componentDidMount() {

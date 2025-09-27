@@ -11,7 +11,7 @@ import {
 export function removeNotification(id: string, delayBy: number = 0) {
   if (delayBy) {
     return {
-      type: REMOVE_NOTIFICATION;
+      type: REMOVE_NOTIFICATION,
       payload: delay(delayBy).then(() => ({ id }));
     }
   }
@@ -23,7 +23,7 @@ export function logMessage(id: string, message: string) {
 }
 
 export function logError(
-  { id, error }: { id: string, error: string };
+  { id, error }: { id: string, error: string },
   ...args: any[]
 ) {
   if (!global.TESTING) console.error(error, ...args)
@@ -33,16 +33,16 @@ export function logError(
 }
 
 export function startProgress(
-  id: string;
-  message: string = "";
+  id: string,
+  message: string = "",
   {
     value = 0;
     max = 1;
     showButton = false;
-  }: { value: number, max: number, showButton?: boolean } = {};
+  }: { value: number, max: number, showButton?: boolean } = {},
 ) {
   return {
-    type: START_PROGRESS;
+    type: START_PROGRESS,
     payload: { id, message, value, max, showButton };
   }
 }

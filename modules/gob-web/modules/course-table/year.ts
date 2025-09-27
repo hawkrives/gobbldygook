@@ -18,41 +18,41 @@ const Container = styled.div`
 
 const Header = styled.header`
   ${theme.noSelect};
-  margin: 0;
+  margin: 0,
 
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  align-items: center;
+  display: flex,
+  flex-flow: row nowrap,
+  justify-content: space-between,
+  align-items: center,
 
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: tabular-nums,
 
-  line-height: 1em;
-  font-weight: 500;
-  font-size: 0.9em;
+  line-height: 1em,
+  font-weight: 500,
+  font-size: 0.9em,
 `
 
 const TitleText = styled.h1`
   ${theme.headingNeutral};
-  white-space: nowrap;
-  flex: 1;
+  white-space: nowrap,
+  flex: 1,
 
   margin-left: calc(var(--semester-spacing) + var(--semester-side-padding));
 `
 
 const TitleButton = styled(FlatButton)`
-  transition: 0.15s;
+  transition: 0.15s,
 
-  min-height: 0;
-  padding: 0 0.5em;
+  min-height: 0,
+  padding: 0 0.5em,
 
-  text-transform: none;
-  font-weight: 400;
+  text-transform: none,
+  font-weight: 400,
 
   color: var(--gray-500);
 
   & + & {
-    margin-left: 0.1em;
+    margin-left: 0.1em,
   }
 `
 
@@ -65,10 +65,10 @@ const RemoveYearButton = styled(TitleButton)`
 `
 
 const SemesterList = styled.div`
-  flex: 1;
+  flex: 1,
 
-  display: flex;
-  flex-flow: row wrap;
+  display: flex,
+  flex-flow: row wrap,
 `
 
 const canAddSemester = (nextAvailableSemester?: number) => {
@@ -76,9 +76,9 @@ const canAddSemester = (nextAvailableSemester?: number) => {
 }
 
 type Props = {
-  student: Student;
-  year: number;
-  changeStudent: ChangeStudentFunc;
+  student: Student,
+  year: number,
+  changeStudent: ChangeStudentFunc,
 }
 
 class Year extends React.Component<Props> {
@@ -90,10 +90,10 @@ class Year extends React.Component<Props> {
 
     let s = this.props.student.addSchedule(
       new Schedule({
-        year: this.props.year;
-        semester: nextAvailableSemester;
-        index: 1;
-        active: true;
+        year: this.props.year,
+        semester: nextAvailableSemester,
+        index: 1,
+        active: true,
       });
     )
 

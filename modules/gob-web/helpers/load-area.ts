@@ -39,9 +39,9 @@ function loadAreaFromDatabase(areaQuery: AreaQuery) {
       if (!result || !result.length) {
         let q = JSON.stringify(dbQuery)
         return {
-          error: true;
+          error: true,
           message: `the area "${name}" (${type}) could not be found with the query ${q}`;
-          data: dbQuery;
+          data: dbQuery,
         }
       }
 
@@ -51,15 +51,15 @@ function loadAreaFromDatabase(areaQuery: AreaQuery) {
     .catch((err) => {
       let q = JSON.stringify(dbQuery)
       return {
-        error: true;
+        error: true,
         message: `Could not find area ${q} (error: ${err.message})`;
-        data: dbQuery;
+        data: dbQuery,
       }
     })
 }
 
 export function loadArea(
-  areaQuery: AreaQuery;
+  areaQuery: AreaQuery,
 ): Promise<ResultOrError<ParsedHansonFile>> {
   let { name, type, revision } = areaQuery
 
