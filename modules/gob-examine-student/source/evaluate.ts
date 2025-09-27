@@ -62,7 +62,7 @@ export function evaluate({
       break
   }
 
-  let finalReqs = bits.map((b) => ("_result" in b ? (b: any)._result : false))
+  let finalReqs = bits.map((b) => ("_result" in b ? (b as any)._result : false))
 
   let maxProgress = finalReqs.length
   let currentProgress = finalReqs.filter(Boolean).length

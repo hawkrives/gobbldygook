@@ -55,7 +55,7 @@ const defaultValues: StudentType = {
 const StudentRecord = Record(defaultValues)
 
 export class Student extends StudentRecord<StudentType> {
-  constructor(data: { [key: keyof StudentType>]: unknown } = {}) {
+  constructor(data: { [key: keyof StudentType]: unknown } = {}) {
     const now = new Date()
 
     let {
@@ -81,33 +81,33 @@ export class Student extends StudentRecord<StudentType> {
     }
 
     if (Array.isArray(schedules)) {
-      schedules = OrderedMap(schedules.map((s: any) => [s.id, s]))
+      schedules = OrderedMap(schedules.map((s as any) => [s.id, s]))
     } else if (!OrderedMap.isOrderedMap(schedules)) {
-      schedules = OrderedMap((schedules: any))
+      schedules = OrderedMap((schedules as any))
     }
 
-    if ((schedules: any).some((s) => !(s instanceof Schedule))) {
-      schedules = (schedules: any).map((s) => new Schedule(s))
+    if ((schedules as any).some((s) => !(s instanceof Schedule))) {
+      schedules = (schedules as any).map((s) => new Schedule(s))
     }
 
     if (Array.isArray(fabrications)) {
-      fabrications = List((fabrications: any))
+      fabrications = List((fabrications as any))
     } else if (List.isList(fabrications)) {
-      fabrications = List((fabrications: any))
+      fabrications = List((fabrications as any))
     } else {
-      fabrications = Map((fabrications: any)).toList()
+      fabrications = Map((fabrications as any)).toList()
     }
 
     if (!OrderedMap.isOrderedMap(overrides)) {
-      overrides = OrderedMap((overrides: any))
+      overrides = OrderedMap((overrides as any))
     }
 
     if (!OrderedMap.isOrderedMap(settings)) {
-      settings = OrderedMap((settings: any))
+      settings = OrderedMap((settings as any))
     }
 
     if (!OrderedMap.isOrderedMap(fulfillments)) {
-      fulfillments = OrderedMap((fulfillments: any))
+      fulfillments = OrderedMap((fulfillments as any))
     }
 
     super(

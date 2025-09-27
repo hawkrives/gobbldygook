@@ -39,7 +39,7 @@ async function main({ data }) {
       break
     }
     default: {
-      ;(message.type: never)
+      ;(message as any).type
     }
   }
 

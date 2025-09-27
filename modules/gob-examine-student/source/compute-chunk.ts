@@ -130,7 +130,7 @@ export default function computeChunk({
   } else if (!expr.$type) {
     throw new TypeError("computeChunk(): expr.$type is undefined!")
   } else {
-    ;(expr.$type: never)
+    ;(expr as any).$type
     throw new TypeError(
       `computeChunk(): the type "${expr.$type}" is not a valid expression type.`,
     )
@@ -220,7 +220,7 @@ export function computeBoolean({
       // isNeeded is set to the negated `haveAnyBeenTrue`, because
       // that's how we check if we need to flag any further courses.
       let thisResult = computeChunk({
-        expr: (req: any),
+        expr: req as any,
         ctx,
         courses,
         dirty,
@@ -239,7 +239,7 @@ export function computeBoolean({
   } else if (expr.$booleanType === "and") {
     const results = expr.$and.map((req) =>
       computeChunk({
-        expr: (req: any),
+        expr: req as any,
         ctx,
         courses,
         dirty,
@@ -289,7 +289,7 @@ export function computeCourse({
 
   const keysNotFromQuery = xor(keys(expr.$course), keys(foundCourse))
   if (keysNotFromQuery.length) {
-    ;(expr.$course: any)._extraKeys = keysNotFromQuery
+    ;(expr as any).$course._extraKeys = keysNotFromQuery
   }
 
   expr._request = expr.$course
@@ -383,7 +383,7 @@ export function computeModifier({ expr, ctx, courses }: ModifierChunkArgs) {
   }
 
   filtered = filtered.map((course) =>
-    "$course" in course ? (course: any).$course : course,
+    "$course" in course ? (course as any).$course : course,
   )
 
   if (expr.$besides) {
@@ -483,7 +483,7 @@ export function computeOf({
     // computeChunk return a boolean.
     // Number() converts that to a 0 or a 1, which then is added to `count`.
     let thisResult = computeChunk({
-      expr: (req: any),
+      expr: req as any,
       ctx,
       courses,
       dirty,

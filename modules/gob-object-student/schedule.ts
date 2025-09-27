@@ -44,11 +44,11 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
     } = data
 
     if (!List.isList(clbids)) {
-      clbids = List((clbids: any))
+      clbids = List((clbids as any))
     }
 
-    if ((clbids: any).some((id) => typeof id === "number")) {
-      clbids = (clbids: any).map((id) => String(id).padStart(10, "0"))
+    if ((clbids as any).some((id) => typeof id === "number")) {
+      clbids = (clbids as any).map((id) => String(id).padStart(10, "0"))
     }
 
     super({
@@ -58,7 +58,7 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
       active,
       title,
       id,
-      clbids: (clbids: any),
+      clbids: (clbids as any),
     })
   }
 

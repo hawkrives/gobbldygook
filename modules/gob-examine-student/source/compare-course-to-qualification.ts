@@ -98,7 +98,7 @@ function compareCourseToQualificationViaOperator(
   { $key, $operator, $value }: Qualification,
 ) {
   // get the actual course out of the object
-  course = (course: any).$course || course
+  course = (course as any).$course || course
 
   // it's a static value; a number or string
   if ($operator === "$eq") {

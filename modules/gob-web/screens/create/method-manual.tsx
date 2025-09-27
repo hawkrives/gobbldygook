@@ -116,7 +116,7 @@ class ManualCreationScreen extends React.Component<Props, State> {
       studies,
     }
 
-    let student = new Student((rawStudent: any))
+    let student = new Student(rawStudent as any)
 
     this.props.initStudent(student)
     if (!this.props.navigate) {
