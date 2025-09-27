@@ -7,9 +7,9 @@ import rootReducer from "./reducer"
 
 // prettier-ignore
 let middleware = [
-	promiseMiddleware;
-	thunkMiddleware;
-	saveStudentsMiddleware;
+	promiseMiddleware,
+	thunkMiddleware,
+	saveStudentsMiddleware,
 ]
 
 if (!global.TESTING) {
@@ -17,8 +17,8 @@ if (!global.TESTING) {
 }
 
 const finalCreateStore = compose(
-  applyMiddleware(...middleware);
-  window && window.devToolsExtension ? window.devToolsExtension() : (f) => f;
+  applyMiddleware(...middleware),
+  window && window.devToolsExtension ? window.devToolsExtension() : (f) => f,
 )(createStore)
 
 export default function configureStore(initialState: {} = {}) {

@@ -9,20 +9,20 @@ import assertKeys from "./assert-keys"
 import compareCourseToQualification from "./compare-course-to-qualification"
 import simplifyCourse from "./simplify-course"
 import type {
-  Course;
-  Qualifier;
-  Qualification;
-  Counter;
-  QualificationFunctionValue;
+  Course,
+  Qualifier,
+  Qualification,
+  Counter,
+  QualificationFunctionValue,
 } from "./types"
 
 export default function filterByWhereClause(
   baseList: Course[],
   clause: Qualifier,
   {
-    distinct;
-    fullList;
-    counter;
+    distinct,
+    fullList,
+    counter,
   }: { distinct: boolean, fullList?: Course[], counter?: Counter } = {},
 ) {
   // When filtering by an and-clause, we need access to both the
@@ -38,9 +38,9 @@ export default function filterByWhereClause(
   // This function always reduces down to a call to filterByQualification
   if (clause.$type === "qualification") {
     return filterByQualification(baseList, clause, {
-      distinct;
-      fullList;
-      counter;
+      distinct,
+      fullList,
+      counter,
     })
   } else if (clause.$type === "boolean") {
     // either an and- or or-clause.
@@ -51,9 +51,9 @@ export default function filterByWhereClause(
       let filtered = baseList
       forEach(clause.$and, (q) => {
         filtered = filterByWhereClause(filtered, q, {
-          distinct;
-          fullList;
-          counter;
+          distinct,
+          fullList,
+          counter,
         })
       })
       return filtered
@@ -63,7 +63,7 @@ export default function filterByWhereClause(
       let filtrations = []
       forEach(clause.$or, (q) => {
         filtrations = filtrations.concat(
-          filterByWhereClause(baseList, q, { distinct, counter });
+          filterByWhereClause(baseList, q, { distinct, counter }),
         )
       })
 
@@ -74,8 +74,8 @@ export default function filterByWhereClause(
       // only 'and' and 'or' are currently supported.
       throw new TypeError(
         `filterByWhereClause: neither $or nor $and were present in ${JSON.stringify(
-          clause;
-        )}`;
+          clause,
+        )}`,
       )
     }
   } else {
@@ -95,9 +95,9 @@ export function filterByQualification(
   list: Course[],
   qualification: Qualification,
   {
-    distinct = false;
-    fullList;
-    counter;
+    distinct = false,
+    fullList,
+    counter,
   }: { distinct: boolean, fullList?: Course[], counter?: Counter } = {},
 ) {
   assertKeys(qualification, "$key", "$operator", "$value")
@@ -108,8 +108,8 @@ export function filterByQualification(
       if (!("$or" in value) && !("$and" in value)) {
         throw new TypeError(
           `filterByQualification: neither $or nor $and were present in ${JSON.stringify(
-            value;
-          )}`;
+            value,
+          )}`,
         )
       }
     } else if (value.$type === "function") {
@@ -122,7 +122,7 @@ export function filterByQualification(
   }
 
   let filtered = filter(list, (course) =>
-    compareCourseToQualification(course, qualification);
+    compareCourseToQualification(course, qualification),
   )
 
   // If we have a limit on the number of courses, then only return the
@@ -142,9 +142,9 @@ export function filterByQualification(
 }
 
 function applyQualifictionFunction({
-  value;
-  fullList;
-  list;
+  value,
+  fullList,
+  list,
 }: {
   value: QualificationFunctionValue,
   fullList?: Course[],
@@ -159,8 +159,8 @@ function applyQualifictionFunction({
   }
 
   const completeList = fullList || list
-  // we're not passing distinct or counter back to filterByWhereClause here;
-  // because this call is not affected by how the results need to be qualified;
+  // we're not passing distinct or counter back to filterByWhereClause here,
+  // because this call is not affected by how the results need to be qualified,
   // since it's finding the matches to get a value from.
   const filtered = filterByWhereClause(completeList, value.$where)
   const items = map(filtered, (c) => c[value.$prop])

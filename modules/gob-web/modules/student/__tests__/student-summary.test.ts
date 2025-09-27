@@ -2,11 +2,11 @@ import "jest-styled-components"
 import React from "react"
 import { render, screen } from "@testing-library/react"
 import {
-  CreditSummary;
-  DateSummary;
-  DegreeSummary;
-  Footer;
-  Header;
+  CreditSummary,
+  DateSummary,
+  DegreeSummary,
+  Footer,
+  Header,
 } from "../student-summary"
 import { List } from "immutable"
 
@@ -15,8 +15,8 @@ describe("CreditSummary", () => {
     render(<CreditSummary currentCredits={5} neededCredits={10} />)
     expect(
       screen.getByText(
-        /You have currently planned for 5 of your 10 required credits/;
-      );
+        /You have currently planned for 5 of your 10 required credits/,
+      ),
     ).not.toBeNull()
   })
 
@@ -29,8 +29,8 @@ describe("CreditSummary", () => {
     render(<CreditSummary currentCredits={10} neededCredits={10} />)
     expect(
       screen.getByText(
-        /You have currently planned for 10 of your 10 required credits/;
-      );
+        /You have currently planned for 10 of your 10 required credits/,
+      ),
     ).not.toBeNull()
   })
 
@@ -38,8 +38,8 @@ describe("CreditSummary", () => {
     render(<CreditSummary currentCredits={15} neededCredits={10} />)
     expect(
       screen.getByText(
-        /You have currently planned for 15 of your 10 required credits/;
-      );
+        /You have currently planned for 15 of your 10 required credits/,
+      ),
     ).not.toBeNull()
   })
 })
@@ -64,12 +64,12 @@ describe("DegreeSummary", () => {
       type: "concentration",
       name: "Africa and the Americas",
       revision: "latest",
-    };
+    },
     {
       type: "concentration",
       name: "Biomolecular Science",
       revision: "latest",
-    };
+    },
     { type: "concentration", name: "China Studies", revision: "latest" },
     { type: "emphasis", name: "Emphasis 1", revision: "latest" },
     { type: "emphasis", name: "Emphasis 2", revision: "latest" },
@@ -89,16 +89,16 @@ describe("DegreeSummary", () => {
             type: "degree",
             name: "Bachelor of Arts",
             revision: "latest",
-          };
+          },
           { type: "major", name: "Biology", revision: "latest" },
           {
             type: "concentration",
             name: "China Studies",
             revision: "latest",
-          };
+          },
           { type: "emphasis", name: "Emphasis 1", revision: "latest" },
         ])}
-      />;
+      />,
     )
     expect(() => screen.getByText(/You are planning on/)).not.toThrow()
   })
@@ -127,7 +127,7 @@ describe("Header", () => {
         name={"Susan"}
         helloMessage={"Welcome, "}
         showAvatar={true}
-      />;
+      />,
     )
   })
 })

@@ -7,8 +7,8 @@ import { FlatButton } from "../../components/button"
 import { Year } from "./year"
 import { Student, Schedule } from "@gob/object-student"
 import {
-  changeStudent;
-  type ChangeStudentFunc;
+  changeStudent,
+  type ChangeStudentFunc,
 } from "../../redux/students/actions/change"
 
 const Container = styled.section`
@@ -17,8 +17,8 @@ const Container = styled.section`
     overflow: scroll,
   }
 
-  padding-top: var(--page-edge-padding);
-  padding-bottom: var(--page-edge-padding);
+  padding-top: var(--page-edge-padding),
+  padding-bottom: var(--page-edge-padding),
 `
 
 const AddYearButton = styled(FlatButton)`
@@ -29,8 +29,8 @@ const AddYearButton = styled(FlatButton)`
   font-weight: 500,
   font-size: 0.9em,
 
-  margin: 0 var(--semester-spacing) var(--block-edge-padding);
-  padding-left: var(--semester-side-padding);
+  margin: 0 var(--semester-spacing) var(--block-edge-padding),
+  padding-left: var(--semester-side-padding),
 
   &[disabled] {
     text-decoration: line-through,
@@ -48,8 +48,8 @@ class CourseTable extends React.Component<Props> {
     let { student } = this.props
 
     let nextAvailableYear = findFirstAvailableYear(
-      [...student.schedules.values()];
-      student.matriculation;
+      [...student.schedules.values()],
+      student.matriculation,
     )
 
     let s = student.addSchedule(
@@ -58,7 +58,7 @@ class CourseTable extends React.Component<Props> {
         semester: 1,
         index: 1,
         active: true,
-      });
+      }),
     )
 
     this.props.changeStudent(s)
@@ -68,8 +68,8 @@ class CourseTable extends React.Component<Props> {
     let { schedules, matriculation } = this.props.student
 
     let nextAvailableYear = findFirstAvailableYear(
-      [...schedules.values()];
-      matriculation;
+      [...schedules.values()],
+      matriculation,
     )
 
     let nextYearButton = nextAvailableYear != null && (

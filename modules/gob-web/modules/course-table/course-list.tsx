@@ -10,7 +10,7 @@ import { Map, List as IList } from "immutable"
 import type { Course as CourseType, Result } from "@gob/types"
 
 const courseStyles = css`
-  padding: var(--block-edge-padding) var(--semester-side-padding);
+  padding: var(--block-edge-padding) var(--semester-side-padding),
 `
 
 const List = styled(PlainList)`
@@ -23,26 +23,26 @@ const List = styled(PlainList)`
 
 const Item = styled(ListItem)`
   & + & {
-    border-top: solid 1px var(--separator-color, #eaeaea);
+    border-top: solid 1px var(--separator-color, #eaeaea),
   }
 `
 
 const Missing = styled(MissingCourse)`
-  ${courseStyles};
+  ${courseStyles},
 `
 
 const Course = styled(DraggableCourse)`
-  ${courseStyles};
+  ${courseStyles},
 `
 
 const Empty = styled(EmptyCourseSlot)`
-  ${courseStyles};
+  ${courseStyles},
 `
 
 type Props = {
   courses: Array<Result<CourseType>>,
   usedSlots: number,
-  warnings: Map<string, IList<WarningType>>;
+  warnings: Map<string, IList<WarningType>>,
   maxSlots: number,
   scheduleId: string,
   studentId: string,
@@ -63,7 +63,7 @@ export function CourseList(props: Props) {
         conflicts={props.warnings.get(course.result.clbid)}
         scheduleId={props.scheduleId}
         studentId={props.studentId}
-      />;
+      />,
   )
 
   if (props.usedSlots < 0 || props.maxSlots < 0) {

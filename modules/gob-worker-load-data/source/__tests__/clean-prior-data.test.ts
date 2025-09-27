@@ -1,4 +1,4 @@
-/* eslint-env jest;
+/* eslint-env jest,
 // @flow
 
 jest.spyOn(global.console, "log").mockImplementation(() => jest.fn())
@@ -8,8 +8,8 @@ jest.mock("@gob/web-database")
 
 import { db } from "../db"
 import cleanPriorData, {
-  getPriorCourses;
-  getPriorAreas;
+  getPriorCourses,
+  getPriorAreas,
 } from "../clean-prior-data"
 
 describe("getPriorCourses", () => {
@@ -71,7 +71,7 @@ describe("cleanPriorData", () => {
       await cleanPriorData("path", "invalid_type")
     } catch (err) {
       expect(err.message).toMatchInlineSnapshot(
-        `""invalid_type" is not a valid store type"`;
+        `""invalid_type" is not a valid store type"`,
       )
     }
   })

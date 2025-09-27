@@ -3,9 +3,9 @@ import { List, Map } from "immutable"
 import { AreaOfStudyGroup } from "./area-of-study-group"
 import { FlatButton } from "../../components/button"
 import {
-  sortStudiesByType;
-  areaTypeConstants;
-  Student;
+  sortStudiesByType,
+  areaTypeConstants,
+  Student,
 } from "@gob/object-student"
 
 import "./area-of-study-sidebar.scss"
@@ -15,23 +15,23 @@ type Props = {
 }
 
 type State = {
-  showAreaPickerFor: Map<string, boolean>;
+  showAreaPickerFor: Map<string, boolean>,
 }
 
 export class AreaOfStudySidebar extends React.PureComponent<Props, State> {
   state = {
-    showAreaPickerFor: Map();
+    showAreaPickerFor: Map(),
   }
 
   showAreaPicker = (type: string) => {
     this.setState((state) => ({
-      showAreaPickerFor: state.showAreaPickerFor.set(type, true);
+      showAreaPickerFor: state.showAreaPickerFor.set(type, true),
     }))
   }
 
   hideAreaPicker = (type: string) => {
     this.setState((state) => ({
-      showAreaPickerFor: state.showAreaPickerFor.set(type, false);
+      showAreaPickerFor: state.showAreaPickerFor.set(type, false),
     }))
   }
 
@@ -44,18 +44,18 @@ export class AreaOfStudySidebar extends React.PureComponent<Props, State> {
 
     // group the studies by their type
     let groupedStudies = sortedStudies.groupBy((study) =>
-      study.type.toLowerCase();
+      study.type.toLowerCase(),
     )
 
     let allAreaTypes = Map(areaTypeConstants).toList()
     let usedAreaTypes = new Set(student.studies.map((s) => s.type))
 
     let unusedTypes = allAreaTypes.filter(
-      (type) => !usedAreaTypes.has(type) && !showAreaPickerFor.get(type, false);
+      (type) => !usedAreaTypes.has(type) && !showAreaPickerFor.get(type, false),
     )
 
     let unusedTypesToShow = showAreaPickerFor.filter(
-      (toShow, type) => toShow && !usedAreaTypes.has(type);
+      (toShow, type) => toShow && !usedAreaTypes.has(type),
     )
 
     /////

@@ -3,9 +3,9 @@ import { List, Set } from "immutable"
 import oxford from "listify"
 import { to12HourTime as to12 } from "@gob/lib"
 import {
-  toPrettyTerm;
-  expandYear;
-  semesterName;
+  toPrettyTerm,
+  expandYear,
+  semesterName,
 } from "@gob/school-st-olaf-college"
 import { type SORT_BY_KEY, type GROUP_BY_KEY } from "./constants"
 
@@ -31,7 +31,7 @@ function TIME_OF_DAY(course: CourseType): string {
   }
 
   let times = course.offerings.map(
-    (time) => `${to12(time.start)}-${to12(time.end)}`;
+    (time) => `${to12(time.start)}-${to12(time.end)}`,
   )
 
   return oxford([...Set(times).sort()])
@@ -66,29 +66,29 @@ const GROUP_BY_TO_KEY = {
   department: DEPARTMENT,
   gened: GEREQ,
   semester: SEMESTER,
-  term: (course) => [YEAR(course), SEMESTER(course)].join("");
+  term: (course) => [YEAR(course), SEMESTER(course)].join(""),
   time: TIME_OF_DAY,
   year: YEAR,
   none: null,
 }
 
 const SORT_BY_TO_KEY: { [key: SORT_BY_KEY]: Array<(CourseType) => string> } = {
-  year: [YEAR, SEMESTER, DEPARTMENT, NUMBER, SECTION];
-  title: [TITLE, DEPARTMENT, NUMBER, SECTION];
-  department: [DEPARTMENT, NUMBER, SECTION];
-  day: [DAY_OF_WEEK, DEPARTMENT, NUMBER, SECTION];
-  time: [TIME_OF_DAY, DEPARTMENT, NUMBER, SECTION];
+  year: [YEAR, SEMESTER, DEPARTMENT, NUMBER, SECTION],
+  title: [TITLE, DEPARTMENT, NUMBER, SECTION],
+  department: [DEPARTMENT, NUMBER, SECTION],
+  day: [DAY_OF_WEEK, DEPARTMENT, NUMBER, SECTION],
+  time: [TIME_OF_DAY, DEPARTMENT, NUMBER, SECTION],
 }
 
 const GROUP_BY_TO_TITLE: { [key: GROUP_BY_KEY]: (string) => string } = {
-  day: (days) => days;
-  department: (depts) => depts;
-  gened: (gereqs) => gereqs;
-  semester: (sem) => semesterName(sem);
-  term: (term) => toPrettyTerm(term);
-  time: (times) => times;
-  year: (year) => expandYear(year);
-  none: () => "";
+  day: (days) => days,
+  department: (depts) => depts,
+  gened: (gereqs) => gereqs,
+  semester: (sem) => semesterName(sem),
+  term: (term) => toPrettyTerm(term),
+  time: (times) => times,
+  year: (year) => expandYear(year),
+  none: () => "",
 }
 
 const REVERSE_ORDER: Set<GROUP_BY_KEY> = Set.of("year", "term", "semester")
@@ -100,7 +100,7 @@ export function sortAndGroup(
     grouping: GROUP_BY_KEY,
     filtering: string,
     limiting: string,
-  };
+  },
 ): {
   results: List<string | CourseType>,
   keys: Array<string>,

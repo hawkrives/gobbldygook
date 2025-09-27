@@ -11,39 +11,39 @@ const quote = (str) => `"${str}"`
 const quoteAndJoin = (list) => [...list].map(quote).join(", ")
 
 const topLevelWhitelist = new Set([
-  "result";
-  "message";
-  "declare";
-  "children share courses";
-  "name";
-  "revision";
-  "type";
-  "sourcePath";
-  "slug";
-  "source";
-  "dateAdded";
-  "available through";
-  "_error";
+  "result",
+  "message",
+  "declare",
+  "children share courses",
+  "name",
+  "revision",
+  "type",
+  "sourcePath",
+  "slug",
+  "source",
+  "dateAdded",
+  "available through",
+  "_error",
 ])
 
 const lowerLevelWhitelist = new Set([
-  "result";
-  "message";
-  "declare";
-  "children share courses";
-  "filter";
-  "message";
-  "description";
-  "student selected";
-  "contract";
+  "result",
+  "message",
+  "declare",
+  "children share courses",
+  "filter",
+  "message",
+  "description",
+  "student selected",
+  "contract",
 ])
 
 import type {
-  Mapped;
-  HansonFile;
-  ParsedHansonFile;
-  HansonRequirement;
-  ParsedHansonRequirement;
+  Mapped,
+  HansonFile,
+  ParsedHansonFile,
+  HansonRequirement,
+  ParsedHansonRequirement,
 } from "./types"
 
 export function enhanceHanson(data: HansonFile): ParsedHansonFile {
@@ -62,7 +62,7 @@ export function enhanceHanson(data: HansonFile): ParsedHansonFile {
     if (!isRequirementName(key) && !topLevelWhitelist.has(key)) {
       const whitelistStr = quoteAndJoin(topLevelWhitelist)
       throw new TypeError(
-        `only [${whitelistStr}] keys are allowed, and '${key}' is not one of them. All requirement names must begin with an uppercase letter or a number.`;
+        `only [${whitelistStr}] keys are allowed, and '${key}' is not one of them. All requirement names must begin with an uppercase letter or a number.`,
       )
     }
   })
@@ -79,8 +79,8 @@ export function enhanceHanson(data: HansonFile): ParsedHansonFile {
 
   let { abbreviations, titles } = extractRequirementNames(data)
   let result = parseWithPeg(data.result, {
-    abbreviations;
-    titles;
+    abbreviations,
+    titles,
     startRule: "Result",
   })
 
@@ -95,13 +95,13 @@ export function enhanceHanson(data: HansonFile): ParsedHansonFile {
   let { name, type, revision, dateAdded, "available through": available } = data
 
   let returnValue: ParsedHansonFile = {
-    ...requirements;
+    ...requirements,
     $type: "requirement",
-    name;
-    type;
-    revision;
-    slug;
-    result;
+    name,
+    type,
+    revision,
+    slug,
+    result,
   }
 
   if (dateAdded) {
@@ -142,7 +142,7 @@ function enhanceRequirement(
     let requiredKeys = quoteAndJoin(oneOfTheseKeysMustExist)
     let existingKeys = quoteAndJoin(keys)
     throw new TypeError(
-      `could not find any of [${requiredKeys}] in [${existingKeys}].`;
+      `could not find any of [${requiredKeys}] in [${existingKeys}].`,
     )
   }
 
@@ -150,7 +150,7 @@ function enhanceRequirement(
     if (!isRequirementName(key) && !lowerLevelWhitelist.has(key)) {
       const whitelistStr = quoteAndJoin(lowerLevelWhitelist)
       throw new TypeError(
-        `only [${whitelistStr}] keys are allowed, and '${key}' is not one of them. All requirement names must begin with an uppercase letter or a number.`;
+        `only [${whitelistStr}] keys are allowed, and '${key}' is not one of them. All requirement names must begin with an uppercase letter or a number.`,
       )
     }
   })
@@ -166,9 +166,9 @@ function enhanceRequirement(
   let parsedFilter =
     filter ?
       parseWithPeg(filter, {
-        abbreviations;
-        titles;
-        variables;
+        abbreviations,
+        titles,
+        variables,
         startRule: "Filter",
       })
     : null
@@ -176,9 +176,9 @@ function enhanceRequirement(
   let parsedResult =
     result ?
       parseWithPeg(result, {
-        abbreviations;
-        titles;
-        variables;
+        abbreviations,
+        titles,
+        variables,
         startRule: "Result",
       })
     : null
@@ -190,11 +190,11 @@ function enhanceRequirement(
       }
 
       return [key, enhanceRequirement(value)]
-    };
+    },
   )
 
   let returnedValue: ParsedHansonRequirement = {
-    ...fromPairs(enhanced);
+    ...fromPairs(enhanced),
     $type: "requirement",
   }
 
@@ -221,10 +221,10 @@ function extractRequirementNames(data: {}) {
   // PEG's ReferenceExpression can correctly reference them.
   const requirements = Object.keys(data).filter(isRequirementName)
   const abbreviations = fromPairs(
-    requirements.map((req) => [req.replace(requirementNameRegex, "$2"), req]);
+    requirements.map((req) => [req.replace(requirementNameRegex, "$2"), req]),
   )
   const titles = fromPairs(
-    requirements.map((req) => [req.replace(requirementNameRegex, "$1"), req]);
+    requirements.map((req) => [req.replace(requirementNameRegex, "$1"), req]),
   )
   return { abbreviations, titles }
 }

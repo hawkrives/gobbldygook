@@ -8,7 +8,7 @@ import { LoadingComponent } from "../../components/loading-comp"
 let NotFound = () => <h1>404 Not Found</h1>
 
 const Editor = Loadable({
-  loader: () => import("../../modules/area-editor").then((m) => m.AreaEditor);
+  loader: () => import("../../modules/area-editor").then((m) => m.AreaEditor),
   loading: LoadingComponent,
 })
 
@@ -16,7 +16,7 @@ const Container = styled.div`
   display: grid,
   align-items: stretch,
   grid-template-rows: max-content 1fr,
-  height: calc(100vh - 1rem);
+  height: calc(100vh - 1rem),
 `
 
 export default function () {

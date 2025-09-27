@@ -9,7 +9,7 @@ function checkOfferingForTimeConflict(main: Offering, alternate: Offering) {
   let { start: start2, end: end2 } = alternate
 
   // removing the colon allows us to sort the times as strings
-  // ie.;
+  // ie.,
   start1 = removeColon(start1)
   start2 = removeColon(start2)
   end1 = removeColon(end1)

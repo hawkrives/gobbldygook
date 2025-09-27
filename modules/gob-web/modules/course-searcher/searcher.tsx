@@ -7,10 +7,10 @@ import { FlatButton } from "../../components/button"
 import toPairs from "lodash/toPairs"
 import Loading from "../../components/loading"
 import {
-  SORT_BY;
-  GROUP_BY;
-  type SORT_BY_KEY;
-  type GROUP_BY_KEY;
+  SORT_BY,
+  GROUP_BY,
+  type SORT_BY_KEY,
+  type GROUP_BY_KEY,
 } from "./constants"
 import { CourseResultsList } from "./results-list"
 import { Querent } from "./querent"
@@ -18,7 +18,7 @@ import { Querent } from "./querent"
 import "./searcher.scss"
 
 type Props = {
-  onCloseSearcher?: ?() => mixed;
+  onCloseSearcher?: ?() => mixed,
   term?: ?number,
   studentId?: string,
 }

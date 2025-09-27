@@ -13,10 +13,10 @@ import type { Requirement } from "./types"
  *
  * @param {Requirement} requirement - the root requirement
  * @returns {Course[]} - the leaf children
-;
+,
 export default function findLeafRequirements(requirement: Requirement) {
   // Time to muse. Just what is a "requirement with no children?"
-  // I think that it's just that – a requirement with no children;
+  // I think that it's just that – a requirement with no children,
   // that is, one with no properties that pass the isRequirementName check.
   // If there are any children, then we call this func on each of them.
   // It should eventually return an array of all of the leaf children.
@@ -35,7 +35,7 @@ export default function findLeafRequirements(requirement: Requirement) {
     return [requirement]
   }
 
-  // if there are no keys in this object which are requirement names;
+  // if there are no keys in this object which are requirement names,
   // then we've found a leaf requirement! return it.
   if (!some(keys(requirement), isRequirementName)) {
     return requirement

@@ -13,7 +13,7 @@ import { Schedule } from "@gob/object-student"
  * @param {Array} schedules - the list of schedules
  * @param {Number} forYear - the year to look within
  * @returns {Number} - the first available semester slot
-;
+,
 export function findFirstAvailableSemester(
   schedules: Array<Schedule>,
   forYear: number,

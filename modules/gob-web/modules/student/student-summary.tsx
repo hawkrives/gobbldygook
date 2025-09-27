@@ -8,8 +8,8 @@ import { connect } from "react-redux"
 import { Card } from "../../components/card"
 import { AvatarLetter } from "../../components/avatar-letter"
 import {
-  changeStudent;
-  type ChangeStudentFunc;
+  changeStudent,
+  type ChangeStudentFunc,
 } from "../../redux/students/actions/change"
 import { Student, type AreaQuery } from "@gob/object-student"
 import { checkStudentAgainstArea } from "../../workers/check-student"
@@ -22,9 +22,9 @@ import { expandYear } from "@gob/school-st-olaf-college/"
 import "./student-summary.scss"
 
 const welcomeMessages = [
-  "Hi, ";
-  "Hi there, ";
-  "Hello, ";
+  "Hi, ",
+  "Hi there, ",
+  "Hello, ",
   "こんにちは、", // japanese
   "ようこそ、", // japanese
   "Fram! Fram! ", // new norwegian
@@ -97,8 +97,8 @@ class StudentSummary extends React.Component<Props, State> {
   check = async (props: Props) => {
     this.setState(() => ({ checking: true }))
     await Promise.all([
-      this.countCredits(props);
-      this.checkGraduatability(props);
+      this.countCredits(props),
+      this.checkGraduatability(props),
     ])
     this.setState(() => ({ checking: false }))
   }
@@ -125,18 +125,18 @@ class StudentSummary extends React.Component<Props, State> {
     // let {creditsNeeded = 0, creditsTaken = 0} = {}
 
     this.setState(() => ({
-      canGraduate;
-      // creditsNeeded;
-      // creditsTaken;
+      canGraduate,
+      // creditsNeeded,
+      // creditsTaken,
     }))
   }
 
   render() {
     let {
-      student;
-      showMessage = true;
-      showEditor = true;
-      showAvatar = true;
+      student,
+      showMessage = true,
+      showEditor = true,
+      showAvatar = true,
     } = this.props
     let { checking, canGraduate, creditsTaken } = this.state
     let { studies } = student
@@ -156,7 +156,7 @@ class StudentSummary extends React.Component<Props, State> {
         {url.has("ferpa") ?
           <div
             style={{
-              backgroundColor: "var(--red)";
+              backgroundColor: "var(--red)",
               textShadow: "none",
               color: "white",
               marginBottom: "1em",
@@ -171,7 +171,7 @@ class StudentSummary extends React.Component<Props, State> {
         {showAvatar && (
           <AvatarLetter
             className={cx(
-              "student-letter";
+              "student-letter",
               canGraduate ? "can-graduate" : "cannot-graduate",
             )}
             value={student.name}
@@ -222,8 +222,8 @@ type EditorState = {
 class Editor extends React.Component<EditorProps, EditorState> {
   state = {
     name: this.props.student.name,
-    matriculation: String(this.props.student.matriculation);
-    graduation: String(this.props.student.graduation);
+    matriculation: String(this.props.student.matriculation),
+    graduation: String(this.props.student.graduation),
   }
 
   nameLabelId = `student-editor--${uniqueId()}`
@@ -298,8 +298,8 @@ class Editor extends React.Component<EditorProps, EditorState> {
         <label htmlFor={this.nameLabelId}>Catalog Year:</label>
         <select value={this.state.matriculation}>
           {range(
-            parseInt(this.state.matriculation);
-            parseInt(this.state.graduation);
+            parseInt(this.state.matriculation),
+            parseInt(this.state.graduation),
           ).map((y) => {
             return (
               <option key={y} value={y}>
@@ -319,7 +319,7 @@ type HeaderProps = {
   canGraduate: boolean,
   helloMessage: string,
   name: string,
-  onChangeName?: (string) => any;
+  onChangeName?: (string) => any,
   showAvatar: boolean,
 }
 
@@ -388,10 +388,10 @@ export class DegreeSummary extends React.Component<DegreeSummaryProps> {
     } = this.props.studies.groupBy((s) => s.type).toJSON()
 
     const {
-      degree: dS = List();
-      major: mS = List();
-      concentration: cS = List();
-      emphasis: eS = List();
+      degree: dS = List(),
+      major: mS = List(),
+      concentration: cS = List(),
+      emphasis: eS = List(),
     } = grouped
 
     const dCount = dS.size

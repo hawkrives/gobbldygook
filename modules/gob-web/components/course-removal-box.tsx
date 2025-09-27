@@ -6,19 +6,19 @@ import { IDENT_COURSE, Student } from "@gob/object-student"
 import { Icon } from "./icon"
 import { iosTrashOutline } from "../icons/ionicons"
 import {
-  action as changeStudent;
-  type ActionCreator as ChangeStudentFunc;
+  action as changeStudent,
+  type ActionCreator as ChangeStudentFunc,
 } from "../redux/students/actions/change"
 
 const Box = styled.div`
   padding: 5em 1em,
-  color: var(--gray-500);
+  color: var(--gray-500),
   background-color: white,
   border-radius: 5px,
 
   position: fixed,
-  top: calc(var(--page-edge-padding) * 2);
-  left: calc(var(--page-edge-padding) * 2);
+  top: calc(var(--page-edge-padding) * 2),
+  left: calc(var(--page-edge-padding) * 2),
   max-width: 240px,
 
   display: none,
@@ -29,16 +29,16 @@ const Box = styled.div`
     css`
       color: black,
       display: flex,
-      z-index: calc(var(--z-sidebar) + 1);
-    `};
+      z-index: calc(var(--z-sidebar) + 1),
+    `},
 
   ${(props) =>
     props.isOver &&
     css`
-      box-shadow: 0 0 10px var(--red-900);
-      color: var(--red-900);
-      background-color: var(--red-50);
-    `};
+      box-shadow: 0 0 10px var(--red-900),
+      color: var(--red-900),
+      background-color: var(--red-50),
+    `},
 `
 
 type Props = {
@@ -76,29 +76,29 @@ const removeCourseTarget = {
 
     let s = props.student.removeCourseFromSchedule(fromScheduleId, clbid)
     props.changeStudent(s)
-  };
+  },
   canDrop(props, monitor: any) {
     const { isFromSearch } = monitor.getItem()
     if (!isFromSearch) {
       return true
     }
     return false
-  };
+  },
 }
 
 // Specifies the props to inject into your component.
 function collect(connect, monitor) {
   return {
-    connectDropTarget: connect.dropTarget();
-    isOver: monitor.isOver();
-    canDrop: monitor.canDrop();
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver(),
+    canDrop: monitor.canDrop(),
   }
 }
 
 const droppable = DropTarget(
-  IDENT_COURSE;
-  removeCourseTarget;
-  collect;
+  IDENT_COURSE,
+  removeCourseTarget,
+  collect,
 )(CourseRemovalBox)
 
 const connected = connect(undefined, { changeStudent })(droppable)

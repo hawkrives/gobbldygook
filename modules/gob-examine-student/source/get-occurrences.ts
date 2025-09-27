@@ -13,7 +13,7 @@ import type { Course } from "./types"
  * @param {Course} course - the course to find occurrences of
  * @param {Course[]} courses - the list of courses
  * @returns {Course[]} - the list of occurrences of that course
-;
+,
 export default function getOccurrences(course: Course, courses: Course[]) {
   const base = simplifyCourse(course)
   return filter(courses, (c) => simplifyCourse(c) === base)

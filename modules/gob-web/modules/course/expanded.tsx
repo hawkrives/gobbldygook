@@ -108,7 +108,7 @@ export default class ExpandedCourse extends React.PureComponent<Props> {
               {consolidateExpandedOfferings(course.offerings || []).map(
                 (offering) => (
                   <ListItem key={offering}>{offering}</ListItem>
-                );
+                ),
               )}
             </BulletedList>
           </div>

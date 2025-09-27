@@ -4,8 +4,8 @@ export function partitionByIndex<T, U>(arr: Array<T | U>): [T[], U[]] {
       return idx % 2 === 0 ?
           [acc[0].concat(val), acc[1]]
         : [acc[0], acc[1].concat(val)]
-    };
-    [[], []];
+    },
+    [[], []],
   )
-  return (reduced: any)
+  return (reduced as any)
 }

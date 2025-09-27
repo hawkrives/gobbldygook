@@ -5,7 +5,7 @@ import type { Course } from "./types"
  * @private
  * @param {Course[]} courses - the list of courses
  * @returns {string[]} - the list of unique departments
-;
+,
 export default function getDepartments(courses: Array<Course>): Array<string> {
   return [...new Set(courses.map((c) => c.department))]
 }

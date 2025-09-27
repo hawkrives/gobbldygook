@@ -8,8 +8,8 @@ export function comboHasCourses(
   combinationOfClasses: Array<Course>,
 ) {
   const these = takeWhile(
-    courses;
-    (course) => queryCourses(course, combinationOfClasses).length >= 1;
+    courses,
+    (course) => queryCourses(course, combinationOfClasses).length >= 1,
   )
 
   return these.length === courses.length

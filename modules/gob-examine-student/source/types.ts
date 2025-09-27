@@ -3,8 +3,8 @@ import type { Course } from "@gob/types"
 export type { Course }
 
 import type {
-  ParsedHansonFile;
-  ParsedHansonRequirement;
+  ParsedHansonFile,
+  ParsedHansonRequirement,
 } from "@gob/hanson-format"
 export type { ParsedHansonFile, ParsedHansonRequirement }
 
@@ -21,7 +21,7 @@ export type EvaluationResult = {
   progress: {
     of: number,
     at: number,
-  };
+  },
 }
 
 export type OverridesPath = string[]
@@ -37,7 +37,7 @@ export type AreaOfStudyTypeEnum =
   | "interdisciplinary"
 
 export type AreaOfStudy = {
-  ...Requirement;
+  ...Requirement,
   name: string,
   type: AreaOfStudyTypeEnum,
 }
@@ -77,13 +77,13 @@ type BaseExpression = {
 
 // type NotExpression = BaseExpression & {$type: 'not', $not: Expression[]}
 export type OrExpression = {
-  ...BaseExpression;
+  ...BaseExpression,
   $type: "boolean",
   $booleanType: "or",
   $or: Array<Expression | Fulfillment>,
 }
 export type AndExpression = {
-  ...BaseExpression;
+  ...BaseExpression,
   $type: "boolean",
   $booleanType: "and",
   $and: Array<Expression | Fulfillment>,
@@ -91,7 +91,7 @@ export type AndExpression = {
 export type BooleanExpression = OrExpression | AndExpression
 
 export type CourseExpression = {
-  ...BaseExpression;
+  ...BaseExpression,
   _request?: Course,
   _taken?: boolean,
   $type: "course",
@@ -126,7 +126,7 @@ export type QualificationValue =
   | QualificationStaticValue
 
 export type Qualification = {
-  ...BaseExpression;
+  ...BaseExpression,
   $type: "qualification",
   $key: string,
   $operator: Operator,
@@ -134,13 +134,13 @@ export type Qualification = {
 }
 
 export type OrQualification = {
-  ...BaseExpression;
+  ...BaseExpression,
   $type: "boolean",
   $booleanType: "or",
   $or: Array<Qualifier>,
 }
 export type AndQualification = {
-  ...BaseExpression;
+  ...BaseExpression,
   $type: "boolean",
   $booleanType: "and",
   $and: Array<Qualifier>,
@@ -162,27 +162,27 @@ type BaseModifierExpression = {
   $besides?: CourseExpression,
 }
 export type ModifierFilterExpression = {
-  ...BaseModifierExpression;
+  ...BaseModifierExpression,
   $from: "filter",
 }
 export type ModifierFilterWhereExpression = {
-  ...BaseModifierExpression;
+  ...BaseModifierExpression,
   $from: "filter-where",
   $where: Qualifier,
 }
 export type ModifierChildrenExpression = {
-  ...BaseModifierExpression;
+  ...BaseModifierExpression,
   $from: "children",
   $children: "$all" | Array<ReferenceExpression>,
 }
 export type ModifierChildrenWhereExpression = {
-  ...BaseModifierExpression;
+  ...BaseModifierExpression,
   $from: "children-where",
   $children: "$all" | Array<ReferenceExpression>,
   $where: Qualifier,
 }
 export type ModifierWhereExpression = {
-  ...BaseModifierExpression;
+  ...BaseModifierExpression,
   $from: "where",
   $where: Qualification,
 }
@@ -194,44 +194,44 @@ export type ModifierExpression =
   | ModifierChildrenWhereExpression
 
 export type OccurrenceExpression = {
-  ...BaseExpression;
+  ...BaseExpression,
   $type: "occurrence",
   $count: Counter,
   $course: Course,
 }
 
 export type OfExpression = {
-  ...BaseExpression;
+  ...BaseExpression,
   $type: "of",
   $count: Counter,
   $of: Array<Expression | Fulfillment>,
 }
 
 export type ReferenceExpression = {
-  ...BaseExpression;
+  ...BaseExpression,
   $type: "reference",
   $requirement: string,
 }
 
 type BaseFilterExpression = {
-  ...BaseExpression;
+  ...BaseExpression,
   $type: "filter",
   $distinct: boolean,
 }
 export type FilterWhereExpression = {
-  ...BaseFilterExpression;
+  ...BaseFilterExpression,
   $filterType: "where",
   $where: Qualifier,
 }
 export type FilterOfExpression = {
-  ...BaseFilterExpression;
+  ...BaseFilterExpression,
   $filterType: "of",
   $of: Array<CourseExpression>,
 }
 export type FilterExpression = FilterOfExpression | FilterWhereExpression
 
 export type WhereExpression = {
-  ...BaseExpression;
+  ...BaseExpression,
   $type: "where",
   $where: Qualifier,
   $count: Counter,

@@ -15,7 +15,7 @@ export const Container = styled.article`
 
   &:not(.fake-course):hover {
     cursor: pointer,
-    background-color: var(--background-color-hover, rgba(10, 10, 10, 0.1));
+    background-color: var(--background-color-hover, rgba(10, 10, 10, 0.1)),
   }
 
   &.is-dragging {
@@ -51,7 +51,7 @@ const GeReqItem = styled(InlineListItem)`
 `
 
 const Identifier = styled.span`
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: tabular-nums,
 `
 
 const Type = styled.span``

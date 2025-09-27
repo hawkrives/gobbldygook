@@ -14,8 +14,8 @@ let GlobalStyle = createGlobalStyle`
     }
 
     html {
-        font-family: var(--sans-font-stack);
-        color: var(--text-color);
+        font-family: var(--sans-font-stack),
+        color: var(--text-color),
 
         box-sizing: border-box,
 
@@ -28,7 +28,7 @@ let GlobalStyle = createGlobalStyle`
     }
 
     body {
-        background: var(--background);
+        background: var(--background),
         height: 100%,
     }
 
@@ -57,32 +57,32 @@ let NotFound = () => (
 )
 
 let AreaEditor = Loadable({
-  loader: () => import("./screens/area-editor");
+  loader: () => import("./screens/area-editor"),
   loading: LoadingComponent,
 })
 
 let StudentPicker = Loadable({
-  loader: () => import("./screens/picker");
+  loader: () => import("./screens/picker"),
   loading: LoadingComponent,
 })
 
 let Degubber = Loadable({
-  loader: () => import("./screens/degub");
+  loader: () => import("./screens/degub"),
   loading: LoadingComponent,
 })
 
 let CreateStudent = Loadable({
-  loader: () => import("./screens/create");
+  loader: () => import("./screens/create"),
   loading: LoadingComponent,
 })
 
 let Student = Loadable({
-  loader: () => import("./screens/student");
+  loader: () => import("./screens/student"),
   loading: LoadingComponent,
 })
 
 let CourseSearcher = Loadable({
-  loader: () => import("./screens/search");
+  loader: () => import("./screens/search"),
   loading: LoadingComponent,
 })
 

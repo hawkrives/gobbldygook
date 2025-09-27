@@ -35,13 +35,13 @@ export function filterAreaList(
   let onlyAvailableAreas = areas.filter(
     (area) =>
       !area["available through"] ||
-      area["available through"] > availableThrough;
+      area["available through"] > availableThrough,
   )
 
   // Group them together to filter them down
   let groupedAreas = groupBy(
-    onlyAvailableAreas;
-    (area) => `${area.name}|${area.type}`;
+    onlyAvailableAreas,
+    (area) => `${area.name}|${area.type}`,
   )
 
   let filtered = values(groupedAreas).map((areaSet) => {

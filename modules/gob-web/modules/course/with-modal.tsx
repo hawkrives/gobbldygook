@@ -8,7 +8,7 @@ type State = {
 
 export default class CourseWithModal extends React.PureComponent<
   MiniProps & { studentId?: string },
-  State;
+  State,
 > {
   state = {
     isOpen: false,

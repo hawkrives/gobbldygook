@@ -3,24 +3,24 @@ import { pluralizeArea } from "@gob/examine-student"
 import capitalize from "lodash/capitalize"
 import { AreaOfStudy } from "../area-of-study"
 import {
-  AreaPicker;
-  type Selection;
+  AreaPicker,
+  type Selection,
 } from "../../components/area-of-study/picker"
 import { FlatButton } from "../../components/button"
 import { List } from "immutable"
 import { connect } from "react-redux"
 import { Student, type AreaQuery } from "@gob/object-student"
 import {
-  changeStudent;
-  type ChangeStudentFunc;
+  changeStudent,
+  type ChangeStudentFunc,
 } from "../../redux/students/actions/change"
 
 import "./area-of-study-group.scss"
 
 type Props = {
   areas?: List<AreaQuery>,
-  onEndAddArea: (string, Event) => any;
-  onInitiateAddArea: (string, Event) => any;
+  onEndAddArea: (string, Event) => any,
+  onInitiateAddArea: (string, Event) => any,
   showAreaPicker: boolean,
   student: Student,
   type: string,
@@ -70,7 +70,7 @@ class AreaOfStudyGroup extends React.PureComponent<Props> {
                 return {
                   label: `${a.name}`,
                   value: `${a.name}${rev}`,
-                  ...a;
+                  ...a,
                 }
               })
               .toArray()}

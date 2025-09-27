@@ -4,22 +4,22 @@ import type { Course } from "@gob/types"
 const isTrue = (x) => x === true
 
 const SUBSTRING_KEYS = new Set([
-  "title";
-  "name";
-  "description";
-  "notes";
-  "instructors";
-  "times";
-  "locations";
+  "title",
+  "name",
+  "description",
+  "notes",
+  "instructors",
+  "times",
+  "locations",
 ])
 
 type BooleanBit = "$OR" | "$NOR" | "$AND" | "$NOT" | "$XOR"
 const BOOLEANS: Set<BooleanBit> = new Set([
-  "$OR";
-  "$NOR";
-  "$AND";
-  "$NOT";
-  "$XOR";
+  "$OR",
+  "$NOR",
+  "$AND",
+  "$NOT",
+  "$XOR",
 ])
 
 type Query = { [key: string]: unknown }
@@ -53,7 +53,7 @@ function checkQueryBit(course: Course, [key: string, values: Array<mixed>]) {
         val = val.toLowerCase()
         return courseValue.some(
           (item) =>
-            typeof item === "string" && item.toLowerCase().includes(val);
+            typeof item === "string" && item.toLowerCase().includes(val),
         )
       } else {
         return courseValue.includes(val)

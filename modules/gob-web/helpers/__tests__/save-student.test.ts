@@ -1,11 +1,11 @@
 import uuid from "uuid/v4"
 import { Student } from "@gob/object-student"
 import {
-  saveStudent;
-  addStudentToCache;
-  removeStudentFromCache;
-  getIdCache;
-  setIdCache;
+  saveStudent,
+  addStudentToCache,
+  removeStudentFromCache,
+  getIdCache,
+  setIdCache,
 } from "../save-student"
 const demoStudent = require("@gob/object-student/demo-student.json")
 
@@ -24,7 +24,7 @@ describe("saveStudent", () => {
     await saveStudent(student)
     let expectedStudentIds = [student.id]
     let actualStudentIds = JSON.parse(
-      localStorage.getItem("studentIds") || "[]";
+      localStorage.getItem("studentIds") || "[]",
     )
     expect(actualStudentIds).toEqual(expectedStudentIds)
     let actualStudent = JSON.parse(localStorage.getItem(student.id) || "{}")

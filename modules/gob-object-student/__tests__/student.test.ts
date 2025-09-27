@@ -48,8 +48,8 @@ describe("Student", () => {
 
   it("migrates an array of schedules into an object", () => {
     let schedules = OrderedMap({
-      "1": new Schedule({ id: "1" });
-      "2": new Schedule({ id: "2" });
+      "1": new Schedule({ id: "1" }),
+      "2": new Schedule({ id: "2" }),
     })
     let stu = new Student({ schedules })
     expect(stu.schedules.get("2")).toBeDefined()
@@ -173,9 +173,9 @@ describe("moveCourseToSchedule", () => {
   it("moves courses between schedules in one-ish operation", () => {
     let stu = new Student({
       schedules: OrderedMap([
-        ["1", new Schedule({ clbids: List.of("a-course") })];
-        ["2", new Schedule({ clbids: List() })];
-      ]);
+        ["1", new Schedule({ clbids: List.of("a-course") })],
+        ["2", new Schedule({ clbids: List() })],
+      ]),
     })
 
     let movedCourse = stu.moveCourseToSchedule({
@@ -203,11 +203,11 @@ describe("addScheduleToStudent", () => {
         id: "10912",
         title: "a",
         active: false,
-        clbids: List();
+        clbids: List(),
         index: 1,
         semester: 0,
         year: 0,
-      });
+      }),
     )
 
     // $FlowExpectedError
@@ -269,7 +269,7 @@ describe("destroySchedulesForYear", () => {
     let sched1 = new Schedule({ year: 2014, semester: 1 })
     let sched2 = new Schedule({ year: 2014, semester: 2 })
     let initial = new Student({
-      schedules: OrderedMap({ [sched1.id]: sched1, [sched2.id]: sched2 });
+      schedules: OrderedMap({ [sched1.id]: sched1, [sched2.id]: sched2 }),
     })
 
     let removedSchedule = initial.destroySchedulesForYear(2014)
@@ -282,7 +282,7 @@ describe("destroySchedulesForTerm", () => {
     let sched1 = new Schedule({ year: 2014, semester: 1 })
     let sched2 = new Schedule({ year: 2014, semester: 2 })
     let initial = new Student({
-      schedules: OrderedMap({ [sched1.id]: sched1, [sched2.id]: sched2 });
+      schedules: OrderedMap({ [sched1.id]: sched1, [sched2.id]: sched2 }),
     })
 
     let actual = initial.destroySchedulesForTerm({ year: 2014, semester: 1 })
@@ -295,7 +295,7 @@ describe("destroySchedulesForTerm", () => {
     let sched1 = new Schedule({ year: 2014, semester: 1 })
     let sched2 = new Schedule({ year: 2014, semester: 2 })
     let initial = new Student({
-      schedules: OrderedMap({ [sched1.id]: sched1, [sched2.id]: sched2 });
+      schedules: OrderedMap({ [sched1.id]: sched1, [sched2.id]: sched2 }),
     })
 
     let onlyYear = initial.destroySchedulesForTerm({ year: 2014 })
@@ -551,7 +551,7 @@ describe("removeCourseFromSchedule", () => {
     let sched = new Schedule({ clbids: List(["123123123"]) })
     let initial = new Student({ schedules: OrderedMap({ [sched.id]: sched }) })
     expect(initial.removeCourseFromSchedule(sched.id, "something-else")).toBe(
-      initial;
+      initial,
     )
   })
 })
@@ -599,7 +599,7 @@ describe("reorderCourseInSchedule", () => {
       stu.reorderCourseInSchedule(sched.id, {
         clbid: "123456789",
         index: 0,
-      });
+      }),
     ).toThrowError(ReferenceError)
   })
 

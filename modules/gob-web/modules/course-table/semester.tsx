@@ -12,58 +12,58 @@ import { Icon } from "../../components/icon"
 import { InlineList, InlineListItem } from "../../components/list"
 import { close, search, alertCircled } from "../../icons/ionicons"
 import {
-  IDENT_COURSE;
-  Student;
-  Schedule;
-  type WarningType;
+  IDENT_COURSE,
+  Student,
+  Schedule,
+  type WarningType,
 } from "@gob/object-student"
 import type { Course as CourseType, Result } from "@gob/types"
 import { getCourse } from "../../helpers/get-courses"
 import {
-  changeStudent;
-  type ChangeStudentFunc;
+  changeStudent,
+  type ChangeStudentFunc,
 } from "../../redux/students/actions/change"
 import { CourseList } from "./course-list"
 import styled from "styled-components"
 import { loadDataForTerm } from "../../workers/load-data"
 
 const Container = styled.div`
-  ${theme.card};
+  ${theme.card},
   flex: 1 0,
   min-width: 13em,
-  margin: var(--semester-spacing);
+  margin: var(--semester-spacing),
   overflow: hidden,
-  color: var(--text-color);
+  color: var(--text-color),
 
   &.can-drop {
     cursor: copy,
-    box-shadow: 0 0 4px var(--gray-500);
+    box-shadow: 0 0 4px var(--gray-500),
     z-index: 10,
   }
 
-  --background-color: var(--white);
-  --text-color: var(--black);
-  --separator-color: var(--gray-100);
-  --background-color-hover: var(--separator-color);
+  --background-color: var(--white),
+  --text-color: var(--black),
+  --separator-color: var(--gray-100),
+  --background-color-hover: var(--separator-color),
 
   &.past {
-    --background-color: var(--teal-50);
-    --separator-color: var(--teal-100);
+    --background-color: var(--teal-50),
+    --separator-color: var(--teal-100),
   }
 
   &.in-progress {
-    --background-color: var(--light-green-50);
-    --separator-color: var(--light-green-100);
+    --background-color: var(--light-green-50),
+    --separator-color: var(--light-green-100),
   }
 
   &.invalid {
-    --background-color: var(--amber-50);
-    --separator-color: var(--amber-100);
+    --background-color: var(--amber-50),
+    --separator-color: var(--amber-100),
   }
 `
 
 const TitleButton = styled(FlatButton)`
-  padding: var(--block-edge-padding) var(--semester-side-padding);
+  padding: var(--block-edge-padding) var(--semester-side-padding),
   min-height: 0,
   font-size: 0.9em,
 
@@ -72,7 +72,7 @@ const TitleButton = styled(FlatButton)`
   transition: 0.15s,
 
   &:hover {
-    background-color: var(--background-color-hover);
+    background-color: var(--background-color-hover),
   }
 
   & + & {
@@ -82,14 +82,14 @@ const TitleButton = styled(FlatButton)`
 
 const RemoveSemesterButton = styled(TitleButton)`
   &:hover {
-    color: var(--red-500);
-    border-color: var(--red-500);
-    background-color: var(--red-50);
+    color: var(--red-500),
+    border-color: var(--red-500),
+    background-color: var(--red-50),
   }
 `
 
 const Header = styled.header`
-  border-bottom: solid 1px var(--separator-color, #eaeaea);
+  border-bottom: solid 1px var(--separator-color, #eaeaea),
 
   font-size: 0.85em,
 
@@ -99,10 +99,10 @@ const Header = styled.header`
 
   overflow: hidden,
 
-  padding-left: var(--semester-side-padding);
+  padding-left: var(--semester-side-padding),
 
   & > ${Icon} {
-    margin-right: var(--semester-side-padding);
+    margin-right: var(--semester-side-padding),
   }
 `
 
@@ -120,12 +120,12 @@ const InfoItem = styled(InlineListItem)`
 `
 
 const Title = styled(Link)`
-  ${theme.linkUndecorated};
+  ${theme.linkUndecorated},
   flex: 1,
   display: flex,
   flex-direction: column,
-  padding: var(--block-edge-padding) 0;
-  padding-right: var(--semester-side-padding);
+  padding: var(--block-edge-padding) 0,
+  padding-right: var(--semester-side-padding),
 
   &:hover {
     text-decoration: underline,
@@ -133,7 +133,7 @@ const Title = styled(Link)`
 `
 
 const TitleText = styled.h1`
-  ${theme.headingNeutral};
+  ${theme.headingNeutral},
   display: inline-block,
   color: black,
 `
@@ -179,7 +179,7 @@ type State = {
   loading: boolean,
   checking: boolean,
   courses: List<Result<CourseType>>,
-  warnings: Map<string, List<WarningType>>;
+  warnings: Map<string, List<WarningType>>,
   hasConflict: boolean,
   credits: number,
 }
@@ -188,8 +188,8 @@ class Semester extends React.Component<Props, State> {
   state = {
     loading: true,
     checking: true,
-    courses: List();
-    warnings: Map();
+    courses: List(),
+    warnings: Map(),
     hasConflict: false,
     credits: 0,
   }
@@ -214,8 +214,8 @@ class Semester extends React.Component<Props, State> {
 
     let { schedule } = props
     let courses = await schedule.getCoursesWithErrors(
-      getCourse;
-      props.student.fabrications;
+      getCourse,
+      props.student.fabrications,
     )
 
     let onlyCourses = courses
@@ -265,9 +265,9 @@ class Semester extends React.Component<Props, State> {
     }
 
     let semesterStatus = discoverSemesterStatus({
-      year;
-      semester;
-      now: new Date();
+      year,
+      semester,
+      now: new Date(),
     })
 
     const className = cx("semester", {
@@ -337,27 +337,27 @@ const semesterTarget = {
       let s = student.moveCourseToSchedule({
         from: fromScheduleId,
         to: schedule.id,
-        clbid;
+        clbid,
       })
       props.changeStudent(s)
     } else {
       let s = student.addCourseToSchedule(schedule.id, clbid)
       props.changeStudent(s)
     }
-  };
+  },
   canDrop(props: ReactProps, monitor) {
     let item = monitor.getItem()
     let hasClbid = props.schedule.clbids.includes(item.clbid)
     return !hasClbid
-  };
+  },
 }
 
 // Specifies the props to inject into your component.
 function collect(connect, monitor) {
   return {
-    connectDropTarget: connect.dropTarget();
-    isOver: monitor.isOver();
-    canDrop: monitor.canDrop();
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver(),
+    canDrop: monitor.canDrop(),
   }
 }
 

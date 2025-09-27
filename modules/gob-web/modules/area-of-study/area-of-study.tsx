@@ -17,25 +17,25 @@ type Props = {
   error?: ?string,
   examining?: boolean,
   results: ?EvaluationResult,
-  onToggleOpen?: (Event) => mixed;
-  onAddOverride?: (Array<string>, Event) => mixed;
-  onRemoveOverride?: (Array<string>, Event) => mixed;
-  onToggleOverride?: (Array<string>, Event) => mixed;
+  onToggleOpen?: (Event) => mixed,
+  onAddOverride?: (Array<string>, Event) => mixed,
+  onRemoveOverride?: (Array<string>, Event) => mixed,
+  onToggleOverride?: (Array<string>, Event) => mixed,
 }
 
 export class AreaOfStudy extends React.Component<Props> {
   render() {
     let {
-      isOpen = true;
-      results;
-      error = null;
-      examining = false;
-      areaOfStudy;
-      onToggleOpen = () => {};
-      onAddOverride = () => {};
-      onRemoveOverride = () => {};
-      onToggleOverride = () => {};
-      style;
+      isOpen = true,
+      results,
+      error = null,
+      examining = false,
+      areaOfStudy,
+      onToggleOpen = () => {},
+      onAddOverride = () => {},
+      onRemoveOverride = () => {},
+      onToggleOverride = () => {},
+      style,
     } = this.props
 
     let { name = "Unknown Area" } = areaOfStudy
@@ -49,7 +49,7 @@ export class AreaOfStudy extends React.Component<Props> {
     }
 
     let className = cx("area", {
-      errored: Boolean(error);
+      errored: Boolean(error),
       loading: examining,
     })
 
@@ -68,7 +68,7 @@ export class AreaOfStudy extends React.Component<Props> {
           </div>
           <ProgressBar
             className={cx("area--progress", {
-              error: Boolean(error);
+              error: Boolean(error),
             })}
             colorful={true}
             value={progressAt}

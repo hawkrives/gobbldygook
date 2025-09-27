@@ -17,7 +17,7 @@ export function getPriorAreas(path: string) {
     .store("areas")
     .getAll(range({ eq: path }))
     .then((oldItems) =>
-      fromPairs(oldItems.map((item) => [item.sourcePath, null]));
+      fromPairs(oldItems.map((item) => [item.sourcePath, null])),
     )
 }
 

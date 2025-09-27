@@ -11,16 +11,16 @@ type Args = {
   fulfillment: Fulfillment,
   expr: Expression,
   computedResult: boolean,
-  matches: ?(Course[]);
+  matches: ?(Course[]),
   counted: ?number,
 }
 
 export default function applyFulfillmentToResult({
-  fulfillment;
-  expr;
-  computedResult;
-  matches;
-  counted;
+  fulfillment,
+  expr,
+  computedResult,
+  matches,
+  counted,
 }: Args): ReturnType {
   let needsFulfillment = true
 
@@ -64,7 +64,7 @@ export default function applyFulfillmentToResult({
     })
   } else {
     throw new Error(
-      "Expression needs a fulfillment, but expression is not countable!";
+      "Expression needs a fulfillment, but expression is not countable!",
     )
   }
 

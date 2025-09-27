@@ -27,7 +27,7 @@ export default async function main() {
   let hydrated = await convertStudent(data, getCourse)
 
   for (let schedule of Object.values(hydrated.schedules)) {
-    delete (schedule: any).courses
+    delete (schedule as any).courses
   }
 
   console.log(JSON.stringify(hydrated))

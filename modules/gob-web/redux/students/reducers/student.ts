@@ -28,16 +28,16 @@ const undoableReducer = undoable(reducer, {
   filter(action, currentState, previousState) {
     // only save history when something has changed.
     return currentState !== previousState
-  };
+  },
 
   // treat LOAD_STUDENTS as the beginning of history
   initTypes: [
-    "@@redux/INIT";
-    "@@INIT";
-    LOAD_STUDENT;
-    INIT_STUDENT;
-    IMPORT_STUDENT;
-  ];
+    "@@redux/INIT",
+    "@@INIT",
+    LOAD_STUDENT,
+    INIT_STUDENT,
+    IMPORT_STUDENT,
+  ],
 })
 
 export { undoableReducer, reducer }

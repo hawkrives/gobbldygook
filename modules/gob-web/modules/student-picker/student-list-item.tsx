@@ -16,7 +16,7 @@ const Container = styled.div`
   align-items: stretch,
 
   & + & {
-    border-top: 1px solid rgba(160, 160, 160, 0.2);
+    border-top: 1px solid rgba(160, 160, 160, 0.2),
   }
 `
 
@@ -34,8 +34,8 @@ const DeleteButton = styled(FlatButton)`
 
   &:hover {
     color: white,
-    border-color: var(--red-900);
-    background-color: var(--red-500);
+    border-color: var(--red-900),
+    background-color: var(--red-500),
   }
 `
 
@@ -53,18 +53,18 @@ const StudentName = styled.div`
 `
 
 const StudentAreas = styled.div`
-  font-size: 0.8em;
+  font-size: 0.8em,
 `
 
 const AreaGrouping = styled.span`
   & + &::before {
-    content: " | ";
+    content: " | ",
   }
 `
 
 const AreaName = styled.span`
   & + &::before {
-    content: " • ";
+    content: " • ",
   }
 `
 
@@ -75,10 +75,10 @@ const StudentInfo = styled.span`
 `
 
 const ListItemLink = styled(Link)`
-  ${theme.linkUndecorated};
+  ${theme.linkUndecorated},
   background-color: white,
   &.is-selected {
-    background-color: var(--blue-50);
+    background-color: var(--blue-50),
   }
 
   flex: 1,
@@ -93,11 +93,11 @@ const ListItemLink = styled(Link)`
 
   cursor: pointer,
 
-  &:hover;
+  &:hover,
   &:focus {
     outline: none,
-    background-color: var(--blue-50);
-    border-color: var(--blue);
+    background-color: var(--blue-50),
+    border-color: var(--blue),
   }
 `
 

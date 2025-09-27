@@ -3,15 +3,15 @@ import { serializeError } from "serialize-error"
 import { RaisedButton } from "../../components/button"
 import { semesterName } from "@gob/school-st-olaf-college"
 import {
-  convertStudent;
-  type PartialStudent;
+  convertStudent,
+  type PartialStudent,
 } from "@gob/school-st-olaf-college-sis-import"
 import { Map, List } from "immutable"
 import { getCourse } from "../../helpers/get-courses"
 import { StudentSummary } from "../../modules/student/student-summary"
 import {
-  action as initStudent;
-  type ActionCreator as InitStudentFunc;
+  action as initStudent,
+  type ActionCreator as InitStudentFunc,
 } from "../../redux/students/actions/init-student"
 import { connect } from "react-redux"
 import type { Course as CourseType, Result } from "@gob/types"
@@ -21,7 +21,7 @@ import "./method-import.scss"
 
 type Props = {
   readonly initStudent: InitStudentFunc, // redux
-  +navigate?: (string) => mixed;
+  +navigate?: (string) => mixed,
 }
 
 type State = {
@@ -91,10 +91,10 @@ class SISImportScreen extends React.Component<Props, State> {
           console.warn(error)
           return { error }
         }
-      };
+      },
       () => {
         this.handleImportData()
-      };
+      },
     )
   }
 
@@ -193,7 +193,7 @@ const StudentInfo = ({ student }: { student: Student }) => (
 )
 
 const ScheduleListing = (props: {
-  schedules: Map<string, Schedule>;
+  schedules: Map<string, Schedule>,
   fabrications: List<CourseType>,
 }) => {
   let { schedules = Map(), fabrications = List() } = props
@@ -227,8 +227,8 @@ class AbbreviatedCourseListing extends React.Component<
   }
   fetchCourses = async () => {
     let courses = await this.props.schedule.getCoursesWithErrors(
-      getCourse;
-      this.props.fabrications;
+      getCourse,
+      this.props.fabrications,
     )
     this.setState(() => ({ courses }))
   }
@@ -244,7 +244,7 @@ class AbbreviatedCourseListing extends React.Component<
             : <li key={r.result.clbid}>
                 {r.result.department} {r.result.number}
                 {r.result.section} – {r.result.name}
-              </li>;
+              </li>,
           )
           .toArray()}
       </ul>

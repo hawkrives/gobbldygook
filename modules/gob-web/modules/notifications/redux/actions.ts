@@ -1,18 +1,18 @@
 import delay from "delay"
 
 import {
-  LOG_MESSAGE;
-  LOG_ERROR;
-  START_PROGRESS;
-  INCREMENT_PROGRESS;
-  REMOVE_NOTIFICATION;
+  LOG_MESSAGE,
+  LOG_ERROR,
+  START_PROGRESS,
+  INCREMENT_PROGRESS,
+  REMOVE_NOTIFICATION,
 } from "./constants"
 
 export function removeNotification(id: string, delayBy: number = 0) {
   if (delayBy) {
     return {
       type: REMOVE_NOTIFICATION,
-      payload: delay(delayBy).then(() => ({ id }));
+      payload: delay(delayBy).then(() => ({ id })),
     }
   }
   return { type: REMOVE_NOTIFICATION, payload: { id } }
@@ -36,14 +36,14 @@ export function startProgress(
   id: string,
   message: string = "",
   {
-    value = 0;
-    max = 1;
-    showButton = false;
+    value = 0,
+    max = 1,
+    showButton = false,
   }: { value: number, max: number, showButton?: boolean } = {},
 ) {
   return {
     type: START_PROGRESS,
-    payload: { id, message, value, max, showButton };
+    payload: { id, message, value, max, showButton },
   }
 }
 

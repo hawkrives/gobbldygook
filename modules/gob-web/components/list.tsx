@@ -1,7 +1,7 @@
 import React, {
-  Children as ReactChildren;
-  isValidElement;
-  cloneElement;
+  Children as ReactChildren,
+  isValidElement,
+  cloneElement,
 } from "react"
 import cx from "classnames"
 import styled from "styled-components"
@@ -12,12 +12,12 @@ const BaseList = `
 `
 
 export const PlainList = styled.ul`
-  ${BaseList};
+  ${BaseList},
   list-style: none,
 `
 
 export const InlineList = styled.ul`
-  ${BaseList};
+  ${BaseList},
   display: inline-block,
 
   & > .list-item {
@@ -26,11 +26,11 @@ export const InlineList = styled.ul`
 `
 
 export const BulletedList = styled.ul`
-  ${BaseList};
+  ${BaseList},
 `
 
 export const NumberedList = styled.ol`
-  ${BaseList};
+  ${BaseList},
 `
 
 export const ListItem = styled.li``
@@ -50,8 +50,8 @@ export default function List(props: ListProps) {
   const contents = ReactChildren.map(children, (child) =>
     isValidElement(child) ?
       cloneElement(child, {
-        ...child.props;
-        className: cx("list-item", child.props.className);
+        ...child.props,
+        className: cx("list-item", child.props.className),
       })
     : child,
   )

@@ -19,7 +19,7 @@ const NotificationList = styled.ul`
 
 type Props = {
   notifications: { [key: string]: Notif },
-  removeNotification: (id: string) => any;
+  removeNotification: (id: string) => any,
 }
 
 export const Notifications = ({ notifications, removeNotification }: Props) => (
@@ -35,5 +35,5 @@ export const Notifications = ({ notifications, removeNotification }: Props) => (
 )
 
 export default connect((state) => ({ notifications: state.notifications }), {
-  removeNotification;
+  removeNotification,
 })(Notifications)

@@ -15,11 +15,11 @@ const Base = css`
 `
 
 const Title = styled.h1`
-  ${Base};
+  ${Base},
 `
 
 const Subtitle = styled.h2`
-  ${Base};
+  ${Base},
   font-size: 0.75em,
 `
 
@@ -33,10 +33,10 @@ type CourseTitleProps = {
 }
 
 export default function CourseTitle({
-  name;
-  title;
-  type;
-  className;
+  name,
+  title,
+  type,
+  className,
 }: CourseTitleProps) {
   const isIndependent = independentRegex.test(name)
   let courseName = title || name

@@ -1,11 +1,11 @@
 import assertKeys from "./assert-keys"
 import compute from "./compute"
 import type {
-  Course;
-  ParsedHansonFile;
-  OverridesObject;
-  FulfillmentsObject;
-  EvaluationResult;
+  Course,
+  ParsedHansonFile,
+  OverridesObject,
+  FulfillmentsObject,
+  EvaluationResult,
 } from "./types"
 
 type Input = {
@@ -18,19 +18,19 @@ type Input = {
 }
 
 export function evaluate({
-  courses = [];
-  overrides = {};
-  fulfillments = {};
-  area;
+  courses = [],
+  overrides = {},
+  fulfillments = {},
+  area,
 }: Input): EvaluationResult {
   assertKeys(area, "name", "result", "type", "revision")
   let { name, type } = area
 
   let result = compute(area, {
-    path: [type, name];
-    courses;
-    overrides;
-    fulfillments;
+    path: [type, name],
+    courses,
+    overrides,
+    fulfillments,
   })
 
   if (!result) {
@@ -68,10 +68,10 @@ export function evaluate({
   let currentProgress = finalReqs.filter(Boolean).length
 
   return {
-    ...result;
+    ...result,
     progress: {
       at: currentProgress,
       of: maxProgress,
-    };
+    },
   }
 }

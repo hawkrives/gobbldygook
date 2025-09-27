@@ -3,9 +3,9 @@ import cx from "classnames"
 import CourseExpression from "./expression--course"
 import ResultIndicator from "./result-indicator"
 import type {
-  Qualifier;
-  Qualification;
-  QualificationValue;
+  Qualifier,
+  Qualification,
+  QualificationValue,
 } from "@gob/examine-student"
 import plur from "plur"
 import { humanizeOperator } from "@gob/examine-student"
@@ -34,7 +34,7 @@ function makeBooleanExpression({ expr, ctx }) {
       acc.push(
         <span key={`${i}-joiner`} className="joiner">
           {JOINERS[kind]}
-        </span>;
+        </span>,
       )
     }
 
@@ -57,7 +57,7 @@ function makeOfExpression({ expr, ctx }) {
     expr.$count.$was ?
       ofLookup[expr.$count.$was] || "???"
     : `${expr._counted || 0} of ${humanizeOperator(
-        expr.$count.$operator;
+        expr.$count.$operator,
       )} ${expr.$count.$num} from among`
 
   let contents = expr.$of.map((ex, i) => (
@@ -232,8 +232,8 @@ export default function Expression(props: Props) {
   }
 
   const className = cx([
-    "expression";
-    `expression--${$type}`;
+    "expression",
+    `expression--${$type}`,
     wasEvaluated ? "evaluated" : "not-evaluated",
     isFulfillment ? "fulfillment" : "",
     wasTaken ? "taken" : "not-taken",

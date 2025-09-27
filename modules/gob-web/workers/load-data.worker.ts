@@ -4,7 +4,7 @@ import { IS_WORKER } from "./lib"
 declare var self: DedicatedWorkerGlobalScope
 
 function checkIdbInWorkerSupport() {
-  if ((self: any).IDBCursor) {
+  if ((self as any).IDBCursor) {
     return true
   }
   return false

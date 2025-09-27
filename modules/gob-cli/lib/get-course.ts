@@ -6,7 +6,7 @@ const Keyv = require("keyv")
 const KeyvFile = require("keyv-file")
 
 const keyv = new Keyv({
-  store: new KeyvFile();
+  store: new KeyvFile(),
 })
 
 const baseUrl = "https://stolaf.dev/course-data"
@@ -22,8 +22,8 @@ export async function getCourseFromNetwork(clbid: string) {
 
 export async function getCourse(
   clbid: string,
-  term?: ?number,
-  fabrications?: ?(Array<CourseType> | List<CourseType>) = [];
+  term?: number | null,
+  fabrications: (Array<CourseType> | List<CourseType>) | null = null,
 ): Promise<Result<CourseType>> {
   if (fabrications) {
     let fab = fabrications.find((c) => c.clbid === clbid)
@@ -37,8 +37,8 @@ export async function getCourse(
     if (!course) {
       return {
         error: true,
-        result: new Error(`Could not find ${clbid}`);
-        meta: { clbid, term };
+        result: new Error(`Could not find ${clbid}`),
+        meta: { clbid, term },
       }
     }
     return { error: false, result: course }

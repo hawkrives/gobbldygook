@@ -27,7 +27,7 @@ import type { Course } from "./types"
  * @private
  * @param {Course} course - the course to simplify
  * @returns {string} - the stringified, simplified course
-;
+,
 function simplifyCourse(course: Course): string {
   return `${course.department} ${course.number} ${course.type}`
 }

@@ -26,7 +26,7 @@ export const Icon = styled.svg.attrs({
   ${(props) =>
     props.block ?
       css`
-        display: block;
+        display: block,
       `
     : ""},
 `

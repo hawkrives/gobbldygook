@@ -4,11 +4,11 @@ import styled, { css } from "styled-components"
 
 const Wrapper = styled.div`
   font-family:
-    Fira Sans;
-    Helvetica Neue;
-    Helvetica;
-    Arial;
-    sans-serif !important;
+    Fira Sans,
+    Helvetica Neue,
+    Helvetica,
+    Arial,
+    sans-serif !important,
   font-weight: 200,
   font-style: normal,
 
@@ -24,10 +24,10 @@ const Wrapper = styled.div`
     width: ${size},
     height: ${size},
     line-height: ${size},
-    font-size: calc(${size} / 3 * 2);
+    font-size: calc(${size} / 3 * 2),
 
     border-radius: ${size},
-  `};
+  `},
 `
 
 type Props = {

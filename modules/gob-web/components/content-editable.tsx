@@ -5,10 +5,10 @@ type Props = {
   className?: string,
   disabled?: boolean,
   multiLine?: boolean,
-  onBlur?: (string) => any;
-  onChange: (string) => any;
-  onFocus?: (string) => any;
-  onKeyDown?: (string) => any;
+  onBlur?: (string) => any,
+  onChange: (string) => any,
+  onFocus?: (string) => any,
+  onKeyDown?: (string) => any,
   placeholder?: string,
   value?: string,
 }
@@ -21,7 +21,7 @@ type State = {
 class ContentEditable extends React.Component<Props, State> {
   static defaultProps = {
     disabled: false,
-    onChange: () => {};
+    onChange: () => {},
     multiLine: false,
     value: "",
   }

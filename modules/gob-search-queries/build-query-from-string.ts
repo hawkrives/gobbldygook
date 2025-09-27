@@ -7,9 +7,9 @@ import uniq from "lodash/uniq"
 import { quacksLikeDeptNum, splitDeptNum } from "@gob/school-st-olaf-college"
 
 import {
-  partitionByIndex;
-  splitParagraph;
-  zipToObjectWithArrays;
+  partitionByIndex,
+  splitParagraph,
+  zipToObjectWithArrays,
 } from "@gob/lib"
 
 import departmentMapping from "sto-course-related-data/handmade/to_department_abbreviations.json"
@@ -32,7 +32,7 @@ let semesters = {
   "late summer": 5,
   summer2: 5,
   "summer 2": 5,
-  summers: ["$OR", 4, 5];
+  summers: ["$OR", 4, 5],
 }
 
 let keywordMappings = {
@@ -64,31 +64,31 @@ let keywordMappings = {
 }
 
 let gereqs = new Set([
-  "ALS-A";
-  "ALS-L";
-  "AQR";
-  "BTS-B";
-  "BTS-T";
-  "EIN";
-  "FOL-C";
-  "FOL-F";
-  "FOL-G";
-  "FOL-J";
-  "FOL-K";
-  "FOL-L";
-  "FOL-N";
-  "FOL-R";
-  "FOL-S";
-  "FYW";
-  "HBS";
-  "HWC";
-  "IST";
-  "MCD";
-  "MCG";
-  "ORC";
-  "SED";
-  "SPM";
-  "WRI";
+  "ALS-A",
+  "ALS-L",
+  "AQR",
+  "BTS-B",
+  "BTS-T",
+  "EIN",
+  "FOL-C",
+  "FOL-F",
+  "FOL-G",
+  "FOL-J",
+  "FOL-K",
+  "FOL-L",
+  "FOL-N",
+  "FOL-R",
+  "FOL-S",
+  "FYW",
+  "HBS",
+  "HWC",
+  "IST",
+  "MCD",
+  "MCG",
+  "ORC",
+  "SED",
+  "SPM",
+  "WRI",
 ])
 
 function organizeValues([key, values], words = false, profWords = false) {
@@ -212,7 +212,7 @@ export function buildQueryFromString(
   // Process the keys, to clean them up somewhat
   keys = keys.map((key) => {
     key = key.toLowerCase()
-    /* istanbul ignore else;
+    /* istanbul ignore else,
     if (!key.startsWith("_")) {
       key = keywordMappings[key] || key
     }
@@ -225,8 +225,8 @@ export function buildQueryFromString(
   // Perform initial cleaning of the values, dependent on the keys
   let paired = unzip(
     toPairs(zipped).map((kvpairs) =>
-      organizeValues(kvpairs, opts.words, opts.profWords);
-    );
+      organizeValues(kvpairs, opts.words, opts.profWords),
+    ),
   )
 
   let organized = zipToObjectWithArrays(...paired) // spread the [k, v] pairs into the arguments properly
@@ -244,12 +244,12 @@ export function buildQueryFromString(
 
     // find the first boolean value in the thing
     let booleanIndex = val.findIndex(
-      (v) => typeof v === "string" && v.startsWith("$");
+      (v) => typeof v === "string" && v.startsWith("$"),
     )
     let includesBoolean = booleanIndex !== -1
     let startsWithBoolean = booleanIndex === 0
 
-    // if it's a multi-value thing and has a boolean, but it's not at the start;
+    // if it's a multi-value thing and has a boolean, but it's not at the start,
     // move it to the front.
     if (includesBoolean && !startsWithBoolean) {
       let [bool] = val.splice(booleanIndex, 1)

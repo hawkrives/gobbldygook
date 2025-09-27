@@ -41,11 +41,11 @@ async function checkStudentAgainstArea(
       let { fulfillments, overrides, name } = student
       let msg = JSON.stringify({
         id: sourceId,
-        area;
-        courses;
-        fulfillments;
-        overrides;
-        name;
+        area,
+        courses,
+        fulfillments,
+        overrides,
+        name,
       })
       worker.postMessage(msg)
     })
@@ -53,9 +53,9 @@ async function checkStudentAgainstArea(
 }
 
 const memoized: typeof checkStudentAgainstArea = mem(checkStudentAgainstArea, {
-  cache: new QuickLRU({ maxSize: 8 });
+  cache: new QuickLRU({ maxSize: 8 }),
   cacheKey: (student: Student, area: ParsedHansonFile) =>
-    JSON.stringify([student.id, area]);
+    JSON.stringify([student.id, area]),
   maxAge: 60000,
 })
 

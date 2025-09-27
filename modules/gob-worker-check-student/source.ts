@@ -4,10 +4,10 @@ import { alterForEvaluation as alterCourse } from "@gob/courses"
 import type { Course as CourseType } from "@gob/types"
 
 function tryEvaluate({
-  courses;
-  area;
-  fulfillments;
-  overrides;
+  courses,
+  area,
+  fulfillments,
+  overrides,
 }): EvaluationResult {
   try {
     return evaluate({ courses, area, fulfillments, overrides })
@@ -30,7 +30,7 @@ export function checkAgainstArea(
     fulfillments: { [key: string]: any },
     // TODO: make this not be `any`
     overrides: { [key: string]: any },
-  };
+  },
 ): EvaluationResult {
   let { courses, fulfillments, overrides } = args
   courses = courses.map(alterCourse)

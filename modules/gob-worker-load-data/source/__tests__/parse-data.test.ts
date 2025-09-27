@@ -1,4 +1,4 @@
-/* eslint-env jest;
+/* eslint-env jest,
 // @flow
 
 jest.spyOn(global.console, "log").mockImplementation(() => jest.fn())

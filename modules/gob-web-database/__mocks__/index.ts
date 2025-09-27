@@ -1,4 +1,4 @@
-/* global jest;
+/* global jest,
 // @flow
 
 import treo from "treo"

@@ -31,18 +31,18 @@ export default async function main() {
 
   let promises = student.schedules.map(async (schedule) => {
     let [courses, conflictInfo] = await Promise.all([
-      schedule.getCourses(getCourse);
-      schedule.validate(getCourse);
+      schedule.getCourses(getCourse),
+      schedule.validate(getCourse),
     ])
 
     let { hasConflict, warnings } = conflictInfo
 
     return {
-      ...schedule.toJSON();
-      courses;
-      term: schedule.getTerm();
-      hasConflict;
-      warnings;
+      ...schedule.toJSON(),
+      courses,
+      term: schedule.getTerm(),
+      hasConflict,
+      warnings,
     }
   })
 

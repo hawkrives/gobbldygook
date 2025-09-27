@@ -3,7 +3,7 @@
  * @private
  * @param {string} type - the type to pluralize
  * @returns {string} - the pluralized type
-;
+,
 export default function pluralizeArea(type: string) {
   switch (type.toLowerCase()) {
     case "degree":

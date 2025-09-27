@@ -4,8 +4,8 @@ import { Map } from "immutable"
 import { semesterName, expandYear } from "@gob/school-st-olaf-college"
 import { Student } from "@gob/object-student"
 import {
-  changeStudent;
-  type ChangeStudentFunc;
+  changeStudent,
+  type ChangeStudentFunc,
 } from "../../redux/students/actions/change"
 
 function semesterList(student: Student): Map<number, Map<string, string>> {
@@ -15,7 +15,7 @@ function semesterList(student: Student): Map<number, Map<string, string>> {
       year: s.year,
       semester: s.semester,
       id: s.id,
-      title: `${semesterName(s.semester)} – ${s.title}`;
+      title: `${semesterName(s.semester)} – ${s.title}`,
     }))
     .sortBy((s) => `${s.year}${s.semester}`)
     .groupBy((s) => s.year)
@@ -53,7 +53,7 @@ class SemesterSelector extends React.Component<Props> {
       s = student.moveCourseToSchedule({
         from: scheduleId,
         to: targetScheduleId,
-        clbid;
+        clbid,
       })
     } else {
       s = student.addCourseToSchedule(targetScheduleId, clbid)

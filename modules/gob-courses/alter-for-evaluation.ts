@@ -5,19 +5,19 @@ import type { Course } from "@gob/types"
 import type { Course as TrimmedCourse } from "@gob/examine-student"
 
 const whitelist = new Set([
-  "clbid";
-  "credits";
-  "crsid";
-  "department";
-  "gereqs";
-  "groupid";
-  "level";
-  "name";
-  "number";
-  "pf";
-  "semester";
-  "type";
-  "year";
+  "clbid",
+  "credits",
+  "crsid",
+  "department",
+  "gereqs",
+  "groupid",
+  "level",
+  "name",
+  "number",
+  "pf",
+  "semester",
+  "type",
+  "year",
 ])
 
 const mapping = new Map([])

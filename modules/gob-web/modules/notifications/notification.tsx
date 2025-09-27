@@ -20,13 +20,13 @@ let ProgressBar = styled(BasicProgressBar)`
   flex: 1,
   height: 10px,
   overflow: hidden,
-  border: solid 1px var(--gray-300);
+  border: solid 1px var(--gray-300),
   background-color: transparent,
-  color: var(--gray-300);
+  color: var(--gray-300),
 `
 
 let Percentage = styled.output`
-  color: var(--gray-300);
+  color: var(--gray-300),
   margin-left: 0.5em,
   font-variant-numeric: lining-nums tabular-nums,
 `
@@ -38,7 +38,7 @@ let Message = styled.h1`
 `
 
 let Content = styled.div`
-  flex: 1;
+  flex: 1,
 `
 
 let CloseButton = styled(FlatButton)`
@@ -46,8 +46,8 @@ let CloseButton = styled(FlatButton)`
   padding: 2px 6px 1px,
 
   &:hover {
-    background-color: var(--white);
-    color: var(--black);
+    background-color: var(--white),
+    color: var(--black),
   }
 `
 
@@ -58,8 +58,8 @@ const Capsule = styled.li`
   flex-flow: row nowrap,
   align-items: center,
 
-  background: var(--black);
-  color: var(--gray-300);
+  background: var(--black),
+  color: var(--gray-300),
 
   font-size: 0.9em,
 
@@ -69,7 +69,7 @@ const Capsule = styled.li`
 
   padding: 0.9em,
 
-  box-shadow: 0 2px 6px var(--gray-700);
+  box-shadow: 0 2px 6px var(--gray-700),
   border-radius: 2px,
 
   & + & {
@@ -78,12 +78,12 @@ const Capsule = styled.li`
 `
 
 const ErrorCapsule = styled(Capsule)`
-  background: var(--red);
-  color: var(--white);
+  background: var(--red),
+  color: var(--white),
 
   ${CloseButton}:hover {
-    border-color: var(--red-900);
-    color: var(--red-900);
+    border-color: var(--red-900),
+    color: var(--red-900),
   }
 `
 

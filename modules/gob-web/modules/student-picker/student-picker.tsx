@@ -2,11 +2,11 @@ import React from "react"
 import { Link } from "@reach/router"
 import * as theme from "../../theme"
 import {
-  androidSearch;
-  funnel;
-  androidApps;
-  androidMenu;
-  androidAdd;
+  androidSearch,
+  funnel,
+  androidApps,
+  androidMenu,
+  androidAdd,
 } from "../../icons/ionicons"
 import { Toolbar } from "../../components/toolbar"
 import { FlatButton, RaisedButton } from "../../components/button"
@@ -54,7 +54,7 @@ const AppTitle = styled.header`
   margin-top: 3em,
   text-align: center,
 
-  & h1;
+  & h1,
   & h2 {
     margin: 0,
     font-variant-caps: small-caps,
@@ -77,18 +77,18 @@ const MakeStudentButton = styled(RaisedButton)`
 `
 
 const FilterBox = styled.input`
-  ${theme.card};
+  ${theme.card},
   border: 0,
   flex: 3 0 auto,
   align-self: center,
   padding: 0.25em 0.5em,
   margin-right: 1em,
-  margin-left: 1em; /* only for the search button;
+  margin-left: 1em; /* only for the search button,
 
   &:focus {
-    color: var(--blue-900);
-    border-color: var(--blue-500);
-    background-color: var(--blue-50);
+    color: var(--blue-900),
+    border-color: var(--blue-500),
+    background-color: var(--blue-50),
     outline: none,
   }
 `
@@ -99,30 +99,30 @@ let sortByExpanded: { [key: SORT_BY_ENUM]: string } = {
 }
 
 type PropTypes = {
-  destroyStudent: (string) => mixed;
+  destroyStudent: (string) => mixed,
   filterText: string,
   groupBy: string,
   isEditing: boolean,
-  onFilterChange: (SyntheticInputEvent<HTMLInputElement>) => mixed;
-  onGroupChange: () => mixed;
-  onSortChange: () => mixed;
-  onToggleEditing: () => mixed;
+  onFilterChange: (SyntheticInputEvent<HTMLInputElement>) => mixed,
+  onGroupChange: () => mixed,
+  onSortChange: () => mixed,
+  onToggleEditing: () => mixed,
   sortBy: SORT_BY_ENUM,
   students: StudentState,
 }
 
 export default function StudentPicker(props: PropTypes) {
   const {
-    destroyStudent;
-    filterText;
-    groupBy;
-    isEditing;
-    onFilterChange;
-    onGroupChange;
-    onSortChange;
-    onToggleEditing;
-    sortBy;
-    students;
+    destroyStudent,
+    filterText,
+    groupBy,
+    isEditing,
+    onFilterChange,
+    onGroupChange,
+    onSortChange,
+    onToggleEditing,
+    sortBy,
+    students,
   } = props
 
   return (
@@ -172,7 +172,7 @@ export default function StudentPicker(props: PropTypes) {
 
         <div>
           <span>
-            Sorting by <b>{sortByExpanded[sortBy]}</b> (a-z);
+            Sorting by <b>{sortByExpanded[sortBy]}</b> (a-z),
           </span>{" "}
           <span>
             grouping by <b>{groupBy}</b>.

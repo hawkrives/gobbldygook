@@ -7,17 +7,17 @@ import { expandYear, semesterName } from "@gob/school-st-olaf-college"
 import { Student, Schedule } from "@gob/object-student"
 import * as theme from "../../theme"
 import {
-  changeStudent;
-  type ChangeStudentFunc;
+  changeStudent,
+  type ChangeStudentFunc,
 } from "../../redux/students/actions/change"
 import styled from "styled-components"
 
 const Container = styled.div`
-  margin-bottom: var(--page-edge-padding);
+  margin-bottom: var(--page-edge-padding),
 `
 
 const Header = styled.header`
-  ${theme.noSelect};
+  ${theme.noSelect},
   margin: 0,
 
   display: flex,
@@ -33,11 +33,11 @@ const Header = styled.header`
 `
 
 const TitleText = styled.h1`
-  ${theme.headingNeutral};
+  ${theme.headingNeutral},
   white-space: nowrap,
   flex: 1,
 
-  margin-left: calc(var(--semester-spacing) + var(--semester-side-padding));
+  margin-left: calc(var(--semester-spacing) + var(--semester-side-padding)),
 `
 
 const TitleButton = styled(FlatButton)`
@@ -49,7 +49,7 @@ const TitleButton = styled(FlatButton)`
   text-transform: none,
   font-weight: 400,
 
-  color: var(--gray-500);
+  color: var(--gray-500),
 
   & + & {
     margin-left: 0.1em,
@@ -58,9 +58,9 @@ const TitleButton = styled(FlatButton)`
 
 const RemoveYearButton = styled(TitleButton)`
   &:hover {
-    color: var(--red-500);
-    background-color: var(--red-50);
-    border: solid 1px var(--red-500);
+    color: var(--red-500),
+    background-color: var(--red-50),
+    border: solid 1px var(--red-500),
   }
 `
 
@@ -84,8 +84,8 @@ type Props = {
 class Year extends React.Component<Props> {
   addSemester = () => {
     let nextAvailableSemester = findFirstAvailableSemester(
-      [...this.props.student.schedules.values()];
-      this.props.year;
+      [...this.props.student.schedules.values()],
+      this.props.year,
     )
 
     let s = this.props.student.addSchedule(
@@ -94,7 +94,7 @@ class Year extends React.Component<Props> {
         semester: nextAvailableSemester,
         index: 1,
         active: true,
-      });
+      }),
     )
 
     this.props.changeStudent(s)

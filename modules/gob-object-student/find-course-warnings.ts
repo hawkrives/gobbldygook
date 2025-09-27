@@ -20,7 +20,7 @@ export type WarningType = {
 export function checkForInvalidYear(
   course: CourseType,
   scheduleYear: number,
-  thisYear: number = new Date().getFullYear();
+  thisYear: number = new Date().getFullYear(),
 ): ?WarningType {
   if (course.semester === 9 || course.semester === undefined) {
     return null
@@ -31,7 +31,7 @@ export function checkForInvalidYear(
     return {
       warning: true,
       type: "invalid-year",
-      msg: `Wrong Year (originally from ${yearString})`;
+      msg: `Wrong Year (originally from ${yearString})`,
     }
   }
 
@@ -50,7 +50,7 @@ export function checkForInvalidSemester(
   return {
     warning: true,
     type: "invalid-semester",
-    msg: `Wrong Semester (originally from ${semString})`;
+    msg: `Wrong Semester (originally from ${semString})`,
   }
 }
 
@@ -102,7 +102,7 @@ export function checkForTimeConflicts(
 export function findWarnings(
   courses: List<CourseType>,
   schedule: Schedule,
-  thisYear: number = new Date().getFullYear();
+  thisYear: number = new Date().getFullYear(),
 ): Map<string, List<WarningType>> {
   let { year, semester } = schedule
 

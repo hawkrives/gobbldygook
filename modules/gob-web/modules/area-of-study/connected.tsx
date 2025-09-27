@@ -5,8 +5,8 @@ import { pathToOverride } from "@gob/examine-student"
 import { AreaOfStudyProvider } from "./provider"
 import { AreaOfStudy } from "./area-of-study"
 import {
-  changeStudent;
-  type ChangeStudentFunc;
+  changeStudent,
+  type ChangeStudentFunc,
 } from "../../redux/students/actions/change"
 
 type Props = {

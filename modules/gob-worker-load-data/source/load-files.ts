@@ -18,7 +18,7 @@ export default function loadFiles(url: string, baseUrl: string) {
   return fetch(url)
     .then(status)
     .then(json)
-    .then((data) => proceedWithUpdate(baseUrl, ((data: any): InfoIndexFile)))
+    .then((data) => proceedWithUpdate(baseUrl, (data as any) as InfoIndexFile))
     .catch((err) => handleErrors(err, url))
 }
 
@@ -43,7 +43,7 @@ export async function loadTerm(
 ) {
   let data: InfoIndexFile = (await fetch(courseInfoUrl)
     .then(status)
-    .then(json): any)
+    .then(json)) as any
 
   const type: InfoFileTypeEnum = data.type
   const notification = new Notification(type, String(uniqueId()))

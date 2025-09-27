@@ -7,7 +7,7 @@ type Props = {
   children: ({
     loading: boolean,
     areas: Array<ParsedHansonFile>,
-  }) => React.Node;
+  }) => React.Node,
 }
 
 type State = {

@@ -5,10 +5,10 @@ import keys from "lodash/keys"
 import uniqBy from "lodash/uniqBy"
 import stringify from "stabilize"
 import type {
-  ModifierChildrenExpression;
-  ModifierChildrenWhereExpression;
-  Requirement;
-  Course;
+  ModifierChildrenExpression,
+  ModifierChildrenWhereExpression,
+  Requirement,
+  Course,
 } from "./types"
 
 /**
@@ -17,7 +17,7 @@ import type {
  * @param {Object} expr - the current result expression
  * @param {Requirement} ctx - the host requirement
  * @returns {Course[]} - the list of matched courses
-;
+,
 export default function getMatchesFromChildren(
   expr: ModifierChildrenExpression | ModifierChildrenWhereExpression,
   ctx: Requirement,
@@ -29,7 +29,7 @@ export default function getMatchesFromChildren(
   // grab all the child requirement names from this requirement
   let childKeys = keys(ctx).filter(isRequirementName)
 
-  // either use all of the child requirements in the computation;
+  // either use all of the child requirements in the computation,
   if (expr.$children === "$all") {
     // do nothing; the default case.
   } else if (Array.isArray(expr.$children)) {

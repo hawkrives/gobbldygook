@@ -18,7 +18,7 @@ export default function applyFulfillmentToExpression(
     let wrapper: OrExpression = {
       $type: "boolean",
       $booleanType: "or",
-      $or: [expr, fulfillment];
+      $or: [expr, fulfillment],
     }
     wrapper._fulfillment = fulfillment
     return wrapper

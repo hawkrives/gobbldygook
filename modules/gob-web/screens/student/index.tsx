@@ -11,8 +11,8 @@ import StudentOverview from "../../modules/student"
 const SearchSidebar = Loadable({
   loader: () =>
     import("../../components/sidebar--course-search").then(
-      (mod) => mod.CourseSearcherSidebar;
-    );
+      (mod) => mod.CourseSearcherSidebar,
+    ),
   loading: LoadingComponent,
 })
 
@@ -36,17 +36,17 @@ const StatusSidebar = ({ student }: { student: Undoable<Student> }) => (
 )
 
 const CourseTable = Loadable({
-  loader: () => import("../../modules/course-table");
+  loader: () => import("../../modules/course-table"),
   loading: LoadingComponent,
 })
 
 const ShareStudentOverlay = Loadable({
-  loader: () => import("./share-student");
+  loader: () => import("./share-student"),
   loading: LoadingComponent,
 })
 
 const SemesterDetail = Loadable({
-  loader: () => import("../../modules/semester-detail");
+  loader: () => import("../../modules/semester-detail"),
   loading: LoadingComponent,
 })
 
@@ -64,7 +64,7 @@ const TermSidebar = ({ student }: { student: Undoable<Student> }) => (
 export default function StudentIndex(props: {
   studentId?: string,
   location?: { search: string },
-  navigate?: (string) => mixed;
+  navigate?: (string) => mixed,
 }) {
   let { location, studentId, navigate } = props
 

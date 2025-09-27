@@ -1,8 +1,8 @@
 import type { CounterOperatorEnum } from "./types"
 export default function computeCountWithOperator({
-  comparator;
-  has;
-  needs;
+  comparator,
+  has,
+  needs,
 }: {
   comparator: CounterOperatorEnum,
   has: number,
@@ -18,6 +18,6 @@ export default function computeCountWithOperator({
   }
 
   throw new TypeError(
-    `computeModifier(): "${comparator}" must be one of $eq, $lte, or $gte.`;
+    `computeModifier(): "${comparator}" must be one of $eq, $lte, or $gte.`,
   )
 }

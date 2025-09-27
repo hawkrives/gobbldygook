@@ -8,6 +8,6 @@ export default function humanizeOperator(operator: CounterOperatorEnum) {
     return "exactly"
   }
   throw new TypeError(
-    `humanizeOperator does not recognize "${operator}" as being an operator.`;
+    `humanizeOperator does not recognize "${operator}" as being an operator.`,
   )
 }

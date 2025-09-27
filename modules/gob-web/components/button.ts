@@ -18,7 +18,7 @@ const BaseButton = styled.button.attrs({ type: "button" })`
   border: solid 1px transparent,
 
   transition: all 0.2s ease-out,
-  border-radius: var(--base-border-radius);
+  border-radius: var(--base-border-radius),
   line-height: normal,
 
   text-align: center,
@@ -35,53 +35,53 @@ const BaseButton = styled.button.attrs({ type: "button" })`
 `
 
 export const RaisedButton = styled(BaseButton)`
-  ${theme.linkUndecorated};
-  ${theme.materialShadow};
+  ${theme.linkUndecorated},
+  ${theme.materialShadow},
 
-  background-color: var(--white);
+  background-color: var(--white),
 
   &:hover {
-    background-color: var(--white);
-    box-shadow: 0 2px 4px 0 rgba(14, 30, 37, 0.12);
-    border-radius: var(--base-border-radius);
+    background-color: var(--white),
+    box-shadow: 0 2px 4px 0 rgba(14, 30, 37, 0.12),
+    border-radius: var(--base-border-radius),
   }
   &:focus {
-    background-color: var(--blue-50);
-    border-color: var(--blue-300);
+    background-color: var(--blue-50),
+    border-color: var(--blue-300),
   }
 
   &:active {
-    ${theme.materialShadow};
-    background-color: var(--white);
+    ${theme.materialShadow},
+    background-color: var(--white),
   }
 
   &[disabled] {
     cursor: default,
-    color: var(--gray-500);
+    color: var(--gray-500),
   }
 `
 
 export const FlatButton = styled(BaseButton)`
-  ${theme.linkUndecorated};
+  ${theme.linkUndecorated},
 
   background-color: transparent,
 
   &:hover {
-    background-color: var(--gray-100);
-    border-color: var(--gray-400);
+    background-color: var(--gray-100),
+    border-color: var(--gray-400),
   }
 
   &:focus {
-    background-color: var(--blue-50);
-    border-color: var(--blue-300);
+    background-color: var(--blue-50),
+    border-color: var(--blue-300),
   }
 
   &[disabled] {
     cursor: default,
-    color: var(--disabled-foreground--light);
+    color: var(--disabled-foreground--light),
 
-    &:hover;
-    &:focus;
+    &:hover,
+    &:focus,
     &:active {
       border-color: transparent,
       background-color: transparent,

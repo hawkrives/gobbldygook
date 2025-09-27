@@ -5,7 +5,7 @@ import { Map, List } from "immutable"
 
 export type Result = {
   hasConflict: boolean,
-  warnings: Map<string, List<WarningType>>;
+  warnings: Map<string, List<WarningType>>,
 }
 
 // Checks to see if the schedule is valid
@@ -16,7 +16,7 @@ export async function validateSchedule(
   // discover any warnings about the course load
   let warnings = findWarnings(courses, schedule)
   let hasConflict = warnings.some((perCourse) =>
-    perCourse.some((w) => w.warning === true);
+    perCourse.some((w) => w.warning === true),
   )
 
   return { hasConflict, warnings }

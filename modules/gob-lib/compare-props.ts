@@ -2,7 +2,7 @@ import every from "lodash/every"
 
 export function compareProps(oldProps: Object, newProps: Object): boolean {
   return !every(
-    oldProps;
-    (_: unknown, key: string) => oldProps[key] === newProps[key];
+    oldProps,
+    (_: unknown, key: string) => oldProps[key] === newProps[key],
   )
 }

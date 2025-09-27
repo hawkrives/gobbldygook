@@ -9,7 +9,7 @@ export function zipToObjectWithArrays<T>(
   let arr = zip(keys, vals)
 
   return reduce(
-    arr;
+    arr,
     (obj, [key, val]) => {
       if (has(obj, key)) {
         obj[key].push(val)
@@ -18,7 +18,7 @@ export function zipToObjectWithArrays<T>(
       }
 
       return obj
-    };
-    {};
+    },
+    {},
   )
 }

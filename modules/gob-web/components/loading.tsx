@@ -5,13 +5,13 @@ import cx from "classnames"
 const divCount = 5
 
 const stretchDelay = keyframes`
-	0%;
-	40%;
+	0%,
+	40%,
 	100% {
-		transform: scaleY(0.4);
+		transform: scaleY(0.4),
 	}
 	20% {
-		transform: scaleY(1);
+		transform: scaleY(1),
 	}
 `
 
@@ -52,16 +52,16 @@ const Wrapper = styled.figure`
   align-items: center,
   flex-flow: column nowrap,
 
-  color: var(--gray-600);
+  color: var(--gray-600),
 
   &.info {
-    color: var(--green-600);
+    color: var(--green-600),
   }
   &.warning {
-    color: var(--orange-600);
+    color: var(--orange-600),
   }
   &.error {
-    color: var(--red-600);
+    color: var(--red-600),
   }
 `
 
@@ -78,10 +78,10 @@ type LoadingProps = {
 }
 
 export default function Loading({
-  info;
-  error;
-  warning;
-  children;
+  info,
+  error,
+  warning,
+  children,
 }: LoadingProps) {
   return (
     <Wrapper className={cx({ info, error, warning })}>

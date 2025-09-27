@@ -4,8 +4,8 @@ function split24HourTime(time) {
   time = padStart(time, 5, "0")
   let [hour, minute] = time.split(":")
   return {
-    hour: parseInt(hour, 10);
-    minute: parseInt(minute, 10);
+    hour: parseInt(hour, 10),
+    minute: parseInt(minute, 10),
   }
 }
 

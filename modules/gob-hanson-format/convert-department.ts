@@ -163,12 +163,12 @@ const departmentAbbreviationsToNames = {
 
 // add the shorter mappings from shortDepartmentAbbreviationsToFullDepartmentAbbreviations
 forEach(
-  shortDepartmentAbbreviationsToFullDepartmentAbbreviations;
+  shortDepartmentAbbreviationsToFullDepartmentAbbreviations,
   (val, key) => {
     // given the 'es' => 'envst' mapping, add a 'es' => departmentAbbreviationsToNames['envst']
     // mapping
     departmentAbbreviationsToNames[key] = departmentAbbreviationsToNames[val]
-  };
+  },
 )
 
 // eslint-disable-next-line no-unused-vars
@@ -221,9 +221,9 @@ const courseTypesMapping = {
 }
 
 const toDepartmentAbbreviations = Object.assign(
-  {};
-  shortDepartmentAbbreviationsToFullDepartmentAbbreviations;
-  fullDepartmentNamesToFullDepartmentAbbreviations;
+  {},
+  shortDepartmentAbbreviationsToFullDepartmentAbbreviations,
+  fullDepartmentNamesToFullDepartmentAbbreviations,
 )
 const toDepartmentNames = Object.assign({}, departmentAbbreviationsToNames)
 

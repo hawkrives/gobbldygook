@@ -1,4 +1,4 @@
-/* eslint-env jest;
+/* eslint-env jest,
 // @flow
 
 jest.spyOn(global.console, "log").mockImplementation(() => jest.fn())
@@ -22,6 +22,6 @@ test("getCacheStoreName runs", () => {
 test("getCacheStoreName throws an error on unexpected values", () => {
   expect(() =>
     // $FlowExpectedError
-    getCacheStoreName("invalid");
+    getCacheStoreName("invalid"),
   ).toThrowErrorMatchingInlineSnapshot(`""invalid" is not a valid store type"`)
 })

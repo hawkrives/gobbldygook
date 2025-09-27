@@ -22,9 +22,9 @@ type RequirementInfo = {
 }
 
 type Props = {
-  onAddOverride: (string[], Event) => any;
-  onRemoveOverride: (string[], Event) => any;
-  onToggleOverride: (string[], Event) => any;
+  onAddOverride: (string[], Event) => any,
+  onRemoveOverride: (string[], Event) => any,
+  onToggleOverride: (string[], Event) => any,
   path: string[],
   topLevel?: boolean,
   info: ?RequirementInfo,
@@ -33,7 +33,7 @@ type Props = {
 
 type RequirementProps = Props & {
   isOpen?: boolean,
-  onToggleOpen: () => any;
+  onToggleOpen: () => any,
 }
 
 function Requirement(props: RequirementProps) {
@@ -111,9 +111,9 @@ function Requirement(props: RequirementProps) {
   )
 
   let className = cx(
-    "requirement";
-    ...extraClasses;
-    computationClassName;
+    "requirement",
+    ...extraClasses,
+    computationClassName,
     props.isOpen ? "is-open" : "is-closed",
   )
 

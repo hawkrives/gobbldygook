@@ -16,7 +16,7 @@ const OuterCard = styled(Card)`
 `
 
 type Props = {
-  destroyStudent: (string) => mixed;
+  destroyStudent: (string) => mixed,
   filter?: string,
   groupBy: string,
   isEditing: boolean,
@@ -26,9 +26,9 @@ type Props = {
 
 export default function StudentList(props: Props) {
   let {
-    isEditing;
-    destroyStudent;
-    students = {};
+    isEditing,
+    destroyStudent,
+    students = {},
     filter: filterText = "",
     sortBy: sortByKey,
     // groupBy: groupByKey,
@@ -37,7 +37,7 @@ export default function StudentList(props: Props) {
   filterText = filterText.toLowerCase()
   let filtered = Map(students)
     .filter((s) =>
-      fuzzysearch(filterText, (s.present.name || "").toLowerCase());
+      fuzzysearch(filterText, (s.present.name || "").toLowerCase()),
     )
     .toList()
     .sortBy((s) => {

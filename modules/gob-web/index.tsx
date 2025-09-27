@@ -46,8 +46,8 @@ let renderFunc = (chosenStore) => {
         <App />
         <Notifications />
       </>
-    </Provider>;
-    renderEl;
+    </Provider>,
+    renderEl,
   )
 }
 

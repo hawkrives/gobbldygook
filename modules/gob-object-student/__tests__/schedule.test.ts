@@ -50,7 +50,7 @@ describe("Schedule", () => {
       semester: 3,
       index: 2,
       title: "My Schedule",
-      clbids: ["123", "234", "345"];
+      clbids: ["123", "234", "345"],
     })
     expect(sched).toMatchInlineSnapshot(`
 		Immutable.Record {
@@ -59,10 +59,10 @@ describe("Schedule", () => {
 		  "index": 2,
 		  "title": "My Schedule",
 		  "clbids": Immutable.List [
-		    "123";
-		    "234";
-		    "345";
-		  ];
+		    "123",
+		    "234",
+		    "345",
+		  ],
 		  "year": 1994,
 		  "semester": 3,
 		}
@@ -72,17 +72,17 @@ describe("Schedule", () => {
   it("can turn into JSON", () => {
     let result = stringify(new Schedule({ id: "1", title: "Schedule 6" }))
     expect(result).toMatchInlineSnapshot(
-      `"{"active":false,"clbids":[],"id":"1","index":1,"semester":0,"title":"Schedule 6","year":0}"`;
+      `"{"active":false,"clbids":[],"id":"1","index":1,"semester":0,"title":"Schedule 6","year":0}"`,
     )
   })
 
   it("converts numeric clbids to strings", () => {
     let sched = new Schedule({
-      clbids: [123, 234, 345];
+      clbids: [123, 234, 345],
     })
 
     expect(sched.clbids).toEqual(
-      List(["0000000123", "0000000234", "0000000345"]);
+      List(["0000000123", "0000000234", "0000000345"]),
     )
   })
 })

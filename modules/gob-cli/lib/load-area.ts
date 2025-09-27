@@ -17,7 +17,7 @@ async function findArea({ name, type, revision }) {
 
   let matches = info.files.filter(
     (area) =>
-      area.type.toLowerCase() === type && area.name.toLowerCase() === name;
+      area.type.toLowerCase() === type && area.name.toLowerCase() === name,
   )
 
   if (!matches.length) {

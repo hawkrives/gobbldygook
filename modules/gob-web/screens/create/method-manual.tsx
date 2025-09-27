@@ -7,12 +7,12 @@ import { Student } from "@gob/object-student"
 import { Header } from "./components"
 import uniqueId from "lodash/uniqueId"
 import {
-  action as initStudent;
-  type ActionCreator as InitStudentFunc;
+  action as initStudent,
+  type ActionCreator as InitStudentFunc,
 } from "../../redux/students/actions/init-student"
 import {
-  AreaPicker;
-  type Selection;
+  AreaPicker,
+  type Selection,
 } from "../../components/area-of-study/picker"
 
 import "./method-manual.scss"
@@ -42,9 +42,9 @@ class ManualCreationScreen extends React.Component<Props, State> {
   state = {
     error: "",
     name: "Black Widow",
-    matriculation: now.getFullYear() - 3;
+    matriculation: now.getFullYear() - 3,
     matriculationIsValid: true,
-    graduation: now.getFullYear() + 1;
+    graduation: now.getFullYear() + 1,
     graduationIsValid: true,
     degrees: [],
     majors: [],
@@ -65,8 +65,8 @@ class ManualCreationScreen extends React.Component<Props, State> {
     let val = parseInt(ev.target.value)
     let isValid = Boolean(val && ev.target.value.length === 4)
     this.setState(
-      () => ({ matriculation: val, matriculationIsValid: isValid });
-      this.checkValidity;
+      () => ({ matriculation: val, matriculationIsValid: isValid }),
+      this.checkValidity,
     )
   }
 
@@ -74,8 +74,8 @@ class ManualCreationScreen extends React.Component<Props, State> {
     let val = parseInt(ev.target.value)
     let isValid = Boolean(val && ev.target.value.length === 4)
     this.setState(
-      () => ({ graduation: val, graduationIsValid: isValid });
-      this.checkValidity;
+      () => ({ graduation: val, graduationIsValid: isValid }),
+      this.checkValidity,
     )
   }
 
@@ -96,24 +96,24 @@ class ManualCreationScreen extends React.Component<Props, State> {
     this.setState(() => ({ submitted: true }))
 
     let studies = Set([
-      ...this.state.degrees;
-      ...this.state.majors;
-      ...this.state.concentrations;
-      ...this.state.emphases;
+      ...this.state.degrees,
+      ...this.state.majors,
+      ...this.state.concentrations,
+      ...this.state.emphases,
     ])
 
     // pick out only the values that we want
     studies = studies.map(({ name, revision, type }) => ({
-      name;
-      revision;
-      type;
+      name,
+      revision,
+      type,
     }))
 
     let rawStudent = {
       name: this.state.name,
       matriculation: this.state.matriculation,
       graduation: this.state.graduation,
-      studies;
+      studies,
     }
 
     let student = new Student((rawStudent: any))

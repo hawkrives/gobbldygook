@@ -1,4 +1,4 @@
-/* eslint-env jest;
+/* eslint-env jest,
 // @flow
 
 jest.spyOn(global.console, "log").mockImplementation(() => jest.fn())
@@ -15,7 +15,7 @@ beforeEach(async () => {
 
 test("cacheItemHash runs", () => {
   expect(() =>
-    cacheItemHash("folder/file", "courses", "deadbeef");
+    cacheItemHash("folder/file", "courses", "deadbeef"),
   ).not.toThrow()
 })
 

@@ -23,7 +23,7 @@ export function getCourseFromNetwork(clbid: string): Promise<CourseType> {
 
   return request.then((course) => {
     networkCache.delete(clbid)
-    return (course: any)
+    return (course as any)
   })
 }
 
@@ -53,7 +53,7 @@ export function getCourseFromDatabase(clbid: string): Promise<CourseType> {
 export async function getCourse(
   clbid: string,
   term?: ?number,
-  fabrications?: ?(Array<CourseType> | List<CourseType>) = [];
+  fabrications?: ?(Array<CourseType> | List<CourseType>) = [],
 ): Promise<Result<CourseType>> {
   if (fabrications) {
     let fab = fabrications.find((c) => c.clbid === clbid)
@@ -72,8 +72,8 @@ export async function getCourse(
     if (!course) {
       return {
         error: true,
-        result: new Error(`Could not find ${clbid}`);
-        meta: { clbid, term };
+        result: new Error(`Could not find ${clbid}`),
+        meta: { clbid, term },
       }
     }
     return { error: false, result: course }

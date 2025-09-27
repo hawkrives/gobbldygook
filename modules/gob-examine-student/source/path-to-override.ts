@@ -5,7 +5,7 @@ const JOINER = "\x1C"
  * @private
  * @param {string[]} path - the path to create the string from
  * @returns {string} - the stringified path
-;
+,
 export default function pathToOverride(path: string[]) {
   return path.join(JOINER).toLowerCase()
 }

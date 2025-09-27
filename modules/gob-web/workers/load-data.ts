@@ -21,7 +21,7 @@ let fetchText = (...args) =>
 const memFetchText: typeof fetchText = mem(fetchText)
 
 worker.addEventListener("error", (msg) =>
-  console.warn("[main] received error from load-data worker:", msg);
+  console.warn("[main] received error from load-data worker:", msg),
 )
 
 worker.addEventListener("message", ({ data }: { data: string }) => {

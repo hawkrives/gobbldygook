@@ -6,23 +6,23 @@ import { Icon } from "./icon"
 import { Toolbar, ToolbarButton } from "./toolbar"
 import { undo, redo } from "../redux/students/actions/undo"
 import {
-  iosUndo;
-  iosUndoOutline;
-  iosRedo;
-  iosRedoOutline;
-  iosSearch;
-  iosPeopleOutline;
-  iosUploadOutline;
-  grid;
+  iosUndo,
+  iosUndoOutline,
+  iosRedo,
+  iosRedoOutline,
+  iosSearch,
+  iosPeopleOutline,
+  iosUploadOutline,
+  grid,
 } from "../icons/ionicons"
 import styled from "styled-components"
 import { Student } from "@gob/object-student"
 import type { Undoable } from "../types"
 
 type Props = {
-  redo: (string) => any;
+  redo: (string) => any,
   student: Undoable<Student>,
-  undo: (string) => any;
+  undo: (string) => any,
 
   search?: boolean,
   share?: boolean,
@@ -110,5 +110,5 @@ export function SidebarToolbar(props: Props) {
 }
 
 export const ConnectedSidebarToolbar = connect(undefined, { undo, redo })(
-  SidebarToolbar;
+  SidebarToolbar,
 )

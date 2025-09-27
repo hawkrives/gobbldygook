@@ -4,19 +4,19 @@ export { filterAreaList } from "./filter-area-list"
 export { getActiveCourses } from "./get-active-courses"
 
 export {
-  findWarnings;
-  checkForInvalidYear;
-  checkForInvalidSemester;
-  checkForTimeConflicts;
+  findWarnings,
+  checkForInvalidYear,
+  checkForInvalidSemester,
+  checkForTimeConflicts,
 } from "./find-course-warnings"
 export type { WarningType, WarningTypeEnum } from "./find-course-warnings"
 
 export {
-  IDENT_COURSE;
-  IDENT_AREA;
-  IDENT_YEAR;
-  IDENT_SEMESTER;
-  IDENT_SCHEDULE;
+  IDENT_COURSE,
+  IDENT_AREA,
+  IDENT_YEAR,
+  IDENT_SEMESTER,
+  IDENT_SCHEDULE,
 } from "./item-types"
 
 export { Schedule } from "./schedule"

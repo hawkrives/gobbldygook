@@ -12,8 +12,8 @@ export function storeCourses(path: string, data: Array<BasicCourse>) {
   console.log(`courses: storing ${path}`)
 
   let coursesToStore = data.map((course) => ({
-    ...course;
-    ...prepareCourse(course);
+    ...course,
+    ...prepareCourse(course),
     sourcePath: path,
   }))
 
@@ -44,10 +44,10 @@ export function storeArea(path: string, data: BasicArea) {
   console.log(`areas: storing ${path}`)
 
   const area = {
-    ...data;
-    type: data.type.toLowerCase();
+    ...data,
+    type: data.type.toLowerCase(),
     sourcePath: path,
-    dateAdded: new Date();
+    dateAdded: new Date(),
   }
 
   const start = present()

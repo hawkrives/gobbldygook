@@ -11,7 +11,7 @@ const filterByOfExpression = (courses: Array<Course>, $of: Array<Course>) =>
  * @param {Object.<string, String|Number|Array>} expr - the filter expression
  * @param {Course[]} courses - the list of courses
  * @returns {Course[]} filtered - the filtered courses
-;
+,
 export default function applyFilter(
   expr: FilterExpression,
   courses: Course[],
@@ -24,8 +24,8 @@ export default function applyFilter(
     filtered = filterByWhereClause(courses, expr.$where)
   } else if (expr.$filterType === "of") {
     filtered = filterByOfExpression(
-      courses;
-      expr.$of.map((c) => c.$course);
+      courses,
+      expr.$of.map((c) => c.$course),
     )
   }
 

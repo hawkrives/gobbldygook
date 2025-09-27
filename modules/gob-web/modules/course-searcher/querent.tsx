@@ -17,7 +17,7 @@ type Props = {
     results: List<string | CourseType>,
     keys: Array<string>,
     years: Set<number>,
-  }) => React.Node;
+  }) => React.Node,
   groupBy: GROUP_BY_KEY,
   sortBy: SORT_BY_KEY,
   limitTo: string,
@@ -40,8 +40,8 @@ export class Querent extends React.Component<Props, State> {
   state = {
     error: "",
     inProgress: false,
-    results: List();
-    grouped: List();
+    results: List(),
+    grouped: List(),
     didSearch: false,
   }
 
@@ -94,7 +94,7 @@ export class Querent extends React.Component<Props, State> {
       this.setState(() => ({
         didSearch: true,
         inProgress: false,
-        results: List(payload);
+        results: List(payload),
       }))
     } catch (error) {
       if (!this._isMounted) {
@@ -120,22 +120,22 @@ export class Querent extends React.Component<Props, State> {
 
     let {
       results: grouped,
-      years;
-      keys;
+      years,
+      keys,
     } = memSortAndGroup(results, {
-      sorting;
-      grouping;
-      filtering;
-      limiting;
+      sorting,
+      grouping,
+      filtering,
+      limiting,
     })
 
     return this.props.children({
-      error;
-      inProgress;
-      didSearch;
+      error,
+      inProgress,
+      didSearch,
       results: grouped,
-      years;
-      keys;
+      years,
+      keys,
     })
   }
 }

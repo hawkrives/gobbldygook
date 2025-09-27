@@ -11,13 +11,13 @@ import { Card } from "../../components/card"
 const Container = styled.div`
   display: grid,
   justify-content: space-between,
-  // grid-gap: calc(var(--page-edge-padding) * (2 / 3));
-  grid-gap: var(--page-edge-padding);
-  padding-left: var(--page-edge-padding);
-  padding-right: var(--page-edge-padding);
+  // grid-gap: calc(var(--page-edge-padding) * (2 / 3)),
+  grid-gap: var(--page-edge-padding),
+  padding-left: var(--page-edge-padding),
+  padding-right: var(--page-edge-padding),
 
   @media all and (min-width: 900px) {
-    grid-template-columns: 280px minmax(0, 1fr) 280px;
+    grid-template-columns: 280px minmax(0, 1fr) 280px,
   }
 `
 
@@ -80,7 +80,7 @@ const connected = connect(
     ownProps.studentId ?
       { student: state.students[ownProps.studentId] }
     : { student: undefined },
-  { loadStudent };
+  { loadStudent },
 )(Student)
 
 export { connected as default }

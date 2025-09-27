@@ -40,7 +40,7 @@ function loadAreaFromDatabase(areaQuery: AreaQuery) {
         let q = JSON.stringify(dbQuery)
         return {
           error: true,
-          message: `the area "${name}" (${type}) could not be found with the query ${q}`;
+          message: `the area "${name}" (${type}) could not be found with the query ${q}`,
           data: dbQuery,
         }
       }
@@ -52,7 +52,7 @@ function loadAreaFromDatabase(areaQuery: AreaQuery) {
       let q = JSON.stringify(dbQuery)
       return {
         error: true,
-        message: `Could not find area ${q} (error: ${err.message})`;
+        message: `Could not find area ${q} (error: ${err.message})`,
         data: dbQuery,
       }
     })

@@ -1,6 +1,6 @@
 export function stringifyError(
   err: any,
-  filter?: Array<any> | ((key: any, value: any) => any);
+  filter?: Array<any> | ((key: any, value: any) => any),
   space?: string | number,
 ) {
   let plainObject = {}

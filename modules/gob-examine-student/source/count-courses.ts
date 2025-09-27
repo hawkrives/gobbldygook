@@ -9,7 +9,7 @@ import type { Course } from "./types"
  * @private
  * @param {Course[]} courses - the list of courses
  * @returns {number} - the number of unique courses
-;
+,
 export default function countCourses(courses: Course[]) {
   return size(uniqBy(courses, simplifyCourse))
 }

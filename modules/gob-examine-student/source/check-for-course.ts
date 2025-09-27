@@ -7,7 +7,7 @@ import type { Course } from "./types"
  * @param {Course} query - the course to look for
  * @param {Course[]} courses - the list of courses
  * @returns {Boolean} - if the course was found or not
-;
+,
 export default function checkForCourse(query: Course, courses: Course[]) {
   return courses.some((course) => compareCourseToCourse(query, course))
 }

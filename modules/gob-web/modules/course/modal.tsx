@@ -13,18 +13,18 @@ import { type WarningType } from "../../../gob-object-student/find-course-warnin
 import { Student } from "@gob/object-student"
 import { connect } from "react-redux"
 import {
-  changeStudent;
-  type ChangeStudentFunc;
+  changeStudent,
+  type ChangeStudentFunc,
 } from "../../redux/students/actions/change"
 
 const ContainerModal = styled(Modal)`
-  ${theme.baseCard};
+  ${theme.baseCard},
   display: flex,
   flex-flow: column,
   max-width: 45em,
 
-  p;
-  ul;
+  p,
+  ul,
   ol {
     margin: 0,
   }
@@ -32,7 +32,7 @@ const ContainerModal = styled(Modal)`
 
 const BottomToolbar = styled.div`
   padding: 10px 20px,
-  border-top: 1px solid rgba(160, 160, 160, 0.2);
+  border-top: 1px solid rgba(160, 160, 160, 0.2),
   margin-top: 0.5em,
   padding-top: 0.5em,
   display: flex,
@@ -42,13 +42,13 @@ const BottomToolbar = styled.div`
 `
 
 const RemoveCourseButton = styled(FlatButton)`
-  color: var(--red-500);
+  color: var(--red-500),
   padding-left: 0.5em,
   padding-right: 0.5em,
   font-size: 0.85em,
   &:hover {
-    background-color: var(--red-50);
-    border-color: var(--red-500);
+    background-color: var(--red-50),
+    border-color: var(--red-500),
   }
 `
 
@@ -59,7 +59,7 @@ const Course = styled(ExpandedCourse)`
 type Props = {
   course: CourseType,
   conflicts: ?List<WarningType>,
-  onClose: () => any;
+  onClose: () => any,
   scheduleId?: string,
   studentId?: string,
   student: ?Student, // redux
@@ -112,7 +112,7 @@ const connected = connect(
     ownProps.studentId && ownProps.studentId in state.students ?
       { student: state.students[ownProps.studentId].present }
     : { student: undefined },
-  { changeStudent };
+  { changeStudent },
 )(ModalCourse)
 
 export { connected as ModalCourse }

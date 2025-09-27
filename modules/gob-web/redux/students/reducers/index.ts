@@ -2,10 +2,10 @@ import omit from "lodash/omit"
 import { ActionTypes as UndoableActionTypes } from "redux-undo"
 import { CHANGE_STUDENT } from "../actions/change"
 import {
-  INIT_STUDENT;
-  IMPORT_STUDENT;
-  DESTROY_STUDENT;
-  LOAD_STUDENT;
+  INIT_STUDENT,
+  IMPORT_STUDENT,
+  DESTROY_STUDENT,
+  LOAD_STUDENT,
 } from "../constants"
 import type { Undoable, Action } from "../../types"
 import { undoableReducer as wrapper } from "./student"

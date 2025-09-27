@@ -7,12 +7,12 @@ import hasOverride from "./has-override"
 import isRequirementName from "./is-requirement-name"
 import mapValues from "lodash/mapValues"
 import type {
-  ParsedHansonFile;
-  ParsedHansonRequirement;
-  Requirement;
-  Course;
-  OverridesObject;
-  FulfillmentsObject;
+  ParsedHansonFile,
+  ParsedHansonRequirement,
+  Requirement,
+  Course,
+  OverridesObject,
+  FulfillmentsObject,
 } from "./types"
 
 // The overall computation is done by compute, which is in charge of computing
@@ -25,24 +25,24 @@ export default function compute(
     overrides: OverridesObject,
     fulfillments: FulfillmentsObject,
     dirty?: Set<string>,
-  };
+  },
 ) {
   let {
-    path;
-    courses = [];
-    overrides = {};
-    fulfillments = {};
-    dirty = new Set();
+    path,
+    courses = [],
+    overrides = {},
+    fulfillments = {},
+    dirty = new Set(),
   } = args
   let childrenShareCourses = Boolean(outerReq["children share courses"])
 
   let requirement: Requirement = mapValues(
-    outerReq;
+    outerReq,
     (req: Requirement, name: string) => {
       if (isRequirementName(name)) {
         // Primarily for the math major: if a requirement is set to 'children share courses',
         // then they share courses. The default is false (well, undefined).
-        // If they don't share courses, then they share the dirty set;
+        // If they don't share courses, then they share the dirty set,
         // if they do, however, they each receive their own dirty set, so that they don't know if a course has been used yet or not.
         // 'children share courses' is non-recursive.
         let localDirty: Set<string> = dirty
@@ -50,15 +50,15 @@ export default function compute(
           localDirty = new Set()
         }
         return compute(req, {
-          path: path.concat([name]);
-          courses;
-          overrides;
+          path: path.concat([name]),
+          courses,
+          overrides,
           dirty: localDirty,
-          fulfillments;
+          fulfillments,
         })
       }
       return req
-    };
+    },
   )
 
   let computed = false
@@ -73,25 +73,25 @@ export default function compute(
     if (requirement.result === "") {
       throw new SyntaxError(
         `compute(): requirement.result must not be empty (in ${JSON.stringify(
-          requirement;
-        )})`;
+          requirement,
+        )})`,
       )
     }
 
     let fulfillment = getFulfillment(path, fulfillments)
     if (fulfillment) {
       requirement.result = applyFulfillmentToExpression(
-        requirement.result;
-        fulfillment;
+        requirement.result,
+        fulfillment,
       )
     }
 
     computed = computeChunk({
       expr: requirement.result,
       ctx: requirement,
-      courses;
-      dirty;
-      fulfillment;
+      courses,
+      dirty,
+      fulfillment,
     })
   } else if ("message" in requirement) {
     // or ask for an override

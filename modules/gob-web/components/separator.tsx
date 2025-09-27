@@ -10,15 +10,15 @@ const Rule = styled.hr`
 `
 
 const LineRule = styled(Rule)`
-  border-width: 1px;
+  border-width: 1px,
 `
 
 const SpacerRule = styled(Rule)`
-  padding: 0 0.5em;
+  padding: 0 0.5em,
 `
 
 const FlexSpacerRule = styled(Rule)`
-  flex: ${(props) => props.flex};
+  flex: ${(props) => props.flex},
 `
 
 type Props = {

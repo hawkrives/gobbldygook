@@ -18,7 +18,7 @@ type Props = {
   selections: Array<Selection>,
   type: string,
   label?: string,
-  onChange: (Array<Selection>) => any;
+  onChange: (Array<Selection>) => any,
   availableThrough?: number,
 }
 
@@ -35,10 +35,10 @@ export function getOptions(
   }
 
   return filtered.map(({ name, type, revision }) => ({
-    name;
-    type;
-    revision;
-    value: `${name} (${revision})`;
+    name,
+    type,
+    revision,
+    value: `${name} (${revision})`,
     label: `${name}`,
   }))
 }

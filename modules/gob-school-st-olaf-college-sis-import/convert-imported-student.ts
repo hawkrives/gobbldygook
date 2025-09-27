@@ -1,9 +1,9 @@
 import {
-  Student;
-  Schedule;
-  type AreaQuery;
-  type CourseType;
-  type CourseLookupFunc;
+  Student,
+  Schedule,
+  type AreaQuery,
+  type CourseType,
+  type CourseLookupFunc,
 } from "@gob/object-student"
 import { List, Set, Map } from "immutable"
 
@@ -38,62 +38,62 @@ type PartialCourse = {
 
 function fleshOutSisFabrication(input: PartialCourse): CourseType {
   let {
-    clbid;
-    credits;
-    crsid = "n/a";
-    department;
-    enrolled = 1;
-    gereqs = [];
-    groupid = "fabrication";
-    instructors = [];
-    lab;
-    max = 0;
-    name;
-    number;
-    pf = false;
-    prerequisites = false;
-    section;
-    semester;
-    status = "Closed";
-    term;
-    title = "";
-    type = "Research";
-    year;
+    clbid,
+    credits,
+    crsid = "n/a",
+    department,
+    enrolled = 1,
+    gereqs = [],
+    groupid = "fabrication",
+    instructors = [],
+    lab,
+    max = 0,
+    name,
+    number,
+    pf = false,
+    prerequisites = false,
+    section,
+    semester,
+    status = "Closed",
+    term,
+    title = "",
+    type = "Research",
+    year,
   } = input
 
   let revisions = []
   let notes = ""
   let description = []
   let level = Math.floor(
-    (parseInt(String(number).replace(/^[0-9]/g, "")) / 100) * 100;
+    (parseInt(String(number).replace(/^[0-9]/g, "")) / 100) * 100,
   )
 
   return {
-    clbid;
-    credits;
-    crsid;
-    department;
-    description;
-    enrolled;
-    gereqs;
-    groupid;
-    instructors;
-    lab;
-    level;
-    max;
-    name;
-    notes;
-    number;
-    pf;
-    prerequisites;
-    revisions;
-    section;
-    semester;
-    status;
-    term;
-    title;
-    type;
-    year;
+    clbid,
+    credits,
+    crsid,
+    department,
+    description,
+    enrolled,
+    gereqs,
+    groupid,
+    instructors,
+    lab,
+    level,
+    max,
+    name,
+    notes,
+    number,
+    pf,
+    prerequisites,
+    revisions,
+    section,
+    semester,
+    status,
+    term,
+    title,
+    type,
+    year,
   }
 }
 
@@ -126,15 +126,15 @@ export async function convertStudent(
   let info = { name, advisor, graduation, matriculation }
 
   let { schedules, fabrications } = await processSchedules(
-    student.schedules;
-    getCourse;
+    student.schedules,
+    getCourse,
   )
 
   let filledStudent = new Student({
-    ...info;
-    schedules;
-    fabrications;
-    studies;
+    ...info,
+    schedules,
+    fabrications,
+    studies,
   })
 
   return filledStudent
@@ -144,7 +144,7 @@ export async function processSchedules(
   schedules: Array<PartialSchedule>,
   getCourse: CourseLookupFunc,
 ): Promise<{
-  schedules: Map<string, Schedule>;
+  schedules: Map<string, Schedule>,
   fabrications: List<CourseType>,
 }> {
   let listOfSchedules = List(schedules)
@@ -153,9 +153,9 @@ export async function processSchedules(
     let clbids = List(courses.map((c) => c.clbid))
 
     return new Schedule({
-      semester;
-      year;
-      clbids;
+      semester,
+      year,
+      clbids,
       active: true,
     })
   })
@@ -166,7 +166,7 @@ export async function processSchedules(
 
     return getCourse(clbid, term, []).then((resolved) => {
       // we actually want to invert this; if we found the course, then it's not
-      // a fabrication, so we return null; otoh, if we _didn't_ find the course;
+      // a fabrication, so we return null; otoh, if we _didn't_ find the course,
       // it must be a fabrication, so we actually want to return it.
       if (resolved.error === false) {
         return null
@@ -180,8 +180,8 @@ export async function processSchedules(
   let fabricationPairs = resolvedFabrications.filter(Boolean)
 
   return {
-    schedules: Map(scheds.map((s) => [s.id, s]));
-    fabrications: List(fabricationPairs);
+    schedules: Map(scheds.map((s) => [s.id, s])),
+    fabrications: List(fabricationPairs),
   }
 }
 
@@ -203,9 +203,9 @@ export function processStudies({
   })
 
   return Set([
-    ...d.map((name) => ({ name, type: "degree", revision: "latest" }));
-    ...m.map((name) => ({ name, type: "major", revision: "latest" }));
-    ...c.map((name) => ({ name, type: "concentration", revision: "latest" }));
-    ...e.map((name) => ({ name, type: "emphasis", revision: "latest" }));
+    ...d.map((name) => ({ name, type: "degree", revision: "latest" })),
+    ...m.map((name) => ({ name, type: "major", revision: "latest" })),
+    ...c.map((name) => ({ name, type: "concentration", revision: "latest" })),
+    ...e.map((name) => ({ name, type: "emphasis", revision: "latest" })),
   ])
 }

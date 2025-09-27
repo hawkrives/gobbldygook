@@ -5,8 +5,8 @@ import type { Result } from "@gob/types"
 import { List, Record } from "immutable"
 import type { CourseLookupFunc, CourseType } from "./types"
 import {
-  validateSchedule;
-  type Result as ValidationResult;
+  validateSchedule,
+  type Result as ValidationResult,
 } from "./validate-schedule"
 
 type ScheduleType = {
@@ -24,7 +24,7 @@ const defaultValues: ScheduleType = {
   active: false,
   index: 1,
   title: "no title",
-  clbids: List();
+  clbids: List(),
   year: 0,
   semester: 0,
 }
@@ -34,13 +34,13 @@ const ScheduleRecord = Record(defaultValues)
 export class Schedule extends ScheduleRecord<ScheduleType> {
   constructor(data: any = {}) {
     let {
-      id = uuid();
-      clbids = [];
-      year;
-      semester;
-      active;
-      index;
-      title = `Schedule ${randomChar()}`;
+      id = uuid(),
+      clbids = [],
+      year,
+      semester,
+      active,
+      index,
+      title = `Schedule ${randomChar()}`,
     } = data
 
     if (!List.isList(clbids)) {
@@ -52,13 +52,13 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
     }
 
     super({
-      year;
-      semester;
-      index;
-      active;
-      title;
-      id;
-      clbids: (clbids: any);
+      year,
+      semester,
+      index,
+      active,
+      title,
+      id,
+      clbids: (clbids: any),
     })
   }
 
@@ -115,7 +115,7 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
   ): Promise<List<Result<CourseType>>> {
     let term = this.getTerm()
     let promises = this.clbids.map((clbid) =>
-      getCourse(clbid, term, fabrications);
+      getCourse(clbid, term, fabrications),
     )
     return Promise.all(promises).then(List)
   }
@@ -125,8 +125,8 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
     fabrications?: Array<CourseType> | List<CourseType>,
   ): Promise<List<CourseType>> {
     let coursesWithErrors = await this.getCoursesWithErrors(
-      getCourse;
-      fabrications;
+      getCourse,
+      fabrications,
     )
 
     return coursesWithErrors

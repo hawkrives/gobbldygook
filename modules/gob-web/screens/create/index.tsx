@@ -8,27 +8,27 @@ import { Router } from "@reach/router"
 let NotFound = () => <h1>404 Not Found</h1>
 
 const WelcomePage = Loadable({
-  loader: () => import("./welcome");
+  loader: () => import("./welcome"),
   loading: LoadingComponent,
 })
 
 const ImportPage = Loadable({
-  loader: () => import("./method-import");
+  loader: () => import("./method-import"),
   loading: LoadingComponent,
 })
 
 const ManualPage = Loadable({
-  loader: () => import("./method-manual");
+  loader: () => import("./method-manual"),
   loading: LoadingComponent,
 })
 
 const DrivePage = Loadable({
-  loader: () => import("./method-drive");
+  loader: () => import("./method-drive"),
   loading: LoadingComponent,
 })
 
 const UploadPage = Loadable({
-  loader: () => import("./method-upload");
+  loader: () => import("./method-upload"),
   loading: LoadingComponent,
 })
 

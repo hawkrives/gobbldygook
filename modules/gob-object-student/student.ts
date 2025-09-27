@@ -2,11 +2,11 @@ import uuid from "uuid/v4"
 import { Record, OrderedMap, Map, List } from "immutable"
 
 import type {
-  AreaQuery;
-  OverrideType;
-  FulfillmentType;
-  CourseType;
-  CourseLookupFunc;
+  AreaQuery,
+  OverrideType,
+  FulfillmentType,
+  CourseType,
+  CourseLookupFunc,
 } from "./types"
 
 import { Schedule } from "./schedule"
@@ -26,12 +26,12 @@ type StudentType = {
   creditsNeeded: number,
 
   studies: List<AreaQuery>,
-  schedules: OrderedMap<string, Schedule>;
-  overrides: OrderedMap<string, OverrideType>;
+  schedules: OrderedMap<string, Schedule>,
+  overrides: OrderedMap<string, OverrideType>,
   fabrications: List<CourseType>,
-  fulfillments: OrderedMap<string, FulfillmentType>;
+  fulfillments: OrderedMap<string, FulfillmentType>,
 
-  settings: OrderedMap<string, mixed>;
+  settings: OrderedMap<string, mixed>,
 }
 
 const defaultValues: StudentType = {
@@ -41,14 +41,14 @@ const defaultValues: StudentType = {
   matriculation: 0,
   graduation: 4,
   advisor: "Professor Y",
-  dateLastModified: new Date();
-  dateCreated: new Date();
-  studies: List();
-  schedules: OrderedMap();
-  overrides: OrderedMap();
-  fabrications: List();
-  fulfillments: OrderedMap();
-  settings: OrderedMap();
+  dateLastModified: new Date(),
+  dateCreated: new Date(),
+  studies: List(),
+  schedules: OrderedMap(),
+  overrides: OrderedMap(),
+  fabrications: List(),
+  fulfillments: OrderedMap(),
+  settings: OrderedMap(),
   creditsNeeded: 35,
 }
 
@@ -59,21 +59,21 @@ export class Student extends StudentRecord<StudentType> {
     const now = new Date()
 
     let {
-      id = uuid();
-      studies = [];
-      schedules = {};
-      matriculation = now.getFullYear() - 2;
-      graduation = now.getFullYear() + 2;
-      overrides = {};
-      fulfillments = {};
-      fabrications = [];
-      settings = {};
-      dateLastModified = now;
-      dateCreated = now;
-      advisor;
-      version;
-      name;
-      creditsNeeded;
+      id = uuid(),
+      studies = [],
+      schedules = {},
+      matriculation = now.getFullYear() - 2,
+      graduation = now.getFullYear() + 2,
+      overrides = {},
+      fulfillments = {},
+      fabrications = [],
+      settings = {},
+      dateLastModified = now,
+      dateCreated = now,
+      advisor,
+      version,
+      name,
+      creditsNeeded,
     } = data
 
     if (Array.isArray(studies)) {
@@ -112,22 +112,22 @@ export class Student extends StudentRecord<StudentType> {
 
     super(
       ({
-        dateLastModified;
-        dateCreated;
-        id;
-        studies;
-        schedules;
-        matriculation;
-        graduation;
-        fulfillments;
-        settings;
-        overrides;
-        fabrications;
-        advisor;
-        version;
-        name;
-        creditsNeeded;
-      }: any);
+        dateLastModified,
+        dateCreated,
+        id,
+        studies,
+        schedules,
+        matriculation,
+        graduation,
+        fulfillments,
+        settings,
+        overrides,
+        fabrications,
+        advisor,
+        version,
+        name,
+        creditsNeeded,
+      }: any),
     )
   }
 
@@ -193,7 +193,7 @@ export class Student extends StudentRecord<StudentType> {
 
   /**
    * Provide a description of schedules here
-  ;
+  ,
 
   get schedules(): OrderedMap<string, Schedule> {
     return this.get("schedules")
@@ -206,7 +206,7 @@ export class Student extends StudentRecord<StudentType> {
   getScheduleForTerm(args: { year: number, semester: number }): ?Schedule {
     let { year, semester } = args
     return this.schedules.find(
-      (s) => s.active === true && s.year === year && s.semester === semester;
+      (s) => s.active === true && s.year === year && s.semester === semester,
     )
   }
 
@@ -225,7 +225,7 @@ export class Student extends StudentRecord<StudentType> {
 
     if (!deleted) {
       throw new ReferenceError(
-        `Could not find a schedule with an ID of ${scheduleId}.`;
+        `Could not find a schedule with an ID of ${scheduleId}.`,
       )
     }
 
@@ -235,7 +235,7 @@ export class Student extends StudentRecord<StudentType> {
       if (deleted && deleted.active) {
         let { year, semester } = deleted
         let otherSchedKey = mutable.schedules.findKey((s) =>
-          s.isSpecificTerm(year, semester);
+          s.isSpecificTerm(year, semester),
         )
 
         if (otherSchedKey) {
@@ -350,7 +350,7 @@ export class Student extends StudentRecord<StudentType> {
     return this.updateIn(["schedules", scheduleId, "clbids"], (ids) => {
       if (!ids) {
         throw new ReferenceError(
-          `Could not find a schedule with an ID of "${scheduleId}".`;
+          `Could not find a schedule with an ID of "${scheduleId}".`,
         )
       }
 
@@ -371,7 +371,7 @@ export class Student extends StudentRecord<StudentType> {
 
   /**
    * Provide a description of areas here
-  ;
+  ,
 
   get studies(): List<AreaQuery> {
     return this.get("studies")
@@ -391,14 +391,14 @@ export class Student extends StudentRecord<StudentType> {
 
   findAreaIndex({ name, type, revision }: AreaQuery): number {
     return this.studies.findIndex(
-      (a) => a.name === name && a.type === type && a.revision === revision;
+      (a) => a.name === name && a.type === type && a.revision === revision,
     )
   }
 
   hasArea({ name, type, revision }: AreaQuery): boolean {
     return (
       this.studies.find(
-        (a) => a.name === name && a.type === type && a.revision === revision;
+        (a) => a.name === name && a.type === type && a.revision === revision,
       ) !== undefined
     )
   }
@@ -409,7 +409,7 @@ export class Student extends StudentRecord<StudentType> {
 
   /**
    * Provide a description of overrides here
-  ;
+  ,
 
   get overrides(): OrderedMap<string, OverrideType> {
     return this.get("overrides")
@@ -433,7 +433,7 @@ export class Student extends StudentRecord<StudentType> {
 
   /**
    * Provide a description of fabrications here
-  ;
+  ,
 
   get fabrications(): List<CourseType> {
     return this.get("fabrications")
@@ -461,7 +461,7 @@ export class Student extends StudentRecord<StudentType> {
 
   /**
    * Provide a description of fabrications here
-  ;
+  ,
 
   get fulfillments(): OrderedMap<string, FulfillmentType> {
     return this.get("fulfillments")

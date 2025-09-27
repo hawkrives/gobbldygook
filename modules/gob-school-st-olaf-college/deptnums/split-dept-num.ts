@@ -7,13 +7,13 @@ export type DeptNum = {
 }
 
 /**
- * Splits a deptnum string (like "AS/RE 230A") into its components;
+ * Splits a deptnum string (like "AS/RE 230A") into its components,
  * like {department: 'AS/RE', number: 230, section: 'A'}.
  *
  * @param {String} deptNumString - the deptnum to split
  * @param {Boolean} includeSection - include the section in the result?
  * @returns {Object} - the result
-;
+,
 export function splitDeptNum(
   deptNumString: string,
   includeSection?: boolean = false,
@@ -31,7 +31,7 @@ export function splitDeptNum(
       matches[1].includes("/") ?
         [matches[2], matches[3]].join("/")
       : matches[1],
-    number: parseInt(matches[4], 10);
+    number: parseInt(matches[4], 10),
   }
 
   if (includeSection && matches.length >= 6 && matches[5]) {

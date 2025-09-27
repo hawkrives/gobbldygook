@@ -13,28 +13,28 @@ import type { Course, Qualification } from "./types"
  * @param {string} $operator - the operator to check against
  * @param {string} $value - the value compare to
  * @returns {boolean} - whether the course matched or not
-;
+,
 export default function compareCourseToQualification(
   course: Course,
   { $key, $operator, $value, $type }: Qualification,
 ) {
   if (Array.isArray($value)) {
     throw new TypeError(
-      "compareCourseToQualification(): what would a comparison to a list even do? oh, wait; I suppose it could compare against one of several values… well, I'm not doing that right now. If you want it, edit the PEG and stick appropriate stuff in here (probably simplest to just call this function again with each possible value and return true if any are true.)";
+      "compareCourseToQualification(): what would a comparison to a list even do? oh, wait; I suppose it could compare against one of several values… well, I'm not doing that right now. If you want it, edit the PEG and stick appropriate stuff in here (probably simplest to just call this function again with each possible value and return true if any are true.)",
     )
   } else if (isPlainObject($value)) {
     return compareCourseToQualificationViaObject(course, {
-      $key;
-      $operator;
-      $value;
-      $type;
+      $key,
+      $operator,
+      $value,
+      $type,
     })
   } else {
     return compareCourseToQualificationViaOperator(course, {
-      $key;
-      $operator;
-      $value;
-      $type;
+      $key,
+      $operator,
+      $value,
+      $type,
     })
   }
 }
@@ -45,7 +45,7 @@ function compareCourseToQualificationViaObject(
 ) {
   if (typeof $value !== "object") {
     throw new TypeError(
-      `compareCourseToQualification(): $value must be an object; "${typeof $value}" is not an object.`;
+      `compareCourseToQualification(): $value must be an object; "${typeof $value}" is not an object.`,
     )
   }
 
@@ -54,8 +54,8 @@ function compareCourseToQualificationViaObject(
     // operators earlier, in the filterByQualification function.
     assertKeys($value, "$computed-value")
     const simplifiedOperator = {
-      $key;
-      $operator;
+      $key,
+      $operator,
       $value: $value["$computed-value"],
       $type: "qualification",
     }
@@ -64,26 +64,26 @@ function compareCourseToQualificationViaObject(
     if ($value.$booleanType === "or") {
       return some($value.$or, (val) =>
         compareCourseToQualification(course, {
-          $key;
-          $operator;
+          $key,
+          $operator,
           $value: val,
-          $type;
-        });
+          $type,
+        }),
       )
     } else if ($value.$booleanType === "and") {
       return every($value.$and, (val) =>
         compareCourseToQualification(course, {
-          $key;
-          $operator;
+          $key,
+          $operator,
           $value: val,
-          $type;
-        });
+          $type,
+        }),
       )
     } else {
       throw new TypeError(
         `compareCourseToQualification(): neither $or nor $and could be found in ${JSON.stringify(
-          $value;
-        )}`;
+          $value,
+        )}`,
       )
     }
   } else {
