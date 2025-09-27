@@ -92,7 +92,7 @@ export async function checkSupport(): Promise<boolean> {
   return Boolean(supportState)
 }
 
-export async function loadDataForTerm(term: number): Promise<mixed> {
+export async function loadDataForTerm(term: number): Promise<unknown> {
   let nonce = Date.now()
 
   if (!navigator.onLine) {

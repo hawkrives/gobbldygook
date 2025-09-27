@@ -16,6 +16,6 @@ export type FulfillmentType = {}
 
 export type CourseLookupFunc = (
   clbid: string,
-  term?: ?number,
+  term?: number | null,
   fabrications?: ?(Array<CourseType> | List<CourseType>),
 ) => Promise<Result<CourseType>>

@@ -24,7 +24,7 @@ const BOOLEANS: Set<BooleanBit> = new Set([
 
 type Query = { [key: string]: unknown }
 
-function checkQueryBit(course: Course, [key: string, values: Array<mixed>]) {
+function checkQueryBit(course: Course, [key: string, values: Array<unknown>]) {
   if (!Object.prototype.hasOwnProperty.call(course, key)) {
     return false
   }

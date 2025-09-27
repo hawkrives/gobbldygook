@@ -16,7 +16,7 @@ const OuterCard = styled(Card)`
 `
 
 type Props = {
-  destroyStudent: (string) => mixed,
+  destroyStudent: (string) => unknown,
   filter?: string,
   groupBy: string,
   isEditing: boolean,

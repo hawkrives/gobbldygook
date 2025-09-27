@@ -183,7 +183,7 @@ export function buildQueryFromString(
   // Grab the keys and values from the lists
   let [keys, values] = partitionByIndex(cleaned)
   ;(keys: Array<string>)
-  ;(values: Array<mixed>)
+  ;(values: Array<unknown>)
 
   if (stringThing && quacksLikeDeptNum(stringThing)) {
     let deptnum = splitDeptNum(stringThing, true)

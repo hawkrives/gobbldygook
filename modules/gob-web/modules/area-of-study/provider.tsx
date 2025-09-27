@@ -9,15 +9,15 @@ type Props = {
   student: Student,
   children: ({
     examining: boolean,
-    results: ?EvaluationResult,
-    error: ?string,
+    results: EvaluationResult | null,
+    error: string | null,
   }) => React.Node,
 }
 
 type State = {
   examining: boolean,
-  results: ?EvaluationResult,
-  error: ?string,
+  results: EvaluationResult | null,
+  error: string | null,
 }
 
 export class AreaOfStudyProvider extends React.Component<Props, State> {

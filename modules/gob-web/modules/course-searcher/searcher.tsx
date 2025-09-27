@@ -18,8 +18,8 @@ import { Querent } from "./querent"
 import "./searcher.scss"
 
 type Props = {
-  onCloseSearcher?: ?() => mixed,
-  term?: ?number,
+  onCloseSearcher?: ?() => unknown,
+  term?: number | null,
   studentId?: string,
 }
 

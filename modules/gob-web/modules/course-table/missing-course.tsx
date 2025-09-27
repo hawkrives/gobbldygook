@@ -2,7 +2,7 @@ import React from "react"
 import FakeCourse from "./fake-course"
 
 type Props = {
-  +className?: string,
+  readonly className?: string,
   readonly clbid: string,
   readonly error: Error,
 }

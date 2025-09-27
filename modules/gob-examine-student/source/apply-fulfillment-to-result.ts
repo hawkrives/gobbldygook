@@ -12,7 +12,7 @@ type Args = {
   expr: Expression
   computedResult: boolean
   matches: ?Course[]
-  counted: ?number
+  counted: number | null
 }
 
 export default function applyFulfillmentToResult({

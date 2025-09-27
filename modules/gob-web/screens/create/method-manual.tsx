@@ -21,7 +21,7 @@ let now = new Date()
 
 type Props = {
   readonly initStudent: InitStudentFunc, // redux
-  +navigate?: (string) => mixed, // react-router
+  readonly navigate?: (string) => unknown, // react-router
 }
 
 type State = {

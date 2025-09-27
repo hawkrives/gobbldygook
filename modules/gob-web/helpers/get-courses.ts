@@ -23,7 +23,7 @@ export function getCourseFromNetwork(clbid: string): Promise<CourseType> {
 
   return request.then((course) => {
     networkCache.delete(clbid)
-    return (course as any)
+    return course as any
   })
 }
 
@@ -52,8 +52,8 @@ export function getCourseFromDatabase(clbid: string): Promise<CourseType> {
 // Gets a course from the database.
 export async function getCourse(
   clbid: string,
-  term?: ?number,
-  fabrications?: ?(Array<CourseType> | List<CourseType>) = [],
+  term?: number | null,
+  fabrications: (Array<CourseType> | List<CourseType>) | null = null,
 ): Promise<Result<CourseType>> {
   if (fabrications) {
     let fab = fabrications.find((c) => c.clbid === clbid)

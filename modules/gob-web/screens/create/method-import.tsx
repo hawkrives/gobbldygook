@@ -20,18 +20,18 @@ import { Header } from "./components"
 import "./method-import.scss"
 
 type Props = {
-  readonly initStudent: InitStudentFunc, // redux
-  +navigate?: (string) => mixed,
+  readonly initStudent: InitStudentFunc // redux
+  readonly navigate?: (string) => unknown
 }
 
 type State = {
-  status: "pending" | "processing" | "ready",
-  error: ?Error,
-  ids: Array<mixed>,
-  selectedId: ?number,
-  student: ?Student,
-  rawStudentText: string,
-  parsedStudentText: ?PartialStudent,
+  status: "pending" | "processing" | "ready"
+  error: Error | null
+  ids: Array<unknown>
+  selectedId: number | null
+  student: Student | null
+  rawStudentText: string
+  parsedStudentText: PartialStudent | null
 }
 
 class SISImportScreen extends React.Component<Props, State> {
@@ -193,8 +193,8 @@ const StudentInfo = ({ student }: { student: Student }) => (
 )
 
 const ScheduleListing = (props: {
-  schedules: Map<string, Schedule>,
-  fabrications: List<CourseType>,
+  schedules: Map<string, Schedule>
+  fabrications: List<CourseType>
 }) => {
   let { schedules = Map(), fabrications = List() } = props
 
@@ -218,8 +218,8 @@ const ScheduleListing = (props: {
 }
 
 class AbbreviatedCourseListing extends React.Component<
-  { schedule: Schedule, fabrications: List<CourseType> },
-  { courses: List<Result<CourseType>> },
+  { schedule: Schedule; fabrications: List<CourseType> },
+  { courses: List<Result<CourseType>> }
 > {
   state = { courses: List() }
   componentDidMount() {

@@ -9,9 +9,9 @@ import type { GROUP_BY_KEY, SORT_BY_KEY } from "./constants"
 
 type Props = {
   query: string,
-  term?: ?number,
+  term?: number | null,
   children: ({
-    error: ?string,
+    error: string | null,
     inProgress: boolean,
     didSearch: boolean,
     results: List<string | CourseType>,
@@ -25,7 +25,7 @@ type Props = {
 }
 
 type State = {
-  error: ?string,
+  error: string | null,
   inProgress: boolean,
   didSearch: boolean,
   results: List<CourseType>,
@@ -67,7 +67,7 @@ export class Querent extends React.Component<Props, State> {
     this._isMounted = false
   }
 
-  submitQuery = async (query: string, { term }: { term: ?number }) => {
+  submitQuery = async (query: string, { term }: { term: number | null }) => {
     if (!query && term == null) {
       return
     }

@@ -9,8 +9,8 @@ export function buildDeptNum(
   course: {
     readonly department: string,
     readonly number: number | string,
-    +section?: string,
-    +type?: string,
+    readonly section?: string,
+    readonly type?: string,
   },
   includeSection?: boolean = false,
 ) {

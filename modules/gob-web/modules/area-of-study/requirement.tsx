@@ -27,7 +27,7 @@ type Props = {
   onToggleOverride: (string[], Event) => any,
   path: string[],
   topLevel?: boolean,
-  info: ?RequirementInfo,
+  info: RequirementInfo | null,
   name?: string,
 }
 

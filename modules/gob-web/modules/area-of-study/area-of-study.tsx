@@ -14,13 +14,13 @@ type Props = {
   style?: {},
 
   areaOfStudy: AreaQuery,
-  error?: ?string,
+  error?: string | null,
   examining?: boolean,
-  results: ?EvaluationResult,
-  onToggleOpen?: (Event) => mixed,
-  onAddOverride?: (Array<string>, Event) => mixed,
-  onRemoveOverride?: (Array<string>, Event) => mixed,
-  onToggleOverride?: (Array<string>, Event) => mixed,
+  results: EvaluationResult | null,
+  onToggleOpen?: (Event) => unknown,
+  onAddOverride?: (Array<string>, Event) => unknown,
+  onRemoveOverride?: (Array<string>, Event) => unknown,
+  onToggleOverride?: (Array<string>, Event) => unknown,
 }
 
 export class AreaOfStudy extends React.Component<Props> {
@@ -100,7 +100,7 @@ export class AreaOfStudy extends React.Component<Props> {
   }
 }
 
-const CatalogLink = ({ slug, name }: { slug: ?string, name: string }) => {
+const CatalogLink = ({ slug, name }: { slug: string | null, name: string }) => {
   if (!slug) {
     return <span>{name}</span>
   }

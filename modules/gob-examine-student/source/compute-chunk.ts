@@ -77,7 +77,7 @@ export default function computeChunk({
 
   let computedResult = false
   let matches: ?(Course[]) = undefined
-  let counted: ?number = undefined
+  let counted: number | null = undefined
 
   // Modifiers, occurrences, references, and wheres don't need isNeeded,
   // because they don't result in recursive calls to computeChunk.

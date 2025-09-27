@@ -3,7 +3,7 @@ import React from "react"
 import uniqueId from "lodash/uniqueId"
 
 export function LabelledSelect(props: {
-  onChange: (ev: SyntheticEvent<HTMLSelectElement>) => mixed
+  onChange: (ev: SyntheticEvent<HTMLSelectElement>) => unknown
   value: string
   label: string
   options: Array<[string, string]>

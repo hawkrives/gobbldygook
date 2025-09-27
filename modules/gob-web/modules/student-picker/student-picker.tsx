@@ -99,14 +99,14 @@ let sortByExpanded: { [key: SORT_BY_ENUM]: string } = {
 }
 
 type PropTypes = {
-  destroyStudent: (string) => mixed,
+  destroyStudent: (string) => unknown,
   filterText: string,
   groupBy: string,
   isEditing: boolean,
-  onFilterChange: (SyntheticInputEvent<HTMLInputElement>) => mixed,
-  onGroupChange: () => mixed,
-  onSortChange: () => mixed,
-  onToggleEditing: () => mixed,
+  onFilterChange: (SyntheticInputEvent<HTMLInputElement>) => unknown,
+  onGroupChange: () => unknown,
+  onSortChange: () => unknown,
+  onToggleEditing: () => unknown,
   sortBy: SORT_BY_ENUM,
   students: StudentState,
 }

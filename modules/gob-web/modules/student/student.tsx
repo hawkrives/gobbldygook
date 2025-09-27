@@ -34,7 +34,7 @@ const CouldNotLoadCard = styled(Card)`
 
 type Props = {
   children: ({ student: Undoable<StudentObject> }) => React.Node, // from react-router
-  loadStudent: (string) => mixed, // redux
+  loadStudent: (string) => unknown, // redux
   studentId?: string, // react-router
   student: ?IndividualStudentState, // redux
 }

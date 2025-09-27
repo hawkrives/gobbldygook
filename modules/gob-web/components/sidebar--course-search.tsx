@@ -6,8 +6,8 @@ import { Student } from "@gob/object-student"
 import type { Undoable } from "../types"
 
 type Props = {
-  term: ?string
-  navigate: (string) => mixed
+  term: string | null
+  navigate: (string) => unknown
   student: Undoable<Student>
   queryString?: string
 }

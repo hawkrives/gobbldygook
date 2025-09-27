@@ -1,4 +1,4 @@
-export function findMissingNumber(arr: number[]): ?number {
+export function findMissingNumber(arr: number[]): number | null {
   if (arr.length === 0) {
     return null
   }

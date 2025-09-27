@@ -64,7 +64,7 @@ const TermSidebar = ({ student }: { student: Undoable<Student> }) => (
 export default function StudentIndex(props: {
   studentId?: string,
   location?: { search: string },
-  navigate?: (string) => mixed,
+  navigate?: (string) => unknown,
 }) {
   let { location, studentId, navigate } = props
 

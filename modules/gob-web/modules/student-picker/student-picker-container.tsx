@@ -7,8 +7,8 @@ import type { State as StudentState } from "../../redux/students/reducers"
 import { type SORT_BY_ENUM } from "./types"
 
 type Props = {
-  destroyStudent: (string) => mixed,
-  loadStudents: () => mixed,
+  destroyStudent: (string) => unknown,
+  loadStudents: () => unknown,
   students: StudentState,
 }
 

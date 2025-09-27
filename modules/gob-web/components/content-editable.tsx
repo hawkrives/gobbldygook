@@ -14,7 +14,7 @@ type Props = {
 }
 
 type State = {
-  lastValue: ?string,
+  lastValue: string | null,
 }
 
 // from http://stackoverflow.com/questions/22677931/react-js-onchange-event-for-contenteditable

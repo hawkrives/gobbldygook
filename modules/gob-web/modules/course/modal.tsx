@@ -62,7 +62,7 @@ type Props = {
   onClose: () => any,
   scheduleId?: string,
   studentId?: string,
-  student: ?Student, // redux
+  student: Student | null, // redux
   changeStudent: ChangeStudentFunc, // redux
 }
 

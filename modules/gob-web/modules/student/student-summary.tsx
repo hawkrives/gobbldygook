@@ -69,8 +69,8 @@ type Props = {
 type State = {
   message: string,
   canGraduate: boolean,
-  creditsNeeded: ?number,
-  creditsTaken: ?number,
+  creditsNeeded: number | null,
+  creditsTaken: number | null,
   checking: boolean,
 }
 
@@ -435,8 +435,8 @@ export class DegreeSummary extends React.Component<DegreeSummaryProps> {
 }
 
 type CreditSummaryProps = {
-  currentCredits: ?number,
-  neededCredits: ?number,
+  currentCredits: number | null,
+  neededCredits: number | null,
 }
 
 export class CreditSummary extends React.Component<CreditSummaryProps> {

@@ -9,13 +9,13 @@ import { close } from "../../icons/ionicons"
 import { Student } from "@gob/object-student"
 
 type Props = {
-  navigate: (string) => mixed
+  navigate: (string) => unknown
   student: Student
   queryString?: string
 }
 
 type State = {
-  encoded: ?string
+  encoded: string | null
   loading: boolean
 }
 

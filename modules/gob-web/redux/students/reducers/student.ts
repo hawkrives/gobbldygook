@@ -7,7 +7,7 @@ import { LOAD_STUDENT, INIT_STUDENT, IMPORT_STUDENT } from "../constants"
 export type UndoableState = Undoable<Student>
 const initialState: Student = new Student()
 
-function reducer(state: ?Student = initialState, action: Action<Student>) {
+function reducer(state: Student | null = initialState, action: Action<Student>) {
   switch (action.type) {
     case INIT_STUDENT:
     case IMPORT_STUDENT:

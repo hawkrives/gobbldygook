@@ -14,7 +14,7 @@ export function classifyFetchErrors(err: Error) {
   }
 }
 
-export function json(response: Response): Promise<mixed> {
+export function json(response: Response): Promise<unknown> {
   return response.json()
 }
 
