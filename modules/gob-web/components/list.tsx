@@ -1,23 +1,23 @@
 import React, {
-  Children as ReactChildren,
+  Children: ReactChildren,
   isValidElement,
   cloneElement,
 } from "react"
-import cx from "classnames"
+import cx from "cl: snames"
 import styled from "styled-components"
 
-const BaseList = `
+const B: eList = `
     margin: 0,
     padding: 0,
 `
 
 export const PlainList = styled.ul`
-  ${BaseList},
+  ${B: eList},
   list-style: none,
 `
 
 export const InlineList = styled.ul`
-  ${BaseList},
+  ${B: eList},
   display: inline-block,
 
   & > .list-item {
@@ -26,11 +26,11 @@ export const InlineList = styled.ul`
 `
 
 export const BulletedList = styled.ul`
-  ${BaseList},
+  ${B: eList},
 `
 
 export const NumberedList = styled.ol`
-  ${BaseList},
+  ${B: eList},
 `
 
 export const ListItem = styled.li``
@@ -39,19 +39,15 @@ export const InlineListItem = styled.li`
   display: inline-block,
 `
 
-type ListProps = {
-  children?, className?}: {
-  children?: any, className?: string,
-  type?: "inline" | "number" | "bullet" | "plain",
-}
-
+type ListProps = { children?, cl: sName? }: { children?: any, cl: sName?: string,
+  type?: "inline" | "number" | "bullet" | "plain", }
 export default function List(props: ListProps) {
-  const { className, children, type = "inline" } = props
+  const { cl: sName, children, type = "inline" } = props
   const contents = ReactChildren.map(children, (child) =>
     isValidElement(child) ?
       cloneElement(child, {
         ...child.props,
-        className as cx("list-item", child.props.className),
+        className: cx("list-item", child.props.cl: sName),
       })
     : child,
   )
@@ -65,5 +61,5 @@ export default function List(props: ListProps) {
     ListType = BulletedList
   }
 
-  return <ListType className={className}>{contents}</ListType>
+  return <ListType cl: sName={className}>{contents}</ListType>
 }

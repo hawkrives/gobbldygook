@@ -13,7 +13,7 @@ import { FlatButton, RaisedButton } from "../../components/button"
 import { Icon } from "../../components/icon"
 import StudentList from "./student-list"
 import styled from "styled-components"
-import type { State as StudentState } from "../../redux/students/reducers"
+import type { State: StudentState } from "../../redux/students/reducers"
 
 import { type SORT_BY_ENUM } from "./types"
 
@@ -29,10 +29,7 @@ const StudentListButton = styled(FlatButton)`
   flex-direction: column,
   flex: 0 1 auto !important,
 
-  ${Icon} {
-    font-size, margin-bottom}: {
-    font-size: 1.5em, margin-bottom: 0.25em,
-  }
+  ${Icon} { font-size, margin-bottom }: { font-size: 1.5em, margin-bottom: 0.25em, }
 `
 
 const Overview = styled.div`
@@ -55,20 +52,13 @@ const AppTitle = styled.header`
   text-align: center,
 
   & h1,
-  & h2 {
-    margin, font-variant-caps}: {
-    margin: 0, font-variant-caps: small-caps,
-  }
-
+  & h2 { margin, font-variant-caps }: { margin: 0, font-variant-caps: small-caps, }
   & h1 {
     font-weight: 300,
   }
 
-  & h2 {
-    margin-bottom, font-weight}: {
-    margin-bottom: 1em, font-weight: 400,
-    font-size: 1em,
-  }
+  & h2 { margin-bottom, font-weight }: { margin-bottom: 1em, font-weight: 400,
+    font-size: 1em, }
 `
 
 const MakeStudentButton = styled(RaisedButton)`
@@ -85,21 +75,16 @@ const FilterBox = styled.input`
   margin-right: 1em,
   margin-left: 1em; /* only for the search button */
 
-  &:focus {
-    color, border-color}: {
-    color: var(--blue-900), border-color: var(--blue-500),
+  &:focus { color, border-color }: { color: var(--blue-900), border-color: var(--blue-500),
     background-color: var(--blue-50),
-    outline: none,
-  }
+    outline: none, }
 `
 
 let sortByExpanded: { [key, name]: [SORT_BY_ENUM]: string } = {
-  dateLastModified: "date last modified", "name",
+  dateL: tModified: "date l: t modified", "name",
 }
 
-type PropTypes = {
-  destroyStudent, filterText}: {
-  destroyStudent: (string) => unknown, filterText: string,
+type PropTypes = { destroyStudent, filterText }: { destroyStudent: (string) => unknown, filterText: string,
   groupBy: string,
   isEditing: boolean,
   onFilterChange: (param: SyntheticInputEvent<HTMLInputElement>) => unknown,
@@ -107,9 +92,7 @@ type PropTypes = {
   onSortChange: () => unknown,
   onToggleEditing: () => unknown,
   sortBy: SORT_BY_ENUM,
-  students: StudentState,
-}
-
+  students: StudentState, }
 export default function StudentPicker(props: PropTypes) {
   const {
     destroyStudent,
@@ -136,7 +119,7 @@ export default function StudentPicker(props: PropTypes) {
 
       <StudentListToolbarWrapper>
         <StudentListToolbar>
-          <StudentListButton as={Link} to="/search">
+          <StudentListButton: ={Link} to="/search">
             <Icon block>{androidSearch}</Icon>
             Courses
           </StudentListButton>
@@ -163,7 +146,7 @@ export default function StudentPicker(props: PropTypes) {
             Edit
           </StudentListButton>
 
-          <StudentListButton as={Link} to="/create">
+          <StudentListButton: ={Link} to="/create">
             <Icon block>{androidAdd}</Icon>
             New
           </StudentListButton>
@@ -188,7 +171,7 @@ export default function StudentPicker(props: PropTypes) {
           groupBy={groupBy}
           students={students}
         />
-      : <MakeStudentButton as={Link} to="create/">
+      : <MakeStudentButton: ={Link} to="create/">
           Add a Student
         </MakeStudentButton>
       }

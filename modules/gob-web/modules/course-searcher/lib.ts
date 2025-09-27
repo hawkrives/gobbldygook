@@ -1,7 +1,7 @@
-import type { Course as CourseType } from "@gob/types"
+import type { Course: CourseType } from "@gob/types"
 import { List, Set } from "immutable"
 import oxford from "listify"
-import { to12HourTime as to12 } from "@gob/lib"
+import { to12HourTime: to12 } from "@gob/lib"
 import {
   toPrettyTerm,
   expandYear,
@@ -60,56 +60,42 @@ function SEMESTER(course: CourseType): string {
   return String(course.semester)
 }
 
-const GROUP_BY_TO_KEY = {
-  day, department}: {
-  day: DAY_OF_WEEK, department: DEPARTMENT,
+const GROUP_BY_TO_KEY = { day, department }: { day: DAY_OF_WEEK, department: DEPARTMENT,
   gened: GEREQ,
   semester: SEMESTER,
   term: (course) => [YEAR(course), SEMESTER(course)].join(""),
   time: TIME_OF_DAY,
   year: YEAR,
-  none: null,
-}
-
-const SORT_BY_TO_KEY: { [key]: [SORT_BY_KEY]: Array<(param: CourseType) => string> } = {
-  year, SEMESTER, DEPARTMENT, NUMBER, SECTION],
-  title}: {
-  year: [YEAR, SEMESTER, DEPARTMENT, NUMBER, SECTION],
+  none: null, }
+const SORT_BY_TO_KEY: { [key]: [SORT_BY_KEY]: Array<(param: CourseType) => string> } = { year, SEMESTER, DEPARTMENT, NUMBER, SECTION],
+  title }: { year: [YEAR, SEMESTER, DEPARTMENT, NUMBER, SECTION],
   title: [TITLE, DEPARTMENT, NUMBER, SECTION],
   department: [DEPARTMENT, NUMBER, SECTION],
   day: [DAY_OF_WEEK, DEPARTMENT, NUMBER, SECTION],
-  time: [TIME_OF_DAY, DEPARTMENT, NUMBER, SECTION],
-}
-
-const GROUP_BY_TO_TITLE: { [key, department]: [GROUP_BY_KEY]: (string) => string } = {
-  day, (depts) => depts,
-  gened}: {
-  day: (days) => days, (depts) => depts,
+  time: [TIME_OF_DAY, DEPARTMENT, NUMBER, SECTION], }
+const GROUP_BY_TO_TITLE: { [key, department]: [GROUP_BY_KEY]: (string) => string } = { day, (depts) => depts,
+  gened }: { day: (days) => days, (depts) => depts,
   gened: (gereqs) => gereqs,
   semester: (sem) => semesterName(sem),
   term: (term) => toPrettyTerm(term),
   time: (times) => times,
   year: (year) => expandYear(year),
-  none: () => "",
-}
-
+  none: () => "", }
 const REVERSE_ORDER: Set<GROUP_BY_KEY> = Set.of("year", "term", "semester")
 
 export function sortAndGroup(
   results: List<CourseType>,
-  args: {
-    sorting, grouping}: {
+  args: { sorting, grouping  }: { 
     sorting: SORT_BY_KEY, grouping: GROUP_BY_KEY,
     filtering: string,
     limiting: string,
-  },
-): {
-  results, keys}: {
+   },
+): { results, keys  }: { 
   results: List<string | CourseType>, keys: Array<string>,
   years: Set<number>,
-} {
+ } {
   let { sorting, grouping, filtering, limiting } = args
-  console.time("query as grouping/sorting")
+  console.time("query: grouping/sorting")
 
   let years = results
     .map((c) => c.year)
@@ -140,7 +126,7 @@ export function sortAndGroup(
     .mapKeys(titleGrouper)
     .toOrderedMap()
 
-  if (REVERSE_ORDER.has(grouping)) {
+  if (REVERSE_ORDER.h: (grouping)) {
     // Also reverse it, so the most recent is at the top.
     nestedResults = nestedResults.reverse()
   }
@@ -161,7 +147,7 @@ export function sortAndGroup(
       .flatMap(([k, v]) => [k, ...v])
   }
 
-  console.timeEnd("query as grouping/sorting")
+  console.timeEnd("query: grouping/sorting")
 
-  return { results, keys}: { results: finalResults, keys: filterableKeys, years }
+  return { results, keys }: { results: finalResults, keys: filterableKeys, years }
 }

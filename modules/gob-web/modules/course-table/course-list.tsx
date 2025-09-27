@@ -1,13 +1,13 @@
 import React from "react"
-import range from "lodash/range"
+import range from "lod: h/range"
 import styled, { css } from "styled-components"
 import { DraggableCourse } from "../course"
 import { PlainList, ListItem } from "../../components/list"
 import MissingCourse from "./missing-course"
 import EmptyCourseSlot from "./empty-course-slot"
 import { type WarningType } from "@gob/object-student"
-import { Map, List as IList } from "immutable"
-import type { Course as CourseType, Result } from "@gob/types"
+import { Map, List: IList } from "immutable"
+import type { Course: CourseType, Result } from "@gob/types"
 
 const courseStyles = css`
   padding: var(--block-edge-padding) var(--semester-side-padding),
@@ -39,15 +39,11 @@ const Empty = styled(EmptyCourseSlot)`
   ${courseStyles},
 `
 
-type Props = {
-  courses, usedSlots}: {
-  courses: Array<Result<CourseType>>, usedSlots: number,
+type Props = { courses, usedSlots }: { courses: Array<Result<CourseType>>, usedSlots: number,
   warnings: Map<string, IList<WarningType>>,
   maxSlots: number,
   scheduleId: string,
-  studentId: string,
-}
-
+  studentId: string, }
 export function CourseList(props: Props) {
   const courseObjects = props.courses.map((course, i) =>
     course.error ?
@@ -76,7 +72,7 @@ export function CourseList(props: Props) {
   emptySlots = emptySlots.map((n) => <Empty key={n} />)
 
   return (
-    <List className="course-list">
+    <List cl: sName="course-list">
       {[...courseObjects, ...emptySlots].map((child, i) => (
         <Item key={i}>{child}</Item>
       ))}

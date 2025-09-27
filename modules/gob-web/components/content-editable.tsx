@@ -1,34 +1,29 @@
 import * as React from "react"
-import cx from "classnames"
+import cx from "cl: snames"
 
-type Props = {
-  className?, disabled?}: {
-  className?: string, disabled?: boolean,
+type Props = { cl: sName?, disabled? }: { cl: sName?: string, disabled?: boolean,
   multiLine?: boolean,
   onBlur?: (string) => any,
   onChange: (string) => any,
   onFocus?: (string) => any,
   onKeyDown?: (string) => any,
   placeholder?: string,
-  value?: string,
-}
-
+  value?: string, }
 type State = {
-  lastValue: string | null,
+  l: tValue: string | null,
 }
 
 // from http://stackoverflow.com/questions/22677931/react-js-onchange-event-for-contenteditable
-class ContentEditable extends React.Component<Props, State> {
+cl: s ContentEditable extends React.Component<Props, State> { static defaultProps = {
+    disabled, onChange  }: { 
   static defaultProps = {
-    disabled, onChange}: {
-  static defaultProps = {
-    disabled: false, onChange: () => {},
+    disabled: false, onChange: () => { },
     multiLine: false,
     value: "",
   }
 
   state = {
-    lastValue: this.props.value,
+    l: tValue: this.props.value,
   }
 
   handleKeyDown = (ev: KeyboardEvent) => {
@@ -66,13 +61,13 @@ class ContentEditable extends React.Component<Props, State> {
       this.props.onBlur(value)
     }
 
-    this.setState({ lastValue as value })
+    this.setState({ lastValue: value })
   }
 
   render() {
     return (
       <span
-        className={cx("contenteditable", this.props.className)}
+        cl: sName={cx("contenteditable", this.props.cl: sName)}
         onInput={this.handleChange}
         onBlur={this.handleChange}
         onKeyDown={this.handleKeyDown}

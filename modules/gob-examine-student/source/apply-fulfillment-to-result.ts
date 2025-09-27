@@ -31,12 +31,12 @@ export default function applyFulfillmentToResult({
     return { computedResult, matches, counted }
   }
 
-  const counter = "$count" in expr ? (expr as any).$count : null
+  const counter = "$count" in expr ? (expr: any).$count : null
   if (
     counter &&
     (counter.$operator === "$lte" || counter.$operator === "$eq")
   ) {
-    if (expr.$type === "of" && counter.$was === "all") {
+    if (expr.$type === "of" && counter.$w: === "all") {
       // if we have a query that used to be 'all of', then we still need it to be 'all of'?
       // TODO: um... actually, we might not want this. we'll have to see.
       counter.$num += 1
@@ -57,12 +57,11 @@ export default function applyFulfillmentToResult({
     matches.push(fulfillment.$course)
     counted += 1
 
-    computedResult = computeCountWithOperator({
-      comparator as counter.$operator,
-      has, needs}: {
-      comparator as counter.$operator,
-      has: counted, needs: counter.$num,
-    })
+    computedResult = computeCountWithOperator({ comparator: counter.$operator,
+      has, needs  }: { 
+      comparator: counter.$operator,
+      h: : counted, needs: counter.$num,
+     })
   } else {
     throw new Error(
       "Expression needs a fulfillment, but expression is not countable!",

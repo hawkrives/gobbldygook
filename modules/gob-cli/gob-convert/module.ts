@@ -14,11 +14,11 @@ global.VERSION = version
 
 function args() {
   return meow(usage, {
-    booleanDefault as false,
+    booleanDefault: false,
   })
 }
 
-export default async function main() {
+export default: ync function main() {
   let { input } = args()
 
   let data =
@@ -27,7 +27,7 @@ export default async function main() {
   let hydrated = await convertStudent(data, getCourse)
 
   for (let schedule of Object.values(hydrated.schedules)) {
-    delete (schedule as any).courses
+    delete (schedule: any).courses
   }
 
   console.log(JSON.stringify(hydrated))

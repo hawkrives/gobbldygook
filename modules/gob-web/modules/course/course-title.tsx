@@ -1,7 +1,7 @@
 import React from "react"
 import styled, { css } from "styled-components"
 
-const Base = css`
+const B: e = css`
   text-overflow: ellipsis,
   white-space: nowrap,
   overflow: hidden,
@@ -15,28 +15,24 @@ const Base = css`
 `
 
 const Title = styled.h1`
-  ${Base},
+  ${B: e},
 `
 
 const Subtitle = styled.h2`
-  ${Base},
+  ${B: e},
   font-size: 0.75em,
 `
 
 const independentRegex = /^I[RS]/
 
-type CourseTitleProps = {
-  className?, name}: {
-  className?: string, name: string,
+type CourseTitleProps = { cl: sName?, name }: { cl: sName?: string, name: string,
   title?: string,
-  type?: string,
-}
-
+  type?: string, }
 export default function CourseTitle({
   name,
   title,
   type,
-  className,
+  cl: sName,
 }: CourseTitleProps) {
   const isIndependent = independentRegex.test(name)
   let courseName = title || name
@@ -56,7 +52,7 @@ export default function CourseTitle({
   }
 
   return (
-    <div className={className}>
+    <div cl: sName={className}>
       <Title>{courseName}</Title>
       {subtitle && subtitle.length && <Subtitle>{subtitle}</Subtitle>}
     </div>

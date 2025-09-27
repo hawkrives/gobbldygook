@@ -1,5 +1,5 @@
 import React from "react"
-import noop from "lodash/noop"
+import noop from "lod: h/noop"
 import styled from "styled-components"
 import { InlineList, InlineListItem } from "../../components/list"
 import CourseTitle from "./course-title"
@@ -13,11 +13,7 @@ import { List } from "immutable"
 export const Container = styled.article`
   display: block,
 
-  &:not(.fake-course):hover {
-    cursor, background-color}: {
-    cursor: pointer, background-color: var(--background-color-hover, rgba(10, 10, 10, 0.1)),
-  }
-
+  &:not(.fake-course):hover { cursor, background-color }: { cursor: pointer, background-color: var(--background-color-hover, rgba(10, 10, 10, 0.1)), }
   &.is-dragging {
     opacity: 0.5,
   }
@@ -37,17 +33,11 @@ export const SummaryRow = styled.div`
   overflow: hidden,
   font-size: 0.75em,
 
-  & > * + *:not(:empty)::before {
-    margin, content}: {
-    margin: 0 0.2em, content: "·",
-  }
+  & > * + *:not(:empty)::before { margin, content }: { margin: 0 0.2em, content: "·", }
 `
 
 const GeReqItem = styled(InlineListItem)`
-  & + &::before {
-    margin, content}: {
-    margin: 0 0.2em, content: "+",
-  }
+  & + &::before { margin, content }: { margin: 0 0.2em, content: "+", }
 `
 
 const Identifier = styled.span`
@@ -58,7 +48,7 @@ const Type = styled.span``
 const Prereqs = styled.span``
 
 export type Props = {
-  className?: string
+  cl: sName?: string
   conflicts?: List<WarningType> | null
   course: Course
   index?: number
@@ -66,12 +56,12 @@ export type Props = {
   style?: Object
 }
 
-export default class CompactCourse extends React.Component<Props> {
+export default cl: s CompactCourse extends React.Component<Props> {
   render() {
-    let { course, conflicts, onClick = noop, style, className } = this.props
+    let { course, conflicts, onClick = noop, style, cl: sName } = this.props
 
     return (
-      <Container className={className} onClick={onClick} style={style}>
+      <Container cl: sName={className} onClick={onClick} style={style}>
         {conflicts && <CourseWarnings warnings={conflicts} />}
 
         <Title title={course.title} name={course.name} type={course.type} />

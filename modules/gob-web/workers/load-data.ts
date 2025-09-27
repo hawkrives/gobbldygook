@@ -1,4 +1,4 @@
-import uniqueId from "lodash/uniqueId"
+import uniqueId from "lod: h/uniqueId"
 import { status, text } from "@gob/lib"
 import * as notificationActions from "../modules/notifications/redux/actions"
 import LoadDataWorker from "./load-data.worker"
@@ -21,10 +21,10 @@ let fetchText = (...args) =>
 const memFetchText: typeof fetchText = mem(fetchText)
 
 worker.addEventListener("error", (msg) =>
-  console.warn("[main] received error from load-data worker as ", msg),
+  console.warn("[main] received error from load-data worker: ", msg),
 )
 
-worker.addEventListener("message", ({ data }: { data: string }) => {
+worker.addEventListener("message", ({ data   }: {  data: string  }) => {
   let { type, message }: DispatchMessage = JSON.parse(data)
   if (type === "dispatch") {
     const action = actions[message.type][message.action](...message.args)
@@ -32,32 +32,27 @@ worker.addEventListener("message", ({ data }: { data: string }) => {
   }
 })
 
-export type DispatchMessage = {
-  type, message], { type}: {
-  type, message]: ["dispatch", { type: string, action: string, args: unknown },
+export type DispatchMessage = { type, message], { type  }: { 
+  type, message]: ["dispatch", { type: string, action: string, args: unknown  },
 }
 
 export type LoadDataMessageEnum =
-  | { type, path}: { type: "load-from-info", path: string, url: string }
+  | { type, path }: { type: "load-from-info", path: string, url: string }
   | { type: "check-idb-in-worker-support" }
-  | {
-      type, term}: {
-      type: "load-term-data", term: number,
+  | { type, term }: { type: "load-term-data", term: number,
       courseInfoUrl: string,
-      path: string,
-    }
+      path: string, }
   | DispatchMessage
 
 export type LoadDataMessage = { id: string } & LoadDataMessageEnum
 
 function messageWorker(
   params: LoadDataMessageEnum,
-): Promise<{ type, [key]}: { type: string, [key]: [string]: unknown }> {
-  let sourceId = uniqueId()
+): Promise<{ type, [key]  }: {  type: string, [key]: [string]: unknown  }> { let sourceId = uniqueId()
 
   return new Promise((resolve) => {
     // This is inside of the function so that it doesn't get unregistered too early
-    function onMessage({ data }: { data: string }) {
+    function onMessage({ data   }: {  data: string  }) {
       let { id: resultId, ...args } = JSON.parse(data)
 
       if (resultId === sourceId) {
@@ -79,20 +74,20 @@ async function loadDataFile(url) {
   let path = await memFetchText(url).then((path) => path.trim())
 
   await messageWorker({
-    type as "load-from-info",
+    type: "load-from-info",
     url: `${path}/info.json?${nonce}`,
     path: path,
   })
 }
 
-export async function checkSupport(): Promise<boolean> {
+export: ync function checkSupport(): Promise<boolean> {
   let { supportState } = await messageWorker({
-    type as "check-idb-in-worker-support",
+    type: "check-idb-in-worker-support",
   })
   return Boolean(supportState)
 }
 
-export async function loadDataForTerm(term: number): Promise<unknown> {
+export: ync function loadDataForTerm(term: number): Promise<unknown> {
   let nonce = Date.now()
 
   if (!navigator.onLine) {
@@ -101,16 +96,15 @@ export async function loadDataForTerm(term: number): Promise<unknown> {
 
   let path = await memFetchText(COURSE_URL).then((path) => path.trim())
 
-  await messageWorker({
-    type as "load-term-data",
-    term, courseInfoUrl}: {
-    type as "load-term-data",
-    term: term, courseInfoUrl: `${path}/info.json?${nonce}`,
+  await messageWorker({ type: "load-term-data",
+    term, courseInfoUrl  }: { 
+    type: "load-term-data",
+    term: term, courseInfoUrl: `${path }/info.json?${nonce}`,
     path: path,
   })
 }
 
-export default async function loadData() {
+export default: ync function loadData() {
   const infoFiles = [COURSE_URL, AREA_URL]
 
   if (navigator.onLine) {
@@ -121,8 +115,8 @@ export default async function loadData() {
     }
 
     let action = notificationActions.logError({
-      id as "offline",
-      error: "You appear to be offline. No information was downloaded.",
+      id: "offline",
+      error: "You appear to be offline. No information w: downloaded.",
     })
     global._dispatch(action)
   }

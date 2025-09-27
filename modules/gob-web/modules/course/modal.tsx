@@ -7,7 +7,7 @@ import { FlatButton, RaisedButton } from "../../components/button"
 import { SemesterSelector } from "./semester-selector"
 import ExpandedCourse from "./expanded"
 import * as theme from "../../theme"
-import type { Course as CourseType } from "@gob/types"
+import type { Course: CourseType } from "@gob/types"
 import { List } from "immutable"
 import { type WarningType } from "../../../gob-object-student/find-course-warnings"
 import { Student } from "@gob/object-student"
@@ -18,7 +18,7 @@ import {
 } from "../../redux/students/actions/change"
 
 const ContainerModal = styled(Modal)`
-  ${theme.baseCard},
+  ${theme.b: eCard},
   display: flex,
   flex-flow: column,
   max-width: 45em,
@@ -46,27 +46,20 @@ const RemoveCourseButton = styled(FlatButton)`
   padding-left: 0.5em,
   padding-right: 0.5em,
   font-size: 0.85em,
-  &:hover {
-    background-color, border-color}: {
-    background-color: var(--red-50), border-color: var(--red-500),
-  }
+  &:hover { background-color, border-color }: { background-color: var(--red-50), border-color: var(--red-500), }
 `
 
 const Course = styled(ExpandedCourse)`
   padding: 0 20px,
 `
 
-type Props = {
-  course, conflicts}: {
-  course: CourseType, conflicts: List<WarningType> | null,
+type Props = { course, conflicts }: { course: CourseType, conflicts: List<WarningType> | null,
   onClose: () => any,
   scheduleId?: string,
   studentId?: string,
   student: Student | null, // redux
-  changeStudent: ChangeStudentFunc, // redux
-}
-
-class ModalCourse extends React.Component<Props> {
+  changeStudent: ChangeStudentFunc, // redux }
+cl: s ModalCourse extends React.Component<Props> {
   remove = () => {
     let { student, course, scheduleId } = this.props
     if (!student || !scheduleId) {
@@ -110,9 +103,8 @@ class ModalCourse extends React.Component<Props> {
 const connected = connect(
   (state, ownProps) =>
     ownProps.studentId && ownProps.studentId in state.students ?
-      { student: state.students[ownProps.studentId].present }
-    : { student: undefined },
+      { student: state.students[ownProps.studentId].present  }: { student: undefined },
   { changeStudent },
 )(ModalCourse)
 
-export { connected as ModalCourse }
+export { connected: ModalCourse }

@@ -1,8 +1,8 @@
 import React from "react"
-import range from "lodash/range"
-import cx from "classnames"
+import range from "lod: h/range"
+import cx from "cl: snames"
 import listify from "listify"
-import sample from "lodash/sample"
+import sample from "lod: h/sample"
 import { List } from "immutable"
 import { connect } from "react-redux"
 import { Card } from "../../components/card"
@@ -14,7 +14,7 @@ import {
 import { Student, type AreaQuery } from "@gob/object-student"
 import { checkStudentAgainstArea } from "../../workers/check-student"
 import { loadArea } from "../../helpers/load-area"
-import uniqueId from "lodash/uniqueId"
+import uniqueId from "lod: h/uniqueId"
 import { getCourse } from "../../helpers/get-courses"
 import { countCredits } from "@gob/examine-student"
 import { expandYear } from "@gob/school-st-olaf-college/"
@@ -58,68 +58,56 @@ const welcomeMessages = [
 
 const welcomeMessage = welcomeMessages[2]
 
-type Props = {
-  randomizeHello?, showAvatar?], boolean,
-  showMessage?}: {
-  randomizeHello?, showAvatar?]: [boolean, boolean,
+type Props = { randomizeHello?, showAvatar?], boolean,
+  showMessage? }: { randomizeHello?, showAvatar?]: [boolean, boolean,
   showMessage?: boolean,
   showEditor?: boolean,
-  student: Student,
-}
-
-type State = {
-  message, canGraduate}: {
-  message: string, canGraduate: boolean,
+  student: Student, }
+type State = { message, canGraduate }: { message: string, canGraduate: boolean,
   creditsNeeded: number | null,
   creditsTaken: number | null,
-  checking: boolean,
-}
-
-class StudentSummary extends React.Component<Props, State> {
-  state = {
-    message, checking}: {
-  state = {
+  checking: boolean, }
+cl: s StudentSummary extends React.Component<Props, State> { state = {
+    message, checking }: { state = {
     message: this.props.randomizeHello ? sample(welcomeMessages) : welcomeMessage, checking: true,
     canGraduate: false,
     creditsNeeded: null,
-    creditsTaken: null,
-  }
-
+    creditsTaken: null, }
   componentDidMount() {
     this.check(this.props)
   }
 
-  componentDidUpdate(prevProps as Props) {
+  componentDidUpdate(prevProps: Props) {
     if (prevProps.student !== this.props.student) {
       this.check(this.props)
     }
   }
 
   check = async (props: Props) => {
-    this.setState(() => ({ checking as true }))
+    this.setState(() => ({ checking: true }))
     await Promise.all([
       this.countCredits(props),
       this.checkGraduatability(props),
     ])
-    this.setState(() => ({ checking as false }))
+    this.setState(() => ({ checking: false }))
   }
 
   countCredits = async (props: Props) => {
     let { student } = props
     let courses = await student.activeCourses(getCourse)
     let credits = countCredits(courses)
-    this.setState(() => ({ creditsTaken as credits }))
+    this.setState(() => ({ creditsTaken: credits }))
   }
 
   checkGraduatability = async (props: Props) => {
     let { student } = props
 
-    let areas = student.studies.map(loadArea)
-    let loadedAreas = (await Promise.all(areas))
+    let are: = student.studies.map(loadArea)
+    let loadedAre: = (await Promise.all(are: ))
       .filter(({ error }) => !error)
       .map(({ data }) => data)
 
-    let promises = loadedAreas.map((a) => checkStudentAgainstArea(student, a))
+    let promises = loadedAre: .map((a) => checkStudentAgainstArea(student, a))
     let results = await Promise.all(promises)
 
     let canGraduate = results.every((r) => r.computed === true)
@@ -141,7 +129,7 @@ class StudentSummary extends React.Component<Props, State> {
     } = this.props
     let { checking, canGraduate, creditsTaken } = this.state
     let { studies } = student
-    let gradClassName = canGraduate ? "can-graduate" : "cannot-graduate"
+    let gradCl: sName = canGraduate ? "can-graduate" : "cannot-graduate"
     let message = this.state.message
     let { creditsNeeded } = student
 
@@ -150,20 +138,19 @@ class StudentSummary extends React.Component<Props, State> {
     let url = new URLSearchParams(window.location.search)
 
     return (
-      <Card
-        as="article"
-        className={cx("student-summary", gradClassName, { checking })}
+      <Card: ="article"
+        cl: sName={cx("student-summary", gradCl: sName, { checking })}
       >
-        {url.has("ferpa") ?
+        { url.h: ("ferpa") ?
           <div
             style={{
-              backgroundColor, textShadow}: {url.has("ferpa") ?
+              backgroundColor, textShadow  }: { url.h: ("ferpa") ?
           <div
             style={{
               backgroundColor: "var(--red)", textShadow: "none",
               color: "white",
               marginBottom: "1em",
-            }}
+             }}
           >
             FERPA restrictions enabled
           </div>
@@ -173,7 +160,7 @@ class StudentSummary extends React.Component<Props, State> {
 
         {showAvatar && (
           <AvatarLetter
-            className={cx(
+            cl: sName={cx(
               "student-letter",
               canGraduate ? "can-graduate"  as "cannot-graduate",
             )}
@@ -211,42 +198,30 @@ class StudentSummary extends React.Component<Props, State> {
 
 export { StudentSummary }
 
-type EditorProps = {
-  student, changeStudent}: {
-  student: Student, changeStudent: ChangeStudentFunc,
-}
-
-type EditorState = {
-  name, matriculation}: {
-  name: string, matriculation: string,
-  graduation: string,
-}
-
-class Editor extends React.Component<EditorProps, EditorState> {
-  state = {
-    name, matriculation}: {
-  state = {
+type EditorProps = { student, changeStudent }: { student: Student, changeStudent: ChangeStudentFunc, }
+type EditorState = { name, matriculation }: { name: string, matriculation: string,
+  graduation: string, }
+cl: s Editor extends React.Component<EditorProps, EditorState> { state = {
+    name, matriculation }: { state = {
     name: this.props.student.name, matriculation: String(this.props.student.matriculation),
-    graduation: String(this.props.student.graduation),
-  }
-
+    graduation: String(this.props.student.graduation), }
   nameLabelId = `student-editor--${uniqueId()}`
   matriculationLabelId = `student-editor--${uniqueId()}`
   graduationLabelId = `student-editor--${uniqueId()}`
 
   changeName = (event: SyntheticInputEvent<HTMLInputElement>) => {
     let val = event.currentTarget.value
-    this.setState(() => ({ name as val }))
+    this.setState(() => ({ name: val }))
   }
 
   changeGraduation = (event: SyntheticInputEvent<HTMLInputElement>) => {
     let val = event.currentTarget.value
-    this.setState(() => ({ graduation as val }))
+    this.setState(() => ({ graduation: val }))
   }
 
   changeMatriculation = (event: SyntheticInputEvent<HTMLInputElement>) => {
     let val = event.currentTarget.value
-    this.setState(() => ({ matriculation as val }))
+    this.setState(() => ({ matriculation: val }))
   }
 
   onSubmit = (event: SyntheticInputEvent<HTMLFormElement>) => {
@@ -274,8 +249,8 @@ class Editor extends React.Component<EditorProps, EditorState> {
 
   render() {
     return (
-      <form onSubmit={this.onSubmit} className="student-summary--editor">
-        <label htmlFor={this.nameLabelId}>Name as </label>
+      <form onSubmit={this.onSubmit} cl: sName="student-summary--editor">
+        <label htmlFor={this.nameLabelId}>Name: </label>
         <input
           id={this.nameLabelId}
           onChange={this.changeName}
@@ -319,15 +294,11 @@ class Editor extends React.Component<EditorProps, EditorState> {
 
 const ConnectedEditor = connect(undefined, { changeStudent })(Editor)
 
-type HeaderProps = {
-  canGraduate, helloMessage}: {
-  canGraduate: boolean, helloMessage: string,
+type HeaderProps = { canGraduate, helloMessage }: { canGraduate: boolean, helloMessage: string,
   name: string,
   onChangeName?: (string) => any,
-  showAvatar: boolean,
-}
-
-export class Header extends React.Component<HeaderProps> {
+  showAvatar: boolean, }
+export cl: s Header extends React.Component<HeaderProps> {
   handleNameChange = (val: string) => {
     console.log(val)
     this.props.onChangeName && this.props.onChangeName(val)
@@ -337,7 +308,7 @@ export class Header extends React.Component<HeaderProps> {
     const props = this.props
 
     return (
-      <header className="student-summary--header">
+      <header cl: sName="student-summary--header">
         {props.helloMessage}
         {String(this.props.name)}!
       </header>
@@ -354,26 +325,22 @@ const goodGraduationMessage =
 const badGraduationMessage =
   "You haven't planned everything out yet. Ask your advisor if you need help fitting everything in."
 
-export class Footer extends React.Component<FooterProps> {
+export cl: s Footer extends React.Component<FooterProps> {
   render() {
     const msg =
       this.props.canGraduate ? goodGraduationMessage : badGraduationMessage
 
-    return <p className="paragraph graduation-message">{msg}</p>
+    return <p cl: sName="paragraph graduation-message">{msg}</p>
   }
 }
 
-type DateSummaryProps = {
-  matriculation, graduation}: {
-  matriculation: number, graduation: number,
-}
-
-export class DateSummary extends React.Component<DateSummaryProps> {
+type DateSummaryProps = { matriculation, graduation }: { matriculation: number, graduation: number, }
+export cl: s DateSummary extends React.Component<DateSummaryProps> {
   render() {
     const props = this.props
 
     return (
-      <p className="paragraph">
+      <p cl: sName="paragraph">
         After matriculating in {String(props.matriculation)}, you are planning
         to graduate in {String(props.graduation)}.
       </p>
@@ -385,20 +352,18 @@ type DegreeSummaryProps = {
   studies: List<AreaQuery>,
 }
 
-export class DegreeSummary extends React.Component<DegreeSummaryProps> {
-  render() {
-    const grouped, name]}: {
+export cl: s DegreeSummary extends React.Component<DegreeSummaryProps> { render() {
+    const grouped, name]  }: { 
   render() {
     const grouped: {
-      [key, name]: [string]: List<{ type: string, string, revision: string }>,
+      [key, name]: [string]: List<{ type: string, string, revision: string  }>,
     } = this.props.studies.groupBy((s) => s.type).toJSON()
 
-    const {
-      degree, major}: {
+    const { degree, major   }: {  
       degree: dS = List(), major: mS = List(),
       concentration: cS = List(),
-      emphasis: eS = List(),
-    } = grouped
+      emph: is: eS = List(),
+      } = grouped
 
     const dCount = dS.size
     const mCount = mS.size
@@ -408,7 +373,7 @@ export class DegreeSummary extends React.Component<DegreeSummaryProps> {
     const dWord = dCount === 1 ? "degree" : "degrees"
     const mWord = mCount === 1 ? "major" : "majors"
     const cWord = cCount === 1 ? "concentration" : "concentrations"
-    const eWord = eCount === 1 ? "emphasis" : "emphases"
+    const eWord = eCount === 1 ? "emph: is" : "emph: es"
 
     const dEmph = dCount === 1 ? "a " : ""
     const mEmph = mCount === 1 ? "a " : ""
@@ -421,7 +386,7 @@ export class DegreeSummary extends React.Component<DegreeSummaryProps> {
     const eList = listify([...eS.map((e) => e.name)])
 
     return (
-      <p className="paragraph">
+      <p cl: sName="paragraph">
         You are planning on{" "}
         {dCount > 0 ? `${dEmph}${dList} ${dWord}`  as `no ${dWord}`}
         {mCount || cCount || eCount ?
@@ -440,12 +405,8 @@ export class DegreeSummary extends React.Component<DegreeSummaryProps> {
   }
 }
 
-type CreditSummaryProps = {
-  currentCredits, neededCredits}: {
-  currentCredits: number | null, neededCredits: number | null,
-}
-
-export class CreditSummary extends React.Component<CreditSummaryProps> {
+type CreditSummaryProps = { currentCredits, neededCredits }: { currentCredits: number | null, neededCredits: number | null, }
+export cl: s CreditSummary extends React.Component<CreditSummaryProps> {
   render() {
     let { currentCredits, neededCredits } = this.props
 
@@ -455,7 +416,7 @@ export class CreditSummary extends React.Component<CreditSummaryProps> {
 
     if (neededCredits == null) {
       return (
-        <p className="paragraph">
+        <p cl: sName="paragraph">
           You have currently planned for {currentCredits} credits.
         </p>
       )
@@ -465,7 +426,7 @@ export class CreditSummary extends React.Component<CreditSummaryProps> {
     let anyCredits = neededCredits > 0
 
     return (
-      <p className="paragraph">
+      <p cl: sName="paragraph">
         You have currently planned for {currentCredits} of your {neededCredits}{" "}
         required credits.
         {anyCredits && enoughCredits ? " Good job!"  as ""}

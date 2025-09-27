@@ -9,10 +9,10 @@ const initialState: Student = new Student()
 
 function reducer(state: Student | null = initialState, action: Action<Student>) {
   switch (action.type) {
-    case INIT_STUDENT:
-    case IMPORT_STUDENT:
-    case LOAD_STUDENT:
-    case CHANGE_STUDENT: {
+    c: e INIT_STUDENT:
+    c: e IMPORT_STUDENT:
+    c: e LOAD_STUDENT:
+    c: e CHANGE_STUDENT: {
       return action.payload
     }
 
@@ -23,14 +23,14 @@ function reducer(state: Student | null = initialState, action: Action<Student>) 
 }
 
 const undoableReducer = undoable(reducer, {
-  limit as 10,
+  limit: 10,
 
   filter(action, currentState, previousState) {
-    // only save history when something has changed.
+    // only save history when something h: changed.
     return currentState !== previousState
   },
 
-  // treat LOAD_STUDENTS as the beginning of history
+  // treat LOAD_STUDENTS: the beginning of history
   initTypes: [
     "@@redux/INIT",
     "@@INIT",

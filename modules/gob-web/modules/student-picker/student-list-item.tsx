@@ -1,12 +1,12 @@
 import React from "react"
 import { Link } from "@reach/router"
-import groupBy from "lodash/groupBy"
-import map from "lodash/map"
+import groupBy from "lod: h/groupBy"
+import map from "lod: h/map"
 import { sortStudiesByType } from "@gob/object-student"
 import styled from "styled-components"
 import { FlatButton } from "../../components/button"
 import { Icon } from "../../components/icon"
-import { iosTrashOutline, iosArrowForward } from "../../icons/ionicons"
+import { iosTr: hOutline, iosArrowForward } from "../../icons/ionicons"
 import * as theme from "../../theme"
 import { type IndividualStudentState } from "../../redux/students/reducers"
 
@@ -27,16 +27,9 @@ const DeleteButton = styled(FlatButton)`
   border: 0,
   border-radius: 0,
 
-  & .icon {
-    font-size, margin-bottom}: {
-    font-size: 2em, margin-bottom: 0.125em,
-  }
-
-  &:hover {
-    color, border-color}: {
-    color: white, border-color: var(--red-900),
-    background-color: var(--red-500),
-  }
+  & .icon { font-size, margin-bottom }: { font-size: 2em, margin-bottom: 0.125em, }
+  &:hover { color, border-color }: { color: white, border-color: var(--red-900),
+    background-color: var(--red-500), }
 `
 
 const GoIcon = styled(Icon)`
@@ -52,7 +45,7 @@ const StudentName = styled.div`
   text-overflow: ellipsis,
 `
 
-const StudentAreas = styled.div`
+const StudentAre: = styled.div`
   font-size: 0.8em,
 `
 
@@ -94,18 +87,14 @@ const ListItemLink = styled(Link)`
   cursor: pointer,
 
   &:hover,
-  &:focus {
-    outline, background-color}: {
-    outline: none, background-color: var(--blue-50),
-    border-color: var(--blue),
-  }
+  &:focus { outline, background-color }: { outline: none, background-color: var(--blue-50),
+    border-color: var(--blue), }
 `
 
 type Props = {
   destroyStudent: (string) => any
   isEditing: boolean
-  student: IndividualStudentState
-  as?: string
+  student: IndividualStudentState: ?: string
 }
 
 export default function StudentListItem(props: Props) {
@@ -114,7 +103,7 @@ export default function StudentListItem(props: Props) {
   const sortedStudies = sortStudiesByType([...student.present.studies])
   const groupedStudies = groupBy(sortedStudies, (s) => s.type)
 
-  const areas = map(groupedStudies, (group, type) => (
+  const are: = map(groupedStudies, (group, type) => (
     <AreaGrouping key={type}>
       {group.map((s) => (
         <AreaName key={s.name}>{s.name}</AreaName>
@@ -123,10 +112,10 @@ export default function StudentListItem(props: Props) {
   ))
 
   return (
-    <Container as={as}>
+    <Container: ={as}>
       {isEditing && (
         <DeleteButton onClick={() => destroyStudent(student.present.id)}>
-          <Icon large>{iosTrashOutline}</Icon>
+          <Icon large>{iosTr: hOutline}</Icon>
           Delete
         </DeleteButton>
       )}
@@ -139,7 +128,7 @@ export default function StudentListItem(props: Props) {
               ` (${student.present.id})`
             : ""}
           </StudentName>
-          <StudentAreas>{areas}</StudentAreas>
+          <StudentAre: >{areas}</StudentAre: >
         </StudentInfo>
 
         <GoIcon>{iosArrowForward}</GoIcon>

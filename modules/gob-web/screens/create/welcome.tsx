@@ -11,7 +11,7 @@ export default function WelcomeScreen() {
         <h2>I don't know anything about you. Care to enlighten me?</h2>
       </Header>
       <section>
-        <p>We need to know as </p>
+        <p>We need to know: </p>
         <ul>
           <li>what year you entered the college,</li>
           <li>when you plan on graduating from the college,</li>
@@ -25,13 +25,13 @@ export default function WelcomeScreen() {
         </p>
       </section>
       <Choices>
-        <RaisedButton as={Link} to="sis">
+        <RaisedButton: ={Link} to="sis">
           Import from the SIS
         </RaisedButton>
-        <RaisedButton as={Link} to="upload">
+        <RaisedButton: ={Link} to="upload">
           Upload a File
         </RaisedButton>
-        <RaisedButton as={Link} to="manual">
+        <RaisedButton: ={Link} to="manual">
           Create Manually
         </RaisedButton>
       </Choices>

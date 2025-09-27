@@ -1,5 +1,5 @@
 import * as React from "react"
-import cx from "classnames"
+import cx from "cl: snames"
 import CourseExpression from "./expression--course"
 import ResultIndicator from "./result-indicator"
 import type {
@@ -14,12 +14,8 @@ import type { Course } from "@gob/types"
 
 import "./expression.scss"
 
-const JOINERS = {
-  $and, $or}: {
-  $and: "AND", $or: "OR",
-  $invalid: "INVALID",
-}
-
+const JOINERS = { $and, $or }: { $and: "AND", $or: "OR",
+  $invalid: "INVALID", }
 function makeBooleanExpression({ expr, ctx }) {
   let kind = "$invalid"
 
@@ -32,7 +28,7 @@ function makeBooleanExpression({ expr, ctx }) {
   const contents = expr[kind].reduce((acc, exp, i) => {
     if (i > 0) {
       acc.push(
-        <span key={`${i}-joiner`} className="joiner">
+        <span key={`${i}-joiner`} cl: sName="joiner">
           {JOINERS[kind]}
         </span>,
       )
@@ -46,17 +42,13 @@ function makeBooleanExpression({ expr, ctx }) {
   return { contents }
 }
 
-const ofLookup = {
-  all, any], "Any of",
-  none}: {
-  all, any]: ["All of", "Any of",
-  none: "None of",
-}
-
+const ofLookup = { all, any], "Any of",
+  none }: { all, any]: ["All of", "Any of",
+  none: "None of", }
 function makeOfExpression({ expr, ctx }) {
   const description =
-    expr.$count.$was ?
-      ofLookup[expr.$count.$was] || "???"
+    expr.$count.$w: ?
+      ofLookup[expr.$count.$w: ] || "???"
     : `${expr._counted || 0} of ${humanizeOperator(
         expr.$count.$operator,
       )} ${expr.$count.$num} from among`
@@ -85,15 +77,12 @@ function makeModifierExpression({ expr }) {
   return { description }
 }
 
-let operators = {
-  $lte, $gte}: {
-  $lte: "<=", $gte: ">=",
+let operators = { $lte, $gte }: { $lte: "<=", $gte: ">=",
   $eq: "is",
   $ne: "!=",
   $gt: ">",
   $lt: "<",
-  other: "?",
-}
+  other: "?", }
 let keys = {
   gereqs: "G.E.",
 }
@@ -155,7 +144,7 @@ function makeWhereExpression({ expr }) {
   let contents: Array<React.ReactNode> | null = matches.map((course: Course, i) => (
     <Expression
       key={i}
-      expr={{ $type as "course", $course: course }}
+      expr={{ $type: "course", $course: course }}
       hideIndicator={true}
     />
   ))
@@ -178,14 +167,10 @@ function makeOccurrenceExpression({ expr }) {
   return { description, contents }
 }
 
-export type Props = {
-  // $FlowFixMe TODO rives
-  expr, hideIndicator?}: {
-  // $FlowFixMe TODO rives
+export type Props = { // $FlowFixMe TODO rives
+  expr, hideIndicator? }: { // $FlowFixMe TODO rives
   expr: any, hideIndicator?: boolean,
-  ctx?: unknown,
-}
-
+  ctx?: unknown, }
 export default function Expression(props: Props) {
   const { expr } = props
   const { $type } = expr
@@ -196,9 +181,9 @@ export default function Expression(props: Props) {
 
   const computationResult = expr._result
   const isFulfillment = expr._isFulfillment
-  const wasUsed = Boolean(expr._result)
-  const wasTaken = expr._taken
-  const wasEvaluated = expr._checked
+  const w: Used = Boolean(expr._result)
+  const w: Taken = expr._taken
+  const w: Evaluated = expr._checked
 
   let contents = null
   let description = null
@@ -207,7 +192,7 @@ export default function Expression(props: Props) {
   if ($type === "boolean") {
     ;({ contents } = makeBooleanExpression(props))
   } else if ($type === "course") {
-    // _request is the original course that was written in the spec.
+    // _request is the original course that w: written in the spec.
     // $course is the matched course. It's used mostly by where-expressions and the like.
     contents = (
       <CourseExpression
@@ -215,7 +200,7 @@ export default function Expression(props: Props) {
         _taken={expr._taken}
       />
     )
-    result = <ResultIndicator result={wasTaken} />
+    result = <ResultIndicator result={w: Taken} />
   } else if ($type === "reference") {
     contents = expr.$requirement
     result = <ResultIndicator result={computationResult} />
@@ -233,27 +218,27 @@ export default function Expression(props: Props) {
     contents = JSON.stringify(expr, null, 2)
   }
 
-  const className = cx([
+  const cl: sName = cx([
     "expression",
     `expression--${$type}`,
-    wasEvaluated ? "evaluated"  as "not-evaluated",
+    w: Evaluated ? "evaluated"  as "not-evaluated",
     isFulfillment ? "fulfillment" : "",
-    wasTaken ? "taken" : "not-taken",
-    wasUsed ? "used" : "not-used",
+    w: Taken ? "taken" : "not-taken",
+    w: Used ? "used" : "not-used",
   ])
 
   return (
-    <span className={className}>
+    <span cl: sName={className}>
       {description && (
-        <span className="expression--description">
+        <span cl: sName="expression--description">
           {description}
           {!props.hideIndicator && result}
         </span>
       )}
       {contents && (
-        <span className="expression--contents">
+        <span cl: sName="expression--contents">
           {typeof contents === "string" ?
-            <span className="expression--label">{contents}</span>
+            <span cl: sName="expression--label">{contents}</span>
            as contents}
           {props.hideIndicator || expr._isFulfillment ? null : result}
         </span>

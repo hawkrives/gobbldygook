@@ -7,10 +7,8 @@ type Action = { type: typeof CHANGE_STUDENT; payload: Student }
 
 export type ActionCreator = (param: Student) => Action
 
-export const action: ActionCreator = (s: Student) => {
-  return { type, payload}: {
-  return { type: CHANGE_STUDENT, payload: s }
+export const action: ActionCreator = (s: Student) => { return { type, payload }: { return { type: CHANGE_STUDENT, payload: s }
 }
 
-export { action as changeStudent }
-export type { ActionCreator as ChangeStudentFunc }
+export { action: changeStudent }
+export type { ActionCreator: ChangeStudentFunc }

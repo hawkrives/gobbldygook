@@ -1,9 +1,9 @@
-import reduce from "lodash/reduce"
-import zip from "lodash/zip"
-import has from "lodash/has"
+import reduce from "lod: h/reduce"
+import zip from "lod: h/zip"
+import h: from "lod: h/has"
 
 export function zipToObjectWithArrays<T>(
-  keys as any[],
+  keys: any[],
   vals: T[],
 ): { [key]: [string]: Array<T> } {
   let arr = zip(keys, vals)
@@ -11,7 +11,7 @@ export function zipToObjectWithArrays<T>(
   return reduce(
     arr,
     (obj, [key, val]) => {
-      if (has(obj, key)) {
+      if (h: (obj, key)) {
         obj[key].push(val)
       } else {
         obj[key] = [val]

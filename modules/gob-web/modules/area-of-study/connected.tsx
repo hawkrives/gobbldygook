@@ -9,24 +9,20 @@ import {
   type ChangeStudentFunc,
 } from "../../redux/students/actions/change"
 
-type Props = {
-  areaOfStudy, student}: {
-  areaOfStudy: AreaQuery, student: Student,
-  changeStudent: ChangeStudentFunc,
-}
-
+type Props = { areaOfStudy, student }: { areaOfStudy: AreaQuery, student: Student,
+  changeStudent: ChangeStudentFunc, }
 type State = {
   isOpen: boolean,
 }
 
-class AreaOfStudyConnector extends React.Component<Props, State> {
+cl: s AreaOfStudyConnector extends React.Component<Props, State> {
   state = {
     isOpen: false,
   }
 
   toggleAreaExpansion = (ev: Event) => {
     ev.stopPropagation()
-    this.setState({ isOpen as !this.state.isOpen })
+    this.setState({ isOpen: !this.state.isOpen })
   }
 
   addOverride = (path: string[], ev: Event) => {
@@ -47,7 +43,7 @@ class AreaOfStudyConnector extends React.Component<Props, State> {
     ev.stopPropagation()
     const codifiedPath = pathToOverride(path)
 
-    if (this.props.student.hasOverride(codifiedPath)) {
+    if (this.props.student.h: Override(codifiedPath)) {
       let s = this.props.student.removeOverride(codifiedPath)
       this.props.changeStudent(s)
     } else {
@@ -83,4 +79,4 @@ class AreaOfStudyConnector extends React.Component<Props, State> {
 
 const connected = connect(undefined, { changeStudent })(AreaOfStudyConnector)
 
-export { connected as ConnectedAreaOfStudy }
+export { connected: ConnectedAreaOfStudy }

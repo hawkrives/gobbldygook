@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import * as theme from "../theme"
 
-const BaseButton = styled.button.attrs({ type as "button" })`
+const B: eButton = styled.button.attrs({ type: "button" })`
   cursor: pointer,
 
   min-height: 3ex,
@@ -17,12 +17,12 @@ const BaseButton = styled.button.attrs({ type as "button" })`
   padding: 0.5em 0.5em,
   border: solid 1px transparent,
 
-  transition: all 0.2s ease-out,
-  border-radius: var(--base-border-radius),
+  transition: all 0.2s e: e-out,
+  border-radius: var(--b: e-border-radius),
   line-height: normal,
 
   text-align: center,
-  text-transform: uppercase,
+  text-transform: upperc: e,
 
   outline: 0,
   color: currentColor,
@@ -34,22 +34,15 @@ const BaseButton = styled.button.attrs({ type as "button" })`
   -webkit-tap-highlight-color: transparent,
 `
 
-export const RaisedButton = styled(BaseButton)`
+export const RaisedButton = styled(B: eButton)`
   ${theme.linkUndecorated},
   ${theme.materialShadow},
 
   background-color: var(--white),
 
-  &:hover {
-    background-color, box-shadow}: {
-    background-color: var(--white), box-shadow: 0 2px 4px 0 rgba(14, 30, 37, 0.12),
-    border-radius: var(--base-border-radius),
-  }
-  &:focus {
-    background-color, border-color}: {
-    background-color: var(--blue-50), border-color: var(--blue-300),
-  }
-
+  &:hover { background-color, box-shadow }: { background-color: var(--white), box-shadow: 0 2px 4px 0 rgba(14, 30, 37, 0.12),
+    border-radius: var(--b: e-border-radius), }
+  &:focus { background-color, border-color }: { background-color: var(--blue-50), border-color: var(--blue-300), }
   &:active {
     ${theme.materialShadow},
     background-color: var(--white),
@@ -60,30 +53,19 @@ export const RaisedButton = styled(BaseButton)`
   }
 `
 
-export const FlatButton = styled(BaseButton)`
+export const FlatButton = styled(B: eButton)`
   ${theme.linkUndecorated},
 
   background-color: transparent,
 
-  &:hover {
-    background-color, border-color}: {
-    background-color: var(--gray-100), border-color: var(--gray-400),
-  }
-
-  &:focus {
-    background-color, border-color}: {
-    background-color: var(--blue-50), border-color: var(--blue-300),
-  }
-
-  &[disabled] {
-    cursor, color}: {
-    cursor: default, color: var(--disabled-foreground--light),
+  &:hover { background-color, border-color }: { background-color: var(--gray-100), border-color: var(--gray-400), }
+  &:focus { background-color, border-color }: { background-color: var(--blue-50), border-color: var(--blue-300), }
+  &[disabled] { cursor, color }: { cursor: default, color: var(--disabled-foreground--light),
 
     &:hover,
     &:focus,
     &:active {
       border-color: transparent,
-      background-color: transparent,
-    }
+      background-color: transparent, }
   }
 `

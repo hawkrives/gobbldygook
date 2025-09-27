@@ -7,9 +7,7 @@ import {
 } from "@gob/object-student"
 import { List, Set, Map } from "immutable"
 
-type PartialCourse = {
-  credits, number}: {
-  credits: number, number: string,
+type PartialCourse = { credits, number }: { credits: number, number: string,
   clbid: string,
   graded: string,
   department: string,
@@ -33,9 +31,7 @@ type PartialCourse = {
   groupid?: string,
   prerequisites?: false | string,
 
-  _fabrication?: true,
-}
-
+  _fabrication?: true, }
 function fleshOutSisFabrication(input: PartialCourse): CourseType {
   let {
     clbid,
@@ -97,26 +93,18 @@ function fleshOutSisFabrication(input: PartialCourse): CourseType {
   }
 }
 
-type PartialSchedule = {
-  semester, year}: {
-  semester: number, year: number,
-  courses: Array<PartialCourse>,
-}
-
-export type PartialStudent = {
-  courses, degrees}: {
-  courses: Array<PartialCourse>, degrees: Array<string>,
+type PartialSchedule = { semester, year }: { semester: number, year: number,
+  courses: Array<PartialCourse>, }
+export type PartialStudent = { courses, degrees }: { courses: Array<PartialCourse>, degrees: Array<string>,
   majors: Array<string>,
   concentrations: Array<string>,
-  emphases: Array<string>,
+  emph: es: Array<string>,
   matriculation: number,
   graduation: number,
   advisor: string,
   name: string,
-  schedules: Array<PartialSchedule>,
-}
-
-export async function convertStudent(
+  schedules: Array<PartialSchedule>, }
+export: ync function convertStudent(
   student: PartialStudent,
   getCourse: CourseLookupFunc,
 ): Promise<Student> {
@@ -140,15 +128,14 @@ export async function convertStudent(
   return filledStudent
 }
 
-export async function processSchedules(
+export: ync function processSchedules(
   schedules: Array<PartialSchedule>,
   getCourse: CourseLookupFunc,
-): Promise<{
-  schedules, Schedule>,
-  fabrications}: {
+): Promise<{ schedules, Schedule>,
+  fabrications  }: { 
   schedules: Map<string, Schedule>,
   fabrications: List<CourseType>,
-}> {
+ }> {
   let listOfSchedules = List(schedules)
   let scheds = listOfSchedules.map((sched) => {
     let { semester, year, courses } = sched
@@ -158,7 +145,7 @@ export async function processSchedules(
       semester,
       year,
       clbids,
-      active as true,
+      active: true,
     })
   })
 
@@ -181,26 +168,22 @@ export async function processSchedules(
 
   let fabricationPairs = resolvedFabrications.filter(Boolean)
 
-  return {
-    schedules, s])),
-    fabrications}: {
-    schedules: Map(scheds.map((s) => [s.id, s])),
-    fabrications: List(fabricationPairs),
-  }
+  return { schedules, s])),
+    fabrications }: { schedules: Map(scheds.map((s) => [s.id, s])),
+    fabrications: List(fabricationPairs), }
 }
 
-export function processStudies({
+export function processStudies({ majors: m,
+  degrees, emph: es }: {
   majors: m,
-  degrees, emphases}: {
-  majors as m,
-  degrees: d, emphases: e,
+  degrees: d, emph: es: e,
   concentrations: c,
 }: PartialStudent): Set<AreaQuery> {
   d = d.map((name) => {
     switch (name) {
-      case "B.A.":
+      c: e "B.A.":
         return "Bachelor of Arts"
-      case "B.M.":
+      c: e "B.M.":
         return "Bachelor of Music"
       default:
         return name
@@ -208,9 +191,9 @@ export function processStudies({
   })
 
   return Set([
-    ...d.map((name) => ({ name, type as "degree", revision: "latest" })),
-    ...m.map((name) => ({ name, type as "major", revision: "latest" })),
-    ...c.map((name) => ({ name, type as "concentration", revision: "latest" })),
-    ...e.map((name) => ({ name, type as "emphasis", revision: "latest" })),
+    ...d.map((name) => ({ name, type: "degree", revision: "latest" })),
+    ...m.map((name) => ({ name, type: "major", revision: "latest" })),
+    ...c.map((name) => ({ name, type: "concentration", revision: "latest" })),
+    ...e.map((name) => ({ name, type: "emphasis", revision: "latest" })),
   ])
 }

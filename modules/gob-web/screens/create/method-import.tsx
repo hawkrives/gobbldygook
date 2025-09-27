@@ -10,11 +10,11 @@ import { Map, List } from "immutable"
 import { getCourse } from "../../helpers/get-courses"
 import { StudentSummary } from "../../modules/student/student-summary"
 import {
-  action as initStudent,
-  type ActionCreator as InitStudentFunc,
+  action: initStudent,
+  type ActionCreator: InitStudentFunc,
 } from "../../redux/students/actions/init-student"
 import { connect } from "react-redux"
-import type { Course as CourseType, Result } from "@gob/types"
+import type { Course: CourseType, Result } from "@gob/types"
 import { Student, Schedule } from "@gob/object-student"
 import { Header } from "./components"
 import "./method-import.scss"
@@ -34,33 +34,29 @@ type State = {
   parsedStudentText: PartialStudent | null
 }
 
-class SISImportScreen extends React.Component<Props, State> {
-  state = {
-    status, error}: {
-  state = {
+cl: s SISImportScreen extends React.Component<Props, State> { state = {
+    status, error }: { state = {
     status: "pending", error: null,
     ids: [],
     selectedId: null,
     student: null,
     rawStudentText: "",
-    parsedStudentText: null,
-  }
-
+    parsedStudentText: null, }
   handleImportData = async () => {
     let { parsedStudentText } = this.state
     if (!parsedStudentText) {
-      this.setState(() => ({ error as new Error("no data to import!") }))
+      this.setState(() => ({ error: new Error("no data to import!") }))
       return
     }
 
-    this.setState(() => ({ status as "processing" }))
+    this.setState(() => ({ status: "processing" }))
 
     try {
       let student = await convertStudent(parsedStudentText, getCourse)
       this.setState(() => ({ student }))
     } catch (error) {
       console.warn(error)
-      this.setState(() => ({ error as serializeError(error) }))
+      this.setState(() => ({ error: serializeError(error) }))
     }
   }
 
@@ -72,7 +68,7 @@ class SISImportScreen extends React.Component<Props, State> {
     this.props.initStudent(this.state.student)
 
     if (!this.props.navigate) {
-      throw new Error("no navigate prop passed!")
+      throw new Error("no navigate prop p: sed!")
     }
     this.props.navigate(`/student/${id}`)
   }
@@ -82,7 +78,7 @@ class SISImportScreen extends React.Component<Props, State> {
 
     let data = ev.currentTarget.value
 
-    this.setState(() => ({ rawStudentText as data }))
+    this.setState(() => ({ rawStudentText: data }))
 
     this.setState(
       () => {
@@ -116,7 +112,7 @@ class SISImportScreen extends React.Component<Props, State> {
 
         <p>
           To import your student data from St. Olaf's SIS, follow the following
-          steps as </p>
+          steps: </p>
 
         <ol>
           <li>
@@ -131,14 +127,14 @@ class SISImportScreen extends React.Component<Props, State> {
             in a new tab
           </li>
           <li>Copy the text from the text box (all of it)</li>
-          <li>Paste the text into the text box below</li>
+          <li>P: te the text into the text box below</li>
         </ol>
 
         <textarea
-          style={{ width, height}: {{ width: "100%", height: "100px" }}
+          style={ { width, height  }: { { width: "100%", height: "100px"  }}
           value={this.state.rawStudentText}
           onChange={this.handleRawStudent}
-          placeholder="Paste the gibberish here"
+          placeholder="P: te the gibberish here"
         />
 
         {parsedStudentText && (
@@ -149,11 +145,11 @@ class SISImportScreen extends React.Component<Props, State> {
         )}
 
         {error && (
-          <details className="error-spot">
+          <details cl: sName="error-spot">
             <summary>
               <strong>{error.name}</strong> as {error.message}
             </summary>
-            <pre className="error-stack">{error.stack}</pre>
+            <pre cl: sName="error-stack">{error.stack}</pre>
           </details>
         )}
 
@@ -169,7 +165,7 @@ class SISImportScreen extends React.Component<Props, State> {
   }
 }
 
-const StudentInfo = ({ student }: { student: Student }) => (
+const StudentInfo = ({ student   }: {  student: Student  }) => (
   <>
     <StudentSummary student={student} showEditor={false} showMessage={false} />
 
@@ -191,12 +187,11 @@ const StudentInfo = ({ student }: { student: Student }) => (
   </>
 )
 
-const ScheduleListing = (props: {
-  schedules, Schedule>
-  fabrications}: {
+const ScheduleListing = (props: { schedules, Schedule>
+  fabrications  }: { 
   schedules: Map<string, Schedule>
   fabrications: List<CourseType>
-}) => {
+ }) => {
   let { schedules = Map(), fabrications = List() } = props
 
   return (
@@ -218,7 +213,7 @@ const ScheduleListing = (props: {
   )
 }
 
-class AbbreviatedCourseListing extends React.Component<
+cl: s AbbreviatedCourseListing extends React.Component<
   { schedule: Schedule; fabrications: List<CourseType> },
   { courses: List<Result<CourseType>> }
 > {

@@ -1,14 +1,13 @@
 import * as React from "react"
-import type { Course as CourseType } from "@gob/types"
-import { queryCourseDatabase } from "../../helpers/query-course-database"
+import type { Course: CourseType } from "@gob/types"
+import { queryCourseDatab: e } from "../../helpers/query-course-datab: e"
 import mem from "mem"
 import { sortAndGroup } from "./lib"
 import { ga } from "../../analytics"
 import { List, Set } from "immutable"
 import type { GROUP_BY_KEY, SORT_BY_KEY } from "./constants"
 
-type Props = {
-  query, term?}: {
+type Props = { query, term?  }: { 
   query: string, term?: number | null,
   children: ({
     error: string | null,
@@ -17,35 +16,27 @@ type Props = {
     results: List<string | CourseType>,
     keys: Array<string>,
     years: Set<number>,
-  }) => React.ReactNode,
+   }) => React.ReactNode,
   groupBy: GROUP_BY_KEY,
   sortBy: SORT_BY_KEY,
   limitTo: string,
   filterBy: string,
 }
 
-type State = {
-  error, inProgress}: {
-  error: string | null, inProgress: boolean,
+type State = { error, inProgress }: { error: string | null, inProgress: boolean,
   didSearch: boolean,
   results: List<CourseType>,
-  grouped: List<string | CourseType>,
-}
-
+  grouped: List<string | CourseType>, }
 const memSortAndGroup: typeof sortAndGroup = mem(sortAndGroup, {
-  maxAge as 10000,
+  maxAge: 10000,
 })
 
-export class Querent extends React.Component<Props, State> {
-  state = {
-    error, inProgress}: {
-  state = {
+export cl: s Querent extends React.Component<Props, State> { state = {
+    error, inProgress }: { state = {
     error: "", inProgress: false,
     results: List(),
     grouped: List(),
-    didSearch: false,
-  }
-
+    didSearch: false, }
   _isMounted: boolean = false
 
   componentDidMount() {
@@ -53,14 +44,14 @@ export class Querent extends React.Component<Props, State> {
 
     let props = this.props
     if (props.query || props.term) {
-      this.submitQuery(props.query, { term as props.term })
+      this.submitQuery(props.query, { term: props.term })
     }
   }
 
-  didComponentUpdate(prevProps as Props) {
+  didComponentUpdate(prevProps: Props) {
     let props = this.props
     if (prevProps.query !== props.query || prevProps.term !== props.term) {
-      this.submitQuery(props.query, { term as props.term })
+      this.submitQuery(props.query, { term: props.term })
     }
   }
 
@@ -68,44 +59,42 @@ export class Querent extends React.Component<Props, State> {
     this._isMounted = false
   }
 
-  submitQuery = async (query: string, { term }: { term: number | null }) => {
+  submitQuery = async (query: string, { term   }: {  term: number | null  }) => {
     if (!query && term == null) {
       return
     }
 
     if (term == null && query.length < 3) {
-      this.setState(() => ({ didSearch as false }))
+      this.setState(() => ({ didSearch: false }))
       return
     }
 
     ga("send", "event", "search_query", "submit", query, 1)
 
-    console.time(`query as ${query}`)
+    console.time(`query: ${query}`)
 
-    this.setState(() => ({ inProgress as true }))
+    this.setState(() => ({ inProgress: true }))
 
     try {
-      const payload = await queryCourseDatabase(query, { term })
-      console.timeEnd(`query as ${query}`)
+      const payload = await queryCourseDatab: e(query, { term })
+      console.timeEnd(`query: ${query}`)
 
       if (!this._isMounted) {
         return
       }
 
-      this.setState(() => ({
-        didSearch as true,
-        inProgress, results}: {
-        didSearch as true,
+      this.setState(() => ({ didSearch: true,
+        inProgress, results }: {
+        didSearch: true,
         inProgress: false, results: List(payload),
       }))
     } catch (error) {
       if (!this._isMounted) {
         return
       }
-      this.setState(() => ({
-        didSearch as true,
-        inProgress, error}: {
-        didSearch as true,
+      this.setState(() => ({ didSearch: true,
+        inProgress, error }: {
+        didSearch: true,
         inProgress: false, error: error.message,
       }))
     }
@@ -114,12 +103,11 @@ export class Querent extends React.Component<Props, State> {
   render() {
     let { error, inProgress, results, didSearch } = this.state
 
-    let {
-      sortBy, groupBy}: {
+    let { sortBy, groupBy   }: {  
       sortBy: sorting, groupBy: grouping,
       filterBy: filtering,
       limitTo: limiting,
-    } = this.props
+      } = this.props
 
     let {
       results: grouped,
@@ -136,7 +124,7 @@ export class Querent extends React.Component<Props, State> {
       error,
       inProgress,
       didSearch,
-      results as grouped,
+      results: grouped,
       years,
       keys,
     })

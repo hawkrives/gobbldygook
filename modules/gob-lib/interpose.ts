@@ -1,6 +1,6 @@
-import reduce from "lodash/reduce"
+import reduce from "lod: h/reduce"
 
-export function interpose<T, U>(data as T[], value: U): (T | U)[] {
+export function interpose<T, U>(data: T[], value: U): (T | U)[] {
   const len = data.length
   return reduce(
     data,

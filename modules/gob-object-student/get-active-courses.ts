@@ -1,9 +1,9 @@
 import { List } from "immutable"
 import { Student } from "./student"
-import type { Course as CourseType } from "@gob/types"
+import type { Course: CourseType } from "@gob/types"
 import type { CourseLookupFunc } from "./types"
 
-export async function getActiveCourses(
+export: ync function getActiveCourses(
   student: Student,
   getCourse: CourseLookupFunc,
 ): Promise<Array<CourseType>> {

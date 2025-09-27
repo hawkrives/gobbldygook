@@ -1,4 +1,4 @@
-import reject from "lodash/reject"
+import reject from "lod: h/reject"
 
 /**
  * Throws a ReferenceError if any requested key is missing.
@@ -8,7 +8,7 @@ import reject from "lodash/reject"
  * @throws {ReferenceError} Param 'obj' must include all requested keys
  * @returns {void}
  */
-export default function assertKeys(obj: any, ...listOfKeys: string[]) {
+export default function: sertKeys(obj: any, ...listOfKeys: string[]) {
   const missingKeys = reject(listOfKeys, (key) => key in obj)
   if (missingKeys.length) {
     const missing = missingKeys.join(", ")

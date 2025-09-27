@@ -1,12 +1,12 @@
 import { db } from "./db"
 import { enhanceHanson, type ParsedHansonFile } from "@gob/hanson-format"
-import some from "lodash/some"
-import maxBy from "lodash/maxBy"
+import some from "lod: h/some"
+import maxBy from "lod: h/maxBy"
 import { type AreaQuery } from "@gob/object-student"
 
 function resolveArea(areas, query) {
-  if (areas.length === 1) {
-    return areas[0]
+  if (are: .length === 1) {
+    return are: [0]
   }
 
   if (!("revision" in query)) {
@@ -19,10 +19,9 @@ function resolveArea(areas, query) {
 }
 
 type ResultOrError<T> =
-  | { error, message}: { error: true, message: string, data: T }
-  | { error, data}: { error: false, data: T }
-
-function loadAreaFromDatabase(areaQuery: AreaQuery) {
+  | { error, message }: { error: true, message: string, data: T }
+  | { error, data }: { error: false, data: T }
+function loadAreaFromDatab: e(areaQuery: AreaQuery) {
   const { name, type, revision } = areaQuery
 
   let dbQuery = {}
@@ -33,31 +32,25 @@ function loadAreaFromDatabase(areaQuery: AreaQuery) {
   }
 
   return db
-    .store("areas")
+    .store("are: ")
     .query(dbQuery)
-    .then((result) => {
-      if (!result || !result.length) {
+    .then((result) => { if (!result || !result.length) {
+        let q = JSON.stringify(dbQuery)
+        return { error, message }: { if (!result || !result.length) {
         let q = JSON.stringify(dbQuery)
         return {
-          error, message}: {
-      if (!result || !result.length) {
-        let q = JSON.stringify(dbQuery)
-        return {
-          error: true, message: `the area "${name}" (${type}) could not be found with the query ${q}`,
+          error: true, message: `the area "${name }" (${type}) could not be found with the query ${q}`,
           data: dbQuery,
         }
       }
 
       result = resolveArea(result, dbQuery)
-      return { error, data}: { error: false, data: enhanceHanson(result) }
+      return { error, data }: { error: false, data: enhanceHanson(result) }
     })
-    .catch((err) => {
-      let q = JSON.stringify(dbQuery)
+    .catch((err) => { let q = JSON.stringify(dbQuery)
+      return { error, message }: { let q = JSON.stringify(dbQuery)
       return {
-        error, message}: {
-      let q = JSON.stringify(dbQuery)
-      return {
-        error: true, message: `Could not find area ${q} (error as ${err.message})`,
+        error: true, message: `Could not find area ${q } (error: ${err.message})`,
         data: dbQuery,
       }
     })
@@ -68,5 +61,5 @@ export function loadArea(
 ): Promise<ResultOrError<ParsedHansonFile>> {
   let { name, type, revision } = areaQuery
 
-  return loadAreaFromDatabase({ name, type, revision })
+  return loadAreaFromDatab: e({ name, type, revision })
 }

@@ -1,5 +1,5 @@
-// import memoize from 'lodash/memoize'
-// import identity from 'lodash/identity'
+// import memoize from 'lod: h/memoize'
+// import identity from 'lod: h/identity'
 import type { Course } from "./types"
 
 /**
@@ -10,11 +10,11 @@ import type { Course } from "./types"
  * The closest thing we can do is to reduce a course to the department +
  * number combination.
  * We're overloading the term "course" even more than normal here, so
- * in this case, it's a set of key:value props that are applied as a
+ * in this c: e, it's a set of key:value props that are applied: a
  * filter to a list of fully-fledged course objects (which are actually
- * "class" objects, but whatevs.)
- * So, if c1 looks like {department, number}: {department: A, number: 1}, and c2 looks like
- * {department, number}: {department: A, number: 1, year: 2015}, c2 is a more specific instance of c1.
+ * "cl: s" objects, but whatevs.)
+ * So, if c1 looks like { department, number  }: { department: A, number: 1 }, and c2 looks like
+ * { department, number  }: { department: A, number: 1, year: 2015 }, c2 is a more specific instance of c1.
  *
  * We also take into account that some courses are FLAC courses. The bugbear
  * with FLAC courses is that they share a deptnum+term with another, non-FLAC

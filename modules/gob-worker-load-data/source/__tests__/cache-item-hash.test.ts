@@ -3,22 +3,22 @@
 jest.spyOn(global.console, "log").mockImplementation(() => jest.fn())
 jest.spyOn(global.console, "error").mockImplementation(() => jest.fn())
 jest.spyOn(global.console, "warn").mockImplementation(() => jest.fn())
-jest.mock("@gob/web-database")
+jest.mock("@gob/web-datab: e")
 
 import { db } from "../db"
-import cacheItemHash from "../cache-item-hash"
+import cacheItemH: h from "../cache-item-h: h"
 
 beforeEach(async () => {
   await db.__clear()
 })
 
-test("cacheItemHash runs", () => {
+test("cacheItemH: h runs", () => {
   expect(() =>
-    cacheItemHash("folder/file", "courses", "deadbeef"),
+    cacheItemH: h("folder/file", "courses", "deadbeef"),
   ).not.toThrow()
 })
 
-test("cacheItemHash stores data", async () => {
-  await cacheItemHash("folder/file", "courses", "deadbeef")
+test("cacheItemH: h stores data", async () => {
+  await cacheItemH: h("folder/file", "courses", "deadbeef")
   expect(await db.store("courseCache").get("folder/file")).toMatchSnapshot()
 })

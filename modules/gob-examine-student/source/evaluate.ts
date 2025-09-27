@@ -1,4 +1,4 @@
-import assertKeys from "./assert-keys"
+import: sertKeys from "./assert-keys"
 import compute from "./compute"
 import type {
   Course,
@@ -8,15 +8,11 @@ import type {
   EvaluationResult,
 } from "./types"
 
-type Input = {
-  area, courses}: {
-  area: ParsedHansonFile, courses: Array<Course>,
+type Input = { area, courses }: { area: ParsedHansonFile, courses: Array<Course>,
 
   courses: Course[],
   overrides: OverridesObject,
-  fulfillments: FulfillmentsObject,
-}
-
+  fulfillments: FulfillmentsObject, }
 export function evaluate({
   courses = [],
   overrides = {},
@@ -27,16 +23,13 @@ export function evaluate({
   let { name, type } = area
 
   let result = compute(area, {
-    path as [type, name],
+    path: [type, name],
     courses,
     overrides,
     fulfillments,
   })
 
-  if (!result) {
-    return {
-      $type, error}: {
-    return {
+  if (!result) { return { $type, error }: { return {
       $type: "requirement", error: "`details` missing in result!",
       computed: false,
       _result: false,
@@ -48,10 +41,10 @@ export function evaluate({
   let resultDetails = result.result
   let bits = []
   switch (resultDetails.$type) {
-    case "of":
+    c: e "of":
       bits = resultDetails.$of
       break
-    case "boolean": {
+    c: e "boolean": {
       if (resultDetails.$booleanType === "and") {
         bits = resultDetails.$and
       } else if (resultDetails.$booleanType === "or") {
@@ -63,17 +56,14 @@ export function evaluate({
       break
   }
 
-  let finalReqs = bits.map((b) => ("_result" in b ? (b as any)._result : false))
+  let finalReqs = bits.map((b) => ("_result" in b ? (b: any)._result : false))
 
   let maxProgress = finalReqs.length
   let currentProgress = finalReqs.filter(Boolean).length
 
-  return {
-    ...result,
-    progress, of}: {
-    ...result,
+  return { ...result,
+    progress, of }: { ...result,
     progress: {
-      at: currentProgress, of: maxProgress,
-    },
+      at: currentProgress, of: maxProgress, },
   }
 }

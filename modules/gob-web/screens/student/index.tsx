@@ -8,21 +8,20 @@ import { Sidebar } from "../../components/sidebar"
 
 import StudentOverview from "../../modules/student"
 
-const SearchSidebar = Loadable({
-  loader, ),
-  loading}: {
+const SearchSidebar = Loadable({ loader, ),
+  loading  }: { 
   loader: () =>
     import("../../components/sidebar--course-search").then(
       (mod) => mod.CourseSearcherSidebar, ),
   loading: LoadingComponent,
-})
+ })
 
 import CourseRemovalBox from "../../components/course-removal-box"
 import { ConnectedSidebarToolbar } from "../../components/sidebar-toolbar"
 import { AreaOfStudySidebar } from "../../modules/student/area-of-study-sidebar"
 import { StudentSummary } from "../../modules/student/student-summary"
 
-const StatusSidebar = ({ student }: { student: Undoable<Student> }) => (
+const StatusSidebar = ({ student   }: {  student: Undoable<Student>  }) => (
   <Sidebar>
     <ConnectedSidebarToolbar
       backTo="picker"
@@ -36,22 +35,19 @@ const StatusSidebar = ({ student }: { student: Undoable<Student> }) => (
   </Sidebar>
 )
 
-const CourseTable = Loadable({
-  loader, loading}: {
+const CourseTable = Loadable({ loader, loading  }: { 
   loader: () => import("../../modules/course-table"), loading: LoadingComponent,
-})
+ })
 
-const ShareStudentOverlay = Loadable({
-  loader, loading}: {
+const ShareStudentOverlay = Loadable({ loader, loading  }: { 
   loader: () => import("./share-student"), loading: LoadingComponent,
-})
+ })
 
-const SemesterDetail = Loadable({
-  loader, loading}: {
+const SemesterDetail = Loadable({ loader, loading  }: { 
   loader: () => import("../../modules/semester-detail"), loading: LoadingComponent,
-})
+ })
 
-const TermSidebar = ({ student }: { student: Undoable<Student> }) => (
+const TermSidebar = ({ student   }: {  student: Undoable<Student>  }) => (
   <Sidebar>
     <ConnectedSidebarToolbar
       backTo="picker"
@@ -62,9 +58,8 @@ const TermSidebar = ({ student }: { student: Undoable<Student> }) => (
   </Sidebar>
 )
 
-export default function StudentIndex(props: {
-  studentId?, location?}: {
-  studentId?: string, location?: { search: string },
+export default function StudentIndex(props: { studentId?, location?  }: { 
+  studentId?: string, location?: { search: string  },
   navigate?: (string) => unknown,
 }) {
   let { location, studentId, navigate } = props
@@ -74,7 +69,7 @@ export default function StudentIndex(props: {
   }
 
   if (!location || !navigate) {
-    return <p>Error: @reach/router did not pass location or navigate!</p>
+    return <p>Error: @reach/router did not p: s location or navigate!</p>
   }
 
   let params = new URLSearchParams(location.search)
@@ -105,7 +100,7 @@ export default function StudentIndex(props: {
             navigate={navigate}
           />
 
-          {params.has("share") && (
+          {params.h: ("share") && (
             <ShareStudentOverlay
               student={student.present}
               navigate={navigate}

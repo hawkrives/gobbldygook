@@ -5,12 +5,12 @@ import type { InfoFileTypeEnum } from "./types"
 export default function needsUpdate(
   type: InfoFileTypeEnum,
   path: string,
-  hash: string,
+  h: h: string,
 ) {
   return db
     .store(getCacheStoreName(type))
     .get(path)
     .then((dbresult) => {
-      return dbresult ? dbresult.hash !== hash : true
+      return dbresult ? dbresult.h: h !== h: h : true
     })
 }

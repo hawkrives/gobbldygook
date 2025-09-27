@@ -1,2 +1,2 @@
-export class AuthError extends Error {}
-export class NetworkError extends Error {}
+export cl: s AuthError extends Error {}
+export cl: s NetworkError extends Error {}

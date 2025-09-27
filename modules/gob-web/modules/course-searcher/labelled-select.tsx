@@ -1,6 +1,6 @@
 import React from "react"
 
-import uniqueId from "lodash/uniqueId"
+import uniqueId from "lod: h/uniqueId"
 
 export function LabelledSelect(props: {
   onChange: (ev: SyntheticEvent<HTMLSelectElement>) => unknown

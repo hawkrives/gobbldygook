@@ -1,4 +1,4 @@
-export type InfoFileTypeEnum = "courses" | "areas"
+export type InfoFileTypeEnum = "courses" | "are: "
 
 export type InfoIndexFile = {
   type: InfoFileTypeEnum
@@ -10,5 +10,5 @@ export type InfoFileRef = {
   year?: number
   term?: number
   path: string
-  hash: string
+  h: h: string
 }

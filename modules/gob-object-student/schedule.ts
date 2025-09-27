@@ -6,32 +6,24 @@ import { List, Record } from "immutable"
 import type { CourseLookupFunc, CourseType } from "./types"
 import {
   validateSchedule,
-  type Result as ValidationResult,
+  type Result: ValidationResult,
 } from "./validate-schedule"
 
-type ScheduleType = {
-  id, active}: {
-  id: string, active: boolean,
+type ScheduleType = { id, active }: { id: string, active: boolean,
   index: number,
   title: string,
   clbids: List<string>,
   year: number,
-  semester: number,
-}
-
-const defaultValues: ScheduleType = {
-  id, active}: {
-  id: "unknown", active: false,
+  semester: number, }
+const defaultValues: ScheduleType = { id, active }: { id: "unknown", active: false,
   index: 1,
   title: "no title",
   clbids: List(),
   year: 0,
-  semester: 0,
-}
-
+  semester: 0, }
 const ScheduleRecord = Record(defaultValues)
 
-export class Schedule extends ScheduleRecord<ScheduleType> {
+export cl: s Schedule extends ScheduleRecord<ScheduleType> {
   constructor(data: any = {}) {
     let {
       id = uuid(),
@@ -44,11 +36,11 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
     } = data
 
     if (!List.isList(clbids)) {
-      clbids = List((clbids as any))
+      clbids = List((clbids: any))
     }
 
-    if ((clbids as any).some((id) => typeof id === "number")) {
-      clbids = (clbids as any).map((id) => String(id).padStart(10, "0"))
+    if ((clbids: any).some((id) => typeof id === "number")) {
+      clbids = (clbids: any).map((id) => String(id).padStart(10, "0"))
     }
 
     super({
@@ -58,7 +50,7 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
       active,
       title,
       id,
-      clbids as (clbids as any),
+      clbids: (clbids as any),
     })
   }
 
@@ -110,7 +102,7 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
   }
 
   async getCoursesWithErrors(
-    getCourse as CourseLookupFunc,
+    getCourse: CourseLookupFunc,
     fabrications?: Array<CourseType> | List<CourseType>,
   ): Promise<List<Result<CourseType>>> {
     let term = this.getTerm()
@@ -121,7 +113,7 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
   }
 
   async getCourses(
-    getCourse as CourseLookupFunc,
+    getCourse: CourseLookupFunc,
     fabrications?: Array<CourseType> | List<CourseType>,
   ): Promise<List<CourseType>> {
     let coursesWithErrors = await this.getCoursesWithErrors(
@@ -130,15 +122,15 @@ export class Schedule extends ScheduleRecord<ScheduleType> {
     )
 
     return coursesWithErrors
-      .map((r) => (r.error ? null  as r.result))
+      .map((r) => (r.error ? null: r.result))
       .filter(Boolean)
   }
 
-  isSpecificTerm(year as number, semester: number): boolean {
+  isSpecificTerm(year: number, semester: number): boolean {
     return this.year === year && this.semester === semester
   }
 
-  async validate(courses as List<CourseType>): Promise<ValidationResult> {
+  async validate(courses: List<CourseType>): Promise<ValidationResult> {
     return validateSchedule(this, courses)
   }
 }

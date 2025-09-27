@@ -1,12 +1,10 @@
 import bugsnag from "bugsnag-js"
 const BUGSNAG_KEY = "7e393deddaeb885f5b140b4320ecef6b"
 
-export function isogram() {
-  // todo, "UA-10662325-7", "auto"],
+export function isogram() { // todo, "UA-10662325-7", "auto"],
       ["send", "pageview"],
     ],
-    l}: {
-  // todo: add function for tracking events
+    l }: { // todo: add function for tracking events
   // https://developers.google.com/analytics/devguides/collection/analyticsjs/events
 
   window.GoogleAnalyticsObject = "ga"
@@ -15,13 +13,11 @@ export function isogram() {
       ["create", "UA-10662325-7", "auto"],
       ["send", "pageview"],
     ],
-    l: Number(new Date()),
-  }
-
+    l: Number(new Date()), }
   let script = document.createElement("script")
   script.async = true
   script.src = "//www.google-analytics.com/analytics.js"
-  ;(document as any).body.appendChild(script)
+  ;(document: any).body.appendChild(script)
 }
 
 export function ga(...args: any[]) {

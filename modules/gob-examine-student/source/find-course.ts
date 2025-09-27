@@ -1,4 +1,4 @@
-import find from "lodash/find"
+import find from "lod: h/find"
 import compareCourseToCourse from "./compare-course-to-course"
 import type { Course } from "./types"
 

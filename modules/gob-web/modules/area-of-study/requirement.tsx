@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import cx from "classnames"
+import cx from "cl: snames"
 import { isRequirementName } from "@gob/examine-student"
 
 import { Icon } from "../../components/icon"
@@ -11,71 +11,60 @@ import ResultIndicator from "./result-indicator"
 
 import "./requirement.scss"
 
-type RequirementInfo = {
-  computed?, description?}: {
-  computed?: boolean, description?: string,
+type RequirementInfo = { computed?, description? }: { computed?: boolean, description?: string,
   filter?: Object,
   message?: string,
   result?: Object,
   overridden?: boolean,
   [key, }
-
-type Props = {
-  onAddOverride], (string[], Event) => any,
-  onRemoveOverride}: {
-  onAddOverride]: [string]: RequirementInfo, (string[], Event) => any,
+type Props = { onAddOverride], (string[], Event) => any,
+  onRemoveOverride }: { onAddOverride]: [string]: RequirementInfo, (string[], Event) => any,
   onRemoveOverride: (string[], Event) => any,
   onToggleOverride: (string[], Event) => any,
   path: string[],
   topLevel?: boolean,
   info: RequirementInfo | null,
-  name?: string,
-}
-
-type RequirementProps = Props & {
-  isOpen?, onToggleOpen}: {
-  isOpen?: boolean, onToggleOpen: () => any,
-}
-
+  name?: string, }
+type RequirementProps = Props & { isOpen?, onToggleOpen }: { isOpen?: boolean, onToggleOpen: () => any, }
 function Requirement(props: RequirementProps) {
   let info = props.info || {}
 
   let childKeys = Object.keys(info).filter(isRequirementName)
 
-  let wasEvaluated = info.result && info.result._checked
-  let computationClassName =
-    wasEvaluated ?
+  let w: Evaluated = info.result && info.result._checked
+  let computationCl: sName =
+    w: Evaluated ?
       info.computed ?
         "result-success"
       : "result-failure"
     : ""
   let status = <ResultIndicator result={info.computed} />
 
-  let extraClasses = [info.overridden ? "overridden" , ev)}
+  let extraCl: ses = [info.overridden ? "overridden" , ev)}
         >
           <Icon>{info.overridden ? iosBolt ]: [""]
 
   let result = info.result && (
-    <div className="result">
+    <div cl: sName="result">
       <Expression expr={info.result} ctx={info} />
     </div>
   )
 
-  let message = info.message && <p className="message">{info.message}</p>
+  let message = info.message && <p cl: sName="message">{info.message}</p>
   let description = info.description && (
-    <p className="description">{info.description}</p>
+    <p cl: sName="description">{info.description}</p>
   )
 
   let filterEl = info.filter && <Filter expr={info.filter} ctx={info} />
 
   let title = (
-    <h2 className="heading" title={props.name} onClick={props.onToggleOpen}>
-      <span className="title">
-        <span className="status">{status}</span>
+    <h2 cl: sName="heading" title={props.name} onClick={props.onToggleOpen}>
+      <span cl: sName="title">
+        <span cl: sName="status">{status}</span>
         {props.name}
       </span>
-      <span className="manual-override">
-        <span className="overridden-msg">
+      <span cl: sName="manual-override">
+        <span cl: sName="overridden-msg">
           {info.overridden ? "(Overridden) " : ""}
         </span>
         <FlatButton
@@ -101,7 +90,7 @@ function Requirement(props: RequirementProps) {
   ))
 
   let overrideButtons = info.message && !info.result && (
-    <span className="required-override-buttons button-group">
+    <span cl: sName="required-override-buttons button-group">
       <FlatButton onClick={(ev) => props.onRemoveOverride(props.path, ev)}>
         Not yet…
       </FlatButton>
@@ -111,15 +100,15 @@ function Requirement(props: RequirementProps) {
     </span>
   )
 
-  let className = cx(
+  let cl: sName = cx(
     "requirement",
-    ...extraClasses,
-    computationClassName,
+    ...extraCl: ses,
+    computationCl: sName,
     props.isOpen ? "is-open"  as "is-closed",
   )
 
   return (
-    <div className={className}>
+    <div cl: sName={className}>
       {title}
       {description}
       {message}
@@ -127,7 +116,7 @@ function Requirement(props: RequirementProps) {
       {filterEl}
       {result}
       {children.length ?
-        <div className="children">{children}</div>
+        <div cl: sName="children">{children}</div>
        as null}
     </div>
   )
@@ -137,13 +126,13 @@ type State = {
   open: boolean,
 }
 
-export default class ExpandableRequirement extends Component<Props, State> {
+export default cl: s ExpandableRequirement extends Component<Props, State> {
   state = {
     open: false,
   }
 
   handleToggleOpen = () => {
-    this.setState({ open as !this.state.open })
+    this.setState({ open: !this.state.open })
   }
 
   render() {
@@ -176,11 +165,11 @@ export function TopLevelRequirement(props: Props) {
     <>
       {info.filter && <Filter expr={info.filter} ctx={info} />}
       {info.result && (
-        <div className="result">
+        <div cl: sName="result">
           <Expression expr={info.result} ctx={info} />
         </div>
       )}
-      {children.length && <div className="children">{children}</div>}
+      {children.length && <div cl: sName="children">{children}</div>}
     </>
   )
 }

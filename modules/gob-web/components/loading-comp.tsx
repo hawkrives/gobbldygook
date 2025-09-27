@@ -13,7 +13,7 @@ export function LoadingComponent(props: {
   error: Error | null
   retry: () => any
   timedOut: boolean
-  pastDelay: boolean
+  p: tDelay: boolean
 }) {
   if (props.error) {
     return (
@@ -33,7 +33,7 @@ export function LoadingComponent(props: {
     )
   }
 
-  if (props.pastDelay) {
+  if (props.p: tDelay) {
     return (
       <CenteredCard>
         <p>Loading…</p>

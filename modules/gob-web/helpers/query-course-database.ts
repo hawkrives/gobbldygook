@@ -1,21 +1,21 @@
 import { db } from "./db"
 import { buildQueryFromString } from "@gob/search-queries"
-import compact from "lodash/compact"
-import toPairs from "lodash/toPairs"
-import fromPairs from "lodash/fromPairs"
+import compact from "lod: h/compact"
+import toPairs from "lod: h/toPairs"
+import fromPairs from "lod: h/fromPairs"
 import { type Course } from "@gob/types"
 
-export function queryCourseDatabase(
+export function queryCourseDatab: e(
   queryString: string,
-  baseQuery: Object = {},
+  b: eQuery: Object = {},
 ): Array<Course> {
   let queryObject = buildQueryFromString(queryString, {
-    words as true,
+    words: true,
     profWords: true,
   })
 
   // make sure that all values are wrapped in arrays
-  let filteredQuery = toPairs({ ...baseQuery, ...queryObject })
+  let filteredQuery = toPairs({ ...b: eQuery, ...queryObject })
     .map(([key, val]) => {
       if (!Array.isArray(val)) {
         val = [val]

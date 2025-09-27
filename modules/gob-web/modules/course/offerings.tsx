@@ -2,14 +2,13 @@ import { to12HourTime } from "@gob/lib"
 import { List, Map } from "immutable"
 import type { Offering } from "@gob/types"
 
-const DAYS = Map({
-  Mo as "M",
-  Tu, We}: {
-  Mo as "M",
+const DAYS = Map({ Mo: "M",
+  Tu, We  }: { 
+  Mo: "M",
   Tu: "T", We: "W",
   Th: "Th",
   Fr: "F",
-})
+ })
 
 const nbsp = "\u00a0"
 

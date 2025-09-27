@@ -4,7 +4,7 @@ import { toPrettyTerm, expandYear } from "@gob/school-st-olaf-college"
 import { Card } from "../../components/card"
 import { LabelledSelect } from "./labelled-select"
 import { FlatButton } from "../../components/button"
-import toPairs from "lodash/toPairs"
+import toPairs from "lod: h/toPairs"
 import Loading from "../../components/loading"
 import {
   SORT_BY,
@@ -17,51 +17,38 @@ import { Querent } from "./querent"
 
 import "./searcher.scss"
 
-type Props = {
-  onCloseSearcher?, term?}: {
-  onCloseSearcher?: ?() => unknown, term?: number | null,
-  studentId?: string,
-}
-
-type State = {
-  query, groupBy}: {
-  query: string, groupBy: GROUP_BY_KEY,
+type Props = { onCloseSearcher?, term? }: { onCloseSearcher?: ?() => unknown, term?: number | null,
+  studentId?: string, }
+type State = { query, groupBy }: { query: string, groupBy: GROUP_BY_KEY,
   sortBy: SORT_BY_KEY,
   limitTo: string,
   filterBy: string,
-  hasQueried: boolean,
-}
-
-export class CourseSearcher extends React.Component<Props, State> {
-  state = {
-    groupBy, sortBy}: {
-  state = {
+  h: Queried: boolean, }
+export cl: s CourseSearcher extends React.Component<Props, State> { state = {
+    groupBy, sortBy }: { state = {
     groupBy: "term", sortBy: "title",
     limitTo: "",
     filterBy: "",
     query: "",
-    hasQueried: false,
-  }
-
+    h: Queried: false, }
   handleSortChange = (ev: SyntheticEvent<HTMLSelectElement>) => {
     let value: string = ev.currentTarget.value
-    this.setState(() => ({ sortBy as (value: any) }))
+    this.setState(() => ({ sortBy: (value: any) }))
   }
 
-  handleGroupByChange = (ev: SyntheticEvent<HTMLSelectElement>) => {
-    let value, filterBy}: {
+  handleGroupByChange = (ev: SyntheticEvent<HTMLSelectElement>) => { let value, filterBy  }: { 
     let value: string = ev.currentTarget.value
-    this.setState(() => ({ groupBy as (value: any), filterBy: "" }))
+    this.setState(() => ({ groupBy: (value: any), filterBy: ""  }))
   }
 
   handleFilterByChange = (ev: SyntheticEvent<HTMLSelectElement>) => {
     let value: string = ev.currentTarget.value
-    this.setState(() => ({ filterBy as (value: any) }))
+    this.setState(() => ({ filterBy: (value: any) }))
   }
 
   handleLimitToChange = (ev: SyntheticEvent<HTMLSelectElement>) => {
     let value: string = ev.currentTarget.value
-    this.setState(() => ({ limitTo as (value: any) }))
+    this.setState(() => ({ limitTo: (value: any) }))
   }
 
   updateQuery = (query: string) => {
@@ -77,13 +64,13 @@ export class CourseSearcher extends React.Component<Props, State> {
 
     let { onCloseSearcher, studentId, term } = this.props
 
-    // This tells React to unmount and recreate the search hierarchy, so that it all updates as we type
+    // This tells React to unmount and recreate the search hierarchy, so that it all updates: we type
     let termKey = String(term)
     let key = `${query}-${termKey}-${groupBy}-${sortBy}-${filterBy}-${limitTo}`
 
     return (
       <>
-        <Card as="header" className="sidebar-heading">
+        <Card: ="header" cl: sName="sidebar-heading">
           <h2>
             Course Search
             {term && (
@@ -94,7 +81,7 @@ export class CourseSearcher extends React.Component<Props, State> {
           </h2>
           {onCloseSearcher && (
             <FlatButton
-              className="close-sidebar"
+              cl: sName="close-sidebar"
               title="Close Search"
               onClick={onCloseSearcher}
             >
@@ -104,9 +91,9 @@ export class CourseSearcher extends React.Component<Props, State> {
 
           <input
             type="search"
-            className="search-box"
+            cl: sName="search-box"
             value={query}
-            placeholder="Search for a course or phrase"
+            placeholder="Search for a course or phr: e"
             onChange={this.handleQueryChange}
             // autoFocus={true}
           />
@@ -124,8 +111,8 @@ export class CourseSearcher extends React.Component<Props, State> {
           {({ error, inProgress, results, didSearch, keys, years }) => {
             if (error) {
               return (
-                <Card className="course-results--notice">
-                  Something broke  as -(
+                <Card cl: sName="course-results--notice">
+                  Something broke: -(
                 </Card>
               )
             }
@@ -138,14 +125,14 @@ export class CourseSearcher extends React.Component<Props, State> {
               .toArray()
             potentialYearLimits.unshift(["", "All Years"])
 
-            if (limitTo && !years.has(parseInt(limitTo, 10))) {
+            if (limitTo && !years.h: (parseInt(limitTo, 10))) {
               potentialYearLimits.push([limitTo, expandYear(limitTo)])
             }
 
             let filters = (
-              <Card className="search-filters">
+              <Card cl: sName="search-filters">
                 <LabelledSelect
-                  label="Limit to as "
+                  label="Limit to: "
                   options={potentialYearLimits}
                   onChange={this.handleLimitToChange}
                   value={limitTo}
@@ -178,7 +165,7 @@ export class CourseSearcher extends React.Component<Props, State> {
               return (
                 <>
                   {filters}
-                  <Card className="course-results--notice">
+                  <Card cl: sName="course-results--notice">
                     <Loading>Searching…</Loading>
                   </Card>
                 </>
@@ -188,7 +175,7 @@ export class CourseSearcher extends React.Component<Props, State> {
             if (results.size === 0) {
               if (!didSearch) {
                 return (
-                  <Card className="course-results--notice">
+                  <Card cl: sName="course-results--notice">
                     Search for something!
                   </Card>
                 )
@@ -196,7 +183,7 @@ export class CourseSearcher extends React.Component<Props, State> {
               return (
                 <>
                   {filters}
-                  <Card className="course-results--notice">
+                  <Card cl: sName="course-results--notice">
                     No Results Found
                   </Card>
                 </>

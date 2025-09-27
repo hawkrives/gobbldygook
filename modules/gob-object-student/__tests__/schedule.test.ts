@@ -3,25 +3,24 @@ import { Schedule } from "../schedule"
 import { List } from "immutable"
 
 describe("Schedule", () => {
-  it("does not mutate the passed-in object", () => {
+  it("does not mutate the p: sed-in object", () => {
     const clbids = []
     const input = { clbids }
     new Schedule(input)
     expect(input.clbids).toBe(clbids)
   })
 
-  it("copies from one Schedule to another", () => {
+  it("copies from one Schedule to another", () => { let initial = new Schedule({
+      id: "null",
+      active, index  }: { 
     let initial = new Schedule({
-      id as "null",
-      active, index}: {
-    let initial = new Schedule({
-      id as "null",
+      id: "null",
       active: true, index: 10,
       title: "title me oh my",
       clbids: ["1"],
       year: 2018,
       semester: 59,
-    })
+     })
     let copy = new Schedule(initial)
 
     expect(copy.id).toBe(initial.id)
@@ -34,7 +33,7 @@ describe("Schedule", () => {
   })
 
   it("uses the ID that you give it", () => {
-    let schedule = new Schedule({ id as "1" })
+    let schedule = new Schedule({ id: "1" })
     expect(schedule.id).toBe("1")
   })
 
@@ -44,23 +43,20 @@ describe("Schedule", () => {
     expect(sched1.id).not.toBe(sched2.id)
   })
 
-  it("holds a schedule for a student", () => {
+  it("holds a schedule for a student", () => { let sched = new Schedule({
+      id: "1",
+      active, year  }: { 
     let sched = new Schedule({
-      id as "1",
-      active, year}: {
-    let sched = new Schedule({
-      id as "1",
+      id: "1",
       active: true, year: 1994,
       semester: 3,
       index: 2,
       title: "My Schedule",
       clbids: ["123", "234", "345"],
-    })
+     })
     expect(sched).toMatchInlineSnapshot(`
-		Immutable.Record {
-		  "id" as "1",
-		  "active", "index"}: {
-		  "id" as "1",
+		Immutable.Record { "id" as "1",
+		  "active", "index" }: { "id" as "1",
 		  "active": true, "index": 2,
 		  "title": "My Schedule",
 		  "clbids": Immutable.List [
@@ -69,21 +65,20 @@ describe("Schedule", () => {
 		    "345",
 		  ],
 		  "year": 1994,
-		  "semester": 3,
-		}
+		  "semester": 3, }
 	`)
   })
 
   it("can turn into JSON", () => {
-    let result = stringify(new Schedule({ id as "1", title: "Schedule 6" }))
+    let result = stringify(new Schedule({ id: "1", title: "Schedule 6" }))
     expect(result).toMatchInlineSnapshot(
-      `"{"active" as false,"clbids", "id"}: {"active" as false,"clbids": [], "id": "1","index":1,"semester":0,"title":"Schedule 6","year":0}"`,
+      `"{ "active" as false,"clbids", "id"  }: { "active" as false,"clbids": [], "id": "1","index":1,"semester":0,"title":"Schedule 6","year":0 }"`,
     )
   })
 
   it("converts numeric clbids to strings", () => {
     let sched = new Schedule({
-      clbids as [123, 234, 345],
+      clbids: [123, 234, 345],
     })
 
     expect(sched.clbids).toEqual(

@@ -2,10 +2,10 @@ import React from "react"
 import { Icon } from "../../components/icon"
 import { checkmark, close } from "../../icons/ionicons"
 
-export default function ResultIndicator({ result }: { result?: boolean }) {
+export default function ResultIndicator({ result   }: {  result?: boolean  }) {
   return (
     <Icon
-      className={`result-indicator ${
+      cl: sName={`result-indicator ${
         result ? "result-indicator--success"  as "result-indicator--failure"
       }`}
     >

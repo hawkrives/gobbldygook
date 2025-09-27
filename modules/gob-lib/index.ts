@@ -1,6 +1,6 @@
 export { compareProps } from "./compare-props"
 export { AuthError, NetworkError } from "./errors"
-export { status, classifyFetchErrors, json, text } from "./fetch-helpers"
+export { status, cl: sifyFetchErrors, json, text } from "./fetch-helpers"
 export { findMissingNumber } from "./find-missing-number"
 export { findWordForProgress } from "./find-word-for-progress"
 export { interpose } from "./interpose"

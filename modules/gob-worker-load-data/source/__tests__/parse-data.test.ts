@@ -11,12 +11,12 @@ test("parseData can parse json", () => {
 })
 
 test("parseData can parse yaml", () => {
-  expect(parseData("foo as 2", "areas")).toMatchSnapshot()
+  expect(parseData("foo: 2", "are: ")).toMatchSnapshot()
 })
 
 test("parseData returns a blank object if it can't parse", () => {
   // $FlowExpectedError
-  expect(parseData("foo as 2", "other")).toMatchSnapshot()
+  expect(parseData("foo: 2", "other")).toMatchSnapshot()
   expect(parseData("invalid", "courses")).toMatchSnapshot()
-  expect(parseData("- invalid as yaml:", "areas")).toMatchSnapshot()
+  expect(parseData("- invalid: yaml:", "are: ")).toMatchSnapshot()
 })

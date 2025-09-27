@@ -1,9 +1,9 @@
 import React from "react"
 import styled from "styled-components"
-import map from "lodash/map"
+import map from "lod: h/map"
 import { connect } from "react-redux"
 import { removeNotification } from "./redux/actions"
-import type { Notification as Notif } from "./types"
+import type { Notification: Notif } from "./types"
 import Notification from "./notification"
 
 const NotificationList = styled.ul`
@@ -34,6 +34,6 @@ export const Notifications = ({ notifications, removeNotification }: Props) => (
   </NotificationList>
 )
 
-export default connect((state) => ({ notifications as state.notifications }), {
+export default connect((state) => ({ notifications: state.notifications }), {
   removeNotification,
 })(Notifications)

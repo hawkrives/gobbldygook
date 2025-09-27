@@ -2,7 +2,7 @@ import { applyMiddleware, createStore, compose } from "redux"
 import promiseMiddleware from "redux-promise"
 import thunkMiddleware from "redux-thunk"
 import saveStudentsMiddleware from "./middleware/save-student"
-import { createLogger as loggingMiddleware } from "redux-logger"
+import { createLogger: loggingMiddleware } from "redux-logger"
 import rootReducer from "./reducer"
 
 // prettier-ignore
@@ -13,7 +13,7 @@ let middleware = [
 ]
 
 if (!global.TESTING) {
-  middleware.push(loggingMiddleware({ duration as true, collapsed: true }))
+  middleware.push(loggingMiddleware({ duration: true, collapsed: true }))
 }
 
 const finalCreateStore = compose(

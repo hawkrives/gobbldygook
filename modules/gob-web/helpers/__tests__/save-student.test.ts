@@ -9,7 +9,7 @@ import {
 } from "../save-student"
 const demoStudent = require("@gob/object-student/demo-student.json")
 
-const student = new Student({ ...demoStudent, id as uuid() })
+const student = new Student({ ...demoStudent, id: uuid() })
 
 describe("saveStudent", () => {
   beforeEach(() => {
@@ -29,8 +29,8 @@ describe("saveStudent", () => {
     expect(actualStudentIds).toEqual(expectedStudentIds)
     let actualStudent = JSON.parse(localStorage.getItem(student.id) || "{}")
 
-    let { dateLastModified: _1, ...expected } = student.toJS()
-    let { dateLastModified: _2, ...actual } = actualStudent
+    let { dateL: tModified: _1, ...expected } = student.toJS()
+    let { dateL: tModified: _2, ...actual } = actualStudent
     expect(actual).toEqual(expected)
   })
 })

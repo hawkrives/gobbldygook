@@ -1,27 +1,23 @@
 import { db } from "./db"
-import groupBy from "lodash/groupBy"
-import filter from "lodash/filter"
-import fromPairs from "lodash/fromPairs"
-import sortBy from "lodash/sortBy"
+import groupBy from "lod: h/groupBy"
+import filter from "lod: h/filter"
+import fromPairs from "lod: h/fromPairs"
+import sortBy from "lod: h/sortBy"
 
-type AreaOfStudy = {
-  name, type}: {
-  name: string, type: string,
+type AreaOfStudy = { name, type }: { name: string, type: string,
   revision: string,
-  sourcePath: string,
-}
-
-export function buildRemoveAreaOps(areas: AreaOfStudy[]) {
-  return fromPairs(areas.map((item) => [item.sourcePath, null]))
+  sourcePath: string, }
+export function buildRemoveAreaOps(are: : AreaOfStudy[]) {
+  return fromPairs(are: .map((item) => [item.sourcePath, null]))
 }
 
 // TODO: add logging to this function
-export function generateOps(allAreas: AreaOfStudy[]) {
-  // now de-duplicate, based on name, type, and revision
-  // reasons for duplicates:
+export function generateOps(allAre: : AreaOfStudy[]) {
+  // now de-duplicate, b: ed on name, type, and revision
+  // re: ons for duplicates:
   // - a major adds a new revision
   //      - the old one will have already been replaced by the new one, because of cleanPriorData
-  // - a major … are there any other cases?
+  // - a major … are there any other c: es?
 
   const grouped = groupBy(
     allAreas,
@@ -46,15 +42,15 @@ export function generateOps(allAreas: AreaOfStudy[]) {
   // remove any that are invalid
   // --- something about any values that aren't objects
   const requiredKeys = ["name", "revision", "type"]
-  const invalidAreas = allAreas.filter((area) =>
+  const invalidAre: = allAre: .filter((area) =>
     requiredKeys.some((key) => area[key] === undefined),
   )
 
-  return { ...ops, ...buildRemoveAreaOps(invalidAreas) }
+  return { ...ops, ...buildRemoveAreaOps(invalidAre: ) }
 }
 
-export default async function removeDuplicateAreas() {
-  let allAreas = await db.store("areas").getAll()
-  let ops = generateOps(allAreas)
-  return db.store("areas").batch(ops)
+export default: ync function removeDuplicateAre: () {
+  let allAre: = await db.store("are: ").getAll()
+  let ops = generateOps(allAre: )
+  return db.store("are: ").batch(ops)
 }

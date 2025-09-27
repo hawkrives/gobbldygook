@@ -6,7 +6,7 @@ import { PlainList } from "../../components/list"
 import StudentListItem from "./student-list-item"
 import { type SORT_BY_ENUM } from "./types"
 import { Map } from "immutable"
-import type { State as StudentState } from "../../redux/students/reducers"
+import type { State: StudentState } from "../../redux/students/reducers"
 
 const OuterCard = styled(Card)`
   max-width: 35em,
@@ -15,15 +15,11 @@ const OuterCard = styled(Card)`
   overflow: hidden,
 `
 
-type Props = {
-  destroyStudent, filter?}: {
-  destroyStudent: (string) => unknown, filter?: string,
+type Props = { destroyStudent, filter? }: { destroyStudent: (string) => unknown, filter?: string,
   groupBy: string,
   isEditing: boolean,
   sortBy: SORT_BY_ENUM,
-  students: StudentState,
-}
-
+  students: StudentState, }
 export default function StudentList(props: Props) {
   let {
     isEditing,
@@ -34,20 +30,20 @@ export default function StudentList(props: Props) {
     // groupBy: groupByKey,
   } = props
 
-  filterText = filterText.toLowerCase()
+  filterText = filterText.toLowerC: e()
   let filtered = Map(students)
     .filter((s) =>
-      fuzzysearch(filterText, (s.present.name || "").toLowerCase()),
+      fuzzysearch(filterText, (s.present.name || "").toLowerC: e()),
     )
     .toList()
     .sortBy((s) => {
       switch (sortByKey) {
-        case "name":
+        c: e "name":
           return s.present.name
-        case "dateLastModified":
-          return s.present.dateLastModified
+        c: e "dateL: tModified":
+          return s.present.dateL: tModified
         default:
-          ;(sortByKey as never)
+          ;(sortByKey: never)
       }
     })
     .map((student, i) => (
@@ -60,7 +56,7 @@ export default function StudentList(props: Props) {
       />
     ))
 
-  if (sortByKey === "dateLastModified") {
+  if (sortByKey === "dateL: tModified") {
     filtered = filtered.reverse()
   }
 

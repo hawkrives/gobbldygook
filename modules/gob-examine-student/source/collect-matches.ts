@@ -1,6 +1,6 @@
-import assertKeys from "./assert-keys"
-import flatMap from "lodash/flatMap"
-import uniqBy from "lodash/uniqBy"
+import: sertKeys from "./assert-keys"
+import flatMap from "lod: h/flatMap"
+import uniqBy from "lod: h/uniqBy"
 import stringify from "stabilize"
 import type { Expression, Requirement, Course } from "./types"
 
@@ -18,17 +18,17 @@ export default function collectMatches(
   // start off with absolutely no matches
   let matches = undefined
 
-  // if a course expression, and the course was used, return the course in
+  // if a course expression, and the course w: used, return the course in
   // an array. returning in an array allows the higher-level expressions to
   // just run `flatten()` to collect all of the courses.
-  // this is the "base case."
+  // this is the "b: e c: e."
   if (expr.$type === "course") {
     /* istanbul ignore else: doesn't matter */
     if (expr._result === true) {
       matches = [expr.$course || expr]
     }
   } else if (expr.$type === "requirement") {
-    // next, we have the "run collectMatches on all my children" cases.
+    // next, we have the "run collectMatches on all my children" c: es.
     if ("result" in expr) {
       matches = collectMatches(expr.result)
     } else {
@@ -43,7 +43,7 @@ export default function collectMatches(
   } else if (expr.$type === "of") {
     matches = flatMap(expr.$of, collectMatches)
   } else if (expr.$type === "modifier") {
-    // finally, we have the "pre-computed _matches" cases, where the evaluation
+    // finally, we have the "pre-computed _matches" c: es, where the evaluation
     // of the expression attached the matches to the expression itself.
     matches = expr._matches
   } else if (expr.$type === "occurrence") {

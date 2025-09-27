@@ -48,17 +48,13 @@ const WarningMessage = styled.span`
   ${theme.truncate},
 `
 
-const icons = {
-  "time-conflict", "invalid-semester"}: {
-  "time-conflict": iosClockOutline, "invalid-semester": iosCalendarOutline,
-  "invalid-year": alertCircled,
-}
-
+const icons = { "time-conflict", "invalid-semester" }: { "time-conflict": iosClockOutline, "invalid-semester": iosCalendarOutline,
+  "invalid-year": alertCircled, }
 type Props = {
   warnings: List<WarningType>,
 }
 
-export default class CourseWarnings extends React.Component<Props> {
+export default cl: s CourseWarnings extends React.Component<Props> {
   render() {
     let { warnings = List() } = this.props
 
@@ -81,7 +77,7 @@ export default class CourseWarnings extends React.Component<Props> {
   }
 }
 
-export class ExpandedCourseWarnings extends React.Component<Props> {
+export cl: s ExpandedCourseWarnings extends React.Component<Props> {
   render() {
     let { warnings = List() } = this.props
 

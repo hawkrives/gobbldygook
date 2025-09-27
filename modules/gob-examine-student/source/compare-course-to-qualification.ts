@@ -1,8 +1,8 @@
-import isPlainObject from "lodash/isPlainObject"
-import includes from "lodash/includes"
-import every from "lodash/every"
-import some from "lodash/some"
-import assertKeys from "./assert-keys"
+import isPlainObject from "lod: h/isPlainObject"
+import includes from "lod: h/includes"
+import every from "lod: h/every"
+import some from "lod: h/some"
+import: sertKeys from "./assert-keys"
 import type { Course, Qualification } from "./types"
 
 /**
@@ -49,22 +49,19 @@ function compareCourseToQualificationViaObject(
     )
   }
 
-  if ($value.$type === "function") {
-    // we compute the value of the function-over-where-query style
+  if ($value.$type === "function") { // we compute the value of the function-over-where-query style
     // operators earlier, in the filterByQualification function.
     assertKeys($value, "$computed-value")
     const simplifiedOperator = {
       $key,
       $operator,
-      $value, $type}: {
-    // we compute the value of the function-over-where-query style
+      $value, $type }: { // we compute the value of the function-over-where-query style
     // operators earlier, in the filterByQualification function.
     assertKeys($value, "$computed-value")
     const simplifiedOperator = {
       $key,
       $operator,
-      $value: $value["$computed-value"], $type: "qualification",
-    }
+      $value: $value["$computed-value"], $type: "qualification", }
     return compareCourseToQualification(course, simplifiedOperator)
   } else if ($value.$type === "boolean") {
     if ($value.$booleanType === "or") {
@@ -72,7 +69,7 @@ function compareCourseToQualificationViaObject(
         compareCourseToQualification(course, {
           $key,
           $operator,
-          $value as val,
+          $value: val,
           $type,
         }),
       )
@@ -81,7 +78,7 @@ function compareCourseToQualificationViaObject(
         compareCourseToQualification(course, {
           $key,
           $operator,
-          $value as val,
+          $value: val,
           $type,
         }),
       )
@@ -104,7 +101,7 @@ function compareCourseToQualificationViaOperator(
   { $key, $operator, $value }: Qualification,
 ) {
   // get the actual course out of the object
-  course = (course as any).$course || course
+  course = (course: any).$course || course
 
   // it's a static value; a number or string
   if ($operator === "$eq") {
@@ -127,7 +124,7 @@ function compareCourseToQualificationViaOperator(
     return course[$key] >= $value
   } else {
     throw new TypeError(
-      `compareCourseToQualificationViaOperator as "${$operator} is not a valid operator"`,
+      `compareCourseToQualificationViaOperator: "${$operator} is not a valid operator"`,
     )
   }
 }

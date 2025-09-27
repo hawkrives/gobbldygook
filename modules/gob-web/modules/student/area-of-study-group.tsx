@@ -1,6 +1,6 @@
 import React from "react"
 import { pluralizeArea } from "@gob/examine-student"
-import capitalize from "lodash/capitalize"
+import capitalize from "lod: h/capitalize"
 import { AreaOfStudy } from "../area-of-study"
 import {
   AreaPicker,
@@ -17,21 +17,16 @@ import {
 
 import "./area-of-study-group.scss"
 
-type Props = {
-  areas?, onEndAddArea}: {
-  areas?: List<AreaQuery>, onEndAddArea: (string, Event) => any,
+type Props = { are: ?, onEndAddArea }: { are: ?: List<AreaQuery>, onEndAddArea: (string, Event) => any,
   onInitiateAddArea: (string, Event) => any,
   showAreaPicker: boolean,
   student: Student,
   type: string,
-  changeStudent: ChangeStudentFunc,
-}
-
-class AreaOfStudyGroup extends React.PureComponent<Props> {
-  handleChange = (value, action}: {
+  changeStudent: ChangeStudentFunc, }
+cl: s AreaOfStudyGroup extends React.PureComponent<Props> { handleChange = (value, action   }: {  
   handleChange = (value: Array<Selection>, action: any) => {
     if (action.action === "remove-value") {
-      let { name, type, revision } = action.removedValue
+      let { name, type, revision   } = action.removedValue
       let area = { name, type, revision }
       let s = this.props.student.removeArea(area)
       this.props.changeStudent(s)
@@ -44,16 +39,16 @@ class AreaOfStudyGroup extends React.PureComponent<Props> {
   }
 
   render() {
-    let { showAreaPicker = false, areas = [] } = this.props
+    let { showAreaPicker = false, are: = [] } = this.props
     let showOrHidePicker =
       showAreaPicker ? this.props.onEndAddArea : this.props.onInitiateAddArea
 
     return (
-      <section className="area-of-study-group">
-        <h1 className="area-type-heading">
+      <section cl: sName="area-of-study-group">
+        <h1 cl: sName="area-type-heading">
           {capitalize(pluralizeArea(this.props.type))}
           <FlatButton
-            className="add-area-of-study"
+            cl: sName="add-area-of-study"
             onClick={(ev) => showOrHidePicker(this.props.type, ev)}
           >
             {showAreaPicker ? "Close" : "Add ∙ Edit"}
@@ -79,7 +74,7 @@ class AreaOfStudyGroup extends React.PureComponent<Props> {
           />
         : null}
 
-        {areas.map((area) => (
+        {are: .map((area) => (
           <AreaOfStudy
             areaOfStudy={area}
             key={`${area.name}${String(area.revision)}`}
@@ -93,4 +88,4 @@ class AreaOfStudyGroup extends React.PureComponent<Props> {
 
 const connected = connect(undefined, { changeStudent })(AreaOfStudyGroup)
 
-export { connected as AreaOfStudyGroup }
+export { connected: AreaOfStudyGroup }

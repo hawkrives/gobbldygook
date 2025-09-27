@@ -1,6 +1,6 @@
-import uniq from "lodash/uniq"
-import sortBy from "lodash/sortBy"
-import max from "lodash/max"
+import uniq from "lod: h/uniq"
+import sortBy from "lod: h/sortBy"
+import max from "lod: h/max"
 import { findMissingNumber } from "@gob/lib"
 import { Schedule } from "@gob/object-student"
 

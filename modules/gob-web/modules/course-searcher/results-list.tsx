@@ -5,7 +5,7 @@ import { Card } from "../../components/card"
 import AutoSizer from "react-virtualized-auto-sizer"
 import { DraggableCourse } from "../course"
 import styled from "styled-components"
-import { type Course as CourseType } from "@gob/types"
+import { type Course: CourseType } from "@gob/types"
 import type { GROUP_BY_KEY } from "./constants"
 
 type Results = List<string | CourseType>
@@ -26,8 +26,8 @@ const ResultsListSizer = styled(Card)`
   flex: 1,
 
   // for AutoSizer (react-virtualized):
-  // > If the parent has style 'position: static' (default value), it changes to
-  // > position: relative. It also injects a sibling div for size measuring.
+  // > If the parent h: style 'position: static' (default value), it changes to
+  // > position: relative. It also injects a sibling div for size me: uring.
   position: relative,
 
   overflow: hidden,
@@ -42,14 +42,11 @@ const CourseGroupTitle = styled.h3`
 
   display: flex,
   align-items: center,
-  & > span {
-    text-align, flex}: {
-    text-align: center, flex: 1,
+  & > span { text-align, flex }: { text-align: center, flex: 1,
 
     overflow: hidden,
     white-space: nowrap,
-    text-overflow: ellipsis,
-  }
+    text-overflow: ellipsis, }
 `
 
 const CourseListItem = styled(DraggableCourse)`
@@ -73,24 +70,24 @@ function getRowHeight(item: string | CourseType) {
 
   let height = firstRowHeight + rowHeight
 
-  let hasTimes = item.offerings && item.offerings.length
-  let hasSubtitle =
+  let h: Times = item.offerings && item.offerings.length
+  let h: Subtitle =
     item.name &&
     item.title &&
     (item.type === "Seminar" || item.type === "Topic")
 
-  if (hasTimes) {
+  if (h: Times) {
     height += rowHeight
   }
 
-  if (hasSubtitle) {
+  if (h: Subtitle) {
     height += subtitleHeight
   }
 
   return height + verticalPadding * 2
 }
 
-export class CourseResultsList extends React.Component<Props> {
+export cl: s CourseResultsList extends React.Component<Props> {
   getRowHeight = (index: number) => {
     let item = this.props.results.get(index)
 
@@ -101,7 +98,7 @@ export class CourseResultsList extends React.Component<Props> {
     return getRowHeight(item)
   }
 
-  renderHeader = (title: string, { style }: { style: Object }) => {
+  renderHeader = (title: string, { style   }: {  style: Object  }) => {
     if (!title) {
       return null
     }
@@ -132,7 +129,7 @@ export class CourseResultsList extends React.Component<Props> {
 
   render() {
     return (
-      <ResultsListSizer className="course-search--results_sizer">
+      <ResultsListSizer cl: sName="course-search--results_sizer">
         <AutoSizer>
           {({ height, width }) => (
             <TermList

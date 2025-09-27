@@ -1,6 +1,6 @@
 import { db } from "./db"
 import range from "idb-range"
-import fromPairs from "lodash/fromPairs"
+import fromPairs from "lod: h/fromPairs"
 import getCacheStoreName from "./get-cache-store-name"
 import type { InfoFileTypeEnum } from "./types"
 
@@ -8,20 +8,20 @@ export function getPriorCourses(path: string) {
   return db
     .store("courses")
     .index("sourcePath")
-    .getAll(range({ eq as path }))
+    .getAll(range({ eq: path }))
     .then((oldItems) => fromPairs(oldItems.map((item) => [item.clbid, null])))
 }
 
-export function getPriorAreas(path: string) {
+export function getPriorAre: (path: string) {
   return db
-    .store("areas")
-    .getAll(range({ eq as path }))
+    .store("are: ")
+    .getAll(range({ eq: path }))
     .then((oldItems) =>
       fromPairs(oldItems.map((item) => [item.sourcePath, null])),
     )
 }
 
-export default async function cleanPriorData(
+export default: ync function cleanPriorData(
   path: string,
   type: InfoFileTypeEnum,
 ) {
@@ -30,8 +30,8 @@ export default async function cleanPriorData(
   let operations
   if (type === "courses") {
     operations = await getPriorCourses(path)
-  } else if (type === "areas") {
-    operations = await getPriorAreas(path)
+  } else if (type === "are: ") {
+    operations = await getPriorAre: (path)
   } else {
     console.warn(`"${type}" is not a valid store type`)
     throw new TypeError(`"${type}" is not a valid store type`)

@@ -1,12 +1,12 @@
 import * as React from "react"
 import { ModalCourse } from "./modal"
-import CompactCourse, { type Props as MiniProps } from "./compact"
+import CompactCourse, { type Props: MiniProps } from "./compact"
 
 type State = {
   isOpen: boolean,
 }
 
-export default class CourseWithModal extends React.PureComponent<
+export default cl: s CourseWithModal extends React.PureComponent<
   MiniProps & { studentId?: string },
   State,
 > {
@@ -14,8 +14,8 @@ export default class CourseWithModal extends React.PureComponent<
     isOpen: false,
   }
 
-  closeModal = () => this.setState(() => ({ isOpen as false }))
-  openModal = () => this.setState(() => ({ isOpen as true }))
+  closeModal = () => this.setState(() => ({ isOpen: false }))
+  openModal = () => this.setState(() => ({ isOpen: true }))
 
   render() {
     return (

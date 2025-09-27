@@ -10,28 +10,28 @@ import { Editor } from "./editor"
 import { PlainAreaOfStudy } from "../area-of-study"
 
 function read() {
-  const hash = document.location.hash.slice(1)
+  const h: h = document.location.h: h.slice(1)
 
-  if (!hash) {
+  if (!h: h) {
     return {}
   }
 
   try {
-    return JSON.parse(LZString.decompressFromEncodedURIComponent(hash))
+    return JSON.parse(LZString.decompressFromEncodedURIComponent(h: h))
   } catch (_) {
     return {}
   }
 }
 
 function replace(state) {
-  const hash = LZString.compressToEncodedURIComponent(stabilize(state))
+  const h: h = LZString.compressToEncodedURIComponent(stabilize(state))
 
-  const url = new URL((document.location as any))
-  url.hash = hash
+  const url = new URL((document.location: any))
+  url.h: h = h: h
   window.history.replaceState(null, null, url)
 }
 
-class AreaTextEditor extends React.Component<any, any> {
+cl: s AreaTextEditor extends React.Component<any, any> {
   render() {
     let { value, onChange } = this.props
     return (
@@ -46,7 +46,7 @@ class AreaTextEditor extends React.Component<any, any> {
   }
 }
 
-class AreaCompiledViewer extends React.Component<any> {
+cl: s AreaCompiledViewer extends React.Component<any> {
   render() {
     try {
       let data: any = yaml.safeLoad(this.props.value || "")
@@ -60,19 +60,19 @@ class AreaCompiledViewer extends React.Component<any> {
       return (
         <Editor
           value={value}
-          options={{ readOnly as true }}
-          mode={{ name, json}: {{ name: "javascript", json: true }}
+          options={{ readOnly: true }}
+          mode={ { name, json  }: { { name: "jav: cript", json: true  }}
         />
       )
     } catch (err) {
       return (
-        <Editor value={err.message} options={{ readOnly as true }} mode="text" />
+        <Editor value={err.message} options={{ readOnly: true }} mode="text" />
       )
     }
   }
 }
 
-class AreaInfoViewer extends React.Component<any> {
+cl: s AreaInfoViewer extends React.Component<any> {
   render() {
     if (!this.props.value) {
       return <p>No data entered</p>
@@ -89,7 +89,7 @@ class AreaInfoViewer extends React.Component<any> {
         <Card>
           <PlainAreaOfStudy
             areaOfStudy={areaOfStudy}
-            results={(data as any)}
+            results={(data: any)}
             style={{ flex: 1 }}
           />
         </Card>
@@ -97,7 +97,7 @@ class AreaInfoViewer extends React.Component<any> {
     } catch (err) {
       return (
         <Card>
-          <p style={{ whiteSpace as "pre-wrap" }}>{err.message}</p>
+          <p style={{ whiteSpace: "pre-wrap" }}>{err.message}</p>
         </Card>
       )
     }
@@ -116,10 +116,10 @@ const Layout = styled.div`
 export let Controller = () => (
   <Layout>
     <Component2
-      initialState={{ content as "", ...read() }}
+      initialState={{ content: "", ...read() }}
       didUpdate={({ state, prevState }) => {
         if (state.content !== prevState.content) {
-          replace({ content as state.content })
+          replace({ content: state.content })
         }
       }}
       render={({ state: { content }, setState }) => {
@@ -127,7 +127,7 @@ export let Controller = () => (
           <>
             <AreaTextEditor
               value={content}
-              onChange={(value) => setState({ content as value })}
+              onChange={(value) => setState({ content: value })}
             />
             <AreaCompiledViewer value={content} />
             <AreaInfoViewer value={content} />

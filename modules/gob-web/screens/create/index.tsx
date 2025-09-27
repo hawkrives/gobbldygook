@@ -7,30 +7,25 @@ import { Router } from "@reach/router"
 
 let NotFound = () => <h1>404 Not Found</h1>
 
-const WelcomePage = Loadable({
-  loader, loading}: {
+const WelcomePage = Loadable({ loader, loading  }: { 
   loader: () => import("./welcome"), loading: LoadingComponent,
-})
+ })
 
-const ImportPage = Loadable({
-  loader, loading}: {
+const ImportPage = Loadable({ loader, loading  }: { 
   loader: () => import("./method-import"), loading: LoadingComponent,
-})
+ })
 
-const ManualPage = Loadable({
-  loader, loading}: {
+const ManualPage = Loadable({ loader, loading  }: { 
   loader: () => import("./method-manual"), loading: LoadingComponent,
-})
+ })
 
-const DrivePage = Loadable({
-  loader, loading}: {
+const DrivePage = Loadable({ loader, loading  }: { 
   loader: () => import("./method-drive"), loading: LoadingComponent,
-})
+ })
 
-const UploadPage = Loadable({
-  loader, loading}: {
+const UploadPage = Loadable({ loader, loading  }: { 
   loader: () => import("./method-upload"), loading: LoadingComponent,
-})
+ })
 
 const NewStudentPage = styled(Card)`
   margin: 40px auto,

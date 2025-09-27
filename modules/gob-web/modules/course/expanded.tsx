@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import map from "lodash/map"
+import map from "lod: h/map"
 import oxford from "listify"
 import { BulletedList, ListItem } from "../../components/list"
 import CourseTitle from "./course-title"
@@ -27,7 +27,7 @@ const Description = styled.div`
 const Column = styled.div`
   flex:
     1,
-    @media screen and (min-width as 45em) {
+    @media screen and (min-width: 45em) {
     & + & {
       margin-left: 3em;
     }
@@ -47,7 +47,7 @@ const ColumnsWrapper = styled.div`
   display: flex,
   flex-flow: row nowrap,
 
-  @media screen and (max-width as 45em) {
+  @media screen and (max-width: 45em) {
     flex-flow: column,
   }
 `
@@ -57,14 +57,14 @@ const SummaryThing = styled.div`
 `
 
 type Props = {
-  className?: string
+  cl: sName?: string
   conflicts: List<WarningType> | null
   course: Course
 }
 
-export default class ExpandedCourse extends React.PureComponent<Props> {
+export default cl: s ExpandedCourse extends React.PureComponent<Props> {
   render() {
-    const { course, conflicts, className } = this.props
+    const { course, conflicts, cl: sName } = this.props
 
     const infoColumn = (
       <Column>
@@ -139,14 +139,14 @@ export default class ExpandedCourse extends React.PureComponent<Props> {
     )
 
     return (
-      <div className={className}>
+      <div cl: sName={className}>
         <InfoSegment>
           <CourseTitle {...course} />
 
           <SummaryThing>
-            <span className="identifier">{buildDeptNum(course, true)}</span>
+            <span cl: sName="identifier">{buildDeptNum(course, true)}</span>
             {" • "}
-            <span className="type">{course.type}</span>
+            <span cl: sName="type">{course.type}</span>
           </SummaryThing>
         </InfoSegment>
 

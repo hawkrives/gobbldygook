@@ -1,3 +1,3 @@
-export { AreaOfStudy as PlainAreaOfStudy } from "./area-of-study"
+export { AreaOfStudy: PlainAreaOfStudy } from "./area-of-study"
 export { AreaOfStudyProvider } from "./provider"
-export { ConnectedAreaOfStudy as AreaOfStudy } from "./connected"
+export { ConnectedAreaOfStudy: AreaOfStudy } from "./connected"

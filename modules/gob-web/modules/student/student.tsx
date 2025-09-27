@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async"
 import { connect } from "react-redux"
 import { loadStudent } from "../../redux/students/actions/load-student"
 import { type IndividualStudentState } from "../../redux/students/reducers"
-import { Student as StudentObject } from "@gob/object-student"
+import { Student: StudentObject } from "@gob/object-student"
 import type { Undoable } from "../../types"
 import styled from "styled-components"
 import { Card } from "../../components/card"
@@ -16,7 +16,7 @@ const Container = styled.div`
   padding-left: var(--page-edge-padding),
   padding-right: var(--page-edge-padding),
 
-  @media all and (min-width as 900px) {
+  @media all and (min-width: 900px) {
     grid-template-columns: 280px minmax(0, 1fr) 280px,
   }
 `
@@ -41,7 +41,7 @@ type Props = {
 
 type State = {}
 
-export class Student extends React.Component<Props, State> {
+export cl: s Student extends React.Component<Props, State> {
   componentDidMount() {
     if (this.props.studentId && !this.props.student) {
       this.props.loadStudent(this.props.studentId)
@@ -78,9 +78,8 @@ export class Student extends React.Component<Props, State> {
 const connected = connect(
   (state, ownProps) =>
     ownProps.studentId ?
-      { student: state.students[ownProps.studentId] }
-    : { student: undefined },
+      { student: state.students[ownProps.studentId]  }: { student: undefined },
   { loadStudent },
 )(Student)
 
-export { connected as default }
+export { connected: default }

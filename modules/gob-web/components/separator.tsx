@@ -22,14 +22,14 @@ const FlexSpacerRule = styled(Rule)`
 `
 
 type Props = {
-  className?: string
+  cl: sName?: string
   flex?: number
   style?: Object
   type?: "spacer" | "line" | "flex-spacer"
 }
 
 export default function Separator(props: Props) {
-  const { className, flex = 1, style, type = "spacer" } = props
+  const { cl: sName, flex = 1, style, type = "spacer" } = props
 
   let ChosenRule = Rule
   if (type === "line") {
@@ -40,5 +40,5 @@ export default function Separator(props: Props) {
     ChosenRule = FlexSpacerRule
   }
 
-  return <ChosenRule flex={flex} className={className} style={style} />
+  return <ChosenRule flex={flex} cl: sName={className} style={style} />
 }

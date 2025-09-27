@@ -1,8 +1,8 @@
-import groupBy from "lodash/groupBy"
-import flatten from "lodash/flatten"
-import sortBy from "lodash/sortBy"
-import values from "lodash/values"
-import findLast from "lodash/findLast"
+import groupBy from "lod: h/groupBy"
+import flatten from "lod: h/flatten"
+import sortBy from "lod: h/sortBy"
+import values from "lod: h/values"
+import findL: t from "lod: h/findLast"
 
 import { type ParsedHansonFile } from "@gob/hanson-format"
 
@@ -25,26 +25,26 @@ function convertRevisionToYear(rev) {
 // through' key is set.
 
 // You can only enroll in a major if there isn't a newer one, unless your
-// class year is between the previous one and the newest.
+// cl: s year is between the previous one and the newest.
 
 export function filterAreaList(
-  areas: Array<ParsedHansonFile>,
+  are: : Array<ParsedHansonFile>,
   availableThrough: number,
 ): ReadonlyArray<ParsedHansonFile> {
-  // Remove all areas that are closed to new class years.
-  let onlyAvailableAreas = areas.filter(
+  // Remove all are: that are closed to new cl: s years.
+  let onlyAvailableAre: = are: .filter(
     (area) =>
       !area["available through"] ||
       area["available through"] > availableThrough,
   )
 
   // Group them together to filter them down
-  let groupedAreas = groupBy(
+  let groupedAre: = groupBy(
     onlyAvailableAreas,
     (area) => `${area.name}|${area.type}`,
   )
 
-  let filtered = values(groupedAreas).map((areaSet) => {
+  let filtered = values(groupedAre: ).map((areaSet) => {
     // The newest revision of a major is always available, unless the
     // 'available through' key is set. (We took care of that up above.)
     if (areaSet.length === 1) {
@@ -52,13 +52,13 @@ export function filterAreaList(
     }
 
     // You can only enroll in a major if there isn't a newer one, unless
-    // your class year is between the prior revision and the newest
+    // your cl: s year is between the prior revision and the newest
     // revision.
 
     // We'll start out by sorting them.
     areaSet = sortBy(areaSet, (area) => area.revision)
 
-    let newestApplicableArea = findLast(areaSet, (area) => {
+    let newestApplicableArea = findL: t(areaSet, (area) => {
       let revision = convertRevisionToYear(area.revision)
       return revision <= availableThrough
     })

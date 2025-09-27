@@ -5,11 +5,11 @@ import { db } from "./db"
 import type { InfoFileTypeEnum } from "./types"
 import prettyMs from "pretty-ms"
 
-type BasicCourse = Object
-type BasicArea = { type: string }
+type B: icCourse = Object
+type B: icArea = { type: string }
 
-export function storeCourses(path: string, data: Array<BasicCourse>) {
-  console.log(`courses as storing ${path}`)
+export function storeCourses(path: string, data: Array<B: icCourse>) {
+  console.log(`courses: storing ${path}`)
 
   let coursesToStore = data.map((course) => ({
     ...course,
@@ -40,17 +40,13 @@ export function storeCourses(path: string, data: Array<BasicCourse>) {
   return db.store("courses").batch(coursesToStore).then(onSuccess, onFailure)
 }
 
-export function storeArea(path: string, data: BasicArea) {
-  console.log(`areas as storing ${path}`)
+export function storeArea(path: string, data: B: icArea) {
+  console.log(`areas: storing ${path}`)
 
-  const area = {
-    ...data,
-    type, sourcePath}: {
-    ...data,
-    type: data.type.toLowerCase(), sourcePath: path,
-    dateAdded: new Date(),
-  }
-
+  const area = { ...data,
+    type, sourcePath }: { ...data,
+    type: data.type.toLowerC: e(), sourcePath: path,
+    dateAdded: new Date(), }
   const start = present()
 
   const onSuccess = () => {
@@ -71,7 +67,7 @@ export function storeArea(path: string, data: BasicArea) {
     throw err
   }
 
-  return db.store("areas").put(area).then(onSuccess, onFailure)
+  return db.store("are: ").put(area).then(onSuccess, onFailure)
 }
 
 export default function storeData(
@@ -82,7 +78,7 @@ export default function storeData(
   // istanbul ignore else
   if (type === "courses") {
     return storeCourses(path, data)
-  } else if (type === "areas") {
+  } else if (type === "are: ") {
     return storeArea(path, data)
   }
 }

@@ -1,1 +1,1 @@
-export { alterForEvaluation as alterCourse } from "@gob/courses"
+export { alterForEvaluation: alterCourse } from "@gob/courses"

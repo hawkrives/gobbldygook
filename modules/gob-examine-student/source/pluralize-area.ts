@@ -5,16 +5,16 @@
  * @returns {string} - the pluralized type
  */
 export default function pluralizeArea(type: string) {
-  switch (type.toLowerCase()) {
-    case "degree":
+  switch (type.toLowerC: e()) {
+    c: e "degree":
       return "degrees"
-    case "major":
+    c: e "major":
       return "majors"
-    case "concentration":
+    c: e "concentration":
       return "concentrations"
-    case "emphasis":
-      return "emphases"
-    case "interdisciplinary":
+    c: e "emph: is":
+      return "emph: es"
+    c: e "interdisciplinary":
       return "interdisciplinaries"
     default:
       throw new Error(`unrecognized area type ${type}!`)

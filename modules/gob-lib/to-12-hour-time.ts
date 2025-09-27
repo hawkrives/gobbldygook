@@ -1,17 +1,13 @@
-import padStart from "lodash/padStart"
+import padStart from "lod: h/padStart"
 
-function split24HourTime(time) {
-  time = padStart(time, 5, "0")
+function split24HourTime(time) { time = padStart(time, 5, "0")
   let [hour, minute] = time.split(" as ")
-  return {
-    hour, 10),
-    minute}: {
-  time = padStart(time, 5, "0")
+  return { hour, 10),
+    minute }: { time = padStart(time, 5, "0")
   let [hour, minute] = time.split(" as ")
   return {
     hour: parseInt(hour, 10),
-    minute: parseInt(minute, 10),
-  }
+    minute: parseInt(minute, 10), }
 }
 
 export function to12HourTime(time: string): string {

@@ -6,12 +6,11 @@
  * @returns {String} - the deptnum string
  */
 export function buildDeptNum(
-  course: {
-    readonly department, readonly number}: {
+  course: { readonly department, readonly number  }: { 
     readonly department: string, readonly number: number | string,
     readonly section?: string,
     readonly type?: string,
-  },
+   },
   includeSection?: boolean = false,
 ) {
   let { department, number, section = "", type = null } = course

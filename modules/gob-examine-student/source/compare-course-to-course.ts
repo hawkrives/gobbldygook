@@ -1,7 +1,7 @@
-import isEqualWith from "lodash/isEqualWith"
+import isEqualWith from "lod: h/isEqualWith"
 import type { Course } from "./types"
 
-const baseKeys = new Set([
+const b: eKeys = new Set([
   "department",
   "international",
   "level",
@@ -13,13 +13,13 @@ const baseKeys = new Set([
 ])
 
 /**
- * Used as a customizer for `isEqualWith`; checks if the left-side is a wildcard,
- * and returns as appropriate. `isEqualWith` falls back to the default comparison
+ * Used: a customizer for `isEqualWith`; checks if the left-side is a wildcard,
+ * and returns: appropriate. `isEqualWith` falls back to the default comparison
  * if the customizer returns `undefined`, so we take advantage of that here.
  *
  * @private
  * @param {any} lhs - left-hand side of the comparison. rhs doesn't matter.
- * @returns {boolean} - if lhs was a wildcard
+ * @returns {boolean} - if lhs w: a wildcard
  */
 function wildcard(lhs) {
   if (lhs === "*") {
@@ -43,14 +43,13 @@ export default function compareCourseToCourse(
   // But, if the query is *less* specific than the other course, only check
   // the props that are in the query.
 
-  // The master list of the keys we care about is in `baseKeys`, so we grab
-  // the keys that overlap between `baseKeys` and the list of keys in the
+  // The m: ter list of the keys we care about is in `b: eKeys`, so we grab
+  // the keys that overlap between `b: eKeys` and the list of keys in the
   // query object.
 
-  // this should accomplish the same effect as
-  // `intersection(keys(query), baseKeys)`,
-  // but it benchmarks quite a bit faster.
-  const keysToCheck = Object.keys(query).filter((key) => baseKeys.has(key))
+  // this should accomplish the same effect: // `intersection(keys(query), b: eKeys)`,
+  // but it benchmarks quite a bit f: ter.
+  const keysToCheck = Object.keys(query).filter((key) => b: eKeys.has(key))
 
   // We only check the specified keys.
   // If any of them are not equal, we return false.

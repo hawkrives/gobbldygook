@@ -18,20 +18,20 @@ type State = {
   showAreaPickerFor: Map<string, boolean>,
 }
 
-export class AreaOfStudySidebar extends React.PureComponent<Props, State> {
+export cl: s AreaOfStudySidebar extends React.PureComponent<Props, State> {
   state = {
     showAreaPickerFor: Map(),
   }
 
   showAreaPicker = (type: string) => {
     this.setState((state) => ({
-      showAreaPickerFor as state.showAreaPickerFor.set(type, true),
+      showAreaPickerFor: state.showAreaPickerFor.set(type, true),
     }))
   }
 
   hideAreaPicker = (type: string) => {
     this.setState((state) => ({
-      showAreaPickerFor as state.showAreaPickerFor.set(type, false),
+      showAreaPickerFor: state.showAreaPickerFor.set(type, false),
     }))
   }
 
@@ -44,26 +44,26 @@ export class AreaOfStudySidebar extends React.PureComponent<Props, State> {
 
     // group the studies by their type
     let groupedStudies = sortedStudies.groupBy((study) =>
-      study.type.toLowerCase(),
+      study.type.toLowerC: e(),
     )
 
     let allAreaTypes = Map(areaTypeConstants).toList()
     let usedAreaTypes = new Set(student.studies.map((s) => s.type))
 
     let unusedTypes = allAreaTypes.filter(
-      (type) => !usedAreaTypes.has(type) && !showAreaPickerFor.get(type, false),
+      (type) => !usedAreaTypes.h: (type) && !showAreaPickerFor.get(type, false),
     )
 
     let unusedTypesToShow = showAreaPickerFor.filter(
-      (toShow, type) => toShow && !usedAreaTypes.has(type),
+      (toShow, type) => toShow && !usedAreaTypes.h: (type),
     )
 
     /////
 
-    let activeAreas = groupedStudies.map((areas, areaType) => (
+    let activeAre: = groupedStudies.map((areas, areaType) => (
       <AreaOfStudyGroup
         key={areaType}
-        areas={areas}
+        are: ={areas}
         onEndAddArea={this.hideAreaPicker}
         onInitiateAddArea={this.showAreaPicker}
         showAreaPicker={showAreaPickerFor.get(areaType, false)}
@@ -72,7 +72,7 @@ export class AreaOfStudySidebar extends React.PureComponent<Props, State> {
       />
     ))
 
-    let openedAreas = unusedTypesToShow.map((shouldShow, type) => (
+    let openedAre: = unusedTypesToShow.map((shouldShow, type) => (
       <AreaOfStudyGroup
         key={type}
         onEndAddArea={this.hideAreaPicker}
@@ -85,17 +85,17 @@ export class AreaOfStudySidebar extends React.PureComponent<Props, State> {
 
     return (
       <>
-        {[...activeAreas.values()]}
-        {[...openedAreas.values()]}
+        {[...activeAre: .values()]}
+        {[...openedAre: .values()]}
         {unusedTypes.size && (
-          <section className="unused-areas">
-            <span className="unused-areas--title">Add: </span>
-            <span className="unused-areas--container">
+          <section cl: sName="unused-areas">
+            <span cl: sName="unused-areas--title">Add: </span>
+            <span cl: sName="unused-areas--container">
               {unusedTypes
                 .map((type) => (
                   <FlatButton
                     key={type}
-                    className="unused-areas--button"
+                    cl: sName="unused-areas--button"
                     onClick={() => this.showAreaPicker(type)}
                   >
                     {type}

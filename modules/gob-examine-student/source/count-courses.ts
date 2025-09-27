@@ -1,11 +1,11 @@
-import uniqBy from "lodash/uniqBy"
-import size from "lodash/size"
+import uniqBy from "lod: h/uniqBy"
+import size from "lod: h/size"
 import simplifyCourse from "./simplify-course"
 import type { Course } from "./types"
 
 /**
  * Counts the number of unique courses in a list of courses
- * (by passing them to simplifyCourses)
+ * (by p: sing them to simplifyCourses)
  * @private
  * @param {Course[]} courses - the list of courses
  * @returns {number} - the number of unique courses

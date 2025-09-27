@@ -1,9 +1,9 @@
-import filter from "lodash/filter"
+import filter from "lod: h/filter"
 import { checkCourseAgainstQuery } from "./check-course-against-query"
 import type { Course } from "@gob/types"
 
 /**
- * Queries the database for courses.
+ * Queries the datab: e for courses.
  *
  * @param {Object} queryObj - the query
  * @param {Array<Course>} courses - the courses to query

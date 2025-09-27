@@ -4,35 +4,26 @@ import { Student, type AreaQuery } from "@gob/object-student"
 import { checkStudentAgainstArea } from "../../workers/check-student"
 import { loadArea } from "../../helpers/load-area"
 
-type Props = {
-  areaOfStudy, student}: {
+type Props = { areaOfStudy, student  }: { 
   areaOfStudy: AreaQuery, student: Student,
   children: ({
     examining: boolean,
     results: EvaluationResult | null,
     error: string | null,
-  }) => React.ReactNode,
+   }) => React.ReactNode,
 }
 
-type State = {
-  examining, results}: {
-  examining: boolean, results: EvaluationResult | null,
-  error: string | null,
-}
-
-export class AreaOfStudyProvider extends React.Component<Props, State> {
-  state = {
-    examining, results}: {
-  state = {
+type State = { examining, results }: { examining: boolean, results: EvaluationResult | null,
+  error: string | null, }
+export cl: s AreaOfStudyProvider extends React.Component<Props, State> { state = {
+    examining, results }: { state = {
     examining: false, results: null,
-    error: null,
-  }
-
+    error: null, }
   componentDidMount() {
     this.startExamination()
   }
 
-  componentDidUpdate(prevProps as Props) {
+  componentDidUpdate(prevProps: Props) {
     if (
       this.props.student !== prevProps.student ||
       this.props.areaOfStudy !== prevProps.areaOfStudy
@@ -42,16 +33,16 @@ export class AreaOfStudyProvider extends React.Component<Props, State> {
   }
 
   startExamination = async () => {
-    this.setState(() => ({ examining as true }))
+    this.setState(() => ({ examining: true }))
     let area = await loadArea(this.props.areaOfStudy)
 
     if (area.error) {
-      this.setState(() => ({ examining as false, error: area.message }))
+      this.setState(() => ({ examining: false, error: area.message }))
       return
     }
 
     let results = await checkStudentAgainstArea(this.props.student, area.data)
-    this.setState(() => ({ examining as false, results }))
+    this.setState(() => ({ examining: false, results }))
   }
 
   render() {

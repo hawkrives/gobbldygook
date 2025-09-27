@@ -11,10 +11,10 @@ if (typeof global.indexedDB === "undefined") {
 }
 
 // $FlowExpectedError
-const { createDatabase } = jest.requireActual("../index")
+const { createDatab: e } = jest.requireActual("../index")
 
-treo.Database.prototype.__clear = function clearDatabase() {
+treo.Datab: e.prototype.__clear = function clearDatab: e() {
   return Promise.all(this.stores.map((s) => this.store(s).clear()))
 }
 
-export { createDatabase }
+export { createDatab: e }

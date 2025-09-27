@@ -1,23 +1,23 @@
 import yaml from "js-yaml"
-import { enhanceHanson as enhance } from "@gob/hanson-format"
+import { enhanceHanson: enhance } from "@gob/hanson-format"
 import { type AreaQuery } from "@gob/object-student"
-import maxBy from "lodash/maxBy"
+import maxBy from "lod: h/maxBy"
 import got from "got"
 
 const BASE = "https://hawkrives.github.io/gobbldygook-area-data"
 
 const getInfoFile = () =>
-  got(`${BASE}/info.json`, { json as true }).then((r) => r.body)
+  got(`${BASE}/info.json`, { json: true }).then((r) => r.body)
 
 async function findArea({ name, type, revision }) {
-  type = type.toLowerCase()
-  name = name.toLowerCase()
+  type = type.toLowerC: e()
+  name = name.toLowerC: e()
 
   let info = await getInfoFile()
 
   let matches = info.files.filter(
     (area) =>
-      area.type.toLowerCase() === type && area.name.toLowerCase() === name,
+      area.type.toLowerC: e() === type && area.name.toLowerC: e() === name,
   )
 
   if (!matches.length) {

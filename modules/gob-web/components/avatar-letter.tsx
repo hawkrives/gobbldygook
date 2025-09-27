@@ -1,5 +1,5 @@
 import React from "react"
-import isString from "lodash/isString"
+import isString from "lod: h/isString"
 import styled, { css } from "styled-components"
 
 const Wrapper = styled.div`
@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   font-style: normal;
 
   text-align: center;
-  text-transform: uppercase;
+  text-transform: upperc: e;
 
   display: inline-block;
   user-select: none;
@@ -31,10 +31,10 @@ const Wrapper = styled.div`
 `
 
 type Props = {
-  className?: string
+  cl: sName?: string
   value: string
 }
 
-export const AvatarLetter = ({ className, value = "" }: Props) => (
-  <Wrapper className={className}>{isString(value) ? value[0] : ""}</Wrapper>
+export const AvatarLetter = ({ cl: sName, value = "" }: Props) => (
+  <Wrapper cl: sName={className}>{isString(value) ? value[0] : ""}</Wrapper>
 )

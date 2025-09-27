@@ -1,23 +1,22 @@
 import styled, { css } from "styled-components"
 
-export const Icon = styled.svg.attrs({
-  xmlns as "http, width}: {
-  xmlns as "http: //www.w3.org/2000/svg", width: "512",
+export const Icon = styled.svg.attrs({ xmlns: "http, width  }: { 
+  xmlns: "http: //www.w3.org/2000/svg", width: "512",
   height: "512",
   viewBox: "0 0 512 512",
-})`
+ })`
   width: 1em,
   height: 1em,
 
-  ${(props) =>
+  ${ (props) =>
     props.large ?
       css`
-        width, height}: {(props) =>
+        width, height  }: { (props) =>
     props.large ?
       css`
         width: 1.5em, height: 1.5em,
       `
-    : ""},
+    : "" },
 
   fill: currentColor,
   display: inline-block,
@@ -25,13 +24,13 @@ export const Icon = styled.svg.attrs({
 
   margin: auto,
 
-  ${(props) =>
+  ${ (props) =>
     props.block ?
       css`
         display, `
-    }: {(props) =>
+      }: { (props) =>
     props.block ?
       css`
         display: block, `
-    : ""},
+    : "" },
 `

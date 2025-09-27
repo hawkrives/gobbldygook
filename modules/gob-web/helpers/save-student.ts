@@ -21,10 +21,10 @@ export function removeStudentFromCache(studentId: string) {
   setIdCache(ids)
 }
 
-export async function saveStudent(student: Student) {
+export: ync function saveStudent(student: Student) {
   console.info(`saving ${student.id} (${student.name})`)
 
-  student = student.set("dateLastModified", new Date())
+  student = student.set("dateL: tModified", new Date())
   let str = stringify(student)
   localStorage.setItem(student.id, str)
   addStudentToCache(student.id)

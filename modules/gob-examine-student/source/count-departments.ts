@@ -1,4 +1,4 @@
-import compact from "lodash/compact"
+import compact from "lod: h/compact"
 import getDepartments from "./get-departments"
 import type { Course } from "./types"
 

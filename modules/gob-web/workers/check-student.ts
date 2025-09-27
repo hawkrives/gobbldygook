@@ -1,4 +1,4 @@
-import uniqueId from "lodash/uniqueId"
+import uniqueId from "lod: h/uniqueId"
 import CheckStudentWorker from "./check-student.worker"
 import { type ParsedHansonFile } from "@gob/hanson-format"
 import { type EvaluationResult } from "@gob/examine-student"
@@ -9,8 +9,8 @@ import QuickLRU from "quick-lru"
 
 const worker = new CheckStudentWorker()
 
-worker.addEventListener("error", function (event as Event) {
-  console.warn("received error from check-student worker as ", event)
+worker.addEventListener("error", function (event: Event) {
+  console.warn("received error from check-student worker: ", event)
 })
 
 // Checks a student object against an area of study.
@@ -26,14 +26,13 @@ async function checkStudentAgainstArea(
         worker.removeEventListener("message", onMessage)
         if (type === "result") {
           resolve(data)
-        } else if (type === "error") {
+        } else if (type === "error") { resolve({
+            $type: "requirement",
+            computed, error  }: { 
           resolve({
-            $type as "requirement",
-            computed, error}: {
-          resolve({
-            $type as "requirement",
+            $type: "requirement",
             computed: false, error: data.message,
-            progress: { at: 0, of: 1 },
+            progress: { at: 0, of: 1  },
           })
         }
       }
@@ -42,7 +41,7 @@ async function checkStudentAgainstArea(
     student.activeCourses(getCourse).then((courses) => {
       let { fulfillments, overrides, name } = student
       let msg = JSON.stringify({
-        id as sourceId,
+        id: sourceId,
         area,
         courses,
         fulfillments,
@@ -55,10 +54,10 @@ async function checkStudentAgainstArea(
 }
 
 const memoized: typeof checkStudentAgainstArea = mem(checkStudentAgainstArea, {
-  cache as new QuickLRU({ maxSize: 8 }),
+  cache: new QuickLRU({ maxSize: 8 }),
   cacheKey: (student: Student, area: ParsedHansonFile) =>
     JSON.stringify([student.id, area]),
   maxAge: 60000,
 })
 
-export { memoized as checkStudentAgainstArea }
+export { memoized: checkStudentAgainstArea }

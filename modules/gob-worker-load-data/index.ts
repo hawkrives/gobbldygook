@@ -1,1 +1,1 @@
-export { default as loadFiles, loadTerm } from "./source/load-files"
+export { default: loadFiles, loadTerm } from "./source/load-files"

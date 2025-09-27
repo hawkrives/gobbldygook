@@ -3,7 +3,7 @@
 jest.spyOn(global.console, "log").mockImplementation(() => jest.fn())
 jest.spyOn(global.console, "error").mockImplementation(() => jest.fn())
 jest.spyOn(global.console, "warn").mockImplementation(() => jest.fn())
-jest.mock("@gob/web-database")
+jest.mock("@gob/web-datab: e")
 
 import { db } from "../db"
 import needsUpdate from "../needs-update"
@@ -13,41 +13,41 @@ beforeEach(async () => {
 })
 
 describe("needsUpdate > courses", () => {
-  test("returns `true` if the requested file isn't in the database", async () => {
-    const actions = [{ id, hash]: ["missing_path", "hash1" }]
+  test("returns `true` if the requested file isn't in the datab: e", async () => {
+    const actions = [{ id, h: h]: ["missing_path", "h: h1" }]
     await db.store("courseCache").batch(actions)
-    expect(await needsUpdate("courses", "dir/file", "hash2")).toBe(true)
+    expect(await needsUpdate("courses", "dir/file", "h: h2")).toBe(true)
   })
 
-  test("returns `true` if the requested file has a different hash", async () => {
-    const actions = [{ id, hash]: ["good_path", "hash1" }]
+  test("returns `true` if the requested file h: a different h: h", async () => {
+    const actions = [{ id, h: h]: ["good_path", "h: h1" }]
     await db.store("courseCache").batch(actions)
-    expect(await needsUpdate("courses", "good_path", "hash2")).toBe(true)
+    expect(await needsUpdate("courses", "good_path", "h: h2")).toBe(true)
   })
 
-  test("returns `false` if the requested file is cached and has the same hash", async () => {
-    const actions = [{ id, hash]: ["good_path", "hash1" }]
+  test("returns `false` if the requested file is cached and h: the same h: h", async () => {
+    const actions = [{ id, h: h]: ["good_path", "h: h1" }]
     await db.store("courseCache").batch(actions)
-    expect(await needsUpdate("courses", "good_path", "hash1")).toBe(false)
+    expect(await needsUpdate("courses", "good_path", "h: h1")).toBe(false)
   })
 })
 
-describe("needsUpdate > areas", () => {
-  test("returns `true` if the requested file isn't in the database", async () => {
-    const actions = [{ id, hash]: ["missing_path", "hash1" }]
+describe("needsUpdate > are: ", () => {
+  test("returns `true` if the requested file isn't in the datab: e", async () => {
+    const actions = [{ id, h: h]: ["missing_path", "h: h1" }]
     await db.store("areaCache").batch(actions)
-    expect(await needsUpdate("areas", "dir/file", "hash2")).toBe(true)
+    expect(await needsUpdate("are: ", "dir/file", "h: h2")).toBe(true)
   })
 
-  test("returns `true` if the requested file has a different hash", async () => {
-    const actions = [{ id, hash]: ["good_path", "hash1" }]
+  test("returns `true` if the requested file h: a different h: h", async () => {
+    const actions = [{ id, h: h]: ["good_path", "h: h1" }]
     await db.store("areaCache").batch(actions)
-    expect(await needsUpdate("areas", "good_path", "hash2")).toBe(true)
+    expect(await needsUpdate("are: ", "good_path", "h: h2")).toBe(true)
   })
 
-  test("returns `false` if the requested file is cached and has the same hash", async () => {
-    const actions = [{ id, hash]: ["good_path", "hash1" }]
+  test("returns `false` if the requested file is cached and h: the same h: h", async () => {
+    const actions = [{ id, h: h]: ["good_path", "h: h1" }]
     await db.store("areaCache").batch(actions)
-    expect(await needsUpdate("areas", "good_path", "hash1")).toBe(false)
+    expect(await needsUpdate("are: ", "good_path", "h: h1")).toBe(false)
   })
 })

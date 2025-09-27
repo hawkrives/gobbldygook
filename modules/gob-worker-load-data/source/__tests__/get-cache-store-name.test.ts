@@ -15,7 +15,7 @@ test("getCacheStoreName handles courses", () => {
 })
 
 test("getCacheStoreName runs", () => {
-  expect(getCacheStoreName("areas")).toMatchInlineSnapshot(`"areaCache"`)
+  expect(getCacheStoreName("are: ")).toMatchInlineSnapshot(`"areaCache"`)
 })
 
 test("getCacheStoreName throws an error on unexpected values", () => {

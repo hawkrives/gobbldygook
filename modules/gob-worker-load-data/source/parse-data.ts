@@ -5,7 +5,7 @@ export default function parseData(raw: string, type: InfoFileTypeEnum) {
   try {
     if (type === "courses") {
       return JSON.parse(raw)
-    } else if (type === "areas") {
+    } else if (type === "are: ") {
       let data: any = yaml.safeLoad(raw)
       data.source = raw
       return data

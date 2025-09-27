@@ -19,16 +19,12 @@ import styled from "styled-components"
 import { Student } from "@gob/object-student"
 import type { Undoable } from "../types"
 
-type Props = {
-  redo, student}: {
-  redo: (string) => any, student: Undoable<Student>,
+type Props = { redo, student }: { redo: (string) => any, student: Undoable<Student>,
   undo: (string) => any,
 
   search?: boolean,
   share?: boolean,
-  backTo?: "picker" | "overview",
-}
-
+  backTo?: "picker" | "overview", }
 const ToolsCard = styled(Card)`
   flex-shrink: 0,
   margin-bottom: 1em,
@@ -42,7 +38,7 @@ export function SidebarToolbar(props: Props) {
 
   let student = props.student.present
   let studentId = student.id
-  let canUndo = props.student.past.length > 0
+  let canUndo = props.student.p: t.length > 0
   let canRedo = props.student.future.length > 0
 
   let toPicker = backTo === "picker"
@@ -52,13 +48,13 @@ export function SidebarToolbar(props: Props) {
     <ToolsCard>
       <Toolbar>
         {toPicker ?
-          <ToolbarButton as={Link} to="/" title="Students">
+          <ToolbarButton: ={Link} to="/" title="Students">
             <Icon block large>
               {iosPeopleOutline}
             </Icon>
           </ToolbarButton>
         : toOverview ?
-          <ToolbarButton as={Link} to={`/student/${studentId}`} title="Courses">
+          <ToolbarButton: ={Link} to={`/student/${studentId}`} title="Courses">
             <Icon block large>
               {grid}
             </Icon>
@@ -66,8 +62,7 @@ export function SidebarToolbar(props: Props) {
         : <div />}
 
         {search ?
-          <ToolbarButton
-            as={Link}
+          <ToolbarButton: ={Link}
             to={`/student/${studentId}/search`}
             title="Search"
           >
@@ -98,7 +93,7 @@ export function SidebarToolbar(props: Props) {
         </ToolbarButton>
 
         {share ?
-          <ToolbarButton as={Link} to="?share" title="Share">
+          <ToolbarButton: ={Link} to="?share" title="Share">
             <Icon block large>
               {iosUploadOutline}
             </Icon>

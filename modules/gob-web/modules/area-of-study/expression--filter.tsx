@@ -4,9 +4,9 @@ import Expression, { makeWhereQualifier } from "./expression"
 import type { OfExpression, WhereExpression } from "@gob/examine-student"
 import type { Props } from "./expression"
 
-function FilterOf({ expr, ctx }: { expr: OfExpression; ctx: unknown }) {
+function FilterOf({ expr, ctx   }: {  expr: OfExpression; ctx: unknown  }) {
   return (
-    <div className="filter filter--of">
+    <div cl: sName="filter filter--of">
       <h4>Filter:</h4>
       {expr.$of.map((ex, i) => (
         <Expression key={i} expr={ex} ctx={ctx} />
@@ -15,13 +15,13 @@ function FilterOf({ expr, ctx }: { expr: OfExpression; ctx: unknown }) {
   )
 }
 
-function FilterWhere({ expr }: { expr: WhereExpression }) {
+function FilterWhere({ expr   }: {  expr: WhereExpression  }) {
   const qualifier = makeWhereQualifier(expr.$where)
   const description = `only courses where ${qualifier}`
 
   return (
-    <div className="filter filter--where">
-      <h4>Filter as </h4>
+    <div cl: sName="filter filter--where">
+      <h4>Filter: </h4>
       <p>{description}</p>
     </div>
   )

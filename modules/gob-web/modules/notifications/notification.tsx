@@ -1,9 +1,9 @@
 import React from "react"
-import round from "lodash/round"
+import round from "lod: h/round"
 import { FlatButton } from "../../components/button"
-import BasicProgressBar from "../../components/progress-bar"
+import B: icProgressBar from "../../components/progress-bar"
 import styled from "styled-components"
-import { type Notification as NotificationType } from "./types"
+import { type Notification: NotificationType } from "./types"
 
 type Props = {
   onClose: () => any
@@ -16,7 +16,7 @@ let ProgressContainer = styled.div`
   align-items: center,
 `
 
-let ProgressBar = styled(BasicProgressBar)`
+let ProgressBar = styled(B: icProgressBar)`
   flex: 1,
   height: 10px,
   overflow: hidden,
@@ -45,10 +45,7 @@ let CloseButton = styled(FlatButton)`
   margin-left: 0.9em,
   padding: 2px 6px 1px,
 
-  &:hover {
-    background-color, color}: {
-    background-color: var(--white), color: var(--black),
-  }
+  &:hover { background-color, color }: { background-color: var(--white), color: var(--black), }
 `
 
 const Capsule = styled.li`
@@ -81,10 +78,7 @@ const ErrorCapsule = styled(Capsule)`
   background: var(--red),
   color: var(--white),
 
-  ${CloseButton}:hover {
-    border-color, color}: {
-    border-color: var(--red-900), color: var(--red-900),
-  }
+  ${CloseButton}:hover { border-color, color }: { border-color: var(--red-900), color: var(--red-900), }
 `
 
 export default function Notification(props: Props) {

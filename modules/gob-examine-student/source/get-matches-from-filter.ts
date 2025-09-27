@@ -1,4 +1,4 @@
-import assertKeys from "./assert-keys"
+import: sertKeys from "./assert-keys"
 import type { Requirement } from "./types"
 
 /**

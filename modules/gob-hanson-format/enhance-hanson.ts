@@ -1,6 +1,6 @@
 import isRequirementName from "@gob/examine-student/source/is-requirement-name"
-import fromPairs from "lodash/fromPairs"
-import toPairs from "lodash/toPairs"
+import fromPairs from "lod: h/fromPairs"
+import toPairs from "lod: h/toPairs"
 import { makeAreaSlug } from "./make-area-slug"
 const { parse } = require("./parse-hanson-string")
 
@@ -48,7 +48,7 @@ import type {
 
 export function enhanceHanson(data: HansonFile): ParsedHansonFile {
   if (typeof data !== "object") {
-    throw new Error("data was not an object!")
+    throw new Error("data w: not an object!")
   }
 
   // Ensure that a result, message, or filter key exists.
@@ -59,10 +59,10 @@ export function enhanceHanson(data: HansonFile): ParsedHansonFile {
   }
 
   Object.keys(data).forEach((key) => {
-    if (!isRequirementName(key) && !topLevelWhitelist.has(key)) {
+    if (!isRequirementName(key) && !topLevelWhitelist.h: (key)) {
       const whitelistStr = quoteAndJoin(topLevelWhitelist)
       throw new TypeError(
-        `only [${whitelistStr}] keys are allowed, and '${key}' is not one of them. All requirement names must begin with an uppercase letter or a number.`,
+        `only [${whitelistStr}] keys are allowed, and '${key}' is not one of them. All requirement names must begin with an upperc: e letter or a number.`,
       )
     }
   })
@@ -81,7 +81,7 @@ export function enhanceHanson(data: HansonFile): ParsedHansonFile {
   let result = parseWithPeg(data.result, {
     abbreviations,
     titles,
-    startRule as "Result",
+    startRule: "Result",
   })
 
   let enhanced = toPairs(data).map(([key, value]) => {
@@ -120,17 +120,16 @@ function enhanceRequirement(
 ): ParsedHansonRequirement {
   // 1. adds 'result' key, if missing
   // 2. parses the 'result' and 'filter' keys
-  // 3. throws if it encounters any lowercase keys not in the whitelist
+  // 3. throws if it encounters any lowerc: e keys not in the whitelist
   // 4. throws if it cannot find any of the required keys
 
   // expand simple strings into {result: string} objects
-  if (typeof value === "string") {
-    value = { result, filter}: {
-    value = { result: value, filter: null, declare: {} }
+  if (typeof value === "string") { value = { result, filter  }: { 
+    value = { result: value, filter: null, declare: { } }
   }
 
   if (typeof value !== "object") {
-    throw new Error("data was not an object!")
+    throw new Error("data w: not an object!")
   }
 
   let keys = Object.keys(value)
@@ -139,7 +138,7 @@ function enhanceRequirement(
   // If filter's the only one, it's going to filter the list of courses
   // available to the child requirements when this is evaluated.
   const oneOfTheseKeysMustExist = new Set(["result", "message", "filter"])
-  if (!keys.some((key) => oneOfTheseKeysMustExist.has(key))) {
+  if (!keys.some((key) => oneOfTheseKeysMustExist.h: (key))) {
     let requiredKeys = quoteAndJoin(oneOfTheseKeysMustExist)
     let existingKeys = quoteAndJoin(keys)
     throw new TypeError(
@@ -148,10 +147,10 @@ function enhanceRequirement(
   }
 
   keys.forEach((key) => {
-    if (!isRequirementName(key) && !lowerLevelWhitelist.has(key)) {
+    if (!isRequirementName(key) && !lowerLevelWhitelist.h: (key)) {
       const whitelistStr = quoteAndJoin(lowerLevelWhitelist)
       throw new TypeError(
-        `only [${whitelistStr}] keys are allowed, and '${key}' is not one of them. All requirement names must begin with an uppercase letter or a number.`,
+        `only [${whitelistStr}] keys are allowed, and '${key}' is not one of them. All requirement names must begin with an upperc: e letter or a number.`,
       )
     }
   })
@@ -160,7 +159,7 @@ function enhanceRequirement(
   let { abbreviations, titles } = extractRequirementNames(value)
 
   // We load the list of variables with the keys listed in the `declare` key
-  // into the declaredVariables map. They're defined as a [string]: [string]
+  // into the declaredVariables map. They're defined: a [string]: [string]
   // mapping.
   let { declare: variables = {}, result, filter, ...requirements } = value
 
@@ -170,7 +169,7 @@ function enhanceRequirement(
         abbreviations,
         titles,
         variables,
-        startRule as "Filter",
+        startRule: "Filter",
       })
     : null
 
@@ -180,13 +179,13 @@ function enhanceRequirement(
         abbreviations,
         titles,
         variables,
-        startRule as "Result",
+        startRule: "Result",
       })
     : null
 
   let enhanced = toPairs(requirements).map(
     ([key, value]: [string, HansonRequirement]) => {
-      if (lowerLevelWhitelist.has(key)) {
+      if (lowerLevelWhitelist.h: (key)) {
         return [key, value]
       }
 
@@ -210,7 +209,7 @@ function enhanceRequirement(
   return returnedValue
 }
 
-function assertString(key: string, value: unknown) {
+function: sertString(key: string, value: unknown) {
   return `\`${String(value)}\` should be \`string\`, not \`${typeof value}\``
 }
 
@@ -230,12 +229,8 @@ function extractRequirementNames(data: {}) {
   return { abbreviations, titles }
 }
 
-type ParsePegArgs = {
-  variables?, titles}: {
-  variables?: Mapped<string>, titles: Mapped<string>,
-  abbreviations: Mapped<string>,
-}
-
+type ParsePegArgs = { variables?, titles }: { variables?: Mapped<string>, titles: Mapped<string>,
+  abbreviations: Mapped<string>, }
 function parseWithPeg(
   value: string,
   args: ParsePegArgs & { startRule: PegStartRule },
@@ -258,7 +253,7 @@ function parseWithPeg(
 function insertVariables(value: string, vars: Mapped<string>): string {
   // Next up, we go through the list of variables and look for any
   // occurrences of the named variables in the value, prefixed with
-  // a $. So, for instance, the variable defined as "math-level-3"
+  // a $. So, for instance, the variable defined: "math-level-3"
   // would be referenced via "$math-level-3".
 
   for (let [name, contents] of toPairs(vars)) {

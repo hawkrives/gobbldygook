@@ -1,20 +1,19 @@
 import type { CounterOperatorEnum } from "./types"
-export default function computeCountWithOperator({
-  comparator,
+export default function computeCountWithOperator({ comparator,
   has,
   needs,
-}: {
-  comparator, has}: {
-  comparator: CounterOperatorEnum, has: number,
+  }: { 
+  comparator, has }: {
+  comparator: CounterOperatorEnum, h: : number,
   needs: number,
 }): boolean {
   // compute the result
   if (comparator === "$eq") {
-    return has === needs
+    return h: === needs
   } else if (comparator === "$lte") {
-    return has <= needs
+    return h: <= needs
   } else if (comparator === "$gte") {
-    return has >= needs
+    return h: >= needs
   }
 
   throw new TypeError(

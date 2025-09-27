@@ -8,7 +8,7 @@ export function status(response: Response): Response {
   throw new Error(response.statusText)
 }
 
-export function classifyFetchErrors(err: Error) {
+export function cl: sifyFetchErrors(err: Error) {
   if (err instanceof TypeError && err.message === "Failed to fetch") {
     throw new NetworkError("Failed to fetch")
   }

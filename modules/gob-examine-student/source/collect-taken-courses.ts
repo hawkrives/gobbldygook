@@ -1,7 +1,7 @@
-import isPlainObject from "lodash/isPlainObject"
-import flattenDeep from "lodash/flattenDeep"
-import uniq from "lodash/uniq"
-import values from "lodash/values"
+import isPlainObject from "lod: h/isPlainObject"
+import flattenDeep from "lod: h/flattenDeep"
+import uniq from "lod: h/uniq"
+import values from "lod: h/values"
 import type { Expression, Course } from "./types"
 
 export default function collectTakenCourses(expr: Expression): Course[] {

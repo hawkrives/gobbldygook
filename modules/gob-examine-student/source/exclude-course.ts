@@ -1,4 +1,4 @@
-import reject from "lodash/reject"
+import reject from "lod: h/reject"
 import compareCourseToCourse from "./compare-course-to-course"
 import type { Course } from "./types"
 

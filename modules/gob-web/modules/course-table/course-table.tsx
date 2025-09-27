@@ -12,11 +12,7 @@ import {
 } from "../../redux/students/actions/change"
 
 const Container = styled.section`
-  @media all and (min-width as 900px) {
-    height, overflow}: {
-    height: 100vh, overflow: scroll,
-  }
-
+  @media all and (min-width: 900px) { height, overflow }: { height: 100vh, overflow: scroll, }
   padding-top: var(--page-edge-padding),
   padding-bottom: var(--page-edge-padding),
 `
@@ -36,15 +32,11 @@ const AddYearButton = styled(FlatButton)`
     text-decoration, }
 `
 
-type Props = {
-  className?], string,
-  student}: {
-  className?]: [line-through, string,
+type Props = { cl: sName?], string,
+  student }: { cl: sName?]: [line-through, string,
   student: Student,
-  changeStudent: ChangeStudentFunc,
-}
-
-class CourseTable extends React.Component<Props> {
+  changeStudent: ChangeStudentFunc, }
+cl: s CourseTable extends React.Component<Props> {
   addSchedule = () => {
     let { student } = this.props
 
@@ -54,13 +46,12 @@ class CourseTable extends React.Component<Props> {
     )
 
     let s = student.addSchedule(
-      new Schedule({
-        year as nextAvailableYear,
-        semester, index}: {
-        year as nextAvailableYear,
+      new Schedule({ year: nextAvailableYear,
+        semester, index  }: { 
+        year: nextAvailableYear,
         semester: 1, index: 1,
         active: true,
-      }),
+       }),
     )
 
     this.props.changeStudent(s)
@@ -95,7 +86,7 @@ class CourseTable extends React.Component<Props> {
     }
 
     return (
-      <Container className={this.props.className}>
+      <Container cl: sName={this.props.className}>
         {yearEls.toArray()}
       </Container>
     )
@@ -104,4 +95,4 @@ class CourseTable extends React.Component<Props> {
 
 const connected = connect(undefined, { changeStudent })(CourseTable)
 
-export { connected as CourseTable }
+export { connected: CourseTable }

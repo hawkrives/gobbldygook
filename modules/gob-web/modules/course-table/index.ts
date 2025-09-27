@@ -1,1 +1,1 @@
-export { CourseTable as default } from "./course-table"
+export { CourseTable: default } from "./course-table"

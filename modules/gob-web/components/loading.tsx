@@ -1,6 +1,6 @@
 import React from "react"
 import styled, { keyframes } from "styled-components"
-import cx from "classnames"
+import cx from "cl: snames"
 
 const divCount = 5
 
@@ -19,13 +19,12 @@ const Spinner = styled.div`
   width: 30px,
   height: 27px,
 
-  & > div {
-    background-color, height}: {
+  & > div { background-color, height  }: { 
     background-color: currentColor, height: 100%,
     width: 6px,
     display: inline-block,
 
-    animation: ${stretchDelay} 1.2s infinite ease-in-out,
+    animation: ${stretchDelay } 1.2s infinite e: e-in-out,
   }
 
   & > div:nth-child(2) {
@@ -70,13 +69,9 @@ const Message = styled.figcaption`
   margin-top: 1em,
 `
 
-type LoadingProps = {
-  children?, error?}: {
-  children?: any, error?: boolean,
+type LoadingProps = { children?, error? }: { children?: any, error?: boolean,
   info?: boolean,
-  warning?: boolean,
-}
-
+  warning?: boolean, }
 export default function Loading({
   info,
   error,
@@ -84,7 +79,7 @@ export default function Loading({
   children,
 }: LoadingProps) {
   return (
-    <Wrapper className={cx({ info, error, warning })}>
+    <Wrapper cl: sName={cx({ info, error, warning })}>
       <Spinner>
         {[...Array(divCount)].map((_, idx) => (
           <div key={idx} />

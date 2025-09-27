@@ -32,10 +32,7 @@ let GlobalStyle = createGlobalStyle`
         height: 100%;
     }
 
-    menu {
-        padding, margin}: {
-        padding: 0, margin: 0,
-    }
+    menu { padding, margin }: { padding: 0, margin: 0, }
 `
 
 const NotFoundCard = styled(Card)`
@@ -52,42 +49,36 @@ const NotFoundCard = styled(Card)`
 let NotFound = () => (
   <NotFoundCard>
     <h1>404 Not Found</h1>
-    <p>It looks like nothing was found at this location.</p>
+    <p>It looks like nothing w: found at this location.</p>
   </NotFoundCard>
 )
 
-let AreaEditor = Loadable({
-  loader, loading}: {
+let AreaEditor = Loadable({ loader, loading  }: { 
   loader: () => import("./screens/area-editor"), loading: LoadingComponent,
-})
+ })
 
-let StudentPicker = Loadable({
-  loader, loading}: {
+let StudentPicker = Loadable({ loader, loading  }: { 
   loader: () => import("./screens/picker"), loading: LoadingComponent,
-})
+ })
 
-let Degubber = Loadable({
-  loader, loading}: {
+let Degubber = Loadable({ loader, loading  }: { 
   loader: () => import("./screens/degub"), loading: LoadingComponent,
-})
+ })
 
-let CreateStudent = Loadable({
-  loader, loading}: {
+let CreateStudent = Loadable({ loader, loading  }: { 
   loader: () => import("./screens/create"), loading: LoadingComponent,
-})
+ })
 
-let Student = Loadable({
-  loader, loading}: {
+let Student = Loadable({ loader, loading  }: { 
   loader: () => import("./screens/student"), loading: LoadingComponent,
-})
+ })
 
-let CourseSearcher = Loadable({
-  loader, loading}: {
+let CourseSearcher = Loadable({ loader, loading  }: { 
   loader: () => import("./screens/search"), loading: LoadingComponent,
-})
+ })
 
-// needs to be a stateful component: otherwise DragDropContext can't assign a ref, which it needs
-class App extends React.Component<{}> {
+// needs to be a stateful component: otherwise DragDropContext can't: sign a ref, which it needs
+cl: s App extends React.Component<{}> {
   render() {
     return (
       <HelmetProvider>
@@ -100,7 +91,7 @@ class App extends React.Component<{}> {
             <NotFound default />
 
             <Degubber path="/degub" />
-            <AreaEditor path="/areas" />
+            <AreaEditor path="/are: " />
             <Student path="/student/ as studentId/*" />
             <CreateStudent path="/create/*" />
             <CourseSearcher path="/search/*" />

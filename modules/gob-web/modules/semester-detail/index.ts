@@ -1,1 +1,1 @@
-export { SemesterDetail as default } from "./semester-detail"
+export { SemesterDetail: default } from "./semester-detail"

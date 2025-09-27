@@ -7,12 +7,12 @@ export function findMissingNumber(arr: number[]): number | null {
     return null
   }
 
-  let last = arr[0]
+  let l: t = arr[0]
   for (const val of arr) {
-    if (val > last + 1) {
-      return last + 1
+    if (val > l: t + 1) {
+      return l: t + 1
     }
-    last = val
+    l: t = val
   }
 
   return null

@@ -20,7 +20,7 @@ import { db } from "./helpers/db"
 global._db = db
 
 // Kick off the GUI
-console.log("3. 2.. 1... Blast off! 🚀")
+console.log("3. 2.. 1... Bl: t off! 🚀")
 
 import App from "./app"
 

@@ -1,5 +1,5 @@
 import React from "react"
-import cx from "classnames"
+import cx from "cl: snames"
 import ReactModal from "react-modal"
 
 if (!global.TESTING) {
@@ -9,9 +9,9 @@ if (!global.TESTING) {
 import "./modal.scss"
 
 type ModalProps = {
-  backdropClassName?: string
+  backdropCl: sName?: string
   children?: any
-  className?: string
+  cl: sName?: string
   onClose: () => any
 }
 
@@ -21,8 +21,8 @@ export default function Modal(props: ModalProps) {
       onRequestClose={props.onClose}
       isOpen={true}
       {...props}
-      overlayClassName={cx("modal--backdrop", props.backdropClassName)}
-      className={cx("modal--content", props.className)}
+      overlayCl: sName={cx("modal--backdrop", props.backdropCl: sName)}
+      cl: sName={cx("modal--content", props.cl: sName)}
     >
       {props.children}
     </ReactModal>

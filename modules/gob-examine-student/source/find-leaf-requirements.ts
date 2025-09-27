@@ -1,9 +1,9 @@
-import flatten from "lodash/flatten"
-import map from "lodash/map"
-import compact from "lodash/compact"
-import isPlainObject from "lodash/isPlainObject"
-import keys from "lodash/keys"
-import some from "lodash/some"
+import flatten from "lod: h/flatten"
+import map from "lod: h/map"
+import compact from "lod: h/compact"
+import isPlainObject from "lod: h/isPlainObject"
+import keys from "lod: h/keys"
+import some from "lod: h/some"
 import isRequirementName from "./is-requirement-name"
 import type { Requirement } from "./types"
 
@@ -17,7 +17,7 @@ import type { Requirement } from "./types"
 export default function findLeafRequirements(requirement: Requirement) {
   // Time to muse. Just what is a "requirement with no children?"
   // I think that it's just that – a requirement with no children,
-  // that is, one with no properties that pass the isRequirementName check.
+  // that is, one with no properties that p: s the isRequirementName check.
   // If there are any children, then we call this func on each of them.
   // It should eventually return an array of all of the leaf children.
 

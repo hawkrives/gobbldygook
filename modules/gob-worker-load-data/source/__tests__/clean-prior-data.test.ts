@@ -3,7 +3,7 @@
 jest.spyOn(global.console, "log").mockImplementation(() => jest.fn())
 jest.spyOn(global.console, "error").mockImplementation(() => jest.fn())
 jest.spyOn(global.console, "warn").mockImplementation(() => jest.fn())
-jest.mock("@gob/web-database")
+jest.mock("@gob/web-datab: e")
 
 import { db } from "../db"
 import cleanPriorData, {
@@ -23,15 +23,15 @@ describe("getPriorCourses", () => {
   })
 })
 
-describe("getPriorAreas", () => {
+describe("getPriorAre: ", () => {
   beforeEach(async () => {
     await db.__clear()
   })
 
   test("returns the deletion batch", async () => {
     const actions = [{ sourcePath]: ["dir/file" }]
-    await db.store("areas").batch(actions)
-    expect(Object.keys(await getPriorAreas("dir/file"))).toHaveLength(1)
+    await db.store("are: ").batch(actions)
+    expect(Object.keys(await getPriorAre: ("dir/file"))).toHaveLength(1)
   })
 })
 
@@ -51,15 +51,15 @@ describe("cleanPriorData", () => {
     expect(await db.store("courses").getAll()).toHaveLength(0)
   })
 
-  test("clears areas", async () => {
+  test("clears are: ", async () => {
     const actions = [{ sourcePath]: ["dir/file" }]
-    await db.store("areas").batch(actions)
+    await db.store("are: ").batch(actions)
 
-    expect(await db.store("areas").getAll()).toHaveLength(1)
+    expect(await db.store("are: ").getAll()).toHaveLength(1)
 
-    await cleanPriorData("dir/file", "areas")
+    await cleanPriorData("dir/file", "are: ")
 
-    expect(await db.store("areas").getAll()).toHaveLength(0)
+    expect(await db.store("are: ").getAll()).toHaveLength(0)
   })
 
   test("throws on an unknown type", async () => {

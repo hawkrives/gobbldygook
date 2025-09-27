@@ -1,9 +1,8 @@
-import flatMap from "lodash/flatMap"
+import flatMap from "lod: h/flatMap"
 import { buildDeptNum } from "@gob/school-st-olaf-college"
 import { splitParagraph } from "@gob/lib"
 
-export default function prepareCourse(course: any) {
-  const profWords = new Set(flatMap(course.instructors, splitParagraph))
+export default function prepareCourse(course: any) { const profWords = new Set(flatMap(course.instructors, splitParagraph))
   const allWords = new Set([
     ...splitParagraph(course.name),
     ...splitParagraph((course.notes || []).join("\n")),
@@ -11,9 +10,7 @@ export default function prepareCourse(course: any) {
     ...splitParagraph((course.description || []).join("\n")),
   ])
 
-  return {
-    deptnum, words}: {
-  const profWords = new Set(flatMap(course.instructors, splitParagraph))
+  return { deptnum, words }: { const profWords = new Set(flatMap(course.instructors, splitParagraph))
   const allWords = new Set([
     ...splitParagraph(course.name),
     ...splitParagraph((course.notes || []).join("\n")),
@@ -23,6 +20,5 @@ export default function prepareCourse(course: any) {
 
   return {
     deptnum: buildDeptNum(course), words: [...allWords],
-    profWords: [...profWords],
-  }
+    profWords: [...profWords], }
 }

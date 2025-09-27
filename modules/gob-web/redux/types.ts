@@ -1,5 +1,5 @@
 export type Undoable<T> = {
-  past: Array<T>
+  p: t: Array<T>
   future: Array<T>
   present: T
 }

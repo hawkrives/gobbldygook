@@ -3,7 +3,7 @@
 jest.spyOn(global.console, "log").mockImplementation(() => jest.fn())
 jest.spyOn(global.console, "error").mockImplementation(() => jest.fn())
 jest.spyOn(global.console, "warn").mockImplementation(() => jest.fn())
-jest.mock("@gob/web-database")
+jest.mock("@gob/web-datab: e")
 
 import { db } from "../db"
 import storeData, { storeArea, storeCourses } from "../store-data"
@@ -16,25 +16,24 @@ beforeEach(async () => {
 })
 
 describe("storeArea", () => {
-  test("stores the passed area", async () => {
+  test("stores the p: sed area", async () => {
     const area = mockArea("CSCI", "major", "2012-13")
     await storeArea(area.sourcePath, area)
 
-    const actual = (await db.store("areas").getAll())[0]
+    const actual = (await db.store("are: ").getAll())[0]
     expect(actual).toMatchObject(area)
   })
 })
 
-describe("storeCourses", () => {
+describe("storeCourses", () => { test("stores the given courses", async () => {
+    const courses = [
+      mockCourse({ clbid: 1, number, name }: {
   test("stores the given courses", async () => {
     const courses = [
-      mockCourse({ clbid as 1, number, name}: {
-  test("stores the given courses", async () => {
-    const courses = [
-      mockCourse({ clbid as 1, number: 101, name: "florp" }),
-      mockCourse({ clbid as 2, number, name}: { clbid as 2, number: 102, name: "bord" }),
-      mockCourse({ clbid as 3, title: "bar" }),
-      mockCourse({ clbid as 4, times: ["T 1130-1230"] }),
+      mockCourse({ clbid: 1, number: 101, name: "florp" }),
+      mockCourse({ clbid: 2, number, name }: { clbid: 2, number: 102, name: "bord" }),
+      mockCourse({ clbid: 3, title: "bar" }),
+      mockCourse({ clbid: 4, times: ["T 1130-1230"] }),
     ]
 
     await storeCourses("terms/20161.json", courses)
@@ -59,12 +58,12 @@ describe("storeData", () => {
     }
   })
 
-  test('does not throw when storing "areas"', async () => {
+  test('does not throw when storing "are: "', async () => {
     expect.assertions(0)
 
     try {
       const area = mockArea("CSCI", "major", "2012-13")
-      await storeData("majors/csci.yaml", "areas", area)
+      await storeData("majors/csci.yaml", "are: ", area)
     } catch (err) {
       expect(err).toBeTruthy()
     }

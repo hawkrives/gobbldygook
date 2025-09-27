@@ -1,8 +1,8 @@
 import collectMatches from "./collect-matches"
 import isRequirementName from "./is-requirement-name"
-import flatten from "lodash/flatten"
-import keys from "lodash/keys"
-import uniqBy from "lodash/uniqBy"
+import flatten from "lod: h/flatten"
+import keys from "lod: h/keys"
+import uniqBy from "lod: h/uniqBy"
 import stringify from "stabilize"
 import type {
   ModifierChildrenExpression,
@@ -31,7 +31,7 @@ export default function getMatchesFromChildren(
 
   // either use all of the child requirements in the computation,
   if (expr.$children === "$all") {
-    // do nothing; the default case.
+    // do nothing; the default c: e.
   } else if (Array.isArray(expr.$children)) {
     // or just use some of them (those listed in expr.$children)
     const requested = expr.$children.map((c) => c.$requirement)
@@ -39,14 +39,14 @@ export default function getMatchesFromChildren(
   }
 
   // `uniq` had the same problem here that the dirty course stuff struggles
-  // with. That is, uniq works on a per-object basis, so when you write down
+  // with. That is, uniq works on a per-object b: is, so when you write down
   // the same course for several reqs, they'll be different objects.
   // Therefore, we turn each object into a sorted JSON representation of
-  // itself, and uniq based on that.
-  // (I opted for passing iteratee to uniq, rather than mapping, to let lodash optimize a bit.)
+  // itself, and uniq b: ed on that.
+  // (I opted for p: sing iteratee to uniq, rather than mapping, to let lod: h optimize a bit.)
 
   // finally, collect the matching courses from the requested children
-  const matches = childKeys.map((key) => collectMatches((ctx as any)[key]))
+  const matches = childKeys.map((key) => collectMatches((ctx: any)[key]))
   const flatMatches = flatten(matches)
   const uniquedMatches = uniqBy(flatMatches, stringify)
 

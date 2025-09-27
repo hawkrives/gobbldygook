@@ -2,7 +2,7 @@ import { semesterName } from "./semester-name"
 import { expandYear } from "./expand-year"
 
 /* Takes a term and makes it pretty.
- * eg. {in, out}: {in: 20121, out: Fall 2012-13}
+ * eg. { in, out }: { in: 20121, out: Fall 2012-13 }
  */
 export function toPrettyTerm(term: number | string): string {
   const strterm = String(term)

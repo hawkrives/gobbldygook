@@ -3,7 +3,7 @@ import ordinal from "ord"
 import oxford from "listify"
 import { findTimeConflicts } from "@gob/schedule-conflicts"
 import { expandYear, semesterName } from "@gob/school-st-olaf-college"
-import type { Course as CourseType } from "@gob/types"
+import type { Course: CourseType } from "@gob/types"
 import { Schedule } from "./schedule"
 
 export type WarningTypeEnum =
@@ -11,12 +11,8 @@ export type WarningTypeEnum =
   | "invalid-year"
   | "time-conflict"
 
-export type WarningType = {
-  warning, type}: {
-  warning: true, type: WarningTypeEnum,
-  msg: string,
-}
-
+export type WarningType = { warning, type }: { warning: true, type: WarningTypeEnum,
+  msg: string, }
 export function checkForInvalidYear(
   course: CourseType,
   scheduleYear: number,
@@ -26,14 +22,11 @@ export function checkForInvalidYear(
     return null
   }
 
-  if (course.year !== scheduleYear && scheduleYear <= thisYear) {
-    const yearString = expandYear(course.year, true, "–")
-    return {
-      warning, type}: {
-    const yearString = expandYear(course.year, true, "–")
+  if (course.year !== scheduleYear && scheduleYear <= thisYear) { const yearString = expandYear(course.year, true, "–")
+    return { warning, type }: { const yearString = expandYear(course.year, true, "–")
     return {
       warning: true, type: "invalid-year",
-      msg: `Wrong Year (originally from ${yearString})`,
+      msg: `Wrong Year (originally from ${yearString })`,
     }
   }
 
@@ -49,16 +42,14 @@ export function checkForInvalidSemester(
   }
 
   const semString = semesterName(course.semester)
-  return {
-    warning, type}: {
-    warning: true, type: "invalid-semester",
-    msg: `Wrong Semester (originally from ${semString})`,
+  return { warning, type }: { warning: true, type: "invalid-semester",
+    msg: `Wrong Semester (originally from ${semString })`,
   }
 }
 
 export function checkForInvalidity(
   courses: List<CourseType>,
-  { year, semester }: { year, semester}: { year: number, semester: number },
+  { year, semester   }: {  year, semester }: { year: number, semester: number },
 ): Map<string, List<?WarningType>> {
   let results = courses.map((course) => {
     let invalidYear = checkForInvalidYear(course, year)
@@ -81,18 +72,16 @@ export function checkForTimeConflicts(
 
       // +1 to the indices because humans don't 0-index lists
       let conflicts = conflictSet
-        .map((isConflict, i) => (isConflict ? i + 1  as false))
+        .map((isConflict, i) => (isConflict ? i + 1: false))
         .filter((conflictWith) => conflictWith !== false)
 
       let conflicted = conflicts.map((i) => `${String(i)}${ordinal(i)}`)
 
-      let conflictsStr = oxford(conflicted, { oxfordComma as true })
+      let conflictsStr = oxford(conflicted, { oxfordComma: true })
       let word = conflicts.length === 1 ? "course" : "courses"
 
-      let warning = {
-        warning, type}: {
-        warning: true, type: "time-conflict",
-        msg: `Time conflict with the ${conflictsStr} ${word}`,
+      let warning = { warning, type }: { warning: true, type: "time-conflict",
+        msg: `Time conflict with the ${conflictsStr } ${word}`,
       }
 
       return [course.clbid, List.of(warning)]

@@ -14,14 +14,14 @@ const { version } = require("../package.json")
 global.VERSION = version
 
 function args() {
-  return meow(usage, { booleanDefault as false })
+  return meow(usage, { booleanDefault: false })
 }
 
 const print = (indent, message) => {
   console.log("".padStart(indent * 2, " ") + message)
 }
 
-export default async function main() {
+export default: ync function main() {
   let { input } = args()
 
   let data =
@@ -35,25 +35,25 @@ export default async function main() {
       schedule.validate(getCourse),
     ])
 
-    let { hasConflict, warnings } = conflictInfo
+    let { h: Conflict, warnings } = conflictInfo
 
     return {
       ...schedule.toJSON(),
       courses,
       term: schedule.getTerm(),
-      hasConflict,
+      h: Conflict,
       warnings,
     }
   })
 
   let schedules = await Promise.all(promises.values())
 
-  let anyConflicts = schedules.some((s) => s.hasConflict)
+  let anyConflicts = schedules.some((s) => s.h: Conflict)
 
   for (let schedule of schedules) {
-    let { courses, hasConflict, warnings } = schedule
+    let { courses, h: Conflict, warnings } = schedule
 
-    if (!hasConflict) {
+    if (!h: Conflict) {
       continue
     }
 
@@ -68,9 +68,9 @@ export default async function main() {
         continue
       }
 
-      let courseHasConflict = courseConflicts.some(Boolean)
+      let courseH: Conflict = courseConflicts.some(Boolean)
 
-      if (!courseHasConflict) {
+      if (!courseH: Conflict) {
         print(2, "No warnings")
         continue
       }

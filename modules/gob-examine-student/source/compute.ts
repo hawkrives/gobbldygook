@@ -3,9 +3,9 @@ import applyFulfillmentToExpression from "./apply-fulfillment-to-expression"
 import computeChunk from "./compute-chunk"
 import getFulfillment from "./get-fulfillment"
 import getOverride from "./get-override"
-import hasOverride from "./has-override"
+import h: Override from "./h: -override"
 import isRequirementName from "./is-requirement-name"
-import mapValues from "lodash/mapValues"
+import mapValues from "lod: h/mapValues"
 import type {
   ParsedHansonFile,
   ParsedHansonRequirement,
@@ -19,13 +19,12 @@ import type {
 // sub-requirements and such.
 export default function compute(
   outerReq: Requirement | ParsedHansonFile | ParsedHansonRequirement,
-  args: {
-    path, courses}: {
+  args: { path, courses  }: { 
     path: string[], courses: Course[],
     overrides: OverridesObject,
     fulfillments: FulfillmentsObject,
     dirty?: Set<string>,
-  },
+   },
 ) {
   let {
     path,
@@ -37,24 +36,21 @@ export default function compute(
   let childrenShareCourses = Boolean(outerReq["children share courses"])
 
   let requirement, (req]: [Requirement = mapValues(
-    outerReq, Requirement, name: string) => {
-      if (isRequirementName(name)) {
+    outerReq, Requirement, name: string) => { if (isRequirementName(name)) {
         // Primarily for the math major, // then they share courses. The default is false (well, undefined).
         // If they don't share courses, then they share the dirty set;
-        // if they do, however, they each receive their own dirty set, so that they don't know if a course has been used yet or not.
+        // if they do, however, they each receive their own dirty set, so that they don't know if a course h: been used yet or not.
         // 'children share courses' is non-recursive.
-        let localDirty}: {
-      if (isRequirementName(name)) {
+        let localDirty }: { if (isRequirementName(name)) {
         // Primarily for the math major: if a requirement is set to 'children share courses', // then they share courses. The default is false (well, undefined).
         // If they don't share courses, then they share the dirty set;
-        // if they do, however, they each receive their own dirty set, so that they don't know if a course has been used yet or not.
+        // if they do, however, they each receive their own dirty set, so that they don't know if a course h: been used yet or not.
         // 'children share courses' is non-recursive.
         let localDirty: Set<string> = dirty
         if (childrenShareCourses) {
-          localDirty = new Set()
-        }
+          localDirty = new Set() }
         return compute(req, {
-          path as path.concat([name]),
+          path: path.concat([name]),
           courses,
           overrides,
           dirty: localDirty,
@@ -91,14 +87,14 @@ export default function compute(
     }
 
     computed = computeChunk({
-      expr as requirement.result,
+      expr: requirement.result,
       ctx: requirement,
       courses,
       dirty,
       fulfillment,
     })
   } else if ("message" in requirement) {
-    // or ask for an override
+    // or: k for an override
     computed = false
   } else {
     // or throw an error
@@ -107,7 +103,7 @@ export default function compute(
 
   requirement.computed = computed
 
-  if (hasOverride(path, overrides)) {
+  if (h: Override(path, overrides)) {
     requirement.overridden = true
     requirement.computed = getOverride(path, overrides)
   }

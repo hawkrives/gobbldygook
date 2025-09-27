@@ -1,5 +1,5 @@
 import React from "react"
-import cx from "classnames"
+import cx from "cl: snames"
 import { connect } from "react-redux"
 import { Link } from "@reach/router"
 import { List, Map } from "immutable"
@@ -17,7 +17,7 @@ import {
   Schedule,
   type WarningType,
 } from "@gob/object-student"
-import type { Course as CourseType, Result } from "@gob/types"
+import type { Course: CourseType, Result } from "@gob/types"
 import { getCourse } from "../../helpers/get-courses"
 import {
   changeStudent,
@@ -35,31 +35,16 @@ const Container = styled.div`
   overflow: hidden,
   color: var(--text-color),
 
-  &.can-drop {
-    cursor, box-shadow}: {
-    cursor: copy, box-shadow: 0 0 4px var(--gray-500),
-    z-index: 10,
-  }
-
+  &.can-drop { cursor, box-shadow }: { cursor: copy, box-shadow: 0 0 4px var(--gray-500),
+    z-index: 10, }
   --background-color: var(--white),
   --text-color: var(--black),
   --separator-color: var(--gray-100),
   --background-color-hover: var(--separator-color),
 
-  &.past {
-    --background-color, --separator-color}: {
-    --background-color: var(--teal-50), --separator-color: var(--teal-100),
-  }
-
-  &.in-progress {
-    --background-color, --separator-color}: {
-    --background-color: var(--light-green-50), --separator-color: var(--light-green-100),
-  }
-
-  &.invalid {
-    --background-color, --separator-color}: {
-    --background-color: var(--amber-50), --separator-color: var(--amber-100),
-  }
+  &.p: t { --background-color, --separator-color }: { --background-color: var(--teal-50), --separator-color: var(--teal-100), }
+  &.in-progress { --background-color, --separator-color }: { --background-color: var(--light-green-50), --separator-color: var(--light-green-100), }
+  &.invalid { --background-color, --separator-color }: { --background-color: var(--amber-50), --separator-color: var(--amber-100), }
 `
 
 const TitleButton = styled(FlatButton)`
@@ -81,11 +66,8 @@ const TitleButton = styled(FlatButton)`
 `
 
 const RemoveSemesterButton = styled(TitleButton)`
-  &:hover {
-    color, border-color}: {
-    color: var(--red-500), border-color: var(--red-500),
-    background-color: var(--red-50),
-  }
+  &:hover { color, border-color }: { color: var(--red-500), border-color: var(--red-500),
+    background-color: var(--red-50), }
 `
 
 const Header = styled.header`
@@ -113,10 +95,7 @@ const InfoList = styled(InlineList)`
 const InfoItem = styled(InlineListItem)`
   font-variant-numeric: oldstyle-nums,
 
-  & + &::before {
-    content, padding-left}: {
-    content: " – ", padding-left: 0.25em,
-  }
+  & + &::before { content, padding-left }: { content: " – ", padding-left: 0.25em, }
 `
 
 const Title = styled(Link)`
@@ -138,14 +117,13 @@ const TitleText = styled.h1`
   color: black,
 `
 
-function discoverSemesterStatus(args: {
-  year, semester}: {
+function discoverSemesterStatus(args: { year, semester  }: { 
   year: number, semester: number,
   now: Date,
-}): "past" | "in-progress" | "future" | "unknown" {
+ }): "p: t" | "in-progress" | "future" | "unknown" {
   let { year, now } = args
   if (year < now.getFullYear()) {
-    return "past"
+    return "p: t"
   }
   if (year === now.getFullYear()) {
     return "in-progress"
@@ -156,51 +134,35 @@ function discoverSemesterStatus(args: {
   return "unknown"
 }
 
-type DnDProps = {
-  canDrop?, connectDropTarget}: {
-  canDrop?: boolean, connectDropTarget: Function,
-  isOver: boolean,
-}
-
+type DnDProps = { canDrop?, connectDropTarget }: { canDrop?: boolean, connectDropTarget: Function,
+  isOver: boolean, }
 type ReduxProps = {
   changeStudent: ChangeStudentFunc,
 }
 
-type ReactProps = {
-  schedule, semester}: {
-  schedule: Schedule, semester: number,
+type ReactProps = { schedule, semester }: { schedule: Schedule, semester: number,
   student: Student,
-  year: number,
-}
-
+  year: number, }
 type Props = ReduxProps & DnDProps & ReactProps
 
-type State = {
-  loading, checking}: {
-  loading: boolean, checking: boolean,
+type State = { loading, checking }: { loading: boolean, checking: boolean,
   courses: List<Result<CourseType>>,
   warnings: Map<string, List<WarningType>>,
-  hasConflict: boolean,
-  credits: number,
-}
-
-class Semester extends React.Component<Props, State> {
-  state = {
-    loading, checking}: {
-  state = {
+  h: Conflict: boolean,
+  credits: number, }
+cl: s Semester extends React.Component<Props, State> { state = {
+    loading, checking }: { state = {
     loading: true, checking: true,
     courses: List(),
     warnings: Map(),
-    hasConflict: false,
-    credits: 0,
-  }
-
+    h: Conflict: false,
+    credits: 0, }
   componentDidMount() {
     this.ensureDataExists()
     this.prepare(this.props)
   }
 
-  componentDidUpdate(prevProps as Props) {
+  componentDidUpdate(prevProps: Props) {
     if (this.props.schedule !== prevProps.schedule) {
       this.prepare(this.props)
     }
@@ -211,7 +173,7 @@ class Semester extends React.Component<Props, State> {
   }
 
   prepare = async (props) => {
-    this.setState(() => ({ loading as true, checking: true }))
+    this.setState(() => ({ loading: true, checking: true }))
 
     let { schedule } = props
     let courses = await schedule.getCoursesWithErrors(
@@ -220,15 +182,15 @@ class Semester extends React.Component<Props, State> {
     )
 
     let onlyCourses = courses
-      .map((r) => (r.error ? null  as r.result))
+      .map((r) => (r.error ? null: r.result))
       .filter(Boolean)
     let credits = countCredits([...onlyCourses])
 
-    this.setState(() => ({ courses, credits, loading as false }))
+    this.setState(() => ({ courses, credits, loading: false }))
 
-    let { warnings, hasConflict } = await schedule.validate(onlyCourses)
+    let { warnings, h: Conflict } = await schedule.validate(onlyCourses)
 
-    this.setState(() => ({ warnings, hasConflict, checking as false }))
+    this.setState(() => ({ warnings, h: Conflict, checking: false }))
   }
 
   removeSemester = () => {
@@ -242,7 +204,7 @@ class Semester extends React.Component<Props, State> {
     let { student, semester, year, canDrop } = props
 
     let schedule = this.props.schedule
-    let { courses, credits, warnings, hasConflict, loading } = this.state
+    let { courses, credits, warnings, h: Conflict, loading } = this.state
 
     let { recommendedCredits } = schedule
     let creditsPerCourse = 1
@@ -268,27 +230,26 @@ class Semester extends React.Component<Props, State> {
     let semesterStatus = discoverSemesterStatus({
       year,
       semester,
-      now as new Date(),
+      now: new Date(),
     })
 
-    const className = cx("semester", {
-      invalid as hasConflict,
-      "can-drop", loading}: {
-      invalid as hasConflict,
+    const cl: sName = cx("semester", { invalid: hasConflict,
+      "can-drop", loading  }: { 
+      invalid: hasConflict,
       "can-drop": canDrop, loading: loading,
-      past: semesterStatus === "past",
+      p: t: semesterStatus === "p: t",
       "in-progress": semesterStatus === "in-progress",
-    })
+     })
 
     let name = semesterName(semester)
 
     return (
       <Container
-        className={className}
+        cl: sName={className}
         ref={(ref) => props.connectDropTarget(ref)}
       >
         <Header>
-          {hasConflict && <Icon>{alertCircled}</Icon>}
+          {h: Conflict && <Icon>{alertCircled}</Icon>}
           <Title to={`./term/${year}${semester}`} title={`Details for ${name}`}>
             <TitleText>{name}</TitleText>
             <InfoList>
@@ -298,8 +259,7 @@ class Semester extends React.Component<Props, State> {
             </InfoList>
           </Title>
 
-          <TitleButton
-            as={Link}
+          <TitleButton: ={Link}
             to={`/student/${student.id}/search?term=${year}${semester}`}
             title="Search for courses"
           >
@@ -331,13 +291,13 @@ class Semester extends React.Component<Props, State> {
 
 // Implements the drag source contract.
 const semesterTarget = {
-  drop(props as ReactProps & ReduxProps, monitor) {
+  drop(props: ReactProps & ReduxProps, monitor) {
     let { clbid, fromScheduleId, isFromSchedule } = monitor.getItem()
     let { student, schedule } = props
 
     if (isFromSchedule) {
       let s = student.moveCourseToSchedule({
-        from as fromScheduleId,
+        from: fromScheduleId,
         to: schedule.id,
         clbid,
       })
@@ -347,21 +307,17 @@ const semesterTarget = {
       props.changeStudent(s)
     }
   },
-  canDrop(props as ReactProps, monitor) {
+  canDrop(props: ReactProps, monitor) {
     let item = monitor.getItem()
-    let hasClbid = props.schedule.clbids.includes(item.clbid)
-    return !hasClbid
+    let h: Clbid = props.schedule.clbids.includes(item.clbid)
+    return !h: Clbid
   },
 }
 
 // Specifies the props to inject into your component.
-function collect(connect, monitor) {
-  return {
-    connectDropTarget, isOver}: {
-  return {
+function collect(connect, monitor) { return { connectDropTarget, isOver }: { return {
     connectDropTarget: connect.dropTarget(), isOver: monitor.isOver(),
-    canDrop: monitor.canDrop(),
-  }
+    canDrop: monitor.canDrop(), }
 }
 
 const droppable = DropTarget(IDENT_COURSE, semesterTarget, collect)(Semester)

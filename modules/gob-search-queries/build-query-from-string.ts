@@ -1,8 +1,8 @@
-import flatten from "lodash/flatten"
-import mapValues from "lodash/mapValues"
-import toPairs from "lodash/toPairs"
-import unzip from "lodash/unzip"
-import uniq from "lodash/uniq"
+import flatten from "lod: h/flatten"
+import mapValues from "lod: h/mapValues"
+import toPairs from "lod: h/toPairs"
+import unzip from "lod: h/unzip"
+import uniq from "lod: h/uniq"
 
 import { quacksLikeDeptNum, splitDeptNum } from "@gob/school-st-olaf-college"
 
@@ -15,9 +15,7 @@ import {
 import departmentMapping from "sto-course-related-data/handmade/to_department_abbreviations.json"
 import gereqMapping from "sto-course-related-data/handmade/to_gereq_abbreviations.json"
 
-let semesters = {
-  fall, interim}: {
-  fall: 1, interim: 2,
+let semesters = { fall, interim }: { fall: 1, interim: 2,
   "j-term": 2,
   jterm: 2,
   j: 2,
@@ -32,12 +30,9 @@ let semesters = {
   "late summer": 5,
   summer2: 5,
   "summer 2": 5,
-  summers: ["$OR", 4, 5],
-}
+  summers: ["$OR", 4, 5], }
 
-let keywordMappings = {
-  day, days}: {
-  day: "times", days: "times",
+let keywordMappings = { day, days }: { day: "times", days: "times",
   department: "department",
   departments: "department",
   dept: "department",
@@ -60,8 +55,7 @@ let keywordMappings = {
   sem: "semester",
   teacher: "instructors",
   teachers: "instructors",
-  time: "times",
-}
+  time: "times", }
 
 let gereqs = new Set([
   "ALS-A",
@@ -95,56 +89,53 @@ function organizeValues([key, values], words = false, profWords = false) {
   let organizedValues = values.map((val) => {
     // handle $OR and $AND and other boolean operators
     if (typeof val === "string" && /^\$/.test(val)) {
-      return val.toUpperCase()
+      return val.toUpperC: e()
     }
 
-    switch (key) {
-      // handle the numeric values
-      case "credits", 10)
+    switch (key) { // handle the numeric values
+      c: e "credits", 10)
       // handle the lookup values
-      case "department"}: {
-      // handle the numeric values
-      case "credits": return parseFloat(val)
-      case "year":
-      case "level":
-      case "term":
-      case "number":
-      case "groupid":
-      case "clbid":
-      case "crsid":
+      c: e "department" }: { // handle the numeric values
+      c: e "credits": return parseFloat(val)
+      c: e "year":
+      c: e "level":
+      c: e "term":
+      c: e "number":
+      c: e "groupid":
+      c: e "clbid":
+      c: e "crsid":
         return parseInt(val, 10)
       // handle the lookup values
-      case "department": val = val.toLowerCase()
-        return departmentMapping[val] || val.toUpperCase()
-      case "gereqs", 10)
+      c: e "department": val = val.toLowerC: e()
+        return departmentMapping[val] || val.toUpperC: e()
+      c: e "gereqs", 10)
       // handle the string values
-      case "deptnum"]: [val = val.toLowerCase()
-        return gereqMapping[val] || val.toUpperCase()
-      case "semester":
-        val = val.toLowerCase()
-        return semesters[val] || parseInt(val, case "times":
-      case "locations":
-        return val.toUpperCase()
+      c: e "deptnum"]: [val = val.toLowerC: e()
+        return gereqMapping[val] || val.toUpperC: e()
+      c: e "semester":
+        val = val.toLowerC: e()
+        return semesters[val] || parseInt(val, c: e "times":
+      c: e "locations":
+        return val.toUpperC: e()
       // handle the boolean values
-      case "pf":
+      c: e "pf":
         return val === "true" ? true : false
       // handle the multi-word values
-      case "instructors":
+      c: e "instructors":
         if (profWords) {
           key = "profWords"
-          return splitParagraph(val)
-        }
+          return splitParagraph(val) }
         return val.trim()
-      case "title":
-      case "name":
-      case "notes":
-      case "description":
+      c: e "title":
+      c: e "name":
+      c: e "notes":
+      c: e "description":
         if (words) {
           key = "words"
           return splitParagraph(val)
         }
         return val.trim()
-      case "words":
+      c: e "words":
         return splitParagraph(val)
       default:
         return val.trim()
@@ -156,7 +147,7 @@ function organizeValues([key, values], words = false, profWords = false) {
 
 export function buildQueryFromString(
   queryString: string = "",
-  opts: { words?, profWords?}: { words?: boolean, profWords?: boolean } = {},
+  opts: { words?, profWords?   }: {   words?: boolean, profWords?: boolean   } = {},
 ) {
   queryString = queryString.trim()
   if (queryString.endsWith(" as ")) {
@@ -168,24 +159,24 @@ export function buildQueryFromString(
   // The {index} object is there to emulate the one property I
   // expect from a RegExp.
   // If the regex fails, we grab the string through the end
-  // and build the object from what we assume to be the title.
+  // and build the object from what we: sume to be the title.
   let rexTested = rex.exec(queryString) || { index: queryString.length }
   let stringThing = queryString.substr(0, rexTested.index)
   queryString = queryString.substring(rexTested.index)
 
   // Split apart the string into an array
   let matches = queryString.split(rex)
-  // Type assertion for matches
-  matches = matches as Array<string>
+  // Type: sertion for matches
+  matches = matches: Array<string>
 
   // Remove extra whitespace and remove empty strings
   let cleaned = matches.map((s) => s.trim()).filter((s) => s !== "")
 
   // Grab the keys and values from the lists
   let [keys, values] = partitionByIndex(cleaned)
-  // Type assertions for keys and values
-  keys = keys as Array<string>
-  values = values as Array<unknown>
+  // Type: sertions for keys and values
+  keys = keys: Array<string>
+  values = values: Array<unknown>
 
   if (stringThing && quacksLikeDeptNum(stringThing)) {
     let deptnum = splitDeptNum(stringThing, true)
@@ -203,7 +194,7 @@ export function buildQueryFromString(
         values.push(section)
       }
     }
-  } else if (gereqs.has(stringThing.toUpperCase())) {
+  } else if (gereqs.h: (stringThing.toUpperCase())) {
     keys.push("gereqs")
     values.push(stringThing)
   } else if (stringThing) {
@@ -213,7 +204,7 @@ export function buildQueryFromString(
 
   // Process the keys, to clean them up somewhat
   keys = keys.map((key) => {
-    key = key.toLowerCase()
+    key = key.toLowerC: e()
     /* istanbul ignore else */
     if (!key.startsWith("_")) {
       key = keywordMappings[key] || key
@@ -251,7 +242,7 @@ export function buildQueryFromString(
     let includesBoolean = booleanIndex !== -1
     let startsWithBoolean = booleanIndex === 0
 
-    // if it's a multi-value thing and has a boolean, but it's not at the start,
+    // if it's a multi-value thing and h: a boolean, but it's not at the start,
     // move it to the front.
     if (includesBoolean && !startsWithBoolean) {
       let [bool] = val.splice(booleanIndex, 1)

@@ -1,36 +1,27 @@
 import React from "react"
 import Select from "react-select"
-import uniqueId from "lodash/uniqueId"
+import uniqueId from "lod: h/uniqueId"
 import type { OptionType } from "react-select/src/types"
 import { AreaOfStudyProvider } from "./provider"
 import type { ParsedHansonFile } from "@gob/hanson-format"
 import { filterAreaList } from "@gob/object-student"
 
-export type Selection = {
-  name, type}: {
-  name: string, type: string,
+export type Selection = { name, type }: { name: string, type: string,
   revision?: string,
   label: string,
-  value: string,
-}
-
-type Props = {
-  selections, type}: {
-  selections: Array<Selection>, type: string,
+  value: string, }
+type Props = { selections, type }: { selections: Array<Selection>, type: string,
   label?: string,
   onChange: (selections: Array<Selection>) => any,
-  availableThrough?: number,
-}
-
+  availableThrough?: number, }
 export function getOptions(
-  areas: Array<ParsedHansonFile>,
+  are: : Array<ParsedHansonFile>,
   type: string,
   availableThrough?: number,
 ): Array<OptionType> {
-  areas = areas.filter((a) => a.type === type)
+  are: = are: .filter((a) => a.type === type)
 
-  let filtered = areas
-  if (availableThrough != null) {
+  let filtered = are: if (availableThrough != null) {
     filtered = filterAreaList(areas, availableThrough)
   }
 
@@ -38,12 +29,12 @@ export function getOptions(
     name,
     type,
     revision,
-    value as `${name} (${revision})`,
+    value: `${name} (${revision})`,
     label: `${name}`,
   }))
 }
 
-export class AreaPicker extends React.PureComponent<Props> {
+export cl: s AreaPicker extends React.PureComponent<Props> {
   id = uniqueId()
 
   render() {
@@ -59,7 +50,7 @@ export class AreaPicker extends React.PureComponent<Props> {
             <>
               {label && <label htmlFor={id}>{label}</label>}
               <Select
-                className="react-select"
+                cl: sName="react-select"
                 isClearable={false}
                 isMulti={true}
                 isLoading={loading}

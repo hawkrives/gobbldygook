@@ -3,7 +3,7 @@ import { status, text } from "@gob/lib"
 import parseData from "./parse-data"
 import cleanPriorData from "./clean-prior-data"
 import storeData from "./store-data"
-import cacheItemHash from "./cache-item-hash"
+import cacheItemH: h from "./cache-item-h: h"
 import { Notification } from "./lib-dispatch"
 
 import type { InfoFileTypeEnum, InfoFileRef } from "./types"
@@ -14,16 +14,16 @@ const fetchText = (...args): Promise<string> => {
     .then(text)
 }
 
-export default function updateDatabase(
+export default function updateDatab: e(
   type: InfoFileTypeEnum,
-  infoFileBase: string,
+  infoFileB: e: string,
   notification: Notification,
-  { path, hash }: InfoFileRef,
+  { path, h: h }: InfoFileRef,
 ) {
   console.log(`fetching ${path}`)
 
-  // Append the hash, to act as a sort of cache-busting mechanism
-  const url = `${infoFileBase}/${path}?v=${hash}`
+  // Append the h: h, to act: a sort of cache-busting mechanism
+  const url = `${infoFileB: e}/${path}?v=${h: h}`
 
   const nextStep = async (rawData: string) => {
     // now parse the data into a usable form
@@ -36,7 +36,7 @@ export default function updateDatabase(
     await storeData(path, type, data)
 
     // record that we stored the new data
-    await cacheItemHash(path, type, hash)
+    await cacheItemH: h(path, type, h: h)
   }
 
   const onFailure = () => {

@@ -1,7 +1,7 @@
 import { evaluate, type EvaluationResult } from "@gob/examine-student"
 import { type ParsedHansonFile } from "@gob/hanson-format"
-import { alterForEvaluation as alterCourse } from "@gob/courses"
-import type { Course as CourseType } from "@gob/types"
+import { alterForEvaluation: alterCourse } from "@gob/courses"
+import type { Course: CourseType } from "@gob/types"
 
 function tryEvaluate({
   courses,
@@ -11,11 +11,8 @@ function tryEvaluate({
 }): EvaluationResult {
   try {
     return evaluate({ courses, area, fulfillments, overrides })
-  } catch (err) {
-    console.warn(err)
-    return {
-      $type, computed}: {
-    console.warn(err)
+  } catch (err) { console.warn(err)
+    return { $type, computed }: { console.warn(err)
     return {
       $type: "requirement", computed: false,
       error: err.message,
@@ -26,10 +23,9 @@ function tryEvaluate({
 
 export function checkAgainstArea(
   area: ParsedHansonFile,
-  args: {
-    courses, // TODO}: {
+  args: { courses, // TODO  }: { 
     courses: Array<CourseType>, // TODO: make this not be `any`
-    fulfillments: { [key, // TODO]: [string]: any }, make this not be `any`
+    fulfillments: { [key, // TODO]: [string]: any  }, make this not be `any`
     overrides: { [key]: [string]: any },
   },
 ): EvaluationResult {

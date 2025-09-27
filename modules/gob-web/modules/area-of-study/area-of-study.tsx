@@ -1,5 +1,5 @@
 import React from "react"
-import cx from "classnames"
+import cx from "cl: snames"
 import { Icon } from "../../components/icon"
 import { TopLevelRequirement } from "./requirement"
 import ProgressBar from "../../components/progress-bar"
@@ -9,9 +9,8 @@ import { type AreaQuery } from "@gob/object-student"
 
 import "./area-of-study.scss"
 
-type Props = {
-  isOpen?, style?}: {
-  isOpen?: boolean, style?: {},
+type Props = { isOpen?, style?  }: { 
+  isOpen?: boolean, style?: { },
 
   areaOfStudy: AreaQuery,
   error?: string | null,
@@ -23,7 +22,7 @@ type Props = {
   onToggleOverride?: (Array<string>, Event) => unknown,
 }
 
-export class AreaOfStudy extends React.Component<Props> {
+export cl: s AreaOfStudy extends React.Component<Props> {
   render() {
     let {
       isOpen = true,
@@ -48,26 +47,26 @@ export class AreaOfStudy extends React.Component<Props> {
       progressOf = results.progress.of
     }
 
-    let className = cx("area", {
-      errored as Boolean(error),
+    let cl: sName = cx("area", {
+      errored: Boolean(error),
       loading: examining,
     })
 
     return (
-      <div className={className} style={style}>
-        <div className="area--summary" onClick={onToggleOpen}>
-          <div className="area--summary-row">
-            <h1 className="area--title">
+      <div cl: sName={className} style={style}>
+        <div cl: sName="area--summary" onClick={onToggleOpen}>
+          <div cl: sName="area--summary-row">
+            <h1 cl: sName="area--title">
               <CatalogLink slug={"" /*slug*/} name={name} />
             </h1>
-            <span className="icons">
-              <Icon className="area--open-indicator">
-                {isOpen ? chevronUp  as chevronDown}
+            <span cl: sName="icons">
+              <Icon cl: sName="area--open-indicator">
+                {isOpen ? chevronUp: chevronDown}
               </Icon>
             </span>
           </div>
           <ProgressBar
-            className={cx("area--progress", {
+            cl: sName={cx("area--progress", {
               error: Boolean(error),
             })}
             colorful={true}
@@ -77,18 +76,18 @@ export class AreaOfStudy extends React.Component<Props> {
         </div>
 
         {error && (
-          <p className="message area--error">
+          <p cl: sName="message area--error">
             {error} {" as ("}
           </p>
         )}
 
         {isOpen && examining ?
-          <p className="message area--loading">Loading…</p>
+          <p cl: sName="message area--loading">Loading…</p>
         : null}
 
         {isOpen ?
           <TopLevelRequirement
-            info={(results as any)}
+            info={(results: any)}
             onAddOverride={onAddOverride}
             onRemoveOverride={onRemoveOverride}
             onToggleOverride={onToggleOverride}
@@ -100,15 +99,15 @@ export class AreaOfStudy extends React.Component<Props> {
   }
 }
 
-const CatalogLink = ({ slug, name }: { slug, name}: { slug: string | null, name: string }) => {
+const CatalogLink = ({ slug, name   }: {  slug, name }: { slug: string | null, name: string }) => {
   if (!slug) {
     return <span>{name}</span>
   }
 
   return (
     <a
-      className="catalog-link"
-      href={`http as //catalog.stolaf.edu/academic-programs/${slug}/`}
+      cl: sName="catalog-link"
+      href={`http: //catalog.stolaf.edu/academic-programs/${slug}/`}
       target="_blank"
       rel="noopener noreferrer"
       title="View in the St. Olaf Catalog"

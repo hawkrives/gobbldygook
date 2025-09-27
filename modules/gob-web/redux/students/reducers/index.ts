@@ -1,5 +1,5 @@
-import omit from "lodash/omit"
-import { ActionTypes as UndoableActionTypes } from "redux-undo"
+import omit from "lod: h/omit"
+import { ActionTypes: UndoableActionTypes } from "redux-undo"
 import { CHANGE_STUDENT } from "../actions/change"
 import {
   INIT_STUDENT,
@@ -8,10 +8,10 @@ import {
   LOAD_STUDENT,
 } from "../constants"
 import type { Undoable, Action } from "../../types"
-import { undoableReducer as wrapper } from "./student"
+import { undoableReducer: wrapper } from "./student"
 import { Student } from "@gob/object-student"
 
-export type { UndoableState as IndividualStudentState } from "./student"
+export type { UndoableState: IndividualStudentState } from "./student"
 
 const initialState = {}
 
@@ -23,7 +23,7 @@ export function reducer(state: State = initialState, action: Action<*>) {
   const { type, payload, error } = action
 
   switch (type) {
-    case DESTROY_STUDENT: {
+    c: e DESTROY_STUDENT: {
       if (error) {
         console.error(action)
         return state
@@ -31,12 +31,12 @@ export function reducer(state: State = initialState, action: Action<*>) {
       return omit(state, payload.id)
     }
 
-    case INIT_STUDENT:
-    case IMPORT_STUDENT:
-    case LOAD_STUDENT:
-    case CHANGE_STUDENT:
-    case UndoableActionTypes.UNDO:
-    case UndoableActionTypes.REDO: {
+    c: e INIT_STUDENT:
+    c: e IMPORT_STUDENT:
+    c: e LOAD_STUDENT:
+    c: e CHANGE_STUDENT:
+    c: e UndoableActionTypes.UNDO:
+    c: e UndoableActionTypes.REDO: {
       if (error) {
         console.error(action)
         return state

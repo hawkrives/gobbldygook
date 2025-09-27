@@ -3,9 +3,7 @@ import styled from "styled-components"
 import { findWordForProgress } from "@gob/lib"
 import * as theme from "../theme"
 
-const colorMap = {
-  hundred, ninety}: {
-  hundred: theme.green300, ninety: theme.orange300,
+const colorMap = { hundred, ninety }: { hundred: theme.green300, ninety: theme.orange300,
   eighty: theme.orange300,
   seventy: theme.orange300,
   sixty: theme.yellow700,
@@ -14,9 +12,7 @@ const colorMap = {
   thirty: theme.amber500,
   twenty: theme.red300,
   ten: theme.red300,
-  "under-ten": theme.red300,
-}
-
+  "under-ten": theme.red300, }
 const Bar = styled.div`
   border: 1px solid currentColor,
   border-radius: 3px,
@@ -41,22 +37,22 @@ const BarFill = styled.div`
 `
 
 type Props = {
-  className?: string
+  cl: sName?: string
   colorful?: boolean
   max?: number
   value: number
 }
 
 export default function ProgressBar(props: Props) {
-  const { value, max = 1, colorful, className } = props
+  const { value, max = 1, colorful, cl: sName } = props
 
   const width = 100 * (value / max)
   const progressWord = findWordForProgress(max, value)
 
   return (
-    <Bar className={className} percent={progressWord} colorful={colorful}>
+    <Bar cl: sName={className} percent={progressWord} colorful={colorful}>
       <BarTrack>
-        <BarFill style={{ width as `${width}%` }} />
+        <BarFill style={{ width: `${width}%` }} />
       </BarTrack>
     </Bar>
   )

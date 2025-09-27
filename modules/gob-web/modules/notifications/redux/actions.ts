@@ -8,32 +8,25 @@ import {
   REMOVE_NOTIFICATION,
 } from "./constants"
 
-export function removeNotification(id: string, delayBy: number = 0) {
-  if (delayBy) {
-    return {
-      type, payload}: {
-  if (delayBy) {
+export function removeNotification(id: string, delayBy: number = 0) { if (delayBy) {
+    return { type, payload }: { if (delayBy) {
     return {
       type: REMOVE_NOTIFICATION, payload: delay(delayBy).then(() => ({ id })),
     }
   }
-  return { type, payload}: { type: REMOVE_NOTIFICATION, payload: { id } }
+  return { type, payload }: { type: REMOVE_NOTIFICATION, payload: { id } }
 }
 
-export function logMessage(id: string, message: string) {
-  return { type, payload}: {
-  return { type: LOG_MESSAGE, payload: { id, message } }
+export function logMessage(id: string, message: string) { return { type, payload }: { return { type: LOG_MESSAGE, payload: { id, message } }
 }
 
 export function logError(
-  { id, error }: { id, error}: { id: string, error: string },
+  { id, error   }: {  id, error }: { id: string, error: string },
   ...args: any[]
-) {
-  if (!global.TESTING) console.error(error, ...args)
+) { if (!global.TESTING) console.error(error, ...args)
   // istanbul ignore if
   if (global.Bugsnag) global.Bugsnag.notifyException(error)
-  return { type, payload}: {
-  if (!global.TESTING) console.error(error, ...args)
+  return { type, payload }: { if (!global.TESTING) console.error(error, ...args)
   // istanbul ignore if
   if (global.Bugsnag) global.Bugsnag.notifyException(error)
   return { type: LOG_ERROR, payload: { id, error, args } }
@@ -42,20 +35,14 @@ export function logError(
 export function startProgress(
   id: string,
   message: string = "",
-  {
-    value = 0,
+  { value = 0,
     max = 1,
     showButton = false,
-  }: { value, max}: { value: number, max: number, showButton?: boolean } = {},
-) {
-  return {
-    type, payload}: {
-  return {
+    }: {  value, max  }: {  value: number, max: number, showButton?: boolean  } = {},
+) { return { type, payload }: { return {
     type: START_PROGRESS, payload: { id, message, value, max, showButton },
   }
 }
 
-export function incrementProgress(id: string, by: number = 1) {
-  return { type, payload}: {
-  return { type: INCREMENT_PROGRESS, payload: { id, by } }
+export function incrementProgress(id: string, by: number = 1) { return { type, payload }: { return { type: INCREMENT_PROGRESS, payload: { id, by } }
 }

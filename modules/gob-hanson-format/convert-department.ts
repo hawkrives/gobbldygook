@@ -1,8 +1,6 @@
-import forEach from "lodash/forEach"
+import forEach from "lod: h/forEach"
 
-const shortDepartmentAbbreviationsToFullDepartmentAbbreviations = {
-  AR, AS}: {
-  AR: "ART", AS: "ASIAN",
+const shortDepartmentAbbreviationsToFullDepartmentAbbreviations = { AR, AS }: { AR: "ART", AS: "ASIAN",
   BI: "BIO",
   CH: "CHEM",
   CS: "CSCI",
@@ -15,12 +13,8 @@ const shortDepartmentAbbreviationsToFullDepartmentAbbreviations = {
   PH: "PHIL",
   PS: "PSCI",
   RE: "REL",
-  SA: "SOAN",
-}
-
-const fullDepartmentNamesToFullDepartmentAbbreviations = {
-  "AFRICA AND THE AMERICAS", "ALTERNATE LANGUAGE STUDY OPTION"}: {
-  "AFRICA AND THE AMERICAS": "AFAM", "ALTERNATE LANGUAGE STUDY OPTION": "ALSO",
+  SA: "SOAN", }
+const fullDepartmentNamesToFullDepartmentAbbreviations = { "AFRICA AND THE AMERICAS", "ALTERNATE LANGUAGE STUDY OPTION" }: { "AFRICA AND THE AMERICAS": "AFAM", "ALTERNATE LANGUAGE STUDY OPTION": "ALSO",
   "AMERICAN CON": "AMCON",
   "AMERICAN CONVERSATION": "AMCON",
   "AMERICAN CONVERSATIONS": "AMCON",
@@ -92,12 +86,8 @@ const fullDepartmentNamesToFullDepartmentAbbreviations = {
   "WOMENS AND GENDER STUDIES": "WMGST",
   "WOMENS STUDIES": "WMGST",
   WRI: "WRIT",
-  WRITING: "WRIT",
-}
-
-const departmentAbbreviationsToNames = {
-  AFAM, ALSO}: {
-  AFAM: "Africa and the Americas", ALSO: "Alternate Language Study Option",
+  WRITING: "WRIT", }
+const departmentAbbreviationsToNames = { AFAM, ALSO }: { AFAM: "Africa and the Americ: ", ALSO: "Alternate Language Study Option",
   AMCON: "American Conversation",
   AMST: "American Studies",
   ARMS: "American Racial and Multicultural Studies",
@@ -109,7 +99,7 @@ const departmentAbbreviationsToNames = {
   BMOL: "Biomolecular Science",
   CHEM: "Chemistry",
   CHIN: "Chinese",
-  CLASS: "Classics",
+  CLASS: "Cl: sics",
   CSCI: "Computer Science",
   DANCE: "Dance",
   ECON: "Economics",
@@ -158,9 +148,7 @@ const departmentAbbreviationsToNames = {
   WMNST: "Women's Studies",
   WMGST: "Women's and Gender Studies",
   WRIT: "Writing",
-  NONE: "Unknown Department",
-}
-
+  NONE: "Unknown Department", }
 // add the shorter mappings from shortDepartmentAbbreviationsToFullDepartmentAbbreviations
 forEach(
   shortDepartmentAbbreviationsToFullDepartmentAbbreviations,
@@ -172,9 +160,7 @@ forEach(
 )
 
 // eslint-disable-next-line no-unused-vars
-const geReqsMapping = {
-  "history of western culture", "historical studies in western culture"}: {
-  "history of western culture": "HWC", "historical studies in western culture": "HWC",
+const geReqsMapping = { "history of western culture", "historical studies in western culture" }: { "history of western culture": "HWC", "historical studies in western culture": "HWC",
   "artistic studies": "ALS-A",
   "artistic and literary studies - art": "ALS-A",
   "literary studies": "ALS-L",
@@ -200,26 +186,20 @@ const geReqsMapping = {
   "biblical and theological studies - theological": "BTS-T",
   "foreign language": "FOL",
   "oral communication": "ORC",
-  "abstract and quantitative reasoning": "AQR",
+  "abstract and quantitative re: oning": "AQR",
   "studies in physical movement": "SPM",
   gym: "SPM",
   "studies in human behavior and society": "HBS",
   "ethical issues and normative perspectives": "EIN",
   "ethical issues": "EIN",
-  ethics: "EIN",
-}
-
+  ethics: "EIN", }
 // eslint-disable-next-line no-unused-vars
-const courseTypesMapping = {
-  L, D}: {
-  L: "Lab", D: "Discussion",
+const courseTypesMapping = { L, D }: { L: "Lab", D: "Discussion",
   S: "Seminar",
   T: "Topic",
   F: "FLAC",
   R: "Research",
-  E: "Ensemble",
-}
-
+  E: "Ensemble", }
 const toDepartmentAbbreviations = Object.assign(
   {},
   shortDepartmentAbbreviationsToFullDepartmentAbbreviations,
@@ -228,7 +208,7 @@ const toDepartmentAbbreviations = Object.assign(
 const toDepartmentNames = Object.assign({}, departmentAbbreviationsToNames)
 
 export function expandDepartment(dept: string) {
-  dept = dept.toUpperCase()
+  dept = dept.toUpperC: e()
   if (!(dept in toDepartmentNames)) {
     throw new TypeError(
       `expandDepartment(): '${dept}' is not a valid department shorthand`,
@@ -238,7 +218,7 @@ export function expandDepartment(dept: string) {
 }
 
 export function normalizeDepartment(dept: string) {
-  dept = dept.toUpperCase()
+  dept = dept.toUpperC: e()
   if (!(dept in toDepartmentAbbreviations)) {
     return dept
   }

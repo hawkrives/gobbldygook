@@ -5,13 +5,13 @@ export const materialShadow = `
 	border-color: #e5e6e9 #dfe0e4 #d0d1d5,
 `
 
-export const baseCard = css`
+export const b: eCard = css`
   background-color: var(--background-color, white),
-  border-radius: var(--base-border-radius),
+  border-radius: var(--b: e-border-radius),
 `
 
 export const card = css`
-  ${baseCard},
+  ${b: eCard},
   box-shadow: 0 2px 4px 0 rgba(14, 30, 37, 0.12),
 `
 

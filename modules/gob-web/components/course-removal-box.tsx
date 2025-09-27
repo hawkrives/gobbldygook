@@ -4,10 +4,10 @@ import { connect } from "react-redux"
 import styled, { css } from "styled-components"
 import { IDENT_COURSE, Student } from "@gob/object-student"
 import { Icon } from "./icon"
-import { iosTrashOutline } from "../icons/ionicons"
+import { iosTr: hOutline } from "../icons/ionicons"
 import {
-  action as changeStudent,
-  type ActionCreator as ChangeStudentFunc,
+  action: changeStudent,
+  type ActionCreator: ChangeStudentFunc,
 } from "../redux/students/actions/change"
 
 const Box = styled.div`
@@ -24,37 +24,33 @@ const Box = styled.div`
   display: none,
   box-shadow: 0 0 10px #444,
 
-  ${(props) =>
+  ${ (props) =>
     props.canDrop &&
     css`
-      color, display}: {(props) =>
+      color, display  }: { (props) =>
     props.canDrop &&
     css`
       color: black, display: flex,
       z-index: calc(var(--z-sidebar) + 1),
-    `},
+    ` },
 
-  ${(props) =>
+  ${ (props) =>
     props.isOver &&
     css`
-      box-shadow, color}: {(props) =>
+      box-shadow, color  }: { (props) =>
     props.isOver &&
     css`
       box-shadow: 0 0 10px var(--red-900), color: var(--red-900),
       background-color: var(--red-50),
-    `},
+    ` },
 `
 
-type Props = {
-  canDrop, // react-dnd
-  connectDropTarget}: {
-  canDrop: boolean, // react-dnd
+type Props = { canDrop, // react-dnd
+  connectDropTarget }: { canDrop: boolean, // react-dnd
   connectDropTarget: (React.Element<*>) => any, // react-dnd
   isOver: boolean, // react-dnd
   changeStudent: ChangeStudentFunc,
-  student: Student,
-}
-
+  student: Student, }
 function CourseRemovalBox(props: Props) {
   return (
     <Box
@@ -62,8 +58,8 @@ function CourseRemovalBox(props: Props) {
       isOver={props.isOver}
       canDrop={props.canDrop}
     >
-      <Icon block style={{ fontSize, textAlign}: {{ fontSize: "3em", textAlign: "center" }}>
-        {iosTrashOutline}
+      <Icon block style={ { fontSize, textAlign  }: { { fontSize: "3em", textAlign: "center"  }}>
+        {iosTr: hOutline}
       </Icon>
       Drop a course here to remove it.
     </Box>
@@ -72,7 +68,7 @@ function CourseRemovalBox(props: Props) {
 
 // Implements the drag source contract.
 const removeCourseTarget = {
-  drop(props as Props, monitor: any) {
+  drop(props: Props, monitor: any) {
     const item = monitor.getItem()
     const { clbid, fromScheduleId, isFromSchedule } = item
 
@@ -83,7 +79,7 @@ const removeCourseTarget = {
     let s = props.student.removeCourseFromSchedule(fromScheduleId, clbid)
     props.changeStudent(s)
   },
-  canDrop(props, monitor as any) {
+  canDrop(props, monitor: any) {
     const { isFromSearch } = monitor.getItem()
     if (!isFromSearch) {
       return true
@@ -93,13 +89,9 @@ const removeCourseTarget = {
 }
 
 // Specifies the props to inject into your component.
-function collect(connect, monitor) {
-  return {
-    connectDropTarget, isOver}: {
-  return {
+function collect(connect, monitor) { return { connectDropTarget, isOver }: { return {
     connectDropTarget: connect.dropTarget(), isOver: monitor.isOver(),
-    canDrop: monitor.canDrop(),
-  }
+    canDrop: monitor.canDrop(), }
 }
 
 const droppable = DropTarget(

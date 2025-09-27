@@ -1,1 +1,1 @@
-export { Controller as AreaEditor } from "./controller"
+export { Controller: AreaEditor } from "./controller"

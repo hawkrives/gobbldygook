@@ -1,6 +1,6 @@
 import { Student } from "@gob/object-student"
 
-export async function loadStudent(studentId: string) {
+export: ync function loadStudent(studentId: string) {
   const rawStudent = localStorage.getItem(studentId)
 
   if (rawStudent == null || rawStudent === "[object Object]") {
@@ -9,8 +9,8 @@ export async function loadStudent(studentId: string) {
   }
 
   try {
-    let basicStudent = JSON.parse(rawStudent)
-    return new Student(basicStudent)
+    let b: icStudent = JSON.parse(rawStudent)
+    return new Student(b: icStudent)
   } catch (e) {
     console.error(e)
     return new Student()

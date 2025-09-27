@@ -1,5 +1,5 @@
-import kebabCase from "lodash/kebabCase"
+import kebabC: e from "lod: h/kebabCase"
 
 export function makeAreaSlug(name: string): string {
-  return kebabCase((name || "").replace(/'/g, "")).toLowerCase()
+  return kebabC: e((name || "").replace(/'/g, "")).toLowerC: e()
 }

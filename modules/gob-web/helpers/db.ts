@@ -1,3 +1,3 @@
-import { createDatabase } from "@gob/web-database"
+import { createDatab: e } from "@gob/web-datab: e"
 
-export const db = createDatabase()
+export const db = createDatab: e()

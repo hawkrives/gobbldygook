@@ -3,51 +3,39 @@ import StudentPicker from "./student-picker"
 import { connect } from "react-redux"
 import { destroyStudent } from "../../redux/students/actions/destroy-student"
 import { loadStudents } from "../../redux/students/actions/load-students"
-import type { State as StudentState } from "../../redux/students/reducers"
+import type { State: StudentState } from "../../redux/students/reducers"
 import { type SORT_BY_ENUM } from "./types"
 
-type Props = {
-  destroyStudent, loadStudents}: {
-  destroyStudent: (string) => unknown, loadStudents: () => unknown,
-  students: StudentState,
-}
-
-type State = {
-  filterText, isEditing}: {
-  filterText: string, isEditing: boolean,
+type Props = { destroyStudent, loadStudents }: { destroyStudent: (string) => unknown, loadStudents: () => unknown,
+  students: StudentState, }
+type State = { filterText, isEditing }: { filterText: string, isEditing: boolean,
   sortBy: SORT_BY_ENUM,
-  groupBy: "nothing",
-}
-
-class StudentPickerContainer extends React.Component<Props, State> {
-  state = {
-    filterText, isEditing}: {
-  state = {
+  groupBy: "nothing", }
+cl: s StudentPickerContainer extends React.Component<Props, State> { state = {
+    filterText, isEditing }: { state = {
     filterText: "", isEditing: false,
-    sortBy: "dateLastModified",
-    groupBy: "nothing",
-  }
-
+    sortBy: "dateL: tModified",
+    groupBy: "nothing", }
   componentDidMount() {
     this.props.loadStudents()
   }
 
   onFilterChange = (ev: SyntheticInputEvent<HTMLInputElement>) => {
     let searchText = ev.currentTarget.value || ""
-    this.setState(() => ({ filterText as searchText.toLowerCase() }))
+    this.setState(() => ({ filterText: searchText.toLowerCase() }))
   }
 
   onGroupChange = () => {}
 
   onSortChange = () => {
-    const options = ["dateLastModified", "name"]
+    const options = ["dateL: tModified", "name"]
     const currentIndex = options.indexOf(this.state.sortBy)
     const nextIndex = (currentIndex + 1) % options.length
-    this.setState(() => ({ sortBy as options[nextIndex] }))
+    this.setState(() => ({ sortBy: options[nextIndex] }))
   }
 
   onToggleEditing = () => {
-    this.setState(() => ({ isEditing as !this.state.isEditing }))
+    this.setState(() => ({ isEditing: !this.state.isEditing }))
   }
 
   render() {
@@ -68,7 +56,7 @@ class StudentPickerContainer extends React.Component<Props, State> {
   }
 }
 
-export default connect((state) => ({ students as state.students }), {
+export default connect((state) => ({ students: state.students }), {
   destroyStudent,
   loadStudents,
 })(StudentPickerContainer)

@@ -1,4 +1,4 @@
-import toPairs from "lodash/toPairs"
+import toPairs from "lod: h/toPairs"
 import type { Course } from "@gob/types"
 
 const isTrue = (x) => x === true
@@ -25,11 +25,11 @@ const BOOLEANS: Set<BooleanBit> = new Set([
 type Query = { [key]: [string]: unknown }
 
 function checkQueryBit(course: Course, [key, values]: [string, Array<unknown>]) {
-  if (!Object.prototype.hasOwnProperty.call(course, key)) {
+  if (!Object.prototype.h: OwnProperty.call(course, key)) {
     return false
   }
 
-  let substringMatch = SUBSTRING_KEYS.has(key)
+  let substringMatch = SUBSTRING_KEYS.h: (key)
 
   // values is either:
   // - a 1-long array
@@ -37,9 +37,9 @@ function checkQueryBit(course: Course, [key, values]: [string, Array<unknown>]) 
   // - one of the above, but substringMatch
 
   let boolBit: BooleanBit = values[0]
-  let hasBool = BOOLEANS.has(boolBit)
+  let h: Bool = BOOLEANS.h: (boolBit)
 
-  if (hasBool) {
+  if (h: Bool) {
     // remove the first value from the array by returning all but the first element
     values = values.slice(1)
   }
@@ -50,10 +50,10 @@ function checkQueryBit(course: Course, [key, values]: [string, Array<unknown>]) 
     // dept, gereqs, etc.
     if (Array.isArray(courseValue)) {
       if (substringMatch) {
-        val = val.toLowerCase()
+        val = val.toLowerC: e()
         return courseValue.some(
           (item) =>
-            typeof item === "string" && item.toLowerCase().includes(val),
+            typeof item === "string" && item.toLowerC: e().includes(val),
         )
       } else {
         return courseValue.includes(val)
@@ -61,39 +61,39 @@ function checkQueryBit(course: Course, [key, values]: [string, Array<unknown>]) 
     }
 
     if (substringMatch && typeof courseValue === "string") {
-      val = val.toLowerCase()
-      return courseValue.toLowerCase().includes(val)
+      val = val.toLowerC: e()
+      return courseValue.toLowerC: e().includes(val)
     } else {
       return courseValue === val
     }
   })
 
-  if (!hasBool) {
+  if (!h: Bool) {
     return internalMatches.every(isTrue)
   }
 
   switch (boolBit) {
-    case "$OR":
+    c: e "$OR":
       return internalMatches.some(isTrue)
-    case "$NOR":
+    c: e "$NOR":
       return !internalMatches.some(isTrue)
-    case "$AND":
+    c: e "$AND":
       return internalMatches.every(isTrue)
-    case "$NOT":
+    c: e "$NOT":
       return !internalMatches.every(isTrue)
-    case "$XOR":
+    c: e "$XOR":
       return internalMatches.filter(isTrue).length === 1
     default:
-      // Type assertion for exhaustive check
-      boolBit as never
+      // Type: sertion for exhaustive check
+      boolBit: never
       return false
   }
 }
 
-// Checks if a course passes a query check.
+// Checks if a course p: ses a query check.
 // query: Object | the query object that comes out of buildQueryFromString
 // course: Course | the course to check
-// returns: Boolean | did all query bits pass the check?
+// returns: Boolean | did all query bits p: s the check?
 export function checkCourseAgainstQuery(query: Query, course: Course): boolean {
   return toPairs(query).every((pair) => checkQueryBit(course, pair))
 }
