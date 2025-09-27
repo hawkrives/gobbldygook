@@ -32,5 +32,5 @@ export function alterForEvaluation(course: Course): TrimmedCourse {
   }
 
   let pairs = toPairs(course).filter(([key]) => whitelist.has(key))
-  return (fromPairs(pairs): any)
+  return fromPairs(pairs) as any
 }

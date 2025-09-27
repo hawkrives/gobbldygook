@@ -2,17 +2,17 @@ import computeCountWithOperator from "./compute-count-with-operator"
 import type { Fulfillment, Expression, Course } from "./types"
 
 type ReturnType = {
-  computedResult: boolean,
-  matches: Course[],
-  counted: number,
+  computedResult: boolean
+  matches: Course[]
+  counted: number
 }
 
 type Args = {
-  fulfillment: Fulfillment,
-  expr: Expression,
-  computedResult: boolean,
-  matches: ?(Course[]),
-  counted: ?number,
+  fulfillment: Fulfillment
+  expr: Expression
+  computedResult: boolean
+  matches: ?Course[]
+  counted: ?number
 }
 
 export default function applyFulfillmentToResult({
@@ -31,7 +31,7 @@ export default function applyFulfillmentToResult({
     return { computedResult, matches, counted }
   }
 
-  const counter = "$count" in expr ? (expr: any).$count : null
+  const counter = "$count" in expr ? (expr as any).$count : null
   if (
     counter &&
     (counter.$operator === "$lte" || counter.$operator === "$eq")
