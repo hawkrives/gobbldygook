@@ -8,7 +8,7 @@
   "jest": {
     "testEnvironment": "jsdom",
     "collectCoverageFrom": [
-      "modules/**/*.js"
+      "modules/**/*.{js,jsx,ts,tsx}"
     ],
     "coveragePathIgnorePatterns": [
       "<rootDir>/node_modules/",
@@ -24,8 +24,8 @@
       "VERSION": "3.0.0-test"
     },
     "resetModules": true,
-    "moduleNameMapper": {
-      "^.+\\.s?css$": "<rootDir>/config/flow/css.js.flow"
+    "transform": {
+      "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"
     },
     "setupFiles": [],
     "setupFilesAfterEnv": [
@@ -34,24 +34,8 @@
     ],
     "testPathIgnorePatterns": [
       "\\.support.js$",
+      "\\.support.ts$",
       "__support__"
-    ]
-  },
-  "flow-coverage-report": {
-    "globIncludePatterns": [
-      "modules/**/*.js"
-    ],
-    "globExcludePatterns": [
-      "**/__tests__/**",
-      "**/__mocks__/**",
-      "**/*-cli/**",
-      "modules/gob-hanson-format/parse-hanson-string.js",
-      "modules/gob-web/icons/ionicons-all.js",
-      "modules/gob-web/icons/ionicons.js",
-      "**/node_modules/**"
-    ],
-    "reportTypes": [
-      "html"
     ]
   },
   "greenkeeper": {
@@ -67,8 +51,9 @@
     "@babel/eslint-parser": "7.28.0",
     "@babel/plugin-transform-runtime": "7.28.0",
     "@babel/preset-env": "7.28.0",
-    "@babel/preset-flow": "7.27.1",
     "@babel/preset-react": "7.27.1",
+    "@babel/preset-typescript": "^7.24.7",
+    "@khanacademy/flow-to-ts": "^0.5.2",
     "@microsoft/eslint-formatter-sarif": "3.1.0",
     "@testing-library/jest-dom": "6.7.0",
     "babel-jest": "29.7.0",
@@ -78,15 +63,13 @@
     "eslint": "8.57.1",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-babel": "5.3.1",
-    "eslint-plugin-flowtype": "8.0.3",
     "eslint-plugin-import": "2.32.0",
     "eslint-plugin-react": "7.37.5",
-    "flow-bin": "0.82.0",
-    "flow-remove-types": "2.122.0",
     "jest": "29.7.0",
     "jest-environment-jsdom": "29.7.0",
     "prettier": "3.6.2",
     "pretty-quick": "4.2.2",
-    "set-blocking": "2.0.0"
+    "set-blocking": "2.0.0",
+    "typescript": "^5.9.3"
   }
 }

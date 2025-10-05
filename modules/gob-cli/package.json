@@ -1,13 +1,13 @@
 {
   "name": "@gob/cli",
   "version": "3.0.0-rc.2",
-  "main": "index.js",
-  "module": "main.js",
+  "main": "index.ts",
+  "module": "main.ts",
   "bin": {
-    "gob-examine": "./gob-examine/index.js",
-    "gob-convert": "./gob-convert/index.js",
-    "gob-lint-area": "./gob-lint-area/index.js",
-    "gob-validate": "./gob-validate/index.js"
+    "gob-examine": "./gob-examine/index.ts",
+    "gob-convert": "./gob-convert/index.ts",
+    "gob-lint-area": "./gob-lint-area/index.ts",
+    "gob-validate": "./gob-validate/index.ts"
   },
   "engines": {
     "node": ">=22"
@@ -25,7 +25,6 @@
     "@gob/school-st-olaf-college": "^3.0.0-rc.2",
     "chalk": "^5.0.0",
     "esm": "^3.0.84",
-    "flow-remove-types": "^2.122.0",
     "get-stdin": "^9.0.0",
     "got": "^10.2.2",
     "js-yaml": "^3.14.0",

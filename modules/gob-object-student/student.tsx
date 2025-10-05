@@ -151,7 +151,7 @@ export class Student extends StudentRecord<StudentType> {
     return this.get("name")
   }
 
-  setName(name: string): this {
+  setName(name: string) {
     return this.set("name", name)
   }
 
@@ -159,7 +159,7 @@ export class Student extends StudentRecord<StudentType> {
     return this.get("advisor")
   }
 
-  setAdvisor(name: string): this {
+  setAdvisor(name: string) {
     return this.set("advisor", name)
   }
 
@@ -167,7 +167,7 @@ export class Student extends StudentRecord<StudentType> {
     return this.get("matriculation")
   }
 
-  setMatriculation(year: string | number): this {
+  setMatriculation(year: string | number) {
     let newYear = typeof year === "string" ? parseInt(year, 10) : year
     return this.set("matriculation", newYear)
   }
@@ -176,7 +176,7 @@ export class Student extends StudentRecord<StudentType> {
     return this.get("graduation")
   }
 
-  setGraduation(year: string | number): this {
+  setGraduation(year: string | number) {
     let newYear = typeof year === "string" ? parseInt(year, 10) : year
     return this.set("graduation", newYear)
   }
@@ -185,7 +185,7 @@ export class Student extends StudentRecord<StudentType> {
     return this.get("settings")
   }
 
-  setSetting(key: string, value: mixed): this {
+  setSetting(key: string, value: mixed) {
     return this.setIn(["settings", key], value)
   }
 
@@ -201,7 +201,7 @@ export class Student extends StudentRecord<StudentType> {
     return this.get("schedules")
   }
 
-  addSchedule(schedule: Schedule): this {
+  addSchedule(schedule: Schedule) {
     return this.setIn(["schedules", schedule.id], schedule)
   }
 
@@ -222,7 +222,7 @@ export class Student extends StudentRecord<StudentType> {
       .toList()
   }
 
-  destroySchedule(scheduleId: string): this {
+  destroySchedule(scheduleId: string) {
     let deleted = this.schedules.get(scheduleId)
 
     if (!deleted) {
@@ -249,7 +249,7 @@ export class Student extends StudentRecord<StudentType> {
     })
   }
 
-  destroySchedulesForYear(year: number): this {
+  destroySchedulesForYear(year: number) {
     let scheduleIds = this.schedules
       .filter((s) => s.year === year)
       .map((s) => s.id)
@@ -262,7 +262,7 @@ export class Student extends StudentRecord<StudentType> {
     })
   }
 
-  destroySchedulesForTerm(args: {| year: number, semester: number |}): this {
+  destroySchedulesForTerm(args: {| year: number, semester: number |}) {
     let { year, semester } = args
 
     if (year == null || semester == null) {
@@ -284,15 +284,15 @@ export class Student extends StudentRecord<StudentType> {
   moveSchedule(
     scheduleId: string,
     { year, semester }: { year: number, semester: number },
-  ): this {
+  ) {
     return this.mergeIn(["schedules", scheduleId], { year, semester })
   }
 
-  reorderSchedule(scheduleId: string, index: number): this {
+  reorderSchedule(scheduleId: string, index: number) {
     return this.setIn(["schedules", scheduleId, "index"], index)
   }
 
-  renameSchedule(scheduleId: string, title: string): this {
+  renameSchedule(scheduleId: string, title: string) {
     return this.setIn(["schedules", scheduleId, "title"], title)
   }
 
@@ -300,7 +300,7 @@ export class Student extends StudentRecord<StudentType> {
   /// Courses, within schedules
   /////
 
-  addCourseToSchedule(scheduleId: string, clbid: string): this {
+  addCourseToSchedule(scheduleId: string, clbid: string) {
     let hasClbid = this.hasCourseInSchedule(scheduleId, clbid)
 
     if (hasClbid) {
@@ -312,7 +312,7 @@ export class Student extends StudentRecord<StudentType> {
     })
   }
 
-  removeCourseFromSchedule(scheduleId: string, clbid: string): this {
+  removeCourseFromSchedule(scheduleId: string, clbid: string) {
     let hasClbid = this.hasCourseInSchedule(scheduleId, clbid)
 
     if (!hasClbid) {
@@ -336,7 +336,7 @@ export class Student extends StudentRecord<StudentType> {
     from: string,
     to: string,
     clbid: string,
-  }): this {
+  }) {
     let { from, to, clbid } = args
 
     // prettier-ignore
@@ -348,7 +348,7 @@ export class Student extends StudentRecord<StudentType> {
   reorderCourseInSchedule(
     scheduleId: string,
     { clbid, index }: { clbid: string, index: number },
-  ): this {
+  ) {
     return this.updateIn(["schedules", scheduleId, "clbids"], (ids) => {
       if (!ids) {
         throw new ReferenceError(
@@ -379,11 +379,11 @@ export class Student extends StudentRecord<StudentType> {
     return this.get("studies")
   }
 
-  addArea(area: AreaQuery): this {
+  addArea(area: AreaQuery) {
     return this.updateIn(["studies"], (set) => set.push(area))
   }
 
-  removeArea(area: AreaQuery): this {
+  removeArea(area: AreaQuery) {
     let index = this.findAreaIndex(area)
     if (index === -1) {
       return this
@@ -421,11 +421,11 @@ export class Student extends StudentRecord<StudentType> {
     return this.hasIn(["overrides", key])
   }
 
-  setOverride(key: string, value: OverrideType): this {
+  setOverride(key: string, value: OverrideType) {
     return this.setIn(["overrides", key], value)
   }
 
-  removeOverride(key: string): this {
+  removeOverride(key: string) {
     return this.deleteIn(["overrides", key])
   }
 
@@ -441,7 +441,7 @@ export class Student extends StudentRecord<StudentType> {
     return this.get("fabrications")
   }
 
-  addFabrication(fabrication: CourseType): this {
+  addFabrication(fabrication: CourseType) {
     return this.update("fabrications", (list) => {
       return list.push(fabrication)
     })
@@ -451,7 +451,7 @@ export class Student extends StudentRecord<StudentType> {
     return this.fabrications.find(({ clbid }) => clbid === fabricationId)
   }
 
-  removeFabrication(fabricationId: string): this {
+  removeFabrication(fabricationId: string) {
     return this.update("fabrications", (list) => {
       return list.filterNot(({ clbid }) => clbid === fabricationId)
     })

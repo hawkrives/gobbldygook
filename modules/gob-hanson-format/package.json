@@ -4,12 +4,12 @@
   },
   "name": "@gob/hanson-format",
   "version": "3.0.0-rc.2",
-  "main": "index.js",
+  "main": "index.ts",
   "repository": "hawkrives/gobbldygook",
   "author": "Hawken MacKay Rives",
   "license": "MIT",
   "scripts": {
-    "build": "pegjs --allowed-start-rules Result,Filter < ./parse-hanson-string.pegjs > ./parse-hanson-string.js"
+    "build": "pegjs --allowed-start-rules Result,Filter < ./parse-hanson-string.pegjs > ./parse-hanson-string.ts"
   },
   "dependencies": {
     "@gob/examine-student": "^3.0.0-rc.2",
