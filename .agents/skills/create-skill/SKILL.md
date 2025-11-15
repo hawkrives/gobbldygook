@@ -21,7 +21,7 @@ Guide agents in creating new skill definitions that follow the Universal Agents 
    - Define boundaries: what the skill can and cannot do
    
 2. **Study reference materials**
-   - Review minibeads documentation structure (markdown with YAML frontmatter)
+   - Review documentation structure (markdown with YAML frontmatter)
    - Examine existing skills in `.agents/skills/` for patterns
    - Note how skills are referenced in `AGENTS.md`
 
@@ -33,7 +33,7 @@ Guide agents in creating new skill definitions that follow the Universal Agents 
    - **Execution steps**: Numbered, sequential procedure
    - **Output format**: Expected deliverables and response structure
 
-4. **Follow minibeads conventions**
+4. **Follow conventions**
    - Use markdown with clear section headers (H2 ##)
    - Keep content focused and actionable
    - Include concrete examples where helpful
