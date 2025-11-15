@@ -4,6 +4,9 @@
 .*/node_modules/jest-validate
 .*/node_modules/@codemirror/lang-javascript/.*
 .*/node_modules/@codemirror/theme-one-dark/.*
+.*/node_modules/hermes-eslint/.*
+.*/node_modules/hermes-estree/.*
+.*/node_modules/hermes-parser/.*
 
 [libs]
 ./config/decls
