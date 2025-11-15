@@ -12,7 +12,7 @@ export default function parseData(raw: string, type: InfoFileTypeEnum) {
       data.source = raw
       return data
     }
-  } catch (err) {
+  } catch (_err) {
     // ignoring the error
   }
   return {}
