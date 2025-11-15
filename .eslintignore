@@ -1,5 +1,0 @@
-node_modules/
-*.min.js
-modules/gob-hanson-format/parse-hanson-string.js
-build*/
-flow-typed/

@@ -1,4 +1,3 @@
-/* globals __dirname */
 /* eslint no-confusing-arrow: 0 */
 
 import peg from "pegjs"
