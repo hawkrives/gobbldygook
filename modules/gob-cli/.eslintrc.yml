@@ -1,8 +1,0 @@
-env:
-  node: true
-
-parserOptions:
-  sourceType: module
-
-rules:
-  no-process-exit: 0

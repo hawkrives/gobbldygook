@@ -244,7 +244,7 @@ describe("proceedWithUpdate", () => {
 
     try {
       await load.proceedWithUpdate(baseUrl, index)
-    } catch (err) {
+    } catch (_err) {
       expect(needsUpdate).toHaveBeenCalled()
       expect(updateDatabase).not.toHaveBeenCalled()
       expect(removeDuplicateAreas).not.toHaveBeenCalled()
@@ -275,7 +275,7 @@ describe("loadFiles", () => {
     expect.assertions(1)
     try {
       await loadFiles("some-url", "another-one")
-    } catch (err) {
+    } catch (_err) {
       expect(global.fetch).toHaveBeenCalled()
     }
   })

@@ -1,4 +1,3 @@
-/* global __dirname */
 // @flow
 "use strict"
 
