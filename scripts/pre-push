@@ -1,0 +1,13 @@
+#!/bin/sh
+# Pre-push hook to run prettier on staged files
+
+# Run pretty-quick to format changed files
+./node_modules/.bin/pretty-quick --staged
+
+# Check if there are any changes after formatting
+if ! git diff --exit-code --quiet; then
+  echo "❌ Code formatting changes detected. Please commit the formatted changes before pushing."
+  exit 1
+fi
+
+exit 0
