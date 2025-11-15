@@ -13,10 +13,13 @@ Reference layout:
       SKILL.md
     flow-to-typescript/
       SKILL.md
+    issue-tracking-minibeads/
+      SKILL.md
   rules/
     api-guideline.md
     create-rule.md
     git-commit.md
+    minibeads-conventions.md
     react-components-guideline.md
 AGENTS.md
 ```
