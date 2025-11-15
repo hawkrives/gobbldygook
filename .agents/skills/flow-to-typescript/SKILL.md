@@ -1,7 +1,7 @@
 # Skill: Flow to TypeScript Conversion
 
 ## Purpose
-Guide agents through converting JavaScript files with Flow type annotations to TypeScript using the `flow-to-ts` tool, ensuring strict type safety and compliance with TypeScript's recommended linting rules.
+Guide agents through converting JavaScript files with Flow type annotations to TypeScript using the `flow-to-ts` tool, ensuring strict type safety and compliance with TypeScript's strict-type-checked and stylistic-type-checked linting rules.
 
 ## Trigger conditions
 - User requests conversion from Flow to TypeScript
@@ -87,12 +87,25 @@ Guide agents through converting JavaScript files with Flow type annotations to T
        "strictBindCallApply": true,
        "strictPropertyInitialization": true,
        "noImplicitThis": true,
-       "alwaysStrict": true
+       "alwaysStrict": true,
+       "exactOptionalPropertyTypes": true,
+       "noPropertyAccessFromIndexSignature": true,
+       "noFallthroughCasesInSwitch": true,
+       "noUncheckedIndexedAccess": true,
+       "noUncheckedSideEffectImports": true,
+       "verbatimModuleSyntax": true,
+       "erasableSyntaxOnly": true,
+       "allowImportingTsExtensions": true,
+       "rewriteRelativeImportExtensions": true,
+       "skipLibCheck": true,
+       "isolatedModules": true,
+       "moduleResolution": "nodenext",
+       "target": "esnext"
      }
    }
    ```
 
-6. **Configure TypeScript ESLint with recommended-type-checked**
+6. **Configure TypeScript ESLint with strict-type-checked and stylistic-type-checked**
    
    Install dependencies:
    ```bash
@@ -110,20 +123,22 @@ Guide agents through converting JavaScript files with Flow type annotations to T
      "plugins": ["@typescript-eslint"],
      "extends": [
        "eslint:recommended",
-       "plugin:@typescript-eslint/recommended-type-checked"
+       "plugin:@typescript-eslint/strict-type-checked",
+       "plugin:@typescript-eslint/stylistic-type-checked"
      ]
    }
    ```
    
-   Key rules from recommended-type-checked:
-   - `@typescript-eslint/no-explicit-any`: error (enforces no `any`)
-   - `@typescript-eslint/no-unsafe-assignment`: error
-   - `@typescript-eslint/no-unsafe-call`: error
-   - `@typescript-eslint/no-unsafe-member-access`: error
-   - `@typescript-eslint/no-unsafe-return`: error
-   - `@typescript-eslint/await-thenable`: error
-   - `@typescript-eslint/no-floating-promises`: error
-   - `@typescript-eslint/require-await`: error
+   Key rules from strict-type-checked and stylistic-type-checked:
+   - All rules from recommended-type-checked, plus:
+   - `@typescript-eslint/no-confusing-void-expression`: error
+   - `@typescript-eslint/no-meaningless-void-operator`: error
+   - `@typescript-eslint/no-unnecessary-boolean-literal-compare`: error
+   - `@typescript-eslint/no-unnecessary-condition`: error
+   - `@typescript-eslint/prefer-nullish-coalescing`: error
+   - `@typescript-eslint/prefer-optional-chain`: error
+   - `@typescript-eslint/prefer-readonly`: error
+   - `@typescript-eslint/prefer-string-starts-ends-with`: error
 
 7. **Fix common conversion issues**
    
@@ -216,7 +231,7 @@ When performing a Flow to TypeScript conversion, deliver:
 - Using `@ts-ignore` or `@ts-expect-error` to bypass type errors
 - Overly broad types (e.g., `object`, `Function`) when specific types are available
 - Type assertions without runtime validation (`value as Type`)
-- Disabling strict mode or recommended-type-checked rules
+- Disabling strict mode or strict-type-checked/stylistic-type-checked rules
 - Converting the entire codebase at once without incremental validation
 
 ## Common pitfalls
