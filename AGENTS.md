@@ -9,8 +9,11 @@ Reference layout:
   skills/
     code-review/
       SKILL.md
+    create-skill/
+      SKILL.md
   rules/
     api-guideline.md
+    create-rule.md
     git-commit.md
     react-components-guideline.md
 AGENTS.md
@@ -32,4 +35,6 @@ AGENTS.md
 ## Extending the manifest
 
 - Additional skills (architecture review, test planning, etc.) or rules (team code style, compliance requirements) can be added under the existing folders.
+- To create new skills, load `skills/create-skill/SKILL.md` for guidance on structure and conventions.
+- To create new rules, load `rules/create-rule.md` for guidance on when and how to define new rules.
 - Keep `AGENTS.md` updated so future agents know when to load each artifact and how to combine them safely.
