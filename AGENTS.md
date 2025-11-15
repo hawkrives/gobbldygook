@@ -11,6 +11,8 @@ Reference layout:
       SKILL.md
     create-skill/
       SKILL.md
+    flow-to-typescript/
+      SKILL.md
   rules/
     api-guideline.md
     create-rule.md
