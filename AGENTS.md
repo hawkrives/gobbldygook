@@ -19,6 +19,7 @@ Reference layout:
     api-guideline.md
     create-rule.md
     git-commit.md
+    landing-the-plane.md
     minibeads-conventions.md
     react-components-guideline.md
 AGENTS.md
