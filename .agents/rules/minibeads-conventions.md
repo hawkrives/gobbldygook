@@ -20,6 +20,8 @@ Apply this rule when:
 
 ## Core principles
 
+**Note**: Throughout this document, `PREFIX-` is used as a placeholder for the actual project issue prefix (e.g., `gobbldygook-` for this project). Replace `PREFIX-` with your project's actual prefix when using these examples.
+
 ### 1. **Markdown-first storage**
 
 Issues are stored as markdown files with YAML frontmatter in `.beads/issues/`. This makes them:
@@ -55,10 +57,10 @@ bd list --status open | grep "keyword"
 
 ```bash
 # Correct: Update existing issue
-bd update project-42 --description "Updated description"
+bd update PREFIX-42 --description "Updated description"
 
 # Incorrect: Creating duplicate
-bd create "Same title as project-42"
+bd create "Same title as PREFIX-42"
 ```
 
 ### 4. **Priority conventions**
@@ -103,8 +105,8 @@ Make blocking relationships explicit:
 # Syntax: bd dep add FROM_ISSUE TO_ISSUE
 # Meaning: TO_ISSUE blocks FROM_ISSUE
 
-# Example: project-2 blocks project-1
-bd dep add project-1 project-2 --type blocks
+# Example: PREFIX-2 blocks PREFIX-1
+bd dep add PREFIX-1 PREFIX-2 --type blocks
 ```
 
 **Dependency types**:
@@ -118,16 +120,16 @@ bd dep add project-1 project-2 --type blocks
 When adding TODOs in code, always reference the tracking issue:
 
 ```javascript
-// TODO(project-42): Implement caching for API responses
+// TODO(PREFIX-42): Implement caching for API responses
 ```
 
 ```python
-# TODO(project-15): Refactor this function to use async/await
+# TODO(PREFIX-15): Refactor this function to use async/await
 ```
 
 When resolving the TODO:
 1. Remove the comment from code
-2. Close the issue with `bd close project-42`
+2. Close the issue with `bd close PREFIX-42`
 3. Reference the issue in the commit message
 
 ### 8. **Issue types**
@@ -145,13 +147,13 @@ Use appropriate types for different kinds of work:
 Synchronize issue status with git commits:
 
 **Before committing**:
-- Update issue status: `bd update project-42 --status in_progress`
+- Update issue status: `bd update PREFIX-42 --status in_progress`
 - Mark completed acceptance criteria: `[x]`
-- Close completed issues: `bd close project-42`
+- Close completed issues: `bd close PREFIX-42`
 
 **In commit messages**:
-- Reference relevant issues: "Fixes project-42: Add user authentication"
-- Mention new issues: "Created project-43 to track performance optimization"
+- Reference relevant issues: "Fixes PREFIX-42: Add user authentication"
+- Mention new issues: "Created PREFIX-43 to track performance optimization"
 
 ### 10. **Query and workflow patterns**
 
@@ -171,7 +173,7 @@ bd stats
 bd list --priority 2
 
 # Show full issue details
-bd show project-42
+bd show PREFIX-42
 ```
 
 ## Project-specific conventions
@@ -273,20 +275,20 @@ bd create "Build API endpoints" --priority 3 --type task
 bd create "Add validation" --priority 3 --type task
 
 # Set dependencies (sub-tasks block epic)
-bd dep add gobbldygook-1 gobbldygook-2
-bd dep add gobbldygook-1 gobbldygook-3
-bd dep add gobbldygook-1 gobbldygook-4
+bd dep add PREFIX-1 PREFIX-2
+bd dep add PREFIX-1 PREFIX-3
+bd dep add PREFIX-1 PREFIX-4
 
 # Update epic to reference sub-tasks
-bd update gobbldygook-1 --description "$(cat <<EOF
+bd update PREFIX-1 --description "$(cat <<EOF
 # Description
 
 Phase 1 tracking issue for core features.
 
 ## Sub-tasks
-- gobbldygook-2: Data model
-- gobbldygook-3: API endpoints  
-- gobbldygook-4: Validation
+- PREFIX-2: Data model
+- PREFIX-3: API endpoints  
+- PREFIX-4: Validation
 
 All sub-tasks must complete before Phase 1 is done.
 EOF

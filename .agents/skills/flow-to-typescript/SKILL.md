@@ -54,9 +54,9 @@ Guide agents through converting JavaScript files with Flow type annotations to T
    - `--inline-utility-types`: Inline utility types when possible
    - `--delete-source`: (Optional) Remove original `.js` files after conversion
 
-4. **Replace `any` with `unknown`**
+4. **Review and replace `any` types appropriately**
    
-   The flow-to-ts tool downgrades to `any` when exact translation isn't possible. For strict type safety, replace these with `unknown`:
+   The flow-to-ts tool downgrades to `any` when exact translation isn't possible. For strict type safety, **review and replace `any` types appropriately**:
    
    ```bash
    # Search for any usages
@@ -99,6 +99,7 @@ Guide agents through converting JavaScript files with Flow type annotations to T
        "rewriteRelativeImportExtensions": true,
        "skipLibCheck": true,
        "isolatedModules": true,
+       "module": "nodenext",
        "moduleResolution": "nodenext",
        "target": "esnext"
      }
@@ -107,9 +108,9 @@ Guide agents through converting JavaScript files with Flow type annotations to T
 
 6. **Configure TypeScript ESLint with strict-type-checked and stylistic-type-checked**
    
-   Install dependencies:
+   Install dependencies (requires ESLint v9+ and @typescript-eslint v8+):
    ```bash
-   npm install --save-dev @typescript-eslint/parser @typescript-eslint/eslint-plugin
+   npm install --save-dev eslint@^9.0.0 @typescript-eslint/parser@^8.0.0 @typescript-eslint/eslint-plugin@^8.0.0
    ```
    
    Update `.eslintrc` (or equivalent):

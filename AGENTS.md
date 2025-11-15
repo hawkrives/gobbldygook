@@ -26,7 +26,7 @@ AGENTS.md
 
 ## Execution protocol
 
-1. **Always read this file** before starting a task so you know which skills or rules to load from `.agents/`.
+1. **Always read this file** before starting a task so you know which skills or rules to load from `.agents/`. If file access is unavailable, request the user to provide the relevant skill or rule content.
 2. **Skills**:
    - Load a skill only if its trigger condition matches the task. Example: code review tasks must load `skills/code-review/SKILL.md`.
    - Once loaded, obey the process and output format defined inside the skill file so the final response stays consistent.
