@@ -1,13 +1,13 @@
 // @flow
-import assertKeys from "./assert-keys"
-import compute from "./compute"
+import assertKeys from "./assert-keys.js"
+import compute from "./compute.js"
 import type {
   Course,
   ParsedHansonFile,
   OverridesObject,
   FulfillmentsObject,
   EvaluationResult,
-} from "./types"
+} from "./types.js"
 
 type Input = {
   area: ParsedHansonFile,

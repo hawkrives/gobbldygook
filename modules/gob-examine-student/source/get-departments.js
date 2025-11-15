@@ -1,5 +1,5 @@
 // @flow
-import type { Course } from "./types"
+import type { Course } from "./types.js"
 
 /**
  * Gets the list of unique departments from a list of courses

@@ -1,6 +1,6 @@
 // @flow
-import isEqualWith from "lodash/isEqualWith"
-import type { Course } from "./types"
+import { isEqualWith } from "lodash"
+import type { Course } from "./types.js"
 
 const baseKeys = new Set([
   "department",

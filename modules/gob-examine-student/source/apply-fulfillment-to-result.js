@@ -1,6 +1,6 @@
 // @flow
-import computeCountWithOperator from "./compute-count-with-operator"
-import type { Fulfillment, Expression, Course } from "./types"
+import computeCountWithOperator from "./compute-count-with-operator.js"
+import type { Fulfillment, Expression, Course } from "./types.js"
 
 type ReturnType = {
   computedResult: boolean,

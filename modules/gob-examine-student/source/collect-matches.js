@@ -1,9 +1,8 @@
 // @flow
-import assertKeys from "./assert-keys"
-import flatMap from "lodash/flatMap"
-import uniqBy from "lodash/uniqBy"
+import assertKeys from "./assert-keys.js"
+import { flatMap, uniqBy } from "lodash"
 import stringify from "stabilize"
-import type { Expression, Requirement, Course } from "./types"
+import type { Expression, Requirement, Course } from "./types.js"
 
 /**
  * Collects matched courses from a result object

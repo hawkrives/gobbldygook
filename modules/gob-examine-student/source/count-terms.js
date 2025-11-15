@@ -1,5 +1,5 @@
 // @flow
-import type { Course } from "./types"
+import type { Course } from "./types.js"
 
 /**
  * Counts the number of unique terms from a list of courses

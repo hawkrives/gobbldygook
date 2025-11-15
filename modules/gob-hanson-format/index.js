@@ -1,8 +1,8 @@
 // @flow
 
-export { expandDepartment, normalizeDepartment } from "./convert-department"
-export { enhanceHanson } from "./enhance-hanson"
-export { makeAreaSlug } from "./make-area-slug"
-export { parse } from "./parse-hanson-string"
+export { expandDepartment, normalizeDepartment } from "./convert-department.js"
+export { enhanceHanson } from "./enhance-hanson.js"
+export { makeAreaSlug } from "./make-area-slug.js"
+export { parse } from "./parse-hanson-string.js"
 
-export type { ParsedHansonRequirement, ParsedHansonFile } from "./types"
+export type { ParsedHansonRequirement, ParsedHansonFile } from "./types.js"

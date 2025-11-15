@@ -1,5 +1,5 @@
 // @flow
-import type { OrExpression, Expression, Fulfillment } from "./types"
+import type { OrExpression, Expression, Fulfillment } from "./types.js"
 
 export default function applyFulfillmentToExpression(
   expr: Expression,

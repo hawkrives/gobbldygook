@@ -1,16 +1,14 @@
 // @flow
-import collectMatches from "./collect-matches"
-import isRequirementName from "./is-requirement-name"
-import flatten from "lodash/flatten"
-import keys from "lodash/keys"
-import uniqBy from "lodash/uniqBy"
+import collectMatches from "./collect-matches.js"
+import isRequirementName from "./is-requirement-name.js"
+import { flatten, keys, uniqBy } from "lodash"
 import stringify from "stabilize"
 import type {
   ModifierChildrenExpression,
   ModifierChildrenWhereExpression,
   Requirement,
   Course,
-} from "./types"
+} from "./types.js"
 
 /**
  * Extract the matched courses from all children.

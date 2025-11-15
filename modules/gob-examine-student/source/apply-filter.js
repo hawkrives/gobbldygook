@@ -1,7 +1,7 @@
 // @flow
-import checkForCourse from "./check-for-course"
-import filterByWhereClause from "./filter-by-where-clause"
-import type { FilterExpression, Course } from "./types"
+import checkForCourse from "./check-for-course.js"
+import filterByWhereClause from "./filter-by-where-clause.js"
+import type { FilterExpression, Course } from "./types.js"
 
 const filterByOfExpression = (courses: Array<Course>, $of: Array<Course>) =>
   $of.filter((course) => checkForCourse(course, courses))

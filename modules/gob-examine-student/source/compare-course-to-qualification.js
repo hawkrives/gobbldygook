@@ -1,10 +1,7 @@
 // @flow
-import isPlainObject from "lodash/isPlainObject"
-import includes from "lodash/includes"
-import every from "lodash/every"
-import some from "lodash/some"
-import assertKeys from "./assert-keys"
-import type { Course, Qualification } from "./types"
+import { isPlainObject, includes, every, some } from "lodash"
+import assertKeys from "./assert-keys.js"
+import type { Course, Qualification } from "./types.js"
 
 /**
  * Compares a course property against a MongoDB-style operator

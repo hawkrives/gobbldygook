@@ -1,9 +1,7 @@
 // @flow
 
-import { db } from "./db"
+import { listAreas, removeArea } from "@gob/web-database"
 import groupBy from "lodash/groupBy"
-import filter from "lodash/filter"
-import fromPairs from "lodash/fromPairs"
 import sortBy from "lodash/sortBy"
 
 type AreaOfStudy = {
@@ -14,7 +12,7 @@ type AreaOfStudy = {
 }
 
 export function buildRemoveAreaOps(areas: AreaOfStudy[]) {
-  return fromPairs(areas.map((item) => [item.sourcePath, null]))
+  return Object.fromEntries(areas.map((item) => [item.sourcePath, null]))
 }
 
 // TODO: add logging to this function
@@ -29,7 +27,9 @@ export function generateOps(allAreas: AreaOfStudy[]) {
     allAreas,
     (area) => `{${area.name}, ${area.type}, ${area.revision}}`,
   )
-  const duplicateGroup = filter(grouped, (list) => list.length > 1)
+  const duplicateGroup = Object.values(grouped).filter(
+    (list) => list.length > 1,
+  )
 
   let ops = {}
   for (let dupsList of duplicateGroup) {
@@ -56,7 +56,14 @@ export function generateOps(allAreas: AreaOfStudy[]) {
 }
 
 export default async function removeDuplicateAreas() {
-  let allAreas = await db.store("areas").getAll()
+  let allAreas = await listAreas()
   let ops = generateOps(allAreas)
-  return db.store("areas").batch(ops)
+  for (const [areaId, removeIfNull] of Object.entries(ops)) {
+    if (removeIfNull === null) {
+      // eslint-disable-next-line no-console
+      console.log(`Removing area: ${areaId}`)
+      // eslint-disable-next-line no-await-in-loop
+      await removeArea(areaId)
+    }
+  }
 }
