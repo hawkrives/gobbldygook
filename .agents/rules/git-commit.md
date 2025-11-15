@@ -10,18 +10,21 @@ Use this rule whenever you draft, review, or request Git commit messages so that
 ## Message format
 
 ```
-<type>(optional scope): <short imperative summary>
+(optional scope: )<short imperative summary>
 
 <body explaining motivation / impact>
 
-Footer (BREAKING CHANGE, issue links, etc.)
+
+Type: <type>
+Scope: <scope> (optional)
+Issue: <url> (optional)
 ```
 
 - **Type**: choose from `feat`, `fix`, `docs`, `chore`, `refactor`, `test`, `perf`, `build`, `ci`, or `revert`. Use lowercase.
 - **Scope**: optional; indicate the subsystem or package (e.g., `api`, `frontend`, `deps`). Omit parentheses if there is no scope.
 - **Summary**: use an imperative verb, ≤ 72 characters, avoid trailing punctuation.
 - **Body** (optional): wrap lines at 72 characters, describe motivation, contrast with previous behavior, and note side effects or risks.
-- **Footer** (optional): include `BREAKING CHANGE:` statements or references such as `Refs #123`.
+- **Trailers**: must be separated from the body by two blank lines. Must be properly formatted git trailers. 
 
 ## Constraints
 
