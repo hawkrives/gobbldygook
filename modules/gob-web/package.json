@@ -77,7 +77,7 @@
     "node": ">=22"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "6.7.0",
+    "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "16.3.0",
     "babel-loader": "10.0.0",
     "case-sensitive-paths-webpack-plugin": "2.4.0",
