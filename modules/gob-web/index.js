@@ -1,6 +1,6 @@
 // @flow
 
-import "typeface-fira-sans"
+import "@fontsource/fira-sans"
 import "./styles/normalize.scss"
 import "./styles/css-colors.scss"
 import "./styles/css-variables.scss"

@@ -70,7 +70,7 @@
     "stabilize": "1.0.0",
     "sto-course-related-data": "4.0.2",
     "styled-components": "4.4.1",
-    "typeface-fira-sans": "1.1.13",
+    "@fontsource/fira-sans": "^5.2.7",
     "uuid": "3.4.0"
   },
   "engines": {
