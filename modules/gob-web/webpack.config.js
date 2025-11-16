@@ -50,7 +50,7 @@ function config() {
   }
 
   const entry = {
-    [entryPointName]: ["./index.js"],
+    [entryPointName]: ["./index.tsx"],
   }
 
   if (isDevelopment) {
@@ -153,7 +153,7 @@ function config() {
   const module = {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         use: [babelLoader],
       },
@@ -163,7 +163,7 @@ function config() {
       // 	use: ['worker-loader', babelLoader],
       // },
       {
-        test: /check-student\.worker\.js$/,
+        test: /check-student\.worker\.(js|ts)$/,
         use: [
           {
             loader: "worker-loader",
@@ -173,7 +173,7 @@ function config() {
         ],
       },
       {
-        test: /load-data\.worker\.js$/,
+        test: /load-data\.worker\.(js|ts)$/,
         use: [
           {
             loader: "worker-loader",
@@ -218,6 +218,9 @@ function config() {
     devServer,
     plugins,
     module,
+    resolve: {
+      extensions: [".js", ".jsx", ".ts", ".tsx", ".json"],
+    },
   }
 }
 

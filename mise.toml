@@ -6,15 +6,15 @@ node = "24"
 "build-dev" = { dir = "{{ config_root }}/modules/gob-web", run = "node --run build-dev" }
 "build-peg" = { dir = "{{ config_root }}/modules/gob-hanson-format", run = "node --run build" }
 "bugsnag" = "curl -d 'apiKey=7e393deddaeb885f5b140b4320ecef6b' -d 'repository=https://github.com/hawkrives/gobbldygook' -d 'revision=$(git rev-parse --verify HEAD)' 'https://notify.bugsnag.com/deploy'"
-"check" = { depends = ["lint", "flow", "test", "prettier-check"], description = "Run all code quality checks" }
+"check" = { depends = ["lint", "typecheck", "test", "prettier-check"], description = "Run all code quality checks" }
 "count" = "echo $(fd -e scss | wc -l) files && echo $(fd -e scss | xargs wc -l | gsort | tail -n1) lines"
 "cover" = "./node_modules/.bin/jest --coverage && open coverage/index.html"
-"flow" = "./node_modules/.bin/flow"
 "lint" = "./node_modules/.bin/eslint --cache --report-unused-disable-directives --max-warnings=0 modules/"
 "netlify" = "mise run build && mise run bugsnag"
 "p" = "./node_modules/.bin/pretty-quick"
-"prettier-check" = "./node_modules/.bin/prettier --check '{*,.*,{.circleci,modules,config,scripts}/**/*}.{js,json,scss,yml,yaml,md}'"
-"pretty" = "./node_modules/.bin/prettier --write '{*,.*,{.circleci,modules,config,scripts}/**/*}.{js,json,scss,yml,yaml,md}'"
+"prettier-check" = "./node_modules/.bin/prettier --check '{*,.*,{.circleci,modules,config,scripts}/**/*}.{js,ts,tsx,json,scss,yml,yaml,md}'"
+"pretty" = "./node_modules/.bin/prettier --write '{*,.*,{.circleci,modules,config,scripts}/**/*}.{js,ts,tsx,json,scss,yml,yaml,md}'"
 "start" = { dir = "{{ config_root }}/modules/gob-web", run = "node --run start" }
 "test" = "./node_modules/.bin/jest"
 "test-students" = "./modules/gob-cli/test-student test/example-students"
+"typecheck" = "./node_modules/.bin/tsc --noEmit"

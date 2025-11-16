@@ -1,0 +1,86 @@
+import * as React from "react"
+import { Helmet } from "react-helmet-async"
+import { connect } from "react-redux"
+import { loadStudent } from "../../redux/students/actions/load-student"
+import { type IndividualStudentState } from "../../redux/students/reducers"
+import { Student as StudentObject } from "@gob/object-student"
+import type { Undoable } from "../../types"
+import styled from "styled-components"
+import { Card } from "../../components/card"
+
+const Container = styled.div`
+  display: grid;
+  justify-content: space-between;
+  // grid-gap: calc(var(--page-edge-padding) * (2 / 3));
+  grid-gap: var(--page-edge-padding);
+  padding-left: var(--page-edge-padding);
+  padding-right: var(--page-edge-padding);
+
+  @media all and (min-width: 900px) {
+    grid-template-columns: 280px minmax(0, 1fr) 280px;
+  }
+`
+
+const CouldNotLoadCard = styled(Card)`
+  margin: 40px auto;
+
+  max-width: 40em;
+  width: 100%;
+
+  padding: 20px;
+
+  text-align: center;
+`
+
+type Props = {
+  children: (args: { student: Undoable<StudentObject> }) => React.ReactNode // from react-router
+  loadStudent: (data: string) => unknown // redux
+  studentId?: string // react-router
+  student: IndividualStudentState | null | undefined // redux
+}
+
+type State = {}
+
+export class Student extends React.Component<Props, State> {
+  componentDidMount() {
+    if (this.props.studentId && !this.props.student) {
+      this.props.loadStudent(this.props.studentId)
+    }
+  }
+
+  render() {
+    if (!this.props.student) {
+      return (
+        <CouldNotLoadCard>
+          <h1>Could not load student</h1>
+          <p>Student {this.props.studentId} could not be loaded.</p>
+        </CouldNotLoadCard>
+      )
+    }
+
+    let { student } = this.props
+
+    let title: string =
+      student ? `${student.present.name} | Gobbldygook` : "Gobbldygook"
+
+    return (
+      <Container>
+        <Helmet>
+          <title>{title}</title>
+        </Helmet>
+
+        {this.props.children({ student })}
+      </Container>
+    )
+  }
+}
+
+const connected = connect(
+  (state, ownProps) =>
+    ownProps.studentId ?
+      { student: state.students[ownProps.studentId] }
+    : { student: undefined },
+  { loadStudent },
+)(Student)
+
+export { connected as default }

@@ -7,12 +7,26 @@
   ],
   "jest": {
     "testEnvironment": "jsdom",
+    "transform": {
+      "^.+\\.tsx?$": [
+        "ts-jest",
+        {
+          "tsconfig": {
+            "jsx": "react",
+            "esModuleInterop": true,
+            "allowSyntheticDefaultImports": true
+          }
+        }
+      ],
+      "^.+\\.jsx?$": "babel-jest"
+    },
     "collectCoverageFrom": [
-      "modules/**/*.js"
+      "modules/**/*.ts",
+      "modules/**/*.tsx"
     ],
     "coveragePathIgnorePatterns": [
       "<rootDir>/node_modules/",
-      "<rootDir>/modules/gob-hanson-format/parse-hanson-string.js"
+      "<rootDir>/modules/gob-hanson-format/parse-hanson-string.ts"
     ],
     "coverageReporters": [
       "json",
@@ -27,13 +41,24 @@
     "moduleNameMapper": {
       "^.+\\.s?css$": "<rootDir>/config/flow/css.js.flow"
     },
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.test.ts?(x)",
+      "**/?(*.)+(spec|test).ts?(x)"
+    ],
     "setupFiles": [],
     "setupFilesAfterEnv": [
       "<rootDir>/config/test-harness.js",
       "@testing-library/jest-dom"
     ],
     "testPathIgnorePatterns": [
-      "\\.support.js$",
+      "\\.support.ts$",
       "__support__"
     ]
   },
@@ -69,9 +94,16 @@
     "@babel/preset-env": "7.28.5",
     "@babel/preset-flow": "7.27.1",
     "@babel/preset-react": "7.28.5",
+    "@babel/preset-typescript": "^7.28.5",
     "@eslint/js": "9.39.1",
     "@microsoft/eslint-formatter-sarif": "3.1.0",
     "@testing-library/jest-dom": "6.9.1",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
+    "@typescript-eslint/eslint-plugin": "^8.46.4",
+    "@typescript-eslint/parser": "^8.46.4",
     "babel-jest": "29.7.0",
     "babel-plugin-styled-components": "2.1.4",
     "core-js": "3.45.0",
@@ -90,6 +122,8 @@
     "jest-environment-jsdom": "29.7.0",
     "prettier": "3.6.2",
     "pretty-quick": "4.2.2",
-    "set-blocking": "2.0.0"
+    "set-blocking": "2.0.0",
+    "ts-jest": "^29.4.5",
+    "typescript": "^5.9.3"
   }
 }
