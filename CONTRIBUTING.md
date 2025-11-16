@@ -1,31 +1,44 @@
-# Contributing
+# Contributing to Gobbldygook
 
-We're using [conventional-changelog](https://github.com/bcoe/conventional-changelog-standard/blob/master/convention.md) to automatically generate the changelogs. What that means is that there's a specified format for a commit:
+Thank you for contributing! This project uses an agents-based workflow with centralized rules to maintain consistency.
 
-    fix: stop graphite breaking when width < 0.1
+## Before You Commit
 
-    Closes #28
+**IMPORTANT**: Before committing any work, consult the **Git Commit rule** at `.agents/rules/git-commit.md`.
 
-In short,
+This rule defines:
+- Commit message format and structure
+- Type classifications (`feat`, `fix`, `docs`, `chore`, etc.)
+- Constraints on logical changes per commit
+- Best practices for clean history
 
-    <type>(<scope>): <subject>
-    <BLANK LINE>
-    <optional body>
-    <BLANK LINE>
-    <optional footer>
+## Before You Finish Your Session
 
-The subject contains succinct description of the change:
+**IMPORTANT**: Before ending your work session, consult the **Landing the Plane rule** at `.agents/rules/landing-the-plane.md`.
 
-- use the imperative, present tense: "change" not "changed" nor "changes"
-- don't capitalize first letter
-- no dot (.) at the end
+This rule defines the protocol for cleanly ending a session, including:
+- Running quality gates (linting, type checking, tests)
+- Filing issues for remaining work
+- Syncing the issue tracker
+- Verifying clean git state
+- Preparing context for the next session
 
-The body should use the imperative, present tense: "change" not "changed" nor "changes". The body should include the motivation for the change and contrast this with previous behavior.
+## Other Guidelines
 
-The footer should contain any information about **Breaking Changes** and is also the place to reference GitHub issues that this commit `Closes`. Breaking Changes should start with the word `BREAKING CHANGE:` with a space or two newlines. The rest of the commit message is then used for this.
+For additional project conventions and guidelines, consult:
+- `.agents/rules/minibeads-conventions.md` - Issue tracking conventions
+- `.agents/rules/react-components-guideline.md` - React component patterns
+- `.agents/rules/api-guideline.md` - API design guidelines
+- `.agents/rules/create-rule.md` - How to create new rules
+- `.agents/skills/` - Reusable processes for common tasks
 
-Here are our types:
+## Quick Reference
 
-- `feat`, `fix` or `perf`: will appear in the changelog.
-- Any `BREAKING CHANGE` will always appear in the changelog.
-- `docs`, `chore`, `style`, `refactor`, and `test`: non-changelog related tasks.
+- **Package manager**: npm (with workspaces in `modules/*`)
+- **Node version**: ≥22 (managed by mise)
+- **Type checking**: Flow v0.82.0
+- **Testing**: Jest
+- **Linting**: ESLint
+- **Formatting**: Prettier
+
+See `mise.toml` for available commands: `mise run --list`

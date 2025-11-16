@@ -10,7 +10,7 @@ Use this rule whenever you draft, review, or request Git commit messages so that
 ## Message format
 
 ```
-(optional scope: )<short imperative summary>
+<short imperative summary>
 
 <body explaining motivation / impact>
 
@@ -23,7 +23,7 @@ Issue: <url> (optional)
 - **Scope**: optional; indicate the subsystem or package (e.g., `api`, `frontend`, `deps`). Omit parentheses if there is no scope.
 - **Summary**: use an imperative verb, ≤ 72 characters, avoid trailing punctuation.
 - **Body** (optional): wrap lines at 72 characters, describe motivation, contrast with previous behavior, and note side effects or risks.
-- **Trailers**: must be separated from the body by one blank line. Must be properly formatted git trailers. 
+- **Trailers**: must be separated from the body by one blank line. Must be properly formatted git trailers.
 
 ## Constraints
 

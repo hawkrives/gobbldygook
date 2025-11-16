@@ -63,7 +63,7 @@
     "react-redux": "7.2.9",
     "react-select": "2.3.0",
     "react-virtualized-auto-sizer": "1.0.26",
-    "react-window": "1.8.2",
+    "react-window": "1.8.11",
     "redux": "4.2.1",
     "redux-promise": "0.6.0",
     "redux-thunk": "2.4.2",
