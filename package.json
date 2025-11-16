@@ -6,7 +6,7 @@
     "modules/*"
   ],
   "jest": {
-    "testEnvironment": "jsdom",
+    "testEnvironment": "<rootDir>/config/jsdom-environment.js",
     "collectCoverageFrom": [
       "modules/**/*.js"
     ],
