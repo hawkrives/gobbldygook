@@ -1,5 +1,5 @@
 // @flow
-import bugsnag from "bugsnag-js"
+import Bugsnag from "@bugsnag/js"
 const BUGSNAG_KEY = "7e393deddaeb885f5b140b4320ecef6b"
 
 export function isogram() {
@@ -33,6 +33,6 @@ export default function start() {
   if (process.env.NODE_ENV === "production") {
     console.log("Initializing analytics 📊")
     isogram()
-    bugsnag(BUGSNAG_KEY)
+    Bugsnag.start({ apiKey: BUGSNAG_KEY })
   }
 }
