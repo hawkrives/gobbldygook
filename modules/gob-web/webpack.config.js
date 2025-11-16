@@ -6,8 +6,7 @@ const webpack = require("webpack")
 
 const babelConfig = require("../../babel.config.js")
 
-const { DefinePlugin, LoaderOptionsPlugin, NormalModuleReplacementPlugin } =
-  webpack
+const { DefinePlugin, NormalModuleReplacementPlugin } = webpack
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const HtmlPlugin = require("@gob/webpack-plugin-html")
@@ -136,9 +135,6 @@ function config() {
       new MiniCssExtractPlugin({
         filename: isDevelopment ? "app.css" : "app.[contenthash].css",
         chunkFilename: "chunk.[name].[chunkhash].css",
-      }),
-      new LoaderOptionsPlugin({
-        minimize: true,
       }),
       new DuplicatePackageCheckerPlugin(),
     ]
