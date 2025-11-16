@@ -126,7 +126,9 @@ function config() {
     new CaseSensitivePathsPlugin(),
 
     // copy files – into the webpack {output} directory
-    new CopyWebpackPlugin([{ from: "./static/*", flatten: true }]),
+    new CopyWebpackPlugin({
+      patterns: [{ from: "./static/*", to: "[name][ext]" }],
+    }),
   ]
 
   if (isProduction) {
@@ -165,7 +167,7 @@ function config() {
         use: [
           {
             loader: "worker-loader",
-            options: { name: "worker.check-student.[hash].js" },
+            options: { filename: "worker.check-student.[hash].js" },
           },
           babelLoader,
         ],
@@ -175,7 +177,7 @@ function config() {
         use: [
           {
             loader: "worker-loader",
-            options: { name: "worker.load-data.[hash].js" },
+            options: { filename: "worker.load-data.[hash].js" },
           },
           babelLoader,
         ],
