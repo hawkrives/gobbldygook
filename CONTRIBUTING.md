@@ -7,6 +7,7 @@ Thank you for contributing! This project uses an agents-based workflow with cent
 **IMPORTANT**: Before committing any work, consult the **Git Commit rule** at `.agents/rules/git-commit.md`.
 
 This rule defines:
+
 - Commit message format and structure
 - Type classifications (`feat`, `fix`, `docs`, `chore`, etc.)
 - Constraints on logical changes per commit
@@ -17,6 +18,7 @@ This rule defines:
 **IMPORTANT**: Before ending your work session, consult the **Landing the Plane rule** at `.agents/rules/landing-the-plane.md`.
 
 This rule defines the protocol for cleanly ending a session, including:
+
 - Running quality gates (linting, type checking, tests)
 - Filing issues for remaining work
 - Syncing the issue tracker
@@ -26,6 +28,7 @@ This rule defines the protocol for cleanly ending a session, including:
 ## Other Guidelines
 
 For additional project conventions and guidelines, consult:
+
 - `.agents/rules/issue-tracking.md` - Issue tracking conventions
 - `.agents/rules/react-components-guideline.md` - React component patterns
 - `.agents/rules/api-guideline.md` - API design guidelines
@@ -40,5 +43,7 @@ For additional project conventions and guidelines, consult:
 - **Testing**: Jest
 - **Linting**: ESLint
 - **Formatting**: Prettier
+
+When running Mise, always set the environment variable `MISE_ENV=agents` to make sure that the agentic tools are installed.
 
 See `mise.toml` for available commands: `mise run --list`
