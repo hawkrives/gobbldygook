@@ -5,7 +5,6 @@ import { Card } from "../../components/card"
 import styled from "styled-components"
 import { enhanceHanson } from "@gob/hanson-format"
 import yaml from "js-yaml"
-import Component2 from "@reach/component-component"
 import stabilize from "stabilize"
 import LZString from "lz-string"
 import { Editor } from "./editor"
@@ -115,27 +114,24 @@ const Layout = styled.div`
   height: 100%;
 `
 
-export let Controller = () => (
-  <Layout>
-    <Component2
-      initialState={{ content: "", ...read() }}
-      didUpdate={({ state, prevState }) => {
-        if (state.content !== prevState.content) {
-          replace({ content: state.content })
-        }
-      }}
-      render={({ state: { content }, setState }) => {
-        return (
-          <>
-            <AreaTextEditor
-              value={content}
-              onChange={(value) => setState({ content: value })}
-            />
-            <AreaCompiledViewer value={content} />
-            <AreaInfoViewer value={content} />
-          </>
-        )
-      }}
-    />
-  </Layout>
-)
+export let Controller = () => {
+  const [content, setContent] = React.useState(() => {
+    const initial = read()
+    return initial.content || ""
+  })
+
+  React.useEffect(() => {
+    replace({ content })
+  }, [content])
+
+  return (
+    <Layout>
+      <AreaTextEditor
+        value={content}
+        onChange={(value) => setContent(value)}
+      />
+      <AreaCompiledViewer value={content} />
+      <AreaInfoViewer value={content} />
+    </Layout>
+  )
+}
