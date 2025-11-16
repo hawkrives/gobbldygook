@@ -128,10 +128,7 @@ export let Controller = () => {
 
   return (
     <Layout>
-      <AreaTextEditor
-        value={content}
-        onChange={(value) => setContent(value)}
-      />
+      <AreaTextEditor value={content} onChange={(value) => setContent(value)} />
       <AreaCompiledViewer value={content} />
       <AreaInfoViewer value={content} />
     </Layout>
