@@ -48,10 +48,10 @@ This document provides comprehensive learning resources for developers working o
 
 ### Browser APIs & Storage
 
-- **IndexedDB**: https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API
+- **IndexedDB**: <https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API>
   - Client-side database for course and area data storage
   - Asynchronous, transactional database operations
-- **Web Workers**: https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API
+- **Web Workers**: <https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API>
   - Background processing for student evaluation and data loading
   - Used in `gob-worker-*` modules
 

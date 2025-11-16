@@ -1,2 +1,3 @@
 [tools]
+rust = "1.91"
 "cargo:https://github.com/rrnewton/minibeads" = { version = "tag:v0.13.0", locked = true }
