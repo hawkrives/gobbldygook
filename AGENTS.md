@@ -34,7 +34,7 @@ Repository tasks (build, test, lint, etc.) are defined in `mise.toml`. Use `mise
 - `mise run lint` - Run ESLint
 - `mise run flow` - Run Flow type checker
 - `mise run test` - Run Jest tests
-- `mise run pretty` - Format code with Prettier
+- `mise run prettier` - Format code with Prettier
 - `mise run build` - Build the web application
 
 Run `mise tasks` to see all available tasks.

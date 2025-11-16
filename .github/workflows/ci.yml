@@ -77,7 +77,7 @@ jobs:
 
       - name: Check formatting
         run: |
-          mise run pretty
+          mise run prettier
           git diff --exit-code
 
   build:

@@ -301,8 +301,8 @@ This rule should be used in conjunction with:
 
 - **Test command**: `mise run test` or `./node_modules/.bin/jest`
 - **Lint command**: `mise run lint` or ESLint directly
-- **Flow check**: `mise run flow` or `./node_modules/.bin/flow`
-- **Prettier**: `mise run pretty` or `./node_modules/.bin/pretty-quick`
+- **Type check**: `mise run typecheck` or `./node_modules/.bin/tsc --noEmit`
+- **Prettier**: `mise run prettier`
 - **Build validation**: `mise run build` (if changes affect build process)
 - **Issue prefix**: Use `gobbldygook-` for all issue IDs in this project
 - **Branch naming**: Follow existing patterns (e.g., `feature/`, `fix/`, `chore/`)
