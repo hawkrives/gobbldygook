@@ -26,7 +26,7 @@ This rule defines the protocol for cleanly ending a session, including:
 ## Other Guidelines
 
 For additional project conventions and guidelines, consult:
-- `.agents/rules/minibeads-conventions.md` - Issue tracking conventions
+- `.agents/rules/issue-tracking.md` - Issue tracking conventions
 - `.agents/rules/react-components-guideline.md` - React component patterns
 - `.agents/rules/api-guideline.md` - API design guidelines
 - `.agents/rules/create-rule.md` - How to create new rules

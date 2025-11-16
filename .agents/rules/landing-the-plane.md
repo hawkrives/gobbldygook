@@ -293,7 +293,7 @@ Commands to start:
 ## Integration with other rules
 
 This rule should be used in conjunction with:
-- **minibeads-conventions.md**: For proper issue creation and management
+- **issue-tracking.md**: For proper issue creation and management
 - **git-commit.md**: For commit message format throughout the session
 - **code-review**: For quality validation before landing
 
