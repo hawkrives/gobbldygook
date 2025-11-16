@@ -3,6 +3,7 @@
 ## Getting Started
 
 **All Copilot agents must read `AGENTS.md` at the beginning of each session** to understand:
+
 - Available skills and when to use them
 - Repository rules and constraints
 - Task definitions in `mise.toml`
@@ -11,6 +12,7 @@
 ## Before Finishing a Task
 
 **Autonomous Copilot agents must invoke the landing-the-plane skill** before completing a task. This ensures:
+
 - All code quality checks pass
 - Work is properly tracked
 - Repository is left in a clean state
