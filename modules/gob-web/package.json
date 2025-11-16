@@ -79,10 +79,10 @@
   "devDependencies": {
     "@testing-library/jest-dom": "6.7.0",
     "@testing-library/react": "16.3.0",
-    "babel-loader": "10.0.0",
+    "babel-loader": "9.2.1",
     "case-sensitive-paths-webpack-plugin": "2.4.0",
     "clean-webpack-plugin": "4.0.0",
-    "copy-webpack-plugin": "5.1.2",
+    "copy-webpack-plugin": "12.0.2",
     "cross-env": "10.0.0",
     "css-loader": "7.1.2",
     "dart-sass": "1.25.0",
@@ -103,6 +103,6 @@
     "webpack": "5.102.1",
     "webpack-cli": "6.0.1",
     "webpack-dev-server": "5.2.2",
-    "worker-loader": "2.0.0"
+    "worker-loader": "3.0.8"
   }
 }
