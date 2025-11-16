@@ -1,6 +1,5 @@
 [tools]
 node = "24"
-"cargo:https://github.com/rrnewton/minibeads" = { version = "tag:v0.13.0", locked = true }
 
 [tasks]
 "build" = { dir = "{{ config_root }}/modules/gob-web", run = "node --run build" }
