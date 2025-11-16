@@ -2,12 +2,6 @@
 
 ## Getting Started
 
-First, install mise in order to run tasks and have the correct versions of tools. 
-
-1. `curl https://mise.run | sh`
-2. Add ~/.local/bin to your PATH and make sure `which mise` finds the executable
-3. Run `mise install --env agents` to install all tools at the correct versions. 
-
 **All Copilot agents must read `AGENTS.md` at the beginning of each session** to understand:
 
 - Available skills and when to use them
