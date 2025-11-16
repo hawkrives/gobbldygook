@@ -1,5 +1,5 @@
 [build]
-command = "curl https://mise.run | sh && mise i node && mise run netlify"
+command = "curl https://mise.run | sh && mise i && mise run netlify"
 # the directory to publish (relative to root of your repo)
 publish = "modules/gob-web/build/"
 
