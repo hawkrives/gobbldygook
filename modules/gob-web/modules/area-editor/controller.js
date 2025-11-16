@@ -115,11 +115,13 @@ const Layout = styled.div`
 `
 
 export let Controller = () => {
+  // $FlowFixMe[prop-missing] - Flow 0.82.0 doesn't have type definitions for React Hooks
   const [content, setContent] = React.useState(() => {
     const initial = read()
     return initial.content || ""
   })
 
+  // $FlowFixMe[prop-missing] - Flow 0.82.0 doesn't have type definitions for React Hooks
   React.useEffect(() => {
     replace({ content })
   }, [content])
