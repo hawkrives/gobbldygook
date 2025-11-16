@@ -16,5 +16,6 @@ node = "24"
 "pretty" = "./node_modules/.bin/prettier --write '{*,.*,{.circleci,modules,config,scripts}/**/*}.{js,ts,tsx,json,scss,yml,yaml,md}'"
 "start" = { dir = "{{ config_root }}/modules/gob-web", run = "node --run start" }
 "test" = "./node_modules/.bin/jest"
+"test:e2e" = "./node_modules/.bin/playwright test"
 "test-students" = "./modules/gob-cli/test-student test/example-students"
 "typecheck" = "./node_modules/.bin/tsc --noEmit"

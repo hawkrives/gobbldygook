@@ -20,3 +20,7 @@ node_modules/
 build*/
 coverage/
 flow-coverage*/
+
+# Playwright test artifacts
+test-results/
+playwright-report/
