@@ -6,8 +6,7 @@ const webpack = require("webpack")
 
 const babelConfig = require("../../babel.config.js")
 
-const { DefinePlugin, NormalModuleReplacementPlugin } =
-  webpack
+const { DefinePlugin, NormalModuleReplacementPlugin } = webpack
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const HtmlPlugin = require("@gob/webpack-plugin-html")
