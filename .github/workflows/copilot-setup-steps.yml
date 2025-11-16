@@ -29,11 +29,14 @@ jobs:
 
       - name: Set up mise
         run: |
-          export MISE_ENV=agents
+          # we set MISE_ENV=agents in github repo settings
           curl https://mise.run | sh
           echo "$HOME/.local/share/mise/bin" >> $GITHUB_PATH
           echo "$HOME/.local/share/mise/shims" >> $GITHUB_PATH
           mise env --dotenv >> "$GITHUB_ENV"
+
+      - name: Install Mise dependencies
+        run: mise install 
 
       - name: Install JavaScript dependencies
         run: npm ci
