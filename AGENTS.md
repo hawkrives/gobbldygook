@@ -23,7 +23,21 @@ Reference layout:
     issue-tracking.md
     react-components-guideline.md
 AGENTS.md
+mise.toml
 ```
+
+## Repository tasks
+
+Repository tasks (build, test, lint, etc.) are defined in `mise.toml`. Use `mise run <task>` to execute them. Key tasks include:
+
+- `mise run check` - Run all code quality checks (lint, flow, test, prettier-check)
+- `mise run lint` - Run ESLint
+- `mise run flow` - Run Flow type checker
+- `mise run test` - Run Jest tests
+- `mise run pretty` - Format code with Prettier
+- `mise run build` - Build the web application
+
+Run `mise tasks` to see all available tasks.
 
 ## Execution protocol
 
