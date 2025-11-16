@@ -3,7 +3,6 @@ const babelParser = require("@babel/eslint-parser")
 const tseslint = require("@typescript-eslint/eslint-plugin")
 const tsParser = require("@typescript-eslint/parser")
 const react = require("eslint-plugin-react")
-const ftFlow = require("eslint-plugin-ft-flow")
 const importPlugin = require("eslint-plugin-import")
 const prettierConfig = require("eslint-config-prettier")
 const js = require("@eslint/js")
@@ -21,11 +20,10 @@ module.exports = [
       "**/*.min.js",
       "**/parse-hanson-string.js", // Generated parser file
       "**/parse-hanson-string.ts", // Generated parser file
-      "**/flow-typed/**",
     ],
   },
 
-  // Base configuration for all JS files (legacy support)
+  // Base configuration for legacy JS files (if any remain)
   {
     files: ["**/*.js", "**/*.jsx"],
     languageOptions: {
@@ -33,11 +31,7 @@ module.exports = [
       parserOptions: {
         requireConfigFile: false,
         babelOptions: {
-          presets: [
-            "@babel/preset-react",
-            "@babel/preset-flow",
-            "@babel/preset-env",
-          ],
+          presets: ["@babel/preset-react", "@babel/preset-env"],
         },
       },
       ecmaVersion: 2021,
@@ -56,13 +50,11 @@ module.exports = [
     },
     plugins: {
       react,
-      "ft-flow": ftFlow,
       import: importPlugin,
     },
     settings: {
       react: {
         version: "16.5",
-        flowVersion: "0.81",
       },
     },
   },
@@ -75,7 +67,6 @@ module.exports = [
       parserOptions: {
         ecmaVersion: 2021,
         sourceType: "module",
-        project: "./tsconfig.json",
       },
       globals: {
         ...globals.browser,
@@ -104,6 +95,10 @@ module.exports = [
       // Allow any types for now during migration
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/ban-ts-comment": "off",
+      "@typescript-eslint/no-require-imports": "off",
+      "@typescript-eslint/no-empty-object-type": "off",
+      "@typescript-eslint/prefer-as-const": "off",
+      "@typescript-eslint/no-unused-expressions": "off",
     },
   },
 
@@ -112,15 +107,6 @@ module.exports = [
 
   // React recommended rules (flat config)
   react.configs.flat.recommended,
-
-  // Flow type rules (manual config since no flat config available) - for legacy JS files
-  {
-    files: ["**/*.js", "**/*.jsx"],
-    rules: {
-      ...ftFlow.configs.recommended.rules,
-      "ft-flow/no-types-missing-file-annotation": "off",
-    },
-  },
 
   // Custom project rules for all files
   {
@@ -206,6 +192,11 @@ module.exports = [
   // Web Worker-specific configuration
   {
     files: ["**/*.worker.{js,ts}", "**/workers/**/*.{js,ts}"],
+    languageOptions: {
+      globals: {
+        DedicatedWorkerGlobalScope: "readonly",
+      },
+    },
     rules: {
       "consistent-this": "off",
     },
