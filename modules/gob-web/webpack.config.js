@@ -6,8 +6,7 @@ const webpack = require("webpack")
 
 const babelConfig = require("../../babel.config.js")
 
-const { DefinePlugin, LoaderOptionsPlugin, NormalModuleReplacementPlugin } =
-  webpack
+const { DefinePlugin, NormalModuleReplacementPlugin } = webpack
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const HtmlPlugin = require("@gob/webpack-plugin-html")
@@ -127,7 +126,9 @@ function config() {
     new CaseSensitivePathsPlugin(),
 
     // copy files – into the webpack {output} directory
-    new CopyWebpackPlugin([{ from: "./static/*", flatten: true }]),
+    new CopyWebpackPlugin({
+      patterns: [{ from: "./static/*", to: "[name][ext]" }],
+    }),
   ]
 
   if (isProduction) {
@@ -136,9 +137,6 @@ function config() {
       new MiniCssExtractPlugin({
         filename: isDevelopment ? "app.css" : "app.[contenthash].css",
         chunkFilename: "chunk.[name].[chunkhash].css",
-      }),
-      new LoaderOptionsPlugin({
-        minimize: true,
       }),
       new DuplicatePackageCheckerPlugin(),
     ]
@@ -169,7 +167,7 @@ function config() {
         use: [
           {
             loader: "worker-loader",
-            options: { name: "worker.check-student.[hash].js" },
+            options: { filename: "worker.check-student.[hash].js" },
           },
           babelLoader,
         ],
@@ -179,7 +177,7 @@ function config() {
         use: [
           {
             loader: "worker-loader",
-            options: { name: "worker.load-data.[hash].js" },
+            options: { filename: "worker.load-data.[hash].js" },
           },
           babelLoader,
         ],
