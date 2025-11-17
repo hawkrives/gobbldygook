@@ -172,8 +172,7 @@ forEach(
   },
 )
 
-// eslint-disable-next-line no-unused-vars
-const geReqsMapping = {
+const _geReqsMapping = {
   "history of western culture": "HWC",
   "historical studies in western culture": "HWC",
   "artistic studies": "ALS-A",
@@ -210,8 +209,7 @@ const geReqsMapping = {
   ethics: "EIN",
 }
 
-// eslint-disable-next-line no-unused-vars
-const courseTypesMapping = {
+const _courseTypesMapping = {
   L: "Lab",
   D: "Discussion",
   S: "Seminar",

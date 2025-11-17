@@ -17,7 +17,7 @@ export function isogram() {
   let script = document.createElement("script")
   script.async = true
   script.src = "//www.google-analytics.com/analytics.js"
-  ;(document: any).body.appendChild(script)
+  ;(document as any).body.appendChild(script)
 }
 
 export function ga(...args: any[]) {

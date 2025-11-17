@@ -82,7 +82,7 @@ describe("Student", () => {
 describe("addFabricationToStudent", () => {
   it("adds fabrications", () => {
     let stu = new Student()
-    let addedFabrication = stu.addFabrication(({ clbid: "123" }: any))
+    let addedFabrication = stu.addFabrication({ clbid: "123" } as any)
     expect(addedFabrication.getFabrication("123")).toEqual({ clbid: "123" })
   })
 })
@@ -90,7 +90,7 @@ describe("addFabricationToStudent", () => {
 describe("removeFabricationFromStudent", () => {
   it("removes fabrications", () => {
     let stu = new Student()
-    stu = stu.addFabrication(({ clbid: "123" }: any))
+    stu = stu.addFabrication({ clbid: "123" } as any)
     stu = stu.removeFabrication("123")
     expect(stu.getFabrication("123")).not.toBeDefined()
   })

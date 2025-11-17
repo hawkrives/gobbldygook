@@ -33,6 +33,6 @@ export function expandYearToShort(
   if (year == null) {
     return "???"
   }
-  let nextYear = String(year + 1).substring(-2)
+  let nextYear = String(year + 1).slice(-2)
   return `${year}${separator}${nextYear}`
 }

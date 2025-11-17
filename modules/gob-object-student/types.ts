@@ -5,9 +5,9 @@ export type { CourseType }
 import { List } from "immutable"
 
 export type AreaQuery = {
-  type: string,
-  name: string,
-  revision: string,
+  type: string
+  name: string
+  revision: string
 }
 
 export type OverrideType = unknown
