@@ -1,7 +1,8 @@
 // @ts-check
 const babelParser = require("@babel/eslint-parser")
+const tseslint = require("@typescript-eslint/eslint-plugin")
+const tsParser = require("@typescript-eslint/parser")
 const react = require("eslint-plugin-react")
-const ftFlow = require("eslint-plugin-ft-flow")
 const importPlugin = require("eslint-plugin-import")
 const prettierConfig = require("eslint-config-prettier")
 const js = require("@eslint/js")
@@ -18,11 +19,11 @@ module.exports = [
       "**/.cache/**",
       "**/*.min.js",
       "**/parse-hanson-string.js", // Generated parser file
-      "**/flow-typed/**",
+      "**/parse-hanson-string.ts", // Generated parser file
     ],
   },
 
-  // Base configuration for all JS files
+  // Base configuration for legacy JS files (if any remain)
   {
     files: ["**/*.js", "**/*.jsx"],
     languageOptions: {
@@ -30,11 +31,7 @@ module.exports = [
       parserOptions: {
         requireConfigFile: false,
         babelOptions: {
-          presets: [
-            "@babel/preset-react",
-            "@babel/preset-flow",
-            "@babel/preset-env",
-          ],
+          presets: ["@babel/preset-react", "@babel/preset-env"],
         },
       },
       ecmaVersion: 2021,
@@ -53,14 +50,55 @@ module.exports = [
     },
     plugins: {
       react,
-      "ft-flow": ftFlow,
       import: importPlugin,
     },
     settings: {
       react: {
         version: "16.5",
-        flowVersion: "0.81",
       },
+    },
+  },
+
+  // TypeScript configuration
+  {
+    files: ["**/*.ts", "**/*.tsx"],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        ecmaVersion: 2021,
+        sourceType: "module",
+      },
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+
+        // Webpack DefinePlugin
+        VERSION: "readonly",
+        APP_BASE: "readonly",
+
+        // Test globals
+        TESTING: "readonly",
+      },
+    },
+    plugins: {
+      "@typescript-eslint": tseslint,
+      react,
+      import: importPlugin,
+    },
+    settings: {
+      react: {
+        version: "16.5",
+      },
+    },
+    rules: {
+      ...tseslint.configs.recommended.rules,
+      // Allow any types for now during migration
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/ban-ts-comment": "off",
+      "@typescript-eslint/no-require-imports": "off",
+      "@typescript-eslint/no-empty-object-type": "off",
+      "@typescript-eslint/prefer-as-const": "off",
+      "@typescript-eslint/no-unused-expressions": "off",
     },
   },
 
@@ -70,18 +108,9 @@ module.exports = [
   // React recommended rules (flat config)
   react.configs.flat.recommended,
 
-  // Flow type rules (manual config since no flat config available)
+  // Custom project rules for all files
   {
-    files: ["**/*.js", "**/*.jsx"],
-    rules: {
-      ...ftFlow.configs.recommended.rules,
-      "ft-flow/no-types-missing-file-annotation": "off",
-    },
-  },
-
-  // Custom project rules
-  {
-    files: ["**/*.js", "**/*.jsx"],
+    files: ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"],
     rules: {
       // Best practices
       "array-callback-return": "warn",
@@ -113,16 +142,7 @@ module.exports = [
       "no-underscore-dangle": "off",
       "no-unmodified-loop-condition": "error",
       "no-unused-labels": "error",
-      "no-unused-vars": [
-        "warn",
-        {
-          args: "after-used",
-          varsIgnorePattern: "^_",
-          argsIgnorePattern: "^_",
-          caughtErrorsIgnorePattern: "^_",
-          ignoreRestSiblings: true,
-        },
-      ],
+      "no-unused-vars": "off", // Disabled in favor of TypeScript's unused variable checking
       "no-useless-constructor": "error",
       "no-var": "error",
       "prefer-spread": "warn",
@@ -139,12 +159,29 @@ module.exports = [
     },
   },
 
+  // TypeScript-specific rules
+  {
+    files: ["**/*.ts", "**/*.tsx"],
+    rules: {
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          args: "after-used",
+          varsIgnorePattern: "^_",
+          argsIgnorePattern: "^_",
+          caughtErrorsIgnorePattern: "^_",
+          ignoreRestSiblings: true,
+        },
+      ],
+    },
+  },
+
   // CLI-specific configuration
   {
     files: [
-      "modules/gob-cli/**/*.js",
-      "modules/gob-hanson-format-cli/**/*.js",
-      "modules/gob-search-queries-cli/**/*.js",
+      "modules/gob-cli/**/*.{js,ts}",
+      "modules/gob-hanson-format-cli/**/*.{js,ts}",
+      "modules/gob-search-queries-cli/**/*.{js,ts}",
     ],
     rules: {
       "no-process-exit": "off",
@@ -154,7 +191,12 @@ module.exports = [
 
   // Web Worker-specific configuration
   {
-    files: ["**/*.worker.js", "**/workers/**/*.js"],
+    files: ["**/*.worker.{js,ts}", "**/workers/**/*.{js,ts}"],
+    languageOptions: {
+      globals: {
+        DedicatedWorkerGlobalScope: "readonly",
+      },
+    },
     rules: {
       "consistent-this": "off",
     },
@@ -162,7 +204,11 @@ module.exports = [
 
   // Test-specific configuration
   {
-    files: ["**/__tests__/**/*.js", "**/*.test.js", "**/*.spec.js"],
+    files: [
+      "**/__tests__/**/*.{js,ts,tsx}",
+      "**/*.test.{js,ts,tsx}",
+      "**/*.spec.{js,ts,tsx}",
+    ],
     languageOptions: {
       globals: {
         ...globals.jest,

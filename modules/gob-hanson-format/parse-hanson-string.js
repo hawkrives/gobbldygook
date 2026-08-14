@@ -422,9 +422,7 @@ function peg$parse(input, options) {
 
       if (ofList.length < count.$num) {
         throw new Error(
-          `you requested ${count.$num} items, but only gave ${
-            ofList.length
-          } options (${JSON.stringify(ofList)}).`,
+          `you requested ${count.$num} items, but only gave ${ofList.length} options (${JSON.stringify(ofList)}).`,
         )
       }
 
@@ -4308,7 +4306,5 @@ function peg$parse(input, options) {
   }
 }
 
-module.exports = {
-  SyntaxError: peg$SyntaxError,
-  parse: peg$parse,
-}
+// ES6 exports for compatibility with TypeScript
+export { peg$SyntaxError as SyntaxError, peg$parse as parse }

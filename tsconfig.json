@@ -1,0 +1,51 @@
+{
+  "compilerOptions": {
+    // Strict Type Checking Options (starting with weaker settings as suggested in issue)
+    "strict": false,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "strictFunctionTypes": false,
+    "strictBindCallApply": false,
+    "strictPropertyInitialization": false,
+    "noImplicitThis": false,
+    "alwaysStrict": false,
+
+    // Suppress additional errors during migration
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitReturns": false,
+    "noFallthroughCasesInSwitch": false,
+
+    // Additional Strict Checks (to be enabled gradually)
+    // "exactOptionalPropertyTypes": true,
+    // "noPropertyAccessFromIndexSignature": true,
+    // "noFallthroughCasesInSwitch": true,
+    // "noUncheckedIndexedAccess": true,
+
+    // Module Resolution
+    "module": "esnext",
+    "moduleResolution": "node",
+    "target": "esnext",
+    "lib": ["dom", "dom.iterable", "esnext", "webworker"],
+    "jsx": "react",
+
+    // Emit Options
+    "noEmit": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+
+    // Interop Constraints
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+
+    // Path Mapping (for module resolution)
+    "baseUrl": ".",
+    "paths": {
+      "@gob/*": ["modules/*"]
+    }
+  },
+  "include": ["modules/gob-colors/**/*.ts"],
+  "exclude": ["node_modules", "**/node_modules", "**/dist/**", "**/build/**"]
+}
