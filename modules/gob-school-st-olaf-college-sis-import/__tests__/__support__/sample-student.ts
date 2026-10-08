@@ -1,4 +1,6 @@
-const data = {
+import type { PartialStudent } from "../../convert-imported-student"
+
+const data: PartialStudent = {
   majors: ["Asian Studies", "Computer Science"],
   degrees: ["B.A."],
   matriculation: 2012,

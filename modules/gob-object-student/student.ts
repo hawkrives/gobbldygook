@@ -36,7 +36,7 @@ type StudentType = {
   settings: OrderedMap<string, unknown>
 }
 
-type Keyed<T> = OrderedMap<string, T> | Readonly<{ [key: string]: T }>
+type Keyed<T> = Map<string, T> | Readonly<{ [key: string]: T }>
 
 // What a student can be built from: a saved student from JSON, or another
 // Student. The collections may be plain arrays and objects or immutable
