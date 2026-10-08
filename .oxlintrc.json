@@ -145,9 +145,9 @@
   "overrides": [
     {
       "files": [
-        "modules/gob-cli/**/*.js",
-        "modules/gob-hanson-format-cli/**/*.js",
-        "modules/gob-search-queries-cli/**/*.js"
+        "modules/gob-cli/**/*.{js,ts}",
+        "modules/gob-hanson-format-cli/**/*.{js,ts}",
+        "modules/gob-search-queries-cli/**/*.{js,ts}"
       ],
       "rules": {
         "no-process-exit": "off"
@@ -155,10 +155,10 @@
     },
     {
       "files": [
-        "**/__tests__/**/*.js",
-        "**/*.test.js",
+        "**/__tests__/**/*.{js,ts,tsx}",
+        "**/*.test.{js,ts,tsx}",
         "**/*.spec.js",
-        "**/__mocks__/**/*.js"
+        "**/__mocks__/**/*.{js,ts}"
       ],
       "env": {
         "jest": true

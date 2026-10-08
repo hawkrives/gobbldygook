@@ -36,6 +36,9 @@ module.name_mapper.extension='woff2' -> '<PROJECT_ROOT>/config/flow/file'
 ; package's .js.flow stubs (or at config/flow/any.js.flow) until the
 ; consumers are converted too.
 module.name_mapper='^@gob/types$' -> '<PROJECT_ROOT>/modules/gob-types/index'
+module.name_mapper='^@gob/colors$' -> '<PROJECT_ROOT>/modules/gob-colors/index'
+module.name_mapper='^@gob/lib$' -> '<PROJECT_ROOT>/modules/gob-lib/index'
+module.name_mapper='^@gob/school-st-olaf-college/?$' -> '<PROJECT_ROOT>/modules/gob-school-st-olaf-college/index'
 
 suppress_type=$FlowIssue
 
