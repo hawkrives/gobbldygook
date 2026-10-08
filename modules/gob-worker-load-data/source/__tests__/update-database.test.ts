@@ -1,9 +1,6 @@
-/* eslint-env jest */
-
 jest.spyOn(global.console, "log").mockImplementation(() => jest.fn())
 jest.spyOn(global.console, "error").mockImplementation(() => jest.fn())
 jest.spyOn(global.console, "warn").mockImplementation(() => jest.fn())
-
 jest.mock("@gob/web-database")
 jest.mock("../lib-dispatch", () => {
   const NotificationMock = jest.fn(() => ({
@@ -21,179 +18,187 @@ jest.mock("../store-data", () => jest.fn())
 jest.mock("../parse-data", () => jest.fn())
 jest.mock("../cache-item-hash", () => jest.fn())
 jest.mock("@gob/lib/fetch-helpers", () => {
-  return { status: (x) => x, text: (x) => x }
+  return {
+    status: (x: unknown) => x,
+    text: (x: unknown) => x,
+  }
 })
-
-const goodFetch = jest.fn((url) => Promise.resolve(JSON.stringify({ url })))
+const goodFetch = jest.fn((url: string) =>
+  Promise.resolve(
+    JSON.stringify({
+      url,
+    }),
+  ),
+)
 const badFetch = jest.fn(() => Promise.reject(new Error("could not fetch")))
-
-global.fetch = jest.fn(() => {
+// status and text are mocked to pass the fetched value straight through, so
+// the fetch mock can resolve to plain values instead of Responses
+const fetchMock = jest.fn<Promise<unknown>, [url: string]>(() => {
   throw new Error("you must pick either goodFetch or badFetch")
 })
-
+globalThis.fetch = fetchMock as unknown as typeof fetch
 import { db } from "../db"
 import cleanPriorData from "../clean-prior-data"
 import * as dispatch from "../lib-dispatch"
 import storeData from "../store-data"
 import cacheItemHash from "../cache-item-hash"
 import updateDatabase from "../update-database"
-
 beforeEach(async () => {
   await db.__clear()
   goodFetch.mockClear()
   badFetch.mockClear()
-  cleanPriorData.mockClear()
-  dispatch.quotaExceededError.mockClear()
-  storeData.mockClear()
-  cacheItemHash.mockClear()
+  jest.mocked(cleanPriorData).mockClear()
+  jest.mocked(dispatch.quotaExceededError).mockClear()
+  jest.mocked(storeData).mockClear()
+  jest.mocked(cacheItemHash).mockClear()
 })
-
 describe("updateDatabase", () => {
   test("calls fetch with an url", async () => {
-    global.fetch.mockImplementationOnce(goodFetch)
+    fetchMock.mockImplementationOnce(goodFetch)
     await updateDatabase(
       "courses",
       "http://unique.com/",
-      dispatch.Notification(),
+      new dispatch.Notification("courses"),
       {
+        type: "json",
         path: "folder/file.json",
         hash: "badidea",
       },
     )
-    expect(global.fetch).toHaveBeenLastCalledWith(
+    expect(fetchMock).toHaveBeenLastCalledWith(
       "http://unique.com//folder/file.json?v=badidea",
     )
   })
-
   describe("calls an internal callback", () => {
     test("the onFailure callback if fetch rejects", async () => {
-      global.fetch.mockImplementationOnce(badFetch)
+      fetchMock.mockImplementationOnce(badFetch)
       const result = await updateDatabase(
         "courses",
         "http://i.am.an.url/",
-        dispatch.Notification(),
-        { path: "terms/20161.json", hash: "deadbeef" },
+        new dispatch.Notification("courses"),
+        {
+          type: "json",
+          path: "terms/20161.json",
+          hash: "deadbeef",
+        },
       )
-
-      expect(global.fetch).toHaveBeenCalledTimes(1)
+      expect(fetchMock).toHaveBeenCalledTimes(1)
       expect(result).toBe(false)
     })
-
     test("the nextStep callback if fetch resolves", async () => {
-      global.fetch.mockImplementationOnce(goodFetch)
+      fetchMock.mockImplementationOnce(goodFetch)
       const result = await updateDatabase(
         "courses",
         "http://i.am.an.url/",
-        dispatch.Notification(),
-        { path: "terms/20161.json", hash: "deadbeef" },
+        new dispatch.Notification("courses"),
+        {
+          type: "json",
+          path: "terms/20161.json",
+          hash: "deadbeef",
+        },
       )
-
-      expect(global.fetch).toHaveBeenCalledTimes(1)
+      expect(fetchMock).toHaveBeenCalledTimes(1)
       expect(result).toBe(true)
     })
   })
-
   describe("increments the notification", () => {
     test("even if the fetch works", async () => {
-      global.fetch.mockImplementationOnce(goodFetch)
-      const n = dispatch.Notification()
+      fetchMock.mockImplementationOnce(goodFetch)
+      const n = new dispatch.Notification("courses")
       await updateDatabase("courses", "http://i.am.an.url/", n, {
+        type: "json",
         path: "terms/20161.json",
         hash: "deadbeef",
       })
       expect(n.increment).toHaveBeenCalledTimes(1)
     })
-
     test("even if the fetch fails", async () => {
-      global.fetch.mockImplementationOnce(badFetch)
-      const n = dispatch.Notification()
+      fetchMock.mockImplementationOnce(badFetch)
+      const n = new dispatch.Notification("courses")
       await updateDatabase("courses", "http://i.am.an.url/", n, {
+        type: "json",
         path: "terms/20161.json",
         hash: "deadbeef",
       })
       expect(n.increment).toHaveBeenCalledTimes(1)
     })
   })
-
   test("calls a sequence of functions", async () => {
-    global.fetch.mockImplementationOnce(goodFetch)
-
+    fetchMock.mockImplementationOnce(goodFetch)
     await updateDatabase(
       "courses",
       "http://i.am.an.url/",
-      dispatch.Notification(),
+      new dispatch.Notification("courses"),
       {
+        type: "json",
         path: "terms/20161.json",
         hash: "deadbeef",
       },
     )
-
     expect(cleanPriorData).toHaveBeenCalledTimes(1)
     expect(storeData).toHaveBeenCalledTimes(1)
     expect(cacheItemHash).toHaveBeenCalledTimes(1)
   })
-
   test("aborts the sequence if one rejects", async () => {
-    global.fetch.mockImplementationOnce(goodFetch)
-    cleanPriorData.mockImplementationOnce(() =>
-      Promise.reject(new Error("problem")),
-    )
+    fetchMock.mockImplementationOnce(goodFetch)
+    jest
+      .mocked(cleanPriorData)
+      .mockImplementationOnce(() => Promise.reject(new Error("problem")))
     expect.assertions(3)
-
     await updateDatabase(
       "courses",
       "http://i.am.an.url/",
-      dispatch.Notification(),
+      new dispatch.Notification("courses"),
       {
+        type: "json",
         path: "terms/20161.json",
         hash: "deadbeef",
       },
     )
-
     expect(cleanPriorData).toHaveBeenCalledTimes(1)
     expect(storeData).not.toHaveBeenCalled()
     expect(cacheItemHash).not.toHaveBeenCalled()
   })
-
   describe("returns", () => {
     test("false if the fetch fails", async () => {
-      global.fetch.mockImplementationOnce(badFetch)
+      fetchMock.mockImplementationOnce(badFetch)
       const value = await updateDatabase(
         "courses",
         "http://i.am.an.url/",
-        dispatch.Notification(),
+        new dispatch.Notification("courses"),
         {
+          type: "json",
           path: "terms/20161.json",
           hash: "deadbeef",
         },
       )
       expect(value).toBe(false)
     })
-
     test("false if any step fails", async () => {
-      global.fetch.mockImplementationOnce(goodFetch)
-      storeData.mockImplementationOnce(() =>
-        Promise.reject(new Error("problem")),
-      )
+      fetchMock.mockImplementationOnce(goodFetch)
+      jest
+        .mocked(storeData)
+        .mockImplementationOnce(() => Promise.reject(new Error("problem")))
       const value = await updateDatabase(
         "courses",
         "http://i.am.an.url/",
-        dispatch.Notification(),
+        new dispatch.Notification("courses"),
         {
+          type: "json",
           path: "terms/20161.json",
           hash: "deadbeef",
         },
       )
       expect(value).toBe(false)
     })
-
     test("true if no steps fail", async () => {
-      global.fetch.mockImplementationOnce(goodFetch)
+      fetchMock.mockImplementationOnce(goodFetch)
       const value = await updateDatabase(
         "courses",
         "http://i.am.an.url/",
-        dispatch.Notification(),
+        new dispatch.Notification("courses"),
         {
+          type: "json",
           path: "terms/20161.json",
           hash: "deadbeef",
         },

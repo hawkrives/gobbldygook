@@ -52,14 +52,20 @@ declare module "treo" {
     // the names of this store's indexes
     indexes: Array<string>
     index(name: string): Index
-    put(key: Key, value?: unknown): Promise<Key>
-    add(key: Key, value?: unknown): Promise<Key>
+    // A store with a key path takes just the value; otherwise give the key.
+    put(value: object): Promise<Key>
+    put(key: Key, value: unknown): Promise<Key>
+    add(value: object): Promise<Key>
+    add(key: Key, value: unknown): Promise<Key>
     get<T = unknown>(key: Key): Promise<T | undefined>
     del(key: Key): Promise<void>
     count(range?: Range): Promise<number>
     clear(): Promise<void>
-    // Puts each value under its key, or deletes the key when it's null.
-    batch(ops: Readonly<Record<string, unknown>>): Promise<void>
+    // Puts each value under its key, or deletes the key when it's null. A
+    // store with a key path also takes a list of values to put.
+    batch(
+      ops: Readonly<Record<string, unknown>> | ReadonlyArray<object>,
+    ): Promise<void>
     getAll<T = unknown>(range?: Range): Promise<Array<T>>
     cursor(options: CursorOptions): Promise<void>
   }
