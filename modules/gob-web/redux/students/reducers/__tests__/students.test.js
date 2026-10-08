@@ -5,6 +5,7 @@ import { INIT_STUDENT, DESTROY_STUDENT } from "../../constants"
 import { CHANGE_STUDENT } from "../../actions/change"
 
 import { undoableReducer, reducer } from "../student"
+import { reducer as studentsReducer } from "../index"
 import { ActionCreators } from "redux-undo"
 const { undo, redo } = ActionCreators
 
@@ -22,20 +23,22 @@ describe("students reducer", () => {
     expect(actual).not.toBe(initialState)
   })
 
-  it.skip("handles DESTROY_STUDENT", () => {
-    // TODO: This needs to test the student-wrapper reducer
-    let student = { id: "xyz" }
-    let initialState = student
+  it("handles DESTROY_STUDENT", () => {
+    let xyz = undoableReducer(undefined, {
+      type: INIT_STUDENT,
+      payload: { id: "xyz" },
+    })
+    let abc = undoableReducer(undefined, {
+      type: INIT_STUDENT,
+      payload: { id: "abc" },
+    })
+    let initialState = { xyz, abc }
 
-    let action = {
-      type: DESTROY_STUDENT,
-      payload: { studentId: student.id },
-    }
+    let action = { type: DESTROY_STUDENT, payload: { id: "xyz" } }
 
-    let expected = {}
-    let actual = reducer(initialState, action)
+    let actual = studentsReducer(initialState, action)
 
-    expect(actual).toEqual(expected)
+    expect(actual).toEqual({ abc })
     expect(actual).not.toBe(initialState)
   })
 })

@@ -348,18 +348,22 @@ describe("changeStudentAdvisor", () => {
   })
 })
 
-xdescribe("changeStudentCreditsNeeded", () => {
+describe("changeStudentCreditsNeeded", () => {
   it(`changes the student's number of credits needed`, () => {
     let initial = new Student()
-    // $FlowFixMe once we have a new way of doing credits
-    let actual = initial.setCreditsNeeded(initial, 130)
+    let actual = initial.setCreditsNeeded(130)
     expect(actual.creditsNeeded).toBeDefined()
     expect(actual.creditsNeeded).toBe(130)
   })
 
+  it("parses string values", () => {
+    let initial = new Student()
+    let actual = initial.setCreditsNeeded("33")
+    expect(actual.creditsNeeded).toBe(33)
+  })
+
   it("returns a new object", () => {
     let initial = new Student()
-    // $FlowFixMe once we have a new way of doing credits
     let final = initial.setCreditsNeeded(0)
     expect(final).not.toBe(initial)
   })

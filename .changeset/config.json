@@ -1,0 +1,12 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@4.0.1/schema.json",
+  "baseBranch": "trunk",
+  "access": "restricted",
+  "format": "auto",
+  "changelog": "@changesets/cli/changelog",
+  "commit": false,
+  "ignore": [],
+  "fixed": [["@gob/*", "!@gob/webpack-plugin-html"]],
+  "linked": [],
+  "updateInternalDependencies": "patch"
+}

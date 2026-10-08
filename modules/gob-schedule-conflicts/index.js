@@ -6,16 +6,17 @@ export function removeColon(time: string): string {
   return time.replace(/:/, "")
 }
 
-function checkOfferingForTimeConflict(main: Offering, alternate: Offering) {
-  let { start: start1, end: end1 } = main
-  let { start: start2, end: end2 } = alternate
+function toNumber(time: string): number {
+  return parseInt(removeColon(time), 10)
+}
 
-  // removing the colon allows us to sort the times as strings
-  // ie.,
-  start1 = removeColon(start1)
-  start2 = removeColon(start2)
-  end1 = removeColon(end1)
-  end2 = removeColon(end2)
+function checkOfferingForTimeConflict(main: Offering, alternate: Offering) {
+  // removing the colon turns "9:05" into 905, which lets us compare the
+  // times as numbers. (Comparing them as strings would put "905" after "1000".)
+  const start1 = toNumber(main.start)
+  const start2 = toNumber(alternate.start)
+  const end1 = toNumber(main.end)
+  const end2 = toNumber(alternate.end)
 
   // const altStartsAfterMain      = start2 >= start1
   const altStartsBeforeMainEnds = start2 <= end1
