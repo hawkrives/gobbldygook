@@ -12,7 +12,17 @@ export default defineConfig({
   forbidOnly: isCI,
   retries: isCI ? 2 : 0,
   workers: isCI ? 2 : undefined,
-  reporter: isCI ? [["github"], ["html", { open: "never" }]] : "list",
+  reporter: [
+    ...(isCI ? [["github"], ["html", { open: "never" }]] : [["list"]]),
+    [
+      "@flakiness/playwright",
+      {
+        flakinessProject: "gobbldygook/gobbldygook",
+        title: "Playwright",
+        outputFolder: "flakiness-report/playwright",
+      },
+    ],
+  ],
   use: {
     baseURL: `http://localhost:${port}`,
     trace: "on-first-retry",
