@@ -29,8 +29,6 @@ export function logError(
   ...args: any[]
 ) {
   if (!global.TESTING) console.error(error, ...args)
-  // istanbul ignore if
-  if (global.Bugsnag) global.Bugsnag.notifyException(error)
   return { type: LOG_ERROR, payload: { id, error, args } }
 }
 
