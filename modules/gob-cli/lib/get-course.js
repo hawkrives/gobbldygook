@@ -5,7 +5,7 @@ import type { Course as CourseType, Result } from "@gob/types"
 import { List } from "immutable"
 
 const Keyv = require("keyv")
-const KeyvFile = require("keyv-file")
+const { KeyvFile } = require("keyv-file")
 
 const keyv = new Keyv({
   store: new KeyvFile(),

@@ -1,0 +1,5 @@
+// @flow
+
+// Stand-in for modules that have been converted to TypeScript. Flow cannot
+// read .ts files, so still-Flow code sees converted modules as `any`.
+declare module.exports: any

@@ -1,0 +1,27 @@
+{
+  // Strict TypeScript 7 config for the files converted from Flow so far.
+  // Babel does the transpiling; `tsc` only typechecks (`mise run typecheck`).
+  "compilerOptions": {
+    "target": "es2023",
+    "lib": ["es2023", "dom", "dom.iterable"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "noEmit": true,
+
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "erasableSyntaxOnly": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "types": ["node", "jest"]
+  },
+  "include": ["modules/**/*.ts", "modules/**/*.tsx", "config/types/**/*.d.ts"],
+  "exclude": ["**/node_modules", "**/build"]
+}

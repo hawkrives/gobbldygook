@@ -1,7 +1,31 @@
+// Compiles for the current Node instead of browsers: used by Jest and by the
+// command-line tools.
+const nodeConfig = {
+  presets: [
+    [
+      "@babel/preset-env",
+      {
+        targets: { node: "current" },
+        modules: "commonjs",
+        useBuiltIns: "usage",
+        corejs: 3,
+      },
+    ],
+  ],
+  plugins: [
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        regenerator: false,
+        useESModules: false,
+      },
+    ],
+  ],
+}
+
 module.exports = {
   presets: [
     "@babel/preset-react",
-    "@babel/preset-flow",
     [
       "@babel/preset-env",
       {
@@ -23,6 +47,15 @@ module.exports = {
       },
     ],
   ],
+  // Flow and TypeScript coexist while the codebase is converted package by
+  // package: .js files are still Flow, .ts/.tsx files are TypeScript.
+  overrides: [
+    { test: /\.jsx?$/, presets: ["@babel/preset-flow"] },
+    {
+      test: /\.tsx?$/,
+      presets: [["@babel/preset-typescript", { allowDeclareFields: true }]],
+    },
+  ],
   plugins: [
     [
       "@babel/plugin-transform-runtime",
@@ -37,27 +70,8 @@ module.exports = {
     // "babel-plugin-lodash",
   ],
   env: {
-    test: {
-      presets: [
-        [
-          "@babel/preset-env",
-          {
-            targets: { node: "current" },
-            modules: "commonjs",
-            useBuiltIns: "usage",
-            corejs: 3,
-          },
-        ],
-      ],
-      plugins: [
-        [
-          "@babel/plugin-transform-runtime",
-          {
-            regenerator: false,
-            useESModules: false,
-          },
-        ],
-      ],
-    },
+    test: nodeConfig,
+    // The command-line tools in gob-cli load the source through @babel/register.
+    node: nodeConfig,
   },
 }
