@@ -95,7 +95,26 @@ describe("qualifiers can use boolean logic", () => {
 })
 
 describe("nested qualifiers", () => {
-  xit("value may rely on a nested qualifier", () => {})
+  it("value may rely on a nested qualifier", () => {
+    expect(
+      parseQualifier("{ year = max(year) from courses where {gereqs = WRI} }"),
+    ).toEqual({
+      $type: "qualification",
+      $key: "year",
+      $operator: "$eq",
+      $value: {
+        $type: "function",
+        $name: "max",
+        $prop: "year",
+        $where: {
+          $type: "qualification",
+          $key: "gereqs",
+          $operator: "$eq",
+          $value: "WRI",
+        },
+      },
+    })
+  })
 
   it("function may optionally include a space between the name and the paren", () => {
     const withSpace = parseQualifier(

@@ -19,14 +19,27 @@ describe("computeReference", () => {
     expect(actual.computedResult).toBe(true)
   })
 
-  xit("returns the list of matches, if present", () => {
+  it("returns the list of matches, if present", () => {
+    const match = { department: ["CSCI"], number: 121 }
     const expr = { $requirement: "Req Name" }
     const ctx = {
-      "Req Name": { computed: true, matches: ["Match"], result: "" },
+      "Req Name": {
+        computed: true,
+        result: { $type: "course", $course: match, _result: true },
+      },
     }
     expect(computeReference({ expr, ctx })).toEqual({
       computedResult: true,
-      matches: ["Match"],
+      matches: [match],
+    })
+  })
+
+  it("returns null matches for message-only requirements", () => {
+    const expr = { $requirement: "Req Name" }
+    const ctx = { "Req Name": { computed: false, message: "Ask" } }
+    expect(computeReference({ expr, ctx })).toEqual({
+      computedResult: false,
+      matches: null,
     })
   })
 
