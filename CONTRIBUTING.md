@@ -41,8 +41,8 @@ For additional project conventions and guidelines, consult:
 - **Node version**: ≥22 (managed by mise)
 - **Type checking**: Flow v0.82.0
 - **Testing**: Jest
-- **Linting**: ESLint
-- **Formatting**: Prettier
+- **Linting**: oxlint (skips files that still use Flow)
+- **Formatting**: oxfmt (skips files that still use Flow)
 
 When running Mise, always set the environment variable `MISE_ENV=agents` to make sure that the agentic tools are installed.
 

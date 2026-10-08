@@ -40,10 +40,10 @@ This document provides comprehensive learning resources for developers working o
 - **Jest**: https://jestjs.io/
   - Unit testing framework with built-in assertion library
   - Mocking, coverage reporting, snapshot testing
-- **ESLint**: https://eslint.org/
+- **oxlint**: https://oxc.rs/docs/guide/usage/linter
   - Code quality and consistency enforcement
   - React-specific rules, Flow integration
-- **Prettier**: https://prettier.io/
+- **oxfmt**: https://oxc.rs/docs/guide/usage/formatter
   - Automated code formatting for consistency
 
 ### Browser APIs & Storage

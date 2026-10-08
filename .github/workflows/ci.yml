@@ -41,7 +41,7 @@ jobs:
       #   uses: coverallsapp/github-action@v2
 
   lint:
-    name: ESLint
+    name: Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
@@ -50,23 +50,21 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run ESLint
+      - name: Run oxlint
         run: mise run lint
 
-      - name: Run ESLint
-        env:
-          SARIF_ESLINT_IGNORE_SUPPRESSED: "true"
-        run: mise run lint -- --format @microsoft/eslint-formatter-sarif --output-file eslint-results.sarif
+      - name: Run oxlint for code scanning
+        run: ./node_modules/.bin/oxlint --format sarif modules/ > oxlint-results.sarif
         continue-on-error: true
 
       - name: Upload analysis results to GitHub
         uses: github/codeql-action/upload-sarif@f94c9befffa4412c356fb5463a959ab7821dd57e # v3
         with:
-          sarif_file: eslint-results.sarif
+          sarif_file: oxlint-results.sarif
           wait-for-processing: true
 
   format:
-    name: Prettier
+    name: Format
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
@@ -76,9 +74,7 @@ jobs:
         run: npm ci
 
       - name: Check formatting
-        run: |
-          mise run pretty
-          git diff --exit-code
+        run: mise run format-check
 
   build:
     name: Build
