@@ -11,7 +11,8 @@
   "dependencies": {
     "@gob/hanson-format": "^3.0.0-rc.2",
     "get-stdin": "^9.0.0",
+    "graceful-fs": "^4.2.11",
     "js-yaml": "^3.14.0",
-    "lodash": "^4.17.21"
+    "stabilize": "^1.0.0"
   }
 }
