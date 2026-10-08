@@ -1,263 +1,65 @@
 # Skill: Flow to TypeScript Conversion
 
 ## Purpose
-Guide agents through converting JavaScript files with Flow type annotations to TypeScript using the `flow-to-ts` tool, ensuring strict type safety and compliance with TypeScript's strict-type-checked and stylistic-type-checked linting rules.
+Convert one workspace package (or one gob-web chunk) from Flow to strict TypeScript 7, in the order listed under "Conversion order" below, while the rest of the repo stays Flow.
 
 ## Trigger conditions
 - User requests conversion from Flow to TypeScript
 - Task involves migrating Flow-typed JavaScript code to TypeScript
-- Need to convert `.js` or `.jsx` files with Flow annotations to `.ts` or `.tsx`
+- Need to convert `.js` files with `// @flow` to `.ts` or `.tsx`
 
-## Capability boundaries
-- Can guide the conversion process using flow-to-ts
-- Can provide post-conversion cleanup and validation steps
-- Cannot handle all edge cases automatically (some manual fixes will be required)
-- Requires the flow-to-ts tool to be installed
+## How the mixed Flow/TypeScript setup works
+- **Babel** (`babel.config.js`) compiles `.js` with `@babel/preset-flow` and `.ts`/`.tsx` with `@babel/preset-typescript` through `overrides`. Webpack, Jest and the CLIs (`modules/gob-cli/lib/init.js`, which uses `@babel/register`) all go through it.
+- **TypeScript** (`tsconfig.json`) only typechecks (`noEmit`). It includes every `.ts`/`.tsx` file under `modules/` plus `config/types/*.d.ts`. Run it with `mise run typecheck`. Strict mode is on, plus `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`, `noImplicitOverride`, `verbatimModuleSyntax` and `erasableSyntaxOnly`. Never loosen these to get a file through.
+- **Flow** can't read `.ts`. Still-Flow code reaches converted code through stubs:
+  - For a converted package imported by name: keep the old Flow source as `index.js.flow` (and its other files as `*.js.flow`), and add a `module.name_mapper` line in `.flowconfig` pointing the package name at that stub, like the existing `@gob/types` entry. If the Flow types are not worth keeping, map it to `config/flow/any` instead.
+  - For a converted file imported by relative path: leave a sibling `foo.js.flow` next to `foo.ts`, either with the old Flow signatures or with `declare module.exports: any`.
+  - Delete stubs once nothing Flow imports them anymore.
 
 ## Execution steps
 
-1. **Verify prerequisites**
-   - Confirm `flow-to-ts` is installed: `yarn global add @khanacademy/flow-to-ts` or `npm install -g @khanacademy/flow-to-ts`
-   - Verify source files contain Flow annotations (e.g., `// @flow` comment)
-   - Check TypeScript compiler is available in the project
-
-2. **Prepare for conversion**
-   - Create a backup of files to be converted
-   - Review the file(s) for complex Flow types that may need manual attention:
-     - Utility types like `$Keys`, `$Values`, `$ReadOnly`
-     - Exact object types (`{| ... |}`)
-     - Flow-specific features like `%checks`
-   - Note any custom type definitions or declarations
-
-3. **Run flow-to-ts conversion**
-   
-   Basic usage:
+1. **Check the order.** Convert a package only after everything it imports is TypeScript. The plan lists the waves (see "References").
+2. **Run flow-to-ts** on the package's `@flow` files:
    ```bash
-   flow-to-ts --write --prettier [file-patterns]
+   npx @khanacademy/flow-to-ts --write --delete-source --inline-utility-types <files>
    ```
-   
-   Recommended options:
-   ```bash
-   flow-to-ts \
-     --write \
-     --prettier \
-     --single-quote \
-     --trailing-comma all \
-     --inline-utility-types \
-     [file-patterns]
-   ```
-   
-   - `--write`: Write output to disk (creates `.ts`/`.tsx` files)
-   - `--prettier`: Format output with prettier
-   - `--single-quote`: Use single quotes (matches most JS conventions)
-   - `--trailing-comma all`: Add trailing commas
-   - `--inline-utility-types`: Inline utility types when possible
-   - `--delete-source`: (Optional) Remove original `.js` files after conversion
-
-4. **Review and replace `any` types appropriately**
-   
-   The flow-to-ts tool downgrades to `any` when exact translation isn't possible. For strict type safety, **review and replace `any` types appropriately**:
-   
-   ```bash
-   # Search for any usages
-   grep -r ": any" --include="*.ts" --include="*.tsx"
-   
-   # Manual review required - determine if:
-   # - Can be a specific type
-   # - Should be `unknown` (requires type guards)
-   # - Should be a generic type parameter
-   ```
-   
-   **Important**: Do NOT blindly replace all `any` with `unknown`. Review each case:
-   - Function parameters that accept anything → `unknown`
-   - Return types that could be anything → `unknown`
-   - Cases where the actual type is known → use the specific type
-   - Generic contexts → consider type parameters
-
-5. **Enable TypeScript strict mode**
-   
-   Update or create `tsconfig.json`:
-   ```json
-   {
-     "compilerOptions": {
-       "strict": true,
-       "noImplicitAny": true,
-       "strictNullChecks": true,
-       "strictFunctionTypes": true,
-       "strictBindCallApply": true,
-       "strictPropertyInitialization": true,
-       "noImplicitThis": true,
-       "alwaysStrict": true,
-       "exactOptionalPropertyTypes": true,
-       "noPropertyAccessFromIndexSignature": true,
-       "noFallthroughCasesInSwitch": true,
-       "noUncheckedIndexedAccess": true,
-       "noUncheckedSideEffectImports": true,
-       "verbatimModuleSyntax": true,
-       "erasableSyntaxOnly": true,
-       "allowImportingTsExtensions": true,
-       "rewriteRelativeImportExtensions": true,
-       "skipLibCheck": true,
-       "isolatedModules": true,
-       "module": "nodenext",
-       "moduleResolution": "nodenext",
-       "target": "esnext"
-     }
-   }
-   ```
-
-6. **Configure TypeScript ESLint with strict-type-checked and stylistic-type-checked**
-   
-   Install dependencies (requires ESLint v9+ and @typescript-eslint v8+):
-   ```bash
-   npm install --save-dev eslint@^9.0.0 @typescript-eslint/parser@^8.0.0 @typescript-eslint/eslint-plugin@^8.0.0
-   ```
-   
-   Update `.eslintrc` (or equivalent):
-   ```json
-   {
-     "parser": "@typescript-eslint/parser",
-     "parserOptions": {
-       "project": true,
-       "tsconfigRootDir": "."
-     },
-     "plugins": ["@typescript-eslint"],
-     "extends": [
-       "eslint:recommended",
-       "plugin:@typescript-eslint/strict-type-checked",
-       "plugin:@typescript-eslint/stylistic-type-checked"
-     ]
-   }
-   ```
-   
-   Key rules from strict-type-checked and stylistic-type-checked:
-   - All rules from recommended-type-checked, plus:
-   - `@typescript-eslint/no-confusing-void-expression`: error
-   - `@typescript-eslint/no-meaningless-void-operator`: error
-   - `@typescript-eslint/no-unnecessary-boolean-literal-compare`: error
-   - `@typescript-eslint/no-unnecessary-condition`: error
-   - `@typescript-eslint/prefer-nullish-coalescing`: error
-   - `@typescript-eslint/prefer-optional-chain`: error
-   - `@typescript-eslint/prefer-readonly`: error
-   - `@typescript-eslint/prefer-string-starts-ends-with`: error
-
-7. **Fix common conversion issues**
-   
-   **Flow exact objects → TypeScript:**
-   ```typescript
-   // Flow: {| name: string, age: number |}
-   // TypeScript: { name: string; age: number }
-   // Note: TypeScript has no exact equivalent, consider using:
-   type Person = { name: string; age: number };
-   ```
-   
-   **Flow utility types → TypeScript:**
-   ```typescript
-   // Flow: $Keys<T> → TypeScript: keyof T
-   // Flow: $Values<T> → TypeScript: T[keyof T]
-   // Flow: $ReadOnly<T> → TypeScript: Readonly<T>
-   // Flow: $Shape<T> → TypeScript: Partial<T>
-   // Flow: $Diff<T, U> → TypeScript: Omit<T, keyof U>
-   ```
-   
-   **React synthetic events:**
-   ```typescript
-   // Flow: SyntheticEvent → TypeScript: React.SyntheticEvent
-   // Flow: SyntheticMouseEvent → TypeScript: React.MouseEvent
-   // Flow: SyntheticKeyboardEvent → TypeScript: React.KeyboardEvent
-   ```
-   
-   **Null/undefined handling:**
-   ```typescript
-   // With strictNullChecks enabled, be explicit:
-   function getValue(): string | null { }
-   function getName(): string | undefined { }
-   ```
-
-8. **Validate the conversion**
-   
-   Run TypeScript compiler:
-   ```bash
-   tsc --noEmit
-   ```
-   
-   Run ESLint with type checking:
-   ```bash
-   eslint . --ext .ts,.tsx
-   ```
-   
-   Address errors in order of priority:
-   1. Type errors (tsc)
-   2. Unsafe type operations (eslint)
-   3. Style issues (eslint)
-
-9. **Manual review checklist**
-   
-   After automated conversion, manually review:
-   - [ ] All `any` types replaced with `unknown` or specific types
-   - [ ] React component props properly typed
-   - [ ] Event handlers have correct types
-   - [ ] Async functions return `Promise<T>`
-   - [ ] No unsafe type assertions (`as any`)
-   - [ ] Generic types properly constrained
-   - [ ] Union types use discriminated unions where appropriate
-   - [ ] Optional chaining (`?.`) used instead of null checks where appropriate
-   - [ ] Nullish coalescing (`??`) used appropriately
+   It crashes on Flow's `this` type, silently drops exactness (`{| |}`) and variance (`+prop`), and turns `Object`, `Function` and `*` into `any`. Convert those files by hand.
+3. **Convert the package's non-Flow `.js` files and tests** too (rename them and add types).
+4. **Point `main` in the package's `package.json` at `index.ts`.** Webpack reads `main` literally.
+5. **Add Flow stubs** for whatever still-Flow code imports (see above), then run `mise run flow`.
+6. **Fix every strict error properly**:
+   - Replace each `any` with a real type, a type parameter, or `unknown` plus narrowing. No `as any`, `@ts-ignore` or `@ts-expect-error` without a one-line reason.
+   - Read-only exact objects (`{| +a: T |}`) become `Readonly<{ a: T }>` or `readonly` fields.
+   - `mixed` becomes `unknown`; `$Keys<T>` becomes `keyof T`; `$ReadOnlyArray<T>` becomes `ReadonlyArray<T>`; `$Shape<T>` becomes `Partial<T>`.
+   - Type-only exports and imports use `export type` / `import type` (`verbatimModuleSyntax` requires it).
+   - No enums, namespaces or constructor parameter properties (`erasableSyntaxOnly`); the code will later run under Node's type stripping.
+   - Class components need `override` on lifecycle methods. Use `declare` for fields Babel shouldn't initialize.
+   - React events: `SyntheticEvent` becomes `React.SyntheticEvent`, `SyntheticMouseEvent` becomes `React.MouseEvent`, and so on.
+   - Untyped third-party modules get a small declaration in `config/types/` or an `@types/*` dev dependency that matches the installed major version.
+7. **Delete `flow-typed/npm` stubs** that nothing else uses anymore.
+8. **Validate:** `mise run typecheck`, `mise run flow`, `mise run test`, `mise run lint`, `mise run format`, `mise run build`, plus `mise run e2e` if gob-web loads the package. Files were unlinted and unformatted while they were Flow, so expect oxlint and oxfmt fixes on the first pass.
 
 ## Output format
-
-When performing a Flow to TypeScript conversion, deliver:
-
-- **Conversion summary**: Number of files converted, any warnings from flow-to-ts
-- **Type replacement report**: List of `any` types replaced with `unknown` or specific types
-- **Validation results**: 
-  - TypeScript compilation status
-  - ESLint errors/warnings count
-  - Any remaining manual fixes needed
-- **Updated configuration files**: `tsconfig.json`, `.eslintrc` changes
-- **Migration notes**: Document any breaking changes or behavioral differences
-
-## Best practices
-
-- **Incremental conversion**: Convert files in logical groups (by feature or module)
-- **Test coverage**: Run tests after each conversion batch
-- **Type narrowing**: Use type guards instead of type assertions where possible
-- **Avoid type assertions**: Prefer proper typing over `as` casts
-- **Document unknowns**: Add comments explaining why `unknown` is used in specific cases
-- **Preserve semantics**: Ensure TypeScript version behaves identically to Flow version
+- Files converted, and any flow-to-ts failures that were converted by hand
+- Every remaining `any` or suppression, with its reason
+- Results of the validation commands
+- Flow stubs added or removed
 
 ## Anti-patterns to avoid
+- Turning off a strict flag, or excluding files from `tsconfig.json`, to get green
+- Converting a package before the packages it imports
+- Blindly replacing `any` with `unknown`, or adding assertions (`as T`) without a runtime check
+- Leaving a converted file without a Flow stub while Flow code still imports it
 
-- Blindly converting all `any` to `unknown` without analysis
-- Using `@ts-ignore` or `@ts-expect-error` to bypass type errors
-- Overly broad types (e.g., `object`, `Function`) when specific types are available
-- Type assertions without runtime validation (`value as Type`)
-- Disabling strict mode or strict-type-checked/stylistic-type-checked rules
-- Converting the entire codebase at once without incremental validation
+## Conversion order
+Leaves first; each line can only start once the lines above it are done.
+1. `gob-types` (done), `gob-colors`, `gob-lib`, `gob-school-st-olaf-college`
+2. `gob-schedule-conflicts`, `gob-search-queries`
+3. Break the `gob-hanson-format` and `gob-examine-student` import cycle (`enhance-hanson.js` imports `is-requirement-name` from examine-student), then `gob-hanson-format` (keep the generated `parse-hanson-string.js` as JavaScript with a `.d.ts`), `gob-examine-student`, `gob-courses`
+4. `gob-object-student` (upgrade immutable to 4.3 here), `gob-schedule-builder`, `gob-worker-check-student`
+5. `gob-school-st-olaf-college-sis-import`, `gob-treo-plugin-*`, `gob-web-database`, `gob-worker-load-data`
+6. The CLIs: `gob-cli`, `gob-hanson-format-cli`, `gob-search-queries-cli`
+7. `gob-web`, bottom-up: types, helpers and redux; `components/`; feature modules; screens, app and workers
+8. Cleanup: delete `.flowconfig`, `flow-typed/`, `config/decls`, `config/flow`, every `.js.flow` stub and `scripts/flow-files.sh`, and remove `flow-bin` and `@babel/preset-flow`
 
-## Common pitfalls
-
-1. **Flow's `mixed` vs TypeScript's `unknown`**: Both represent "any type" but TypeScript's `unknown` is safer and requires type checking before use.
-
-2. **Variance annotations**: Flow's variance annotations (`+property`, `-property`) don't have direct TypeScript equivalents. Document these cases.
-
-3. **Nominal typing**: Flow supports nominal typing with opaque types. TypeScript uses structural typing. Consider using brands or unique symbols for nominal-like behavior.
-
-4. **Refinement handling**: Flow's refinement may be more sophisticated. Add explicit type guards in TypeScript where needed.
-
-## Troubleshooting
-
-**Problem**: flow-to-ts produces errors during conversion
-- **Solution**: Check that source files have valid Flow syntax. Fix Flow errors before converting.
-
-**Problem**: TypeScript compiler reports type errors after conversion
-- **Solution**: Expected for complex types. Review each error and apply proper TypeScript types.
-
-**Problem**: Too many `any` types in converted code
-- **Solution**: Use `--inline-utility-types` option. Manually type complex cases.
-
-**Problem**: ESLint reports unsafe type operations
-- **Solution**: Add proper type guards, narrow types before use, replace `any` with `unknown`.
-
-**Problem**: Tests fail after conversion
-- **Solution**: Check for behavioral differences in type coercion, null handling, and type assertions.
+`gob-webpack-plugin-html` stays JavaScript until the Vite move removes it.

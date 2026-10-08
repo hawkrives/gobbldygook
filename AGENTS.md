@@ -30,9 +30,10 @@ mise.toml
 
 Repository tasks (build, test, lint, etc.) are defined in `mise.toml`. Use `mise run <task>` to execute them. Key tasks include:
 
-- `mise run check` - Run all code quality checks (lint, flow, test, format-check)
+- `mise run check` - Run all code quality checks (lint, flow, typecheck, test, format-check)
 - `mise run lint` - Run oxlint (it skips files that still use Flow)
 - `mise run flow` - Run Flow type checker
+- `mise run typecheck` - Typecheck the files already converted to TypeScript (strict TS 7)
 - `mise run test` - Run Jest tests
 - `mise run e2e` - Build the web app and run the Playwright end-to-end tests
 - `mise run format` - Format code with oxfmt (files that still use Flow are skipped)
