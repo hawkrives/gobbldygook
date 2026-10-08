@@ -1,10 +1,10 @@
 import { parse } from "../../parse-hanson-string"
 
-const f = (str) =>
+const f = (str: string) =>
   expect(() => parse(str, { startRule: "Filter" })).not.toThrow()
-const r = (str) =>
+const r = (str: string) =>
   expect(() => parse(str, { startRule: "Result" })).not.toThrow()
-const t = (str, msg) => expect(() => parse(str)).toThrow(msg)
+const t = (str: string, msg?: string) => expect(() => parse(str)).toThrow(msg)
 
 describe("parse-hanson-string", () => {
   it("should not throw", () => {
