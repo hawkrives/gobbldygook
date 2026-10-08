@@ -1,7 +1,13 @@
 import { convertStudent } from "../convert-imported-student"
 import { sample } from "./__support__/sample-student"
 import expectedSchedules from "./__support__/expected-schedules"
-const getCourseMock = async (course) => course
+import type { CourseLookupFunc } from "@gob/object-student"
+
+// Finds no courses, so every imported course becomes a fabrication
+const getCourseMock: CourseLookupFunc = async (clbid) => ({
+  error: true,
+  result: new Error(`no course ${clbid}`),
+})
 
 describe("convertStudent", () => {
   it("converts a student from the imported data to a Gobbldygook student", async () => {
