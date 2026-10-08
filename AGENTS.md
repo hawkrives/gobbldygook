@@ -34,6 +34,7 @@ Repository tasks (build, test, lint, etc.) are defined in `mise.toml`. Use `mise
 - `mise run lint` - Run oxlint (it skips files that still use Flow)
 - `mise run flow` - Run Flow type checker
 - `mise run test` - Run Jest tests
+- `mise run e2e` - Build the web app and run the Playwright end-to-end tests
 - `mise run format` - Format code with oxfmt (files that still use Flow are skipped)
 - `mise run build` - Build the web application
 

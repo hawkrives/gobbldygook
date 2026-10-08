@@ -41,6 +41,7 @@ For additional project conventions and guidelines, consult:
 - **Node version**: ≥22 (managed by mise)
 - **Type checking**: Flow v0.82.0
 - **Testing**: Jest
+- **End-to-end tests**: Playwright, run with `mise run e2e` (specs and fixture course data live in `e2e/`)
 - **Linting**: oxlint (skips files that still use Flow)
 - **Formatting**: oxfmt (skips files that still use Flow)
 
