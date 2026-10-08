@@ -1,6 +1,14 @@
 import { quacksLikeDeptNum } from "../quacks-like-dept-num"
 
 describe("quacksLikeDeptNum", () => {
+  it("returns quickly on a long run of letters with no number", () => {
+    // Before the regex was anchored to the start of a letter run, this took
+    // several seconds; now it takes about a millisecond.
+    const start = performance.now()
+    expect(quacksLikeDeptNum("a".repeat(50_000))).toBe(false)
+    expect(performance.now() - start).toBeLessThan(1000)
+  })
+
   it("fails on the empty string", () => {
     expect(quacksLikeDeptNum("")).toBe(false)
   })
