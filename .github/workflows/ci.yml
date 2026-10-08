@@ -54,7 +54,7 @@ jobs:
         run: mise run lint
 
       - name: Run oxlint for code scanning
-        run: ./node_modules/.bin/oxlint --format sarif modules/ > oxlint-results.sarif
+        run: ./node_modules/.bin/oxlint --format sarif modules/ e2e/ playwright.config.ts > oxlint-results.sarif
         continue-on-error: true
 
       - name: Upload analysis results to GitHub

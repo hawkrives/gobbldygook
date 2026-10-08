@@ -167,6 +167,12 @@
         "no-empty": "off",
         "no-unused-expressions": "off"
       }
+    },
+    {
+      "files": ["e2e/**/*.ts"],
+      "rules": {
+        "no-await-in-loop": "off"
+      }
     }
   ]
 }
