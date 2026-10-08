@@ -16,6 +16,11 @@ stats.json
 # Node stuff
 node_modules/
 
+# Playwright output
+test-results/
+playwright-report/
+blob-report/
+
 # The build artifacts
 build*/
 coverage/

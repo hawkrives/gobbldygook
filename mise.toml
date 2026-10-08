@@ -7,6 +7,7 @@ node = "24"
 "build-peg" = { dir = "{{ config_root }}/modules/gob-hanson-format", run = "node --run build" }
 "bugsnag" = "curl -d 'apiKey=7e393deddaeb885f5b140b4320ecef6b' -d 'repository=https://github.com/hawkrives/gobbldygook' -d 'revision=$(git rev-parse --verify HEAD)' 'https://notify.bugsnag.com/deploy'"
 "check" = { depends = ["lint", "flow", "test", "format-check"], description = "Run all code quality checks" }
+"e2e" = { depends = ["build"], run = "./node_modules/.bin/playwright test", description = "Build the web app and run the Playwright end-to-end tests" }
 "count" = "echo $(fd -e scss | wc -l) files && echo $(fd -e scss | xargs wc -l | gsort | tail -n1) lines"
 "cover" = "./node_modules/.bin/jest --coverage && open coverage/index.html"
 "flow" = "./node_modules/.bin/flow"
