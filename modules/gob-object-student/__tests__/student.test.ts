@@ -1,11 +1,43 @@
-// @flow
-
 import demoStudent from "../demo-student.json"
 import stringify from "stabilize"
 import { List, OrderedMap } from "immutable"
 
 import { Student } from "../student"
 import { Schedule } from "../schedule"
+import type { CourseType } from "../types"
+
+// Reads a schedule the test expects to exist
+function getSchedule(student: Student, id: string): Schedule {
+  let schedule = student.schedules.get(id)
+  if (!schedule) {
+    throw new Error(`expected a schedule with an ID of "${id}"`)
+  }
+  return schedule
+}
+
+const fabrication = (clbid: string): CourseType => ({
+  type: "Research",
+  clbid,
+  credits: 1,
+  crsid: clbid,
+  description: [],
+  department: "CSCI",
+  enrolled: 0,
+  gereqs: [],
+  groupid: clbid,
+  instructors: [],
+  level: 100,
+  max: 0,
+  name: "Independent Study",
+  number: 298,
+  pf: false,
+  prerequisites: false,
+  section: "A",
+  status: "O",
+  semester: 1,
+  year: 2020,
+  revisions: [],
+})
 
 describe("Student", () => {
   it("creates a unique ID for each new student without an ID prop", () => {
@@ -82,15 +114,15 @@ describe("Student", () => {
 describe("addFabricationToStudent", () => {
   it("adds fabrications", () => {
     let stu = new Student()
-    let addedFabrication = stu.addFabrication(({ clbid: "123" }: any))
-    expect(addedFabrication.getFabrication("123")).toEqual({ clbid: "123" })
+    let addedFabrication = stu.addFabrication(fabrication("123"))
+    expect(addedFabrication.getFabrication("123")).toEqual(fabrication("123"))
   })
 })
 
 describe("removeFabricationFromStudent", () => {
   it("removes fabrications", () => {
     let stu = new Student()
-    stu = stu.addFabrication(({ clbid: "123" }: any))
+    stu = stu.addFabrication(fabrication("123"))
     stu = stu.removeFabrication("123")
     expect(stu.getFabrication("123")).not.toBeDefined()
   })
@@ -186,11 +218,9 @@ describe("moveCourseToSchedule", () => {
       clbid: "a-course",
     })
 
-    // $FlowExpectedError
-    let sched1: Schedule = movedCourse.schedules.get("1")
+    let sched1 = getSchedule(movedCourse, "1")
 
-    // $FlowExpectedError
-    let sched2: Schedule = movedCourse.schedules.get("2")
+    let sched2 = getSchedule(movedCourse, "2")
 
     expect(sched1.clbids).not.toContain("a-course")
     expect(sched2.clbids).toContain("a-course")
@@ -212,8 +242,7 @@ describe("addScheduleToStudent", () => {
       }),
     )
 
-    // $FlowExpectedError
-    let sched: Schedule = newSchedule.schedules.get("10912")
+    let sched = getSchedule(newSchedule, "10912")
 
     expect(sched).toMatchInlineSnapshot(`
 Immutable.Record {
@@ -252,8 +281,7 @@ describe("destroyScheduleFromStudent", () => {
 
     let removedSchedule = stu.destroySchedule(sched1.id)
 
-    // $FlowExpectedError
-    let extracted: Schedule = removedSchedule.schedules.get(sched2.id)
+    let extracted = getSchedule(removedSchedule, sched2.id)
 
     expect(extracted).toBeDefined()
     expect(extracted.active).toBe(true)
@@ -300,11 +328,13 @@ describe("destroySchedulesForTerm", () => {
       schedules: OrderedMap({ [sched1.id]: sched1, [sched2.id]: sched2 }),
     })
 
+    // @ts-expect-error: checks the warning when the semester is missing
     let onlyYear = initial.destroySchedulesForTerm({ year: 2014 })
 
     expect(onlyYear.schedules.get(sched1.id)).toBeDefined()
     expect(onlyYear.schedules.get(sched2.id)).toBeDefined()
 
+    // @ts-expect-error: checks the warning when the year is missing
     let onlySemester = initial.destroySchedulesForTerm({ semester: 1 })
 
     expect(onlySemester.schedules.get(sched1.id)).toBeDefined()
@@ -422,8 +452,7 @@ describe("moveScheduleInStudent", () => {
       semester: 3,
     })
 
-    // $FlowExpectedError
-    let plucked: Schedule = actual.schedules.get(sched.id)
+    let plucked = getSchedule(actual, sched.id)
 
     expect(plucked.year).toBe(2014)
     expect(plucked.semester).toBe(3)
@@ -435,8 +464,7 @@ describe("moveScheduleInStudent", () => {
 
     let actual = stu.moveSchedule(sched.id, { year: 2014, semester: 2 })
 
-    // $FlowExpectedError
-    let plucked: Schedule = actual.schedules.get(sched.id)
+    let plucked = getSchedule(actual, sched.id)
 
     expect(plucked).not.toBe(sched)
   })
@@ -448,8 +476,7 @@ describe("reorderScheduleInStudent", () => {
     let initial = new Student({ schedules: OrderedMap({ [sched.id]: sched }) })
     let actual = initial.reorderSchedule(sched.id, 5)
 
-    // $FlowExpectedError
-    let plucked: Schedule = actual.schedules.get(sched.id)
+    let plucked = getSchedule(actual, sched.id)
 
     expect(plucked.index).toBe(5)
   })
@@ -459,8 +486,7 @@ describe("reorderScheduleInStudent", () => {
     let initial = new Student({ schedules: OrderedMap({ [sched.id]: sched }) })
     let actual = initial.reorderSchedule(sched.id, 5)
 
-    // $FlowExpectedError
-    let plucked: Schedule = actual.schedules.get(sched.id)
+    let plucked = getSchedule(actual, sched.id)
 
     expect(actual).not.toBe(initial)
     expect(plucked).not.toBe(sched)
@@ -473,8 +499,7 @@ describe("renameScheduleInStudent", () => {
     let initial = new Student({ schedules: OrderedMap({ [sched.id]: sched }) })
     let actual = initial.renameSchedule(sched.id, "My New Title")
 
-    // $FlowExpectedError
-    let plucked: Schedule = actual.schedules.get(sched.id)
+    let plucked = getSchedule(actual, sched.id)
 
     expect(plucked.title).toBe("My New Title")
   })
@@ -484,8 +509,7 @@ describe("renameScheduleInStudent", () => {
     let initial = new Student({ schedules: OrderedMap({ [sched.id]: sched }) })
     let actual = initial.renameSchedule(sched.id, "My New Title")
 
-    // $FlowExpectedError
-    let plucked: Schedule = actual.schedules.get(sched.id)
+    let plucked = getSchedule(actual, sched.id)
 
     expect(actual).not.toBe(initial)
     expect(plucked).not.toBe(sched)
@@ -498,8 +522,7 @@ describe("addCourseToSchedule", () => {
     let initial = new Student({ schedules: OrderedMap({ [sched.id]: sched }) })
     let addedCourse = initial.addCourseToSchedule(sched.id, "918")
 
-    // $FlowExpectedError
-    let plucked: Schedule = addedCourse.schedules.get(sched.id)
+    let plucked = getSchedule(addedCourse, sched.id)
 
     expect(plucked.clbids).toContain("918")
   })
@@ -509,10 +532,8 @@ describe("addCourseToSchedule", () => {
     let initial = new Student({ schedules: OrderedMap({ [sched.id]: sched }) })
     let actual = initial.addCourseToSchedule(sched.id, "a-new-course")
 
-    // $FlowExpectedError
-    let plucked: Schedule = actual.schedules.get(sched.id)
-    // $FlowExpectedError
-    let initialPlucked: Schedule = initial.schedules.get(sched.id)
+    let plucked = getSchedule(actual, sched.id)
+    let initialPlucked = getSchedule(initial, sched.id)
 
     expect(actual).not.toBe(initial)
     expect(plucked).not.toBe(initialPlucked)
@@ -532,8 +553,7 @@ describe("removeCourseFromSchedule", () => {
     let initial = new Student({ schedules: OrderedMap({ [sched.id]: sched }) })
     let removedCourse = initial.removeCourseFromSchedule(sched.id, "123")
 
-    // $FlowExpectedError
-    let plucked: Schedule = removedCourse.schedules.get(sched.id)
+    let plucked = getSchedule(removedCourse, sched.id)
 
     expect(plucked.clbids).not.toContain("123")
   })
@@ -543,10 +563,8 @@ describe("removeCourseFromSchedule", () => {
     let initial = new Student({ schedules: OrderedMap({ [sched.id]: sched }) })
     let actual = initial.removeCourseFromSchedule(sched.id, "123")
 
-    // $FlowExpectedError
-    let plucked: Schedule = actual.schedules.get(sched.id)
-    // $FlowExpectedError
-    let initialPlucked: Schedule = initial.schedules.get(sched.id)
+    let plucked = getSchedule(actual, sched.id)
+    let initialPlucked = getSchedule(initial, sched.id)
 
     expect(actual).not.toBe(initial)
     expect(plucked).not.toBe(initialPlucked)
@@ -571,8 +589,7 @@ describe("reorderCourseInSchedule", () => {
       index: 1,
     })
 
-    // $FlowExpectedError
-    let plucked: Schedule = actual.schedules.get(sched.id)
+    let plucked = getSchedule(actual, sched.id)
 
     expect(plucked.clbids).not.toEqual(List.of("123", "456", "789"))
     expect(plucked.clbids).toEqual(List.of("456", "123", "789"))
@@ -589,10 +606,8 @@ describe("reorderCourseInSchedule", () => {
 
     expect(actual).not.toBe(initial)
 
-    // $FlowExpectedError
-    let plucked: Schedule = actual.schedules.get(sched.id)
-    // $FlowExpectedError
-    let initialPlucked: Schedule = initial.schedules.get(sched.id)
+    let plucked = getSchedule(actual, sched.id)
+    let initialPlucked = getSchedule(initial, sched.id)
 
     expect(plucked).not.toBe(initialPlucked)
     expect(plucked).not.toBe(sched)
@@ -617,8 +632,7 @@ describe("reorderCourseInSchedule", () => {
       index: 10,
     })
 
-    // $FlowExpectedError
-    let plucked: Schedule = reordered.schedules.get(sched.id)
+    let plucked = getSchedule(reordered, sched.id)
 
     expect(plucked.clbids.findIndex((c) => c === "123456789")).toBe(1)
   })
@@ -631,8 +645,7 @@ describe("reorderCourseInSchedule", () => {
       index: Infinity,
     })
 
-    // $FlowExpectedError
-    let plucked: Schedule = reordered.schedules.get(sched.id)
+    let plucked = getSchedule(reordered, sched.id)
 
     expect(plucked.clbids.findIndex((c) => c === "123456789")).toBe(1)
   })
@@ -645,8 +658,7 @@ describe("reorderCourseInSchedule", () => {
       index: -10,
     })
 
-    // $FlowExpectedError
-    let plucked: Schedule = reordered.schedules.get(sched.id)
+    let plucked = getSchedule(reordered, sched.id)
 
     expect(plucked.clbids.findIndex((c) => c === "123")).toBe(0)
   })

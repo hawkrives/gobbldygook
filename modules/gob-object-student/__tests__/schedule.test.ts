@@ -1,12 +1,10 @@
-// @flow
-
 import stringify from "stabilize"
 import { Schedule } from "../schedule"
 import { List } from "immutable"
 
 describe("Schedule", () => {
   it("does not mutate the passed-in object", () => {
-    const clbids = []
+    const clbids: string[] = []
     const input = { clbids }
     new Schedule(input)
     expect(input.clbids).toBe(clbids)

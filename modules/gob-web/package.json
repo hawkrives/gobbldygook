@@ -36,7 +36,7 @@
     "codemirror": "6.0.2",
     "delay": "4.4.1",
     "fuzzysearch": "1.0.3",
-    "immutable": "4.0.0-rc.12",
+    "immutable": "4.3.9",
     "js-yaml": "3.15.2",
     "listify": "1.0.3",
     "lodash": "4.18.1",
