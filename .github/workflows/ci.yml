@@ -27,6 +27,9 @@ jobs:
   test:
     name: Jest Tests
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # lets the Flakiness.io reporter upload via GitHub OIDC
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
       - uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2
@@ -97,8 +100,17 @@ jobs:
           path: ./modules/gob-web/build
 
   e2e:
-    name: Playwright
+    name: Playwright (${{ matrix.browser }})
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # lets the Flakiness.io reporter upload via GitHub OIDC
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+    env:
+      FLAKINESS_TITLE: Playwright (${{ matrix.browser }})
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
       - uses: jdx/mise-action@c37c93293d6b742fc901e1406b8f764f6fb19dac # v2
@@ -106,16 +118,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Playwright's Chromium
-        run: ./node_modules/.bin/playwright install --with-deps chromium
+      - name: Install Playwright's ${{ matrix.browser }}
+        run: ./node_modules/.bin/playwright install --with-deps ${{ matrix.browser }}
 
       - name: Build and run the end-to-end tests
-        run: mise run e2e
+        run: mise run e2e -- --project=${{ matrix.browser }}
 
       - name: Upload Playwright report
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: playwright-report
+          name: playwright-report-${{ matrix.browser }}
           path: playwright-report/
           retention-days: 14
