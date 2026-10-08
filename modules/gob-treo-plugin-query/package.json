@@ -1,7 +1,7 @@
 {
   "name": "@gob/treo-plugin-query",
   "version": "3.0.0-rc.2",
-  "main": "index.js",
+  "main": "index.ts",
   "license": "MIT",
   "dependencies": {
     "@gob/search-queries": "^3.0.0-rc.2",
