@@ -56,8 +56,10 @@ async function checkStudentAgainstArea(
 
 const memoized: typeof checkStudentAgainstArea = mem(checkStudentAgainstArea, {
   cache: new QuickLRU({ maxSize: 8 }),
+  // Key on the whole student, not just its id, so that edits to the plan
+  // get re-checked instead of returning the cached result.
   cacheKey: (student: Student, area: ParsedHansonFile) =>
-    JSON.stringify([student.id, area]),
+    JSON.stringify([student, area]),
   maxAge: 60000,
 })
 
