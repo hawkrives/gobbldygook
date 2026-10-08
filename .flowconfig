@@ -39,6 +39,8 @@ module.name_mapper='^@gob/types$' -> '<PROJECT_ROOT>/modules/gob-types/index'
 module.name_mapper='^@gob/colors$' -> '<PROJECT_ROOT>/modules/gob-colors/index'
 module.name_mapper='^@gob/lib$' -> '<PROJECT_ROOT>/modules/gob-lib/index'
 module.name_mapper='^@gob/school-st-olaf-college/?$' -> '<PROJECT_ROOT>/modules/gob-school-st-olaf-college/index'
+module.name_mapper='^@gob/schedule-conflicts$' -> '<PROJECT_ROOT>/modules/gob-schedule-conflicts/index'
+module.name_mapper='^@gob/search-queries$' -> '<PROJECT_ROOT>/modules/gob-search-queries/index'
 
 suppress_type=$FlowIssue
 
