@@ -1,10 +1,18 @@
 import { test, expect } from "./fixtures/test"
 import type { Page } from "@playwright/test"
+import LZString from "lz-string"
 
 // The editor screen has three panes: the YAML source, the compiled JSON
 // from @gob/hanson-format, and a rendered area of study.
 const source = (page: Page) => page.locator(".cm-content").nth(0)
 const compiled = (page: Page) => page.locator(".cm-content").nth(1)
+
+// The editor saves its source into the URL hash, compressed with lz-string.
+function sourceInUrl(page: Page): string {
+  const hash = new URL(page.url()).hash.slice(1)
+  const state = LZString.decompressFromEncodedURIComponent(hash)
+  return state ? String(JSON.parse(state).content ?? "") : ""
+}
 
 async function typeSource(page: Page, yaml: string) {
   await source(page).click()
@@ -47,7 +55,9 @@ result: CSCI 121
   }) => {
     await page.goto("/areas")
     await typeSource(page, "name: Shareable\ntype: Major\nresult: CSCI 121")
-    await expect(page).toHaveURL(/\/areas#.+/)
+    // The empty editor writes a hash on load too, so wait for the typed
+    // source itself to reach the URL before reloading.
+    await expect.poll(() => sourceInUrl(page)).toContain("name: Shareable")
 
     await page.reload()
 
