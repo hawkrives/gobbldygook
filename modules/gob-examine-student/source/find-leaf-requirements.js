@@ -5,7 +5,7 @@ import compact from "lodash/compact"
 import isPlainObject from "lodash/isPlainObject"
 import keys from "lodash/keys"
 import some from "lodash/some"
-import isRequirementName from "./is-requirement-name"
+import isRequirementName from "@gob/hanson-format/is-requirement-name"
 import type { Requirement } from "./types"
 
 /**

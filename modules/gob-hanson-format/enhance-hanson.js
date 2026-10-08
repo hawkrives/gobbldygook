@@ -1,6 +1,6 @@
 // @flow
 
-import isRequirementName from "@gob/examine-student/source/is-requirement-name"
+import isRequirementName from "./is-requirement-name"
 import fromPairs from "lodash/fromPairs"
 import toPairs from "lodash/toPairs"
 import { makeAreaSlug } from "./make-area-slug"

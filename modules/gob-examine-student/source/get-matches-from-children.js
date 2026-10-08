@@ -1,6 +1,6 @@
 // @flow
 import collectMatches from "./collect-matches"
-import isRequirementName from "./is-requirement-name"
+import isRequirementName from "@gob/hanson-format/is-requirement-name"
 import flatten from "lodash/flatten"
 import keys from "lodash/keys"
 import uniqBy from "lodash/uniqBy"
