@@ -6,7 +6,7 @@ node = "24"
 "build-dev" = { dir = "{{ config_root }}/modules/gob-web", run = "node --run build-dev" }
 "build-peg" = { dir = "{{ config_root }}/modules/gob-hanson-format", run = "node --run build" }
 "changeset" = { run = "./node_modules/.bin/changeset", description = "Record a user-facing change for the changelog" }
-"check" = { depends = ["lint", "flow", "test", "format-check"], description = "Run all code quality checks" }
+"check" = { depends = ["lint", "flow", "typecheck", "test", "format-check"], description = "Run all code quality checks" }
 "e2e" = { depends = ["build"], run = "./node_modules/.bin/playwright test", description = "Build the web app and run the Playwright end-to-end tests" }
 "count" = "echo $(fd -e scss | wc -l) files && echo $(fd -e scss | xargs wc -l | gsort | tail -n1) lines"
 "cover" = "./node_modules/.bin/jest --coverage && open coverage/index.html"
@@ -17,4 +17,5 @@ node = "24"
 "netlify" = "mise run build"
 "start" = { dir = "{{ config_root }}/modules/gob-web", run = "node --run start" }
 "test" = "./node_modules/.bin/jest"
+"typecheck" = { run = "./node_modules/.bin/tsc -p .", description = "Typecheck the files converted to TypeScript" }
 "test-students" = "./modules/gob-cli/test-student test/example-students"
