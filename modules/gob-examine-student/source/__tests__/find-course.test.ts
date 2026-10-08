@@ -1,8 +1,9 @@
 import findCourse from "../find-course"
+import type { Course } from "../types"
 
 describe("findCourse", () => {
   it("finds a course in a list of courses", () => {
-    const courses = [
+    const courses: Course[] = [
       { department: ["THEAT"], number: 222, section: "A" },
       { department: ["THEAT"], number: 222 },
       { department: ["ASIAN"], number: 275 },
@@ -14,7 +15,7 @@ describe("findCourse", () => {
   })
 
   it("requires the found course to have at least all of the properties of the query", () => {
-    const courses = [
+    const courses: Course[] = [
       { department: ["THEAT"], number: 222, section: "A" },
       { department: ["THEAT"], number: 222 },
       { department: ["ASIAN"], number: 275 },

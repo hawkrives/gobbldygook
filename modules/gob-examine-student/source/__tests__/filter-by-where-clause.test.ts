@@ -1,15 +1,16 @@
 import filterByWhereClause from "../filter-by-where-clause"
+import type { BooleanQualification, Course, Qualification } from "../types"
 
 describe("filterByWhereClause", () => {
   it("filters an array of courses by a where-clause", () => {
-    const clause = {
+    const clause: Qualification = {
       $type: "qualification",
       $key: "gereqs",
       $operator: "$eq",
       $value: "EIN",
     }
 
-    const courses = [
+    const courses: Course[] = [
       {
         department: ["ART", "ASIAN"],
         number: 310,
@@ -37,11 +38,12 @@ describe("filterByWhereClause", () => {
   it("throws if confronted with an unknown type", () => {
     const clause = { $type: "bad" }
 
+    // @ts-expect-error: checks the runtime guard against unknown types
     expect(() => filterByWhereClause([], clause)).toThrowError(TypeError)
   })
 
   it("filters an array of courses by an and-joined where-clause", () => {
-    const clause = {
+    const clause: BooleanQualification = {
       $type: "boolean",
       $booleanType: "and",
       $and: [
@@ -70,7 +72,7 @@ describe("filterByWhereClause", () => {
       ],
     }
 
-    const courses = [
+    const courses: Course[] = [
       {
         department: ["ART", "ASIAN"],
         number: 310,
@@ -95,7 +97,7 @@ describe("filterByWhereClause", () => {
   })
 
   it("filters an array of courses by an or-joined where-clause", () => {
-    const clause = {
+    const clause: BooleanQualification = {
       $type: "boolean",
       $booleanType: "or",
       $or: [
@@ -114,7 +116,7 @@ describe("filterByWhereClause", () => {
       ],
     }
 
-    const courses = [
+    const courses: Course[] = [
       {
         department: ["ART", "ASIAN"],
         number: 310,
@@ -153,13 +155,14 @@ describe("filterByWhereClause", () => {
   })
 
   it('must filter by either "and" or "or"', () => {
-    const clause = {
+    const clause: BooleanQualification = {
       $type: "boolean",
+      // @ts-expect-error: checks the runtime guard against other types
       $booleanType: "xor",
       $xor: [],
     }
 
-    const courses = [
+    const courses: Course[] = [
       {
         department: ["ART", "ASIAN"],
         number: 310,
@@ -172,14 +175,14 @@ describe("filterByWhereClause", () => {
   })
 
   it("can require that the courses be distinct", () => {
-    const clause = {
+    const clause: Qualification = {
       $type: "qualification",
       $key: "gereqs",
       $operator: "$eq",
       $value: "SPM",
     }
 
-    const courses = [
+    const courses: Course[] = [
       { department: ["ESTH"], number: 182, year: 2012, gereqs: ["SPM"] },
       { department: ["ESTH"], number: 182, year: 2013, gereqs: ["SPM"] },
     ]
@@ -191,14 +194,14 @@ describe("filterByWhereClause", () => {
   })
 
   it('does not count things that don\'t count when matching "distinct"', () => {
-    const clause = {
+    const clause: Qualification = {
       $type: "qualification",
       $key: "gereqs",
       $operator: "$eq",
       $value: "SPM",
     }
 
-    const courses = [
+    const courses: Course[] = [
       { department: ["ESTH"], number: 182, year: 2012, gereqs: ["FYW"] },
       { department: ["ESTH"], number: 182, year: 2013, gereqs: ["SPM"] },
     ]

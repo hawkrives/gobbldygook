@@ -14,6 +14,7 @@ describe("humanizeOperator", () => {
   })
 
   it("throws on unexpected values", () => {
+    // @ts-expect-error: checks the runtime guard against bad operators
     expect(() => humanizeOperator("$")).toThrow()
   })
 })

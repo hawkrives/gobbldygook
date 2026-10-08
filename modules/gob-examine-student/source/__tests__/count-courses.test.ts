@@ -1,8 +1,9 @@
 import countCourses from "../count-courses"
+import type { Course } from "../types"
 
 describe("countCourses", () => {
   it("counts the number of distinct courses in an array", () => {
-    const courses = [
+    const courses: Course[] = [
       { department: ["ASIAN", "ART"], number: 111 },
       { department: ["ASIAN", "ART"], number: 112 },
     ]
@@ -11,7 +12,7 @@ describe("countCourses", () => {
   })
 
   it("does not just return the number of courses in the array", () => {
-    const courses = [
+    const courses: Course[] = [
       { department: ["ASIAN", "ART"], number: 111 },
       { department: ["ASIAN", "ART"], number: 111 },
     ]

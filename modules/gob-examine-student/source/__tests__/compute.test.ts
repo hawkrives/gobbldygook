@@ -1,24 +1,32 @@
 import compute from "../compute"
+import asRequirement from "../as-requirement"
 import pathToOverride from "../path-to-override"
+import type { Course, CourseExpression, Requirement } from "../types"
 
-const course = (department, number) => ({
+const course = (department: string, number: number): CourseExpression => ({
   $type: "course",
   $course: { department: [department], number },
 })
 
 describe("compute", () => {
   it("computes the result of a requirement", () => {
-    const req = { result: course("CSCI", 121) }
-    const courses = [{ department: ["CSCI"], number: 121 }]
+    const req: Requirement = {
+      $type: "requirement",
+      result: course("CSCI", 121),
+    }
+    const courses: Course[] = [{ department: ["CSCI"], number: 121 }]
 
     const actual = compute(req, { path: ["Req"], courses })
 
     expect(actual.computed).toBe(true)
-    expect(actual.result._result).toBe(true)
+    expect(actual.result?._result).toBe(true)
   })
 
   it("is false when the courses are missing", () => {
-    const req = { result: course("CSCI", 121) }
+    const req: Requirement = {
+      $type: "requirement",
+      result: course("CSCI", 121),
+    }
 
     const actual = compute(req, { path: ["Req"], courses: [] })
 
@@ -26,42 +34,46 @@ describe("compute", () => {
   })
 
   it("computes child requirements before the parent's result", () => {
-    const req = {
+    const req: Requirement = {
+      $type: "requirement",
       result: { $type: "reference", $requirement: "Child" },
       Child: { $type: "requirement", result: course("CSCI", 121) },
     }
-    const courses = [{ department: ["CSCI"], number: 121 }]
+    const courses: Course[] = [{ department: ["CSCI"], number: 121 }]
 
     const actual = compute(req, { path: ["Area"], courses })
 
-    expect(actual.Child.computed).toBe(true)
+    expect(asRequirement(actual.Child, "Child").computed).toBe(true)
     expect(actual.computed).toBe(true)
   })
 
   it("applies a filter before computing the result", () => {
-    const req = {
+    const req: Requirement = {
+      $type: "requirement",
       filter: {
         $type: "filter",
+        $distinct: false,
         $filterType: "of",
         $of: [course("CSCI", 125)],
       },
       result: course("CSCI", 121),
     }
-    const courses = [
+    const courses: Course[] = [
       { department: ["CSCI"], number: 121 },
       { department: ["CSCI"], number: 125 },
     ]
 
     const actual = compute(req, { path: ["Req"], courses })
 
-    expect(actual.filter._matches).toEqual([
+    expect(actual.filter?._matches).toEqual([
       { department: ["CSCI"], number: 125 },
     ])
     expect(actual.computed).toBe(false)
   })
 
   it("does not let sibling requirements share courses by default", () => {
-    const req = {
+    const req: Requirement = {
+      $type: "requirement",
       result: {
         $type: "boolean",
         $booleanType: "and",
@@ -73,17 +85,18 @@ describe("compute", () => {
       A: { $type: "requirement", result: course("CSCI", 121) },
       B: { $type: "requirement", result: course("CSCI", 121) },
     }
-    const courses = [{ department: ["CSCI"], number: 121 }]
+    const courses: Course[] = [{ department: ["CSCI"], number: 121 }]
 
     const actual = compute(req, { path: ["Area"], courses })
 
-    expect(actual.A.computed).toBe(true)
-    expect(actual.B.computed).toBe(false)
+    expect(asRequirement(actual.A, "A").computed).toBe(true)
+    expect(asRequirement(actual.B, "B").computed).toBe(false)
     expect(actual.computed).toBe(false)
   })
 
   it('lets sibling requirements share courses with "children share courses"', () => {
-    const req = {
+    const req: Requirement = {
+      $type: "requirement",
       "children share courses": true,
       result: {
         $type: "boolean",
@@ -96,12 +109,12 @@ describe("compute", () => {
       A: { $type: "requirement", result: course("CSCI", 121) },
       B: { $type: "requirement", result: course("CSCI", 121) },
     }
-    const courses = [{ department: ["CSCI"], number: 121 }]
+    const courses: Course[] = [{ department: ["CSCI"], number: 121 }]
 
     const actual = compute(req, { path: ["Area"], courses })
 
-    expect(actual.A.computed).toBe(true)
-    expect(actual.B.computed).toBe(true)
+    expect(asRequirement(actual.A, "A").computed).toBe(true)
+    expect(asRequirement(actual.B, "B").computed).toBe(true)
     expect(actual.computed).toBe(true)
   })
 

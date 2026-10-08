@@ -10,7 +10,16 @@ export type { ParsedHansonFile, ParsedHansonRequirement }
 // @gob/types Courses, but the courses an area names only have the fields
 // written in the area file, like {department: "CSCI", number: 121}. The
 // comparisons read fields by name, so any other key is allowed too.
-export type Course = Partial<StudentCourse> & {
+// Qualifications match array fields by membership, so a cross-listed course
+// can also list its departments, like {department: ["ART", "ASIAN"]}.
+// An area file can write "*" for the year or semester to match any.
+export type Course = Omit<
+  Partial<StudentCourse>,
+  "department" | "year" | "semester"
+> & {
+  department?: string | readonly string[]
+  year?: number | "*"
+  semester?: number | "*"
   international?: boolean
   [key: string]: unknown
 }

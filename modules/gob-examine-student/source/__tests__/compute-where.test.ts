@@ -1,9 +1,10 @@
 import { computeWhere } from "../compute-chunk"
+import type { Course, WhereExpression } from "../types"
 
 describe("computeWhere", () => {
   it('requires "distinct" courses to be different courses', () => {
-    const expr = {
-      $type: "boolean",
+    const expr: WhereExpression = {
+      $type: "where",
       $count: { $operator: "$gte", $num: 2 },
       $where: {
         $type: "qualification",
@@ -14,7 +15,7 @@ describe("computeWhere", () => {
       $distinct: true,
     }
 
-    const courses = [
+    const courses: Course[] = [
       { department: ["ESTH"], number: 182, year: 2012, gereqs: ["SPM"] },
       { department: ["ESTH"], number: 182, year: 2013, gereqs: ["SPM"] },
     ]
@@ -29,7 +30,7 @@ describe("computeWhere", () => {
 
     expect(actual).toEqual(expected)
 
-    const altCourses = [
+    const altCourses: Course[] = [
       { department: ["ESTH"], number: 182, year: 2012, gereqs: ["SPM"] },
       { department: ["ESTH"], number: 187, year: 2013, gereqs: ["SPM"] },
     ]

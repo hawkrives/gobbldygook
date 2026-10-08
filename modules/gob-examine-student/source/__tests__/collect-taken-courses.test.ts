@@ -1,8 +1,13 @@
 import collectTakenCourses from "../collect-taken-courses"
+import type {
+  BooleanExpression,
+  CourseExpression,
+  OfExpression,
+} from "../types"
 
 describe("collectTakenCourses", () => {
   it("collects a list of all of the courses anywhere in this object which have the `_taken` property.", () => {
-    const obj = {
+    const obj: CourseExpression = {
       $type: "course",
       $course: {
         department: ["ASIAN"],
@@ -15,7 +20,7 @@ describe("collectTakenCourses", () => {
   })
 
   it("can go down one layer deep", () => {
-    const obj = {
+    const obj: BooleanExpression = {
       $type: "boolean",
       $booleanType: "or",
       $or: [
@@ -41,7 +46,7 @@ describe("collectTakenCourses", () => {
   })
 
   it("can go down many layers deep", () => {
-    const obj = {
+    const obj: OfExpression = {
       $type: "of",
       $count: { $operator: "$gte", $num: 3 },
       $of: [
@@ -67,6 +72,7 @@ describe("collectTakenCourses", () => {
         {
           $type: "where",
           $count: { $operator: "$gte", $num: 2 },
+          $distinct: false,
           $where: {
             $key: "gereq",
             $operator: "$eq",

@@ -1,8 +1,14 @@
 import computeChunk, { computeBoolean } from "../compute-chunk"
+import type {
+  BooleanExpression,
+  Course,
+  Expression,
+  Requirement,
+} from "../types"
 
 describe("computeBoolean", () => {
   it("computes the boolean result of and-clauses", () => {
-    const clause = {
+    const clause: BooleanExpression = {
       $type: "boolean",
       $booleanType: "and",
       $and: [
@@ -16,8 +22,8 @@ describe("computeBoolean", () => {
         },
       ],
     }
-    const requirement = { result: clause }
-    const courses = [
+    const requirement: Requirement = { $type: "requirement", result: clause }
+    const courses: Course[] = [
       { department: ["CSCI"], number: 121 },
       { department: ["CSCI"], number: 125 },
     ]
@@ -26,7 +32,7 @@ describe("computeBoolean", () => {
       expr: clause,
       ctx: requirement,
       courses,
-      dirty: new Set(),
+      dirty: new Set<string>(),
       isNeeded: true,
     })
     expect(clause).toMatchSnapshot()
@@ -35,7 +41,7 @@ describe("computeBoolean", () => {
   })
 
   it("computes the boolean result of or-clauses", () => {
-    const clause = {
+    const clause: BooleanExpression = {
       $type: "boolean",
       $booleanType: "or",
       $or: [
@@ -49,8 +55,8 @@ describe("computeBoolean", () => {
         },
       ],
     }
-    const requirement = { result: clause }
-    const courses = [
+    const requirement: Requirement = { $type: "requirement", result: clause }
+    const courses: Course[] = [
       { department: ["CSCI"], number: 121 },
       { department: ["CSCI"], number: 125 },
     ]
@@ -59,7 +65,7 @@ describe("computeBoolean", () => {
       expr: clause,
       ctx: requirement,
       courses,
-      dirty: new Set(),
+      dirty: new Set<string>(),
       isNeeded: true,
     })
     expect(clause).toMatchSnapshot()
@@ -68,7 +74,7 @@ describe("computeBoolean", () => {
   })
 
   it("computes an or-clause even if the first item is false", () => {
-    const clause = {
+    const clause: BooleanExpression = {
       $type: "boolean",
       $booleanType: "or",
       $or: [
@@ -82,8 +88,8 @@ describe("computeBoolean", () => {
         },
       ],
     }
-    const requirement = { result: clause }
-    const courses = [
+    const requirement: Requirement = { $type: "requirement", result: clause }
+    const courses: Course[] = [
       { department: ["CSCI"], number: 151 },
       { department: ["CSCI"], number: 125 },
     ]
@@ -92,7 +98,7 @@ describe("computeBoolean", () => {
       expr: clause,
       ctx: requirement,
       courses,
-      dirty: new Set(),
+      dirty: new Set<string>(),
       isNeeded: true,
     })
     expect(clause).toMatchSnapshot()
@@ -101,7 +107,7 @@ describe("computeBoolean", () => {
   })
 
   it("can compute the result of several other boolean expressions", () => {
-    const clause = {
+    const clause: BooleanExpression = {
       $type: "boolean",
       $booleanType: "and",
       $and: [
@@ -135,9 +141,9 @@ describe("computeBoolean", () => {
         },
       ],
     }
-    const requirement = { result: clause }
+    const requirement: Requirement = { $type: "requirement", result: clause }
 
-    const courses = [
+    const courses: Course[] = [
       { department: ["CSCI"], number: 130 },
       { department: ["CSCI"], number: 125 },
     ]
@@ -146,7 +152,7 @@ describe("computeBoolean", () => {
       expr: clause,
       ctx: requirement,
       courses,
-      dirty: new Set(),
+      dirty: new Set<string>(),
       isNeeded: true,
     })
     expect(clause).toMatchSnapshot()
@@ -155,7 +161,7 @@ describe("computeBoolean", () => {
   })
 
   it("can compute the result of several course expressions", () => {
-    const clause = {
+    const clause: BooleanExpression = {
       $or: [
         {
           $type: "course",
@@ -169,9 +175,9 @@ describe("computeBoolean", () => {
       $type: "boolean",
       $booleanType: "or",
     }
-    const requirement = { result: clause }
+    const requirement: Requirement = { $type: "requirement", result: clause }
 
-    const courses = [
+    const courses: Course[] = [
       { department: ["CSCI"], number: 130 },
       { department: ["CSCI"], number: 125 },
     ]
@@ -180,7 +186,7 @@ describe("computeBoolean", () => {
       expr: clause,
       ctx: requirement,
       courses,
-      dirty: new Set(),
+      dirty: new Set<string>(),
       isNeeded: true,
     })
     expect(clause).toMatchSnapshot()
@@ -189,7 +195,7 @@ describe("computeBoolean", () => {
   })
 
   it("can compute the result of several modifier expressions", () => {
-    const clause = {
+    const clause: BooleanExpression = {
       $and: [
         {
           $children: "$all",
@@ -218,7 +224,9 @@ describe("computeBoolean", () => {
       $type: "boolean",
       $booleanType: "and",
     }
-    const requirement = {
+    const requirement: Requirement &
+      Record<"A" | "C", Requirement & { result: Expression }> = {
+      $type: "requirement",
       A: {
         $type: "requirement",
         result: {
@@ -250,12 +258,12 @@ describe("computeBoolean", () => {
       result: clause,
     }
 
-    const courses = [
+    const courses: Course[] = [
       { department: ["ART"], number: 120, credits: 1.0 },
       { department: ["ART"], number: 104, credits: 1.0 },
       { department: ["ART"], number: 105, credits: 1.0 },
     ]
-    const dirty = new Set()
+    const dirty = new Set<string>()
 
     requirement.A.computed = computeChunk({
       expr: requirement.A.result,
@@ -283,7 +291,7 @@ describe("computeBoolean", () => {
   })
 
   it("can compute the result of several occurrence expressions", () => {
-    const clause = {
+    const clause: BooleanExpression = {
       $or: [
         {
           $count: { $operator: "$gte", $num: 1 },
@@ -300,9 +308,9 @@ describe("computeBoolean", () => {
       $booleanType: "or",
     }
 
-    const requirement = { result: clause }
+    const requirement: Requirement = { $type: "requirement", result: clause }
 
-    const courses = [
+    const courses: Course[] = [
       { department: ["THEAT"], number: 266, year: 2014, semester: 1 },
       { department: ["THEAT"], number: 266, year: 2014, semester: 3 },
       { department: ["THEAT"], number: 266, year: 2015, semester: 1 },
@@ -312,7 +320,7 @@ describe("computeBoolean", () => {
       expr: clause,
       ctx: requirement,
       courses,
-      dirty: new Set(),
+      dirty: new Set<string>(),
       isNeeded: true,
     })
     expect(clause).toMatchSnapshot()
@@ -321,7 +329,7 @@ describe("computeBoolean", () => {
   })
 
   it("can compute the result of several of-expressions", () => {
-    const clause = {
+    const clause: BooleanExpression = {
       $and: [
         {
           $count: { $operator: "$gte", $num: 1 },
@@ -356,9 +364,9 @@ describe("computeBoolean", () => {
       $booleanType: "and",
     }
 
-    const requirement = { result: clause }
+    const requirement: Requirement = { $type: "requirement", result: clause }
 
-    const courses = [
+    const courses: Course[] = [
       { department: ["CSCI"], number: 125 },
       { department: ["ART"], number: 102 },
     ]
@@ -367,7 +375,7 @@ describe("computeBoolean", () => {
       expr: clause,
       ctx: requirement,
       courses,
-      dirty: new Set(),
+      dirty: new Set<string>(),
       isNeeded: true,
     })
     expect(clause).toMatchSnapshot()
@@ -376,7 +384,7 @@ describe("computeBoolean", () => {
   })
 
   it("can compute the result of several requirement references", () => {
-    const clause = {
+    const clause: BooleanExpression = {
       $and: [
         { $requirement: "A", $type: "reference" },
         { $requirement: "C", $type: "reference" },
@@ -384,7 +392,9 @@ describe("computeBoolean", () => {
       $type: "boolean",
       $booleanType: "and",
     }
-    const requirement = {
+    const requirement: Requirement &
+      Record<"A" | "C", Requirement & { result: Expression }> = {
+      $type: "requirement",
       A: {
         $type: "requirement",
         result: {
@@ -416,12 +426,12 @@ describe("computeBoolean", () => {
       result: clause,
     }
 
-    const courses = [
+    const courses: Course[] = [
       { department: ["ART"], number: 120 },
       { department: ["ART"], number: 104 },
       { department: ["ART"], number: 105 },
     ]
-    const dirty = new Set()
+    const dirty = new Set<string>()
 
     requirement.A.computed = computeChunk({
       expr: requirement.A.result,
@@ -449,7 +459,7 @@ describe("computeBoolean", () => {
   })
 
   it("can compute the result of several where-expressions", () => {
-    const clause = {
+    const clause: BooleanExpression = {
       $and: [
         {
           $count: { $operator: "$gte", $num: 1 },
@@ -478,9 +488,9 @@ describe("computeBoolean", () => {
       $booleanType: "and",
     }
 
-    const requirement = { result: clause }
+    const requirement: Requirement = { $type: "requirement", result: clause }
 
-    const courses = [
+    const courses: Course[] = [
       { department: ["CSCI"], number: 125, gereqs: ["WRI"] },
       { department: ["ART"], number: 102, gereqs: ["BTS-T"] },
     ]
@@ -489,7 +499,7 @@ describe("computeBoolean", () => {
       expr: clause,
       ctx: requirement,
       courses,
-      dirty: new Set(),
+      dirty: new Set<string>(),
       isNeeded: true,
     })
     expect(clause).toMatchSnapshot()
@@ -500,6 +510,7 @@ describe("computeBoolean", () => {
   it("throws when neither $and nor $or were present", () => {
     expect(() =>
       computeBoolean({
+        // @ts-expect-error: checks the runtime guard against bad input
         expr: { $neither: [] },
         isNeeded: true,
       }),

@@ -1,8 +1,9 @@
 import getOccurrences from "../get-occurrences"
+import type { Course } from "../types"
 
 describe("getOccurrences", () => {
   it("returns a list of occurrences of a course", () => {
-    const courses = [
+    const courses: Course[] = [
       { department: ["THEAT"], number: 222 },
       { department: ["THEAT"], number: 222 },
       { department: ["ASIAN"], number: 275 },
@@ -17,7 +18,7 @@ describe("getOccurrences", () => {
   })
 
   it("ignores sections when identifying occurrences", () => {
-    const courses = [
+    const courses: Course[] = [
       { department: ["THEAT"], number: 222, section: "A" },
       { department: ["THEAT"], number: 222, section: "B" },
       { department: ["ASIAN"], number: 275 },

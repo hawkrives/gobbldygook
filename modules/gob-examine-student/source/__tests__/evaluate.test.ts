@@ -1,9 +1,12 @@
 import { evaluate } from "../evaluate"
+import type { Course, ParsedHansonFile } from "../types"
 
 describe("evaluate", () => {
   it("evaluates!", () => {
-    const area = {
+    const area: ParsedHansonFile = {
+      $type: "requirement",
       name: "Sample Area",
+      slug: "sample-area",
       type: "major",
       revision: "0000-01",
       result: { $type: "reference", $requirement: "Req" },
@@ -19,13 +22,14 @@ describe("evaluate", () => {
       },
     }
 
-    const courses = []
+    const courses: Course[] = []
     const overrides = {}
 
     expect(() => evaluate({ courses, overrides, area })).not.toThrow()
 
     expect(evaluate({ courses, overrides, area })).toMatchInlineSnapshot(`
 		{
+		  "$type": "requirement",
 		  "Req": {
 		    "$type": "requirement",
 		    "computed": false,
@@ -55,6 +59,7 @@ describe("evaluate", () => {
 		    "_result": false,
 		  },
 		  "revision": "0000-01",
+		  "slug": "sample-area",
 		  "type": "major",
 		}
 	`)
