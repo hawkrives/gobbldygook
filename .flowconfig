@@ -50,6 +50,7 @@ module.name_mapper='^@gob/schedule-builder$' -> '<PROJECT_ROOT>/modules/gob-sche
 module.name_mapper='^@gob/worker-check-student$' -> '<PROJECT_ROOT>/modules/gob-worker-check-student/index'
 module.name_mapper='^@gob/school-st-olaf-college-sis-import$' -> '<PROJECT_ROOT>/modules/gob-school-st-olaf-college-sis-import/index'
 module.name_mapper='^@gob/web-database$' -> '<PROJECT_ROOT>/modules/gob-web-database/index'
+module.name_mapper='^@gob/worker-load-data$' -> '<PROJECT_ROOT>/modules/gob-worker-load-data/index'
 
 suppress_type=$FlowIssue
 

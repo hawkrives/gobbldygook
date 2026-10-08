@@ -1,4 +1,6 @@
-export function mockCourse(data = {}) {
+import type { RawCourse } from "../types"
+
+export function mockCourse(data: Partial<RawCourse> = {}): RawCourse {
   return {
     clbid: 1,
     department: "DEPT",
