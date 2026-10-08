@@ -1,11 +1,16 @@
-const { parse } = require("@gob/hanson-format")
-const { parseArgs } = require("node:util")
-const stringify = require("stabilize")
-const yaml = require("js-yaml")
-const util = require("util")
-const getStdin = require("get-stdin")
+import { parse } from "@gob/hanson-format"
+import { parseArgs } from "node:util"
+import util from "node:util"
+import stringify from "stabilize"
+import yaml from "js-yaml"
+import getStdin from "get-stdin"
 
-function parseString(args, string) {
+type Args = {
+  json: boolean
+  yaml: boolean
+}
+
+function parseString(args: Args, string: string) {
   if (string.length === 0) {
     throw new Error("Either --stdin or an argument is required")
   }
@@ -21,7 +26,7 @@ function parseString(args, string) {
   }
 }
 
-module.exports.cli = function cli() {
+export function cli() {
   const { values: args, positionals } = parseArgs({
     options: {
       json: {
@@ -40,19 +45,14 @@ module.exports.cli = function cli() {
     allowPositionals: true,
   })
 
-  args.string = positionals[0]
-
   if (args.stdin) {
     getStdin()
       .then((string) => parseString(args, string))
-      .catch((err) => {
-        throw err
+      .catch((err: unknown) => {
+        console.error(err)
+        process.exitCode = 1
       })
   } else {
-    parseString(args, args.string)
+    parseString(args, positionals[0] ?? "")
   }
 }
-
-process.on("unhandledRejection", (reason) => {
-  console.error(reason)
-})

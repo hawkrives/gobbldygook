@@ -1,11 +1,8 @@
-// @flow
-
 import got from "got"
+import Keyv from "keyv"
+import { KeyvFile } from "keyv-file"
+import type { List } from "immutable"
 import type { Course as CourseType, Result } from "@gob/types"
-import { List } from "immutable"
-
-const Keyv = require("keyv")
-const { KeyvFile } = require("keyv-file")
 
 const keyv = new Keyv({
   store: new KeyvFile(),
@@ -13,19 +10,19 @@ const keyv = new Keyv({
 
 const baseUrl = "https://stolaf.dev/course-data"
 
-export async function getCourseFromNetwork(clbid: string) {
+export async function getCourseFromNetwork(clbid: string): Promise<unknown> {
   const id = clbid
   const dir = (Math.floor(parseInt(clbid, 10) / 1000) * 1000).toString()
 
   const path = `${baseUrl}/courses/${dir}/${id}.json`
 
-  return (await got(path, { json: true, cache: keyv })).body
+  return (await got(path, { responseType: "json", cache: keyv })).body
 }
 
 export async function getCourse(
   clbid: string,
-  term?: ?number,
-  fabrications?: ?(Array<CourseType> | List<CourseType>) = [],
+  term?: number | null,
+  fabrications: Array<CourseType> | List<CourseType> | null = [],
 ): Promise<Result<CourseType>> {
   if (fabrications) {
     let fab = fabrications.find((c) => c.clbid === clbid)
@@ -35,7 +32,8 @@ export async function getCourse(
   }
 
   try {
-    let course = await getCourseFromNetwork(clbid)
+    // the course data is trusted to have the shape of a Course
+    let course = (await getCourseFromNetwork(clbid)) as CourseType | null
     if (!course) {
       return {
         error: true,
@@ -45,6 +43,9 @@ export async function getCourse(
     }
     return { error: false, result: course }
   } catch (error) {
-    return { error: true, result: error }
+    return {
+      error: true,
+      result: error instanceof Error ? error : new Error(String(error)),
+    }
   }
 }

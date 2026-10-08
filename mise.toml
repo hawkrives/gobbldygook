@@ -18,4 +18,3 @@ node = "24"
 "start" = { dir = "{{ config_root }}/modules/gob-web", run = "node --run start" }
 "test" = "./node_modules/.bin/jest"
 "typecheck" = { run = "./node_modules/.bin/tsc -p .", description = "Typecheck the files converted to TypeScript" }
-"test-students" = "./modules/gob-cli/test-student test/example-students"
