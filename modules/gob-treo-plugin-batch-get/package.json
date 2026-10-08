@@ -1,7 +1,7 @@
 {
   "name": "@gob/treo-plugin-batch-get",
   "version": "3.0.0-rc.2",
-  "main": "index.js",
+  "main": "index.ts",
   "license": "MIT",
   "dependencies": {
     "idb-request": "^3.2.0"

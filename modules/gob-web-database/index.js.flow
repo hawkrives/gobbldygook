@@ -1,0 +1,5 @@
+// @flow
+
+// Flow stub for the TypeScript source in index.ts. The treo database is
+// untyped on the Flow side, as it was before.
+declare export function createDatabase(name?: string, schema?: mixed): any
