@@ -1,0 +1,46 @@
+import { Student } from "@gob/object-student"
+import type { StudentInput } from "@gob/object-student"
+
+import { IMPORT_STUDENT } from "../constants"
+
+export type ImportStudentAction =
+  | { type: typeof IMPORT_STUDENT; payload: Student; error?: false }
+  | { type: typeof IMPORT_STUDENT; payload: Error; error: true }
+
+export function importStudent({
+  data,
+  type,
+}: { data?: string; type?: string } = {}): ImportStudentAction {
+  let stu: unknown = undefined
+  if (type === "application/json") {
+    try {
+      stu = JSON.parse(String(data))
+    } catch (err) {
+      return {
+        type: IMPORT_STUDENT,
+        error: true,
+        payload: err instanceof Error ? err : new Error(String(err)),
+      }
+    }
+  } else {
+    return {
+      type: IMPORT_STUDENT,
+      error: true,
+      payload: new TypeError(
+        `importStudent: ${String(type)} is an invalid data type`,
+      ),
+    }
+  }
+
+  if (!stu) {
+    return {
+      type: IMPORT_STUDENT,
+      error: true,
+      payload: new Error("Could not process data: " + String(data)),
+    }
+  }
+
+  // imported files are trusted to have the shape of a saved Student
+  const fleshedStudent = new Student(stu as StudentInput)
+  return { type: IMPORT_STUDENT, payload: fleshedStudent }
+}

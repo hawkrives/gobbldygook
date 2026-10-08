@@ -93,6 +93,8 @@
     "@types/lodash": "4.17.25",
     "@types/node": "24.19.1",
     "@types/pegjs": "0.10.6",
+    "@types/redux-logger": "3.0.12",
+    "@types/styled-components": "4.4.3",
     "@types/uuid": "3.4.13",
     "babel-jest": "29.7.0",
     "babel-plugin-styled-components": "2.3.0",
@@ -119,6 +121,9 @@
     "react-select": {
       "react": "^18.3.1",
       "react-dom": "^18.3.1"
+    },
+    "@types/styled-components": {
+      "@types/react-native": "0.71.13"
     }
   }
 }

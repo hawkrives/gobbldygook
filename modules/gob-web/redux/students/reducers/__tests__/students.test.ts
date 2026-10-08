@@ -7,11 +7,18 @@ import { CHANGE_STUDENT } from "../../actions/change"
 import { undoableReducer, reducer } from "../student"
 import { reducer as studentsReducer } from "../index"
 import { ActionCreators } from "redux-undo"
+import type { StateWithHistory } from "redux-undo"
+import type { Student } from "@gob/object-student"
 const { undo, redo } = ActionCreators
+
+// The reducers only pass students along, so plain objects stand in for them,
+// and redux-undo treats an empty object like a fresh history
+const fakeStudent = (data: object) => data as Student
+const emptyHistory = () => ({}) as StateWithHistory<Student>
 
 describe("students reducer", () => {
   it("handles INIT_STUDENT", () => {
-    let initialState = {}
+    let initialState = fakeStudent({})
 
     let student = { id: "xyz" }
     let action = { type: INIT_STUDENT, payload: student }
@@ -45,7 +52,7 @@ describe("students reducer", () => {
 
 describe("the undoable students reducer", () => {
   it("returns a new object with changes", () => {
-    const initial = {}
+    const initial = emptyHistory()
     const hasOneStudent = undoableReducer(initial, {
       type: INIT_STUDENT,
       payload: { id: "xyz" },
@@ -57,7 +64,7 @@ describe("the undoable students reducer", () => {
   })
 
   it("treats INIT_STUDENT as a blank slate", () => {
-    const initial = {}
+    const initial = emptyHistory()
 
     const firstStudent = { id: "xyz" }
     const hasOneStudent = undoableReducer(initial, {
@@ -82,7 +89,7 @@ describe("the undoable students reducer", () => {
   })
 
   it("holds previous states", () => {
-    const initial = {}
+    const initial = emptyHistory()
     const student = { id: "xyz" }
     const hasOneStudent = undoableReducer(initial, {
       type: INIT_STUDENT,
@@ -104,7 +111,7 @@ describe("the undoable students reducer", () => {
   })
 
   it("allows undoing to a previous state", () => {
-    const initial = {}
+    const initial = emptyHistory()
     const hasOneStudent = undoableReducer(initial, {
       type: INIT_STUDENT,
       payload: { id: "xyz" },
@@ -119,13 +126,10 @@ describe("the undoable students reducer", () => {
   })
 
   it("allows redoing to a future state", () => {
-    const initial = undoableReducer(
-      {},
-      {
-        type: INIT_STUDENT,
-        payload: { id: "xyz" },
-      },
-    )
+    const initial = undoableReducer(emptyHistory(), {
+      type: INIT_STUDENT,
+      payload: { id: "xyz" },
+    })
     const hasOneStudent = undoableReducer(initial, {
       type: CHANGE_STUDENT,
       payload: { name: "abc", id: "xyz" },
@@ -149,7 +153,7 @@ describe("the undoable students reducer", () => {
   })
 
   it("only holds 9 previous states", () => {
-    let state = {}
+    let state = emptyHistory()
     for (let i of range(15)) {
       state = undoableReducer(state, {
         type: CHANGE_STUDENT,

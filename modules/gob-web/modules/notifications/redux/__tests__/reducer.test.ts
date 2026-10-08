@@ -6,11 +6,12 @@ import {
   START_PROGRESS,
 } from "../constants"
 import reducer from "../reducers"
+import type { State } from "../reducers"
 
 describe("notifications reducer", () => {
   it("returns the initial state", () => {
     const expected = {}
-    const actual = reducer(undefined, {})
+    const actual = reducer(undefined, { type: "@@INIT" })
     expect(actual).toEqual(expected)
   })
 
@@ -19,9 +20,9 @@ describe("notifications reducer", () => {
 
     const actualState = reducer(undefined, {
       type: LOG_MESSAGE,
-      payload: { id: 0, message },
+      payload: { id: "0", message },
     })
-    const expectedState = { 0: { message, type: "message" } }
+    const expectedState = { "0": { message, type: "message" } }
 
     expect(actualState).toEqual(expectedState)
   })
@@ -31,20 +32,20 @@ describe("notifications reducer", () => {
 
     const actualState = reducer(undefined, {
       type: LOG_ERROR,
-      payload: { id: 0, error, args: [] },
+      payload: { id: "0", error, args: [] },
     })
-    const expectedState = { 0: { message: error.message, type: "error" } }
+    const expectedState = { "0": { message: error.message, type: "error" } }
 
     expect(actualState).toEqual(expectedState)
   })
 
   it("handles REMOVE_NOTIFICATION", () => {
-    const id = 0
+    const id = "0"
     const message = "message"
 
     const action = { type: REMOVE_NOTIFICATION, payload: { id, message } }
 
-    const initialState = { [id]: { message, type: "message" } }
+    const initialState: State = { [id]: { message, type: "message" } }
     const expectedState = {}
     const actualState = reducer(initialState, action)
 
@@ -52,7 +53,7 @@ describe("notifications reducer", () => {
   })
 
   it("handles START_PROGRESS", () => {
-    const id = 0
+    const id = "0"
     const message = "message"
     const value = 0
     const max = 1
@@ -70,7 +71,7 @@ describe("notifications reducer", () => {
   })
 
   it("handles INCREMENT_PROGRESS", () => {
-    const id = 0
+    const id = "0"
     const message = "message"
     const value = 0
     const max = 1
@@ -79,7 +80,7 @@ describe("notifications reducer", () => {
 
     const action = { type: INCREMENT_PROGRESS, payload: { id, by } }
 
-    const initialState = {
+    const initialState: State = {
       [id]: { message, value, max, showButton, type: "progress" },
     }
     const expectedState = {
@@ -97,7 +98,7 @@ describe("notifications reducer", () => {
   })
 
   it('does not let INCREMENT_PROGRESS go past "max"', () => {
-    const id = 0
+    const id = "0"
     const message = "message"
     const value = 0
     const max = 1
@@ -106,7 +107,7 @@ describe("notifications reducer", () => {
 
     const action = { type: INCREMENT_PROGRESS, payload: { id, by } }
 
-    const initialState = {
+    const initialState: State = {
       [id]: { message, value, max, showButton, type: "progress" },
     }
     const expectedState = {
@@ -118,7 +119,7 @@ describe("notifications reducer", () => {
   })
 
   it("allows custom values for INCREMENT_PROGRESS", () => {
-    const id = 0
+    const id = "0"
     const message = "message"
     const value = 5
     const max = 10
@@ -127,7 +128,7 @@ describe("notifications reducer", () => {
 
     const action = { type: INCREMENT_PROGRESS, payload: { id, by } }
 
-    const initialState = {
+    const initialState: State = {
       [id]: { message, value, max, showButton, type: "progress" },
     }
     const expectedState = {
@@ -145,9 +146,9 @@ describe("notifications reducer", () => {
   })
 
   it("does not mutate the progress item during INCREMENT_PROGRESS", () => {
-    const id = 0
+    const id = "0"
     const notification = {
-      id,
+      type: "progress" as const,
       message: "",
       value: 0,
       max: 1,
@@ -156,7 +157,7 @@ describe("notifications reducer", () => {
 
     const action = { type: INCREMENT_PROGRESS, payload: { id, by: 1 } }
 
-    const initialState = { [id]: notification }
+    const initialState: State = { [id]: notification }
     const actualState = reducer(initialState, action)
 
     expect(initialState[id]).not.toBe(actualState[id])

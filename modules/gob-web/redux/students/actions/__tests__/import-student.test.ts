@@ -1,5 +1,13 @@
 import { importStudent } from "../import-student"
+import type { ImportStudentAction } from "../import-student"
 import { IMPORT_STUDENT } from "../../constants"
+
+function errorOf(action: ImportStudentAction): Error {
+  if (!action.error) {
+    throw new Error("expected an error action")
+  }
+  return action.payload
+}
 
 describe("importStudent action", () => {
   it("returns an action to import a student", () => {
@@ -13,7 +21,7 @@ describe("importStudent action", () => {
     let action = importStudent()
     expect(action).toHaveProperty("error", true)
     expect(action).toHaveProperty("payload")
-    expect(action.payload.message).toBe(
+    expect(errorOf(action).message).toBe(
       "importStudent: undefined is an invalid data type",
     )
   })
@@ -25,7 +33,7 @@ describe("importStudent action", () => {
     })
     expect(action).toHaveProperty("error", true)
     expect(action).toHaveProperty("payload")
-    expect(action.payload.message).toMatch(
+    expect(errorOf(action).message).toMatch(
       /Unexpected token|JSON|parse|invalid/i,
     )
   })
@@ -34,7 +42,7 @@ describe("importStudent action", () => {
     let action = importStudent({ data: "", type: "text/html" })
     expect(action).toHaveProperty("error", true)
     expect(action).toHaveProperty("payload")
-    expect(action.payload.message).toBe(
+    expect(errorOf(action).message).toBe(
       "importStudent: text/html is an invalid data type",
     )
   })
@@ -43,6 +51,6 @@ describe("importStudent action", () => {
     let action = importStudent({ data: "null", type: "application/json" })
     expect(action).toHaveProperty("error", true)
     expect(action).toHaveProperty("payload")
-    expect(action.payload.message).toBe("Could not process data: null")
+    expect(errorOf(action).message).toBe("Could not process data: null")
   })
 })

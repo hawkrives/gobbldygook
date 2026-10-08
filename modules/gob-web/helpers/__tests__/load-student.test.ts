@@ -1,5 +1,3 @@
-// @flow
-
 import { loadStudent } from "../load-student"
 const demoStudent = require("@gob/object-student/demo-student.json")
 
@@ -9,7 +7,7 @@ jest.spyOn(global.console, "error").mockImplementation(() => jest.fn())
 jest.spyOn(global.console, "warn").mockImplementation(() => jest.fn())
 
 describe("loadStudent", () => {
-  let student
+  let student: Student
   beforeEach(() => {
     student = new Student(demoStudent)
     localStorage.clear()
