@@ -43,6 +43,7 @@ module.name_mapper='^@gob/schedule-conflicts$' -> '<PROJECT_ROOT>/modules/gob-sc
 module.name_mapper='^@gob/search-queries$' -> '<PROJECT_ROOT>/modules/gob-search-queries/index'
 module.name_mapper='^@gob/hanson-format$' -> '<PROJECT_ROOT>/modules/gob-hanson-format/index'
 module.name_mapper='^@gob/hanson-format/is-requirement-name$' -> '<PROJECT_ROOT>/modules/gob-hanson-format/is-requirement-name'
+module.name_mapper='^@gob/examine-student$' -> '<PROJECT_ROOT>/modules/gob-examine-student/index'
 
 suppress_type=$FlowIssue
 
