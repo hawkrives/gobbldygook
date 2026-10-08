@@ -80,5 +80,21 @@
     "jest-environment-jsdom": "29.7.0",
     "oxfmt": "0.72.0",
     "oxlint": "1.87.0"
+  },
+  "overrides": {
+    "@reach/router": {
+      "react": "^18.3.1",
+      "react-dom": "^18.3.1"
+    },
+    "create-react-context": {
+      "react": "^18.3.1"
+    },
+    "react-input-autosize": {
+      "react": "^18.3.1"
+    },
+    "react-select": {
+      "react": "^18.3.1",
+      "react-dom": "^18.3.1"
+    }
   }
 }
