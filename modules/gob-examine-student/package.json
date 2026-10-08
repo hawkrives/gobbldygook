@@ -10,8 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "@gob/hanson-format": "^3.0.0-rc.2",
-    "@gob/lib": "^3.0.0-rc.2",
-    "lodash": "^4.17.21",
+    "lodash": "^4.18.1",
     "stabilize": "^1.0.0"
   }
 }

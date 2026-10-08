@@ -20,22 +20,23 @@
   "dependencies": {
     "@gob/examine-student": "^3.0.0-rc.2",
     "@gob/hanson-format": "^3.0.0-rc.2",
-    "@gob/lib": "^3.0.0-rc.2",
     "@gob/object-student": "^3.0.0-rc.2",
     "@gob/school-st-olaf-college": "^3.0.0-rc.2",
+    "@gob/school-st-olaf-college-sis-import": "^3.0.0-rc.2",
     "chalk": "^5.0.0",
     "esm": "^3.0.84",
     "flow-remove-types": "^2.122.0",
     "get-stdin": "^9.0.0",
-    "got": "^10.2.2",
-    "js-yaml": "^3.14.0",
+    "got": "^10.7.0",
+    "immutable": "^4.0.0-rc.12",
+    "js-yaml": "^3.15.2",
     "keyv": "^4.0.3",
     "keyv-file": "^0.3.0",
     "load-json-file": "^2.0.0",
-    "lodash": "^4.17.21",
-    "meow": "^6.0.1",
-    "pify": "^4.0.1",
+    "lodash": "^4.18.1",
+    "meow": "^6.1.1",
     "plur": "^3.0.1",
-    "sparkly": "^6.0.0"
+    "pretty-ms": "^6.0.1",
+    "sparkly": "^6.0.1"
   }
 }
