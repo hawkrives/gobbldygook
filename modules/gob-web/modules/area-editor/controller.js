@@ -35,15 +35,7 @@ function replace(state) {
 class AreaTextEditor extends React.Component<any, any> {
   render() {
     let { value, onChange } = this.props
-    return (
-      <Editor
-        value={value}
-        onBeforeChange={(editor, data, value) => {
-          onChange(value)
-        }}
-        mode="yaml"
-      />
-    )
+    return <Editor value={value} onChange={(value) => onChange(value)} />
   }
 }
 
