@@ -11,7 +11,7 @@
   "dependencies": {
     "@gob/lib": "^3.0.0-rc.2",
     "@gob/school-st-olaf-college": "^3.0.0-rc.2",
-    "lodash": "^4.17.21",
+    "lodash": "^4.18.1",
     "sto-course-related-data": "^4.0.2"
   }
 }

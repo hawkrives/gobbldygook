@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@gob/examine-student": "^3.0.0-rc.2",
-    "lodash": "^4.17.21"
+    "lodash": "^4.18.1"
   },
   "devDependencies": {
     "pegjs": "0.10.0"

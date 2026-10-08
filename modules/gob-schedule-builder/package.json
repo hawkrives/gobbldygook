@@ -10,6 +10,6 @@
   "license": "MIT",
   "dependencies": {
     "@gob/search-queries": "^3.0.0-rc.2",
-    "lodash": "^4.17.21"
+    "lodash": "^4.18.1"
   }
 }
