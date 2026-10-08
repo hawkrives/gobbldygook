@@ -113,7 +113,7 @@
     "react/no-string-refs": "error",
     "react/no-unescaped-entities": "off",
     "react/no-unknown-property": "error",
-    "react/react-in-jsx-scope": "error",
+    "react/react-in-jsx-scope": "off",
     "array-callback-return": "warn",
     "default-case": "error",
     "eqeqeq": ["error", "smart"],

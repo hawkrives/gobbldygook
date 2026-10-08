@@ -3,7 +3,15 @@ import flatten from "lodash/flatten"
 import sortBy from "lodash/sortBy"
 import values from "lodash/values"
 import findLast from "lodash/findLast"
-import type { ParsedHansonFile } from "@gob/hanson-format"
+
+// The fields filterAreaList reads, which both area files and parsed areas
+// have
+type AreaSummary = {
+  name?: string | undefined
+  type?: string | undefined
+  revision?: string | undefined
+  "available through"?: number | undefined
+}
 
 function convertRevisionToYear(rev: string | undefined): number {
   // The +1 is because the year is the beginning of the academic year, but
@@ -21,10 +29,10 @@ function convertRevisionToYear(rev: string | undefined): number {
 // through' key is set.
 // You can only enroll in a major if there isn't a newer one, unless your
 // class year is between the previous one and the newest.
-export function filterAreaList(
-  areas: Array<ParsedHansonFile>,
+export function filterAreaList<T extends AreaSummary>(
+  areas: ReadonlyArray<T>,
   availableThrough: number,
-): ReadonlyArray<ParsedHansonFile> {
+): Array<T> {
   // Remove all areas that are closed to new class years.
   let onlyAvailableAreas = areas.filter(
     (area) =>
