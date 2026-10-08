@@ -52,6 +52,7 @@
     "react-dom": "18.3.1",
     "react-dropzone": "7.0.1",
     "react-helmet-async": "^2.0.5",
+    "react-is": "16.13.1",
     "react-loadable": "5.5.0",
     "react-modal": "3.16.3",
     "react-redux": "7.2.9",
@@ -64,7 +65,7 @@
     "redux-undo": "0.6.1",
     "serialize-error": "12.0.0",
     "stabilize": "1.0.0",
-    "styled-components": "4.4.1",
+    "styled-components": "5.3.11",
     "uuid": "3.4.0"
   },
   "engines": {
@@ -74,6 +75,7 @@
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "16.3.3",
     "babel-loader": "10.1.1",
+    "babel-plugin-styled-components": "2.3.0",
     "case-sensitive-paths-webpack-plugin": "2.4.0",
     "clean-webpack-plugin": "4.0.0",
     "copy-webpack-plugin": "13.0.1",
@@ -81,7 +83,7 @@
     "css-loader": "7.1.5",
     "duplicate-package-checker-webpack-plugin": "3.0.0",
     "fake-indexeddb": "3.1.8",
-    "jest-styled-components": "6.3.4",
+    "jest-styled-components": "7.4.0",
     "mini-css-extract-plugin": "2.9.4",
     "prop-types": "15.8.1",
     "redux-logger": "3.0.6",
