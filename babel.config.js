@@ -25,7 +25,9 @@ const nodeConfig = {
 
 module.exports = {
   presets: [
-    "@babel/preset-react",
+    // The automatic runtime matches tsconfig's "jsx": "react-jsx", so .tsx
+    // files don't need React in scope
+    ["@babel/preset-react", { runtime: "automatic" }],
     [
       "@babel/preset-env",
       {
