@@ -44,6 +44,7 @@ module.name_mapper='^@gob/search-queries$' -> '<PROJECT_ROOT>/modules/gob-search
 module.name_mapper='^@gob/hanson-format$' -> '<PROJECT_ROOT>/modules/gob-hanson-format/index'
 module.name_mapper='^@gob/hanson-format/is-requirement-name$' -> '<PROJECT_ROOT>/modules/gob-hanson-format/is-requirement-name'
 module.name_mapper='^@gob/examine-student$' -> '<PROJECT_ROOT>/modules/gob-examine-student/index'
+module.name_mapper='^@gob/courses$' -> '<PROJECT_ROOT>/modules/gob-courses/index'
 
 suppress_type=$FlowIssue
 
