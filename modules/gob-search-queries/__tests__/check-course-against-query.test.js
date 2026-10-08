@@ -37,7 +37,7 @@ describe("checkCourseAgainstQuery", () => {
     expect(checkCourseAgainstQuery(query, course)).toBe(true)
   })
 
-  it("handles complicated queries", () => {
+  it("rejects a course that misses part of a complicated query", () => {
     let query = {
       departments: ["$AND", "ASIAN", "REL"],
       title: ["Japan"],
