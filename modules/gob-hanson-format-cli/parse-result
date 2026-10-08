@@ -1,3 +1,4 @@
 #!/usr/bin/env node
 
-require('./parse-result.js').cli()
+require("@gob/cli/lib/init")
+require("./parse-result.ts").cli()

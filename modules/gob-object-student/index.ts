@@ -19,5 +19,6 @@ export {
 export { Schedule } from "./schedule"
 export { sortStudiesByType } from "./sort-studies-by-type"
 export { Student } from "./student"
+export type { StudentInput } from "./student"
 export { validateSchedule } from "./validate-schedule"
 export * from "./types"

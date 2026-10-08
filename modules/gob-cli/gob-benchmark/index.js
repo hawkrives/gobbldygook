@@ -2,4 +2,4 @@
 
 require("../lib/init")
 
-require("./module.js").default()
+require("./module.ts").default()

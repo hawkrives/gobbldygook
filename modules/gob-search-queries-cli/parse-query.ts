@@ -18,13 +18,14 @@ export function cli() {
     allowPositionals: true,
   })
 
-  if (positionals.length === 0) {
+  const input = positionals[0]
+  if (input === undefined) {
     console.error("Error: query is required")
     console.error("Usage: parse-query <query>")
     process.exit(1)
   }
 
-  const query = buildQueryFromString(positionals[0])
+  const query = buildQueryFromString(input)
 
   if (args.json) {
     console.log(stringify(query, { space: 4 }))

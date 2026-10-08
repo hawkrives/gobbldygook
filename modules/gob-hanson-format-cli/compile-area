@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 
-require('@gob/cli/lib/init')
-require('./compile-area.js').cli()
+require("@gob/cli/lib/init")
+require("./compile-area.ts").cli()
