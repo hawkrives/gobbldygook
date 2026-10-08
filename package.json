@@ -92,6 +92,7 @@
     "@types/lodash": "4.17.25",
     "@types/node": "24.19.1",
     "@types/pegjs": "0.10.6",
+    "@types/uuid": "^3.4.13",
     "babel-jest": "29.7.0",
     "babel-plugin-styled-components": "2.3.0",
     "core-js": "3.50.0",
