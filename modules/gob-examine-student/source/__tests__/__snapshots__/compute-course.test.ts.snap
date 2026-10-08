@@ -22,7 +22,7 @@ exports[`computeCourse merges a query and the found course 1`] = `
   "_extraKeys": [
     "crsid",
   ],
-  "crsid": 20951,
+  "crsid": "20951",
   "department": [
     "ART",
   ],

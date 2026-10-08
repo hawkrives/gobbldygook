@@ -3,6 +3,7 @@ import computeCountWithOperator from "../compute-count-with-operator"
 describe("computeCountWithOperator", () => {
   it("throws on operators other than $eq, $lte, or $gte", () => {
     expect(() =>
+      // @ts-expect-error: checks the runtime guard against bad operators
       computeCountWithOperator({ comparator: "$invalid" }),
     ).toThrowError(TypeError)
   })

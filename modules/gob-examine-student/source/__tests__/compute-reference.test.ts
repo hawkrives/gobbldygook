@@ -1,9 +1,13 @@
 import { computeReference } from "../compute-chunk"
+import type { ReferenceExpression, Requirement } from "../types"
 
 describe("computeReference", () => {
   it("returns the result of the referenced requirement", () => {
-    const expr = { $requirement: "Req" }
-    const ctx = { Req: { computed: true } }
+    const expr: ReferenceExpression = {
+      $type: "reference",
+      $requirement: "Req",
+    }
+    const ctx: Requirement = { $type: "requirement", Req: { computed: true } }
 
     const actual = computeReference({ expr, ctx })
     expect(actual.computedResult).toBeDefined()
@@ -11,8 +15,14 @@ describe("computeReference", () => {
   })
 
   it("supports spaces in the requirement name", () => {
-    const expr = { $requirement: "Req Name" }
-    const ctx = { "Req Name": { computed: true } }
+    const expr: ReferenceExpression = {
+      $type: "reference",
+      $requirement: "Req Name",
+    }
+    const ctx: Requirement = {
+      $type: "requirement",
+      "Req Name": { computed: true },
+    }
 
     const actual = computeReference({ expr, ctx })
     expect(actual.computedResult).toBeDefined()
@@ -21,8 +31,12 @@ describe("computeReference", () => {
 
   it("returns the list of matches, if present", () => {
     const match = { department: ["CSCI"], number: 121 }
-    const expr = { $requirement: "Req Name" }
-    const ctx = {
+    const expr: ReferenceExpression = {
+      $type: "reference",
+      $requirement: "Req Name",
+    }
+    const ctx: Requirement = {
+      $type: "requirement",
       "Req Name": {
         computed: true,
         result: { $type: "course", $course: match, _result: true },
@@ -35,8 +49,14 @@ describe("computeReference", () => {
   })
 
   it("returns null matches for message-only requirements", () => {
-    const expr = { $requirement: "Req Name" }
-    const ctx = { "Req Name": { computed: false, message: "Ask" } }
+    const expr: ReferenceExpression = {
+      $type: "reference",
+      $requirement: "Req Name",
+    }
+    const ctx: Requirement = {
+      $type: "requirement",
+      "Req Name": { computed: false, message: "Ask" },
+    }
     expect(computeReference({ expr, ctx })).toEqual({
       computedResult: false,
       matches: null,
@@ -44,8 +64,8 @@ describe("computeReference", () => {
   })
 
   it("throws a ReferenceError if the referenced requirement doesn't exist", () => {
-    const expr = { $requirement: "A" }
-    const ctx = { ONLY: {} }
+    const expr: ReferenceExpression = { $type: "reference", $requirement: "A" }
+    const ctx: Requirement = { $type: "requirement", ONLY: {} }
     expect(() => computeReference({ expr, ctx })).toThrowError(ReferenceError)
   })
 })

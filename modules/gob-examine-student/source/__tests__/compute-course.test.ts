@@ -1,14 +1,15 @@
 import { computeCourse } from "../compute-chunk"
+import type { Course, CourseExpression } from "../types"
 
 describe("computeCourse", () => {
   it("checks if a course exists in the list of courses", () => {
-    const courses = [
+    const courses: Course[] = [
       { department: ["ASIAN", "ART"], number: 130 },
       { department: ["ASIAN", "ART"], number: 170 },
       { department: ["ART"], number: 250 },
     ]
 
-    const query = {
+    const query: CourseExpression = {
       $type: "course",
       $course: { department: ["ART"], number: 250 },
     }
@@ -16,7 +17,7 @@ describe("computeCourse", () => {
     const { computedResult, match } = computeCourse({
       expr: query,
       courses,
-      dirty: new Set(),
+      dirty: new Set<string>(),
       isNeeded: true,
     })
 
@@ -25,13 +26,15 @@ describe("computeCourse", () => {
   })
 
   it("adds the course to the dirty set if it matches", () => {
-    const courses = [{ department: ["ART"], number: 130, type: "Research" }]
-    const query = {
+    const courses: Course[] = [
+      { department: ["ART"], number: 130, type: "Research" },
+    ]
+    const query: CourseExpression = {
       $type: "course",
       $course: { department: ["ART"], number: 130, type: "Research" },
     }
 
-    const dirty = new Set()
+    const dirty = new Set<string>()
 
     computeCourse({ expr: query, courses, dirty, isNeeded: true })
 
@@ -39,15 +42,15 @@ describe("computeCourse", () => {
   })
 
   it("does not add the course to the dirty set if it did not match", () => {
-    const courses = [
+    const courses: Course[] = [
       { department: ["ASIAN", "ART"], number: 130, type: "Research" },
     ]
-    const query = {
+    const query: CourseExpression = {
       $type: "course",
       $course: { department: ["ART"], number: 999, type: "Lab" },
     }
 
-    const dirty = new Set()
+    const dirty = new Set<string>()
 
     computeCourse({ expr: query, courses, dirty, isNeeded: true })
 
@@ -55,8 +58,10 @@ describe("computeCourse", () => {
   })
 
   it("returns false if the course is in the dirty set", () => {
-    const courses = [{ department: ["ART"], number: 130, type: "Research" }]
-    const query = {
+    const courses: Course[] = [
+      { department: ["ART"], number: 130, type: "Research" },
+    ]
+    const query: CourseExpression = {
       $type: "course",
       $course: { department: ["ART"], number: 130, type: "Research" },
     }
@@ -75,21 +80,21 @@ describe("computeCourse", () => {
   })
 
   it("merges a query and the found course", () => {
-    const courses = [
+    const courses: Course[] = [
       { department: ["ASIAN", "ART"], number: 130 },
       { department: ["ASIAN", "ART"], number: 170 },
       { department: ["ART"], number: 250 },
     ]
 
-    const query = {
+    const query: CourseExpression = {
       $type: "course",
-      $course: { department: ["ART"], number: 250, crsid: 20951 },
+      $course: { department: ["ART"], number: 250, crsid: "20951" },
     }
 
     const { computedResult, match } = computeCourse({
       expr: query,
       courses,
-      dirty: new Set(),
+      dirty: new Set<string>(),
       isNeeded: true,
     })
 

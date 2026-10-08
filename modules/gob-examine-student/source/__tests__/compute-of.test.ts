@@ -1,29 +1,41 @@
 import computeChunk, { computeOf } from "../compute-chunk"
+import type {
+  Course,
+  CourseExpression,
+  Expression,
+  OfExpression,
+  Qualification,
+  QualificationValue,
+  Requirement,
+} from "../types"
 
-const csci = (number) => ({ department: ["CSCI"], number })
-const course = (department, number) => ({
+const csci = (number: number): Course => ({ department: ["CSCI"], number })
+const course = (department: string, number: number): CourseExpression => ({
   $type: "course",
   $course: { department: [department], number },
 })
-const of = (num, items) => ({
+const of = (num: number, items: Expression[]): OfExpression => ({
   $type: "of",
   $count: { $operator: "$gte", $num: num },
   $of: items,
 })
-const qualification = (key, value) => ({
+const qualification = (
+  key: string,
+  value: QualificationValue,
+): Qualification => ({
   $type: "qualification",
   $key: key,
   $operator: "$eq",
   $value: value,
 })
-const clone = (expr) => JSON.parse(JSON.stringify(expr))
+const clone = <T>(expr: T): T => JSON.parse(JSON.stringify(expr))
 
-function run(expr, courses) {
+function run(expr: OfExpression, courses: Course[]) {
   const { computedResult, counted } = computeOf({
     expr,
     ctx: { $type: "requirement", result: expr },
     courses,
-    dirty: new Set(),
+    dirty: new Set<string>(),
     isNeeded: true,
   })
   return { computedResult, counted }
@@ -31,7 +43,7 @@ function run(expr, courses) {
 
 describe("computeOf", () => {
   it("computes a list of boolean-equivalent expressions against a desired count", () => {
-    const expr = {
+    const expr: OfExpression = {
       $type: "of",
       $count: { $operator: "$gte", $num: 2 },
       $of: [
@@ -49,13 +61,13 @@ describe("computeOf", () => {
         },
       ],
     }
-    const req = {
+    const req: Requirement = {
       $type: "requirement",
       result: expr,
     }
 
-    const dirty = new Set()
-    const courses = [
+    const dirty = new Set<string>()
+    const courses: Course[] = [
       { department: ["CSCI"], number: 121 },
       { department: ["CSCI"], number: 125 },
     ]
@@ -107,13 +119,13 @@ describe("computeOf", () => {
 
   it("stores the number of matches in its containing expression", () => {
     const expr = of(2, [course("CSCI", 121), course("CSCI", 125)])
-    const req = { $type: "requirement", result: expr }
+    const req: Requirement = { $type: "requirement", result: expr }
 
     const result = computeChunk({
       expr,
       ctx: req,
       courses: [csci(121), csci(125)],
-      dirty: new Set(),
+      dirty: new Set<string>(),
     })
 
     expect(result).toBe(true)
@@ -170,7 +182,7 @@ describe("computeOf", () => {
       },
     ])
 
-    const courses = [
+    const courses: Course[] = [
       { ...csci(121), gereqs: ["WRI"] },
       { ...csci(125), gereqs: ["WRI"] },
     ]
@@ -226,7 +238,7 @@ describe("computeOf", () => {
       { $type: "reference", $requirement: "B" },
       { $type: "reference", $requirement: "C" },
     ])
-    const ctx = {
+    const ctx: Requirement = {
       $type: "requirement",
       result: expr,
       A: { computed: true },
@@ -238,7 +250,7 @@ describe("computeOf", () => {
       expr,
       ctx,
       courses: [],
-      dirty: new Set(),
+      dirty: new Set<string>(),
       isNeeded: true,
     })
 
@@ -262,7 +274,7 @@ describe("computeOf", () => {
       },
     ])
 
-    const courses = [
+    const courses: Course[] = [
       { ...csci(121), gereqs: ["SPM"] },
       { ...csci(125), gereqs: ["WRI"] },
     ]

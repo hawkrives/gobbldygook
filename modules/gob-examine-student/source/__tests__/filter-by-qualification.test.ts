@@ -1,15 +1,16 @@
 import { filterByQualification } from "../filter-by-where-clause"
+import type { Course, Qualification } from "../types"
 
 describe("filterByQualification", () => {
   it("filters an array of courses by a qualification", () => {
-    const basicQualification = {
+    const basicQualification: Qualification = {
       $type: "qualification",
       $key: "gereqs",
       $value: "EIN",
       $operator: "$eq",
     }
 
-    const courses = [
+    const courses: Course[] = [
       {
         department: ["ART", "ASIAN"],
         number: 310,
@@ -34,7 +35,7 @@ describe("filterByQualification", () => {
   })
 
   it("filters an array of courses by a boolean qualification-value", () => {
-    const basicQualification = {
+    const basicQualification: Qualification = {
       $type: "qualification",
       $key: "gereqs",
       $value: {
@@ -45,7 +46,7 @@ describe("filterByQualification", () => {
       $operator: "$eq",
     }
 
-    const courses = [
+    const courses: Course[] = [
       {
         department: ["ART", "ASIAN"],
         number: 310,
@@ -78,18 +79,19 @@ describe("filterByQualification", () => {
   })
 
   it("requires that a boolean qualification-value be either $and or $or", () => {
-    const basicQualification = {
+    const basicQualification: Qualification = {
       $type: "qualification",
       $key: "gereqs",
       $value: {
         $type: "boolean",
+        // @ts-expect-error: checks the runtime guard against other types
         $booleanType: "xor",
         $xor: ["EIN", "BTS-T"],
       },
       $operator: "$eq",
     }
 
-    const courses = [
+    const courses: Course[] = [
       {
         department: ["ART", "ASIAN"],
         number: 310,
@@ -114,7 +116,7 @@ describe("filterByQualification", () => {
   })
 
   it("filters an array based on a nested where-query with the max function", () => {
-    const advancedQualificationMax = {
+    const advancedQualificationMax: Qualification = {
       $type: "qualification",
       $key: "year",
       $operator: "$lte",
@@ -131,7 +133,7 @@ describe("filterByQualification", () => {
       },
     }
 
-    const courses = [
+    const courses: Course[] = [
       {
         department: ["ART", "ASIAN"],
         number: 310,
@@ -170,7 +172,7 @@ describe("filterByQualification", () => {
   })
 
   it("filters an array based on a nested where-query with the min function", () => {
-    const advancedQualificationMin = {
+    const advancedQualificationMin: Qualification = {
       $type: "qualification",
       $key: "year",
       $operator: "$lte",
@@ -187,7 +189,7 @@ describe("filterByQualification", () => {
       },
     }
 
-    const courses = [
+    const courses: Course[] = [
       {
         department: ["ART", "ASIAN"],
         number: 310,
@@ -224,7 +226,7 @@ describe("filterByQualification", () => {
   })
 
   it("must use either min or max as a function for a nested where-query", () => {
-    const advancedQualificationBad = {
+    const advancedQualificationBad: Qualification = {
       $type: "qualification",
       $key: "year",
       $operator: "$lte",
@@ -241,7 +243,7 @@ describe("filterByQualification", () => {
       },
     }
 
-    const courses = [
+    const courses: Course[] = [
       {
         department: ["ART", "ASIAN"],
         number: 310,
@@ -266,13 +268,14 @@ describe("filterByQualification", () => {
   })
 
   it("must specify a function when utilizing a nested where-query", () => {
-    const advancedQualificationBad = {
+    const advancedQualificationBad: Qualification = {
       $type: "qualification",
       $key: "year",
       $operator: "$lte",
       $value: {
         $name: "max",
         $prop: "year",
+        // @ts-expect-error: checks the runtime guard against a missing type
         $type: "",
         $where: {
           $type: "qualification",
@@ -283,7 +286,7 @@ describe("filterByQualification", () => {
       },
     }
 
-    const courses = [
+    const courses: Course[] = [
       {
         department: ["ART", "ASIAN"],
         number: 310,
@@ -308,14 +311,14 @@ describe("filterByQualification", () => {
   })
 
   it("can require that the courses be distinct", () => {
-    const clause = {
+    const clause: Qualification = {
       $type: "qualification",
       $key: "gereqs",
       $operator: "$eq",
       $value: "SPM",
     }
 
-    const courses = [
+    const courses: Course[] = [
       { department: ["ESTH"], number: 182, year: 2012, gereqs: ["SPM"] },
       { department: ["ESTH"], number: 182, year: 2013, gereqs: ["SPM"] },
     ]
@@ -329,14 +332,14 @@ describe("filterByQualification", () => {
   })
 
   it('does not count things that don\'t count when matching "distinct"', () => {
-    const clause = {
+    const clause: Qualification = {
       $type: "qualification",
       $key: "gereqs",
       $operator: "$eq",
       $value: "SPM",
     }
 
-    const courses = [
+    const courses: Course[] = [
       { department: ["ESTH"], number: 182, year: 2012, gereqs: ["FYW"] },
       { department: ["ESTH"], number: 182, year: 2013, gereqs: ["SPM"] },
     ]

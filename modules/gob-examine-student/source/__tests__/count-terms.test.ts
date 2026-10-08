@@ -1,8 +1,9 @@
 import { countTerms } from "../count-terms"
+import type { Course } from "../types"
 
 describe("countTerms", () => {
   it("counts the number of terms in an array of courses", () => {
-    const courses = [
+    const courses: Course[] = [
       { year: 2010, semester: 1 },
       { year: 2010, semester: 2 },
       { year: 2010, semester: 3 },
@@ -11,7 +12,7 @@ describe("countTerms", () => {
   })
 
   it("skips duplicate terms", () => {
-    const courses = [
+    const courses: Course[] = [
       { year: 2010, semester: 1 },
       { year: 2010, semester: 1 },
       { year: 2010, semester: 3 },

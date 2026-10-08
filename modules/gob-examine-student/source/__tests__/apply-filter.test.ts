@@ -1,9 +1,11 @@
 import applyFilter from "../apply-filter"
+import type { Course, FilterExpression } from "../types"
 
 describe("applyFilter", () => {
   it("filters a list of courses", () => {
-    const query = {
+    const query: FilterExpression = {
       $type: "filter",
+      $distinct: false,
       $filterType: "where",
       $where: {
         $type: "qualification",
@@ -13,7 +15,7 @@ describe("applyFilter", () => {
       },
     }
 
-    const courses = [
+    const courses: Course[] = [
       { department: ["ASIAN"], number: 100 },
       { department: ["CSCI"], number: 121 },
       { department: ["CHEM", "BIO"], number: 111 },
@@ -25,8 +27,9 @@ describe("applyFilter", () => {
   })
 
   it("filters by where-style queries", () => {
-    const query = {
+    const query: FilterExpression = {
       $type: "filter",
+      $distinct: false,
       $filterType: "where",
       $where: {
         $type: "qualification",
@@ -36,7 +39,7 @@ describe("applyFilter", () => {
       },
     }
 
-    const courses = [
+    const courses: Course[] = [
       { department: ["ASIAN"], number: 100 },
       { department: ["CSCI"], number: 121 },
       { department: ["CHEM", "BIO"], number: 111 },
@@ -48,8 +51,9 @@ describe("applyFilter", () => {
   })
 
   it("filters by list-of-valid-courses queries", () => {
-    const query = {
+    const query: FilterExpression = {
       $type: "filter",
+      $distinct: false,
       $filterType: "of",
       $of: [
         { $type: "course", $course: { department: ["CSCI"], number: 121 } },
@@ -57,7 +61,7 @@ describe("applyFilter", () => {
       ],
     }
 
-    const courses = [
+    const courses: Course[] = [
       { department: ["ASIAN"], number: 100 },
       { department: ["CSCI"], number: 121 },
       { department: ["CHEM", "BIO"], number: 111 },
@@ -69,8 +73,9 @@ describe("applyFilter", () => {
   })
 
   it("returns the matches on the expression", () => {
-    const query = {
+    const query: FilterExpression = {
       $type: "filter",
+      $distinct: false,
       $filterType: "where",
       $where: {
         $type: "qualification",
@@ -80,7 +85,7 @@ describe("applyFilter", () => {
       },
     }
 
-    const courses = [
+    const courses: Course[] = [
       { department: ["ASIAN"], number: 100 },
       { department: ["CSCI"], number: 121 },
       { department: ["CHEM", "BIO"], number: 111 },
@@ -97,7 +102,7 @@ describe("applyFilter", () => {
   it("returns an empty list when not presented with a filter", () => {
     const query = {}
 
-    const courses = [
+    const courses: Course[] = [
       { department: ["ASIAN"], number: 100 },
       { department: ["CSCI"], number: 121 },
       { department: ["CHEM", "BIO"], number: 111 },
@@ -105,6 +110,7 @@ describe("applyFilter", () => {
       { department: ["ART", "ASIAN"], number: 121 },
     ]
 
+    // @ts-expect-error: checks the fallback for a missing filter
     expect(applyFilter(query, courses)).toMatchSnapshot()
   })
 })
