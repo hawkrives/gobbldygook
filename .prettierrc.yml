@@ -1,5 +1,0 @@
-# Prettier only formats Flow files now (see scripts/flow-files.sh); everything
-# else goes through oxfmt. Keep these options in sync with .oxfmtrc.json.
-trailingComma: "all"
-semi: false
-parser: "babel-flow"

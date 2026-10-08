@@ -31,10 +31,10 @@ mise.toml
 Repository tasks (build, test, lint, etc.) are defined in `mise.toml`. Use `mise run <task>` to execute them. Key tasks include:
 
 - `mise run check` - Run all code quality checks (lint, flow, test, format-check)
-- `mise run lint` - Run oxlint, plus ESLint on files that still use Flow
+- `mise run lint` - Run oxlint (it skips files that still use Flow)
 - `mise run flow` - Run Flow type checker
 - `mise run test` - Run Jest tests
-- `mise run format` - Format code with oxfmt, plus Prettier on files that still use Flow
+- `mise run format` - Format code with oxfmt (files that still use Flow are skipped)
 - `mise run build` - Build the web application
 
 Run `mise tasks` to see all available tasks.

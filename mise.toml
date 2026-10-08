@@ -10,15 +10,9 @@ node = "24"
 "count" = "echo $(fd -e scss | wc -l) files && echo $(fd -e scss | xargs wc -l | gsort | tail -n1) lines"
 "cover" = "./node_modules/.bin/jest --coverage && open coverage/index.html"
 "flow" = "./node_modules/.bin/flow"
-"lint" = { depends = ["lint:oxlint", "lint:eslint-flow"], description = "Lint with oxlint, plus ESLint for files that still use Flow" }
-"lint:oxlint" = "./node_modules/.bin/oxlint --max-warnings=0 --report-unused-disable-directives modules/"
-"lint:eslint-flow" = "scripts/flow-files.sh | grep '^modules/' | xargs ./node_modules/.bin/eslint --cache --report-unused-disable-directives --max-warnings=0"
-"format" = { depends = ["format:oxfmt", "format:prettier-flow"], description = "Format with oxfmt, plus Prettier for files that still use Flow" }
-"format:oxfmt" = "scripts/flow-files.sh | sed 's/^/!/' | xargs ./node_modules/.bin/oxfmt '{*,.*,{.circleci,modules,config,scripts}/**/*}.{js,json,scss,yml,yaml,md}'"
-"format:prettier-flow" = "scripts/flow-files.sh | xargs ./node_modules/.bin/prettier --write --log-level warn"
-"format-check" = { depends = ["format-check:oxfmt", "format-check:prettier-flow"], description = "Check formatting without writing changes" }
-"format-check:oxfmt" = "scripts/flow-files.sh | sed 's/^/!/' | xargs ./node_modules/.bin/oxfmt --check '{*,.*,{.circleci,modules,config,scripts}/**/*}.{js,json,scss,yml,yaml,md}'"
-"format-check:prettier-flow" = "scripts/flow-files.sh | xargs ./node_modules/.bin/prettier --check --log-level warn"
+"lint" = "./node_modules/.bin/oxlint --max-warnings=0 --report-unused-disable-directives modules/"
+"format" = "scripts/flow-files.sh | sed 's/^/!/' | xargs ./node_modules/.bin/oxfmt '{*,.*,{.circleci,modules,config,scripts}/**/*}.{js,json,scss,yml,yaml,md}'"
+"format-check" = "scripts/flow-files.sh | sed 's/^/!/' | xargs ./node_modules/.bin/oxfmt --check '{*,.*,{.circleci,modules,config,scripts}/**/*}.{js,json,scss,yml,yaml,md}'"
 "netlify" = "mise run build && mise run bugsnag"
 "start" = { dir = "{{ config_root }}/modules/gob-web", run = "node --run start" }
 "test" = "./node_modules/.bin/jest"

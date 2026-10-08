@@ -35,6 +35,6 @@ ComponentName/
 
 ## Constraints
 
-- Follow the existing lint configuration (`.oxlintrc.json`, plus `eslint.config.js` for files that still use Flow).
+- Follow the existing lint configuration (`.oxlintrc.json`).
 - Ensure code passes Flow type checking (`flow check`) before submission.
 - Components should work with the project's webpack configuration and babel setup.

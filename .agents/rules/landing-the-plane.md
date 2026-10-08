@@ -40,7 +40,6 @@ Execute all relevant quality checks to ensure code meets project standards:
 ```bash
 # Run linter
 mise run lint
-# oxlint for most files, plus ESLint for files that still use Flow
 
 # Run Flow type checking
 mise run flow
@@ -50,7 +49,7 @@ mise run flow
 mise run test
 # or: ./node_modules/.bin/jest
 
-# Check formatting (oxfmt, plus Prettier for files that still use Flow)
+# Check formatting with oxfmt (Flow files are skipped until converted)
 mise run format-check
 ```
 
@@ -300,9 +299,9 @@ This rule should be used in conjunction with:
 ## Notes for gobbldygook project
 
 - **Test command**: `mise run test` or `./node_modules/.bin/jest`
-- **Lint command**: `mise run lint` (oxlint, plus ESLint for Flow files)
+- **Lint command**: `mise run lint` (oxlint; it skips Flow files)
 - **Flow check**: `mise run flow` or `./node_modules/.bin/flow`
-- **Formatting**: `mise run format` (oxfmt, plus Prettier for Flow files)
+- **Formatting**: `mise run format` (oxfmt; Flow files are skipped)
 - **Build validation**: `mise run build` (if changes affect build process)
 - **Issue prefix**: Use `gobbldygook-` for all issue IDs in this project
 - **Branch naming**: Follow existing patterns (e.g., `feature/`, `fix/`, `chore/`)

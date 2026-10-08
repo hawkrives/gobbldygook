@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-# Lists the JS files that still use Flow syntax. oxlint and oxfmt cannot parse
-# Flow, so these files stay on ESLint and Prettier until they become TypeScript.
+# Lists the JS files that still use Flow syntax. oxfmt refuses to parse Flow
+# (and oxlint silently skips @flow files), so `mise run format` excludes these
+# until they are converted to TypeScript.
 set -euo pipefail
 cd "$(git rev-parse --show-toplevel)"
 {

@@ -50,7 +50,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run oxlint, and ESLint on Flow files
+      - name: Run oxlint
         run: mise run lint
 
       - name: Run oxlint for code scanning
