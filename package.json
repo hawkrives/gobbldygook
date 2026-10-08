@@ -7,6 +7,18 @@
   ],
   "jest": {
     "testEnvironment": "jsdom",
+    "testLocationInResults": true,
+    "reporters": [
+      "default",
+      [
+        "@flakiness/jest",
+        {
+          "flakinessProject": "gobbldygook/gobbldygook",
+          "title": "Jest",
+          "outputFolder": "flakiness-report/jest"
+        }
+      ]
+    ],
     "collectCoverageFrom": [
       "modules/**/*.js"
     ],
@@ -70,6 +82,8 @@
     "@babel/preset-flow": "7.27.1",
     "@babel/preset-react": "7.28.5",
     "@changesets/cli": "3.0.3",
+    "@flakiness/jest": "1.4.0",
+    "@flakiness/playwright": "2.0.2",
     "@playwright/test": "1.64.0",
     "@testing-library/jest-dom": "6.9.1",
     "babel-jest": "29.7.0",
