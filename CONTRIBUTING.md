@@ -13,6 +13,12 @@ This rule defines:
 - Constraints on logical changes per commit
 - Best practices for clean history
 
+## Recording User-Facing Changes
+
+This project uses [Changesets](https://changesets.dev/) to track user-facing changes. When a change affects what users see or do, run `mise run changeset` and describe the change; commit the generated file in `.changeset/` with the rest of your work. Refactors, tooling, and other internal-only changes do not need a changeset.
+
+The `@gob/*` packages share one version number (except `@gob/webpack-plugin-html`), so a bump to any of them bumps all of them.
+
 ## Before You Finish Your Session
 
 **IMPORTANT**: Before ending your work session, consult the **Landing the Plane rule** at `.agents/rules/landing-the-plane.md`.
@@ -44,6 +50,7 @@ For additional project conventions and guidelines, consult:
 - **End-to-end tests**: Playwright, run with `mise run e2e` (specs and fixture course data live in `e2e/`)
 - **Linting**: oxlint (skips files that still use Flow)
 - **Formatting**: oxfmt (skips files that still use Flow)
+- **Changelog**: Changesets, run with `mise run changeset`
 
 When running Mise, always set the environment variable `MISE_ENV=agents` to make sure that the agentic tools are installed.
 
