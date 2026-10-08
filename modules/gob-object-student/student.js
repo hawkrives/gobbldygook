@@ -145,6 +145,12 @@ export class Student extends StudentRecord<StudentType> {
     return this.get("creditsNeeded")
   }
 
+  setCreditsNeeded(credits: string | number): this {
+    let newCredits =
+      typeof credits === "string" ? parseInt(credits, 10) : credits
+    return this.set("creditsNeeded", newCredits)
+  }
+
   /////
 
   get name(): string {

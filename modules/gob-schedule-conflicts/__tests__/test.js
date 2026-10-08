@@ -44,6 +44,17 @@ test("checks for course time conflicts", () => {
   expect(checkCoursesForTimeConflicts(c2, c3)).toBe(false)
 })
 
+test("compares morning times against later times numerically", () => {
+  let morning = { offerings: [{ day: "Mo", start: "9:05", end: "10:00" }] }
+  let lateMorning = { offerings: [{ day: "Mo", start: "9:30", end: "10:25" }] }
+  let afternoon = { offerings: [{ day: "Mo", start: "13:00", end: "14:00" }] }
+
+  expect(checkCoursesForTimeConflicts(morning, morning)).toBe(true)
+  expect(checkCoursesForTimeConflicts(morning, lateMorning)).toBe(true)
+  expect(checkCoursesForTimeConflicts(lateMorning, morning)).toBe(true)
+  expect(checkCoursesForTimeConflicts(morning, afternoon)).toBe(false)
+})
+
 test("finds all time conflicts in a schedule", () => {
   let schedule = [
     {
