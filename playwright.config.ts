@@ -18,7 +18,7 @@ export default defineConfig({
       "@flakiness/playwright",
       {
         flakinessProject: "gobbldygook/gobbldygook",
-        title: "Playwright",
+        title: process.env.FLAKINESS_TITLE || "Playwright",
         outputFolder: "flakiness-report/playwright",
       },
     ],
@@ -32,6 +32,14 @@ export default defineConfig({
     {
       name: "chromium",
       use: { ...devices["Desktop Chrome"] },
+    },
+    {
+      name: "firefox",
+      use: { ...devices["Desktop Firefox"] },
+    },
+    {
+      name: "webkit",
+      use: { ...devices["Desktop Safari"] },
     },
   ],
   webServer: {
