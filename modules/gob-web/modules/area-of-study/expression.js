@@ -55,9 +55,8 @@ const ofLookup = {
 }
 
 function makeOfExpression({ expr, ctx }) {
-  const description =
-    expr.$count.$was ?
-      ofLookup[expr.$count.$was] || "???"
+  const description = expr.$count.$was
+    ? ofLookup[expr.$count.$was] || "???"
     : `${expr._counted || 0} of ${humanizeOperator(
         expr.$count.$operator,
       )} ${expr.$count.$num} from among`
@@ -252,9 +251,11 @@ export default function Expression(props: Props) {
       )}
       {contents && (
         <span className="expression--contents">
-          {typeof contents === "string" ?
+          {typeof contents === "string" ? (
             <span className="expression--label">{contents}</span>
-          : contents}
+          ) : (
+            contents
+          )}
           {props.hideIndicator || expr._isFulfillment ? null : result}
         </span>
       )}

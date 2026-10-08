@@ -26,8 +26,9 @@ const print = (indent, message) => {
 export default async function main() {
   let { input } = args()
 
-  let data =
-    input.length ? await loadJsonFile(input[0]) : JSON.parse(await stdin())
+  let data = input.length
+    ? await loadJsonFile(input[0])
+    : JSON.parse(await stdin())
 
   let student = new Student(data)
 

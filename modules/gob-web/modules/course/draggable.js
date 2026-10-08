@@ -1,3 +1,4 @@
+// @flow
 import React from "react"
 import { findDOMNode } from "react-dom"
 import styled from "styled-components"
@@ -9,7 +10,8 @@ import CourseWithModal from "./with-modal"
 type Props = {
   className?: string,
   style?: any,
-  connectDragSource: () => any, // react-dnd
+  scheduleId?: string,
+  connectDragSource: (any) => any, // react-dnd
   isDragging: boolean, // react-dnd
 }
 
