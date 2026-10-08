@@ -32,8 +32,8 @@ describe("undo", () => {
 
     let actual = reducer(state, undo("xyz"))
 
-    expect(actual.xyz.present).toEqual({ id: "xyz", name: "first" })
-    expect(actual.abc.present).toEqual({ id: "abc", name: "second" })
+    expect(actual["xyz"]?.present).toEqual({ id: "xyz", name: "first" })
+    expect(actual["abc"]?.present).toEqual({ id: "abc", name: "second" })
   })
 })
 
@@ -58,6 +58,6 @@ describe("redo", () => {
 
     let actual = reducer(state, redo("xyz"))
 
-    expect(actual.xyz.present).toEqual({ id: "xyz", name: "second" })
+    expect(actual["xyz"]?.present).toEqual({ id: "xyz", name: "second" })
   })
 })

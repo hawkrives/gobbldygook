@@ -1,5 +1,3 @@
-// @flow
-
 import uuid from "uuid/v4"
 import { Student } from "@gob/object-student"
 import {
@@ -38,7 +36,7 @@ describe("saveStudent", () => {
 })
 
 describe("addStudentToCache", () => {
-  let ids
+  let ids: Array<string>
   beforeEach(() => {
     ids = ["1", "2", "3"]
     localStorage.clear()
@@ -61,7 +59,7 @@ describe("addStudentToCache", () => {
 })
 
 describe("removeStudentFromCache", () => {
-  let ids
+  let ids: Array<string>
   beforeEach(() => {
     ids = ["1", "2", "3"]
     localStorage.clear()
