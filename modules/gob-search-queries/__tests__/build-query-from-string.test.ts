@@ -10,6 +10,7 @@ describe("buildQueryFromString", () => {
   })
 
   it("handles an invalid second arg", () => {
+    // @ts-expect-error: checks that a null options argument is tolerated
     expect(buildQueryFromString("", null)).toMatchSnapshot()
   })
 
