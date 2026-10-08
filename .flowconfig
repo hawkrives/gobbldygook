@@ -41,6 +41,8 @@ module.name_mapper='^@gob/lib$' -> '<PROJECT_ROOT>/modules/gob-lib/index'
 module.name_mapper='^@gob/school-st-olaf-college/?$' -> '<PROJECT_ROOT>/modules/gob-school-st-olaf-college/index'
 module.name_mapper='^@gob/schedule-conflicts$' -> '<PROJECT_ROOT>/modules/gob-schedule-conflicts/index'
 module.name_mapper='^@gob/search-queries$' -> '<PROJECT_ROOT>/modules/gob-search-queries/index'
+module.name_mapper='^@gob/hanson-format$' -> '<PROJECT_ROOT>/modules/gob-hanson-format/index'
+module.name_mapper='^@gob/hanson-format/is-requirement-name$' -> '<PROJECT_ROOT>/modules/gob-hanson-format/is-requirement-name'
 
 suppress_type=$FlowIssue
 

@@ -55,11 +55,13 @@ describe("enhanceHanson", () => {
   })
 
   it("requires its input to be an object", () => {
+    // @ts-expect-error: checks the runtime guard against non-objects
     expect(() => enhanceHanson("")).toThrowError("data was not an object!")
   })
 
   it('requires "revision" to be a string, if present', () => {
     expect(() =>
+      // @ts-expect-error: YAML can turn an unquoted revision into a number
       enhanceHanson({ revision: 2, result: "CSCI 121" }),
     ).toThrowError(
       '"revision" must be a string. Try wrapping it in single quotes.',
@@ -86,9 +88,9 @@ describe("enhanceHanson", () => {
   })
 
   it("enforces a whitelist of keys at lower levels", () => {
-    expect(() =>
-      enhanceHanson({ result: "", innerbad: "zzzz" }, { topLevel: false }),
-    ).toThrow(/only \[.*\] keys are allowed/)
+    expect(() => enhanceHanson({ result: "", innerbad: "zzzz" })).toThrow(
+      /only \[.*\] keys are allowed/,
+    )
   })
 
   it('expands string-only keys into objects with a "result" key', () => {
@@ -169,7 +171,7 @@ describe("enhanceHanson", () => {
     }
     const output = enhanceHanson(input)
 
-    expect(output.Req.result.$of.length).toBe(9)
+    expect(output).toHaveProperty(["Req", "result", "$of", "length"], 9)
 
     expect(output).toMatchSnapshot()
   })
@@ -186,7 +188,7 @@ describe("enhanceHanson", () => {
     }
     const output = enhanceHanson(input)
 
-    expect(output.Req.filter.$of.length).toBe(9)
+    expect(output).toHaveProperty(["Req", "filter", "$of", "length"], 9)
     expect(output).toMatchSnapshot()
   })
 
