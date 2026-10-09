@@ -3,11 +3,11 @@ export default function computeCountWithOperator({
   comparator,
   has,
   needs,
-}: {
+}: Readonly<{
   comparator: CounterOperatorEnum
   has: number
   needs: number
-}): boolean {
+}>): boolean {
   // compute the result
   switch (comparator) {
     case "$eq":

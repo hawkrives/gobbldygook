@@ -27,44 +27,44 @@ export function revisionFor(year: number): string {
 }
 
 export type FixtureCourse = {
-  clbid: string
-  crsid: string
-  groupid: string
-  credits: number
-  department: string
-  number: number
-  name: string
-  section: string
-  status: string
-  type: string
-  level: number
-  year: number
-  semester: number
-  term: number
-  gereqs: string[]
-  instructors: string[]
-  description: string[]
-  notes: string[]
-  prerequisites: false
-  pf: boolean
-  enrolled: number
-  max: number
-  offerings: Array<{
-    day: string
-    start: string
-    end: string
-    location: string
+  readonly clbid: string
+  readonly crsid: string
+  readonly groupid: string
+  readonly credits: number
+  readonly department: string
+  readonly number: number
+  readonly name: string
+  readonly section: string
+  readonly status: string
+  readonly type: string
+  readonly level: number
+  readonly year: number
+  readonly semester: number
+  readonly term: number
+  readonly gereqs: ReadonlyArray<string>
+  readonly instructors: ReadonlyArray<string>
+  readonly description: ReadonlyArray<string>
+  readonly notes: ReadonlyArray<string>
+  readonly prerequisites: false
+  readonly pf: boolean
+  readonly enrolled: number
+  readonly max: number
+  readonly offerings: ReadonlyArray<{
+    readonly day: string
+    readonly start: string
+    readonly end: string
+    readonly location: string
   }>
-  revisions: never[]
+  readonly revisions: ReadonlyArray<never>
 }
 
 type CatalogEntry = {
-  department: string
-  number: number
-  name: string
-  semester: number
-  gereqs: string[]
-  instructors: string[]
+  readonly department: string
+  readonly number: number
+  readonly name: string
+  readonly semester: number
+  readonly gereqs: ReadonlyArray<string>
+  readonly instructors: ReadonlyArray<string>
 }
 
 const catalog: CatalogEntry[] = [

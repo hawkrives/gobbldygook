@@ -9,7 +9,7 @@ import LZString from "lz-string"
 import { Editor } from "./editor"
 import { PlainAreaOfStudy } from "../area-of-study"
 
-type EditorState = { content?: string }
+type EditorState = Readonly<{ content?: string }>
 
 function read(): EditorState {
   const hash = document.location.hash.slice(1)

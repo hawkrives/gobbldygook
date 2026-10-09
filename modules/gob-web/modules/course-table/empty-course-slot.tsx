@@ -6,6 +6,8 @@ const Course = styled(FakeCourse)`
   user-select: none;
 `
 
-export default function EmptyCourseSlot(props: { className?: string }) {
+export default function EmptyCourseSlot(
+  props: Readonly<{ className?: string }>,
+) {
   return <Course title="Empty Slot" className={props.className} />
 }

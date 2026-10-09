@@ -5,11 +5,12 @@ import type { Course } from "@gob/examine-student"
 
 import "./expression--course.scss"
 
-type Props = Course & {
-  _result?: boolean | undefined
-  _taken?: boolean | undefined
-  style?: CSSProperties | undefined
-}
+type Props = Course &
+  Readonly<{
+    _result?: boolean | undefined
+    _taken?: boolean | undefined
+    style?: Readonly<CSSProperties> | undefined
+  }>
 
 export default function CourseExpression(props: Props) {
   const department = props.department

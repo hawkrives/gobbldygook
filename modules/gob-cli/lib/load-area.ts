@@ -8,14 +8,14 @@ import got from "got"
 const BASE = "https://hawkrives.github.io/gobbldygook-area-data"
 
 type InfoFileArea = {
-  name: string
-  type: string
-  revision: string
-  path: string
+  readonly name: string
+  readonly type: string
+  readonly revision: string
+  readonly path: string
 }
 
 type InfoFile = {
-  files: Array<InfoFileArea>
+  readonly files: ReadonlyArray<InfoFileArea>
 }
 
 const getInfoFile = () =>

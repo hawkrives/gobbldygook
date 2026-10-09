@@ -7,7 +7,7 @@ import type { Course } from "./types"
  */
 
 export default function getDepartments(
-  courses: Array<Course>,
+  courses: ReadonlyArray<Course>,
 ): Array<Course["department"]> {
   return [...new Set(courses.map((c) => c.department))]
 }

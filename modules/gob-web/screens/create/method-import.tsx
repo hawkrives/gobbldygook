@@ -173,7 +173,7 @@ class SISImportScreen extends React.Component<Props, State> {
   }
 }
 
-const StudentInfo = ({ student }: { student: Student }) => (
+const StudentInfo = ({ student }: Readonly<{ student: Student }>) => (
   <>
     <StudentSummary student={student} showEditor={false} showMessage={false} />
 
@@ -196,10 +196,12 @@ const StudentInfo = ({ student }: { student: Student }) => (
   </>
 )
 
-const ScheduleListing = (props: {
-  schedules: Collection.Keyed<string, Schedule>
-  fabrications: List<CourseType>
-}) => {
+const ScheduleListing = (
+  props: Readonly<{
+    schedules: Collection.Keyed<string, Schedule>
+    fabrications: List<CourseType>
+  }>,
+) => {
   let { schedules, fabrications } = props
 
   return (

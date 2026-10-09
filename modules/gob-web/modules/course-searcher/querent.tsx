@@ -8,22 +8,24 @@ import { List } from "immutable"
 import type { Set } from "immutable"
 import type { GROUP_BY_KEY, SORT_BY_KEY } from "./constants"
 
-type Props = {
+type Props = Readonly<{
   query: string
   term?: number | null | undefined
-  children: (args: {
-    error: string | null
-    inProgress: boolean
-    didSearch: boolean
-    results: List<string | CourseType>
-    keys: Array<string>
-    years: Set<number>
-  }) => React.ReactNode
+  children: (
+    args: Readonly<{
+      error: string | null
+      inProgress: boolean
+      didSearch: boolean
+      results: List<string | CourseType>
+      keys: ReadonlyArray<string>
+      years: Set<number>
+    }>,
+  ) => React.ReactNode
   groupBy: GROUP_BY_KEY
   sortBy: SORT_BY_KEY
   limitTo: string
   filterBy: string
-}
+}>
 
 type State = {
   error: string | null
@@ -66,7 +68,7 @@ export class Querent extends React.Component<Props, State> {
 
   submitQuery = async (
     query: string,
-    { term }: { term?: number | null | undefined },
+    { term }: Readonly<{ term?: number | null | undefined }>,
   ) => {
     if (!query && term == null) {
       return

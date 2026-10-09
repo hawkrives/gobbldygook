@@ -3,7 +3,7 @@ declare global {
     GoogleAnalyticsObject?: string
     // analytics.js replaces the queue object with its tracker function
     ga?:
-      | ((...args: Array<unknown>) => void)
+      | ((...args: ReadonlyArray<unknown>) => void)
       | { q: Array<Array<unknown>>; l: number }
   }
 }
@@ -27,11 +27,11 @@ export function isogram() {
   document.body.appendChild(script)
 }
 
-export function ga(...args: Array<unknown>) {
+export function ga(...args: ReadonlyArray<unknown>) {
   if (process.env.NODE_ENV === "production") {
     try {
       // throws, and is ignored, until analytics.js has loaded
-      ;(window.ga as (...args: Array<unknown>) => void)(...args)
+      ;(window.ga as (...args: ReadonlyArray<unknown>) => void)(...args)
     } catch (_e) {} // eslint-disable-line no-empty
   }
 }

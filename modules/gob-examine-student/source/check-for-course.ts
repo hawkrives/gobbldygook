@@ -8,6 +8,9 @@ import type { Course } from "./types"
  * @returns {Boolean} - if the course was found or not
  */
 
-export default function checkForCourse(query: Course, courses: Course[]) {
+export default function checkForCourse(
+  query: Course,
+  courses: ReadonlyArray<Course>,
+) {
   return courses.some((course) => compareCourseToCourse(query, course))
 }

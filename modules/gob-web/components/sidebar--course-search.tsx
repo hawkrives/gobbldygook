@@ -4,12 +4,12 @@ import { Sidebar } from "./sidebar"
 import type { Student } from "@gob/object-student"
 import type { Undoable } from "../types"
 
-type Props = {
+type Props = Readonly<{
   term?: string | null | undefined
   navigate: (to: string) => unknown
   student: Undoable<Student>
   queryString?: string
-}
+}>
 
 export function CourseSearcherSidebar(props: Props) {
   let { student, navigate, queryString = window.location.search } = props

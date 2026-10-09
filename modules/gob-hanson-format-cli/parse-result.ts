@@ -5,10 +5,10 @@ import stringify from "stabilize"
 import yaml from "js-yaml"
 import getStdin from "get-stdin"
 
-type Args = {
+type Args = Readonly<{
   json: boolean
   yaml: boolean
-}
+}>
 
 function parseString(args: Args, string: string) {
   if (string.length === 0) {

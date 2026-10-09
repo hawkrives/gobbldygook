@@ -8,6 +8,6 @@ const rootReducer = combineReducers({
   students,
 })
 
-export type RootState = ReturnType<typeof rootReducer>
+export type RootState = Readonly<ReturnType<typeof rootReducer>>
 
 export default rootReducer

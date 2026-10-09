@@ -11,6 +11,12 @@ import type { GROUP_BY_KEY } from "./constants"
 
 type Results = List<string | CourseType>
 
+type RowProps = Readonly<
+  Omit<ListChildComponentProps, "style"> & {
+    style: Readonly<React.CSSProperties>
+  }
+>
+
 type Props = {
   groupedBy: GROUP_BY_KEY
   results: Results
@@ -103,7 +109,10 @@ export class CourseResultsList extends React.Component<Props> {
     return getRowHeight(item)
   }
 
-  renderHeader = (title: string, { style }: { style: React.CSSProperties }) => {
+  renderHeader = (
+    title: string,
+    { style }: Readonly<{ style: Readonly<React.CSSProperties> }>,
+  ) => {
     if (!title) {
       return null
     }
@@ -115,7 +124,7 @@ export class CourseResultsList extends React.Component<Props> {
     )
   }
 
-  renderRow = (args: ListChildComponentProps) => {
+  renderRow = (args: RowProps) => {
     let { index, style } = args
     let item = this.props.results.get(index)
 

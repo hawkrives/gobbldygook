@@ -16,6 +16,7 @@ type Input = {
   fulfillments?: FulfillmentsObject
 }
 
+// oxlint-disable-next-line typescript/prefer-readonly-parameter-types -- evaluates area's expressions in place, writing their results onto them
 export function evaluate({
   courses = [],
   overrides = {},

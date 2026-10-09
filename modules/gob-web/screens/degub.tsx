@@ -12,11 +12,11 @@ function Student({
   undo,
   redo,
   student,
-}: {
+}: Readonly<{
   undo: () => unknown
   redo: () => unknown
   student: Undoable<StudentObject>
-}) {
+}>) {
   const canUndo = student.past.length
   const canRedo = student.future.length
   const present = student.present
@@ -51,9 +51,11 @@ const connector = connect(
   },
 )
 
-type Props = RouteComponentProps & {
-  className?: string
-} & ConnectedProps<typeof connector>
+type Props = Readonly<RouteComponentProps> &
+  Readonly<{
+    className?: string
+  }> &
+  Readonly<ConnectedProps<typeof connector>>
 
 function Degub(props: Props) {
   const students = props.students

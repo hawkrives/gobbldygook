@@ -57,14 +57,14 @@ const Identifier = styled.span`
 const Type = styled.span``
 const Prereqs = styled.span``
 
-export type Props = {
+export type Props = Readonly<{
   className?: string | undefined
   conflicts?: List<WarningType> | null | undefined
   course: Course
   index?: number | undefined
   onClick?: ((ev: React.MouseEvent) => unknown) | undefined
-  style?: React.CSSProperties | undefined
-}
+  style?: Readonly<React.CSSProperties> | undefined
+}>
 
 export default class CompactCourse extends React.Component<Props> {
   override render() {

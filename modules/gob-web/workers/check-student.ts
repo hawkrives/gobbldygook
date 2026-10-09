@@ -21,7 +21,7 @@ worker.addEventListener("error", function (event: Event) {
 // Checks a student object against an area of study.
 async function checkStudentAgainstArea(
   student: Student,
-  area: ParsedHansonFile,
+  area: Readonly<ParsedHansonFile>,
 ): Promise<EvaluationResult> {
   return new Promise((resolve) => {
     const sourceId = uniqueId()

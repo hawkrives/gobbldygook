@@ -4,6 +4,7 @@ import some from "lodash/some"
 import assertKeys from "./assert-keys"
 import type {
   Course,
+  DeepReadonly,
   Operator,
   Qualification,
   QualificationStaticValue,
@@ -20,7 +21,7 @@ import type {
  */
 export default function compareCourseToQualification(
   course: Course,
-  { $key, $operator, $value, $type }: Qualification,
+  { $key, $operator, $value, $type }: DeepReadonly<Qualification>,
 ): boolean {
   if (Array.isArray($value)) {
     throw new TypeError(
@@ -45,7 +46,7 @@ export default function compareCourseToQualification(
 
 function compareCourseToQualificationViaObject(
   course: Course,
-  { $key, $operator, $value, $type }: Qualification,
+  { $key, $operator, $value, $type }: DeepReadonly<Qualification>,
 ): boolean {
   if (typeof $value !== "object") {
     throw new TypeError(

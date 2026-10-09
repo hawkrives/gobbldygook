@@ -1,17 +1,21 @@
 import Expression, { makeWhereQualifier } from "./expression"
 
 import type {
+  DeepReadonly,
   FilterExpression,
   FilterOfExpression,
   FilterWhereExpression,
 } from "@gob/examine-student"
 
-type Props = {
-  expr: FilterExpression
+type Props = Readonly<{
+  expr: DeepReadonly<FilterExpression>
   ctx?: unknown
-}
+}>
 
-function FilterOf({ expr, ctx }: { expr: FilterOfExpression; ctx?: unknown }) {
+function FilterOf({
+  expr,
+  ctx,
+}: Readonly<{ expr: DeepReadonly<FilterOfExpression>; ctx?: unknown }>) {
   return (
     <div className="filter filter--of">
       <h4>Filter:</h4>
@@ -22,7 +26,9 @@ function FilterOf({ expr, ctx }: { expr: FilterOfExpression; ctx?: unknown }) {
   )
 }
 
-function FilterWhere({ expr }: { expr: FilterWhereExpression }) {
+function FilterWhere({
+  expr,
+}: Readonly<{ expr: DeepReadonly<FilterWhereExpression> }>) {
   const qualifier = makeWhereQualifier(expr.$where)
   const description = `only courses where ${qualifier}`
 

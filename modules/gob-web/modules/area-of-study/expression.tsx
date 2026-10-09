@@ -5,6 +5,7 @@ import ResultIndicator from "./result-indicator"
 import type {
   BooleanExpression,
   Course,
+  DeepReadonly,
   Expression as ExpressionType,
   ModifierExpression,
   OccurrenceExpression,
@@ -24,7 +25,10 @@ const JOINERS = {
   $or: "OR",
 }
 
-function makeBooleanExpression(expr: BooleanExpression, ctx: unknown) {
+function makeBooleanExpression(
+  expr: DeepReadonly<BooleanExpression>,
+  ctx: unknown,
+) {
   const [kind, children] =
     "$and" in expr
       ? (["$and", expr.$and] as const)
@@ -54,7 +58,7 @@ const ofLookup: Readonly<Record<string, string | undefined>> = {
   none: "None of",
 }
 
-function makeOfExpression(expr: OfExpression, ctx: unknown) {
+function makeOfExpression(expr: DeepReadonly<OfExpression>, ctx: unknown) {
   const description = expr.$count.$was
     ? (ofLookup[expr.$count.$was] ?? "???")
     : `${expr._counted ?? 0} of ${humanizeOperator(
@@ -73,7 +77,7 @@ function makeOfExpression(expr: OfExpression, ctx: unknown) {
   return { description, contents }
 }
 
-function makeModifierExpression(expr: ModifierExpression) {
+function makeModifierExpression(expr: DeepReadonly<ModifierExpression>) {
   const op = humanizeOperator(expr.$count.$operator)
   const num = expr.$count.$num
   const needs = `${op} ${num} ${plur(expr.$what, expr.$count.$num)}`
@@ -97,7 +101,7 @@ let keys: Readonly<Record<string, string>> = {
   gereqs: "G.E.",
 }
 
-function stringifyWhereValue(value: QualificationValue): string {
+function stringifyWhereValue(value: DeepReadonly<QualificationValue>): string {
   if (typeof value === "number") {
     return String(value)
   }
@@ -123,7 +127,7 @@ function stringifyWhereValue(value: QualificationValue): string {
   return "Unknown"
 }
 
-export function makeWhereQualifier(where: Qualifier): string {
+export function makeWhereQualifier(where: DeepReadonly<Qualifier>): string {
   // area files are parsed at runtime, so a qualifier can match none of the
   // types
   const unchecked: { $type?: unknown; $booleanType?: unknown } = where
@@ -145,7 +149,7 @@ export function makeWhereQualifier(where: Qualifier): string {
   return `${key} ${operator} ${value}`
 }
 
-function makeWhereExpression(expr: WhereExpression) {
+function makeWhereExpression(expr: DeepReadonly<WhereExpression>) {
   const op = humanizeOperator(expr.$count.$operator)
   const num = expr.$count.$num
   const needs = `${op} ${num}`
@@ -173,7 +177,7 @@ function makeWhereExpression(expr: WhereExpression) {
   return { description, contents }
 }
 
-function makeOccurrenceExpression(expr: OccurrenceExpression) {
+function makeOccurrenceExpression(expr: DeepReadonly<OccurrenceExpression>) {
   const op = humanizeOperator(expr.$count.$operator)
   const word = expr.$count.$num === 1 ? "occurrence" : "occurrences"
   const num = expr.$count.$num
@@ -186,12 +190,14 @@ function makeOccurrenceExpression(expr: OccurrenceExpression) {
   return { description, contents }
 }
 
-export type Props = {
+export type Props = Readonly<{
   // fulfillments are course expressions marked with _isFulfillment
-  expr: ExpressionType & { _isFulfillment?: boolean; _taken?: boolean }
+  expr: DeepReadonly<
+    ExpressionType & { _isFulfillment?: boolean; _taken?: boolean }
+  >
   hideIndicator?: boolean
   ctx?: unknown
-}
+}>
 
 export default function Expression(props: Props) {
   const { expr } = props

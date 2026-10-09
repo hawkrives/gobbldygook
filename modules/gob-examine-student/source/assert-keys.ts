@@ -8,7 +8,10 @@ import reject from "lodash/reject"
  * @returns {void}
  */
 
-export default function assertKeys(obj: object, ...listOfKeys: string[]) {
+export default function assertKeys(
+  obj: object,
+  ...listOfKeys: readonly string[]
+) {
   const missingKeys = reject(listOfKeys, (key) => key in obj)
 
   if (missingKeys.length) {

@@ -15,17 +15,19 @@ import type {
   QualificationStaticValue,
 } from "./types"
 
-type FilterOptions = {
+type FilterOptions = Readonly<{
   distinct?: boolean | undefined
-  fullList?: Course[] | undefined
-  counter?: Counter | undefined
-}
+  fullList?: ReadonlyArray<Course> | undefined
+  counter?: Readonly<Counter> | undefined
+}>
 
-export default function filterByWhereClause(
-  baseList: Course[],
+// Returns either baseList itself or a new list of courses.
+export default function filterByWhereClause<L extends ReadonlyArray<Course>>(
+  baseList: L,
+  // oxlint-disable-next-line typescript/prefer-readonly-parameter-types -- filterByQualification writes $computed-value onto the clause's function values
   clause: Qualifier,
   { distinct, fullList, counter }: FilterOptions = {},
-): Course[] {
+): L | Course[] {
   // When filtering by an and-clause, we need access to both the
   // entire list of courses, and the result of the prior iteration.
   // To simplify future invocations, we default to `fullList = list`
@@ -48,7 +50,7 @@ export default function filterByWhereClause(
           // and-clauses become the result of applying each invocation to the
           // result of the prior one. they are the list of unique courses which
           // meet all of the qualifications.
-          let filtered = baseList
+          let filtered: L | Course[] = baseList
           forEach(clause.$and, (q) => {
             filtered = filterByWhereClause(filtered, q, {
               distinct,
@@ -90,7 +92,7 @@ export default function filterByWhereClause(
   }
 }
 type QualificationFunction = (
-  items: Array<QualificationStaticValue>,
+  items: ReadonlyArray<QualificationStaticValue>,
 ) => QualificationStaticValue | undefined
 
 const qualificationFunctionLookup: Readonly<
@@ -100,7 +102,8 @@ const qualificationFunctionLookup: Readonly<
   min: min,
 }
 export function filterByQualification(
-  list: Course[],
+  list: ReadonlyArray<Course>,
+  // oxlint-disable-next-line typescript/prefer-readonly-parameter-types -- applyQualifictionFunction writes $computed-value onto the qualification's function value
   qualification: Qualification,
   { distinct = false, fullList, counter }: FilterOptions = {},
 ): Course[] {
@@ -152,14 +155,15 @@ export function filterByQualification(
   return filtered
 }
 
+// oxlint-disable-next-line typescript/prefer-readonly-parameter-types -- writes $computed-value onto value
 function applyQualifictionFunction({
   value,
   fullList,
   list,
 }: {
-  value: QualificationFunctionValue
-  fullList?: Course[] | undefined
-  list: Course[]
+  readonly value: QualificationFunctionValue
+  readonly fullList?: ReadonlyArray<Course> | undefined
+  readonly list: ReadonlyArray<Course>
 }): void {
   const func = Object.hasOwn(qualificationFunctionLookup, value.$name)
     ? qualificationFunctionLookup[value.$name]

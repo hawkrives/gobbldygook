@@ -13,7 +13,11 @@ export type { ParsedHansonFile, ParsedHansonRequirement }
 // Qualifications match array fields by membership, so a cross-listed course
 // can also list its departments, like {department: ["ART", "ASIAN"]}.
 // An area file can write "*" for the year or semester to match any.
-export type Course = Omit<
+export type Course = Readonly<MutableCourse>
+
+// computeCourse writes `_extraKeys` onto the course of a course expression,
+// so that one course stays writable. Everything else reads courses as Course.
+export type MutableCourse = Omit<
   Partial<StudentCourse>,
   "department" | "year" | "semester"
 > & {
@@ -23,6 +27,15 @@ export type Course = Omit<
   international?: boolean
   [key: string]: unknown
 }
+
+// Evaluation writes its results (_result, _matches, _checked, ...) onto the
+// expressions it is given, so the expression types stay writable. Code that
+// only reads an expression takes it as DeepReadonly<...> instead.
+export type DeepReadonly<T> = unknown extends T
+  ? T
+  : T extends (...args: readonly never[]) => unknown
+    ? T
+    : { readonly [K in keyof T]: DeepReadonly<T[K]> }
 
 // An area or requirement while it is evaluated. Keys that are requirement
 // names (see isRequirementName) hold child requirements.
@@ -47,7 +60,7 @@ export type EvaluationResult = Requirement & {
   }
 }
 
-export type OverridesPath = string[]
+export type OverridesPath = ReadonlyArray<string>
 export type OverridesObject = Readonly<Record<string, boolean>>
 export type FulfillmentsPath = OverridesPath
 export type FulfillmentsObject = Readonly<Record<string, Fulfillment>>
@@ -110,7 +123,7 @@ export type CourseExpression = BaseExpression & {
   _request?: Course
   _taken?: boolean
   $type: "course"
-  $course: Course
+  $course: MutableCourse
 }
 
 export type QualificationFunctionValue = {

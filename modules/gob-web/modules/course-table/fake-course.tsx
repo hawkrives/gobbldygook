@@ -1,10 +1,10 @@
 import { Container, Title, SummaryRow } from "../course/compact"
 
-type PropTypes = {
+type PropTypes = Readonly<{
   className?: string | undefined
   details?: string
   title: string
-}
+}>
 
 export default function FakeCourse(props: PropTypes) {
   return (

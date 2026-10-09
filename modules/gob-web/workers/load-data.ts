@@ -13,7 +13,7 @@ declare global {
 const COURSE_URL = APP_BASE + "courseData.url"
 const AREA_URL = APP_BASE + "areaData.url"
 
-type WorkerActionCreator = (...args: Array<unknown>) => AnyAction
+type WorkerActionCreator = (...args: ReadonlyArray<unknown>) => AnyAction
 
 // The worker names an action creator and is trusted to send it matching
 // arguments; see @gob/worker-load-data's lib-dispatch
@@ -51,23 +51,27 @@ worker.addEventListener("message", ({ data }: MessageEvent<string>) => {
   }
 })
 
-export type DispatchMessage = {
+export type DispatchMessage = Readonly<{
   type: "dispatch"
-  message: { type: string; action: string; args: Array<unknown> }
-}
+  message: Readonly<{
+    type: string
+    action: string
+    args: ReadonlyArray<unknown>
+  }>
+}>
 
 export type LoadDataMessageEnum =
-  | { type: "load-from-info"; path: string; url: string }
-  | { type: "check-idb-in-worker-support" }
-  | {
+  | Readonly<{ type: "load-from-info"; path: string; url: string }>
+  | Readonly<{ type: "check-idb-in-worker-support" }>
+  | Readonly<{
       type: "load-term-data"
       term: number
       courseInfoUrl: string
       path: string
-    }
+    }>
   | DispatchMessage
 
-export type LoadDataMessage = { id: string } & LoadDataMessageEnum
+export type LoadDataMessage = Readonly<{ id: string }> & LoadDataMessageEnum
 
 function messageWorker(
   params: LoadDataMessageEnum,

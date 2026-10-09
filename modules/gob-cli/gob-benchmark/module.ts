@@ -11,11 +11,13 @@ import sparkly from "sparkly"
 import mean from "lodash/mean"
 import { loadStudent } from "../lib/load-student"
 
+// oxlint-disable-next-line typescript/prefer-readonly-parameter-types -- process.hrtime() only accepts a mutable [number, number] tuple
 function now(other?: [number, number]) {
   let time = process.hrtime(other)
   return time[0] * 1e3 + time[1] / 1e6
 }
 
+// oxlint-disable-next-line typescript/prefer-readonly-parameter-types -- evaluate() writes its results onto area's expressions and takes a mutable courses array
 function benchmarkArea({
   area,
   courses,
@@ -49,11 +51,11 @@ async function benchmark({
   runs,
   graph,
   files,
-}: {
+}: Readonly<{
   runs: number
   graph: boolean
-  files: Array<string>
-}) {
+  files: ReadonlyArray<string>
+}>) {
   let loadedFiles = await Promise.all(files.map((file) => loadStudent(file)))
 
   for (const { student, areas, courses, overrides } of loadedFiles) {

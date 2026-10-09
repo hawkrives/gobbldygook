@@ -19,9 +19,11 @@ type ScheduleType = {
 
 // What a schedule can be built from: a saved schedule from JSON, or the
 // fields of another Schedule. Older saves stored clbids as numbers.
-export type ScheduleInput = Partial<Omit<ScheduleType, "clbids">> & {
-  clbids?: Iterable<string | number>
-}
+export type ScheduleInput = Readonly<
+  Partial<Omit<ScheduleType, "clbids">> & {
+    clbids?: Iterable<string | number>
+  }
+>
 
 const defaultValues: ScheduleType = {
   id: "unknown",
@@ -91,7 +93,7 @@ export class Schedule extends ScheduleRecord {
 
   async getCoursesWithErrors(
     getCourse: CourseLookupFunc,
-    fabrications?: Array<CourseType> | List<CourseType>,
+    fabrications?: ReadonlyArray<CourseType> | List<CourseType>,
   ): Promise<List<Result<CourseType>>> {
     let term = this.getTerm()
     let promises = this.clbids.map((clbid) =>
@@ -102,7 +104,7 @@ export class Schedule extends ScheduleRecord {
 
   async getCourses(
     getCourse: CourseLookupFunc,
-    fabrications?: Array<CourseType> | List<CourseType>,
+    fabrications?: ReadonlyArray<CourseType> | List<CourseType>,
   ): Promise<List<CourseType>> {
     let coursesWithErrors = await this.getCoursesWithErrors(
       getCourse,

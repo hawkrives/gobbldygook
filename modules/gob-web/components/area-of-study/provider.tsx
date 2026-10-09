@@ -3,17 +3,19 @@ import * as React from "react"
 import { db } from "../../helpers/db"
 import type { HansonFile } from "@gob/hanson-format"
 
-type Props = {
-  children: (args: {
-    loading: boolean
-    areas: Array<HansonFile>
-  }) => React.ReactNode
-}
+type Props = Readonly<{
+  children: (
+    args: Readonly<{
+      loading: boolean
+      areas: ReadonlyArray<HansonFile>
+    }>,
+  ) => React.ReactNode
+}>
 
-type State = {
+type State = Readonly<{
   loading: boolean
-  areas: Array<HansonFile>
-}
+  areas: ReadonlyArray<HansonFile>
+}>
 
 export class AreaOfStudyProvider extends React.PureComponent<Props, State> {
   override state: State = {

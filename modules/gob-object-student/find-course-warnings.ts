@@ -9,11 +9,11 @@ export type WarningTypeEnum =
   | "invalid-semester"
   | "invalid-year"
   | "time-conflict"
-export type WarningType = {
+export type WarningType = Readonly<{
   warning: true
   type: WarningTypeEnum
   msg: string
-}
+}>
 export function checkForInvalidYear(
   course: CourseType,
   scheduleYear: number,
@@ -53,7 +53,7 @@ export function checkForInvalidSemester(
 }
 export function checkForInvalidity(
   courses: List<CourseType>,
-  { year, semester }: { year: number; semester: number },
+  { year, semester }: Readonly<{ year: number; semester: number }>,
 ): Map<string, List<WarningType | null | undefined>> {
   let results = courses.map(
     (course): [string, List<WarningType | null | undefined>] => {

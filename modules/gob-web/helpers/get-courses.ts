@@ -11,11 +11,12 @@ declare global {
 const baseUrl = "https://stolaf.dev/course-data"
 
 // Courses in the database also carry their search indexes
-type StoredCourse = CourseType & {
-  profWords?: unknown
-  words?: unknown
-  sourcePath?: unknown
-}
+type StoredCourse = CourseType &
+  Readonly<{
+    profWords?: unknown
+    words?: unknown
+    sourcePath?: unknown
+  }>
 
 const networkCache: Map<string, Promise<CourseType>> = new Map()
 export function getCourseFromNetwork(clbid: string): Promise<CourseType> {
@@ -69,7 +70,7 @@ export function getCourseFromDatabase(clbid: string): Promise<CourseType> {
 export async function getCourse(
   clbid: string,
   term?: number | null,
-  fabrications: Array<CourseType> | List<CourseType> | null = [],
+  fabrications: ReadonlyArray<CourseType> | List<CourseType> | null = [],
 ): Promise<Result<CourseType>> {
   if (fabrications) {
     let fab = fabrications.find((c) => c.clbid === clbid)

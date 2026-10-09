@@ -197,7 +197,131 @@
         "typescript/prefer-regexp-exec": "error",
         "typescript/prefer-string-starts-ends-with": "error",
         "typescript/switch-exhaustiveness-check": "error",
-        "typescript/strict-boolean-expressions": "error"
+        "typescript/strict-boolean-expressions": "error",
+        "typescript/prefer-readonly-parameter-types": [
+          "error",
+          {
+            "treatMethodsAsReadonly": true,
+            "ignoreInferredTypes": true,
+            "allow": [
+              {
+                "from": "package",
+                "package": "immutable",
+                "name": [
+                  "List",
+                  "Map",
+                  "OrderedMap",
+                  "Set",
+                  "OrderedSet",
+                  "Record",
+                  "Seq",
+                  "Collection",
+                  "Stack"
+                ]
+              },
+              {
+                "from": "package",
+                "package": "playwright-core",
+                "name": [
+                  "Page",
+                  "Locator",
+                  "BrowserContext",
+                  "Route",
+                  "Request",
+                  "Response",
+                  "Download",
+                  "Browser",
+                  "APIRequestContext"
+                ]
+              },
+              {
+                "from": "package",
+                "package": "@playwright/test",
+                "name": ["TestInfo"]
+              },
+              {
+                "from": "package",
+                "package": "react",
+                "name": [
+                  "MouseEvent",
+                  "ChangeEvent",
+                  "KeyboardEvent",
+                  "FormEvent",
+                  "FocusEvent",
+                  "DragEvent",
+                  "SyntheticEvent",
+                  "ReactNode",
+                  "ReactElement"
+                ]
+              },
+              {
+                "from": "package",
+                "package": "@types/react",
+                "name": [
+                  "MouseEvent",
+                  "ChangeEvent",
+                  "KeyboardEvent",
+                  "FormEvent",
+                  "FocusEvent",
+                  "DragEvent",
+                  "SyntheticEvent",
+                  "ReactNode",
+                  "ReactElement"
+                ]
+              },
+              {
+                "from": "package",
+                "package": "@reach/router",
+                "name": ["RouteComponentProps", "NavigateFn", "WindowLocation"]
+              },
+              {
+                "from": "package",
+                "package": "react-dnd",
+                "name": [
+                  "DropTargetMonitor",
+                  "DragSourceMonitor",
+                  "ConnectDragSource",
+                  "ConnectDropTarget"
+                ]
+              },
+              {
+                "from": "package",
+                "package": "redux",
+                "name": ["AnyAction", "Action", "Dispatch"]
+              },
+              {
+                "from": "lib",
+                "name": [
+                  "Event",
+                  "MessageEvent",
+                  "ErrorEvent",
+                  "Error",
+                  "HTMLElement",
+                  "HTMLInputElement",
+                  "Element",
+                  "Response",
+                  "Request",
+                  "File",
+                  "FileList",
+                  "Blob",
+                  "IDBDatabase",
+                  "IDBTransaction",
+                  "IDBObjectStore",
+                  "IDBIndex",
+                  "IDBRequest",
+                  "IDBCursorWithValue",
+                  "Worker",
+                  "Window",
+                  "Date",
+                  "RegExp",
+                  "URL",
+                  "URLSearchParams",
+                  "Promise"
+                ]
+              }
+            ]
+          }
+        ]
       }
     },
     {

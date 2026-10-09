@@ -1,3 +1,4 @@
+/* oxlint-disable typescript/prefer-readonly-parameter-types -- these helpers build expressions for computeOf, which writes its results onto them */
 import computeChunk, { computeOf } from "../compute-chunk"
 import type {
   Course,

@@ -1,4 +1,4 @@
-export type Mapped<T> = Record<string, T>
+export type Mapped<T> = Readonly<Record<string, T>>
 
 // What the PEG parser returns for a "result" or "filter" string: a tree of
 // expressions, each tagged with its $type ("course", "of", "boolean", ...).
@@ -11,7 +11,7 @@ export type ParsedExpression = {
 // An area of study as loaded from its YAML file. Keys that are requirement
 // names (see isRequirementName) hold child requirements; enhanceHanson
 // checks all of it at runtime.
-export type HansonFile = {
+export type HansonFile = Readonly<{
   name?: string
   type?: string
   revision?: string
@@ -21,7 +21,7 @@ export type HansonFile = {
   slug?: string
   "available through"?: number
   [key: string]: unknown
-}
+}>
 
 // A child requirement as written in YAML. A plain string is shorthand for
 // `{result: string}`.

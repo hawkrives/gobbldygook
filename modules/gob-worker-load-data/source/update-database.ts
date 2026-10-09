@@ -13,7 +13,7 @@ const fetchText = (url: string): Promise<string> => {
 export default function updateDatabase(
   type: InfoFileTypeEnum,
   infoFileBase: string,
-  notification: Notification,
+  notification: Readonly<Notification>,
   { path, hash }: InfoFileRef,
 ): Promise<boolean> {
   console.log(`fetching ${path}`)

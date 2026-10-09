@@ -7,7 +7,10 @@ import prettyMs from "pretty-ms"
 
 // The parts of a failed IndexedDB write that onFailure reads
 type WriteError = {
-  target: { db: { name: string }; error: { name: string } }
+  readonly target: {
+    readonly db: { readonly name: string }
+    readonly error: { readonly name: string }
+  }
 }
 
 // istanbul ignore next
@@ -26,7 +29,7 @@ const onFailure = (err: WriteError): never => {
 
 export function storeCourses(
   path: string,
-  data: Array<RawCourse>,
+  data: ReadonlyArray<RawCourse>,
 ): Promise<void> {
   console.log(`courses: storing ${path}`)
 
@@ -75,7 +78,7 @@ export default function storeData(
 ): Promise<void> | undefined {
   // istanbul ignore else
   if (type === "courses") {
-    return storeCourses(path, data as Array<RawCourse>)
+    return storeCourses(path, data as ReadonlyArray<RawCourse>)
   } else if (type === "areas") {
     return storeArea(path, data as RawArea)
   }

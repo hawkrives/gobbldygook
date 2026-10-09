@@ -2,7 +2,7 @@ import assertKeys from "./assert-keys"
 import flatMap from "lodash/flatMap"
 import uniqBy from "lodash/uniqBy"
 import stringify from "stabilize"
-import type { Expression, Requirement, Course } from "./types"
+import type { Expression, Requirement, Course, DeepReadonly } from "./types"
 /**
  * Collects matched courses from a result object
  * @private
@@ -11,11 +11,11 @@ import type { Expression, Requirement, Course } from "./types"
  */
 
 export default function collectMatches(
-  expr: Expression | Requirement,
+  expr: DeepReadonly<Expression | Requirement>,
 ): Course[] {
   assertKeys(expr, "$type")
   // start off with absolutely no matches
-  let matches: Course[] | undefined = undefined
+  let matches: ReadonlyArray<Course> | undefined = undefined
 
   // if a course expression, and the course was used, return the course in
   // an array. returning in an array allows the higher-level expressions to

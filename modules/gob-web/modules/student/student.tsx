@@ -32,10 +32,12 @@ const CouldNotLoadCard = styled(Card)`
   text-align: center;
 `
 
-type OwnProps = {
-  children: (args: { student: Undoable<StudentObject> }) => React.ReactNode // from react-router
+type OwnProps = Readonly<{
+  children: (
+    args: Readonly<{ student: Undoable<StudentObject> }>,
+  ) => React.ReactNode // from react-router
   studentId?: string // react-router
-}
+}>
 
 const connector = connect(
   (state: RootState, ownProps: OwnProps) =>
@@ -45,7 +47,7 @@ const connector = connect(
   { loadStudent },
 )
 
-type Props = OwnProps & ConnectedProps<typeof connector>
+type Props = OwnProps & Readonly<ConnectedProps<typeof connector>>
 
 type State = {}
 

@@ -18,6 +18,7 @@ import type {
 // sub-requirements and such.
 export default function compute(
   outerReq: { readonly [key: string]: unknown },
+  // oxlint-disable-next-line typescript/prefer-readonly-parameter-types -- computeChunk adds to dirty and writes results onto the fulfillments it evaluates, and courses can come back as a where-expression's matches, which applyFulfillmentToResult pushes onto
   args: {
     path: string[]
     courses?: Course[]

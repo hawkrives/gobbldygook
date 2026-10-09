@@ -8,14 +8,14 @@ if (!globalThis.TESTING) {
 
 import "./modal.scss"
 
-type ModalProps = {
+type ModalProps = Readonly<{
   backdropClassName?: string
   children?: React.ReactNode
   className?: string
   // react-modal's aria-label for the dialog
   contentLabel?: string
   onClose: () => unknown
-}
+}>
 
 export default function Modal(props: ModalProps) {
   return (

@@ -24,12 +24,12 @@ const Subtitle = styled.h2`
 
 const independentRegex = /^I[RS]/
 
-type CourseTitleProps = {
+type CourseTitleProps = Readonly<{
   className?: string | undefined
   name: string
   title?: string | undefined
   type?: string | undefined
-}
+}>
 
 export default function CourseTitle({
   name,

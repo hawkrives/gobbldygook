@@ -38,12 +38,12 @@ const BarFill = styled.div`
   height: 100%;
 `
 
-type Props = {
+type Props = Readonly<{
   className?: string
   colorful?: boolean
   max?: number
   value: number
-}
+}>
 
 export default function ProgressBar(props: Props) {
   const { value, max = 1, colorful, className } = props

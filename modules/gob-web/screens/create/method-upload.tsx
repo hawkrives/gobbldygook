@@ -11,11 +11,11 @@ import { Header } from "./components"
 import { Student, type StudentInput } from "@gob/object-student"
 import "./method-upload.scss"
 
-type UploadedFile = {
+type UploadedFile = Readonly<{
   name: string
   size: number
   data: Promise<string>
-}
+}>
 
 type Converted =
   | ReturnType<typeof initStudent>
@@ -28,7 +28,7 @@ const connector = connect(undefined, mapDispatch)
 type Props = RouteComponentProps & ConnectedProps<typeof connector>
 
 type State = {
-  files: Array<UploadedFile>
+  files: ReadonlyArray<UploadedFile>
   actions: Array<Converted>
 }
 
@@ -44,7 +44,7 @@ class UploadFileScreen extends React.Component<Props, State> {
 
   dropzone: DropZone | null = null
 
-  handleFileDrop = (droppedFiles: Array<File>) => {
+  handleFileDrop = (droppedFiles: ReadonlyArray<File>) => {
     console.log(droppedFiles)
     let files = droppedFiles.map((f) => ({
       name: f.name,
@@ -96,7 +96,7 @@ class UploadFileScreen extends React.Component<Props, State> {
     this.setState((state) => ({ actions: [...state.actions, converted] }))
   }
 
-  convertFilesToStudents = (files: Array<UploadedFile>) => {
+  convertFilesToStudents = (files: ReadonlyArray<UploadedFile>) => {
     this.setState(
       () => ({ actions: [] }),
       () => {

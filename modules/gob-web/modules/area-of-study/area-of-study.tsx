@@ -4,25 +4,28 @@ import { Icon } from "../../components/icon"
 import { TopLevelRequirement, type OverrideHandler } from "./requirement"
 import ProgressBar from "../../components/progress-bar"
 import { chevronUp, chevronDown } from "../../icons/ionicons"
-import type { EvaluationResult } from "@gob/examine-student"
+import type { DeepReadonly, EvaluationResult } from "@gob/examine-student"
 
 import "./area-of-study.scss"
 
-type Props = {
+type Props = Readonly<{
   isOpen?: boolean
-  style?: React.CSSProperties
+  style?: Readonly<React.CSSProperties>
 
   // an AreaQuery, or the name and type of an area that is being written in
   // the area editor (which may not have either yet)
-  areaOfStudy: { name?: string | undefined; type?: string | undefined }
+  areaOfStudy: Readonly<{
+    name?: string | undefined
+    type?: string | undefined
+  }>
   error?: string | null
   examining?: boolean
-  results: EvaluationResult | null | undefined
+  results: DeepReadonly<EvaluationResult> | null | undefined
   onToggleOpen?: (ev: React.MouseEvent) => unknown
   onAddOverride?: OverrideHandler
   onRemoveOverride?: OverrideHandler
   onToggleOverride?: OverrideHandler
-}
+}>
 
 export class AreaOfStudy extends React.Component<Props> {
   override render() {
@@ -106,10 +109,10 @@ export class AreaOfStudy extends React.Component<Props> {
 const CatalogLink = ({
   slug,
   name,
-}: {
+}: Readonly<{
   slug: string | null | undefined
   name: string
-}) => {
+}>) => {
   if (slug == null || slug === "") {
     return <span>{name}</span>
   }

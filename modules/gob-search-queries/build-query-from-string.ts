@@ -96,7 +96,7 @@ function lookup<T>(
 }
 
 function organizeValues(
-  [key, values]: [string, ReadonlyArray<string | number>],
+  [key, values]: readonly [string, ReadonlyArray<string | number>],
   words = false,
   profWords = false,
 ): [string, Array<QueryValue>] {
@@ -180,7 +180,7 @@ function organizeValues(
 
 export function buildQueryFromString(
   queryString: string = "",
-  opts: { words?: boolean; profWords?: boolean } = {},
+  opts: Readonly<{ words?: boolean; profWords?: boolean }> = {},
 ): Query {
   queryString = queryString.trim()
 

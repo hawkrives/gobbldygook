@@ -12,6 +12,7 @@ type Args = {
   matches: Course[] | null | undefined
   counted: number | null | undefined
 }
+// oxlint-disable-next-line typescript/prefer-readonly-parameter-types -- pushes onto expr.$of and matches, and increments expr.$count.$num
 export default function applyFulfillmentToResult({
   fulfillment,
   expr,

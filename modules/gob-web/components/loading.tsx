@@ -70,12 +70,12 @@ const Message = styled.figcaption`
   margin-top: 1em;
 `
 
-type LoadingProps = {
+type LoadingProps = Readonly<{
   children?: React.ReactNode
   error?: boolean
   info?: boolean
   warning?: boolean
-}
+}>
 
 export default function Loading({
   info,

@@ -8,7 +8,7 @@ import type { Course } from "./types"
  * @returns {number} - the number of unique departments
  */
 
-export default function countDepartments(courses: Course[]) {
+export default function countDepartments(courses: ReadonlyArray<Course>) {
   // getDepartments does a uniq
   return compact(getDepartments(courses)).length
 }

@@ -60,7 +60,7 @@ declare global {
   var _store: Store | undefined
 }
 
-let renderFunc = (chosenStore: Store) => {
+let renderFunc = (chosenStore: Readonly<Store>) => {
   let renderEl = document.getElementById("gobbldygook")
   if (!renderEl) {
     return

@@ -6,14 +6,14 @@ import maxBy from "lodash/maxBy"
 import type { AreaQuery } from "@gob/object-student"
 
 type DatabaseQuery = {
-  name: Array<string>
-  type: Array<string>
-  revision?: Array<string>
+  name: ReadonlyArray<string>
+  type: ReadonlyArray<string>
+  revision?: ReadonlyArray<string>
 }
 
 function resolveArea(
-  areas: Array<HansonFile>,
-  query: DatabaseQuery,
+  areas: ReadonlyArray<HansonFile>,
+  query: Readonly<DatabaseQuery>,
 ): HansonFile | undefined {
   if (areas.length === 1) {
     return areas[0]

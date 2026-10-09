@@ -23,6 +23,7 @@ import type {
   Expression,
   Requirement,
   Course,
+  DeepReadonly,
   Fulfillment,
   BooleanExpression,
   CourseExpression,
@@ -57,6 +58,7 @@ type Args = {
   fulfillment?: Fulfillment | null
   isNeeded?: boolean
 }
+// oxlint-disable-next-line typescript/prefer-readonly-parameter-types -- writes _result, _matches, _counted and _checked onto expr, and updates dirty
 export default function computeChunk({
   expr,
   ctx,
@@ -204,6 +206,7 @@ type BooleanChunkArgs = {
   dirty: Set<StringifiedCourse>
   isNeeded: boolean
 }
+// oxlint-disable-next-line typescript/prefer-readonly-parameter-types -- evaluates expr's children in place (via computeChunk) and updates dirty
 export function computeBoolean({
   expr,
   ctx,
@@ -279,6 +282,7 @@ type CourseChunkArgs = {
   dirty: Set<StringifiedCourse>
   isNeeded: boolean
 }
+// oxlint-disable-next-line typescript/prefer-readonly-parameter-types -- writes _request, _taken and $course onto expr, and adds to dirty
 export function computeCourse({
   expr,
   courses,
@@ -347,6 +351,7 @@ const modifierWhats: ReadonlySet<unknown> = new Set([
   "term",
 ])
 
+// oxlint-disable-next-line typescript/prefer-readonly-parameter-types -- filterByWhereClause writes $computed-value onto expr.$where
 export function computeModifier({ expr, ctx, courses }: ModifierChunkArgs) {
   assertKeys(expr, "$what", "$count", "$from")
   const what = expr.$what
@@ -463,10 +468,10 @@ export function computeModifier({ expr, ctx, courses }: ModifierChunkArgs) {
  * @param {Course[]} courses - the list of courses to search
  * @returns {boolean} - the result of the occurrence
  */
-type OccurrenceChunkArgs = {
+type OccurrenceChunkArgs = DeepReadonly<{
   expr: OccurrenceExpression
   courses: Course[]
-}
+}>
 export function computeOccurrence({ expr, courses }: OccurrenceChunkArgs) {
   assertKeys(expr, "$course", "$count")
   let filtered = getOccurrences(expr.$course, courses)
@@ -503,6 +508,7 @@ type OfChunkArgs = {
   dirty: Set<StringifiedCourse>
   isNeeded: boolean
 }
+// oxlint-disable-next-line typescript/prefer-readonly-parameter-types -- evaluates expr.$of in place (via computeChunk) and updates dirty
 export function computeOf({
   expr,
   ctx,
@@ -593,6 +599,7 @@ type ReferenceChunkArgs = {
   expr: ReferenceExpression
   ctx: Requirement
 }
+// oxlint-disable-next-line typescript/prefer-readonly-parameter-types -- writes _checked onto expr
 export function computeReference({
   expr,
   ctx,
@@ -631,6 +638,7 @@ type WhereChunkArgs = {
   expr: WhereExpression
   courses: Course[]
 }
+// oxlint-disable-next-line typescript/prefer-readonly-parameter-types -- filterByWhereClause can hand courses back as the matches, which computeChunk passes to applyFulfillmentToResult to push onto
 export function computeWhere({ expr, courses }: WhereChunkArgs) {
   assertKeys(expr, "$where", "$count", "$distinct")
   const filtered = filterByWhereClause(courses, expr.$where, {

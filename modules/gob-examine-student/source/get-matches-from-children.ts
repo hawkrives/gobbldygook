@@ -8,8 +8,10 @@ import stringify from "stabilize"
 import type {
   ModifierChildrenExpression,
   ModifierChildrenWhereExpression,
+  ReferenceExpression,
   Requirement,
   Course,
+  DeepReadonly,
 } from "./types"
 /**
  * Extract the matched courses from all children.
@@ -20,8 +22,10 @@ import type {
  */
 
 export default function getMatchesFromChildren(
-  expr: ModifierChildrenExpression | ModifierChildrenWhereExpression,
-  ctx: Requirement,
+  expr: DeepReadonly<
+    ModifierChildrenExpression | ModifierChildrenWhereExpression
+  >,
+  ctx: DeepReadonly<Requirement>,
 ): Course[] {
   // grab all the child requirement names from this requirement
   let childKeys = keys(ctx).filter(isRequirementName)
@@ -31,7 +35,10 @@ export default function getMatchesFromChildren(
     // do nothing; the default case.
   } else if (Array.isArray(expr.$children)) {
     // or just use some of them (those listed in expr.$children)
-    const requested = expr.$children.map((c) => c.$requirement)
+    // Array.isArray narrows a readonly array to any[], so name the item type
+    const requested = expr.$children.map(
+      (c: DeepReadonly<ReferenceExpression>) => c.$requirement,
+    )
     childKeys = childKeys.filter((key) => requested.includes(key))
   }
 

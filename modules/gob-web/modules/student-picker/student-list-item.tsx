@@ -100,12 +100,12 @@ const ListItemLink = styled(Link)`
   }
 `
 
-type Props = {
+type Props = Readonly<{
   destroyStudent: (id: string) => unknown
   isEditing: boolean
   student: IndividualStudentState
   as?: "li"
-}
+}>
 
 export default function StudentListItem(props: Props) {
   const { student, isEditing, destroyStudent, as } = props
