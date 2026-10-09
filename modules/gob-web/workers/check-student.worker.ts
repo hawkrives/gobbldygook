@@ -36,7 +36,9 @@ function main({ data }: MessageEvent<string>) {
   } catch (error) {
     let message = error instanceof Error ? error.message : String(error)
     self.postMessage(JSON.stringify({ id, type: "error", data: { message } }))
-    console.warn(`(${name}, ${String(area.name)})`, error)
+    // the names go in as arguments, not in the format string, so a "%" in a
+    // student's name can't change what gets logged
+    console.warn("(%s, %s)", name, String(area.name), error)
   }
 }
 
