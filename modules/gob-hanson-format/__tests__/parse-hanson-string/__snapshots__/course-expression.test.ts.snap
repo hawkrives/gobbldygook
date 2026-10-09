@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`CourseExpression parses courses with a single department 1`] = `
+exports[`CourseExpression > parses courses with a single department 1`] = `
 {
   "$course": {
     "department": "CSCI",
@@ -10,7 +10,7 @@ exports[`CourseExpression parses courses with a single department 1`] = `
 }
 `;
 
-exports[`CourseExpression parses courses with a two departments 1`] = `
+exports[`CourseExpression > parses courses with a two departments 1`] = `
 {
   "$course": {
     "department": "AS/ES",
@@ -20,7 +20,7 @@ exports[`CourseExpression parses courses with a two departments 1`] = `
 }
 `;
 
-exports[`CourseExpression parses courses with no departments as having no department 1`] = `
+exports[`CourseExpression > parses courses with no departments as having no department 1`] = `
 {
   "$course": {
     "number": 121,
@@ -29,7 +29,7 @@ exports[`CourseExpression parses courses with no departments as having no depart
 }
 `;
 
-exports[`CourseExpression parses courses with sections 1`] = `
+exports[`CourseExpression > parses courses with sections 1`] = `
 {
   "$course": {
     "department": "CSCI",
@@ -40,7 +40,7 @@ exports[`CourseExpression parses courses with sections 1`] = `
 }
 `;
 
-exports[`CourseExpression parses courses with semesters 1`] = `
+exports[`CourseExpression > parses courses with semesters 1`] = `
 {
   "$course": {
     "department": "CSCI",
@@ -53,7 +53,7 @@ exports[`CourseExpression parses courses with semesters 1`] = `
 }
 `;
 
-exports[`CourseExpression parses courses with years 1`] = `
+exports[`CourseExpression > parses courses with years 1`] = `
 {
   "$course": {
     "department": "CSCI",
@@ -65,7 +65,7 @@ exports[`CourseExpression parses courses with years 1`] = `
 }
 `;
 
-exports[`CourseExpression supports international courses 1`] = `
+exports[`CourseExpression > supports international courses 1`] = `
 {
   "$course": {
     "department": "CSCI",
@@ -76,7 +76,7 @@ exports[`CourseExpression supports international courses 1`] = `
 }
 `;
 
-exports[`CourseExpression supports international labs 1`] = `
+exports[`CourseExpression > supports international labs 1`] = `
 {
   "$course": {
     "department": "CSCI",
@@ -88,7 +88,7 @@ exports[`CourseExpression supports international labs 1`] = `
 }
 `;
 
-exports[`CourseExpression supports labs 1`] = `
+exports[`CourseExpression > supports labs 1`] = `
 {
   "$course": {
     "department": "CSCI",
@@ -99,7 +99,7 @@ exports[`CourseExpression supports labs 1`] = `
 }
 `;
 
-exports[`CourseExpression supports wildcard sections 1`] = `
+exports[`CourseExpression > supports wildcard sections 1`] = `
 {
   "$course": {
     "department": "CSCI",
@@ -110,7 +110,7 @@ exports[`CourseExpression supports wildcard sections 1`] = `
 }
 `;
 
-exports[`CourseExpression supports wildcard semesters 1`] = `
+exports[`CourseExpression > supports wildcard semesters 1`] = `
 {
   "$course": {
     "department": "CSCI",
@@ -123,7 +123,7 @@ exports[`CourseExpression supports wildcard semesters 1`] = `
 }
 `;
 
-exports[`CourseExpression supports wildcard years 1`] = `
+exports[`CourseExpression > supports wildcard years 1`] = `
 {
   "$course": {
     "department": "CSCI",

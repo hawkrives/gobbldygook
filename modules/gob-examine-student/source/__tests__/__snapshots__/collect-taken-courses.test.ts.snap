@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`collectTakenCourses can go down many layers deep 1`] = `
+exports[`collectTakenCourses > can go down many layers deep 1`] = `
 [
   {
     "department": [
@@ -50,7 +50,7 @@ exports[`collectTakenCourses can go down many layers deep 1`] = `
 ]
 `;
 
-exports[`collectTakenCourses can go down one layer deep 1`] = `
+exports[`collectTakenCourses > can go down one layer deep 1`] = `
 [
   {
     "department": [
@@ -61,7 +61,7 @@ exports[`collectTakenCourses can go down one layer deep 1`] = `
 ]
 `;
 
-exports[`collectTakenCourses collects a list of all of the courses anywhere in this object which have the \`_taken\` property. 1`] = `
+exports[`collectTakenCourses > collects a list of all of the courses anywhere in this object which have the \`_taken\` property. 1`] = `
 [
   {
     "department": [

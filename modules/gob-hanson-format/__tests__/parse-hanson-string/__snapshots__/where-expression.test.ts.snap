@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`WhereExpression describes courses "where" a fact is true 1`] = `
+exports[`WhereExpression > describes courses "where" a fact is true 1`] = `
 {
   "$count": {
     "$num": 1,
@@ -17,7 +17,7 @@ exports[`WhereExpression describes courses "where" a fact is true 1`] = `
 }
 `;
 
-exports[`WhereExpression may require distinct course 1`] = `
+exports[`WhereExpression > may require distinct course 1`] = `
 {
   "$count": {
     "$num": 2,
@@ -34,7 +34,7 @@ exports[`WhereExpression may require distinct course 1`] = `
 }
 `;
 
-exports[`nested qualifiers function may optionally include a space between the name and the paren 1`] = `
+exports[`nested qualifiers > function may optionally include a space between the name and the paren 1`] = `
 {
   "$key": "year",
   "$operator": "$eq",
@@ -53,7 +53,7 @@ exports[`nested qualifiers function may optionally include a space between the n
 }
 `;
 
-exports[`nested qualifiers function may optionally include a space between the name and the paren 2`] = `
+exports[`nested qualifiers > function may optionally include a space between the name and the paren 2`] = `
 {
   "$key": "year",
   "$operator": "$eq",
@@ -72,7 +72,7 @@ exports[`nested qualifiers function may optionally include a space between the n
 }
 `;
 
-exports[`qualification value may be compared by != (not equal to) 1`] = `
+exports[`qualification value may be compared by > != (not equal to) 1`] = `
 {
   "$key": "a",
   "$operator": "$ne",
@@ -81,7 +81,7 @@ exports[`qualification value may be compared by != (not equal to) 1`] = `
 }
 `;
 
-exports[`qualification value may be compared by < (less than) 1`] = `
+exports[`qualification value may be compared by > < (less than) 1`] = `
 {
   "$key": "a",
   "$operator": "$lt",
@@ -90,7 +90,7 @@ exports[`qualification value may be compared by < (less than) 1`] = `
 }
 `;
 
-exports[`qualification value may be compared by <= (less than or equal to) 1`] = `
+exports[`qualification value may be compared by > <= (less than or equal to) 1`] = `
 {
   "$key": "a",
   "$operator": "$lte",
@@ -99,7 +99,7 @@ exports[`qualification value may be compared by <= (less than or equal to) 1`] =
 }
 `;
 
-exports[`qualification value may be compared by = (single equals) 1`] = `
+exports[`qualification value may be compared by > = (single equals) 1`] = `
 {
   "$key": "a",
   "$operator": "$eq",
@@ -108,7 +108,7 @@ exports[`qualification value may be compared by = (single equals) 1`] = `
 }
 `;
 
-exports[`qualification value may be compared by == (double equals) 1`] = `
+exports[`qualification value may be compared by > == (double equals) 1`] = `
 {
   "$key": "a",
   "$operator": "$eq",
@@ -117,7 +117,7 @@ exports[`qualification value may be compared by == (double equals) 1`] = `
 }
 `;
 
-exports[`qualification value may be compared by => (greater than or equal to) 1`] = `
+exports[`qualification value may be compared by > => (greater than or equal to) 1`] = `
 {
   "$key": "a",
   "$operator": "$gte",
@@ -126,7 +126,7 @@ exports[`qualification value may be compared by => (greater than or equal to) 1`
 }
 `;
 
-exports[`qualification value may be compared by > (greater than) 1`] = `
+exports[`qualification value may be compared by > > (greater than) 1`] = `
 {
   "$key": "a",
   "$operator": "$gt",
@@ -135,7 +135,7 @@ exports[`qualification value may be compared by > (greater than) 1`] = `
 }
 `;
 
-exports[`qualifiers can use boolean logic boolean logic can be overridden by parens: (a | b) & c 1`] = `
+exports[`qualifiers can use boolean logic > boolean logic can be overridden by parens: (a | b) & c 1`] = `
 {
   "$and": [
     {
@@ -168,7 +168,7 @@ exports[`qualifiers can use boolean logic boolean logic can be overridden by par
 }
 `;
 
-exports[`qualifiers can use boolean logic can be separated by & 1`] = `
+exports[`qualifiers can use boolean logic > can be separated by & 1`] = `
 {
   "$and": [
     {
@@ -189,7 +189,7 @@ exports[`qualifiers can use boolean logic can be separated by & 1`] = `
 }
 `;
 
-exports[`qualifiers can use boolean logic can be separated by | 1`] = `
+exports[`qualifiers can use boolean logic > can be separated by | 1`] = `
 {
   "$booleanType": "or",
   "$or": [
@@ -210,7 +210,7 @@ exports[`qualifiers can use boolean logic can be separated by | 1`] = `
 }
 `;
 
-exports[`qualifiers can use boolean logic can used in boolean logic: a & b | c 1`] = `
+exports[`qualifiers can use boolean logic > can used in boolean logic: a & b | c 1`] = `
 {
   "$booleanType": "or",
   "$or": [
@@ -243,7 +243,7 @@ exports[`qualifiers can use boolean logic can used in boolean logic: a & b | c 1
 }
 `;
 
-exports[`qualifiers can use boolean logic can used in boolean logic: a | b & c 1`] = `
+exports[`qualifiers can use boolean logic > can used in boolean logic: a | b & c 1`] = `
 {
   "$booleanType": "or",
   "$or": [
@@ -276,7 +276,7 @@ exports[`qualifiers can use boolean logic can used in boolean logic: a | b & c 1
 }
 `;
 
-exports[`qualifiers can use boolean logic value may be a boolean and-list 1`] = `
+exports[`qualifiers can use boolean logic > value may be a boolean and-list 1`] = `
 {
   "$and": [
     {
@@ -304,7 +304,7 @@ exports[`qualifiers can use boolean logic value may be a boolean and-list 1`] = 
 }
 `;
 
-exports[`qualifiers can use boolean logic value may be a boolean or-list 1`] = `
+exports[`qualifiers can use boolean logic > value may be a boolean or-list 1`] = `
 {
   "$and": [
     {
@@ -332,7 +332,7 @@ exports[`qualifiers can use boolean logic value may be a boolean or-list 1`] = `
 }
 `;
 
-exports[`qualifiers syntax value may be a number (coerced to integers) 1`] = `
+exports[`qualifiers syntax > value may be a number (coerced to integers) 1`] = `
 {
   "$key": "a",
   "$operator": "$eq",
@@ -341,7 +341,7 @@ exports[`qualifiers syntax value may be a number (coerced to integers) 1`] = `
 }
 `;
 
-exports[`qualifiers syntax value may include hyphens 1`] = `
+exports[`qualifiers syntax > value may include hyphens 1`] = `
 {
   "$key": "a",
   "$operator": "$eq",
@@ -350,7 +350,7 @@ exports[`qualifiers syntax value may include hyphens 1`] = `
 }
 `;
 
-exports[`qualifiers syntax value may include underscores 1`] = `
+exports[`qualifiers syntax > value may include underscores 1`] = `
 {
   "$key": "a",
   "$operator": "$eq",

@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`sortStudiesByType sorts a list of areas of study by type 1`] = `
+exports[`sortStudiesByType > sorts a list of areas of study by type 1`] = `
 [
   {
     "type": "degree",

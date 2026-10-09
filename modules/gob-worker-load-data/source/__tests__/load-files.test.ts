@@ -1,42 +1,49 @@
-jest.spyOn(global.console, "log").mockImplementation(() => jest.fn())
-jest.spyOn(global.console, "error").mockImplementation(() => jest.fn())
-jest.spyOn(global.console, "warn").mockImplementation(() => jest.fn())
-jest.mock("@gob/web-database")
-jest.mock("../lib-dispatch.ts", () => {
-  const NotificationMock = jest.fn(() => ({
-    start: jest.fn(),
-    increment: jest.fn(),
-    remove: jest.fn(),
-  }))
+vi.spyOn(global.console, "log").mockImplementation(() => vi.fn())
+vi.spyOn(global.console, "error").mockImplementation(() => vi.fn())
+vi.spyOn(global.console, "warn").mockImplementation(() => vi.fn())
+vi.mock("@gob/web-database")
+vi.mock("../lib-dispatch.ts", () => {
+  // Called with `new`, so the implementation can't be an arrow function
+  const NotificationMock = vi.fn(function () {
+    return {
+      start: vi.fn(),
+      increment: vi.fn(),
+      remove: vi.fn(),
+    }
+  })
   return {
-    refreshCourses: jest.fn(),
-    refreshAreas: jest.fn(),
-    quotaExceededError: jest.fn(),
+    refreshCourses: vi.fn(),
+    refreshAreas: vi.fn(),
+    quotaExceededError: vi.fn(),
     Notification: NotificationMock,
   }
 })
-jest.mock("../needs-update.ts", () => jest.fn(() => Promise.resolve()))
-jest.mock("../update-database.ts", () => jest.fn(() => Promise.resolve()))
-jest.mock("../remove-duplicate-areas.ts", () =>
-  jest.fn(() => Promise.resolve()),
-)
-jest.mock("@gob/lib/fetch-helpers.ts", () => {
+vi.mock("../needs-update.ts", () => ({
+  default: vi.fn(() => Promise.resolve()),
+}))
+vi.mock("../update-database.ts", () => ({
+  default: vi.fn(() => Promise.resolve()),
+}))
+vi.mock("../remove-duplicate-areas.ts", () => ({
+  default: vi.fn(() => Promise.resolve()),
+}))
+vi.mock("@gob/lib/fetch-helpers.ts", () => {
   return {
     status: (x: unknown) => x,
     text: (x: unknown) => x,
   }
 })
-const goodFetch = jest.fn((url: string) =>
+const goodFetch = vi.fn((url: string) =>
   Promise.resolve(
     JSON.stringify({
       url,
     }),
   ),
 )
-const badFetch = jest.fn(() => Promise.reject(new Error("could not fetch")))
+const badFetch = vi.fn(() => Promise.reject(new Error("could not fetch")))
 // status and text are mocked to pass the fetched value straight through, so
 // the fetch mock can resolve to plain values instead of Responses
-const fetchMock = jest.fn<Promise<unknown>, [url: string]>(() => {
+const fetchMock = vi.fn<(url: string) => Promise<unknown>>(() => {
   throw new Error("you must pick either goodFetch or badFetch")
 })
 globalThis.fetch = fetchMock as unknown as typeof fetch
@@ -49,12 +56,12 @@ import removeDuplicateAreas from "../remove-duplicate-areas.ts"
 import loadFiles, * as load from "../load-files.ts"
 beforeEach(async () => {
   await db.__clear()
-  jest.mocked(dispatch.quotaExceededError).mockClear()
+  vi.mocked(dispatch.quotaExceededError).mockClear()
   goodFetch.mockClear()
   badFetch.mockClear()
-  jest.mocked(needsUpdate).mockClear()
-  jest.mocked(updateDatabase).mockClear()
-  jest.mocked(removeDuplicateAreas).mockClear()
+  vi.mocked(needsUpdate).mockClear()
+  vi.mocked(updateDatabase).mockClear()
+  vi.mocked(removeDuplicateAreas).mockClear()
 })
 
 const mockArgs = (type: InfoFileTypeEnum) => {
@@ -145,7 +152,7 @@ describe("finishUp", () => {
       notification,
       baseUrl: "url",
     })
-    // oxlint-disable-next-line typescript/unbound-method -- a jest.fn() from the Notification mock; it is only inspected, never called
+    // oxlint-disable-next-line typescript/unbound-method -- a vi.fn() from the Notification mock; it is only inspected, never called
     expect(notification.remove).toHaveBeenCalledTimes(1)
   })
 })
@@ -183,9 +190,9 @@ describe("slurpIntoDatabase", () => {
       },
     ]
     await load.slurpIntoDatabase(args, fileRefs)
-    // oxlint-disable-next-line typescript/unbound-method -- a jest.fn() from the Notification mock; it is only inspected, never called
+    // oxlint-disable-next-line typescript/unbound-method -- a vi.fn() from the Notification mock; it is only inspected, never called
     expect(args.notification.start).toHaveBeenCalledTimes(1)
-    // oxlint-disable-next-line typescript/unbound-method -- a jest.fn() from the Notification mock; it is only inspected, never called
+    // oxlint-disable-next-line typescript/unbound-method -- a vi.fn() from the Notification mock; it is only inspected, never called
     expect(args.notification.start).toHaveBeenCalledWith(fileRefs.length)
   })
   test("calls updateDatabase once for each file given", async () => {
@@ -222,7 +229,7 @@ describe("slurpIntoDatabase", () => {
 })
 describe("filterFiles", () => {
   test("calls needsUpdate once per file", async () => {
-    jest.mocked(needsUpdate).mockImplementation(() => Promise.resolve(true))
+    vi.mocked(needsUpdate).mockImplementation(() => Promise.resolve(true))
     const args = mockArgs("courses")
     const fileRefs: InfoFileRef[] = [
       {
@@ -254,8 +261,7 @@ describe("filterFiles", () => {
     expect(needsUpdate).toHaveBeenCalledTimes(fileRefs.length)
   })
   test("returns only files that needsUpdate says need updates", async () => {
-    jest
-      .mocked(needsUpdate)
+    vi.mocked(needsUpdate)
       .mockImplementationOnce(() => Promise.resolve(true))
       .mockImplementationOnce(() => Promise.resolve(false))
       .mockImplementationOnce(() => Promise.resolve(true))
@@ -392,9 +398,9 @@ describe("proceedWithUpdate", () => {
     expect(removeDuplicateAreas).toHaveBeenCalled()
   })
   test("rejects if any fail", async () => {
-    jest
-      .mocked(needsUpdate)
-      .mockImplementationOnce(() => Promise.reject(new Error("mock error")))
+    vi.mocked(needsUpdate).mockImplementationOnce(() =>
+      Promise.reject(new Error("mock error")),
+    )
     const baseUrl = "remote"
     const index: InfoIndexFile = {
       type: "areas",

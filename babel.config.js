@@ -1,27 +1,3 @@
-// Compiles for the current Node instead of browsers: used by Jest.
-const testConfig = {
-  presets: [
-    [
-      "@babel/preset-env",
-      {
-        targets: { node: "current" },
-        modules: "commonjs",
-        useBuiltIns: "usage",
-        corejs: 3,
-      },
-    ],
-  ],
-  plugins: [
-    [
-      "@babel/plugin-transform-runtime",
-      {
-        regenerator: false,
-        useESModules: false,
-      },
-    ],
-  ],
-}
-
 module.exports = {
   presets: [
     // The automatic runtime matches tsconfig's "jsx": "react-jsx", so .tsx
@@ -69,7 +45,4 @@ module.exports = {
     // into `import sum from 'lodash/sum'`
     // "babel-plugin-lodash",
   ],
-  env: {
-    test: testConfig,
-  },
 }

@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`queryCourses properly handles a list of five years 1`] = `
+exports[`queryCourses > properly handles a list of five years 1`] = `
 [
   {
     "departments": [
@@ -17,7 +17,7 @@ exports[`queryCourses properly handles a list of five years 1`] = `
 ]
 `;
 
-exports[`queryCourses queries a list of courses 1`] = `
+exports[`queryCourses > queries a list of courses 1`] = `
 [
   {
     "departments": [

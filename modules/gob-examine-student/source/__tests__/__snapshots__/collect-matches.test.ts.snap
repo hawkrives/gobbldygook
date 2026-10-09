@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`collectMatches collects matches from "courses" modifiers 1`] = `
+exports[`collectMatches > collects matches from "courses" modifiers 1`] = `
 [
   {
     "department": [
@@ -17,7 +17,7 @@ exports[`collectMatches collects matches from "courses" modifiers 1`] = `
 ]
 `;
 
-exports[`collectMatches collects matches from boolean expressions 1`] = `
+exports[`collectMatches > collects matches from boolean expressions 1`] = `
 [
   {
     "department": [
@@ -34,7 +34,7 @@ exports[`collectMatches collects matches from boolean expressions 1`] = `
 ]
 `;
 
-exports[`collectMatches collects matches from child requirements 1`] = `
+exports[`collectMatches > collects matches from child requirements 1`] = `
 [
   {
     "department": [
@@ -51,7 +51,7 @@ exports[`collectMatches collects matches from child requirements 1`] = `
 ]
 `;
 
-exports[`collectMatches collects matches from course expressions 1`] = `
+exports[`collectMatches > collects matches from course expressions 1`] = `
 [
   {
     "department": [
@@ -62,7 +62,7 @@ exports[`collectMatches collects matches from course expressions 1`] = `
 ]
 `;
 
-exports[`collectMatches collects matches from occurrences 1`] = `
+exports[`collectMatches > collects matches from occurrences 1`] = `
 [
   {
     "department": [
@@ -81,7 +81,7 @@ exports[`collectMatches collects matches from occurrences 1`] = `
 ]
 `;
 
-exports[`collectMatches collects matches from of-expressions 1`] = `
+exports[`collectMatches > collects matches from of-expressions 1`] = `
 [
   {
     "department": [
@@ -110,7 +110,7 @@ exports[`collectMatches collects matches from of-expressions 1`] = `
 ]
 `;
 
-exports[`collectMatches collects matches from requirement references 1`] = `
+exports[`collectMatches > collects matches from requirement references 1`] = `
 [
   {
     "department": [
@@ -121,7 +121,7 @@ exports[`collectMatches collects matches from requirement references 1`] = `
 ]
 `;
 
-exports[`collectMatches collects matches from where-expressions 1`] = `
+exports[`collectMatches > collects matches from where-expressions 1`] = `
 [
   {
     "department": [
@@ -138,4 +138,4 @@ exports[`collectMatches collects matches from where-expressions 1`] = `
 ]
 `;
 
-exports[`collectMatches does not try to collect matches from requirements with no result key 1`] = `[]`;
+exports[`collectMatches > does not try to collect matches from requirements with no result key 1`] = `[]`;

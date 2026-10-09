@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`OfExpression allows "n" to be "all" 1`] = `
+exports[`OfExpression > allows "n" to be "all" 1`] = `
 {
   "$count": {
     "$num": 3,
@@ -25,7 +25,7 @@ exports[`OfExpression allows "n" to be "all" 1`] = `
 }
 `;
 
-exports[`OfExpression allows "n" to be "any" 1`] = `
+exports[`OfExpression > allows "n" to be "any" 1`] = `
 {
   "$count": {
     "$num": 1,
@@ -50,7 +50,7 @@ exports[`OfExpression allows "n" to be "any" 1`] = `
 }
 `;
 
-exports[`OfExpression allows "n" to be "none" 1`] = `
+exports[`OfExpression > allows "n" to be "none" 1`] = `
 {
   "$count": {
     "$num": 0,
@@ -75,7 +75,7 @@ exports[`OfExpression allows "n" to be "none" 1`] = `
 }
 `;
 
-exports[`OfExpression allows "n" to be a counter 1`] = `
+exports[`OfExpression > allows "n" to be a counter 1`] = `
 {
   "$count": {
     "$num": 3,
@@ -99,7 +99,7 @@ exports[`OfExpression allows "n" to be a counter 1`] = `
 }
 `;
 
-exports[`OfExpression if n is "all", it is the number of items in the of-parens 1`] = `
+exports[`OfExpression > if n is "all", it is the number of items in the of-parens 1`] = `
 {
   "$count": {
     "$num": 3,
@@ -124,7 +124,7 @@ exports[`OfExpression if n is "all", it is the number of items in the of-parens 
 }
 `;
 
-exports[`OfExpression supports boolean statements within the parens 1`] = `
+exports[`OfExpression > supports boolean statements within the parens 1`] = `
 {
   "$count": {
     "$num": 1,
@@ -164,7 +164,7 @@ exports[`OfExpression supports boolean statements within the parens 1`] = `
 }
 `;
 
-exports[`OfExpression supports courses within the parens 1`] = `
+exports[`OfExpression > supports courses within the parens 1`] = `
 {
   "$count": {
     "$num": 1,
@@ -183,7 +183,7 @@ exports[`OfExpression supports courses within the parens 1`] = `
 }
 `;
 
-exports[`OfExpression supports modifiers within the parens 1`] = `
+exports[`OfExpression > supports modifiers within the parens 1`] = `
 {
   "$count": {
     "$num": 1,
@@ -229,7 +229,7 @@ exports[`OfExpression supports modifiers within the parens 1`] = `
 }
 `;
 
-exports[`OfExpression supports occurrences within the parens 1`] = `
+exports[`OfExpression > supports occurrences within the parens 1`] = `
 {
   "$count": {
     "$num": 1,
@@ -259,7 +259,7 @@ exports[`OfExpression supports occurrences within the parens 1`] = `
 }
 `;
 
-exports[`OfExpression supports of-statements of the form "n of ()" 1`] = `
+exports[`OfExpression > supports of-statements of the form "n of ()" 1`] = `
 {
   "$count": {
     "$num": 1,
@@ -278,7 +278,7 @@ exports[`OfExpression supports of-statements of the form "n of ()" 1`] = `
 }
 `;
 
-exports[`OfExpression supports references within the parens 1`] = `
+exports[`OfExpression > supports references within the parens 1`] = `
 {
   "$count": {
     "$num": 1,
@@ -306,7 +306,7 @@ exports[`OfExpression supports references within the parens 1`] = `
 }
 `;
 
-exports[`OfExpression supports trailing commas 1`] = `
+exports[`OfExpression > supports trailing commas 1`] = `
 {
   "$count": {
     "$num": 1,
@@ -324,7 +324,7 @@ exports[`OfExpression supports trailing commas 1`] = `
 }
 `;
 
-exports[`OfExpression supports where-clauses within the parens 1`] = `
+exports[`OfExpression > supports where-clauses within the parens 1`] = `
 {
   "$count": {
     "$num": 1,

@@ -1,12 +1,12 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`computeCourse adds the course to the dirty set if it matches 1`] = `
+exports[`computeCourse > adds the course to the dirty set if it matches 1`] = `
 Set {
   "ART 130 Research",
 }
 `;
 
-exports[`computeCourse checks if a course exists in the list of courses 1`] = `
+exports[`computeCourse > checks if a course exists in the list of courses 1`] = `
 {
   "department": [
     "ART",
@@ -15,9 +15,9 @@ exports[`computeCourse checks if a course exists in the list of courses 1`] = `
 }
 `;
 
-exports[`computeCourse does not add the course to the dirty set if it did not match 1`] = `Set {}`;
+exports[`computeCourse > does not add the course to the dirty set if it did not match 1`] = `Set {}`;
 
-exports[`computeCourse merges a query and the found course 1`] = `
+exports[`computeCourse > merges a query and the found course 1`] = `
 {
   "_extraKeys": [
     "crsid",
@@ -30,7 +30,7 @@ exports[`computeCourse merges a query and the found course 1`] = `
 }
 `;
 
-exports[`computeCourse returns false if the course is in the dirty set 1`] = `
+exports[`computeCourse > returns false if the course is in the dirty set 1`] = `
 {
   "department": [
     "ART",

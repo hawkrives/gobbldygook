@@ -1,7 +1,7 @@
-jest.spyOn(global.console, "log").mockImplementation(() => jest.fn())
-jest.spyOn(global.console, "error").mockImplementation(() => jest.fn())
-jest.spyOn(global.console, "warn").mockImplementation(() => jest.fn())
-jest.mock("@gob/web-database")
+vi.spyOn(global.console, "log").mockImplementation(() => vi.fn())
+vi.spyOn(global.console, "error").mockImplementation(() => vi.fn())
+vi.spyOn(global.console, "warn").mockImplementation(() => vi.fn())
+vi.mock("@gob/web-database")
 import { db } from "../db.ts"
 import cacheItemHash from "../cache-item-hash.ts"
 beforeEach(async () => {

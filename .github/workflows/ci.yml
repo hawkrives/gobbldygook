@@ -25,7 +25,7 @@ jobs:
         run: mise run typecheck
 
   test:
-    name: Jest Tests
+    name: Vitest Tests
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -38,7 +38,7 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: mise run test -- --runInBand --coverage
+        run: mise run test -- --coverage
 
       # - name: Upload coverage to Coveralls
       #   uses: coverallsapp/github-action@v2
@@ -57,7 +57,7 @@ jobs:
         run: mise run lint
 
       - name: Run oxlint for code scanning
-        run: ./node_modules/.bin/oxlint --format sarif modules/ e2e/ playwright.config.ts > oxlint-results.sarif
+        run: ./node_modules/.bin/oxlint --format sarif modules/ e2e/ playwright.config.ts vitest.config.ts > oxlint-results.sarif
         continue-on-error: true
 
       - name: Upload analysis results to GitHub

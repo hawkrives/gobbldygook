@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`buildQueryFromString builds a query string even with no keys 1`] = `
+exports[`buildQueryFromString > builds a query string even with no keys 1`] = `
 {
   "words": [
     "$AND",
@@ -11,7 +11,7 @@ exports[`buildQueryFromString builds a query string even with no keys 1`] = `
 }
 `;
 
-exports[`buildQueryFromString builds a query string even with somewhat unconventional input 1`] = `
+exports[`buildQueryFromString > builds a query string even with somewhat unconventional input 1`] = `
 {
   "department": [
     "AMCON",
@@ -28,7 +28,7 @@ exports[`buildQueryFromString builds a query string even with somewhat unconvent
 }
 `;
 
-exports[`buildQueryFromString builds a query string while deduplicating synonyms of keys 1`] = `
+exports[`buildQueryFromString > builds a query string while deduplicating synonyms of keys 1`] = `
 {
   "gereqs": [
     "$AND",
@@ -44,7 +44,7 @@ exports[`buildQueryFromString builds a query string while deduplicating synonyms
 }
 `;
 
-exports[`buildQueryFromString builds a query string with multiple keys into a query object 1`] = `
+exports[`buildQueryFromString > builds a query string with multiple keys into a query object 1`] = `
 {
   "department": [
     "$AND",
@@ -65,7 +65,7 @@ exports[`buildQueryFromString builds a query string with multiple keys into a qu
 }
 `;
 
-exports[`buildQueryFromString builds a query string with variable-case keys into a query object 1`] = `
+exports[`buildQueryFromString > builds a query string with variable-case keys into a query object 1`] = `
 {
   "department": [
     "$AND",
@@ -89,7 +89,7 @@ exports[`buildQueryFromString builds a query string with variable-case keys into
 }
 `;
 
-exports[`buildQueryFromString can also search for deptnums even with no keys 1`] = `
+exports[`buildQueryFromString > can also search for deptnums even with no keys 1`] = `
 {
   "department": [
     "ASIAN",
@@ -100,7 +100,7 @@ exports[`buildQueryFromString can also search for deptnums even with no keys 1`]
 }
 `;
 
-exports[`buildQueryFromString can also search for deptnums with sections even with no keys 1`] = `
+exports[`buildQueryFromString > can also search for deptnums with sections even with no keys 1`] = `
 {
   "department": [
     "AS/RE",
@@ -114,7 +114,7 @@ exports[`buildQueryFromString can also search for deptnums with sections even wi
 }
 `;
 
-exports[`buildQueryFromString conjoins a deptnum and a department key 1`] = `
+exports[`buildQueryFromString > conjoins a deptnum and a department key 1`] = `
 {
   "department": [
     "$AND",
@@ -127,7 +127,7 @@ exports[`buildQueryFromString conjoins a deptnum and a department key 1`] = `
 }
 `;
 
-exports[`buildQueryFromString handles a otherwise-valid string that ends with a colon 1`] = `
+exports[`buildQueryFromString > handles a otherwise-valid string that ends with a colon 1`] = `
 {
   "deptnum": [
     "ENGL 200",
@@ -135,7 +135,7 @@ exports[`buildQueryFromString handles a otherwise-valid string that ends with a 
 }
 `;
 
-exports[`buildQueryFromString handles a single key and no value 1`] = `
+exports[`buildQueryFromString > handles a single key and no value 1`] = `
 {
   "department": [
     "ENGL",
@@ -146,7 +146,7 @@ exports[`buildQueryFromString handles a single key and no value 1`] = `
 }
 `;
 
-exports[`buildQueryFromString handles a string that ends with a colon 1`] = `
+exports[`buildQueryFromString > handles a string that ends with a colon 1`] = `
 {
   "deptnum": [
     "ENGL 200 VALID",
@@ -154,11 +154,11 @@ exports[`buildQueryFromString handles a string that ends with a colon 1`] = `
 }
 `;
 
-exports[`buildQueryFromString handles an empty string 1`] = `{}`;
+exports[`buildQueryFromString > handles an empty string 1`] = `{}`;
 
-exports[`buildQueryFromString handles an invalid second arg 1`] = `{}`;
+exports[`buildQueryFromString > handles an invalid second arg 1`] = `{}`;
 
-exports[`buildQueryFromString handles multiple colons in a querystring 1`] = `
+exports[`buildQueryFromString > handles multiple colons in a querystring 1`] = `
 {
   "csci": [
     "helloworld",
@@ -169,9 +169,9 @@ exports[`buildQueryFromString handles multiple colons in a querystring 1`] = `
 }
 `;
 
-exports[`buildQueryFromString handles no arguments as an empty string 1`] = `{}`;
+exports[`buildQueryFromString > handles no arguments as an empty string 1`] = `{}`;
 
-exports[`buildQueryFromString ignores subsequent deptnums in a non-keyed query 1`] = `
+exports[`buildQueryFromString > ignores subsequent deptnums in a non-keyed query 1`] = `
 {
   "department": [
     "AS/RE",
@@ -185,7 +185,7 @@ exports[`buildQueryFromString ignores subsequent deptnums in a non-keyed query 1
 }
 `;
 
-exports[`buildQueryFromString infers $AND from a list of multiple things 1`] = `
+exports[`buildQueryFromString > infers $AND from a list of multiple things 1`] = `
 {
   "year": [
     "$AND",
@@ -198,7 +198,7 @@ exports[`buildQueryFromString infers $AND from a list of multiple things 1`] = `
 }
 `;
 
-exports[`buildQueryFromString makes professors properly title-cased 1`] = `
+exports[`buildQueryFromString > makes professors properly title-cased 1`] = `
 {
   "instructors": [
     "Katherine Tegtmeyer-pak",
@@ -206,7 +206,7 @@ exports[`buildQueryFromString makes professors properly title-cased 1`] = `
 }
 `;
 
-exports[`buildQueryFromString makes professors properly title-cased 2`] = `
+exports[`buildQueryFromString > makes professors properly title-cased 2`] = `
 {
   "profWords": [
     "$AND",
@@ -217,7 +217,7 @@ exports[`buildQueryFromString makes professors properly title-cased 2`] = `
 }
 `;
 
-exports[`buildQueryFromString makes professors properly title-cased 3`] = `
+exports[`buildQueryFromString > makes professors properly title-cased 3`] = `
 {
   "instructors": [
     "olaf a. hall-holt",
@@ -225,7 +225,7 @@ exports[`buildQueryFromString makes professors properly title-cased 3`] = `
 }
 `;
 
-exports[`buildQueryFromString makes professors properly title-cased 4`] = `
+exports[`buildQueryFromString > makes professors properly title-cased 4`] = `
 {
   "profWords": [
     "$AND",
@@ -237,7 +237,7 @@ exports[`buildQueryFromString makes professors properly title-cased 4`] = `
 }
 `;
 
-exports[`buildQueryFromString maps multiple multi-word queries to the same words array 1`] = `
+exports[`buildQueryFromString > maps multiple multi-word queries to the same words array 1`] = `
 {
   "words": [
     "$AND",
@@ -247,7 +247,7 @@ exports[`buildQueryFromString maps multiple multi-word queries to the same words
 }
 `;
 
-exports[`buildQueryFromString parses credits correctly 1`] = `
+exports[`buildQueryFromString > parses credits correctly 1`] = `
 {
   "credits": [
     "$OR",
@@ -257,7 +257,7 @@ exports[`buildQueryFromString parses credits correctly 1`] = `
 }
 `;
 
-exports[`buildQueryFromString removes duplicate values for a key 1`] = `
+exports[`buildQueryFromString > removes duplicate values for a key 1`] = `
 {
   "credits": [
     "$OR",
@@ -267,17 +267,17 @@ exports[`buildQueryFromString removes duplicate values for a key 1`] = `
 }
 `;
 
-exports[`buildQueryFromString returns an empty object when given nothing but whitespace 1`] = `{}`;
+exports[`buildQueryFromString > returns an empty object when given nothing but whitespace 1`] = `{}`;
 
-exports[`buildQueryFromString returns an empty object when given nothing but whitespace 2`] = `{}`;
+exports[`buildQueryFromString > returns an empty object when given nothing but whitespace 2`] = `{}`;
 
-exports[`buildQueryFromString returns an empty object when given nothing but whitespace 3`] = `{}`;
+exports[`buildQueryFromString > returns an empty object when given nothing but whitespace 3`] = `{}`;
 
-exports[`buildQueryFromString returns an empty object when given nothing but whitespace 4`] = `{}`;
+exports[`buildQueryFromString > returns an empty object when given nothing but whitespace 4`] = `{}`;
 
-exports[`buildQueryFromString returns an empty object when given nothing but whitespace 5`] = `{}`;
+exports[`buildQueryFromString > returns an empty object when given nothing but whitespace 5`] = `{}`;
 
-exports[`buildQueryFromString sorts a five-year token string correctly 1`] = `
+exports[`buildQueryFromString > sorts a five-year token string correctly 1`] = `
 {
   "year": [
     "$OR",
@@ -290,7 +290,7 @@ exports[`buildQueryFromString sorts a five-year token string correctly 1`] = `
 }
 `;
 
-exports[`buildQueryFromString turns pf from a "true" string into a boolean 1`] = `
+exports[`buildQueryFromString > turns pf from a "true" string into a boolean 1`] = `
 {
   "pf": [
     true,

@@ -4,9 +4,9 @@ const demoStudent =
 
 import { Student } from "@gob/object-student"
 import type { StudentInput } from "@gob/object-student"
-jest.spyOn(global.console, "log").mockImplementation(() => jest.fn())
-jest.spyOn(global.console, "error").mockImplementation(() => jest.fn())
-jest.spyOn(global.console, "warn").mockImplementation(() => jest.fn())
+vi.spyOn(global.console, "log").mockImplementation(() => vi.fn())
+vi.spyOn(global.console, "error").mockImplementation(() => vi.fn())
+vi.spyOn(global.console, "warn").mockImplementation(() => vi.fn())
 
 describe("loadStudent", () => {
   let student: Student

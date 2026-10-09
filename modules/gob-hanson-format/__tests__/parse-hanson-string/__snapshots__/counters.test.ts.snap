@@ -1,97 +1,97 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`counters may be prefixed by "at most" (≤) 1`] = `
+exports[`counters > may be prefixed by "at most" (≤) 1`] = `
 {
   "$num": 10,
   "$operator": "$lte",
 }
 `;
 
-exports[`counters may be prefixed by "exactly" (==) 1`] = `
+exports[`counters > may be prefixed by "exactly" (==) 1`] = `
 {
   "$num": 10,
   "$operator": "$eq",
 }
 `;
 
-exports[`counters returns numerical values for the parsed properties 1`] = `
+exports[`counters > returns numerical values for the parsed properties 1`] = `
 {
   "$num": 0,
   "$operator": "$gte",
 }
 `;
 
-exports[`counters returns numerical values for the parsed properties 2`] = `
+exports[`counters > returns numerical values for the parsed properties 2`] = `
 {
   "$num": 1,
   "$operator": "$gte",
 }
 `;
 
-exports[`counters returns numerical values for the parsed properties 3`] = `
+exports[`counters > returns numerical values for the parsed properties 3`] = `
 {
   "$num": 2,
   "$operator": "$gte",
 }
 `;
 
-exports[`counters returns numerical values for the parsed properties 4`] = `
+exports[`counters > returns numerical values for the parsed properties 4`] = `
 {
   "$num": 3,
   "$operator": "$gte",
 }
 `;
 
-exports[`counters returns numerical values for the parsed properties 5`] = `
+exports[`counters > returns numerical values for the parsed properties 5`] = `
 {
   "$num": 4,
   "$operator": "$gte",
 }
 `;
 
-exports[`counters returns numerical values for the parsed properties 6`] = `
+exports[`counters > returns numerical values for the parsed properties 6`] = `
 {
   "$num": 5,
   "$operator": "$gte",
 }
 `;
 
-exports[`counters returns numerical values for the parsed properties 7`] = `
+exports[`counters > returns numerical values for the parsed properties 7`] = `
 {
   "$num": 6,
   "$operator": "$gte",
 }
 `;
 
-exports[`counters returns numerical values for the parsed properties 8`] = `
+exports[`counters > returns numerical values for the parsed properties 8`] = `
 {
   "$num": 7,
   "$operator": "$gte",
 }
 `;
 
-exports[`counters returns numerical values for the parsed properties 9`] = `
+exports[`counters > returns numerical values for the parsed properties 9`] = `
 {
   "$num": 8,
   "$operator": "$gte",
 }
 `;
 
-exports[`counters returns numerical values for the parsed properties 10`] = `
+exports[`counters > returns numerical values for the parsed properties 10`] = `
 {
   "$num": 9,
   "$operator": "$gte",
 }
 `;
 
-exports[`counters returns numerical values for the parsed properties 11`] = `
+exports[`counters > returns numerical values for the parsed properties 11`] = `
 {
   "$num": 10,
   "$operator": "$gte",
 }
 `;
 
-exports[`counters with no prefix are assumed to be ≥ 1`] = `
+exports[`counters > with no prefix are assumed to be ≥ 1`] = `
 {
   "$num": 10,
   "$operator": "$gte",
