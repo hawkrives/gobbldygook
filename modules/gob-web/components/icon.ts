@@ -15,7 +15,7 @@ export const Icon = styled.svg.attrs({
   height: 1em;
 
   ${(props) =>
-    props.large
+    props.large === true
       ? css`
           width: 1.5em;
           height: 1.5em;
@@ -29,7 +29,7 @@ export const Icon = styled.svg.attrs({
   margin: auto;
 
   ${(props) =>
-    props.block
+    props.block === true
       ? css`
           display: block;
         `

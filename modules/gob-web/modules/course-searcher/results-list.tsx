@@ -74,10 +74,11 @@ function getRowHeight(item: string | CourseType) {
 
   let height = firstRowHeight + rowHeight
 
-  let hasTimes = item.offerings?.length
+  let hasTimes = (item.offerings?.length ?? 0) > 0
   let hasSubtitle =
-    item.name &&
-    item.title &&
+    Boolean(item.name) &&
+    item.title != null &&
+    item.title !== "" &&
     (item.type === "Seminar" || item.type === "Topic")
 
   if (hasTimes) {
@@ -95,7 +96,7 @@ export class CourseResultsList extends React.Component<Props> {
   getRowHeight = (index: number) => {
     let item = this.props.results.get(index)
 
-    if (!item) {
+    if (item == null || item === "") {
       return 0
     }
 
@@ -118,7 +119,7 @@ export class CourseResultsList extends React.Component<Props> {
     let { index, style } = args
     let item = this.props.results.get(index)
 
-    if (!item) {
+    if (item == null || item === "") {
       return null
     }
 

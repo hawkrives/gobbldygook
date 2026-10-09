@@ -12,8 +12,10 @@ export default function FakeCourse(props: PropTypes) {
       <Title name={props.title} />
       <SummaryRow>
         {
-          // oxlint-disable-next-line typescript/prefer-nullish-coalescing -- empty details (like an empty error message) fall back too
-          props.details || "no details"
+          // empty details (like an empty error message) fall back too
+          props.details != null && props.details !== ""
+            ? props.details
+            : "no details"
         }
       </SummaryRow>
     </Container>

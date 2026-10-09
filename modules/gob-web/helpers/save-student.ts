@@ -2,8 +2,11 @@ import stringify from "stabilize"
 import type { Student } from "@gob/object-student"
 
 export function getIdCache(): Set<string> {
-  // oxlint-disable-next-line typescript/prefer-nullish-coalescing -- an empty string must also fall back to "[]"
-  let stored: unknown = JSON.parse(localStorage.getItem("studentIds") || "[]")
+  // an empty string must also fall back to "[]"
+  let storedIds = localStorage.getItem("studentIds")
+  let stored: unknown = JSON.parse(
+    storedIds != null && storedIds !== "" ? storedIds : "[]",
+  )
   return new Set(Array.isArray(stored) ? stored.map(String) : [])
 }
 

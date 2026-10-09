@@ -36,7 +36,9 @@ export function filterAreaList<T extends AreaSummary>(
   // Remove all areas that are closed to new class years.
   let onlyAvailableAreas = areas.filter(
     (area) =>
-      !area["available through"] ||
+      area["available through"] == null ||
+      area["available through"] === 0 ||
+      Number.isNaN(area["available through"]) ||
       area["available through"] > availableThrough,
   )
   // Group them together to filter them down

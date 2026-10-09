@@ -74,8 +74,9 @@ type State = {
 class StudentSummary extends React.Component<Props, State> {
   override state: State = {
     message:
-      (this.props.randomizeHello ? sample(welcomeMessages) : welcomeMessage) ??
-      "",
+      (this.props.randomizeHello === true
+        ? sample(welcomeMessages)
+        : welcomeMessage) ?? "",
     checking: true,
     canGraduate: false,
     creditsNeeded: null,

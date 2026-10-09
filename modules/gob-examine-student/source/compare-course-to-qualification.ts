@@ -125,7 +125,8 @@ function compareCourseToQualificationViaOperator(
   // get the actual course out of the object
   const inner = course["$course"]
   // a course expression keeps its course under $course
-  const actual = inner && typeof inner === "object" ? (inner as Course) : course
+  const actual =
+    inner !== null && typeof inner === "object" ? (inner as Course) : course
   const courseValue = actual[$key]
 
   // it's a static value; a number or string

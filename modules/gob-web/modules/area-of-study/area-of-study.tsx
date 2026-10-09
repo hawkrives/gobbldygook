@@ -79,7 +79,7 @@ export class AreaOfStudy extends React.Component<Props> {
           />
         </div>
 
-        {error && (
+        {error != null && error !== "" && (
           <p className="message area--error">
             {error} {":("}
           </p>
@@ -110,7 +110,7 @@ const CatalogLink = ({
   slug: string | null | undefined
   name: string
 }) => {
-  if (!slug) {
+  if (slug == null || slug === "") {
     return <span>{name}</span>
   }
 

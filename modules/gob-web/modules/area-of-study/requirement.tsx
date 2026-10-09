@@ -45,15 +45,18 @@ function Requirement(props: RequirementProps) {
 
   let childKeys = Object.keys(info).filter(isRequirementName)
 
-  let wasEvaluated = info.result?._checked
+  // info comes from the area file and the evaluation, so check truthiness
+  let wasEvaluated = Boolean(info.result?._checked)
+  let wasComputed = Boolean(info.computed)
+  let isOverridden = Boolean(info.overridden)
   let computationClassName = wasEvaluated
-    ? info.computed
+    ? wasComputed
       ? "result-success"
       : "result-failure"
     : ""
   let status = <ResultIndicator result={info.computed} />
 
-  let extraClasses = [info.overridden ? "overridden" : ""]
+  let extraClasses = [isOverridden ? "overridden" : ""]
 
   let result = info.result && (
     <div className="result">
@@ -61,8 +64,10 @@ function Requirement(props: RequirementProps) {
     </div>
   )
 
-  let message = info.message && <p className="message">{info.message}</p>
-  let description = info.description && (
+  let message = info.message != null && info.message !== "" && (
+    <p className="message">{info.message}</p>
+  )
+  let description = info.description != null && info.description !== "" && (
     <p className="description">{info.description}</p>
   )
 
@@ -76,15 +81,15 @@ function Requirement(props: RequirementProps) {
       </span>
       <span className="manual-override">
         <span className="overridden-msg">
-          {info.overridden ? "(Overridden) " : ""}
+          {isOverridden ? "(Overridden) " : ""}
         </span>
         <FlatButton
           title={`${
-            info.overridden ? "Remove" : "Apply"
+            isOverridden ? "Remove" : "Apply"
           } a manual override to this requirement`}
           onClick={(ev) => props.onToggleOverride(props.path, ev)}
         >
-          <Icon>{info.overridden ? iosBolt : iosBoltOutline}</Icon>
+          <Icon>{isOverridden ? iosBolt : iosBoltOutline}</Icon>
         </FlatButton>
       </span>
     </h2>
@@ -102,22 +107,24 @@ function Requirement(props: RequirementProps) {
     />
   ))
 
-  let overrideButtons = info.message && !info.result && (
-    <span className="required-override-buttons button-group">
-      <FlatButton onClick={(ev) => props.onRemoveOverride(props.path, ev)}>
-        Not yet…
-      </FlatButton>
-      <FlatButton onClick={(ev) => props.onAddOverride(props.path, ev)}>
-        Done!
-      </FlatButton>
-    </span>
-  )
+  let overrideButtons = info.message != null &&
+    info.message !== "" &&
+    !info.result && (
+      <span className="required-override-buttons button-group">
+        <FlatButton onClick={(ev) => props.onRemoveOverride(props.path, ev)}>
+          Not yet…
+        </FlatButton>
+        <FlatButton onClick={(ev) => props.onAddOverride(props.path, ev)}>
+          Done!
+        </FlatButton>
+      </span>
+    )
 
   let className = cx(
     "requirement",
     ...extraClasses,
     computationClassName,
-    props.isOpen ? "is-open" : "is-closed",
+    props.isOpen === true ? "is-open" : "is-closed",
   )
 
   return (

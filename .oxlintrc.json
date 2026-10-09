@@ -196,7 +196,8 @@
         "typescript/prefer-optional-chain": "error",
         "typescript/prefer-regexp-exec": "error",
         "typescript/prefer-string-starts-ends-with": "error",
-        "typescript/switch-exhaustiveness-check": "error"
+        "typescript/switch-exhaustiveness-check": "error",
+        "typescript/strict-boolean-expressions": "error"
       }
     },
     {

@@ -136,6 +136,10 @@ export function filterForRecentCourses(file: InfoFileRef, oldestYear: number) {
   // Only download the json courses
   const isJson = file.type === "json"
   // Only get the last four years of data
-  const isRecent = file.year && file.year >= oldestYear
+  const isRecent =
+    file.year != null &&
+    file.year !== 0 &&
+    !Number.isNaN(file.year) &&
+    file.year >= oldestYear
   return isJson && isRecent
 }

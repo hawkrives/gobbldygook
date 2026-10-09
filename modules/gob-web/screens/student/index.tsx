@@ -78,7 +78,7 @@ export default function StudentIndex(
 ) {
   let { location, studentId, navigate } = props
 
-  if (!studentId) {
+  if (studentId === undefined || studentId === "") {
     return <p>Student could not be loaded.</p>
   }
 

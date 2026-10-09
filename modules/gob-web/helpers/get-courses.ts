@@ -81,7 +81,9 @@ export async function getCourse(
   // in network-only mode the course is the parsed JSON, which may be null
   let getCourseFrom: (clbid: string) => Promise<CourseType | null> =
     getCourseFromDatabase
-  if (globalThis.useNetworkOnly) {
+  // set by hand from the devtools console, so it may be any value
+  const networkOnly = Boolean(globalThis.useNetworkOnly)
+  if (networkOnly) {
     getCourseFrom = getCourseFromNetwork
   }
 

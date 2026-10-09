@@ -5,8 +5,11 @@ import { defineConfig, devices } from "@playwright/test"
 
 // An empty E2E_PORT falls back to the default port.
 const portSetting = process.env.E2E_PORT
-const port = portSetting ? Number(portSetting) : 4173
+const port =
+  portSetting !== undefined && portSetting !== "" ? Number(portSetting) : 4173
 const isCI = Boolean(process.env.CI)
+// An empty FLAKINESS_TITLE falls back to the default title too.
+const flakinessTitle = process.env.FLAKINESS_TITLE
 
 export default defineConfig({
   testDir: "./e2e",
@@ -20,8 +23,10 @@ export default defineConfig({
       "@flakiness/playwright",
       {
         flakinessProject: "gobbldygook/gobbldygook",
-        // oxlint-disable-next-line typescript/prefer-nullish-coalescing -- an empty FLAKINESS_TITLE should fall back to the default title too
-        title: process.env.FLAKINESS_TITLE || "Playwright",
+        title:
+          flakinessTitle !== undefined && flakinessTitle !== ""
+            ? flakinessTitle
+            : "Playwright",
         outputFolder: "flakiness-report/playwright",
       },
     ],

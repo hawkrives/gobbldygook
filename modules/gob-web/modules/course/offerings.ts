@@ -41,7 +41,7 @@ export function consolidateExpandedOfferings(
       let start = to12HourTime(first.start)
       let end = to12HourTime(first.end)
 
-      if (first.location) {
+      if (first.location != null && first.location !== "") {
         let location = first.location.replace(/ /g, nbsp)
         return `${days} from ${start} to ${end}, in${nbsp}${location}`
       }

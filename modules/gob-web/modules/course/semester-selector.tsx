@@ -35,7 +35,7 @@ class SemesterSelector extends React.Component<Props> {
   moveToSchedule = (ev: React.ChangeEvent<HTMLSelectElement>) => {
     let { scheduleId, student, clbid } = this.props
 
-    if (!scheduleId) {
+    if (scheduleId == null || scheduleId === "") {
       return
     }
 
@@ -63,11 +63,12 @@ class SemesterSelector extends React.Component<Props> {
   override render() {
     let { scheduleId, student } = this.props
 
-    let specialOption = scheduleId ? (
-      <option value={REMOVE_FROM_SCHEDULE}>Remove from Schedule</option>
-    ) : (
-      <option value={NO_SCHEDULE}>No Schedule</option>
-    )
+    let specialOption =
+      scheduleId != null && scheduleId !== "" ? (
+        <option value={REMOVE_FROM_SCHEDULE}>Remove from Schedule</option>
+      ) : (
+        <option value={NO_SCHEDULE}>No Schedule</option>
+      )
 
     let semesters = semesterList(student)
     let options = semesters.map((group, year) => (
@@ -84,8 +85,10 @@ class SemesterSelector extends React.Component<Props> {
 
     return (
       <select
-        // oxlint-disable-next-line typescript/prefer-nullish-coalescing -- an empty scheduleId means no schedule, as in moveToSchedule
-        value={scheduleId || NO_SCHEDULE}
+        // an empty scheduleId means no schedule, as in moveToSchedule
+        value={
+          scheduleId != null && scheduleId !== "" ? scheduleId : NO_SCHEDULE
+        }
         onChange={this.moveToSchedule}
       >
         {specialOption}

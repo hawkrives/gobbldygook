@@ -308,7 +308,7 @@ function checkAgainstArea(
   let path = [String(areaData.type), String(areaData.name)]
   let result: Requirement = evaluate({ area: areaData, courses, overrides })
 
-  if (args.path) {
+  if (args.path !== undefined && args.path !== "") {
     let subPath = args.path.split(".")
     let subResult: unknown = get(result, subPath)
     if (typeof subResult !== "object" || subResult === null) {
@@ -328,14 +328,16 @@ function checkAgainstArea(
     console.log(summarize(result, String(areaData.name), path))
   }
 
-  let outcome = result.computed ? "success" : "failure"
+  // overrides come from the student file, so `computed` may be any value
+  const passed = Boolean(result.computed)
+  let outcome = passed ? "success" : "failure"
   if (!args.status) {
     console.log(
       `[${String(areaData.type)}] ${String(areaData.name)}: ${outcome}`,
     )
   }
 
-  return Boolean(result.computed)
+  return passed
 }
 
 export default async function main() {

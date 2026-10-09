@@ -78,7 +78,7 @@ export function checkForTimeConflicts(
 
       // +1 to the indices because humans don't 0-index lists
       let conflicts = conflictSet.flatMap((isConflict, i) =>
-        isConflict ? [i + 1] : [],
+        isConflict === true ? [i + 1] : [],
       )
       let conflicted = conflicts.map((i) => `${String(i)}${ordinal(i)}`)
       let conflictsStr = oxford(conflicted)

@@ -59,7 +59,8 @@ export default function collectMatches(
     const unexpected: { $type?: unknown } = expr
     // a falsy $type is reported as "undefined"
     const typeName = String(unexpected.$type)
-    const type = unexpected.$type ? typeName : "undefined"
+    const hasType = Boolean(unexpected.$type)
+    const type = hasType ? typeName : "undefined"
     throw new TypeError(`collectMatches(): unknown expression type "${type}"`)
   }
 

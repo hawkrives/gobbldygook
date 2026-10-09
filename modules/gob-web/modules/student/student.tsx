@@ -39,7 +39,7 @@ type OwnProps = {
 
 const connector = connect(
   (state: RootState, ownProps: OwnProps) =>
-    ownProps.studentId
+    ownProps.studentId != null && ownProps.studentId !== ""
       ? { student: state.students[ownProps.studentId] }
       : { student: undefined },
   { loadStudent },
@@ -51,7 +51,11 @@ type State = {}
 
 export class Student extends React.Component<Props, State> {
   override componentDidMount() {
-    if (this.props.studentId && !this.props.student) {
+    if (
+      this.props.studentId != null &&
+      this.props.studentId !== "" &&
+      !this.props.student
+    ) {
       this.props.loadStudent(this.props.studentId)
     }
   }

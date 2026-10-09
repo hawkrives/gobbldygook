@@ -12,8 +12,10 @@ import type { SORT_BY_KEY, GROUP_BY_KEY } from "./constants"
 const ALL_DAYS = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
 
 function TITLE(course: CourseType): string {
-  // oxlint-disable-next-line typescript/prefer-nullish-coalescing -- an empty title falls back to the name too
-  return course.title || course.name
+  // an empty title falls back to the name too
+  return course.title != null && course.title !== ""
+    ? course.title
+    : course.name
 }
 
 function DAY_OF_WEEK(course: CourseType): string {

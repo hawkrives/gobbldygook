@@ -38,8 +38,9 @@ export default function CourseTitle({
   className,
 }: CourseTitleProps) {
   const isIndependent = independentRegex.test(name)
-  // oxlint-disable-next-line typescript/prefer-nullish-coalescing -- an empty title falls back to the name too
-  let courseName: string | undefined = title || name
+  // an empty title falls back to the name too
+  let courseName: string | undefined =
+    title != null && title !== "" ? title : name
   let subtitle: string | undefined = undefined
 
   if (isIndependent) {
@@ -58,7 +59,7 @@ export default function CourseTitle({
   return (
     <div className={className}>
       <Title>{courseName}</Title>
-      {subtitle && subtitle.length && <Subtitle>{subtitle}</Subtitle>}
+      {subtitle != null && subtitle !== "" && <Subtitle>{subtitle}</Subtitle>}
     </div>
   )
 }

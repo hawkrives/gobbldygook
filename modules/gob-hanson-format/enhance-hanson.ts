@@ -67,13 +67,15 @@ export function enhanceHanson(data: HansonFile): ParsedHansonFile {
 
   // because this only runs at the top level, we know
   // that we'll have a name to use
-  // oxlint-disable-next-line typescript/prefer-nullish-coalescing -- an empty (or non-string falsy) slug or name from the YAML falls back like a missing one
+  // oxlint-disable-next-line typescript/prefer-nullish-coalescing, typescript/strict-boolean-expressions -- an empty (or non-string falsy) slug or name from the YAML falls back like a missing one
   let slug = data.slug || makeAreaSlug(data.name || "")
 
   // YAML turns an unquoted revision like 2020-21 into a number or a date
   const rev: unknown = data.revision
   const revName = String(rev)
-  if (rev && typeof rev !== "string") {
+  // a falsy revision (missing, null, 0, ...) is allowed through
+  const hasRevision = Boolean(rev)
+  if (hasRevision && typeof rev !== "string") {
     let msg = `"revision" must be a string. Try wrapping it in single quotes. "${revName}" is a ${typeof rev}.`
     throw new TypeError(msg)
   }
@@ -105,11 +107,15 @@ export function enhanceHanson(data: HansonFile): ParsedHansonFile {
     result,
   }
 
-  if (dateAdded) {
+  // YAML may give any type here, and any falsy value is left off; the
+  // undefined checks only narrow the types
+  const hasDateAdded = Boolean(dateAdded)
+  if (dateAdded !== undefined && hasDateAdded) {
     returnValue.dateAdded = dateAdded
   }
 
-  if (available) {
+  const hasAvailable = Boolean(available)
+  if (available !== undefined && hasAvailable) {
     returnValue["available through"] = available
   }
 
@@ -164,7 +170,12 @@ function enhanceRequirement(value: unknown): ParsedHansonRequirement {
   // mapping.
   let { declare: variables = {}, result, filter, ...requirements } = requirement
 
-  let parsedFilter = filter
+  // YAML may give any type here; parseWithPeg rejects a truthy non-string,
+  // and any falsy value means there is no filter (or result)
+  const hasFilter = Boolean(filter)
+  const hasResult = Boolean(result)
+
+  let parsedFilter = hasFilter
     ? parseWithPeg(filter, {
         abbreviations,
         titles,
@@ -173,7 +184,7 @@ function enhanceRequirement(value: unknown): ParsedHansonRequirement {
       })
     : null
 
-  let parsedResult = result
+  let parsedResult = hasResult
     ? parseWithPeg(result, {
         abbreviations,
         titles,

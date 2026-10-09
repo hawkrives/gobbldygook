@@ -25,7 +25,7 @@ export class SemesterDetail extends React.Component<Props> {
   override render() {
     let { term, student } = this.props
 
-    if (!term) {
+    if (term == null || term === "") {
       return <p>Unknown term</p>
     }
 
