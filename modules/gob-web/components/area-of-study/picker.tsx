@@ -6,22 +6,25 @@ import { AreaOfStudyProvider } from "./provider"
 import type { HansonFile } from "@gob/hanson-format"
 import { filterAreaList } from "@gob/object-student"
 
-export type Selection = {
+export type Selection = Readonly<{
   name: string
   type: string
   revision?: string | undefined
   label: string
   value: string
-}
+}>
 
-type Props = {
-  selections: Array<Selection>
+type Props = Readonly<{
+  selections: ReadonlyArray<Selection>
   type: string
   label?: string
   // react-select also passes along the option that was added or removed
-  onChange: (selections: Array<Selection>, action: ActionMeta) => unknown
+  onChange: (
+    selections: ReadonlyArray<Selection>,
+    action: Readonly<ActionMeta>,
+  ) => unknown
   availableThrough?: number
-}
+}>
 
 export function getOptions(
   areas: ReadonlyArray<HansonFile>,
@@ -53,7 +56,10 @@ function isList(
 export class AreaPicker extends React.PureComponent<Props> {
   id = uniqueId()
 
-  handleChange = (value: ValueType<Selection>, action: ActionMeta) => {
+  handleChange = (
+    value: ValueType<Selection>,
+    action: Readonly<ActionMeta>,
+  ) => {
     // a multi-select clears to null when the last selection is removed
     let selections = value == null ? [] : isList(value) ? [...value] : [value]
     this.props.onChange(selections, action)

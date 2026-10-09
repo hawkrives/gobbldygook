@@ -8,14 +8,15 @@ import { changeStudent } from "../../redux/students/actions/change"
 
 const connector = connect(undefined, { changeStudent })
 
-type Props = {
+type Props = Readonly<{
   areaOfStudy: AreaQuery
   student: Student
-} & ConnectedProps<typeof connector>
+}> &
+  ConnectedProps<typeof connector>
 
-type State = {
+type State = Readonly<{
   isOpen: boolean
-}
+}>
 
 class AreaOfStudyConnector extends React.Component<Props, State> {
   override state: State = {
@@ -27,21 +28,21 @@ class AreaOfStudyConnector extends React.Component<Props, State> {
     this.setState({ isOpen: !this.state.isOpen })
   }
 
-  addOverride = (path: string[], ev: React.MouseEvent) => {
+  addOverride = (path: ReadonlyArray<string>, ev: React.MouseEvent) => {
     ev.stopPropagation()
     const codifiedPath = pathToOverride(path)
     let s = this.props.student.setOverride(codifiedPath, true)
     this.props.changeStudent(s)
   }
 
-  removeOverride = (path: string[], ev: React.MouseEvent) => {
+  removeOverride = (path: ReadonlyArray<string>, ev: React.MouseEvent) => {
     ev.stopPropagation()
     const codifiedPath = pathToOverride(path)
     let s = this.props.student.removeOverride(codifiedPath)
     this.props.changeStudent(s)
   }
 
-  toggleOverride = (path: string[], ev: React.MouseEvent) => {
+  toggleOverride = (path: ReadonlyArray<string>, ev: React.MouseEvent) => {
     ev.stopPropagation()
     const codifiedPath = pathToOverride(path)
 

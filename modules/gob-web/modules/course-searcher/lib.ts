@@ -106,15 +106,15 @@ const REVERSE_ORDER: Set<GROUP_BY_KEY> = Set.of("year", "term", "semester")
 
 export function sortAndGroup(
   results: List<CourseType>,
-  args: {
+  args: Readonly<{
     sorting: SORT_BY_KEY
     grouping: GROUP_BY_KEY
     filtering: string
     limiting: string
-  },
+  }>,
 ): {
   results: List<string | CourseType>
-  keys: Array<string>
+  keys: ReadonlyArray<string>
   years: Set<number>
 } {
   let { sorting, grouping, filtering, limiting } = args

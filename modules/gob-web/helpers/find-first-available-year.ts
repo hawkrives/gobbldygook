@@ -14,7 +14,7 @@ import { findMissingNumber } from "@gob/lib"
  * @returns {Number} - the first available semester slot
  */
 export function findFirstAvailableYear(
-  schedules: ReadonlyArray<{ year: number }>,
+  schedules: ReadonlyArray<Readonly<{ year: number }>>,
   matriculation?: number | null,
 ): number {
   if (schedules.length === 0 && matriculation == null) {

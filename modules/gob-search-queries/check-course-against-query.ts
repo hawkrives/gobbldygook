@@ -28,7 +28,7 @@ function isBooleanBit(value: unknown): value is BooleanBit {
 
 function checkQueryBit(
   course: Queryable,
-  [key, values]: [string, ReadonlyArray<QueryValue>],
+  [key, values]: readonly [string, ReadonlyArray<QueryValue>],
 ): boolean {
   if (!Object.hasOwn(course, key)) {
     return false

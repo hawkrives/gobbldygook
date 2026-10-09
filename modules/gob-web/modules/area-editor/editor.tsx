@@ -17,11 +17,11 @@ const StyledEditor = styled(CodeMirror)`
   }
 `
 
-type Props = {
+type Props = Readonly<{
   value: string
   onChange?: (value: string) => void
   readOnly?: boolean
-}
+}>
 
 export const Editor = (props: Props) => (
   <Card style={{ overflow: "hidden", display: "flex" }}>

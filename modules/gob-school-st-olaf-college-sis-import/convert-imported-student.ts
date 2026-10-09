@@ -6,7 +6,7 @@ import type {
 } from "@gob/object-student"
 import { List, Set, Map } from "immutable"
 
-type PartialCourse = {
+type PartialCourse = Readonly<{
   credits: number
   number: number | string
   clbid: string
@@ -15,7 +15,7 @@ type PartialCourse = {
   lab: boolean
   section: string
   name: string
-  gereqs?: Array<string>
+  gereqs?: ReadonlyArray<string>
 
   year: number
   semester: number
@@ -26,14 +26,14 @@ type PartialCourse = {
   crsid?: string
   status?: string
   pf?: boolean
-  instructors?: Array<string>
+  instructors?: ReadonlyArray<string>
   enrolled?: number
   max?: number
   groupid?: string
   prerequisites?: false | string
 
   _fabrication?: true
-}
+}>
 
 function fleshOutSisFabrication(input: PartialCourse): CourseType {
   let {
@@ -96,25 +96,25 @@ function fleshOutSisFabrication(input: PartialCourse): CourseType {
   }
 }
 
-type PartialSchedule = {
+type PartialSchedule = Readonly<{
   semester: number
   year: number
-  courses: Array<PartialCourse>
-}
+  courses: ReadonlyArray<PartialCourse>
+}>
 
-export type PartialStudent = {
+export type PartialStudent = Readonly<{
   // nothing reads this; the courses come from each schedule
-  courses?: Array<PartialCourse>
-  degrees: Array<string>
-  majors: Array<string>
-  concentrations: Array<string>
-  emphases: Array<string>
+  courses?: ReadonlyArray<PartialCourse>
+  degrees: ReadonlyArray<string>
+  majors: ReadonlyArray<string>
+  concentrations: ReadonlyArray<string>
+  emphases: ReadonlyArray<string>
   matriculation: number
   graduation: number
   advisor: string
   name: string
-  schedules: Array<PartialSchedule>
-}
+  schedules: ReadonlyArray<PartialSchedule>
+}>
 
 export async function convertStudent(
   student: PartialStudent,
@@ -145,7 +145,7 @@ function isCourse(course: CourseType | null): course is CourseType {
 }
 
 export async function processSchedules(
-  schedules: Array<PartialSchedule>,
+  schedules: ReadonlyArray<PartialSchedule>,
   getCourse: CourseLookupFunc,
 ): Promise<{
   schedules: Map<string, Schedule>

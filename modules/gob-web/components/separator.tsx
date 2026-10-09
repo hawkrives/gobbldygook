@@ -21,12 +21,12 @@ const FlexSpacerRule = styled(Rule)<{ flex: number }>`
   flex: ${(props) => props.flex};
 `
 
-type Props = {
+type Props = Readonly<{
   className?: string
   flex?: number
-  style?: React.CSSProperties
+  style?: Readonly<React.CSSProperties>
   type?: "spacer" | "line" | "flex-spacer"
-}
+}>
 
 export default function Separator(props: Props) {
   const { className, flex = 1, style, type = "spacer" } = props

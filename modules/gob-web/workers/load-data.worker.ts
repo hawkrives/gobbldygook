@@ -9,7 +9,7 @@ function checkIdbInWorkerSupport() {
   return false
 }
 
-function sendMessage(params: { id: string; [key: string]: unknown }) {
+function sendMessage(params: Readonly<{ id: string; [key: string]: unknown }>) {
   let { id, type, ...args } = params
   let strMessage = JSON.stringify({ id, type, ...args })
   self.postMessage(strMessage)

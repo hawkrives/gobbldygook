@@ -7,10 +7,11 @@ type State = {
   isOpen: boolean
 }
 
-export type Props = MiniProps & {
-  scheduleId?: string | undefined
-  studentId?: string | undefined
-}
+export type Props = MiniProps &
+  Readonly<{
+    scheduleId?: string | undefined
+    studentId?: string | undefined
+  }>
 
 export default class CourseWithModal extends React.PureComponent<Props, State> {
   override state: State = {

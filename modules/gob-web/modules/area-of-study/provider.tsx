@@ -1,20 +1,20 @@
 import * as React from "react"
-import type { EvaluationResult } from "@gob/examine-student"
+import type { DeepReadonly, EvaluationResult } from "@gob/examine-student"
 import { Student, type AreaQuery } from "@gob/object-student"
 import { checkStudentAgainstArea } from "../../workers/check-student"
 import { loadArea } from "../../helpers/load-area"
 
-type State = {
+type State = Readonly<{
   examining: boolean
-  results: EvaluationResult | null
+  results: DeepReadonly<EvaluationResult> | null
   error: string | null
-}
+}>
 
-type Props = {
+type Props = Readonly<{
   areaOfStudy: AreaQuery
   student: Student
   children: (state: State) => React.ReactNode
-}
+}>
 
 export class AreaOfStudyProvider extends React.Component<Props, State> {
   override state: State = {

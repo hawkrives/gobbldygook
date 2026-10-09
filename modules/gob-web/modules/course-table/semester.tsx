@@ -138,11 +138,13 @@ const TitleText = styled.h1`
   color: black;
 `
 
-function discoverSemesterStatus(args: {
-  year: number
-  semester: number
-  now: Date
-}): "past" | "in-progress" | "future" | "unknown" {
+function discoverSemesterStatus(
+  args: Readonly<{
+    year: number
+    semester: number
+    now: Date
+  }>,
+): "past" | "in-progress" | "future" | "unknown" {
   let { year, now } = args
   if (year < now.getFullYear()) {
     return "past"
@@ -156,22 +158,22 @@ function discoverSemesterStatus(args: {
   return "unknown"
 }
 
-type DnDProps = {
+type DnDProps = Readonly<{
   canDrop: boolean
   connectDropTarget: ConnectDropTarget
   isOver: boolean
-}
+}>
 
 const connector = connect(undefined, { changeStudent })
 
-type ReduxProps = ConnectedProps<typeof connector>
+type ReduxProps = Readonly<ConnectedProps<typeof connector>>
 
-type ReactProps = {
+type ReactProps = Readonly<{
   schedule: Schedule
   semester: number
   student: Student
   year: number
-}
+}>
 
 type Props = ReduxProps & DnDProps & ReactProps
 
@@ -281,7 +283,7 @@ class Semester extends React.Component<Props, State> {
     return (
       <Container
         className={className}
-        ref={(ref: HTMLDivElement | null) => props.connectDropTarget(ref)}
+        ref={(ref) => props.connectDropTarget(ref)}
       >
         <Header>
           {hasConflict && <Icon>{alertCircled}</Icon>}

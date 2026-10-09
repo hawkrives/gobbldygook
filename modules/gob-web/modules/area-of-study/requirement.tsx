@@ -2,7 +2,10 @@ import type * as React from "react"
 import { Component } from "react"
 import cx from "classnames"
 import { isRequirementName } from "@gob/examine-student"
-import type { Requirement as RequirementType } from "@gob/examine-student"
+import type {
+  DeepReadonly,
+  Requirement as RequirementType,
+} from "@gob/examine-student"
 
 import { Icon } from "../../components/icon"
 import { iosBoltOutline, iosBolt } from "../../icons/ionicons"
@@ -13,26 +16,32 @@ import ResultIndicator from "./result-indicator"
 
 import "./requirement.scss"
 
-type RequirementInfo = Partial<RequirementType> & {
-  description?: string
-}
+type RequirementInfo = DeepReadonly<
+  Partial<RequirementType> & {
+    description?: string
+  }
+>
 
-export type OverrideHandler = (path: string[], ev: React.MouseEvent) => unknown
+export type OverrideHandler = (
+  path: ReadonlyArray<string>,
+  ev: React.MouseEvent,
+) => unknown
 
-type Props = {
+type Props = Readonly<{
   onAddOverride: OverrideHandler
   onRemoveOverride: OverrideHandler
   onToggleOverride: OverrideHandler
-  path: string[]
+  path: ReadonlyArray<string>
   topLevel?: boolean
   info: RequirementInfo | null | undefined
   name?: string
-}
+}>
 
-type RequirementProps = Props & {
-  isOpen?: boolean
-  onToggleOpen: () => unknown
-}
+type RequirementProps = Props &
+  Readonly<{
+    isOpen?: boolean
+    onToggleOpen: () => unknown
+  }>
 
 // Keys that are requirement names hold child requirements; see
 // isRequirementName.
@@ -140,9 +149,9 @@ function Requirement(props: RequirementProps) {
   )
 }
 
-type State = {
+type State = Readonly<{
   open: boolean
-}
+}>
 
 export default class ExpandableRequirement extends Component<Props, State> {
   override state: State = {

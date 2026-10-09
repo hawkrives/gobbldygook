@@ -6,9 +6,11 @@ import updateDatabase from "./update-database"
 import removeDuplicateAreas from "./remove-duplicate-areas"
 import type { InfoFileTypeEnum, InfoFileRef, InfoIndexFile } from "./types"
 type Args = {
-  baseUrl: string
-  notification: Notification
-  type: InfoFileTypeEnum
+  readonly baseUrl: string
+  // Readonly to callers; its own start() method still records the progress
+  // bar's length on it
+  readonly notification: Readonly<Notification>
+  readonly type: InfoFileTypeEnum
 }
 export default function loadFiles(url: string, baseUrl: string): Promise<void> {
   console.log(`fetching ${url}`)
@@ -74,7 +76,7 @@ export function getFilesToLoad(
 }
 export async function filterFiles(
   type: InfoFileTypeEnum,
-  files: InfoFileRef[],
+  files: ReadonlyArray<InfoFileRef>,
 ): Promise<Array<InfoFileRef>> {
   // For each file, see if it needs loading. We then update each promise
   // with either the path or `null`.
@@ -92,7 +94,7 @@ export async function filterFiles(
 }
 export async function slurpIntoDatabase(
   { type, baseUrl, notification }: Args,
-  files: Array<InfoFileRef>,
+  files: ReadonlyArray<InfoFileRef>,
 ) {
   // Exit early if nothing needs to happen
   if (files.length === 0) {

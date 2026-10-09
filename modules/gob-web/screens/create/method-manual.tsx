@@ -27,10 +27,10 @@ type State = {
   matriculationIsValid: boolean
   graduation: number
   graduationIsValid: boolean
-  degrees: Array<Selection>
-  majors: Array<Selection>
-  concentrations: Array<Selection>
-  emphases: Array<Selection>
+  degrees: ReadonlyArray<Selection>
+  majors: ReadonlyArray<Selection>
+  concentrations: ReadonlyArray<Selection>
+  emphases: ReadonlyArray<Selection>
   submitted: boolean
 }
 

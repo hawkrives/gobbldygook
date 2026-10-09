@@ -8,12 +8,14 @@ let CenteredCard = styled(Card)`
   padding: 2rem;
 `
 
-export function LoadingComponent(props: {
-  error?: unknown
-  retry: () => unknown
-  timedOut: boolean
-  pastDelay: boolean
-}) {
+export function LoadingComponent(
+  props: Readonly<{
+    error?: unknown
+    retry: () => unknown
+    timedOut: boolean
+    pastDelay: boolean
+  }>,
+) {
   // a rejected import can reject with any value
   let hasError = Boolean(props.error)
   if (hasError) {

@@ -97,7 +97,7 @@ let sortByExpanded: Readonly<Record<SORT_BY_ENUM, string>> = {
   name: "name",
 }
 
-type PropTypes = {
+type PropTypes = Readonly<{
   destroyStudent: (id: string) => unknown
   filterText: string
   groupBy: string
@@ -108,7 +108,7 @@ type PropTypes = {
   onToggleEditing: () => unknown
   sortBy: SORT_BY_ENUM
   students: StudentState
-}
+}>
 
 export default function StudentPicker(props: PropTypes) {
   const {

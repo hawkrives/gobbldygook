@@ -4,10 +4,10 @@ import BasicProgressBar from "../../components/progress-bar"
 import styled from "styled-components"
 import type { NotificationState } from "./redux/reducers"
 
-type Props = {
+type Props = Readonly<{
   onClose: () => unknown
   notification: NotificationState
-}
+}>
 
 let ProgressContainer = styled.div`
   display: flex;

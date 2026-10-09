@@ -27,7 +27,8 @@ import { ConnectedSidebarToolbar } from "../../components/sidebar-toolbar"
 import { AreaOfStudySidebar } from "../../modules/student/area-of-study-sidebar"
 import { StudentSummary } from "../../modules/student/student-summary"
 
-type SidebarProps = RouteComponentProps & { student: Undoable<Student> }
+type SidebarProps = Readonly<RouteComponentProps> &
+  Readonly<{ student: Undoable<Student> }>
 
 const StatusSidebar = ({ student }: SidebarProps) => (
   <Sidebar>

@@ -8,6 +8,7 @@ import type {
   BooleanExpression,
   Course,
   CourseExpression,
+  DeepReadonly,
   Expression,
   Filter,
   ModifierExpression,
@@ -31,11 +32,11 @@ import { loadStudent } from "../lib/load-student"
 
 // The child requirements of an evaluated requirement
 function childRequirements(
-  requirement: Requirement,
-): Array<[string, Requirement]> {
+  requirement: DeepReadonly<Requirement>,
+): Array<[string, DeepReadonly<Requirement>]> {
   return Object.entries(requirement)
     .filter(([k]) => isRequirementName(k))
-    .map(([k, v]) => [k, v as Requirement])
+    .map(([k, v]) => [k, v as DeepReadonly<Requirement>])
 }
 
 function condenseCourse(course: Course) {
@@ -45,9 +46,9 @@ function condenseCourse(course: Course) {
 }
 
 function summarize(
-  requirement: Requirement,
+  requirement: DeepReadonly<Requirement>,
   name: string,
-  path: Array<string>,
+  path: ReadonlyArray<string>,
   depth = 0,
 ): string {
   let prose = ""
@@ -65,7 +66,7 @@ function summarize(
   )}${prose}`
 }
 
-function stringifyChunk(expr: Expression): string {
+function stringifyChunk(expr: DeepReadonly<Expression>): string {
   let resultString = ""
   switch (expr.$type) {
     case "boolean":
@@ -105,7 +106,7 @@ function stringifyChunk(expr: Expression): string {
 const AND = chalk.bold("AND")
 const OR = chalk.bold("OR")
 
-function stringifyBoolean(expr: BooleanExpression) {
+function stringifyBoolean(expr: DeepReadonly<BooleanExpression>) {
   if (expr.$booleanType === "or") {
     const str = expr.$or.map((req) => stringifyChunk(req)).join(` ${OR} `)
     return `(${str})`
@@ -114,13 +115,15 @@ function stringifyBoolean(expr: BooleanExpression) {
   return `(${str})`
 }
 
-function stringifyCourse(expr: CourseExpression) {
+function stringifyCourse(expr: DeepReadonly<CourseExpression>) {
   return condenseCourse(expr.$course)
 }
 
-function stringifyChildren(expr: {
-  $children: "$all" | Array<ReferenceExpression>
-}) {
+function stringifyChildren(
+  expr: DeepReadonly<{
+    $children: "$all" | Array<ReferenceExpression>
+  }>,
+) {
   if (expr.$children === "$all") {
     return "all children"
   }
@@ -128,7 +131,7 @@ function stringifyChildren(expr: {
   return `(${str})`
 }
 
-function stringifyModifier(expr: ModifierExpression) {
+function stringifyModifier(expr: DeepReadonly<ModifierExpression>) {
   let modifier
   if (expr.$from === "children") {
     modifier = stringifyChildren(expr)
@@ -151,19 +154,19 @@ function stringifyModifier(expr: ModifierExpression) {
   return `${expr.$count.$num} ${word} ${besides}from ${modifier}`
 }
 
-function stringifyOccurrence(expr: OccurrenceExpression) {
+function stringifyOccurrence(expr: DeepReadonly<OccurrenceExpression>) {
   const word = expr.$count.$num === 1 ? "occurrence" : "occurrences"
   return `${expr.$count.$num} ${word} of ${condenseCourse(expr.$course)}`
 }
 
-function stringifyOf(expr: OfExpression) {
+function stringifyOf(expr: DeepReadonly<OfExpression>) {
   const op = humanizeOperator(expr.$count.$operator)
   const qualifier = op ? ` ${op}` : ""
   const ofs = expr.$of.map((req) => stringifyChunk(req)).join(", ")
   return `${expr.$count.$num} of${qualifier} (${ofs})`
 }
 
-function stringifyReference(expr: ReferenceExpression) {
+function stringifyReference(expr: DeepReadonly<ReferenceExpression>) {
   return `*${expr.$requirement}`
 }
 
@@ -171,11 +174,11 @@ function stringifyQualification({
   $key,
   $operator,
   $value,
-}: {
+}: DeepReadonly<{
   $key: string
   $operator: Operator
   $value: QualificationValue
-}): string {
+}>): string {
   if (typeof $value === "object") {
     if ($value.$type === "function") {
       const computed = $value["$computed-value"]
@@ -187,7 +190,7 @@ function stringifyQualification({
       return stringifyQualification({ $key, $operator, $value: computed })
     }
 
-    let ds: Array<QualificationValue>
+    let ds: ReadonlyArray<DeepReadonly<QualificationValue>>
     let conjunction: string
     if ($value.$booleanType === "or") {
       ds = $value.$or
@@ -222,7 +225,7 @@ function stringifyQualification({
   }
 }
 
-function stringifyWhereClause(clause: Qualifier): string {
+function stringifyWhereClause(clause: DeepReadonly<Qualifier>): string {
   if (clause.$type === "qualification") {
     return stringifyQualification(clause)
   }
@@ -232,13 +235,13 @@ function stringifyWhereClause(clause: Qualifier): string {
   return clause.$or.map(stringifyWhereClause).join(" | ")
 }
 
-function stringifyWhere(expr: WhereExpression) {
+function stringifyWhere(expr: DeepReadonly<WhereExpression>) {
   const word = plur("course", expr.$count.$num)
   const where = stringifyWhereClause(expr.$where)
   return `${expr.$count.$num} ${word} where {${where}}`
 }
 
-function stringifyFilter(filter: Filter) {
+function stringifyFilter(filter: DeepReadonly<Filter>) {
   let resultString = "Filter: "
 
   // a filter will be either a where-style query or a list of courses
@@ -261,9 +264,9 @@ function indent(indentWith: string, string: string) {
 }
 
 function proseify(
-  requirement: Requirement,
+  requirement: DeepReadonly<Requirement>,
   name: string,
-  path: Array<string>,
+  path: ReadonlyArray<string>,
   depth = 0,
 ): string {
   let prose = childRequirements(requirement)
@@ -288,21 +291,23 @@ function proseify(
 }
 
 type Flags = {
-  json: boolean
-  yaml: boolean
-  prose: boolean
-  summary: boolean
-  status: boolean
-  path: string | undefined
+  readonly json: boolean
+  readonly yaml: boolean
+  readonly prose: boolean
+  readonly summary: boolean
+  readonly status: boolean
+  readonly path: string | undefined
 }
 
 // Returns whether the area (or the requirement at --path) passed
 function checkAgainstArea(
+  // oxlint-disable-next-line typescript/prefer-readonly-parameter-types -- evaluate() takes a mutable courses array
   {
     courses,
     overrides,
   }: { courses: Array<Course>; overrides: OverridesObject },
   args: Flags,
+  // oxlint-disable-next-line typescript/prefer-readonly-parameter-types -- evaluate() writes its results onto the area's expressions
   areaData: ParsedHansonFile,
 ): boolean {
   let path = [String(areaData.type), String(areaData.name)]

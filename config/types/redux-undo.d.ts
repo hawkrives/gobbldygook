@@ -3,9 +3,9 @@ declare module "redux-undo" {
   import type { Action, Reducer } from "redux"
 
   export type StateWithHistory<S> = {
-    past: Array<S>
+    past: ReadonlyArray<S>
     present: S
-    future: Array<S>
+    future: ReadonlyArray<S>
     // older redux-undo kept the history here as well
     history?: unknown
   }

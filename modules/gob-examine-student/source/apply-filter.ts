@@ -2,8 +2,10 @@ import checkForCourse from "./check-for-course"
 import filterByWhereClause from "./filter-by-where-clause"
 import type { FilterExpression, Course } from "./types"
 
-const filterByOfExpression = (courses: Array<Course>, $of: Array<Course>) =>
-  $of.filter((course) => checkForCourse(course, courses))
+const filterByOfExpression = (
+  courses: ReadonlyArray<Course>,
+  $of: ReadonlyArray<Course>,
+) => $of.filter((course) => checkForCourse(course, courses))
 
 /**
  * Filters a list of courses by way of a filter expression.
@@ -14,7 +16,9 @@ const filterByOfExpression = (courses: Array<Course>, $of: Array<Course>) =>
  */
 
 export default function applyFilter(
+  // oxlint-disable-next-line typescript/prefer-readonly-parameter-types -- writes _matches onto expr (and filterByWhereClause writes $computed-value onto its $where)
   expr: FilterExpression,
+  // oxlint-disable-next-line typescript/prefer-readonly-parameter-types -- filterByWhereClause can return courses itself, and compute hands the result to computeChunk, where a where-expression's matches can be that list and applyFulfillmentToResult pushes onto them
   courses: Course[],
 ): Course[] {
   // default to an empty array

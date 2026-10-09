@@ -17,10 +17,12 @@ import "./area-of-study-group.scss"
 
 // react-select 2 also passes the option that was added or removed, which its
 // types leave out
-type PickerAction = ActionMeta & {
-  option?: Selection
-  removedValue?: Selection
-}
+type PickerAction = Readonly<
+  ActionMeta & {
+    option?: Selection
+    removedValue?: Selection
+  }
+>
 
 const connector = connect(undefined, { changeStudent })
 
@@ -34,7 +36,10 @@ type Props = {
 } & ConnectedProps<typeof connector>
 
 class AreaOfStudyGroup extends React.PureComponent<Props> {
-  handleChange = (_value: Array<Selection>, meta: ActionMeta) => {
+  handleChange = (
+    _value: ReadonlyArray<Selection>,
+    meta: Readonly<ActionMeta>,
+  ) => {
     let action = meta as PickerAction
     if (action.action === "remove-value" && action.removedValue) {
       let { name, type, revision } = action.removedValue

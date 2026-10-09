@@ -42,7 +42,7 @@ class DraggableCourse extends React.PureComponent<OwnProps & CollectedProps> {
 
     return (
       <Draggable
-        ref={(ref: CourseWithModal | null) => {
+        ref={(ref) => {
           // oxlint-disable-next-line react/no-find-dom-node, typescript/no-deprecated -- a ref would need CourseWithModal and CompactCourse to forward one, which changes when they re-render
           this.props.connectDragSource(findDOMNode(ref) as Element | null)
         }}

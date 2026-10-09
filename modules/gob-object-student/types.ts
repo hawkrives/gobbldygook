@@ -3,13 +3,13 @@ import type { List } from "immutable"
 
 export type { CourseType }
 
-export type AreaQuery = {
+export type AreaQuery = Readonly<{
   type: string
   name: string
   // undefined for an area file that names no revision; loadArea then loads
   // the latest one
   revision: string | undefined
-}
+}>
 
 export type OverrideType = unknown
 
@@ -20,5 +20,5 @@ export type FulfillmentType = string
 export type CourseLookupFunc = (
   clbid: string,
   term?: number | null,
-  fabrications?: Array<CourseType> | List<CourseType> | null,
+  fabrications?: ReadonlyArray<CourseType> | List<CourseType> | null,
 ) => Promise<Result<CourseType>>

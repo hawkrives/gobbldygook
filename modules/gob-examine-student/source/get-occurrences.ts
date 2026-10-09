@@ -13,7 +13,10 @@ import type { Course } from "./types" // old version; compares course objects in
  * @returns {Course[]} - the list of occurrences of that course
  */
 
-export default function getOccurrences(course: Course, courses: Course[]) {
+export default function getOccurrences(
+  course: Course,
+  courses: ReadonlyArray<Course>,
+) {
   const base = simplifyCourse(course)
   return filter(courses, (c) => simplifyCourse(c) === base)
 }

@@ -4,6 +4,7 @@ type Replacer =
 
 export function stringifyError(
   err: object,
+  // oxlint-disable-next-line typescript/prefer-readonly-parameter-types -- JSON.stringify's lib type takes the array replacer as a mutable (number | string)[]
   filter?: Replacer,
   space?: string | number,
 ): string {

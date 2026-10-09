@@ -35,6 +35,7 @@ declare module "treo" {
   }
 }
 
+// oxlint-disable-next-line typescript/prefer-readonly-parameter-types -- IDBValidKey can hold ArrayBuffers and views, which are not readonly types
 function canAdd({
   query,
   value,
@@ -44,7 +45,7 @@ function canAdd({
   query: Query
   value: Queryable
   primaryKey: IDBValidKey
-  results: Array<IDBValidKey>
+  results: ReadonlyArray<IDBValidKey>
 }): boolean {
   // Check if we want to add the current value to the results array.
   // Essentially, make sure that the current value passes the query,
@@ -65,6 +66,7 @@ const sortKeys = (key: string): number | undefined => {
 // an index makes IndexedDB throw and the query reject, as it always has.
 const toKey = (value: QueryValue): IDBValidKey => value as IDBValidKey
 
+// oxlint-disable-next-line typescript/prefer-readonly-parameter-types -- treo's Store class type is not readonly
 function queryStore<T>(this: Store, query: Query): Promise<Array<T>> {
   return new Promise((resolvePromise, rejectPromise) => {
     // Take a query object.
@@ -148,6 +150,7 @@ function queryStore<T>(this: Store, query: Query): Promise<Array<T>> {
 }
 
 function queryIndex<T>(
+  // oxlint-disable-next-line typescript/prefer-readonly-parameter-types -- treo's Index class type is not readonly
   this: Index,
   query: Query,
   primaryKeysOnly = false,
@@ -265,6 +268,7 @@ function queryIndex<T>(
 }
 
 function plugin() {
+  // oxlint-disable-next-line typescript/prefer-readonly-parameter-types -- installs query onto treo.Store.prototype and treo.Index.prototype; treo's Database type is not readonly
   return (_db: Database, treo: typeof Database): void => {
     treo.Store.prototype.query = queryStore
     treo.Index.prototype.query = queryIndex

@@ -8,11 +8,11 @@ import Modal from "../../components/modal"
 import { close } from "../../icons/ionicons"
 import { Student } from "@gob/object-student"
 
-type Props = {
+type Props = Readonly<{
   navigate: (to: string) => unknown
   student: Student
   queryString?: string
-}
+}>
 
 type State = {
   encoded: string | undefined

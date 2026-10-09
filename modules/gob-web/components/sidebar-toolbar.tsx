@@ -18,7 +18,7 @@ import styled from "styled-components"
 import type { Student } from "@gob/object-student"
 import type { Undoable } from "../types"
 
-type Props = {
+type Props = Readonly<{
   redo: (studentId: string) => unknown
   student: Undoable<Student>
   undo: (studentId: string) => unknown
@@ -26,7 +26,7 @@ type Props = {
   search?: boolean
   share?: boolean
   backTo?: "picker" | "overview"
-}
+}>
 
 const ToolsCard = styled(Card)`
   flex-shrink: 0;

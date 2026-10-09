@@ -29,10 +29,10 @@ const Wrapper = styled.div<{ size?: string }>`
   `};
 `
 
-type Props = {
+type Props = Readonly<{
   className?: string
   value: string
-}
+}>
 
 export const AvatarLetter = ({ className, value }: Props) => (
   <Wrapper className={className}>{isString(value) ? value[0] : ""}</Wrapper>

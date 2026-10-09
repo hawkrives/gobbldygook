@@ -7,18 +7,22 @@ import sortBy from "lodash/sortBy"
 // A stored area. Invalid areas may be missing any field but sourcePath,
 // which is the store's key.
 type AreaOfStudy = {
-  name?: string | undefined
-  type?: string | undefined
-  revision?: string | undefined
-  sourcePath: string
+  readonly name?: string | undefined
+  readonly type?: string | undefined
+  readonly revision?: string | undefined
+  readonly sourcePath: string
 }
 
-export function buildRemoveAreaOps(areas: AreaOfStudy[]): Record<string, null> {
+export function buildRemoveAreaOps(
+  areas: ReadonlyArray<AreaOfStudy>,
+): Record<string, null> {
   return fromPairs(areas.map((item) => [item.sourcePath, null]))
 }
 
 // TODO: add logging to this function
-export function generateOps(allAreas: AreaOfStudy[]): Record<string, null> {
+export function generateOps(
+  allAreas: ReadonlyArray<AreaOfStudy>,
+): Record<string, null> {
   // now de-duplicate, based on name, type, and revision
   // reasons for duplicates:
   // - a major adds a new revision

@@ -14,14 +14,14 @@ const OuterCard = styled(Card)`
   overflow: hidden;
 `
 
-type Props = {
+type Props = Readonly<{
   destroyStudent: (id: string) => unknown
   filter?: string
   groupBy: string
   isEditing: boolean
   sortBy: SORT_BY_ENUM
   students: StudentState
-}
+}>
 
 export default function StudentList(props: Props) {
   let {

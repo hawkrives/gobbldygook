@@ -45,21 +45,21 @@ const Box = styled.div<{ canDrop: boolean; isOver: boolean }>`
     `};
 `
 
-type OwnProps = {
+type OwnProps = Readonly<{
   changeStudent: ChangeStudentFunc
   student: Student
-}
+}>
 
-type CollectedProps = {
+type CollectedProps = Readonly<{
   canDrop: boolean
   connectDropTarget: ConnectDropTarget
   isOver: boolean
-}
+}>
 
 function CourseRemovalBox(props: OwnProps & CollectedProps) {
   return (
     <Box
-      ref={(ref: HTMLDivElement | null) => props.connectDropTarget(ref)}
+      ref={(ref) => props.connectDropTarget(ref)}
       isOver={props.isOver}
       canDrop={props.canDrop}
     >

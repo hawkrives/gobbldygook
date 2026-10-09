@@ -35,11 +35,11 @@ export const InlineListItem = styled.li`
   display: inline-block;
 `
 
-type ListProps = {
+type ListProps = Readonly<{
   children?: React.ReactNode
   className?: string
   type?: "inline" | "number" | "bullet" | "plain"
-}
+}>
 
 export default function List(props: ListProps) {
   const { className, children, type = "inline" } = props

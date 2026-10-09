@@ -22,7 +22,7 @@ const connector = connect(
   { removeNotification },
 )
 
-type Props = ConnectedProps<typeof connector>
+type Props = Readonly<ConnectedProps<typeof connector>>
 
 export const Notifications = ({ notifications, removeNotification }: Props) => (
   <NotificationList>

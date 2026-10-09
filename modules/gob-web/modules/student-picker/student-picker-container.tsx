@@ -12,7 +12,7 @@ const connector = connect(
   { destroyStudent, loadStudents },
 )
 
-type Props = ConnectedProps<typeof connector>
+type Props = Readonly<ConnectedProps<typeof connector>>
 
 type State = {
   filterText: string

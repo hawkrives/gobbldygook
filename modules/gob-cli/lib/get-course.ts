@@ -22,7 +22,7 @@ export async function getCourseFromNetwork(clbid: string): Promise<unknown> {
 export async function getCourse(
   clbid: string,
   term?: number | null,
-  fabrications: Array<CourseType> | List<CourseType> | null = [],
+  fabrications: ReadonlyArray<CourseType> | List<CourseType> | null = [],
 ): Promise<Result<CourseType>> {
   if (fabrications) {
     let fab = fabrications.find((c) => c.clbid === clbid)

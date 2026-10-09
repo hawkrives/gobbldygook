@@ -55,13 +55,13 @@ const welcomeMessages = [
 
 const welcomeMessage = welcomeMessages[2]
 
-type Props = {
+type Props = Readonly<{
   randomizeHello?: boolean
   showAvatar?: boolean
   showMessage?: boolean
   showEditor?: boolean
   student: Student
-}
+}>
 
 type State = {
   message: string

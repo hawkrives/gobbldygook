@@ -10,16 +10,20 @@ import {
 import type { AnyAction } from "redux"
 import type { NotificationAction } from "./actions"
 
+// INCREMENT_PROGRESS updates its own copy of a progress notification, so
+// this one stays writable
+type ProgressNotification = {
+  type: "progress"
+  message: string
+  value: number
+  max: number
+  showButton: boolean
+}
+
 export type NotificationState =
-  | { type: "message"; message: string }
-  | { type: "error"; message: string }
-  | {
-      type: "progress"
-      message: string
-      value: number
-      max: number
-      showButton: boolean
-    }
+  | Readonly<{ type: "message"; message: string }>
+  | Readonly<{ type: "error"; message: string }>
+  | Readonly<ProgressNotification>
 
 export type State = Readonly<Record<string, NotificationState>>
 
@@ -79,7 +83,7 @@ export default function reducer(
       }
 
       // make a copy of the previous item
-      const progress = { ...previous }
+      const progress: ProgressNotification = { ...previous }
       progress.value += payload.by
       progress.value = Math.min(progress.value, progress.max)
 

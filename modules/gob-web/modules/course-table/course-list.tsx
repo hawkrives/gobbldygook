@@ -38,17 +38,24 @@ const Empty = styled(EmptyCourseSlot)`
   ${courseStyles};
 `
 
-type Props = {
-  courses: Array<Result<CourseType>>
+// A Result from @gob/types, with its error and meta read-only too
+type ReadonlyResult<R> = R extends unknown
+  ? { readonly [K in keyof R]: Readonly<R[K]> }
+  : never
+
+type Props = Readonly<{
+  courses: ReadonlyArray<ReadonlyResult<Result<CourseType>>>
   usedSlots: number
   warnings: Map<string, IList<WarningType>>
   maxSlots: number
   scheduleId: string
   studentId: string
-}
+}>
 
 // The course loader records the clbid it looked for, as a string, in `meta`
-function missingClbid(meta: Record<string, unknown> | undefined): string {
+function missingClbid(
+  meta: Readonly<Record<string, unknown>> | undefined,
+): string {
   const clbid = meta?.["clbid"]
   return typeof clbid === "string" ? clbid : "null"
 }

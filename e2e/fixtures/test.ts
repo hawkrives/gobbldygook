@@ -12,20 +12,20 @@ import {
 } from "./data"
 
 export type SeedSchedule = {
-  year: number
-  semester: number
+  readonly year: number
+  readonly semester: number
   /** Courses by department and number, like "CSCI 121", from `year`. */
-  courses?: string[]
-  title?: string
+  readonly courses?: ReadonlyArray<string>
+  readonly title?: string
 }
 
 export type SeedStudent = {
-  id: string
-  name: string
-  matriculation?: number
-  graduation?: number
-  majors?: string[]
-  schedules?: SeedSchedule[]
+  readonly id: string
+  readonly name: string
+  readonly matriculation?: number
+  readonly graduation?: number
+  readonly majors?: ReadonlyArray<string>
+  readonly schedules?: ReadonlyArray<SeedSchedule>
 }
 
 /** Builds the JSON the app keeps in localStorage for one student. */
@@ -126,7 +126,7 @@ class App {
   }
 
   /** Writes students into localStorage the way the app saves them. */
-  async seedStudents(...students: SeedStudent[]) {
+  async seedStudents(...students: ReadonlyArray<SeedStudent>) {
     let records = students.map(studentRecord)
     await this.page.evaluate((records) => {
       let ids = new Set(

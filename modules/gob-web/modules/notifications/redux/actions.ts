@@ -8,38 +8,42 @@ import {
   REMOVE_NOTIFICATION,
 } from "./constants"
 
-type RemovePayload = { id: string }
+type RemovePayload = Readonly<{ id: string }>
 
-export type RemoveNotificationAction = {
+export type RemoveNotificationAction = Readonly<{
   type: typeof REMOVE_NOTIFICATION
   payload: RemovePayload
-}
+}>
 
-export type LogMessageAction = {
+export type LogMessageAction = Readonly<{
   type: typeof LOG_MESSAGE
-  payload: { id: string; message: string }
-}
+  payload: Readonly<{ id: string; message: string }>
+}>
 
-export type LogErrorAction = {
+export type LogErrorAction = Readonly<{
   type: typeof LOG_ERROR
-  payload: { id: string; error: Error | string; args: Array<unknown> }
-}
+  payload: Readonly<{
+    id: string
+    error: Error | string
+    args: ReadonlyArray<unknown>
+  }>
+}>
 
-export type StartProgressAction = {
+export type StartProgressAction = Readonly<{
   type: typeof START_PROGRESS
-  payload: {
+  payload: Readonly<{
     id: string
     message: string
     value: number
     max: number
     showButton: boolean
-  }
-}
+  }>
+}>
 
-export type IncrementProgressAction = {
+export type IncrementProgressAction = Readonly<{
   type: typeof INCREMENT_PROGRESS
-  payload: { id: string; by: number }
-}
+  payload: Readonly<{ id: string; by: number }>
+}>
 
 export type NotificationAction =
   | RemoveNotificationAction
@@ -74,8 +78,8 @@ export function logMessage(id: string, message: string): LogMessageAction {
 }
 
 export function logError(
-  { id, error }: { id: string; error: Error | string },
-  ...args: Array<unknown>
+  { id, error }: Readonly<{ id: string; error: Error | string }>,
+  ...args: ReadonlyArray<unknown>
 ): LogErrorAction {
   if (!globalThis.TESTING) console.error(error, ...args)
   return { type: LOG_ERROR, payload: { id, error, args } }
@@ -88,7 +92,7 @@ export function startProgress(
     value = 0,
     max = 1,
     showButton = false,
-  }: { value?: number; max?: number; showButton?: boolean } = {},
+  }: Readonly<{ value?: number; max?: number; showButton?: boolean }> = {},
 ): StartProgressAction {
   return {
     type: START_PROGRESS,

@@ -1,4 +1,8 @@
-function dispatch(type: string, action: string, ...args: unknown[]): void {
+function dispatch(
+  type: string,
+  action: string,
+  ...args: ReadonlyArray<unknown>
+): void {
   const toDispatch = { type: "dispatch", message: { type, action, args } }
   self.postMessage(JSON.stringify(toDispatch))
 }
@@ -11,10 +15,10 @@ export const quotaExceededError = (dbName: string): void => {
 }
 
 export class Notification {
-  id: string
-  type: string
+  readonly id: string
+  readonly type: string
   length = 1
-  store = "notifications"
+  readonly store = "notifications"
 
   constructor(notificationType: string, id?: string) {
     this.id = id ?? notificationType

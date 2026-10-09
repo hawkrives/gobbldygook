@@ -41,27 +41,29 @@ type Keyed<T> = Map<string, T> | Readonly<{ [key: string]: T }>
 // What a student can be built from: a saved student from JSON, or another
 // Student. The collections may be plain arrays and objects or immutable
 // ones.
-export type StudentInput = Partial<
-  Omit<
-    StudentType,
-    | "studies"
-    | "schedules"
-    | "overrides"
-    | "fabrications"
-    | "fulfillments"
-    | "settings"
-  >
-> & {
-  studies?: ReadonlyArray<AreaQuery> | List<AreaQuery>
-  schedules?: ReadonlyArray<ScheduleInput> | Keyed<ScheduleInput>
-  overrides?: Keyed<OverrideType>
-  fabrications?:
-    | ReadonlyArray<CourseType>
-    | List<CourseType>
-    | Readonly<{ [clbid: string]: CourseType }>
-  fulfillments?: Keyed<FulfillmentType>
-  settings?: Keyed<unknown>
-}
+export type StudentInput = Readonly<
+  Partial<
+    Omit<
+      StudentType,
+      | "studies"
+      | "schedules"
+      | "overrides"
+      | "fabrications"
+      | "fulfillments"
+      | "settings"
+    >
+  > & {
+    studies?: ReadonlyArray<AreaQuery> | List<AreaQuery>
+    schedules?: ReadonlyArray<ScheduleInput> | Keyed<ScheduleInput>
+    overrides?: Keyed<OverrideType>
+    fabrications?:
+      | ReadonlyArray<CourseType>
+      | List<CourseType>
+      | Readonly<{ [clbid: string]: CourseType }>
+    fulfillments?: Keyed<FulfillmentType>
+    settings?: Keyed<unknown>
+  }
+>
 
 const defaultValues: StudentType = {
   id: "unknown",
@@ -220,10 +222,12 @@ export class Student extends StudentRecord {
     )
   }
 
-  getScheduleForTerm(args: {
-    year: number
-    semester: number
-  }): Schedule | undefined {
+  getScheduleForTerm(
+    args: Readonly<{
+      year: number
+      semester: number
+    }>,
+  ): Schedule | undefined {
     let { year, semester } = args
     return this.schedules.find(
       // oxlint-disable-next-line typescript/no-unnecessary-boolean-literal-compare -- `active` comes from saved data unchecked; only a literal true counts
@@ -231,10 +235,12 @@ export class Student extends StudentRecord {
     )
   }
 
-  findSchedulesForTerm(args: {
-    year: number
-    semester: number
-  }): List<Schedule> {
+  findSchedulesForTerm(
+    args: Readonly<{
+      year: number
+      semester: number
+    }>,
+  ): List<Schedule> {
     let { year, semester } = args
     return this.schedules
       .filter((s) => s.year === year && s.semester === semester)
@@ -277,7 +283,9 @@ export class Student extends StudentRecord {
     )
   }
 
-  destroySchedulesForTerm(args: { year: number; semester: number }): this {
+  destroySchedulesForTerm(
+    args: Readonly<{ year: number; semester: number }>,
+  ): this {
     let { year, semester } = args
 
     // oxlint-disable-next-line typescript/no-unnecessary-condition -- guards untyped callers that leave one out; the tests check this warning
@@ -292,7 +300,7 @@ export class Student extends StudentRecord {
 
   moveSchedule(
     scheduleId: string,
-    { year, semester }: { year: number; semester: number },
+    { year, semester }: Readonly<{ year: number; semester: number }>,
   ): this {
     return this.updateSchedule(scheduleId, (s) => s.merge({ year, semester }))
   }
@@ -341,11 +349,13 @@ export class Student extends StudentRecord {
     return schedule.clbids.some((id) => id === clbid)
   }
 
-  moveCourseToSchedule(args: {
-    from: string
-    to: string
-    clbid: string
-  }): this {
+  moveCourseToSchedule(
+    args: Readonly<{
+      from: string
+      to: string
+      clbid: string
+    }>,
+  ): this {
     let { from, to, clbid } = args
 
     return this.removeCourseFromSchedule(from, clbid).addCourseToSchedule(
@@ -356,7 +366,7 @@ export class Student extends StudentRecord {
 
   reorderCourseInSchedule(
     scheduleId: string,
-    { clbid, index }: { clbid: string; index: number },
+    { clbid, index }: Readonly<{ clbid: string; index: number }>,
   ): this {
     return this.updateSchedule(scheduleId, (s) =>
       s.update("clbids", (ids) => {

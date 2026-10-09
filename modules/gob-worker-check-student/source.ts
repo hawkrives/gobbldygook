@@ -9,6 +9,7 @@ import type { ParsedHansonFile } from "@gob/hanson-format"
 import { alterForEvaluation as alterCourse } from "@gob/courses"
 import type { Course as CourseType } from "@gob/types"
 
+// oxlint-disable-next-line typescript/prefer-readonly-parameter-types -- evaluate() writes its results onto area's expressions and takes a mutable courses array
 function tryEvaluate(input: {
   courses: Array<TrimmedCourse>
   area: ParsedHansonFile
@@ -29,7 +30,9 @@ function tryEvaluate(input: {
 }
 
 export function checkAgainstArea(
+  // oxlint-disable-next-line typescript/prefer-readonly-parameter-types -- evaluate() writes its results onto area's expressions
   area: ParsedHansonFile,
+  // oxlint-disable-next-line typescript/prefer-readonly-parameter-types -- evaluate() writes its results onto the fulfillments' course expressions
   args: {
     courses: ReadonlyArray<CourseType>
     fulfillments: FulfillmentsObject

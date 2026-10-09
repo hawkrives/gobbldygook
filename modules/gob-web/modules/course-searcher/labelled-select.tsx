@@ -2,12 +2,14 @@ import type * as React from "react"
 
 import uniqueId from "lodash/uniqueId"
 
-export function LabelledSelect(props: {
-  onChange: (ev: React.ChangeEvent<HTMLSelectElement>) => unknown
-  value: string
-  label: string
-  options: ReadonlyArray<readonly [string, string]>
-}) {
+export function LabelledSelect(
+  props: Readonly<{
+    onChange: (ev: React.ChangeEvent<HTMLSelectElement>) => unknown
+    value: string
+    label: string
+    options: ReadonlyArray<readonly [string, string]>
+  }>,
+) {
   let { onChange, value, label, options } = props
   let id = `labelled-select-${uniqueId()}`
 

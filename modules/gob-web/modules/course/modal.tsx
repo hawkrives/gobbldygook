@@ -54,13 +54,13 @@ const Course = styled(ExpandedCourse)`
   padding: 0 20px;
 `
 
-type OwnProps = {
+type OwnProps = Readonly<{
   course: CourseType
   conflicts?: List<WarningType> | null | undefined
   onClose: () => unknown
   scheduleId?: string | undefined
   studentId?: string | undefined
-}
+}>
 
 const connector = connect(
   (state: RootState, ownProps: OwnProps) => {
@@ -73,7 +73,7 @@ const connector = connect(
   { changeStudent },
 )
 
-type Props = OwnProps & ConnectedProps<typeof connector>
+type Props = OwnProps & Readonly<ConnectedProps<typeof connector>>
 
 class ModalCourse extends React.Component<Props> {
   remove = () => {

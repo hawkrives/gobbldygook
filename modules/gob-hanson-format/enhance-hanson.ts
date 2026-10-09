@@ -239,12 +239,12 @@ function extractRequirementNames(data: object) {
   return { abbreviations, titles }
 }
 
-type ParsePegArgs = {
+type ParsePegArgs = Readonly<{
   variables?: Mapped<string>
   titles: Mapped<string>
   abbreviations: Mapped<string>
   startRule: PegStartRule
-}
+}>
 
 function parseWithPeg(value: unknown, args: ParsePegArgs): ParsedExpression {
   let { variables = {}, titles, abbreviations, startRule } = args

@@ -12,7 +12,7 @@ const whitelist = new Set<string>([
   UndoableActionTypes.REDO,
 ])
 
-export const shouldTakeAction = ({ type }: { type: string }) => {
+export const shouldTakeAction = ({ type }: Readonly<{ type: string }>) => {
   return whitelist.has(type)
 }
 

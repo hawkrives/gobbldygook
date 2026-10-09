@@ -3,13 +3,13 @@ import { Student } from "@gob/object-student"
 import { IMPORT_STUDENT } from "../constants"
 
 export type ImportStudentAction =
-  | { type: typeof IMPORT_STUDENT; payload: Student; error?: false }
-  | { type: typeof IMPORT_STUDENT; payload: Error; error: true }
+  | Readonly<{ type: typeof IMPORT_STUDENT; payload: Student; error?: false }>
+  | Readonly<{ type: typeof IMPORT_STUDENT; payload: Error; error: true }>
 
 export function importStudent({
   data,
   type,
-}: { data?: string; type?: string } = {}): ImportStudentAction {
+}: Readonly<{ data?: string; type?: string }> = {}): ImportStudentAction {
   let stu: unknown = undefined
   if (type === "application/json") {
     try {

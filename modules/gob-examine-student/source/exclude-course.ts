@@ -9,6 +9,9 @@ import type { Course } from "./types"
  * @returns {Course[]} - the filtered list of courses
  */
 
-export default function excludeCourse(query: Course, courses: Course[]) {
+export default function excludeCourse(
+  query: Course,
+  courses: ReadonlyArray<Course>,
+) {
   return reject(courses, (course) => compareCourseToCourse(query, course))
 }
