@@ -1,7 +1,4 @@
-// @flow
-
-import React from "react"
-import { Link } from "@reach/router"
+import { Link, type RouteComponentProps } from "@reach/router"
 import { RaisedButton } from "../../components/button"
 import { CourseSearcher } from "../../modules/course-searcher"
 import styled from "styled-components"
@@ -16,7 +13,7 @@ let Container = styled.div`
   }
 `
 
-export default function CourseSearcherScreen() {
+export default function CourseSearcherScreen(_props: RouteComponentProps) {
   return (
     <>
       <RaisedButton as={Link} to="/" style={{ margin: "1rem" }}>

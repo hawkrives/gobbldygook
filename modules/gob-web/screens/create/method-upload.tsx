@@ -1,35 +1,58 @@
-import React from "react"
-import PropTypes from "prop-types"
-
+import * as React from "react"
 import DropZone from "react-dropzone"
+import type { Dispatch } from "redux"
+import type { RouteComponentProps } from "@reach/router"
 import { RaisedButton } from "../../components/button"
 import List from "../../components/list"
 import { StudentSummary } from "../../modules/student/student-summary"
 import { action as initStudent } from "../../redux/students/actions/init-student"
-import { connect } from "react-redux"
+import { connect, type ConnectedProps } from "react-redux"
 import { Header } from "./components"
-import { Student } from "@gob/object-student"
+import { Student, type StudentInput } from "@gob/object-student"
 import "./method-upload.scss"
 
-class UploadFileScreen extends React.Component {
-  static propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    navigate: PropTypes.func.isRequired,
-  }
+type UploadedFile = {
+  name: string
+  size: number
+  data: Promise<string>
+}
 
-  state = {
+type Converted =
+  | ReturnType<typeof initStudent>
+  | { name: string; error: string }
+
+let mapDispatch = (dispatch: Dispatch) => ({ dispatch })
+
+const connector = connect(undefined, mapDispatch)
+
+type Props = RouteComponentProps & ConnectedProps<typeof connector>
+
+type State = {
+  files: Array<UploadedFile>
+  actions: Array<Converted>
+}
+
+function errorMessage(err: unknown): string {
+  return err instanceof Error ? err.message : String(err)
+}
+
+class UploadFileScreen extends React.Component<Props, State> {
+  override state: State = {
     files: [],
     actions: [],
   }
 
-  handleFileDrop = (files) => {
-    console.log(files)
-    files = files.map((f) => ({
+  dropzone: DropZone | null = null
+
+  handleFileDrop = (droppedFiles: Array<File>) => {
+    console.log(droppedFiles)
+    let files = droppedFiles.map((f) => ({
       name: f.name,
       size: f.size,
-      data: new Promise((resolve, reject) => {
+      data: new Promise<string>((resolve, reject) => {
         let reader = new FileReader()
-        reader.onload = (ev) => resolve(ev.target.result)
+        // readAsText always produces a string
+        reader.onload = () => resolve(reader.result as string)
         reader.onerror = reader.onabort = reject
         reader.readAsText(f)
       }),
@@ -41,43 +64,51 @@ class UploadFileScreen extends React.Component {
   }
 
   handleOpenPicker = () => {
-    this.dropzone.open()
+    this.dropzone?.open()
   }
 
-  convertOneFile = async (file) => {
+  convertOneFile = async (file: UploadedFile) => {
     let data = await file.data
 
-    let parsed
+    let parsed: StudentInput | { name: string; error: string }
     try {
-      parsed = JSON.parse(data)
+      // an exported student; the Student constructor fills in what's missing
+      parsed = JSON.parse(data) as StudentInput
     } catch (err) {
-      const msg = err.message
+      const msg = errorMessage(err)
       parsed = {
         name: file.name,
         error: `could not parse "${data}" because "${msg}"`,
       }
     }
 
-    let converted
+    let converted: Converted
     try {
       converted = initStudent(new Student(parsed))
     } catch (err) {
-      converted = { name: file.name, error: err.message }
+      converted = { name: file.name, error: errorMessage(err) }
     }
 
     this.setState((state) => ({ actions: [...state.actions, converted] }))
   }
 
-  convertFilesToStudents = (files) => {
-    this.setState(() => ({ actions: [] }), files.forEach(this.convertOneFile))
+  convertFilesToStudents = (files: Array<UploadedFile>) => {
+    this.setState(
+      () => ({ actions: [] }),
+      () => files.forEach(this.convertOneFile),
+    )
   }
 
   handleImportStudents = () => {
-    this.state.actions.forEach(this.props.dispatch)
-    this.props.navigate("/")
+    this.state.actions.forEach((action) => {
+      if ("type" in action) {
+        this.props.dispatch(action)
+      }
+    })
+    this.props.navigate?.("/")
   }
 
-  render() {
+  override render() {
     let { actions } = this.state
     let files = this.state.files.slice(actions.length)
 
@@ -92,7 +123,6 @@ class UploadFileScreen extends React.Component {
           accept=".gbstudent,.json,.gb-student"
           onDrop={this.handleFileDrop}
           multiple={true}
-          disablePreview={true}
           className="upload-dropzone"
           activeClassName="canDrop"
           rejectClassName="canDrop" // HTML doesn't give us filenames until we drop, so it can't tell if it'll be accepted until the drop happens
@@ -104,7 +134,7 @@ class UploadFileScreen extends React.Component {
 
         <List type="plain" className="upload-results">
           {actions.map((stu) =>
-            stu.payload ? (
+            "payload" in stu ? (
               <li key={stu.payload.id}>
                 <StudentSummary
                   student={stu.payload}
@@ -135,6 +165,4 @@ class UploadFileScreen extends React.Component {
   }
 }
 
-let mapDispatch = (dispatch) => ({ dispatch })
-
-export default connect(undefined, mapDispatch)(UploadFileScreen)
+export default connector(UploadFileScreen)

@@ -1,11 +1,8 @@
-// @flow
-
-import * as React from "react"
-import { Link } from "@reach/router"
+import { Link, type RouteComponentProps } from "@reach/router"
 import { RaisedButton } from "../../components/button"
 import { Choices, Header } from "./components"
 
-export default function WelcomeScreen() {
+export default function WelcomeScreen(_props: RouteComponentProps) {
   return (
     <>
       <Header>

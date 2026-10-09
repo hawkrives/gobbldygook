@@ -50,7 +50,7 @@ function config() {
   }
 
   const entry = {
-    [entryPointName]: ["./index.js"],
+    [entryPointName]: ["./index.tsx"],
   }
 
   if (isDevelopment) {

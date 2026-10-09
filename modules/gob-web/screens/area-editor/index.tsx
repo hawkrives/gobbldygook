@@ -1,15 +1,12 @@
-// @flow
-
-import * as React from "react"
 import styled from "styled-components"
-import { Router, Link } from "@reach/router"
+import { Router, Link, type RouteComponentProps } from "@reach/router"
 import { RaisedButton } from "../../components/button"
 import Loadable from "react-loadable"
 import { LoadingComponent } from "../../components/loading-comp"
 
-let NotFound = () => <h1>404 Not Found</h1>
+let NotFound = (_props: RouteComponentProps) => <h1>404 Not Found</h1>
 
-const Editor = Loadable({
+const Editor = Loadable<RouteComponentProps>({
   loader: () => import("../../modules/area-editor").then((m) => m.AreaEditor),
   loading: LoadingComponent,
 })
@@ -21,7 +18,7 @@ const Container = styled.div`
   height: calc(100vh - 1rem);
 `
 
-export default function () {
+export default function AreaEditorScreen(_props: RouteComponentProps) {
   return (
     <Container>
       <header>

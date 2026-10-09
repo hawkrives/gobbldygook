@@ -1,7 +1,5 @@
-// @flow
-
 import * as React from "react"
-import { Router } from "@reach/router"
+import { Router, type RouteComponentProps } from "@reach/router"
 import { Helmet, HelmetProvider } from "react-helmet-async"
 import HTML5Backend from "react-dnd-html5-backend"
 import { DragDropContext } from "react-dnd"
@@ -51,46 +49,46 @@ const NotFoundCard = styled(Card)`
   text-align: center;
 `
 
-let NotFound = () => (
+let NotFound = (_props: RouteComponentProps) => (
   <NotFoundCard>
     <h1>404 Not Found</h1>
     <p>It looks like nothing was found at this location.</p>
   </NotFoundCard>
 )
 
-let AreaEditor = Loadable({
+let AreaEditor = Loadable<RouteComponentProps>({
   loader: () => import("./screens/area-editor"),
   loading: LoadingComponent,
 })
 
-let StudentPicker = Loadable({
+let StudentPicker = Loadable<RouteComponentProps>({
   loader: () => import("./screens/picker"),
   loading: LoadingComponent,
 })
 
-let Degubber = Loadable({
+let Degubber = Loadable<RouteComponentProps>({
   loader: () => import("./screens/degub"),
   loading: LoadingComponent,
 })
 
-let CreateStudent = Loadable({
+let CreateStudent = Loadable<RouteComponentProps>({
   loader: () => import("./screens/create"),
   loading: LoadingComponent,
 })
 
-let Student = Loadable({
+let Student = Loadable<RouteComponentProps<{ studentId: string }>>({
   loader: () => import("./screens/student"),
   loading: LoadingComponent,
 })
 
-let CourseSearcher = Loadable({
+let CourseSearcher = Loadable<RouteComponentProps>({
   loader: () => import("./screens/search"),
   loading: LoadingComponent,
 })
 
 // needs to be a stateful component: otherwise DragDropContext can't assign a ref, which it needs
 class App extends React.Component<{}> {
-  render() {
+  override render() {
     return (
       <HelmetProvider>
         <div>

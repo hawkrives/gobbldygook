@@ -1,35 +1,32 @@
-// @flow
-
-import * as React from "react"
 import Loadable from "react-loadable"
 import { LoadingComponent } from "../../components/loading-comp"
 import styled from "styled-components"
 import { Card } from "../../components/card"
-import { Router } from "@reach/router"
+import { Router, type RouteComponentProps } from "@reach/router"
 
-let NotFound = () => <h1>404 Not Found</h1>
+let NotFound = (_props: RouteComponentProps) => <h1>404 Not Found</h1>
 
-const WelcomePage = Loadable({
+const WelcomePage = Loadable<RouteComponentProps>({
   loader: () => import("./welcome"),
   loading: LoadingComponent,
 })
 
-const ImportPage = Loadable({
+const ImportPage = Loadable<RouteComponentProps>({
   loader: () => import("./method-import"),
   loading: LoadingComponent,
 })
 
-const ManualPage = Loadable({
+const ManualPage = Loadable<RouteComponentProps>({
   loader: () => import("./method-manual"),
   loading: LoadingComponent,
 })
 
-const DrivePage = Loadable({
+const DrivePage = Loadable<RouteComponentProps>({
   loader: () => import("./method-drive"),
   loading: LoadingComponent,
 })
 
-const UploadPage = Loadable({
+const UploadPage = Loadable<RouteComponentProps>({
   loader: () => import("./method-upload"),
   loading: LoadingComponent,
 })
@@ -43,7 +40,7 @@ const NewStudentPage = styled(Card)`
   padding: 20px;
 `
 
-export default function () {
+export default function CreateStudentScreen(_props: RouteComponentProps) {
   return (
     <NewStudentPage>
       <Router>
