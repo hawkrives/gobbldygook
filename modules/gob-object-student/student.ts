@@ -1,4 +1,4 @@
-import uuid from "uuid/v4"
+import uuid from "uuid/v4.js"
 import { Record, OrderedMap, Map, List } from "immutable"
 
 import type {
@@ -7,12 +7,12 @@ import type {
   FulfillmentType,
   CourseType,
   CourseLookupFunc,
-} from "./types"
+} from "./types.ts"
 
-import { Schedule } from "./schedule"
-import type { ScheduleInput } from "./schedule"
-import { getActiveCourses } from "./get-active-courses"
-import { encodeStudent } from "./encode-student"
+import { Schedule } from "./schedule.ts"
+import type { ScheduleInput } from "./schedule.ts"
+import { getActiveCourses } from "./get-active-courses.ts"
+import { encodeStudent } from "./encode-student.ts"
 
 type StudentType = {
   id: string

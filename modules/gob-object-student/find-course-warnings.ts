@@ -4,7 +4,7 @@ import oxford from "listify"
 import { findTimeConflicts } from "@gob/schedule-conflicts"
 import { expandYear, semesterName } from "@gob/school-st-olaf-college"
 import type { Course as CourseType } from "@gob/types"
-import type { Schedule } from "./schedule"
+import type { Schedule } from "./schedule.ts"
 export type WarningTypeEnum =
   | "invalid-semester"
   | "invalid-year"

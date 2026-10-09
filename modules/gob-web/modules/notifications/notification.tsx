@@ -1,8 +1,8 @@
-import round from "lodash/round"
-import { FlatButton } from "../../components/button"
-import BasicProgressBar from "../../components/progress-bar"
+import round from "lodash/round.js"
+import { FlatButton } from "../../components/button.ts"
+import BasicProgressBar from "../../components/progress-bar.tsx"
 import styled from "styled-components"
-import type { NotificationState } from "./redux/reducers"
+import type { NotificationState } from "./redux/reducers.ts"
 
 type Props = Readonly<{
   onClose: () => unknown

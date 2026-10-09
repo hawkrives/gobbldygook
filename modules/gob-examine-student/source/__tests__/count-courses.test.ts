@@ -1,5 +1,5 @@
-import countCourses from "../count-courses"
-import type { Course } from "../types"
+import countCourses from "../count-courses.ts"
+import type { Course } from "../types.ts"
 
 describe("countCourses", () => {
   it("counts the number of distinct courses in an array", () => {

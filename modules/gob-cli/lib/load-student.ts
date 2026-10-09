@@ -5,9 +5,9 @@ import type {
   OverridesObject,
   ParsedHansonFile,
 } from "@gob/examine-student"
-import { getCourse } from "./get-course"
-import loadArea from "./load-area"
-import { loadJson } from "./load-json"
+import { getCourse } from "./get-course.ts"
+import loadArea from "./load-area.ts"
+import { loadJson } from "./load-json.ts"
 
 export type LoadedStudent = {
   student: Student

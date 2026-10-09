@@ -1,7 +1,7 @@
-import { db } from "./db"
+import { db } from "./db.ts"
 import { buildQueryFromString } from "@gob/search-queries"
 import type { QueryValue } from "@gob/search-queries"
-import compact from "lodash/compact"
+import compact from "lodash/compact.js"
 import type { Course } from "@gob/types"
 
 export function queryCourseDatabase(

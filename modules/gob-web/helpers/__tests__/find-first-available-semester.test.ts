@@ -1,4 +1,4 @@
-import { findFirstAvailableSemester } from "../find-first-available-semester"
+import { findFirstAvailableSemester } from "../find-first-available-semester.ts"
 
 describe("findFirstAvailableSemester", () => {
   describe("finds the first open semester", () => {

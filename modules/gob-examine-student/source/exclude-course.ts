@@ -1,6 +1,6 @@
-import reject from "lodash/reject"
-import compareCourseToCourse from "./compare-course-to-course"
-import type { Course } from "./types"
+import reject from "lodash/reject.js"
+import compareCourseToCourse from "./compare-course-to-course.ts"
+import type { Course } from "./types.ts"
 /**
  * Removes a course from a list of courses
  * @private

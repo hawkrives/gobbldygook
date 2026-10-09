@@ -1,9 +1,9 @@
 import undoable from "redux-undo"
 import type { AnyAction } from "redux"
 import { Student } from "@gob/object-student"
-import type { Undoable } from "../../types"
-import { CHANGE_STUDENT } from "../actions/change"
-import { LOAD_STUDENT, INIT_STUDENT, IMPORT_STUDENT } from "../constants"
+import type { Undoable } from "../../types.ts"
+import { CHANGE_STUDENT } from "../actions/change.ts"
+import { LOAD_STUDENT, INIT_STUDENT, IMPORT_STUDENT } from "../constants.ts"
 
 export type UndoableState = Undoable<Student>
 

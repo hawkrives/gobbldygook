@@ -1,1 +1,1 @@
-export { checkAgainstArea } from "./source"
+export { checkAgainstArea } from "./source.ts"

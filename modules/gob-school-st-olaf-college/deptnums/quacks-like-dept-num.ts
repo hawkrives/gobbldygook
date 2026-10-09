@@ -1,4 +1,4 @@
-import { deptNumRegex } from "./dept-num-regex"
+import { deptNumRegex } from "./dept-num-regex.ts"
 // Checks if a string looks like a deptnum.
 export function quacksLikeDeptNum(deptNumString: string): boolean {
   return deptNumRegex.test(deptNumString)

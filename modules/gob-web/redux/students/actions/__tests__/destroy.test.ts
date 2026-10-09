@@ -1,5 +1,5 @@
-import { destroyStudent } from "../destroy-student"
-import { DESTROY_STUDENT } from "../../constants"
+import { destroyStudent } from "../destroy-student.ts"
+import { DESTROY_STUDENT } from "../../constants.ts"
 
 describe("destroyStudent action", () => {
   beforeEach(() => {

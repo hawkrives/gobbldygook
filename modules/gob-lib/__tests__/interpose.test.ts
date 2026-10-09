@@ -1,4 +1,4 @@
-import { interpose } from "../interpose"
+import { interpose } from "../interpose.ts"
 
 describe("interpose", () => {
   it("should interpose a value between other values in an array", () => {

@@ -4,9 +4,9 @@ import {
   LOG_MESSAGE,
   REMOVE_NOTIFICATION,
   START_PROGRESS,
-} from "../constants"
-import reducer from "../reducers"
-import type { State } from "../reducers"
+} from "../constants.ts"
+import reducer from "../reducers.ts"
+import type { State } from "../reducers.ts"
 
 describe("notifications reducer", () => {
   it("returns the initial state", () => {

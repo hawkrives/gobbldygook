@@ -11,15 +11,15 @@ declare module "treo" {
 if (typeof globalThis.indexedDB === "undefined") {
   globalThis.indexedDB = require("fake-indexeddb") as IDBFactory
   globalThis.IDBIndex =
-    require("fake-indexeddb/lib/FDBIndex") as typeof IDBIndex
+    require("fake-indexeddb/lib/FDBIndex.js") as typeof IDBIndex
   globalThis.IDBKeyRange =
-    require("fake-indexeddb/lib/FDBKeyRange") as typeof IDBKeyRange
+    require("fake-indexeddb/lib/FDBKeyRange.js") as typeof IDBKeyRange
   globalThis.IDBObjectStore =
-    require("fake-indexeddb/lib/FDBObjectStore") as typeof IDBObjectStore
+    require("fake-indexeddb/lib/FDBObjectStore.js") as typeof IDBObjectStore
 }
 
 const { createDatabase } =
-  jest.requireActual<typeof import("../index")>("../index")
+  jest.requireActual<typeof import("../index.ts")>("../index")
 
 treo.Database.prototype.__clear = function clearDatabase() {
   return Promise.all(this.stores.map((s) => this.store(s).clear()))

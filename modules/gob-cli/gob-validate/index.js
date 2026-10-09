@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-require("../lib/init")
+import main from "./module.ts"
 
-require("./module.ts").default()
+await main()

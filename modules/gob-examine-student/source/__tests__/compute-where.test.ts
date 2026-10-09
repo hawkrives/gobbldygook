@@ -1,5 +1,5 @@
-import { computeWhere } from "../compute-chunk"
-import type { Course, WhereExpression } from "../types"
+import { computeWhere } from "../compute-chunk.ts"
+import type { Course, WhereExpression } from "../types.ts"
 
 describe("computeWhere", () => {
   it('requires "distinct" courses to be different courses', () => {

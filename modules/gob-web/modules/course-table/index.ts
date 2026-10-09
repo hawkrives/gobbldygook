@@ -1,1 +1,1 @@
-export { CourseTable as default } from "./course-table"
+export { CourseTable as default } from "./course-table.tsx"

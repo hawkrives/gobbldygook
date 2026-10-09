@@ -1,4 +1,4 @@
-import type { CourseType } from "../types"
+import type { CourseType } from "../types.ts"
 
 // The checks under test only read a few fields (year, semester, clbid,
 // offerings), so test courses only set those. Some tests rely on a field

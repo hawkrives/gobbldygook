@@ -2,10 +2,10 @@ jest.spyOn(global.console, "log").mockImplementation(() => jest.fn())
 jest.spyOn(global.console, "error").mockImplementation(() => jest.fn())
 jest.spyOn(global.console, "warn").mockImplementation(() => jest.fn())
 jest.mock("@gob/web-database")
-import { db } from "../db"
-import storeData, { storeArea, storeCourses } from "../store-data"
-import { mockArea } from "./area.support"
-import { mockCourse } from "./course.support"
+import { db } from "../db.ts"
+import storeData, { storeArea, storeCourses } from "../store-data.ts"
+import { mockArea } from "./area.support.ts"
+import { mockCourse } from "./course.support.ts"
 beforeEach(async () => {
   await db.__clear()
 })

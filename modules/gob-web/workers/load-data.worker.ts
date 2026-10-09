@@ -1,6 +1,6 @@
 import { loadFiles, loadTerm } from "@gob/worker-load-data"
-import type { LoadDataMessage } from "./load-data"
-import { IS_WORKER, WorkerStandIn } from "./lib"
+import type { LoadDataMessage } from "./load-data.ts"
+import { IS_WORKER, WorkerStandIn } from "./lib.ts"
 
 function checkIdbInWorkerSupport() {
   if ("IDBCursor" in self) {

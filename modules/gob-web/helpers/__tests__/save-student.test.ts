@@ -1,4 +1,4 @@
-import uuid from "uuid/v4"
+import uuid from "uuid/v4.js"
 import { Student } from "@gob/object-student"
 import type { StudentInput } from "@gob/object-student"
 import {
@@ -7,7 +7,7 @@ import {
   removeStudentFromCache,
   getIdCache,
   setIdCache,
-} from "../save-student"
+} from "../save-student.ts"
 const demoStudent =
   require("@gob/object-student/demo-student.json") as StudentInput
 

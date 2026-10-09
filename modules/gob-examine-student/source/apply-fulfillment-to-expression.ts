@@ -1,5 +1,5 @@
 /* oxlint-disable typescript/prefer-readonly-parameter-types -- both functions put expr and fulfillment into an expression tree that evaluation writes its results onto, and applyFulfillmentToExpression also writes _fulfillment onto expr and pushes onto expr.$or */
-import type { OrExpression, Expression, Fulfillment } from "./types"
+import type { OrExpression, Expression, Fulfillment } from "./types.ts"
 
 function wrapInOr(expr: Expression, fulfillment: Fulfillment): OrExpression {
   // example OR-expression:

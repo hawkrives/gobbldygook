@@ -1,5 +1,5 @@
-import sumBy from "lodash/sumBy"
-import type { Course } from "./types"
+import sumBy from "lodash/sumBy.js"
+import type { Course } from "./types.ts"
 
 // Sums up the number of credits offered by a set of courses.
 // Course lists come from student files, so tolerate holes in them.

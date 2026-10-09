@@ -3,12 +3,12 @@ import { connect } from "react-redux"
 import type { ConnectedProps } from "react-redux"
 import styled from "styled-components"
 import { expandYear } from "@gob/school-st-olaf-college"
-import { findFirstAvailableYear } from "../../helpers/find-first-available-year"
-import { FlatButton } from "../../components/button"
-import { Year } from "./year"
+import { findFirstAvailableYear } from "../../helpers/find-first-available-year.ts"
+import { FlatButton } from "../../components/button.ts"
+import { Year } from "./year.tsx"
 import { Schedule } from "@gob/object-student"
 import type { Student } from "@gob/object-student"
-import { changeStudent } from "../../redux/students/actions/change"
+import { changeStudent } from "../../redux/students/actions/change.ts"
 
 const Container = styled.section`
   @media all and (min-width: 900px) {

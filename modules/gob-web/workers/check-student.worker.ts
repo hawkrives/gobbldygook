@@ -4,7 +4,7 @@ import { checkAgainstArea } from "@gob/worker-check-student"
 import type { ParsedHansonFile } from "@gob/hanson-format"
 import type { CourseType } from "@gob/object-student"
 import type { FulfillmentsObject, OverridesObject } from "@gob/examine-student"
-import { IS_WORKER, WorkerStandIn } from "./lib"
+import { IS_WORKER, WorkerStandIn } from "./lib.ts"
 
 // what workers/check-student sends
 type CheckMessage = {

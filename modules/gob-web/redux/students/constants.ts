@@ -8,4 +8,4 @@ export const SAVE_STUDENT = "gobbldygook/processed/SAVE_STUDENT"
 
 export const INIT_STUDENT = "gobbldygook/processed/INIT_STUDENT"
 
-export { CHANGE_STUDENT } from "./actions/change"
+export { CHANGE_STUDENT } from "./actions/change.ts"

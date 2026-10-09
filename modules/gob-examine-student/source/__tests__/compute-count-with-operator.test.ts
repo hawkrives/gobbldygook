@@ -1,4 +1,4 @@
-import computeCountWithOperator from "../compute-count-with-operator"
+import computeCountWithOperator from "../compute-count-with-operator.ts"
 
 describe("computeCountWithOperator", () => {
   it("throws on operators other than $eq, $lte, or $gte", () => {

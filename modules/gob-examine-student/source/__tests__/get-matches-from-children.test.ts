@@ -1,5 +1,5 @@
-import getMatchesFromChildren from "../get-matches-from-children"
-import type { ModifierChildrenExpression, Requirement } from "../types"
+import getMatchesFromChildren from "../get-matches-from-children.ts"
+import type { ModifierChildrenExpression, Requirement } from "../types.ts"
 
 // The children here are written in an older, flatter shape (course
 // expressions without $course), so they are left untyped; only the

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
 
-require("@gob/cli/lib/init")
-require("./compile-student.ts").cli()
+import { cli } from "./compile-student.ts"
+
+cli()

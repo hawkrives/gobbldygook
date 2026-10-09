@@ -1,4 +1,4 @@
-import { customParser } from "./parse-hanson-string.support"
+import { customParser } from "./parse-hanson-string.support.ts"
 const parseWhere = customParser({ allowedStartRules: ["Where"] })
 const parseQualifier = customParser({ allowedStartRules: ["Qualifier"] })
 

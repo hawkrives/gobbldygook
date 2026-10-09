@@ -6,7 +6,7 @@ import {
   START_PROGRESS,
   INCREMENT_PROGRESS,
   REMOVE_NOTIFICATION,
-} from "./constants"
+} from "./constants.ts"
 
 type RemovePayload = Readonly<{ id: string }>
 

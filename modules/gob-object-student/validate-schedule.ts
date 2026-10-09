@@ -1,7 +1,7 @@
-import type { WarningType } from "./find-course-warnings"
-import { findWarnings } from "./find-course-warnings"
+import type { WarningType } from "./find-course-warnings.ts"
+import { findWarnings } from "./find-course-warnings.ts"
 import type { Course as CourseType } from "@gob/types"
-import type { Schedule } from "./schedule"
+import type { Schedule } from "./schedule.ts"
 import type { Map, List } from "immutable"
 export type Result = {
   hasConflict: boolean

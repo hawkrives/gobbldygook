@@ -1,5 +1,6 @@
 {
   "name": "@gob/worker-check-student",
+  "type": "module",
   "version": "3.0.0-rc.2",
   "main": "index.ts",
   "license": "MIT",
@@ -8,6 +9,6 @@
     "@gob/examine-student": "^3.0.0-rc.2"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=22.18"
   }
 }

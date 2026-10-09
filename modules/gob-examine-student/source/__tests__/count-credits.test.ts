@@ -1,5 +1,5 @@
-import { countCredits } from "../count-credits"
-import type { Course } from "../types"
+import { countCredits } from "../count-credits.ts"
+import type { Course } from "../types.ts"
 
 describe("countCredits", () => {
   it("counts the number of credits in an array of courses", () => {

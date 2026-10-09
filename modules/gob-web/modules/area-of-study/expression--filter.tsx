@@ -1,4 +1,4 @@
-import Expression, { makeWhereQualifier } from "./expression"
+import Expression, { makeWhereQualifier } from "./expression.tsx"
 
 import type {
   DeepReadonly,

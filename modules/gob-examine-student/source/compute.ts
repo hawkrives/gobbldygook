@@ -1,18 +1,18 @@
-import applyFilter from "./apply-filter"
-import applyFulfillmentToExpression from "./apply-fulfillment-to-expression"
-import asRequirement from "./as-requirement"
-import computeChunk from "./compute-chunk"
-import getFulfillment from "./get-fulfillment"
-import getOverride from "./get-override"
-import hasOverride from "./has-override"
-import isRequirementName from "@gob/hanson-format/is-requirement-name"
-import mapValues from "lodash/mapValues"
+import applyFilter from "./apply-filter.ts"
+import applyFulfillmentToExpression from "./apply-fulfillment-to-expression.ts"
+import asRequirement from "./as-requirement.ts"
+import computeChunk from "./compute-chunk.ts"
+import getFulfillment from "./get-fulfillment.ts"
+import getOverride from "./get-override.ts"
+import hasOverride from "./has-override.ts"
+import isRequirementName from "@gob/hanson-format/is-requirement-name.ts"
+import mapValues from "lodash/mapValues.js"
 import type {
   Requirement,
   Course,
   OverridesObject,
   FulfillmentsObject,
-} from "./types"
+} from "./types.ts"
 
 // The overall computation is done by compute, which is in charge of computing
 // sub-requirements and such.

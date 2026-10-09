@@ -1,5 +1,6 @@
 {
   "name": "@gob/worker-load-data",
+  "type": "module",
   "version": "3.0.0-rc.2",
   "main": "index.ts",
   "license": "MIT",
@@ -14,6 +15,6 @@
     "pretty-ms": "^6.0.1"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=22.18"
   }
 }

@@ -1,10 +1,10 @@
 import { status, text } from "@gob/lib"
-import parseData from "./parse-data"
-import cleanPriorData from "./clean-prior-data"
-import storeData from "./store-data"
-import cacheItemHash from "./cache-item-hash"
-import type { Notification } from "./lib-dispatch"
-import type { InfoFileTypeEnum, InfoFileRef } from "./types"
+import parseData from "./parse-data.ts"
+import cleanPriorData from "./clean-prior-data.ts"
+import storeData from "./store-data.ts"
+import cacheItemHash from "./cache-item-hash.ts"
+import type { Notification } from "./lib-dispatch.ts"
+import type { InfoFileTypeEnum, InfoFileRef } from "./types.ts"
 
 const fetchText = (url: string): Promise<string> => {
   return fetch(url).then(status).then(text)

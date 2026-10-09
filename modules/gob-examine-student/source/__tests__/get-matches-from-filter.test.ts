@@ -1,5 +1,5 @@
-import getMatchesFromFilter from "../get-matches-from-filter"
-import type { FilterExpression, Requirement } from "../types"
+import getMatchesFromFilter from "../get-matches-from-filter.ts"
+import type { FilterExpression, Requirement } from "../types.ts"
 
 describe("getMatchesFromFilter", () => {
   it("returns the matches from the requirement's filter property", () => {

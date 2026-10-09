@@ -1,4 +1,4 @@
-import { stringifyError } from "../stringify-error"
+import { stringifyError } from "../stringify-error.ts"
 
 describe("stringifyError", () => {
   it("should turn an error into a stringifiable object", () => {

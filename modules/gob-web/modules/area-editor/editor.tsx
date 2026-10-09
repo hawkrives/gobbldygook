@@ -2,7 +2,7 @@ import styled from "styled-components"
 import CodeMirror from "@uiw/react-codemirror"
 import { javascript } from "@codemirror/lang-javascript"
 import { oneDark } from "@codemirror/theme-one-dark"
-import { Card } from "../../components/card"
+import { Card } from "../../components/card.ts"
 
 const StyledEditor = styled(CodeMirror)`
   padding: 0;

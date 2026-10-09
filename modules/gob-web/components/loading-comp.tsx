@@ -1,5 +1,5 @@
-import { Card } from "./card"
-import { RaisedButton } from "./button"
+import { Card } from "./card.ts"
+import { RaisedButton } from "./button.ts"
 import styled from "styled-components"
 
 let CenteredCard = styled(Card)`

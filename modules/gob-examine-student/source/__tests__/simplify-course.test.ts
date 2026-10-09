@@ -1,4 +1,4 @@
-import simplifyCourse from "../simplify-course"
+import simplifyCourse from "../simplify-course.ts"
 
 describe("simplifyCourse", () => {
   it("only uses department, number, and type", () => {

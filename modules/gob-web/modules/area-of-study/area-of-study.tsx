@@ -1,9 +1,9 @@
 import * as React from "react"
 import cx from "classnames"
-import { Icon } from "../../components/icon"
-import { TopLevelRequirement, type OverrideHandler } from "./requirement"
-import ProgressBar from "../../components/progress-bar"
-import { chevronUp, chevronDown } from "../../icons/ionicons"
+import { Icon } from "../../components/icon.ts"
+import { TopLevelRequirement, type OverrideHandler } from "./requirement.tsx"
+import ProgressBar from "../../components/progress-bar.tsx"
+import { chevronUp, chevronDown } from "../../icons/ionicons.tsx"
 import type { DeepReadonly, EvaluationResult } from "@gob/examine-student"
 
 import "./area-of-study.scss"

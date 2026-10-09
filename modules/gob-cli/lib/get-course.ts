@@ -1,8 +1,12 @@
-import got from "got"
+// got 10 is CommonJS, so under Node's ESM loader the default import is its
+// module.exports, whose `default` property is got itself
+import gotPackage from "got"
 import Keyv from "keyv"
 import { KeyvFile } from "keyv-file"
 import type { List } from "immutable"
 import type { Course as CourseType, Result } from "@gob/types"
+
+const got = gotPackage.default
 
 const keyv = new Keyv({
   store: new KeyvFile(),

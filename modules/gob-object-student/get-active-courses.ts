@@ -1,7 +1,7 @@
 import { List } from "immutable"
-import type { Student } from "./student"
+import type { Student } from "./student.ts"
 import type { Course as CourseType } from "@gob/types"
-import type { CourseLookupFunc } from "./types"
+import type { CourseLookupFunc } from "./types.ts"
 export async function getActiveCourses(
   student: Student,
   getCourse: CourseLookupFunc,

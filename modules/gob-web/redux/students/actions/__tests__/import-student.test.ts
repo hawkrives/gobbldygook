@@ -1,6 +1,6 @@
-import { importStudent } from "../import-student"
-import type { ImportStudentAction } from "../import-student"
-import { IMPORT_STUDENT } from "../../constants"
+import { importStudent } from "../import-student.ts"
+import type { ImportStudentAction } from "../import-student.ts"
+import { IMPORT_STUDENT } from "../../constants.ts"
 
 function errorOf(action: ImportStudentAction): Error {
   if (action.error !== true) {

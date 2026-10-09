@@ -1,11 +1,11 @@
 import * as React from "react"
-import toPairs from "lodash/toPairs"
-import upperFirst from "lodash/upperFirst"
+import toPairs from "lodash/toPairs.js"
+import upperFirst from "lodash/upperFirst.js"
 import styled from "styled-components"
 
-import { consolidateExpandedOfferings } from "./offerings"
-import { Icon } from "../../components/icon"
-import { chevronUp, chevronDown } from "../../icons/ionicons"
+import { consolidateExpandedOfferings } from "./offerings.ts"
+import { Icon } from "../../components/icon.ts"
+import { chevronUp, chevronDown } from "../../icons/ionicons.tsx"
 
 import type { Course as CourseType, Offering } from "@gob/types"
 

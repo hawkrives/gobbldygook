@@ -1,5 +1,5 @@
-import applyFilter from "../apply-filter"
-import type { Course, FilterExpression } from "../types"
+import applyFilter from "../apply-filter.ts"
+import type { Course, FilterExpression } from "../types.ts"
 
 describe("applyFilter", () => {
   it("filters a list of courses", () => {

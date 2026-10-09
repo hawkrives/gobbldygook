@@ -1,4 +1,4 @@
-import getOverride from "../get-override"
+import getOverride from "../get-override.ts"
 
 describe("getOverride", () => {
   // Overrides hold booleans; the other values check that getOverride hands

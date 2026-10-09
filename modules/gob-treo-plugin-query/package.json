@@ -1,5 +1,6 @@
 {
   "name": "@gob/treo-plugin-query",
+  "type": "module",
   "version": "3.0.0-rc.2",
   "main": "index.ts",
   "license": "MIT",
@@ -10,6 +11,6 @@
     "treo": "^0.6.0-rc2"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=22.18"
   }
 }

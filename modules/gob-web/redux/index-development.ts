@@ -2,10 +2,10 @@ import { applyMiddleware, legacy_createStore, compose } from "redux"
 import type { Middleware, StoreEnhancer } from "redux"
 import promiseMiddleware from "redux-promise"
 import thunkMiddleware from "redux-thunk"
-import saveStudentsMiddleware from "./middleware/save-student"
+import saveStudentsMiddleware from "./middleware/save-student.ts"
 import { createLogger as loggingMiddleware } from "redux-logger"
-import rootReducer from "./reducer"
-import type { RootState } from "./reducer"
+import rootReducer from "./reducer.ts"
+import type { RootState } from "./reducer.ts"
 
 declare global {
   interface Window {

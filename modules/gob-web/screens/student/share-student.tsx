@@ -1,11 +1,11 @@
 import * as React from "react"
 import styled from "styled-components"
-import { Card } from "../../components/card"
-import { FlatButton } from "../../components/button"
-import { Icon } from "../../components/icon"
-import { Toolbar } from "../../components/toolbar"
-import Modal from "../../components/modal"
-import { close } from "../../icons/ionicons"
+import { Card } from "../../components/card.ts"
+import { FlatButton } from "../../components/button.ts"
+import { Icon } from "../../components/icon.ts"
+import { Toolbar } from "../../components/toolbar.ts"
+import Modal from "../../components/modal.tsx"
+import { close } from "../../icons/ionicons.tsx"
 import { Student } from "@gob/object-student"
 
 type Props = Readonly<{

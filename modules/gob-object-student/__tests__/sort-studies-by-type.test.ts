@@ -1,5 +1,5 @@
-import { sortStudiesByType } from "../sort-studies-by-type"
-import type { AreaQuery } from "../types"
+import { sortStudiesByType } from "../sort-studies-by-type.ts"
+import type { AreaQuery } from "../types.ts"
 
 describe("sortStudiesByType", () => {
   it("sorts a list of areas of study by type", () => {

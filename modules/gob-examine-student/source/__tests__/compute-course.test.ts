@@ -1,5 +1,5 @@
-import { computeCourse } from "../compute-chunk"
-import type { Course, CourseExpression } from "../types"
+import { computeCourse } from "../compute-chunk.ts"
+import type { Course, CourseExpression } from "../types.ts"
 
 describe("computeCourse", () => {
   it("checks if a course exists in the list of courses", () => {

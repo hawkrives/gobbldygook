@@ -4,9 +4,9 @@ import {
   checkForInvalidSemester,
   checkForTimeConflicts,
   findWarnings,
-} from "../find-course-warnings"
-import { Schedule } from "../schedule"
-import { course } from "./course.support"
+} from "../find-course-warnings.ts"
+import { Schedule } from "../schedule.ts"
+import { course } from "./course.support.ts"
 
 const mondayMorning = [{ day: "Mo", start: "9:05", end: "10:00" }]
 const mondayAfternoon = [{ day: "Mo", start: "13:00", end: "14:00" }]

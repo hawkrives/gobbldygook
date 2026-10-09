@@ -1,11 +1,11 @@
-import size from "lodash/size"
-import range from "lodash/range"
+import size from "lodash/size.js"
+import range from "lodash/range.js"
 
-import { INIT_STUDENT, DESTROY_STUDENT } from "../../constants"
-import { CHANGE_STUDENT } from "../../actions/change"
+import { INIT_STUDENT, DESTROY_STUDENT } from "../../constants.ts"
+import { CHANGE_STUDENT } from "../../actions/change.ts"
 
-import { undoableReducer, reducer } from "../student"
-import { reducer as studentsReducer } from "../index"
+import { undoableReducer, reducer } from "../student.ts"
+import { reducer as studentsReducer } from "../index.ts"
 import { ActionCreators } from "redux-undo"
 import type { StateWithHistory } from "redux-undo"
 import type { Student } from "@gob/object-student"

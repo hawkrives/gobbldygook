@@ -1,5 +1,5 @@
-import isPlainObject from "lodash/isPlainObject"
-import type { Requirement } from "./types"
+import isPlainObject from "lodash/isPlainObject.js"
+import type { Requirement } from "./types.ts"
 
 // Requirements are the plain objects tagged {$type: "requirement"}; their
 // other keys are checked where they're used.

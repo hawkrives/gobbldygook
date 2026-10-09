@@ -1,14 +1,14 @@
-import includes from "lodash/includes"
-import every from "lodash/every"
-import some from "lodash/some"
-import assertKeys from "./assert-keys"
+import includes from "lodash/includes.js"
+import every from "lodash/every.js"
+import some from "lodash/some.js"
+import assertKeys from "./assert-keys.ts"
 import type {
   Course,
   DeepReadonly,
   Operator,
   Qualification,
   QualificationStaticValue,
-} from "./types"
+} from "./types.ts"
 
 /**
  * Compares a course property against a MongoDB-style operator

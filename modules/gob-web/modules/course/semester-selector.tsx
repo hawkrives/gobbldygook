@@ -3,8 +3,8 @@ import { connect } from "react-redux"
 import { Map } from "immutable"
 import { semesterName, expandYear } from "@gob/school-st-olaf-college"
 import type { Student } from "@gob/object-student"
-import { changeStudent } from "../../redux/students/actions/change"
-import type { ChangeStudentFunc } from "../../redux/students/actions/change"
+import { changeStudent } from "../../redux/students/actions/change.ts"
+import type { ChangeStudentFunc } from "../../redux/students/actions/change.ts"
 
 function semesterList(student: Student): Map<number, Map<string, string>> {
   return student.schedules

@@ -1,5 +1,5 @@
-import compareCourseToCourse from "./compare-course-to-course"
-import type { Course } from "./types"
+import compareCourseToCourse from "./compare-course-to-course.ts"
+import type { Course } from "./types.ts"
 /**
  * Checks if a course exists in an array of courses
  * @private

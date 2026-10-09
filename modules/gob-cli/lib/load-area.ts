@@ -2,8 +2,12 @@ import yaml from "js-yaml"
 import { enhanceHanson as enhance } from "@gob/hanson-format"
 import type { HansonFile, ParsedHansonFile } from "@gob/hanson-format"
 import type { AreaQuery } from "@gob/object-student"
-import maxBy from "lodash/maxBy"
-import got from "got"
+import maxBy from "lodash/maxBy.js"
+// got 10 is CommonJS, so under Node's ESM loader the default import is its
+// module.exports, whose `default` property is got itself
+import gotPackage from "got"
+
+const got = gotPackage.default
 
 const BASE = "https://hawkrives.github.io/gobbldygook-area-data"
 

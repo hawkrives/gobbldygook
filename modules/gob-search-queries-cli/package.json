@@ -1,8 +1,9 @@
 {
   "engines": {
-    "node": ">=22"
+    "node": ">=22.18"
   },
   "name": "@gob/search-queries-cli",
+  "type": "module",
   "version": "3.0.0-rc.2",
   "main": "index.js",
   "repository": "hawkrives/gobbldygook",

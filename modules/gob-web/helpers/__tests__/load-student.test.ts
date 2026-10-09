@@ -1,4 +1,4 @@
-import { loadStudent } from "../load-student"
+import { loadStudent } from "../load-student.ts"
 const demoStudent =
   require("@gob/object-student/demo-student.json") as StudentInput
 

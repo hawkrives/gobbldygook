@@ -1,7 +1,7 @@
-import flatMap from "lodash/flatMap"
+import flatMap from "lodash/flatMap.js"
 import { buildDeptNum } from "@gob/school-st-olaf-college"
 import { splitParagraph } from "@gob/lib"
-import type { RawCourse } from "./types"
+import type { RawCourse } from "./types.ts"
 
 export default function prepareCourse(course: RawCourse): {
   deptnum: string

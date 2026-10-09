@@ -1,13 +1,13 @@
 import { Link } from "@reach/router"
-import groupBy from "lodash/groupBy"
-import map from "lodash/map"
+import groupBy from "lodash/groupBy.js"
+import map from "lodash/map.js"
 import { sortStudiesByType } from "@gob/object-student"
 import styled from "styled-components"
-import { FlatButton } from "../../components/button"
-import { Icon } from "../../components/icon"
-import { iosTrashOutline, iosArrowForward } from "../../icons/ionicons"
-import * as theme from "../../theme"
-import type { IndividualStudentState } from "../../redux/students/reducers"
+import { FlatButton } from "../../components/button.ts"
+import { Icon } from "../../components/icon.ts"
+import { iosTrashOutline, iosArrowForward } from "../../icons/ionicons.tsx"
+import * as theme from "../../theme/index.ts"
+import type { IndividualStudentState } from "../../redux/students/reducers/index.ts"
 
 const Container = styled.div`
   display: flex;

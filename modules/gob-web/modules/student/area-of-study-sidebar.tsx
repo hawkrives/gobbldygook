@@ -1,7 +1,7 @@
 import * as React from "react"
 import { List, Map } from "immutable"
-import { AreaOfStudyGroup } from "./area-of-study-group"
-import { FlatButton } from "../../components/button"
+import { AreaOfStudyGroup } from "./area-of-study-group.tsx"
+import { FlatButton } from "../../components/button.ts"
 import {
   sortStudiesByType,
   areaTypeConstants,

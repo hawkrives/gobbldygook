@@ -2,9 +2,9 @@ import * as React from "react"
 import { connect, type ConnectedProps } from "react-redux"
 import { Student, type AreaQuery } from "@gob/object-student"
 import { pathToOverride } from "@gob/examine-student"
-import { AreaOfStudyProvider } from "./provider"
-import { AreaOfStudy } from "./area-of-study"
-import { changeStudent } from "../../redux/students/actions/change"
+import { AreaOfStudyProvider } from "./provider.tsx"
+import { AreaOfStudy } from "./area-of-study.tsx"
+import { changeStudent } from "../../redux/students/actions/change.ts"
 
 const connector = connect(undefined, { changeStudent })
 

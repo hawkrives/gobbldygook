@@ -1,6 +1,6 @@
-import has from "lodash/has"
-import pathToOverride from "./path-to-override"
-import type { OverridesObject, OverridesPath } from "./types"
+import has from "lodash/has.js"
+import pathToOverride from "./path-to-override.ts"
+import type { OverridesObject, OverridesPath } from "./types.ts"
 /**
  * Checks if an override object has an override
  * @private

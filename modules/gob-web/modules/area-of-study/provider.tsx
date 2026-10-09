@@ -1,8 +1,8 @@
 import * as React from "react"
 import type { DeepReadonly, EvaluationResult } from "@gob/examine-student"
 import { Student, type AreaQuery } from "@gob/object-student"
-import { checkStudentAgainstArea } from "../../workers/check-student"
-import { loadArea } from "../../helpers/load-area"
+import { checkStudentAgainstArea } from "../../workers/check-student.ts"
+import { loadArea } from "../../helpers/load-area.ts"
 
 type State = Readonly<{
   examining: boolean

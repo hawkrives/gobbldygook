@@ -1,5 +1,5 @@
-import getDepartments from "../get-departments"
-import type { Course } from "../types"
+import getDepartments from "../get-departments.ts"
+import type { Course } from "../types.ts"
 
 describe("getDepartments", () => {
   it("returns the distinct departments from an array of courses", () => {

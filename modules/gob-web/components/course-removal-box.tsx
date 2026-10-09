@@ -8,11 +8,11 @@ import { connect } from "react-redux"
 import styled, { css } from "styled-components"
 import { IDENT_COURSE } from "@gob/object-student"
 import type { Student } from "@gob/object-student"
-import { Icon } from "./icon"
-import { iosTrashOutline } from "../icons/ionicons"
-import { action as changeStudent } from "../redux/students/actions/change"
-import type { ActionCreator as ChangeStudentFunc } from "../redux/students/actions/change"
-import type { DraggedCourse } from "../modules/course/draggable"
+import { Icon } from "./icon.ts"
+import { iosTrashOutline } from "../icons/ionicons.tsx"
+import { action as changeStudent } from "../redux/students/actions/change.ts"
+import type { ActionCreator as ChangeStudentFunc } from "../redux/students/actions/change.ts"
+import type { DraggedCourse } from "../modules/course/draggable.tsx"
 
 const Box = styled.div<{ canDrop: boolean; isOver: boolean }>`
   padding: 5em 1em;

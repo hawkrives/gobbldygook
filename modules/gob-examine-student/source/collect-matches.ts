@@ -1,8 +1,8 @@
-import assertKeys from "./assert-keys"
-import flatMap from "lodash/flatMap"
-import uniqBy from "lodash/uniqBy"
+import assertKeys from "./assert-keys.ts"
+import flatMap from "lodash/flatMap.js"
+import uniqBy from "lodash/uniqBy.js"
 import stringify from "stabilize"
-import type { Expression, Requirement, Course, DeepReadonly } from "./types"
+import type { Expression, Requirement, Course, DeepReadonly } from "./types.ts"
 /**
  * Collects matched courses from a result object
  * @private

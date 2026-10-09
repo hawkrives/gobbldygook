@@ -1,8 +1,8 @@
-import uniqueId from "lodash/uniqueId"
+import uniqueId from "lodash/uniqueId.js"
 import { status, text } from "@gob/lib"
 import type { AnyAction, Dispatch } from "redux"
-import * as notificationActions from "../modules/notifications/redux/actions"
-import LoadDataWorker from "./load-data.worker"
+import * as notificationActions from "../modules/notifications/redux/actions.ts"
+import LoadDataWorker from "./load-data.worker.ts"
 import mem from "mem"
 
 declare global {

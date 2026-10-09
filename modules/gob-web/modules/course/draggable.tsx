@@ -9,8 +9,8 @@ import type {
 } from "react-dnd"
 import cx from "classnames"
 import { IDENT_COURSE } from "@gob/object-student"
-import CourseWithModal from "./with-modal"
-import type { Props as CourseProps } from "./with-modal"
+import CourseWithModal from "./with-modal.tsx"
+import type { Props as CourseProps } from "./with-modal.tsx"
 
 type OwnProps = CourseProps
 

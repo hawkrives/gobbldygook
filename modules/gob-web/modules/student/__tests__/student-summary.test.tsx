@@ -6,7 +6,7 @@ import {
   DegreeSummary,
   Footer,
   Header,
-} from "../student-summary"
+} from "../student-summary.tsx"
 import { List } from "immutable"
 
 describe("CreditSummary", () => {

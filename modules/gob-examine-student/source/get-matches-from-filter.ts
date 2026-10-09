@@ -1,5 +1,5 @@
-import assertKeys from "./assert-keys"
-import type { Course, Requirement } from "./types"
+import assertKeys from "./assert-keys.ts"
+import type { Course, Requirement } from "./types.ts"
 /**
  * Returns the list of matches from a requirement's filter
  * @private

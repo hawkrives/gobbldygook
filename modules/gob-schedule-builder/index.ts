@@ -1,1 +1,1 @@
-export { comboHasCourses } from "./combo-has-courses"
+export { comboHasCourses } from "./combo-has-courses.ts"

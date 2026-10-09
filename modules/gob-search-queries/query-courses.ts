@@ -1,6 +1,6 @@
-import filter from "lodash/filter"
-import { checkCourseAgainstQuery } from "./check-course-against-query"
-import type { Query, Queryable } from "./types"
+import filter from "lodash/filter.js"
+import { checkCourseAgainstQuery } from "./check-course-against-query.ts"
+import type { Query, Queryable } from "./types.ts"
 
 /**
  * Queries the database for courses.

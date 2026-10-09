@@ -1,8 +1,8 @@
 import { ActionTypes } from "redux-undo"
-import { undo, redo } from "../undo"
-import { reducer } from "../../reducers"
-import { INIT_STUDENT } from "../../constants"
-import { CHANGE_STUDENT } from "../change"
+import { undo, redo } from "../undo.ts"
+import { reducer } from "../../reducers/index.ts"
+import { INIT_STUDENT } from "../../constants.ts"
+import { CHANGE_STUDENT } from "../change.ts"
 
 describe("undo", () => {
   it("creates an UNDO action for the given student", () => {

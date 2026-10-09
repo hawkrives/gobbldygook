@@ -1,4 +1,4 @@
-import hasOverride from "../has-override"
+import hasOverride from "../has-override.ts"
 
 describe("hasOverride", () => {
   it("checks if an override exists", () => {

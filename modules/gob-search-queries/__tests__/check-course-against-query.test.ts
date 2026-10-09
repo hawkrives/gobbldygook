@@ -1,4 +1,4 @@
-import { checkCourseAgainstQuery } from "../check-course-against-query"
+import { checkCourseAgainstQuery } from "../check-course-against-query.ts"
 
 describe("checkCourseAgainstQuery", () => {
   it("compares a course to a query object", () => {

@@ -2,7 +2,7 @@ jest.spyOn(global.console, "log").mockImplementation(() => jest.fn())
 jest.spyOn(global.console, "error").mockImplementation(() => jest.fn())
 jest.spyOn(global.console, "warn").mockImplementation(() => jest.fn())
 jest.mock("@gob/web-database")
-jest.mock("../lib-dispatch", () => {
+jest.mock("../lib-dispatch.ts", () => {
   const NotificationMock = jest.fn(() => ({
     start: jest.fn(),
     increment: jest.fn(),
@@ -15,10 +15,12 @@ jest.mock("../lib-dispatch", () => {
     Notification: NotificationMock,
   }
 })
-jest.mock("../needs-update", () => jest.fn(() => Promise.resolve()))
-jest.mock("../update-database", () => jest.fn(() => Promise.resolve()))
-jest.mock("../remove-duplicate-areas", () => jest.fn(() => Promise.resolve()))
-jest.mock("@gob/lib/fetch-helpers", () => {
+jest.mock("../needs-update.ts", () => jest.fn(() => Promise.resolve()))
+jest.mock("../update-database.ts", () => jest.fn(() => Promise.resolve()))
+jest.mock("../remove-duplicate-areas.ts", () =>
+  jest.fn(() => Promise.resolve()),
+)
+jest.mock("@gob/lib/fetch-helpers.ts", () => {
   return {
     status: (x: unknown) => x,
     text: (x: unknown) => x,
@@ -38,13 +40,13 @@ const fetchMock = jest.fn<Promise<unknown>, [url: string]>(() => {
   throw new Error("you must pick either goodFetch or badFetch")
 })
 globalThis.fetch = fetchMock as unknown as typeof fetch
-import { db } from "../db"
-import type { InfoFileRef, InfoFileTypeEnum, InfoIndexFile } from "../types"
-import * as dispatch from "../lib-dispatch"
-import needsUpdate from "../needs-update"
-import updateDatabase from "../update-database"
-import removeDuplicateAreas from "../remove-duplicate-areas"
-import loadFiles, * as load from "../load-files"
+import { db } from "../db.ts"
+import type { InfoFileRef, InfoFileTypeEnum, InfoIndexFile } from "../types.ts"
+import * as dispatch from "../lib-dispatch.ts"
+import needsUpdate from "../needs-update.ts"
+import updateDatabase from "../update-database.ts"
+import removeDuplicateAreas from "../remove-duplicate-areas.ts"
+import loadFiles, * as load from "../load-files.ts"
 beforeEach(async () => {
   await db.__clear()
   jest.mocked(dispatch.quotaExceededError).mockClear()

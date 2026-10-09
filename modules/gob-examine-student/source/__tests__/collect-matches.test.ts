@@ -1,5 +1,5 @@
-import collectMatches from "../collect-matches"
-import type { Requirement } from "../types"
+import collectMatches from "../collect-matches.ts"
+import type { Requirement } from "../types.ts"
 
 describe("collectMatches", () => {
   it("throws an error if confronted with an unknown type", () => {

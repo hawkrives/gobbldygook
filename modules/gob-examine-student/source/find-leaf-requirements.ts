@@ -1,11 +1,11 @@
-import flatten from "lodash/flatten"
-import map from "lodash/map"
-import compact from "lodash/compact"
-import keys from "lodash/keys"
-import some from "lodash/some"
-import isRequirementName from "@gob/hanson-format/is-requirement-name"
-import isRequirement from "./is-requirement"
-import type { Requirement } from "./types"
+import flatten from "lodash/flatten.js"
+import map from "lodash/map.js"
+import compact from "lodash/compact.js"
+import keys from "lodash/keys.js"
+import some from "lodash/some.js"
+import isRequirementName from "@gob/hanson-format/is-requirement-name.ts"
+import isRequirement from "./is-requirement.ts"
+import type { Requirement } from "./types.ts"
 
 /**
  * Searches recursively through a requirement tree to find all of the

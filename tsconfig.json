@@ -1,11 +1,14 @@
 {
   // Strict TypeScript 7 config, with every extra strictness flag on.
-  // Babel does the transpiling; `tsc` only typechecks (`mise run typecheck`).
+  // `tsc` only typechecks (`mise run typecheck`). Node runs the non-web
+  // packages' source directly by stripping types, so this config checks them
+  // as Node sees them: ES modules with explicit file extensions. gob-web is
+  // bundled by webpack and has its own config in modules/gob-web.
   "compilerOptions": {
     "target": "es2023",
     "lib": ["es2023", "dom", "dom.iterable"],
-    "module": "esnext",
-    "moduleResolution": "bundler",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "jsx": "react-jsx",
     "noEmit": true,
 
@@ -26,9 +29,10 @@
     "verbatimModuleSyntax": true,
     "erasableSyntaxOnly": true,
     "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
     "skipLibCheck": true,
     "types": ["node", "jest"]
   },
   "include": ["modules/**/*.ts", "modules/**/*.tsx", "config/types/**/*.d.ts"],
-  "exclude": ["**/node_modules", "**/build"]
+  "exclude": ["**/node_modules", "**/build", "modules/gob-web"]
 }

@@ -1,6 +1,6 @@
-import filter from "lodash/filter"
-import simplifyCourse from "./simplify-course"
-import type { Course } from "./types" // old version; compares course objects instead of simplified versions
+import filter from "lodash/filter.js"
+import simplifyCourse from "./simplify-course.ts"
+import type { Course } from "./types.ts" // old version; compares course objects instead of simplified versions
 // export default function getOccurrences(course, courses) {
 //     return filter(courses, (c) => compareCourseToCourse(filter, c))
 // }

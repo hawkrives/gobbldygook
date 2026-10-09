@@ -1,6 +1,6 @@
 import { Student } from "@gob/object-student"
 
-import { IMPORT_STUDENT } from "../constants"
+import { IMPORT_STUDENT } from "../constants.ts"
 
 export type ImportStudentAction =
   | Readonly<{ type: typeof IMPORT_STUDENT; payload: Student; error?: false }>

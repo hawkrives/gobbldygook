@@ -1,7 +1,7 @@
 jest.spyOn(global.console, "log").mockImplementation(() => jest.fn())
 jest.spyOn(global.console, "error").mockImplementation(() => jest.fn())
 jest.spyOn(global.console, "warn").mockImplementation(() => jest.fn())
-import parseData from "../parse-data"
+import parseData from "../parse-data.ts"
 test("parseData can parse json", () => {
   expect(parseData('{"foo": 2}', "courses")).toMatchSnapshot()
 })

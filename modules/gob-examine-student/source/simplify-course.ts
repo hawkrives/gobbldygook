@@ -1,6 +1,6 @@
 // import memoize from 'lodash/memoize'
 // import identity from 'lodash/identity'
-import type { Course } from "./types"
+import type { Course } from "./types.ts"
 
 /**
  * Simplifies a course to just the department/number combo.

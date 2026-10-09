@@ -1,11 +1,11 @@
 import * as React from "react"
-import StudentPicker from "./student-picker"
+import StudentPicker from "./student-picker.tsx"
 import { connect } from "react-redux"
-import { destroyStudent } from "../../redux/students/actions/destroy-student"
-import { loadStudents } from "../../redux/students/actions/load-students"
+import { destroyStudent } from "../../redux/students/actions/destroy-student.ts"
+import { loadStudents } from "../../redux/students/actions/load-students.ts"
 import type { ConnectedProps } from "react-redux"
-import type { RootState } from "../../redux/reducer"
-import type { SORT_BY_ENUM } from "./types"
+import type { RootState } from "../../redux/reducer.ts"
+import type { SORT_BY_ENUM } from "./types.ts"
 
 const connector = connect(
   (state: RootState) => ({ students: state.students }),

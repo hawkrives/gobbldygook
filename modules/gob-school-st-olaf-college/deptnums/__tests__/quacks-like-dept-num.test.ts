@@ -1,4 +1,4 @@
-import { quacksLikeDeptNum } from "../quacks-like-dept-num"
+import { quacksLikeDeptNum } from "../quacks-like-dept-num.ts"
 
 describe("quacksLikeDeptNum", () => {
   it("returns quickly on a long run of letters with no number", () => {

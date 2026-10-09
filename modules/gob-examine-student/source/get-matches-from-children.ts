@@ -1,9 +1,9 @@
-import asRequirement from "./as-requirement"
-import collectMatches from "./collect-matches"
-import isRequirementName from "@gob/hanson-format/is-requirement-name"
-import flatten from "lodash/flatten"
-import keys from "lodash/keys"
-import uniqBy from "lodash/uniqBy"
+import asRequirement from "./as-requirement.ts"
+import collectMatches from "./collect-matches.ts"
+import isRequirementName from "@gob/hanson-format/is-requirement-name.ts"
+import flatten from "lodash/flatten.js"
+import keys from "lodash/keys.js"
+import uniqBy from "lodash/uniqBy.js"
 import stringify from "stabilize"
 import type {
   ModifierChildrenExpression,
@@ -12,7 +12,7 @@ import type {
   Requirement,
   Course,
   DeepReadonly,
-} from "./types"
+} from "./types.ts"
 /**
  * Extract the matched courses from all children.
  * @private

@@ -1,4 +1,4 @@
-import { queryCourses } from "../query-courses"
+import { queryCourses } from "../query-courses.ts"
 
 describe("queryCourses", () => {
   it("queries a list of courses", () => {

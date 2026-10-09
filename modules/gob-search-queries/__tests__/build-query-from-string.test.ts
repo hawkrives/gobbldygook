@@ -1,4 +1,4 @@
-import { buildQueryFromString } from "../build-query-from-string"
+import { buildQueryFromString } from "../build-query-from-string.ts"
 
 describe("buildQueryFromString", () => {
   it("handles an empty string", () => {

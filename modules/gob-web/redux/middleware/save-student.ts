@@ -1,8 +1,8 @@
 import type { AnyAction, Middleware } from "redux"
-import * as studentActions from "../students/constants"
+import * as studentActions from "../students/constants.ts"
 import { ActionTypes as UndoableActionTypes } from "redux-undo"
-import { saveStudent } from "../../helpers/save-student"
-import type { RootState } from "../reducer"
+import { saveStudent } from "../../helpers/save-student.ts"
+import type { RootState } from "../reducer.ts"
 
 const whitelist = new Set<string>([
   studentActions.INIT_STUDENT,

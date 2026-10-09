@@ -1,10 +1,10 @@
-import computeChunk, { computeBoolean } from "../compute-chunk"
+import computeChunk, { computeBoolean } from "../compute-chunk.ts"
 import type {
   BooleanExpression,
   Course,
   Expression,
   Requirement,
-} from "../types"
+} from "../types.ts"
 
 describe("computeBoolean", () => {
   it("computes the boolean result of and-clauses", () => {

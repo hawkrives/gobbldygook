@@ -1,4 +1,4 @@
-import findLeafRequirements from "../find-leaf-requirements"
+import findLeafRequirements from "../find-leaf-requirements.ts"
 
 describe("findLeafRequirements", () => {
   it("finds the leafs of a requirement tree", () => {

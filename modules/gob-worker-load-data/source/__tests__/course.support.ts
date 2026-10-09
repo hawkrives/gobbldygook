@@ -1,4 +1,4 @@
-import type { RawCourse } from "../types"
+import type { RawCourse } from "../types.ts"
 
 export function mockCourse(data: Partial<RawCourse> = {}): RawCourse {
   return {

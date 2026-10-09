@@ -1,11 +1,11 @@
-import uuid from "uuid/v4"
+import uuid from "uuid/v4.js"
 import { randomChar } from "@gob/lib"
 import type { Result } from "@gob/types"
 
 import { List, Record } from "immutable"
-import type { CourseLookupFunc, CourseType } from "./types"
-import type { Result as ValidationResult } from "./validate-schedule"
-import { validateSchedule } from "./validate-schedule"
+import type { CourseLookupFunc, CourseType } from "./types.ts"
+import type { Result as ValidationResult } from "./validate-schedule.ts"
+import { validateSchedule } from "./validate-schedule.ts"
 
 type ScheduleType = {
   id: string

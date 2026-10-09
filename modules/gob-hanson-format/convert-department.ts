@@ -1,4 +1,4 @@
-import forEach from "lodash/forEach"
+import forEach from "lodash/forEach.js"
 const shortDepartmentAbbreviationsToFullDepartmentAbbreviations: Readonly<
   Record<string, string>
 > = {

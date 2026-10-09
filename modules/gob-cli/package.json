@@ -1,5 +1,6 @@
 {
   "name": "@gob/cli",
+  "type": "module",
   "version": "3.0.0-rc.2",
   "main": "lib/index.ts",
   "bin": {
@@ -9,7 +10,7 @@
     "gob-validate": "./gob-validate/index.js"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=22.18"
   },
   "description": "A course scheduling app for St. Olaf College",
   "homepage": "https://gobbldygook.site/",
@@ -30,7 +31,7 @@
     "keyv": "^4.0.3",
     "keyv-file": "^0.3.0",
     "lodash": "^4.18.1",
-    "meow": "^6.1.1",
+    "meow": "^14.1.0",
     "plur": "^3.0.1",
     "pretty-ms": "^6.0.1",
     "sparkly": "^6.0.1"

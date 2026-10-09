@@ -1,12 +1,12 @@
 import * as React from "react"
-import map from "lodash/map"
+import map from "lodash/map.js"
 import { connect, type ConnectedProps } from "react-redux"
 import type { RouteComponentProps } from "@reach/router"
 import type { Student as StudentObject } from "@gob/object-student"
-import type { RootState } from "../redux/reducer"
-import type { Undoable } from "../types"
-import { undo, redo } from "../redux/students/actions/undo"
-import { loadStudents } from "../redux/students/actions/load-students"
+import type { RootState } from "../redux/reducer.ts"
+import type { Undoable } from "../types.ts"
+import { undo, redo } from "../redux/students/actions/undo.ts"
+import { loadStudents } from "../redux/students/actions/load-students.ts"
 
 function Student({
   undo,
