@@ -9,14 +9,11 @@ declare module "treo" {
 
 // Use fake-indexeddb if real IndexedDB is not available (Node.js), but use real IndexedDB when possible (browser)
 if (typeof globalThis.indexedDB === "undefined") {
-  globalThis.indexedDB = (await import("fake-indexeddb")).default
-  globalThis.IDBIndex = (await import("fake-indexeddb/lib/FDBIndex.js")).default
-  globalThis.IDBKeyRange = (
-    await import("fake-indexeddb/lib/FDBKeyRange.js")
-  ).default
-  globalThis.IDBObjectStore = (
-    await import("fake-indexeddb/lib/FDBObjectStore.js")
-  ).default
+  const fake = await import("fake-indexeddb")
+  globalThis.indexedDB = fake.indexedDB
+  globalThis.IDBIndex = fake.IDBIndex
+  globalThis.IDBKeyRange = fake.IDBKeyRange
+  globalThis.IDBObjectStore = fake.IDBObjectStore
 }
 
 const { createDatabase } =
