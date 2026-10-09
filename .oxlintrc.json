@@ -23,8 +23,7 @@
     "**/coverage/**",
     "**/.cache/**",
     "**/*.min.js",
-    "**/parse-hanson-string.js",
-    "**/flow-typed/**"
+    "**/parse-hanson-string.js"
   ],
   "rules": {
     "constructor-super": "error",

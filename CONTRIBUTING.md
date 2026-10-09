@@ -45,11 +45,11 @@ For additional project conventions and guidelines, consult:
 
 - **Package manager**: npm (with workspaces in `modules/*`)
 - **Node version**: ≥22 (managed by mise)
-- **Type checking**: Flow v0.82.0
+- **Type checking**: strict TypeScript 7, run with `mise run typecheck`
 - **Testing**: Jest
 - **End-to-end tests**: Playwright, run with `mise run e2e` (specs and fixture course data live in `e2e/`)
-- **Linting**: oxlint (skips files that still use Flow)
-- **Formatting**: oxfmt (skips files that still use Flow)
+- **Linting**: oxlint
+- **Formatting**: oxfmt
 - **Changelog**: Changesets, run with `mise run changeset`
 
 When running Mise, always set the environment variable `MISE_ENV=agents` to make sure that the agentic tools are installed.

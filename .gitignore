@@ -25,4 +25,3 @@ flakiness-report/
 # The build artifacts
 build*/
 coverage/
-flow-coverage*/
