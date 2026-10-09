@@ -6,7 +6,9 @@ export type { CourseType }
 export type AreaQuery = {
   type: string
   name: string
-  revision: string
+  // undefined for an area file that names no revision; loadArea then loads
+  // the latest one
+  revision: string | undefined
 }
 
 export type OverrideType = unknown
