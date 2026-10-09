@@ -15,7 +15,7 @@ describe("WhereExpression", () => {
 describe("qualifiers syntax", () => {
   it("key must be a string", () => {
     expect(() => parseQualifier("{a = b}")).not.toThrow()
-    expect(() => parseQualifier("{1 = b}")).toThrowError(
+    expect(() => parseQualifier("{1 = b}")).toThrow(
       'Expected qualification-or but "1" found.',
     )
   })

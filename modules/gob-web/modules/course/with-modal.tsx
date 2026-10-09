@@ -17,8 +17,12 @@ export default class CourseWithModal extends React.PureComponent<Props, State> {
     isOpen: false,
   }
 
-  closeModal = () => this.setState(() => ({ isOpen: false }))
-  openModal = () => this.setState(() => ({ isOpen: true }))
+  closeModal = () => {
+    this.setState(() => ({ isOpen: false }))
+  }
+  openModal = () => {
+    this.setState(() => ({ isOpen: true }))
+  }
 
   override render() {
     return (

@@ -8,6 +8,7 @@ export type Result = {
   warnings: Map<string, List<WarningType>>
 }
 // Checks to see if the schedule is valid
+// oxlint-disable-next-line typescript/require-await -- callers await the Promise this returns, and a throw from findWarnings should become a rejection
 export async function validateSchedule(
   schedule: Schedule,
   courses: List<CourseType>,
@@ -15,7 +16,7 @@ export async function validateSchedule(
   // discover any warnings about the course load
   let warnings = findWarnings(courses, schedule)
   let hasConflict = warnings.some((perCourse) =>
-    perCourse.some((w) => w.warning === true),
+    perCourse.some((w) => w.warning),
   )
   return {
     hasConflict,

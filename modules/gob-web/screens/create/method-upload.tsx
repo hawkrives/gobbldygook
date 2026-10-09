@@ -52,14 +52,18 @@ class UploadFileScreen extends React.Component<Props, State> {
       data: new Promise<string>((resolve, reject) => {
         let reader = new FileReader()
         // readAsText always produces a string
-        reader.onload = () => resolve(reader.result as string)
+        reader.onload = () => {
+          resolve(reader.result as string)
+        }
         reader.onerror = reader.onabort = reject
         reader.readAsText(f)
       }),
     }))
     this.setState(
       () => ({ files }),
-      () => this.convertFilesToStudents(files),
+      () => {
+        this.convertFilesToStudents(files)
+      },
     )
   }
 
@@ -95,7 +99,11 @@ class UploadFileScreen extends React.Component<Props, State> {
   convertFilesToStudents = (files: Array<UploadedFile>) => {
     this.setState(
       () => ({ actions: [] }),
-      () => files.forEach(this.convertOneFile),
+      () => {
+        files.forEach((file) => {
+          void this.convertOneFile(file)
+        })
+      },
     )
   }
 
@@ -105,7 +113,7 @@ class UploadFileScreen extends React.Component<Props, State> {
         this.props.dispatch(action)
       }
     })
-    this.props.navigate?.("/")
+    void this.props.navigate?.("/")
   }
 
   override render() {

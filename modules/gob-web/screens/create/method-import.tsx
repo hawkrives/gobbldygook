@@ -73,7 +73,7 @@ class SISImportScreen extends React.Component<Props, State> {
     if (!this.props.navigate) {
       throw new Error("no navigate prop passed!")
     }
-    this.props.navigate(`/student/${id}`)
+    void this.props.navigate(`/student/${id}`)
   }
 
   handleRawStudent = (ev: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -97,7 +97,7 @@ class SISImportScreen extends React.Component<Props, State> {
     this.setState(
       () => ({ parsedStudentText }),
       () => {
-        this.handleImportData()
+        void this.handleImportData()
       },
     )
   }
@@ -230,7 +230,7 @@ class AbbreviatedCourseListing extends React.Component<
 > {
   override state: ListingState = { courses: List() }
   override componentDidMount() {
-    this.fetchCourses()
+    void this.fetchCourses()
   }
   fetchCourses = async () => {
     let courses = await this.props.schedule.getCoursesWithErrors(

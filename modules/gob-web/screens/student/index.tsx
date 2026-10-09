@@ -126,4 +126,4 @@ export default function StudentIndex(
   )
 }
 
-CourseTable.preload()
+void CourseTable.preload()

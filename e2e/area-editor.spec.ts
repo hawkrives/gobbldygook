@@ -11,7 +11,10 @@ const compiled = (page: Page) => page.locator(".cm-content").nth(1)
 function sourceInUrl(page: Page): string {
   const hash = new URL(page.url()).hash.slice(1)
   const state = LZString.decompressFromEncodedURIComponent(hash)
-  return state ? String(JSON.parse(state).content ?? "") : ""
+  if (!state) return ""
+  const { content } = JSON.parse(state) as { content?: unknown }
+  // oxlint-disable-next-line typescript/no-base-to-string -- content is the YAML string the editor saved; String() only coerces unexpected JSON
+  return String(content ?? "")
 }
 
 async function typeSource(page: Page, yaml: string) {

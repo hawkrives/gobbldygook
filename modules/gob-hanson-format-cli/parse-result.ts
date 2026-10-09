@@ -47,7 +47,9 @@ export function cli() {
 
   if (args.stdin) {
     getStdin()
-      .then((string) => parseString(args, string))
+      .then((string) => {
+        parseString(args, string)
+      })
       .catch((err: unknown) => {
         console.error(err)
         process.exitCode = 1

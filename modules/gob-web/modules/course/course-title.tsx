@@ -38,6 +38,7 @@ export default function CourseTitle({
   className,
 }: CourseTitleProps) {
   const isIndependent = independentRegex.test(name)
+  // oxlint-disable-next-line typescript/prefer-nullish-coalescing -- an empty title falls back to the name too
   let courseName: string | undefined = title || name
   let subtitle: string | undefined = undefined
 
@@ -47,7 +48,7 @@ export default function CourseTitle({
       courseName = courseName.substring(3)
     }
   } else if (type === "Topic") {
-    courseName = `${name.replace(/top.*: */gi, "")}`
+    courseName = name.replace(/top.*: */gi, "")
     subtitle = title
   } else if (type === "Seminar") {
     courseName = title

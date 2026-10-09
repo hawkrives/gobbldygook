@@ -12,8 +12,7 @@ test("getCacheStoreName handles areas", () => {
   expect(getCacheStoreName("areas")).toMatchInlineSnapshot(`"areaCache"`)
 })
 test("getCacheStoreName throws an error on unexpected values", () => {
-  expect(() =>
-    // @ts-expect-error: checks the runtime guard against an unknown type
-    getCacheStoreName("invalid"),
-  ).toThrowErrorMatchingInlineSnapshot(`""invalid" is not a valid store type"`)
+  expect(() => getCacheStoreName("invalid")).toThrowErrorMatchingInlineSnapshot(
+    `""invalid" is not a valid store type"`,
+  )
 })

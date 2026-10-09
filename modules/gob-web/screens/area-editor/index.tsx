@@ -39,4 +39,4 @@ export default function AreaEditorScreen(_props: RouteComponentProps) {
   )
 }
 
-Editor.preload()
+void Editor.preload()

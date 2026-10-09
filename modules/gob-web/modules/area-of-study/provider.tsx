@@ -24,7 +24,7 @@ export class AreaOfStudyProvider extends React.Component<Props, State> {
   }
 
   override componentDidMount() {
-    this.startExamination()
+    void this.startExamination()
   }
 
   override componentDidUpdate(prevProps: Props) {
@@ -32,7 +32,7 @@ export class AreaOfStudyProvider extends React.Component<Props, State> {
       this.props.student !== prevProps.student ||
       this.props.areaOfStudy !== prevProps.areaOfStudy
     ) {
-      this.startExamination()
+      void this.startExamination()
     }
   }
 
@@ -52,7 +52,7 @@ export class AreaOfStudyProvider extends React.Component<Props, State> {
   override render() {
     let { examining, results, error } = this.state
 
-    if (results && results.error) {
+    if (results?.error) {
       error = results.error
     }
 

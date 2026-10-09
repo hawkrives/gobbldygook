@@ -29,13 +29,16 @@ let fetchText = (input: string) => fetch(input).then(status).then(text)
 
 const memFetchText: typeof fetchText = mem(fetchText)
 
-worker.addEventListener("error", (msg) =>
-  console.warn("[main] received error from load-data worker:", msg),
-)
+worker.addEventListener("error", (msg) => {
+  console.warn("[main] received error from load-data worker:", msg)
+})
 
 worker.addEventListener("message", ({ data }: MessageEvent<string>) => {
-  // the worker only sends messages that it built itself
-  let { type, message } = JSON.parse(data) as DispatchMessage
+  // the worker sends dispatch requests, and also the replies that
+  // messageWorker listens for, which have no type
+  const { type, message } = JSON.parse(data) as
+    | DispatchMessage
+    | { type?: undefined; message?: undefined }
   if (type === "dispatch") {
     const actionCreator = actions[message.type]?.[message.action]
     if (!actionCreator) {

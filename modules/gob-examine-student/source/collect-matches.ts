@@ -24,7 +24,10 @@ export default function collectMatches(
   if (expr.$type === "course") {
     /* istanbul ignore else: doesn't matter */
     if (expr._result === true) {
-      matches = [expr.$course || expr]
+      // older, flatter course expressions put the course's keys on the
+      // expression itself, with no $course
+      const flat: { $course?: Course | null } = expr
+      matches = [flat.$course ?? expr]
     }
   } else if (expr.$type === "requirement") {
     // next, we have the "run collectMatches on all my children" cases.
@@ -52,9 +55,12 @@ export default function collectMatches(
   } else if (expr.$type === "where") {
     matches = expr._matches
   } else {
-    throw new TypeError(
-      `collectMatches(): unknown expression type "${expr.$type || "undefined"}"`,
-    )
+    // filter expressions, or anything unexpected from a parsed area file
+    const unexpected: { $type?: unknown } = expr
+    // a falsy $type is reported as "undefined"
+    const typeName = String(unexpected.$type)
+    const type = unexpected.$type ? typeName : "undefined"
+    throw new TypeError(`collectMatches(): unknown expression type "${type}"`)
   }
 
   // then we either return the matches, or an empty array if it's falsy

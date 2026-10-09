@@ -15,4 +15,4 @@ export default function StudentPickerScreen(_props: RouteComponentProps) {
   )
 }
 
-StudentPicker.preload()
+void StudentPicker.preload()

@@ -143,16 +143,17 @@ describe("finishUp", () => {
       notification,
       baseUrl: "url",
     })
+    // oxlint-disable-next-line typescript/unbound-method -- a jest.fn() from the Notification mock; it is only inspected, never called
     expect(notification.remove).toHaveBeenCalledTimes(1)
   })
 })
 describe("deduplicateAreas", () => {
   test("calls removeDuplicateAreas if working on an area index", () => {
-    load.deduplicateAreas(mockArgs("areas"))
+    void load.deduplicateAreas(mockArgs("areas"))
     expect(removeDuplicateAreas).toHaveBeenCalledTimes(1)
   })
   test("does not call removeDuplicateAreas unless working on an area index", () => {
-    load.deduplicateAreas(mockArgs("courses"))
+    void load.deduplicateAreas(mockArgs("courses"))
     expect(removeDuplicateAreas).toHaveBeenCalledTimes(0)
   })
 })
@@ -180,7 +181,9 @@ describe("slurpIntoDatabase", () => {
       },
     ]
     await load.slurpIntoDatabase(args, fileRefs)
+    // oxlint-disable-next-line typescript/unbound-method -- a jest.fn() from the Notification mock; it is only inspected, never called
     expect(args.notification.start).toHaveBeenCalledTimes(1)
+    // oxlint-disable-next-line typescript/unbound-method -- a jest.fn() from the Notification mock; it is only inspected, never called
     expect(args.notification.start).toHaveBeenCalledWith(fileRefs.length)
   })
   test("calls updateDatabase once for each file given", async () => {
@@ -289,7 +292,7 @@ describe("filterFiles", () => {
   })
 })
 describe("getFilesToLoad", () => {
-  test("returns the input array if loading areas", async () => {
+  test("returns the input array if loading areas", () => {
     const index: InfoIndexFile = {
       type: "areas",
       files: [
@@ -315,10 +318,10 @@ describe("getFilesToLoad", () => {
         },
       ],
     }
-    const actual = await load.getFilesToLoad("areas", 0, index)
+    const actual = load.getFilesToLoad("areas", 0, index)
     expect(actual).toBe(index.files)
   })
-  test("filters the input array if loading courses", async () => {
+  test("filters the input array if loading courses", () => {
     const index: InfoIndexFile = {
       type: "courses",
       files: [
@@ -348,7 +351,7 @@ describe("getFilesToLoad", () => {
         },
       ],
     }
-    const actual = await load.getFilesToLoad("courses", 2002, index)
+    const actual = load.getFilesToLoad("courses", 2002, index)
     const expected = index.files.filter((f) => (f.year ?? 0) >= 2002)
     expect(actual).toEqual(expected)
   })

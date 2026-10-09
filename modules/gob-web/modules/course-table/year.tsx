@@ -109,6 +109,7 @@ class Year extends React.Component<Props> {
     let { student, year } = this.props
 
     let schedules = student.schedules
+      // oxlint-disable-next-line typescript/no-unnecessary-boolean-literal-compare -- schedules are loaded from saved JSON, so only a literal true counts as active
       .filter((s) => s.active === true && s.year === year)
       .sortBy((s) => s.getTerm())
       .toList()
@@ -123,7 +124,7 @@ class Year extends React.Component<Props> {
         <Header>
           <TitleText>{niceYear}</TitleText>
           <>
-            {!isAddSemesterDisabled && nextSemester != null && (
+            {!isAddSemesterDisabled && (
               <TitleButton title="Add Semester" onClick={this.addSemester}>
                 Add ‘{semesterName(nextSemester)}’
               </TitleButton>

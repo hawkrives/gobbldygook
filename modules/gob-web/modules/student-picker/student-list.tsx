@@ -27,7 +27,7 @@ export default function StudentList(props: Props) {
   let {
     isEditing,
     destroyStudent,
-    students = {},
+    students,
     filter: filterText = "",
     sortBy: sortByKey,
     // groupBy: groupByKey,

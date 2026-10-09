@@ -195,13 +195,13 @@ class Semester extends React.Component<Props, State> {
   }
 
   override componentDidMount() {
-    this.ensureDataExists()
-    this.prepare(this.props)
+    void this.ensureDataExists()
+    void this.prepare(this.props)
   }
 
   override componentDidUpdate(prevProps: Props) {
     if (this.props.schedule !== prevProps.schedule) {
-      this.prepare(this.props)
+      void this.prepare(this.props)
     }
   }
 
@@ -310,16 +310,14 @@ class Semester extends React.Component<Props, State> {
           </RemoveSemesterButton>
         </Header>
 
-        {schedule && (
-          <CourseList
-            courses={[...courses]}
-            usedSlots={credits / creditsPerCourse}
-            maxSlots={recommendedSlots / creditsPerCourse}
-            warnings={warnings}
-            scheduleId={schedule.id}
-            studentId={student.id}
-          />
-        )}
+        <CourseList
+          courses={[...courses]}
+          usedSlots={credits / creditsPerCourse}
+          maxSlots={recommendedSlots / creditsPerCourse}
+          warnings={warnings}
+          scheduleId={schedule.id}
+          studentId={student.id}
+        />
       </Container>
     )
   }

@@ -47,12 +47,18 @@ type Props = {
   studentId: string
 }
 
+// The course loader records the clbid it looked for, as a string, in `meta`
+function missingClbid(meta: Record<string, unknown> | undefined): string {
+  const clbid = meta?.["clbid"]
+  return typeof clbid === "string" ? clbid : "null"
+}
+
 export function CourseList(props: Props) {
   const courseObjects = props.courses.map((course, i) =>
     course.error ? (
       <Missing
         key={i}
-        clbid={String(course.meta?.["clbid"] ?? null)}
+        clbid={missingClbid(course.meta)}
         error={course.result}
       />
     ) : (

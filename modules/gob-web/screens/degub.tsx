@@ -59,7 +59,7 @@ function Degub(props: Props) {
   const students = props.students
 
   return (
-    <ul className={`degub ${props.className || ""}`}>
+    <ul className={`degub ${props.className ?? ""}`}>
       {map(students, (s, i) => (
         <li key={i}>
           <Student

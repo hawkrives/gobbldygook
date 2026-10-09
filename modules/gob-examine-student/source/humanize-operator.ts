@@ -1,14 +1,18 @@
 import type { CounterOperatorEnum } from "./types"
 export default function humanizeOperator(operator: CounterOperatorEnum) {
-  if (operator === "$gte") {
-    return ""
-  } else if (operator === "$lte") {
-    return "at most"
-  } else if (operator === "$eq") {
-    return "exactly"
+  switch (operator) {
+    case "$gte":
+      return ""
+    case "$lte":
+      return "at most"
+    case "$eq":
+      return "exactly"
+    default: {
+      // unreachable for well-typed input; area files are parsed at runtime
+      const unexpected: unknown = operator
+      throw new TypeError(
+        `humanizeOperator does not recognize "${String(unexpected)}" as being an operator.`,
+      )
+    }
   }
-
-  throw new TypeError(
-    `humanizeOperator does not recognize "${operator}" as being an operator.`,
-  )
 }

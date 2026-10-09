@@ -47,7 +47,7 @@ describe("enhanceHanson", () => {
   })
 
   it("requires the top-level to have certain keys", () => {
-    expect(() => enhanceHanson({ $type: "a", slug: "nope" })).toThrowError(
+    expect(() => enhanceHanson({ $type: "a", slug: "nope" })).toThrow(
       '"result" is a required key',
     )
 
@@ -56,16 +56,14 @@ describe("enhanceHanson", () => {
 
   it("requires its input to be an object", () => {
     // @ts-expect-error: checks the runtime guard against non-objects
-    expect(() => enhanceHanson("")).toThrowError("data was not an object!")
+    expect(() => enhanceHanson("")).toThrow("data was not an object!")
   })
 
   it('requires "revision" to be a string, if present', () => {
     expect(() =>
       // @ts-expect-error: YAML can turn an unquoted revision into a number
       enhanceHanson({ revision: 2, result: "CSCI 121" }),
-    ).toThrowError(
-      '"revision" must be a string. Try wrapping it in single quotes.',
-    )
+    ).toThrow('"revision" must be a string. Try wrapping it in single quotes.')
 
     expect(() =>
       enhanceHanson({ revision: "2", result: "CSCI 121" }),
@@ -73,7 +71,7 @@ describe("enhanceHanson", () => {
   })
 
   it("enforces a whitelist of keys at the top-level", () => {
-    expect(() => enhanceHanson({ result: "", xxx: "yyy" })).toThrowError(
+    expect(() => enhanceHanson({ result: "", xxx: "yyy" })).toThrow(
       /only \[.*\] keys are allowed/,
     )
   })
@@ -109,7 +107,7 @@ describe("enhanceHanson", () => {
           result: "only courses from (CSCI 121)",
         },
       }),
-    ).toThrowError('Expected expression but "o" found.')
+    ).toThrow('Expected expression but "o" found.')
 
     expect(() =>
       enhanceHanson({
@@ -156,7 +154,7 @@ describe("enhanceHanson", () => {
           filter: "one of (CSCI 121)",
         },
       }),
-    ).toThrowError('Expected "only" but "o" found.')
+    ).toThrow('Expected "only" but "o" found.')
   })
 
   it("allows defining variables in result", () => {
@@ -206,7 +204,7 @@ describe("enhanceHanson", () => {
       },
     }
 
-    expect(() => enhanceHanson(input)).toThrowError(
+    expect(() => enhanceHanson(input)).toThrow(
       "Expected expression but \"o\" found. (in 'one of ($math-level-3)')",
     )
   })

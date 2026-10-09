@@ -1,7 +1,6 @@
-import type { InfoFileTypeEnum } from "./types"
-
 export default function getCacheStoreName(
-  type: InfoFileTypeEnum,
+  // `type` comes from the info index file, so it is checked at runtime
+  type: string,
 ): "courseCache" | "areaCache" {
   if (type === "courses") {
     return "courseCache"

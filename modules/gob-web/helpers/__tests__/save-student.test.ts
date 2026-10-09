@@ -1,5 +1,6 @@
 import uuid from "uuid/v4"
 import { Student } from "@gob/object-student"
+import type { StudentInput } from "@gob/object-student"
 import {
   saveStudent,
   addStudentToCache,
@@ -7,7 +8,8 @@ import {
   getIdCache,
   setIdCache,
 } from "../save-student"
-const demoStudent = require("@gob/object-student/demo-student.json")
+const demoStudent =
+  require("@gob/object-student/demo-student.json") as StudentInput
 
 const student = new Student({ ...demoStudent, id: uuid() })
 
@@ -17,17 +19,19 @@ describe("saveStudent", () => {
   })
 
   it("returns a promise", () => {
-    expect(saveStudent(student).then).toBeDefined()
+    expect(saveStudent(student)).toHaveProperty("then")
   })
 
   it("saves a student", async () => {
     await saveStudent(student)
     let expectedStudentIds = [student.id]
-    let actualStudentIds = JSON.parse(
-      localStorage.getItem("studentIds") || "[]",
+    let actualStudentIds: unknown = JSON.parse(
+      localStorage.getItem("studentIds") ?? "[]",
     )
     expect(actualStudentIds).toEqual(expectedStudentIds)
-    let actualStudent = JSON.parse(localStorage.getItem(student.id) || "{}")
+    let actualStudent = JSON.parse(
+      localStorage.getItem(student.id) ?? "{}",
+    ) as Record<string, unknown>
 
     let { dateLastModified: _1, ...expected } = student.toJS()
     let { dateLastModified: _2, ...actual } = actualStudent
@@ -46,14 +50,14 @@ describe("addStudentToCache", () => {
   it("adds an id to the list of student ids", () => {
     addStudentToCache("5")
     let expected = ids.concat(["5"])
-    let actual = JSON.parse(localStorage.getItem("studentIds") || "[]")
+    let actual: unknown = JSON.parse(localStorage.getItem("studentIds") ?? "[]")
     expect(actual).toEqual(expected)
   })
 
   it("does not add an id if one already exists", () => {
     addStudentToCache("3")
     let expected = ids
-    let actual = JSON.parse(localStorage.getItem("studentIds") || "[]")
+    let actual: unknown = JSON.parse(localStorage.getItem("studentIds") ?? "[]")
     expect(actual).toEqual(expected)
   })
 })
@@ -69,14 +73,14 @@ describe("removeStudentFromCache", () => {
   it("removes an id from the list of student ids", () => {
     removeStudentFromCache("1")
     let expected = ids.filter((id) => id !== "1")
-    let actual = JSON.parse(localStorage.getItem("studentIds") || "[]")
+    let actual: unknown = JSON.parse(localStorage.getItem("studentIds") ?? "[]")
     expect(actual).toEqual(expected)
   })
 
   it("does not throw if the id does not exist", () => {
     removeStudentFromCache("300")
     let expected = ids
-    let actual = JSON.parse(localStorage.getItem("studentIds") || "[]")
+    let actual: unknown = JSON.parse(localStorage.getItem("studentIds") ?? "[]")
     expect(actual).toEqual(expected)
   })
 })
@@ -100,7 +104,9 @@ describe("setIdCache", () => {
     localStorage.clear()
     const ids = new Set(["1", "2", "3"])
     setIdCache(ids)
-    let actual = new Set(JSON.parse(localStorage.getItem("studentIds") || "[]"))
+    let actual = new Set(
+      JSON.parse(localStorage.getItem("studentIds") ?? "[]") as Array<string>,
+    )
     let expected = ids
     expect(actual).toEqual(expected)
   })

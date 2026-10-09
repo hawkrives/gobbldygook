@@ -89,6 +89,7 @@ function stringifyChunk(expr: Expression): string {
     case "where":
       resultString = stringifyWhere(expr)
       break
+    case "filter":
     default:
       throw new Error(`uh oh! unknown type "${expr.$type}"`)
   }

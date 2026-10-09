@@ -33,5 +33,5 @@ export function alterForEvaluation(course: Course): TrimmedCourse {
 
   // every whitelisted key is a Course field, so what's left is a smaller Course
   let pairs = toPairs(altered).filter(([key]) => whitelist.has(key))
-  return fromPairs(pairs) as TrimmedCourse
+  return fromPairs(pairs)
 }

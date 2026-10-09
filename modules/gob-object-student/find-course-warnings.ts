@@ -19,7 +19,9 @@ export function checkForInvalidYear(
   scheduleYear: number,
   thisYear: number = new Date().getFullYear(),
 ): WarningType | null | undefined {
-  if (course.semester === 9 || course.semester === undefined) {
+  // course data comes from storage, and may be missing its semester
+  let semester = course.semester as number | undefined
+  if (semester === 9 || semester === undefined) {
     return null
   }
 

@@ -16,7 +16,9 @@ export default function loadFiles(url: string, baseUrl: string): Promise<void> {
     .then(status)
     .then(json)
     .then((data) => proceedWithUpdate(baseUrl, data as InfoIndexFile))
-    .catch((err) => handleErrors(err, url))
+    .catch((err: unknown) => {
+      handleErrors(err as Error, url)
+    })
 }
 export async function proceedWithUpdate(
   baseUrl: string,
@@ -30,11 +32,11 @@ export async function proceedWithUpdate(
     notification,
     baseUrl,
   }
-  const files = await getFilesToLoad(type, oldestYear, data)
+  const files = getFilesToLoad(type, oldestYear, data)
   const filtered = await filterFiles(type, files)
   await slurpIntoDatabase(args, filtered)
   await deduplicateAreas(args)
-  await finishUp(args)
+  finishUp(args)
 }
 export async function loadTerm(
   term: number,
@@ -45,7 +47,7 @@ export async function loadTerm(
     .then(status)
     .then(json)) as InfoIndexFile
   const type: InfoFileTypeEnum = data.type
-  const notification = new Notification(type, String(uniqueId()))
+  const notification = new Notification(type, uniqueId())
   const args = {
     type,
     notification,
@@ -55,7 +57,7 @@ export async function loadTerm(
   const filtered = await filterFiles(type, files)
   await slurpIntoDatabase(args, filtered)
   await deduplicateAreas(args)
-  await finishUp(args)
+  finishUp(args)
 }
 export function getFilesToLoad(
   type: InfoFileTypeEnum,

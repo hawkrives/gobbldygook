@@ -172,7 +172,7 @@ export async function processSchedules(
       // we actually want to invert this; if we found the course, then it's not
       // a fabrication, so we return null; otoh, if we _didn't_ find the course,
       // it must be a fabrication, so we actually want to return it.
-      if (resolved.error === false) {
+      if (!resolved.error) {
         return null
       }
       return fleshOutSisFabrication(course)

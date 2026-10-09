@@ -29,61 +29,64 @@ export default function filterByWhereClause(
   // When filtering by an and-clause, we need access to both the
   // entire list of courses, and the result of the prior iteration.
   // To simplify future invocations, we default to `fullList = list`
-  if (!fullList) {
-    fullList = baseList
-  }
+  fullList ??= baseList
 
   // There are only two types of where-clauses: boolean, and qualification.
   // Boolean where-clauses are comprised of a set of qualifications.
   // This function always reduces down to a call to filterByQualification
-  if (clause.$type === "qualification") {
-    return filterByQualification(baseList, clause, {
-      distinct,
-      fullList,
-      counter,
-    })
-  } else if (clause.$type === "boolean") {
-    // either an and- or or-clause.
-    // and-clauses become the result of applying each invocation to the
-    // result of the prior one. they are the list of unique courses which
-    // meet all of the qualifications.
-    if (clause.$booleanType === "and") {
-      let filtered = baseList
-      forEach(clause.$and, (q) => {
-        filtered = filterByWhereClause(filtered, q, {
-          distinct,
-          fullList,
-          counter,
-        })
+  switch (clause.$type) {
+    case "qualification":
+      return filterByQualification(baseList, clause, {
+        distinct,
+        fullList,
+        counter,
       })
-      return filtered
-    } else if (clause.$booleanType === "or") {
-      // or-clauses are the list of unique courses that meet one or more
-      // of the qualifications.
-      let filtrations: Course[] = []
-      forEach(clause.$or, (q) => {
-        filtrations = filtrations.concat(
-          filterByWhereClause(baseList, q, {
-            distinct,
-            counter,
-          }),
-        )
-      })
-      // uniquify the list of possibilities by way of turning them into
-      // the simplified representations.
-      return uniqBy(filtrations, simplifyCourse)
-    } else {
-      // only 'and' and 'or' are currently supported.
+    case "boolean":
+      // either an and- or or-clause.
+      switch (clause.$booleanType) {
+        case "and": {
+          // and-clauses become the result of applying each invocation to the
+          // result of the prior one. they are the list of unique courses which
+          // meet all of the qualifications.
+          let filtered = baseList
+          forEach(clause.$and, (q) => {
+            filtered = filterByWhereClause(filtered, q, {
+              distinct,
+              fullList,
+              counter,
+            })
+          })
+          return filtered
+        }
+        case "or": {
+          // or-clauses are the list of unique courses that meet one or more
+          // of the qualifications.
+          let filtrations: Course[] = []
+          forEach(clause.$or, (q) => {
+            filtrations = filtrations.concat(
+              filterByWhereClause(baseList, q, {
+                distinct,
+                counter,
+              }),
+            )
+          })
+          // uniquify the list of possibilities by way of turning them into
+          // the simplified representations.
+          return uniqBy(filtrations, simplifyCourse)
+        }
+        default:
+          // only 'and' and 'or' are currently supported.
+          throw new TypeError(
+            `filterByWhereClause: neither $or nor $and were present in ${JSON.stringify(clause)}`,
+          )
+      }
+    default: {
+      // where-clauses *must* be either a 'boolean' or a 'qualification'
+      const unexpected: { $type?: unknown } = clause
       throw new TypeError(
-        `filterByWhereClause: neither $or nor $and were present in ${JSON.stringify(clause)}`,
+        `filterByWhereClause: wth kind of type is a "${String(unexpected.$type)}" clause?`,
       )
     }
-  } else {
-    // where-clauses *must* be either a 'boolean' or a 'qualification'
-    const unexpected: { $type?: unknown } = clause
-    throw new TypeError(
-      `filterByWhereClause: wth kind of type is a "${String(unexpected.$type)}" clause?`,
-    )
   }
 }
 type QualificationFunction = (
@@ -105,23 +108,27 @@ export function filterByQualification(
   const value = qualification.$value
 
   if (typeof value === "object" && !Array.isArray(value)) {
-    if (value.$type === "boolean") {
-      if (!("$or" in value) && !("$and" in value)) {
+    switch (value.$type) {
+      case "boolean":
+        if (!("$or" in value) && !("$and" in value)) {
+          throw new TypeError(
+            `filterByQualification: neither $or nor $and were present in ${JSON.stringify(value)}`,
+          )
+        }
+        break
+      case "function":
+        applyQualifictionFunction({
+          value,
+          fullList,
+          list,
+        })
+        break
+      default: {
+        const unexpected: { $type?: unknown } = value
         throw new TypeError(
-          `filterByQualification: neither $or nor $and were present in ${JSON.stringify(value)}`,
+          `filterByQualification: ${String(unexpected.$type)} is not a valid type for a query.`,
         )
       }
-    } else if (value.$type === "function") {
-      applyQualifictionFunction({
-        value,
-        fullList,
-        list,
-      })
-    } else {
-      const unexpected: { $type?: unknown } = value
-      throw new TypeError(
-        `filterByQualification: ${String(unexpected.$type)} is not a valid type for a query.`,
-      )
     }
   }
 
@@ -164,7 +171,7 @@ function applyQualifictionFunction({
     )
   }
 
-  const completeList = fullList || list
+  const completeList = fullList ?? list
   // we're not passing distinct or counter back to filterByWhereClause here,
   // because this call is not affected by how the results need to be qualified,
   // since it's finding the matches to get a value from.

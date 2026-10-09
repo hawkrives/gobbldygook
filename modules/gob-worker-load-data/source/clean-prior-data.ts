@@ -2,7 +2,6 @@ import { db } from "./db"
 import range from "idb-range"
 import fromPairs from "lodash/fromPairs"
 import getCacheStoreName from "./get-cache-store-name"
-import type { InfoFileTypeEnum } from "./types"
 
 export function getPriorCourses(path: string): Promise<Record<string, null>> {
   return db
@@ -23,7 +22,8 @@ export function getPriorAreas(path: string): Promise<Record<string, null>> {
 
 export default async function cleanPriorData(
   path: string,
-  type: InfoFileTypeEnum,
+  // `type` comes from the info index file, so it is checked at runtime
+  type: string,
 ): Promise<void> {
   console.log(`cleaning ${path}`)
 

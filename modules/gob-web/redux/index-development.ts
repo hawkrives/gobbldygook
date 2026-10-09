@@ -1,4 +1,4 @@
-import { applyMiddleware, createStore, compose } from "redux"
+import { applyMiddleware, legacy_createStore, compose } from "redux"
 import type { Middleware, StoreEnhancer } from "redux"
 import promiseMiddleware from "redux-promise"
 import thunkMiddleware from "redux-thunk"
@@ -29,7 +29,9 @@ const devTools: StoreEnhancer = window.devToolsExtension
   : (f) => f
 
 export default function configureStore(initialState: Partial<RootState> = {}) {
-  return createStore(
+  // configureStore from Redux Toolkit sets up its own middleware, which would
+  // change the store's behavior, so this keeps the plain Redux store
+  return legacy_createStore(
     rootReducer,
     initialState,
     compose(applyMiddleware(...middleware), devTools),

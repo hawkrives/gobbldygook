@@ -47,7 +47,14 @@ class AreaTextEditor extends React.Component<
 > {
   override render() {
     let { value, onChange } = this.props
-    return <Editor value={value} onChange={(value) => onChange(value)} />
+    return (
+      <Editor
+        value={value}
+        onChange={(value) => {
+          onChange(value)
+        }}
+      />
+    )
   }
 }
 
@@ -118,6 +125,7 @@ const Layout = styled.div`
 export let Controller = () => {
   const [content, setContent] = React.useState(() => {
     const initial = read()
+    // oxlint-disable-next-line typescript/prefer-nullish-coalescing -- the hash can be edited by hand, so any falsy content falls back
     return initial.content || ""
   })
 
@@ -127,7 +135,12 @@ export let Controller = () => {
 
   return (
     <Layout>
-      <AreaTextEditor value={content} onChange={(value) => setContent(value)} />
+      <AreaTextEditor
+        value={content}
+        onChange={(value) => {
+          setContent(value)
+        }}
+      />
       <AreaCompiledViewer value={content} />
       <AreaInfoViewer value={content} />
     </Layout>

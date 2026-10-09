@@ -72,7 +72,7 @@ class CourseTable extends React.Component<Props> {
       matriculation,
     )
 
-    let nextYearButton = nextAvailableYear != null && (
+    let nextYearButton = (
       <AddYearButton key="add-year" title="Add Year" onClick={this.addSchedule}>
         Add {expandYear(nextAvailableYear, false, "–")}
       </AddYearButton>
@@ -86,11 +86,9 @@ class CourseTable extends React.Component<Props> {
       ))
       .toList()
 
-    if (nextAvailableYear != null) {
-      let yearNumbers = [...years.keys(), nextAvailableYear].sort()
-      let targetIndex = yearNumbers.indexOf(nextAvailableYear)
-      yearEls = yearEls.insert(targetIndex, nextYearButton)
-    }
+    let yearNumbers = [...years.keys(), nextAvailableYear].sort()
+    let targetIndex = yearNumbers.indexOf(nextAvailableYear)
+    yearEls = yearEls.insert(targetIndex, nextYearButton)
 
     return (
       <Container className={this.props.className}>

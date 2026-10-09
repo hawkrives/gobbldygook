@@ -67,12 +67,14 @@ export function enhanceHanson(data: HansonFile): ParsedHansonFile {
 
   // because this only runs at the top level, we know
   // that we'll have a name to use
+  // oxlint-disable-next-line typescript/prefer-nullish-coalescing -- an empty (or non-string falsy) slug or name from the YAML falls back like a missing one
   let slug = data.slug || makeAreaSlug(data.name || "")
 
   // YAML turns an unquoted revision like 2020-21 into a number or a date
   const rev: unknown = data.revision
+  const revName = String(rev)
   if (rev && typeof rev !== "string") {
-    let msg = `"revision" must be a string. Try wrapping it in single quotes. "${String(rev)}" is a ${typeof rev}.`
+    let msg = `"revision" must be a string. Try wrapping it in single quotes. "${revName}" is a ${typeof rev}.`
     throw new TypeError(msg)
   }
 

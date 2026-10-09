@@ -47,7 +47,9 @@ async function main({ data }: MessageEvent<string>) {
 }
 
 if (IS_WORKER) {
-  self.addEventListener("message", main)
+  self.addEventListener("message", (event: MessageEvent<string>) => {
+    void main(event)
+  })
 }
 
 export default WorkerStandIn

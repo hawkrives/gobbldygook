@@ -133,7 +133,9 @@ function queryStore<T>(this: Store, query: Query): Promise<Array<T>> {
       }
 
       let iterateStore = (cursor: IDBCursorWithValue) => {
-        let { value, primaryKey } = cursor
+        let { primaryKey } = cursor
+        // the stores this plugin queries hold courses
+        let value = cursor.value as Queryable
         if (canAdd({ query, value, primaryKey, results })) {
           results.push(primaryKey)
         }
@@ -162,7 +164,7 @@ function queryIndex<T>(
 
     // Prevent invalid logic from not having a query.
     let values = query[name]
-    if (!query || !size(query) || !values || !size(values)) {
+    if (!size(query) || !values || !size(values)) {
       resolvePromise([])
       return
     }
@@ -221,7 +223,9 @@ function queryIndex<T>(
       } else if (currentKey !== undefined && cursorKey > currentKey) {
         // If the cursor's key is "past" the current one, we need to skip
         // ahead to the next one key in the list of keys.
-        let { value, primaryKey } = cursor
+        let { primaryKey } = cursor
+        // the stores this plugin queries hold courses
+        let value = cursor.value as Queryable
         if (canAdd({ query, value, primaryKey, results })) {
           results.push(primaryKey)
         }
@@ -240,7 +244,9 @@ function queryIndex<T>(
       } else if (cursorKey === currentKey) {
         // If we've found what we're looking for, add it, and go to
         // the next result.
-        let { value, primaryKey } = cursor
+        let { primaryKey } = cursor
+        // the stores this plugin queries hold courses
+        let value = cursor.value as Queryable
         if (canAdd({ query, value, primaryKey, results })) {
           results.push(primaryKey)
         }

@@ -29,7 +29,7 @@ import type { Course } from "./types"
  * @returns {string} - the stringified, simplified course
  */
 function simplifyCourse(course: Course): string {
-  return `${course.department} ${course.number} ${course.type}`
+  return `${String(course.department)} ${String(course.number)} ${String(course.type)}`
 }
 
 export default simplifyCourse // export default memoize(simplifyCourse, identity)

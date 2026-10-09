@@ -4,5 +4,5 @@ export default function getFulfillment(
   path: FulfillmentsPath,
   fulfillments: FulfillmentsObject,
 ): Fulfillment | null {
-  return fulfillments[pathToOverride(path)] || null
+  return fulfillments[pathToOverride(path)] ?? null
 }

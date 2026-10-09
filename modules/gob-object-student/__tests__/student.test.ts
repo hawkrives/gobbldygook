@@ -290,7 +290,7 @@ describe("destroyScheduleFromStudent", () => {
   it(`throws if it cannot find the requested schedule id`, () => {
     let stu = new Student({ schedules: OrderedMap() })
     let shouldThrowBecauseNotAdded = () => stu.destroySchedule("unknown")
-    expect(shouldThrowBecauseNotAdded).toThrowError(ReferenceError)
+    expect(shouldThrowBecauseNotAdded).toThrow(ReferenceError)
   })
 })
 
@@ -621,7 +621,7 @@ describe("reorderCourseInSchedule", () => {
         clbid: "123456789",
         index: 0,
       }),
-    ).toThrowError(ReferenceError)
+    ).toThrow(ReferenceError)
   })
 
   it("truncates the requested index if it is greater than the number of courses", () => {

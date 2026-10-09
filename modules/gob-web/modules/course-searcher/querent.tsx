@@ -53,7 +53,7 @@ export class Querent extends React.Component<Props, State> {
 
     let props = this.props
     if (props.query || props.term) {
-      this.submitQuery(props.query, { term: props.term })
+      void this.submitQuery(props.query, { term: props.term })
     }
   }
 

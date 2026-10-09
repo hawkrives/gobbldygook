@@ -15,5 +15,5 @@ type ParsedRule = Readonly<Record<string, unknown>>
 export const customParser = (buildOptions?: ParserBuildOptions) => {
   const parser = peg.generate(grammar, buildOptions)
   return (input: string, options?: ParserOptions): ParsedRule =>
-    parser.parse(input, options)
+    parser.parse(input, options) as ParsedRule
 }

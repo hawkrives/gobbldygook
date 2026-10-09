@@ -613,6 +613,6 @@ describe("computeModifier", () => {
         // @ts-expect-error: checks the runtime guard against bad input
         expr: { $what: "invalid", $from: {}, $count: {} },
       }),
-    ).toThrowError(TypeError)
+    ).toThrow(TypeError)
   })
 })

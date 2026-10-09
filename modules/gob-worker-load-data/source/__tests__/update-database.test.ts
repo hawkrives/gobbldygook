@@ -110,6 +110,7 @@ describe("updateDatabase", () => {
         path: "terms/20161.json",
         hash: "deadbeef",
       })
+      // oxlint-disable-next-line typescript/unbound-method -- a jest.fn() from the Notification mock; it is only inspected, never called
       expect(n.increment).toHaveBeenCalledTimes(1)
     })
     test("even if the fetch fails", async () => {
@@ -120,6 +121,7 @@ describe("updateDatabase", () => {
         path: "terms/20161.json",
         hash: "deadbeef",
       })
+      // oxlint-disable-next-line typescript/unbound-method -- a jest.fn() from the Notification mock; it is only inspected, never called
       expect(n.increment).toHaveBeenCalledTimes(1)
     })
   })

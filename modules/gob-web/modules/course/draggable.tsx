@@ -43,7 +43,7 @@ class DraggableCourse extends React.PureComponent<OwnProps & CollectedProps> {
     return (
       <Draggable
         ref={(ref: CourseWithModal | null) => {
-          // eslint-disable-next-line react/no-find-dom-node
+          // oxlint-disable-next-line react/no-find-dom-node, typescript/no-deprecated -- a ref would need CourseWithModal and CompactCourse to forward one, which changes when they re-render
           this.props.connectDragSource(findDOMNode(ref) as Element | null)
         }}
         style={this.props.style}
@@ -57,6 +57,7 @@ class DraggableCourse extends React.PureComponent<OwnProps & CollectedProps> {
 // Implements the drag source contract.
 const courseSource = {
   beginDrag(props: OwnProps): DraggedCourse {
+    // oxlint-disable-next-line typescript/prefer-nullish-coalescing -- an empty scheduleId counts as no schedule
     let scheduleId = props.scheduleId || null
     return {
       isFromSchedule: scheduleId !== null,

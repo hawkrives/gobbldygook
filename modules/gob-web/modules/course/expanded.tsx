@@ -66,12 +66,17 @@ export default class ExpandedCourse extends React.PureComponent<Props> {
   override render() {
     const { course, conflicts, className } = this.props
 
+    // course data comes from JSON, and some courses leave out these lists
+    const description = course.description as Course["description"] | undefined
+    const instructors = course.instructors as Course["instructors"] | undefined
+    const gereqs = course.gereqs as Course["gereqs"] | undefined
+
     const infoColumn = (
       <Column>
-        {course.description && (
+        {description && (
           <Description>
             <Heading>Description</Heading>
-            {course.description.map((d, i) => (
+            {description.map((d, i) => (
               <p key={i}>{d}</p>
             ))}
           </Description>
@@ -100,12 +105,10 @@ export default class ExpandedCourse extends React.PureComponent<Props> {
         {course.offerings && (
           <div>
             <Heading>
-              {course.offerings && course.offerings.length === 1
-                ? "Offering"
-                : "Offerings"}
+              {course.offerings.length === 1 ? "Offering" : "Offerings"}
             </Heading>
             <BulletedList>
-              {consolidateExpandedOfferings(course.offerings || []).map(
+              {consolidateExpandedOfferings(course.offerings).map(
                 (offering) => (
                   <ListItem key={offering}>{offering}</ListItem>
                 ),
@@ -114,22 +117,20 @@ export default class ExpandedCourse extends React.PureComponent<Props> {
           </div>
         )}
 
-        {course.instructors && (
+        {instructors && (
           <div>
             <Heading>
-              {course.instructors && course.instructors.length === 1
-                ? "Instructor"
-                : "Instructors"}
+              {instructors.length === 1 ? "Instructor" : "Instructors"}
             </Heading>
-            <div>{oxford(course.instructors)}</div>
+            <div>{oxford(instructors)}</div>
           </div>
         )}
 
-        {course.gereqs && (
+        {gereqs && (
           <div>
             <Heading>G.E. Requirements</Heading>
             <BulletedList>
-              {map(course.gereqs, (ge) => (
+              {map(gereqs, (ge) => (
                 <ListItem key={ge}>{ge}</ListItem>
               ))}
             </BulletedList>

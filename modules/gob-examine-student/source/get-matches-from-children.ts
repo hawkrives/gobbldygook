@@ -23,10 +23,6 @@ export default function getMatchesFromChildren(
   expr: ModifierChildrenExpression | ModifierChildrenWhereExpression,
   ctx: Requirement,
 ): Course[] {
-  if (expr.$type !== "modifier") {
-    return []
-  }
-
   // grab all the child requirement names from this requirement
   let childKeys = keys(ctx).filter(isRequirementName)
 

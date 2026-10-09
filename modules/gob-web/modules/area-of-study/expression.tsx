@@ -47,7 +47,8 @@ function makeBooleanExpression(expr: BooleanExpression, ctx: unknown) {
   return { contents }
 }
 
-const ofLookup = {
+// $was comes from an area file, so it may not be one of these
+const ofLookup: Readonly<Record<string, string | undefined>> = {
   all: "All of",
   any: "Any of",
   none: "None of",
@@ -55,8 +56,8 @@ const ofLookup = {
 
 function makeOfExpression(expr: OfExpression, ctx: unknown) {
   const description = expr.$count.$was
-    ? ofLookup[expr.$count.$was] || "???"
-    : `${expr._counted || 0} of ${humanizeOperator(
+    ? (ofLookup[expr.$count.$was] ?? "???")
+    : `${expr._counted ?? 0} of ${humanizeOperator(
         expr.$count.$operator,
       )} ${expr.$count.$num} from among`
 
@@ -80,7 +81,7 @@ function makeModifierExpression(expr: ModifierExpression) {
   if (expr.$from === "where") {
     from = "courses where " + makeWhereQualifier(expr.$where)
   }
-  const description = `${expr._counted || 0} of ${needs} from ${from}`
+  const description = `${expr._counted ?? 0} of ${needs} from ${from}`
   return { description }
 }
 
@@ -109,10 +110,12 @@ function stringifyWhereValue(value: QualificationValue): string {
     return String(value["$computed-value"])
   }
 
-  if (value.$type === "boolean") {
+  // area files are parsed at runtime, so a value can match none of the types
+  const unchecked: { $type?: unknown; $booleanType?: unknown } = value
+  if (unchecked.$type === "boolean") {
     if (value.$booleanType === "or") {
       return value.$or.join(" OR ")
-    } else if (value.$booleanType === "and") {
+    } else if (unchecked.$booleanType === "and") {
       return value.$and.join(" AND ")
     }
   }
@@ -121,20 +124,23 @@ function stringifyWhereValue(value: QualificationValue): string {
 }
 
 export function makeWhereQualifier(where: Qualifier): string {
-  if (where.$type === "boolean") {
-    if (where.$booleanType === "and") {
-      return where.$and.map(makeWhereQualifier).join(" AND ")
-    } else if (where.$booleanType === "or") {
-      return where.$or.map(makeWhereQualifier).join(" OR ")
-    }
-  }
-
+  // area files are parsed at runtime, so a qualifier can match none of the
+  // types
+  const unchecked: { $type?: unknown; $booleanType?: unknown } = where
   if (where.$type !== "qualification") {
+    if (unchecked.$type === "boolean") {
+      if (where.$booleanType === "and") {
+        return where.$and.map(makeWhereQualifier).join(" AND ")
+      } else if (unchecked.$booleanType === "or") {
+        return where.$or.map(makeWhereQualifier).join(" OR ")
+      }
+    }
+
     return "unknown"
   }
 
   let operator = operators[where.$operator] || "?"
-  let key = keys[where.$key] || where.$key
+  let key = keys[where.$key] ?? where.$key
   let value = stringifyWhereValue(where.$value)
   return `${key} ${operator} ${value}`
 }
@@ -146,10 +152,10 @@ function makeWhereExpression(expr: WhereExpression) {
   const qualifier = makeWhereQualifier(expr.$where)
   const distinct = expr.$distinct ? "distinct " : ""
   const word = expr.$count.$num === 1 ? "course" : "courses"
-  const counted = expr._counted || 0
+  const counted = expr._counted ?? 0
   const description = `${counted} of ${needs} ${distinct}${word} from courses where ${qualifier}`
 
-  let matches = expr._matches || []
+  let matches = expr._matches ?? []
   let contents: Array<React.ReactElement> | null = matches.map(
     (course: Course, i) => (
       <Expression
@@ -160,7 +166,7 @@ function makeWhereExpression(expr: WhereExpression) {
     ),
   )
 
-  if (contents && !contents.length) {
+  if (!contents.length) {
     contents = null
   }
 
@@ -171,7 +177,7 @@ function makeOccurrenceExpression(expr: OccurrenceExpression) {
   const op = humanizeOperator(expr.$count.$operator)
   const word = expr.$count.$num === 1 ? "occurrence" : "occurrences"
   const num = expr.$count.$num
-  const description = `${expr._counted || 0} of ${op} ${num} ${word} of `
+  const description = `${expr._counted ?? 0} of ${op} ${num} ${word} of `
 
   const contents = (
     <Expression expr={{ $type: "course", $course: expr.$course }} />
@@ -191,7 +197,9 @@ export default function Expression(props: Props) {
   const { expr } = props
   const { $type } = expr
 
-  if (!$type) {
+  // area files are parsed at runtime, so $type can be missing
+  const unchecked: { $type?: unknown } = expr
+  if (!unchecked.$type) {
     return null
   }
 
@@ -212,7 +220,7 @@ export default function Expression(props: Props) {
     // $course is the matched course. It's used mostly by where-expressions and the like.
     contents = (
       <CourseExpression
-        {...(expr._request || expr.$course)}
+        {...(expr._request ?? expr.$course)}
         _taken={expr._taken}
       />
     )

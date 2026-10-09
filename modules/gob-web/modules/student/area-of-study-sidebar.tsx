@@ -96,7 +96,9 @@ export class AreaOfStudySidebar extends React.PureComponent<Props, State> {
                   <FlatButton
                     key={type}
                     className="unused-areas--button"
-                    onClick={() => this.showAreaPicker(type)}
+                    onClick={() => {
+                      this.showAreaPicker(type)
+                    }}
                   >
                     {type}
                   </FlatButton>

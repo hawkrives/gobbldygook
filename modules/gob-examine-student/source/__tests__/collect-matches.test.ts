@@ -11,7 +11,7 @@ describe("collectMatches", () => {
       },
     }
 
-    expect(() => collectMatches(expr)).toThrowError(TypeError)
+    expect(() => collectMatches(expr)).toThrow(TypeError)
   })
 
   it("collects matches from child requirements", () => {

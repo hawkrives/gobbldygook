@@ -39,7 +39,7 @@ describe("filterByWhereClause", () => {
     const clause = { $type: "bad" }
 
     // @ts-expect-error: checks the runtime guard against unknown types
-    expect(() => filterByWhereClause([], clause)).toThrowError(TypeError)
+    expect(() => filterByWhereClause([], clause)).toThrow(TypeError)
   })
 
   it("filters an array of courses by an and-joined where-clause", () => {

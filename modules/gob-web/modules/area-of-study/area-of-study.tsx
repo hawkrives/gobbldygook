@@ -44,7 +44,9 @@ export class AreaOfStudy extends React.Component<Props> {
     let progressAt = 0
     let progressOf = 1
 
-    if (results && results.progress) {
+    // the area editor passes an area that hasn't been checked against a
+    // student, which has no progress
+    if (results?.progress) {
       progressAt = results.progress.at
       progressOf = results.progress.of
     }

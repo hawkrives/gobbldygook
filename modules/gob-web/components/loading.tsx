@@ -86,7 +86,7 @@ export default function Loading({
   return (
     <Wrapper className={cx({ info, error, warning })}>
       <Spinner>
-        {[...Array(divCount)].map((_, idx) => (
+        {[...Array<undefined>(divCount)].map((_, idx) => (
           <div key={idx} />
         ))}
       </Spinner>

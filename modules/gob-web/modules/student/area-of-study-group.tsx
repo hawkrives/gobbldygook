@@ -50,7 +50,7 @@ class AreaOfStudyGroup extends React.PureComponent<Props> {
   }
 
   override render() {
-    let { showAreaPicker = false, areas = List<AreaQuery>() } = this.props
+    let { showAreaPicker, areas = List<AreaQuery>() } = this.props
     let showOrHidePicker = showAreaPicker
       ? this.props.onEndAddArea
       : this.props.onInitiateAddArea
@@ -76,7 +76,7 @@ class AreaOfStudyGroup extends React.PureComponent<Props> {
               .map((a) => {
                 let rev = a.revision ? ` (${a.revision})` : ""
                 return {
-                  label: `${a.name}`,
+                  label: a.name,
                   value: `${a.name}${rev}`,
                   ...a,
                 }

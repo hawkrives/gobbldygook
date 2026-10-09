@@ -35,13 +35,15 @@ function FilterWhere({ expr }: { expr: FilterWhereExpression }) {
 }
 
 export default function Filter(props: Props) {
-  if (!props.expr.$type) {
+  // area files are parsed at runtime, so a filter can match none of the types
+  const unchecked: { $type?: unknown; $filterType?: unknown } = props.expr
+  if (!unchecked.$type) {
     return null
   }
 
   if (props.expr.$filterType === "of") {
     return <FilterOf expr={props.expr} ctx={props.ctx} />
-  } else if (props.expr.$filterType === "where") {
+  } else if (unchecked.$filterType === "where") {
     return <FilterWhere expr={props.expr} />
   } else {
     return <div>{JSON.stringify(props, null, 2)}</div>

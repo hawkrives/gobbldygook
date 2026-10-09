@@ -12,6 +12,7 @@ import type { SORT_BY_KEY, GROUP_BY_KEY } from "./constants"
 const ALL_DAYS = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
 
 function TITLE(course: CourseType): string {
+  // oxlint-disable-next-line typescript/prefer-nullish-coalescing -- an empty title falls back to the name too
   return course.title || course.name
 }
 
@@ -50,7 +51,9 @@ function SECTION(course: CourseType): string {
 }
 
 function GEREQ(course: CourseType): string {
-  return course.gereqs ? oxford(course.gereqs) : "No GEs"
+  // course data comes from JSON, and some courses leave out gereqs
+  const gereqs = course.gereqs as CourseType["gereqs"] | undefined
+  return gereqs ? oxford(gereqs) : "No GEs"
 }
 
 function YEAR(course: CourseType): string {
