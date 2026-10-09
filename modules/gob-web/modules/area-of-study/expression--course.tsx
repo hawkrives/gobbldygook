@@ -14,35 +14,58 @@ type Props = Course & {
 export default function CourseExpression(props: Props) {
   const department = props.department
 
-  const international = props.international && (
+  // area files and course data are parsed at runtime, so these fields can
+  // hold values their types don't allow
+  const isInternational = Boolean(props.international)
+  const international = isInternational ? (
     <span className="course--international">I</span>
+  ) : (
+    props.international
   )
-  const lab =
-    Boolean(props.lab) ||
-    (props.type === "Lab" && <span className="course--lab">L</span>)
+  const lab = Boolean(props.lab) || props.type === "Lab"
 
-  const section = props.section && props.section !== "*" && (
-    <span className="course--section">[{props.section}]</span>
+  const section = props.section != null &&
+    props.section !== "" &&
+    props.section !== "*" && (
+      <span className="course--section">[{props.section}]</span>
+    )
+
+  const hasYear =
+    props.year != null && props.year !== 0 && !Number.isNaN(props.year)
+  const year = hasYear ? (
+    <span className="course--year">{props.year}</span>
+  ) : (
+    props.year
   )
-
-  const year = props.year && <span className="course--year">{props.year}</span>
-  const semester = props.semester && (
+  const rawSemester = props.semester
+  const hasSemester =
+    rawSemester != null && rawSemester !== 0 && !Number.isNaN(rawSemester)
+  const semester = hasSemester ? (
     <span className="course--semester">
-      {props.semester === "*"
-        ? "ANY"
-        : semesterName(props.semester).toUpperCase()}
+      {rawSemester === "*" ? "ANY" : semesterName(rawSemester).toUpperCase()}
     </span>
+  ) : (
+    rawSemester
   )
+
+  const hasNumber =
+    props.number != null &&
+    props.number !== "" &&
+    props.number !== 0 &&
+    !Number.isNaN(props.number)
 
   /////
 
-  // oxlint-disable-next-line typescript/prefer-nullish-coalescing -- semester and year can be falsy values like 0, which should fall through
-  const temporalIdentifiers = (semester || year) && (
-    <div className="temporal">
-      {semester}
-      {year}
-    </div>
-  )
+  // when neither is set, this is the year itself, like `semester || year`
+  const temporalIdentifiers =
+    hasSemester || hasYear ? (
+      <div className="temporal">
+        {semester}
+        {year}
+      </div>
+    ) : (
+      year
+    )
 
   return (
     <span
@@ -56,10 +79,7 @@ export default function CourseExpression(props: Props) {
         <span className="course--department">{department}</span>
         <span>
           <span className="course--number">
-            {
-              // oxlint-disable-next-line typescript/prefer-nullish-coalescing -- an empty or 0 number falls back too
-              props.number || String(props.level)[0] + "XX"
-            }
+            {hasNumber ? props.number : String(props.level)[0] + "XX"}
           </span>
           {international}
           {lab ? "L" : null} {section}

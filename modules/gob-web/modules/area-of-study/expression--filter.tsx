@@ -37,7 +37,8 @@ function FilterWhere({ expr }: { expr: FilterWhereExpression }) {
 export default function Filter(props: Props) {
   // area files are parsed at runtime, so a filter can match none of the types
   const unchecked: { $type?: unknown; $filterType?: unknown } = props.expr
-  if (!unchecked.$type) {
+  const hasType = Boolean(unchecked.$type)
+  if (!hasType) {
     return null
   }
 

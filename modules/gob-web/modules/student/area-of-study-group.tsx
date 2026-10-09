@@ -74,7 +74,10 @@ class AreaOfStudyGroup extends React.PureComponent<Props> {
             selections={this.props.student.studies
               .filter((a) => a.type === this.props.type)
               .map((a) => {
-                let rev = a.revision ? ` (${a.revision})` : ""
+                let rev =
+                  a.revision != null && a.revision !== ""
+                    ? ` (${a.revision})`
+                    : ""
                 return {
                   label: a.name,
                   value: `${a.name}${rev}`,

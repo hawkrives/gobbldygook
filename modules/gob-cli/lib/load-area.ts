@@ -43,7 +43,7 @@ async function findArea({
     throw new Error(`could not find area matching ${ser}`)
   }
 
-  if (!revision || revision === "latest") {
+  if (revision == null || revision === "" || revision === "latest") {
     // maxBy returns the entire object that it matched
     return maxBy(matches, (area) => Number(area.revision.split("-")[0]))
   }

@@ -70,7 +70,9 @@ export class AreaPicker extends React.PureComponent<Props> {
 
           return (
             <>
-              {label && <label htmlFor={id}>{label}</label>}
+              {label != null && label !== "" && (
+                <label htmlFor={id}>{label}</label>
+              )}
               <Select<Selection>
                 className="react-select"
                 isClearable={false}

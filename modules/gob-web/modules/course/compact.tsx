@@ -89,9 +89,10 @@ export default class CompactCourse extends React.Component<Props> {
               ))}
             </InlineList>
           )}
-          {course.prerequisites && (
-            <Prereqs title={course.prerequisites}>Prereq</Prereqs>
-          )}
+          {typeof course.prerequisites === "string" &&
+            course.prerequisites !== "" && (
+              <Prereqs title={course.prerequisites}>Prereq</Prereqs>
+            )}
         </SummaryRow>
         <SummaryRow>
           {consolidateOfferings(course.offerings ?? []).map((offering) => (

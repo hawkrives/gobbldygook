@@ -260,7 +260,7 @@ export class Student extends StudentRecord {
           s.isSpecificTerm(year, semester),
         )
 
-        if (otherSchedKey) {
+        if (otherSchedKey != null && otherSchedKey !== "") {
           schedules = schedules.update(otherSchedKey, (s) =>
             s ? s.set("active", true) : s,
           )

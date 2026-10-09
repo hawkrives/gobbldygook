@@ -3,7 +3,7 @@ import type { ImportStudentAction } from "../import-student"
 import { IMPORT_STUDENT } from "../../constants"
 
 function errorOf(action: ImportStudentAction): Error {
-  if (!action.error) {
+  if (action.error !== true) {
     throw new Error("expected an error action")
   }
   return action.payload

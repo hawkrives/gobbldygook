@@ -199,15 +199,16 @@ export default function Expression(props: Props) {
 
   // area files are parsed at runtime, so $type can be missing
   const unchecked: { $type?: unknown } = expr
-  if (!unchecked.$type) {
+  const hasType = Boolean(unchecked.$type)
+  if (!hasType) {
     return null
   }
 
   const computationResult = expr._result
-  const isFulfillment = expr._isFulfillment
+  const isFulfillment = Boolean(expr._isFulfillment)
   const wasUsed = Boolean(expr._result)
-  const wasTaken = expr._taken
-  const wasEvaluated = expr._checked
+  const wasTaken = Boolean(expr._taken)
+  const wasEvaluated = Boolean(expr._checked)
 
   let contents: React.ReactNode = null
   let description: string | null = null
@@ -251,23 +252,29 @@ export default function Expression(props: Props) {
     wasUsed ? "used" : "not-used",
   ])
 
+  // contents can be a requirement name from the area file, so keep falsy
+  // values like 0 rendering as they did
+  const hasContents = Boolean(contents)
+
   return (
     <span className={className}>
-      {description && (
+      {description != null && description !== "" && (
         <span className="expression--description">
           {description}
-          {!props.hideIndicator && result}
+          {props.hideIndicator !== true && result}
         </span>
       )}
-      {contents && (
+      {hasContents ? (
         <span className="expression--contents">
           {typeof contents === "string" ? (
             <span className="expression--label">{contents}</span>
           ) : (
             contents
           )}
-          {props.hideIndicator || expr._isFulfillment ? null : result}
+          {props.hideIndicator === true || isFulfillment ? null : result}
         </span>
+      ) : (
+        contents
       )}
     </span>
   )

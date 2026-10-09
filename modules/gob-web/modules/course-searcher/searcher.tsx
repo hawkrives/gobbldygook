@@ -88,10 +88,12 @@ export class CourseSearcher extends React.Component<Props, State> {
         <Card as="header" className="sidebar-heading">
           <h2>
             Course Search
-            {term && (
+            {term != null && term !== 0 && !Number.isNaN(term) ? (
               <>
                 <br />({toPrettyTerm(term)})
               </>
+            ) : (
+              term
             )}
           </h2>
           {onCloseSearcher && (
@@ -124,7 +126,7 @@ export class CourseSearcher extends React.Component<Props, State> {
           limitTo={limitTo}
         >
           {({ error, inProgress, results, didSearch, keys, years }) => {
-            if (error) {
+            if (error != null && error !== "") {
               return (
                 <Card className="course-results--notice">
                   Something broke :-(

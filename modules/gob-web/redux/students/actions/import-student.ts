@@ -31,7 +31,8 @@ export function importStudent({
     }
   }
 
-  if (!stu) {
+  // the falsy values JSON.parse can return
+  if (stu === null || stu === false || stu === 0 || stu === "") {
     return {
       type: IMPORT_STUDENT,
       error: true,

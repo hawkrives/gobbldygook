@@ -36,7 +36,7 @@ export function splitDeptNum(
     number: parseInt(number, 10),
   }
 
-  if (includeSection && section) {
+  if (includeSection && section !== undefined && section !== "") {
     deptNum.section = section
   }
 

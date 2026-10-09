@@ -18,14 +18,14 @@ export function buildDeptNum(
   const deptnumString = `${department} ${number}`
 
   if (includeSection) {
-    if (type && type === "Lab") {
+    if (type === "Lab") {
       return `${deptnumString}${section}[L]`
     }
 
     return `${deptnumString}${section}`
   }
 
-  if (type && type === "Lab") {
+  if (type === "Lab") {
     return `${deptnumString}[L]`
   }
 

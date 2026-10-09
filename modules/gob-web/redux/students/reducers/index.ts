@@ -22,12 +22,13 @@ export function reducer(state: State = initialState, action: AnyAction): State {
   // every action reaches this reducer; the student actions, and undo and
   // redo, all carry the student's id in their payload
   const type: unknown = action.type
-  const error: unknown = action["error"]
+  // any truthy `error` marks a failed action
+  const failed = Boolean(action["error"])
   const payload = action["payload"] as { id: string }
 
   switch (type) {
     case DESTROY_STUDENT: {
-      if (error) {
+      if (failed) {
         console.error(action)
         return state
       }
@@ -40,7 +41,7 @@ export function reducer(state: State = initialState, action: AnyAction): State {
     case CHANGE_STUDENT:
     case UndoableActionTypes.UNDO:
     case UndoableActionTypes.REDO: {
-      if (error) {
+      if (failed) {
         console.error(action)
         return state
       }

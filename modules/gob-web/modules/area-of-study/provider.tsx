@@ -52,7 +52,7 @@ export class AreaOfStudyProvider extends React.Component<Props, State> {
   override render() {
     let { examining, results, error } = this.state
 
-    if (results?.error) {
+    if (results?.error != null && results.error !== "") {
       error = results.error
     }
 

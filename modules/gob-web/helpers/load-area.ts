@@ -38,7 +38,7 @@ function loadAreaFromDatabase(
   const { name, type, revision } = areaQuery
 
   let dbQuery: DatabaseQuery = { name: [name], type: [type] }
-  if (revision && revision !== "latest") {
+  if (revision != null && revision !== "" && revision !== "latest") {
     dbQuery.revision = [revision]
   }
 

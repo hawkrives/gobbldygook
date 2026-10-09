@@ -52,7 +52,10 @@ export class Querent extends React.Component<Props, State> {
     this._isMounted = true
 
     let props = this.props
-    if (props.query || props.term) {
+    if (
+      props.query ||
+      (props.term != null && props.term !== 0 && !Number.isNaN(props.term))
+    ) {
       void this.submitQuery(props.query, { term: props.term })
     }
   }

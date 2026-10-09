@@ -6,13 +6,15 @@ export default function ResultIndicator({
 }: {
   result?: boolean | undefined
 }) {
+  // results come from evaluated area data, so check truthiness
+  let succeeded = Boolean(result)
   return (
     <Icon
       className={`result-indicator ${
-        result ? "result-indicator--success" : "result-indicator--failure"
+        succeeded ? "result-indicator--success" : "result-indicator--failure"
       }`}
     >
-      {result ? checkmark : close}
+      {succeeded ? checkmark : close}
     </Icon>
   )
 }

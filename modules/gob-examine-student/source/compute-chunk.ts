@@ -136,7 +136,8 @@ export default function computeChunk({
       // unreachable for well-typed input; area files are parsed at runtime
       const unexpected: { $type?: unknown } = expr
       const typeName = String(unexpected.$type)
-      if (!unexpected.$type) {
+      const hasType = Boolean(unexpected.$type)
+      if (!hasType) {
         throw new TypeError("computeChunk(): expr.$type is undefined!")
       }
       throw new TypeError(
@@ -354,8 +355,9 @@ export function computeModifier({ expr, ctx, courses }: ModifierChunkArgs) {
   if (!modifierWhats.has(what)) {
     const unexpected: unknown = what
     const whatName = String(unexpected)
+    const hasWhat = Boolean(unexpected)
     throw new TypeError(
-      `computeModifier(): "${unexpected ? whatName : "undefined"}" is not a valid source for a modifier`,
+      `computeModifier(): "${hasWhat ? whatName : "undefined"}" is not a valid source for a modifier`,
     )
   }
 
@@ -396,7 +398,8 @@ export function computeModifier({ expr, ctx, courses }: ModifierChunkArgs) {
 
   // assertKeys only checked that the key exists; area files are parsed at runtime
   const unchecked: { $count?: unknown } = expr
-  if (!unchecked.$count) {
+  const hasCount = Boolean(unchecked.$count)
+  if (!hasCount) {
     throw new TypeError(
       `expression must include $count! ${JSON.stringify(expr)}`,
     )

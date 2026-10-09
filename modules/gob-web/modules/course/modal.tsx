@@ -78,7 +78,7 @@ type Props = OwnProps & ConnectedProps<typeof connector>
 class ModalCourse extends React.Component<Props> {
   remove = () => {
     let { student, course, scheduleId } = this.props
-    if (!student || !scheduleId) {
+    if (!student || scheduleId == null || scheduleId === "") {
       return
     }
     let s = student.removeCourseFromSchedule(scheduleId, course.clbid)
@@ -98,14 +98,14 @@ class ModalCourse extends React.Component<Props> {
         <Course conflicts={conflicts} course={course} />
 
         <BottomToolbar>
-          {scheduleId && student ? (
+          {scheduleId != null && scheduleId !== "" && student ? (
             <SemesterSelector
               scheduleId={scheduleId}
               student={student}
               clbid={course.clbid}
             />
           ) : null}
-          {scheduleId && student ? (
+          {scheduleId != null && scheduleId !== "" && student ? (
             <RemoveCourseButton onClick={this.remove}>
               Remove Course
             </RemoveCourseButton>

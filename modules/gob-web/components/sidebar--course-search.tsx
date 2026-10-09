@@ -14,14 +14,16 @@ type Props = {
 export function CourseSearcherSidebar(props: Props) {
   let { student, navigate, queryString = window.location.search } = props
 
-  let boundCloseModal = props.term
+  const rawTerm = props.term
+  const hasTerm = rawTerm != null && rawTerm !== ""
+  let boundCloseModal = hasTerm
     ? () => {
         let params = new URLSearchParams(queryString)
         params.delete("term")
         navigate(`/student/${student.present.id}?${params.toString()}`)
       }
     : null
-  let term = props.term ? parseInt(props.term, 10) : null
+  let term = hasTerm ? parseInt(rawTerm, 10) : null
 
   return (
     <Sidebar>

@@ -57,8 +57,11 @@ class DraggableCourse extends React.PureComponent<OwnProps & CollectedProps> {
 // Implements the drag source contract.
 const courseSource = {
   beginDrag(props: OwnProps): DraggedCourse {
-    // oxlint-disable-next-line typescript/prefer-nullish-coalescing -- an empty scheduleId counts as no schedule
-    let scheduleId = props.scheduleId || null
+    // an empty scheduleId counts as no schedule
+    let scheduleId =
+      props.scheduleId != null && props.scheduleId !== ""
+        ? props.scheduleId
+        : null
     return {
       isFromSchedule: scheduleId !== null,
       isFromSearch: scheduleId === null,

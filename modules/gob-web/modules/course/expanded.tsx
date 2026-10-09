@@ -95,12 +95,13 @@ export default class ExpandedCourse extends React.PureComponent<Props> {
 
     const detailColumn = (
       <Column>
-        {course.prerequisites && (
-          <div>
-            <Heading>Prerequisites</Heading>
-            <p>{course.prerequisites}</p>
-          </div>
-        )}
+        {typeof course.prerequisites === "string" &&
+          course.prerequisites !== "" && (
+            <div>
+              <Heading>Prerequisites</Heading>
+              <p>{course.prerequisites}</p>
+            </div>
+          )}
 
         {course.offerings && (
           <div>

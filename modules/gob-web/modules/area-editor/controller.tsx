@@ -64,7 +64,9 @@ class AreaCompiledViewer extends React.Component<ViewerProps> {
       let data = yaml.safeLoad(this.props.value || "")
       let value = ""
 
-      if (data) {
+      // a YAML document can be any value, like 0 or ""
+      let hasData = Boolean(data)
+      if (hasData) {
         // enhanceHanson throws if the YAML isn't an area of study
         value = JSON.stringify(enhanceHanson(data as HansonFile), null, 2)
       }
@@ -125,7 +127,7 @@ const Layout = styled.div`
 export let Controller = () => {
   const [content, setContent] = React.useState(() => {
     const initial = read()
-    // oxlint-disable-next-line typescript/prefer-nullish-coalescing -- the hash can be edited by hand, so any falsy content falls back
+    // oxlint-disable-next-line typescript/prefer-nullish-coalescing, typescript/strict-boolean-expressions -- the hash can be edited by hand, so any falsy content falls back
     return initial.content || ""
   })
 

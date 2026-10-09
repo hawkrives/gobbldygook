@@ -217,7 +217,7 @@ export function buildQueryFromString(
       keys.push("number")
       values.push(number)
 
-      if (section) {
+      if (section !== undefined && section !== "") {
         keys.push("section")
         values.push(section)
       }

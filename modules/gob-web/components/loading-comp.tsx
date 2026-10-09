@@ -14,7 +14,9 @@ export function LoadingComponent(props: {
   timedOut: boolean
   pastDelay: boolean
 }) {
-  if (props.error) {
+  // a rejected import can reject with any value
+  let hasError = Boolean(props.error)
+  if (hasError) {
     return (
       <CenteredCard>
         <p>Error!</p>
