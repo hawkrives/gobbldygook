@@ -11,8 +11,8 @@ This document provides comprehensive learning resources for developers working o
   - Key patterns: Function components, useEffect, useState, useContext
 - **JavaScript ES6+ Features**: https://developer.mozilla.org/en-US/docs/Web/JavaScript
   - Essential: Arrow functions, destructuring, modules, async/await, template literals
-- **Flow Type Checker**: https://flow.org/en/docs/
-  - Static type checking for JavaScript (legacy, but still used in this project)
+- **TypeScript**: https://www.typescriptlang.org/docs/
+  - Strict static type checking (TypeScript 7, strict flags on)
   - Type annotations, interfaces, generics
 
 ### State Management & Data Flow
@@ -42,7 +42,7 @@ This document provides comprehensive learning resources for developers working o
   - Mocking, coverage reporting, snapshot testing
 - **oxlint**: https://oxc.rs/docs/guide/usage/linter
   - Code quality and consistency enforcement
-  - React-specific rules, Flow integration
+  - React-specific rules
 - **oxfmt**: https://oxc.rs/docs/guide/usage/formatter
   - Automated code formatting for consistency
 
@@ -91,10 +91,9 @@ This document provides comprehensive learning resources for developers working o
 - **React Best Practices**: https://github.com/alan2207/bulletproof-react
 - **Component Design**: Atomic design principles, reusable components
 
-### JavaScript & Flow
+### JavaScript & TypeScript
 
-- **Flow Best Practices**: https://flow.org/en/docs/style-guide/
-- **JavaScript Style Guide**: Airbnb style guide (referenced in ESLint config)
+- **TypeScript Handbook**: https://www.typescriptlang.org/docs/handbook/intro.html
 - **Functional Programming**: Immutable data, pure functions, composition
 
 ### Testing Strategies
@@ -122,10 +121,11 @@ This document provides comprehensive learning resources for developers working o
 
 - **GitHub Actions**: Automated testing, linting, building
 - **Quality Gates**: All checks must pass before merge
-  - Flow type checking (zero errors)
-  - ESLint (zero warnings) 
+  - TypeScript type checking (zero errors)
+  - oxlint (zero warnings)
   - Jest tests (full coverage)
-  - Prettier formatting
+  - oxfmt formatting
+  - Playwright end-to-end tests
   - Webpack production build
 
 ### Deployment
@@ -136,11 +136,10 @@ This document provides comprehensive learning resources for developers working o
 
 ## Common Challenges & Solutions
 
-### Flow Type System
+### Type System
 
-- **Legacy Type System**: Flow is being maintained but not actively developed
-- **Type Definitions**: Custom types in `flow-typed/` directory
-- **Migration Considerations**: Potential future migration to TypeScript
+- **Strict TypeScript**: `noUncheckedIndexedAccess` and `exactOptionalPropertyTypes` are on
+- **Type Definitions**: Types for untyped dependencies live in `config/types/`
 
 ### Build Performance
 
@@ -164,12 +163,12 @@ This document provides comprehensive learning resources for developers working o
 
 ### Community Resources
 
-- **Stack Overflow**: JavaScript, React, Webpack, Flow questions
+- **Stack Overflow**: JavaScript, TypeScript, React, Webpack questions
 - **GitHub Issues**: Project-specific problems and feature requests
 - **MDN Web Docs**: Browser API references and web standards
 
 ### Internal Resources
 
 - **Code Comments**: Inline documentation for complex logic
-- **Type Definitions**: Flow types document data structures and interfaces
+- **Type Definitions**: TypeScript types document data structures and interfaces
 - **Test Files**: Examples of expected behavior and usage patterns

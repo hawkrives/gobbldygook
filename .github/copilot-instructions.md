@@ -25,6 +25,6 @@ To invoke the landing-the-plane skill, follow the protocol defined in `.agents/r
 - **Skills location**: `.agents/skills/`
 - **Rules location**: `.agents/rules/`
 - **Tasks**: Defined in `mise.toml`, run with `mise run <task>`
-- **Quality checks**: `mise run check` (runs lint, flow, test, format-check)
+- **Quality checks**: `mise run check` (runs lint, typecheck, test, format-check)
 
 For complete details, **always refer to `AGENTS.md` first**.

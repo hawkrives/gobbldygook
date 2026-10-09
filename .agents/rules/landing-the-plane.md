@@ -41,15 +41,14 @@ Execute all relevant quality checks to ensure code meets project standards:
 # Run linter
 mise run lint
 
-# Run Flow type checking
-mise run flow
-# or: ./node_modules/.bin/flow
+# Run the TypeScript type checker
+mise run typecheck
 
 # Run tests
 mise run test
 # or: ./node_modules/.bin/jest
 
-# Check formatting with oxfmt (Flow files are skipped until converted)
+# Check formatting with oxfmt
 mise run format-check
 ```
 
@@ -198,7 +197,7 @@ bd create "Optimize render performance in course list" --type chore --priority 4
 mise run lint
 # ✓ No lint errors
 
-mise run flow
+mise run typecheck
 # ✓ No type errors
 
 mise run test
@@ -251,7 +250,7 @@ Filed for follow-up:
 
 Quality gates:
 ✓ Lint: No errors
-✓ Flow: No type errors  
+✓ TypeScript: No type errors  
 ✓ Tests: 45 suites, 234 tests, all passing
 
 Recommended next session prompt:
@@ -299,9 +298,9 @@ This rule should be used in conjunction with:
 ## Notes for gobbldygook project
 
 - **Test command**: `mise run test` or `./node_modules/.bin/jest`
-- **Lint command**: `mise run lint` (oxlint; it skips Flow files)
-- **Flow check**: `mise run flow` or `./node_modules/.bin/flow`
-- **Formatting**: `mise run format` (oxfmt; Flow files are skipped)
+- **Lint command**: `mise run lint` (oxlint)
+- **Type check**: `mise run typecheck` (strict TypeScript 7)
+- **Formatting**: `mise run format` (oxfmt)
 - **Build validation**: `mise run build` (if changes affect build process)
 - **Issue prefix**: Use `gobbldygook-` for all issue IDs in this project
 - **Branch naming**: Follow existing patterns (e.g., `feature/`, `fix/`, `chore/`)

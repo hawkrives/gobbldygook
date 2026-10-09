@@ -49,10 +49,9 @@ module.exports = {
       },
     ],
   ],
-  // Flow and TypeScript coexist while the codebase is converted package by
-  // package: .js files are still Flow, .ts/.tsx files are TypeScript.
+  // The remaining .js files (configs, CLI entry points, the generated
+  // Hanson parser) are plain JavaScript; only .ts/.tsx need the TypeScript preset.
   overrides: [
-    { test: /\.jsx?$/, presets: ["@babel/preset-flow"] },
     {
       test: /\.tsx?$/,
       presets: [["@babel/preset-typescript", { allowDeclareFields: true }]],
