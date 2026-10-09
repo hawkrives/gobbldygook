@@ -1,5 +1,5 @@
 {
-  // Strict TypeScript 7 config for the files converted from Flow so far.
+  // Strict TypeScript 7 config, with every extra strictness flag on.
   // Babel does the transpiling; `tsc` only typechecks (`mise run typecheck`).
   "compilerOptions": {
     "target": "es2023",
@@ -14,6 +14,13 @@
     "exactOptionalPropertyTypes": true,
     "noImplicitOverride": true,
     "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noUncheckedSideEffectImports": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
 
     "isolatedModules": true,
     "verbatimModuleSyntax": true,

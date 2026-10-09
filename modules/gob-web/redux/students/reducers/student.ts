@@ -39,7 +39,7 @@ function reducer(
 const undoableReducer = undoable(reducer, {
   limit: 10,
 
-  filter(action, currentState, previousState) {
+  filter(_action, currentState, previousState) {
     // only save history when something has changed.
     return currentState !== previousState
   },

@@ -22,8 +22,8 @@ describe("OfExpression", () => {
   it('if n is "all", it is the number of items in the of-parens', () => {
     const result = parse("all of (A, B, C)")
     expect(result).toMatchSnapshot()
-    expect(result.$count).toBeDefined()
-    expect(result.$count).toEqual({
+    expect(result["$count"]).toBeDefined()
+    expect(result["$count"]).toEqual({
       $operator: "$eq",
       $num: 3,
       $was: "all",
@@ -50,24 +50,24 @@ describe("OfExpression", () => {
     const actual = parse("one of (CSCI 121, one course where {gereqs = WRI})")
     expect(actual).toMatchSnapshot()
 
-    expect(actual.$of).toBeDefined()
-    expect(actual.$of).toHaveLength(2)
+    expect(actual["$of"]).toBeDefined()
+    expect(actual["$of"]).toHaveLength(2)
   })
 
   it("supports occurrences within the parens", () => {
     const actual = parse("one of (two occurrences of CSCI 121, CSCI 308)")
     expect(actual).toMatchSnapshot()
 
-    expect(actual.$of).toBeDefined()
-    expect(actual.$of).toHaveLength(2)
+    expect(actual["$of"]).toBeDefined()
+    expect(actual["$of"]).toHaveLength(2)
   })
 
   it("supports references within the parens", () => {
     const actual = parse("one of (A, B, C, D)")
     expect(actual).toMatchSnapshot()
 
-    expect(actual.$of).toBeDefined()
-    expect(actual.$of).toHaveLength(4)
+    expect(actual["$of"]).toBeDefined()
+    expect(actual["$of"]).toHaveLength(4)
   })
 
   it("supports modifiers within the parens", () => {
@@ -76,8 +76,8 @@ describe("OfExpression", () => {
     )
     expect(actual).toMatchSnapshot()
 
-    expect(actual.$of).toBeDefined()
-    expect(actual.$of).toHaveLength(3)
+    expect(actual["$of"]).toBeDefined()
+    expect(actual["$of"]).toHaveLength(3)
   })
 
   // The grammar currently accepts "one of (CSCI 121 CSCI 125)". Requiring

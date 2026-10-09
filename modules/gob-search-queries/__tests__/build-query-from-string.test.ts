@@ -164,7 +164,7 @@ describe("buildQueryFromString", () => {
 
     let actual = buildQueryFromString(query)
     expect(actual).toMatchSnapshot()
-    expect(actual.credits).toEqual(["$OR", 1, 0.25])
+    expect(actual["credits"]).toEqual(["$OR", 1, 0.25])
   })
 
   it('turns pf from a "true" string into a boolean', () => {

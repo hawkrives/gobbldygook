@@ -281,7 +281,7 @@ export function computeCourse({
   const keysNotFromQuery = xor(keys(expr.$course), keys(foundCourse))
 
   if (keysNotFromQuery.length) {
-    expr.$course._extraKeys = keysNotFromQuery
+    expr.$course["_extraKeys"] = keysNotFromQuery
   }
 
   expr._request = expr.$course
@@ -385,7 +385,7 @@ export function computeModifier({ expr, ctx, courses }: ModifierChunkArgs) {
 
   // the matches from child requirements can still be course expressions
   filtered = filtered.map((course) =>
-    "$course" in course ? (course.$course as Course) : course,
+    "$course" in course ? (course["$course"] as Course) : course,
   )
 
   if (expr.$besides) {
