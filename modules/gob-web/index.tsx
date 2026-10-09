@@ -31,7 +31,9 @@ startAnalytics()
 
 // Kick off data loading
 import loadData from "./workers/load-data"
-loadData().catch((err) => console.error(err))
+loadData().catch((err: unknown) => {
+  console.error(err)
+})
 
 // ... attach the db for debugging
 import { db } from "./helpers/db"
@@ -64,6 +66,7 @@ let renderFunc = (chosenStore: Store) => {
     return
   }
 
+  // oxlint-disable-next-line typescript/no-deprecated -- moving to createRoot changes rendering (concurrent features, batching); that migration is a separate change
   render(
     <Provider store={chosenStore}>
       <>

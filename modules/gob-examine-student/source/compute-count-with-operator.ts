@@ -9,15 +9,19 @@ export default function computeCountWithOperator({
   needs: number
 }): boolean {
   // compute the result
-  if (comparator === "$eq") {
-    return has === needs
-  } else if (comparator === "$lte") {
-    return has <= needs
-  } else if (comparator === "$gte") {
-    return has >= needs
+  switch (comparator) {
+    case "$eq":
+      return has === needs
+    case "$lte":
+      return has <= needs
+    case "$gte":
+      return has >= needs
+    default: {
+      // unreachable for well-typed input; area files are parsed at runtime
+      const unexpected: unknown = comparator
+      throw new TypeError(
+        `computeModifier(): "${String(unexpected)}" must be one of $eq, $lte, or $gte.`,
+      )
+    }
   }
-
-  throw new TypeError(
-    `computeModifier(): "${comparator}" must be one of $eq, $lte, or $gte.`,
-  )
 }

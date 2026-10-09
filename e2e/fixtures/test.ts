@@ -66,6 +66,8 @@ export function studentRecord(seed: SeedStudent) {
   }
 }
 
+export type StoredStudent = ReturnType<typeof studentRecord>
+
 async function countStoredRecords(page: Page) {
   return page.evaluate(async () => {
     // Opening a database that doesn't exist yet would create an empty one at
@@ -78,8 +80,13 @@ async function countStoredRecords(page: Page) {
 
     let db = await new Promise<IDBDatabase>((resolve, reject) => {
       let req = indexedDB.open("gobbldygook")
-      req.onsuccess = () => resolve(req.result)
-      req.onerror = () => reject(req.error)
+      req.onsuccess = () => {
+        resolve(req.result)
+      }
+      req.onerror = () => {
+        // oxlint-disable-next-line typescript/prefer-promise-reject-errors -- `error` is always set when `onerror` fires
+        reject(req.error)
+      }
     })
     try {
       if (!db.objectStoreNames.contains("courses")) {
@@ -88,8 +95,13 @@ async function countStoredRecords(page: Page) {
       let count = (store: string) =>
         new Promise<number>((resolve, reject) => {
           let req = db.transaction(store).objectStore(store).count()
-          req.onsuccess = () => resolve(req.result)
-          req.onerror = () => reject(req.error)
+          req.onsuccess = () => {
+            resolve(req.result)
+          }
+          req.onerror = () => {
+            // oxlint-disable-next-line typescript/prefer-promise-reject-errors -- `error` is always set when `onerror` fires
+            reject(req.error)
+          }
         })
       return { areas: await count("areas"), courses: await count("courses") }
     } finally {
@@ -117,7 +129,9 @@ class App {
   async seedStudents(...students: SeedStudent[]) {
     let records = students.map(studentRecord)
     await this.page.evaluate((records) => {
-      let ids = new Set(JSON.parse(localStorage.getItem("studentIds") || "[]"))
+      let ids = new Set(
+        JSON.parse(localStorage.getItem("studentIds") ?? "[]") as string[],
+      )
       for (let record of records) {
         localStorage.setItem(record.id, JSON.stringify(record))
         ids.add(record.id)
@@ -127,9 +141,10 @@ class App {
   }
 
   /** Reads a student back out of localStorage. */
-  async storedStudent(id: string) {
+  async storedStudent(id: string): Promise<StoredStudent | null> {
     return this.page.evaluate(
-      (id) => JSON.parse(localStorage.getItem(id) || "null"),
+      (id) =>
+        JSON.parse(localStorage.getItem(id) ?? "null") as StoredStudent | null,
       id,
     )
   }

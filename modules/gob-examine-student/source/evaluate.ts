@@ -32,40 +32,23 @@ export function evaluate({
     fulfillments,
   })
 
-  if (!result) {
-    return {
-      $type: "requirement",
-      error: "`details` missing in result!",
-      computed: false,
-      _result: false,
-      _checked: false,
-      progress: {
-        at: 0,
-        of: 1,
-      },
-    }
-  }
-
   let resultDetails = result.result
   let bits: Expression[] = []
 
-  switch (resultDetails?.$type) {
-    case "of":
-      bits = resultDetails.$of
-      break
-
-    case "boolean": {
-      if (resultDetails.$booleanType === "and") {
+  if (resultDetails?.$type === "of") {
+    bits = resultDetails.$of
+  } else if (resultDetails?.$type === "boolean") {
+    switch (resultDetails.$booleanType) {
+      case "and":
         bits = resultDetails.$and
-      } else if (resultDetails.$booleanType === "or") {
+        break
+      case "or":
         bits = resultDetails.$or
-      }
-
-      break
+        break
+      default:
+        // area files are parsed at runtime; count nothing for anything else
+        break
     }
-
-    default:
-      break
   }
 
   let finalReqs = bits.map((b) => b._result ?? false)

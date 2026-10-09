@@ -17,7 +17,7 @@ export class Notification {
   store = "notifications"
 
   constructor(notificationType: string, id?: string) {
-    this.id = id || notificationType
+    this.id = id ?? notificationType
     this.type = notificationType
   }
 

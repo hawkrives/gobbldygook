@@ -9,7 +9,6 @@ test("parseData can parse yaml", () => {
   expect(parseData("foo: 2", "areas")).toMatchSnapshot()
 })
 test("parseData returns a blank object if it can't parse", () => {
-  // @ts-expect-error: checks that an unknown type parses to {}
   expect(parseData("foo: 2", "other")).toMatchSnapshot()
   expect(parseData("invalid", "courses")).toMatchSnapshot()
   expect(parseData("- invalid: yaml:", "areas")).toMatchSnapshot()

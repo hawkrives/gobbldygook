@@ -44,7 +44,7 @@ export class SemesterDetail extends React.Component<Props> {
           <title>{title}</title>
         </Helmet>
         <DetailText>
-          {this.props.uri || ""}
+          {this.props.uri ?? ""}
           {"\n"}
           {JSON.stringify(schedules.toJSON(), null, 2)}
         </DetailText>

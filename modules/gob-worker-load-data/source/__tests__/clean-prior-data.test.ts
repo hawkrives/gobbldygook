@@ -67,7 +67,6 @@ describe("cleanPriorData", () => {
     expect.assertions(1)
 
     try {
-      // @ts-expect-error: checks the runtime guard against an unknown type
       await cleanPriorData("path", "invalid_type")
     } catch (err) {
       expect((err as Error).message).toMatchInlineSnapshot(

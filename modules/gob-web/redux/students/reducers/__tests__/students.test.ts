@@ -9,7 +9,8 @@ import { reducer as studentsReducer } from "../index"
 import { ActionCreators } from "redux-undo"
 import type { StateWithHistory } from "redux-undo"
 import type { Student } from "@gob/object-student"
-const { undo, redo } = ActionCreators
+const undo = () => ActionCreators.undo()
+const redo = () => ActionCreators.redo()
 
 // The reducers only pass students along, so plain objects stand in for them,
 // and redux-undo treats an empty object like a fresh history

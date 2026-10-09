@@ -70,6 +70,9 @@ export default class CompactCourse extends React.Component<Props> {
   override render() {
     let { course, conflicts, onClick = noop, style, className } = this.props
 
+    // course data comes from JSON, and some courses leave out gereqs
+    const gereqs = course.gereqs as Course["gereqs"] | undefined
+
     return (
       <Container className={className} onClick={onClick} style={style}>
         {conflicts && <CourseWarnings warnings={conflicts} />}
@@ -79,9 +82,9 @@ export default class CompactCourse extends React.Component<Props> {
         <SummaryRow>
           <Identifier>{buildDeptNum(course, true)}</Identifier>
           {course.type !== "Research" && <Type>{course.type}</Type>}
-          {course.gereqs && (
+          {gereqs && (
             <InlineList>
-              {course.gereqs.map((ge) => (
+              {gereqs.map((ge) => (
                 <GeReqItem key={ge}>{ge}</GeReqItem>
               ))}
             </InlineList>
@@ -91,7 +94,7 @@ export default class CompactCourse extends React.Component<Props> {
           )}
         </SummaryRow>
         <SummaryRow>
-          {consolidateOfferings(course.offerings || []).map((offering) => (
+          {consolidateOfferings(course.offerings ?? []).map((offering) => (
             <span key={offering}>{offering}</span>
           ))}
         </SummaryRow>

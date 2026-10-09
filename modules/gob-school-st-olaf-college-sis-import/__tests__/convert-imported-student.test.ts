@@ -4,10 +4,11 @@ import expectedSchedules from "./__support__/expected-schedules"
 import type { CourseLookupFunc } from "@gob/object-student"
 
 // Finds no courses, so every imported course becomes a fabrication
-const getCourseMock: CourseLookupFunc = async (clbid) => ({
-  error: true,
-  result: new Error(`no course ${clbid}`),
-})
+const getCourseMock: CourseLookupFunc = (clbid) =>
+  Promise.resolve({
+    error: true,
+    result: new Error(`no course ${clbid}`),
+  })
 
 describe("convertStudent", () => {
   it("converts a student from the imported data to a Gobbldygook student", async () => {
@@ -73,7 +74,7 @@ describe("convertStudent", () => {
 
     let actualSchedules = actual.schedules.toList().toJS()
     for (let expectedSched of expectedSchedules) {
-      let expected = expect.objectContaining(expectedSched)
+      let expected: unknown = expect.objectContaining(expectedSched)
       expect(actualSchedules).toContainEqual(expected)
     }
   })

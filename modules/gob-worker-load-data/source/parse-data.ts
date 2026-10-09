@@ -1,11 +1,11 @@
 import yaml from "js-yaml"
-import type { InfoFileTypeEnum } from "./types"
 
 // Course files are JSON lists of courses; area files are YAML, and keep
 // their source text. Anything that fails to parse becomes {}.
 export default function parseData(
   raw: string,
-  type: InfoFileTypeEnum,
+  // `type` comes from the info index file, so it is checked at runtime
+  type: string,
 ): unknown {
   try {
     if (type === "courses") {

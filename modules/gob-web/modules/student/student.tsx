@@ -68,9 +68,7 @@ export class Student extends React.Component<Props, State> {
 
     let { student } = this.props
 
-    let title: string = student
-      ? `${student.present.name} | Gobbldygook`
-      : "Gobbldygook"
+    let title: string = `${student.present.name} | Gobbldygook`
 
     return (
       <Container>

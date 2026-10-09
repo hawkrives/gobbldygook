@@ -189,9 +189,9 @@ describe("compareCourseToQualification", () => {
       // @ts-expect-error: checks the runtime guard against bad values
       $value: [2016],
     }
-    expect(() =>
-      compareCourseToQualification(course, qualification),
-    ).toThrowError(TypeError)
+    expect(() => compareCourseToQualification(course, qualification)).toThrow(
+      TypeError,
+    )
   })
 
   it("throws if $value is an object and has an unknown type", () => {
@@ -203,9 +203,9 @@ describe("compareCourseToQualification", () => {
       // @ts-expect-error: checks the runtime guard against bad values
       $value: { $type: "unknown" },
     }
-    expect(() =>
-      compareCourseToQualification(course, qualification),
-    ).toThrowError(TypeError)
+    expect(() => compareCourseToQualification(course, qualification)).toThrow(
+      TypeError,
+    )
   })
 
   it("handles $or boolean values", () => {
@@ -258,8 +258,8 @@ describe("compareCourseToQualification", () => {
       // @ts-expect-error: checks the runtime guard against bad values
       $value: { $type: "boolean", $booleanType: "xor", $xor: [] },
     }
-    expect(() =>
-      compareCourseToQualification(course, qualification),
-    ).toThrowError(TypeError)
+    expect(() => compareCourseToQualification(course, qualification)).toThrow(
+      TypeError,
+    )
   })
 })

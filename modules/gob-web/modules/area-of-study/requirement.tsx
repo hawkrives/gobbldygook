@@ -41,11 +41,11 @@ function childInfo(info: RequirementInfo, key: string): RequirementInfo {
 }
 
 function Requirement(props: RequirementProps) {
-  let info: RequirementInfo = props.info || {}
+  let info: RequirementInfo = props.info ?? {}
 
   let childKeys = Object.keys(info).filter(isRequirementName)
 
-  let wasEvaluated = info.result && info.result._checked
+  let wasEvaluated = info.result?._checked
   let computationClassName = wasEvaluated
     ? info.computed
       ? "result-success"
@@ -158,7 +158,7 @@ export default class ExpandableRequirement extends Component<Props, State> {
 }
 
 export function TopLevelRequirement(props: Props) {
-  let info: RequirementInfo = props.info || {}
+  let info: RequirementInfo = props.info ?? {}
   let childKeys = Object.keys(info).filter(isRequirementName)
   let children = childKeys.map((key) => (
     <ExpandableRequirement

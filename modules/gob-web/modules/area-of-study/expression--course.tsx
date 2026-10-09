@@ -18,7 +18,7 @@ export default function CourseExpression(props: Props) {
     <span className="course--international">I</span>
   )
   const lab =
-    props.lab ||
+    Boolean(props.lab) ||
     (props.type === "Lab" && <span className="course--lab">L</span>)
 
   const section = props.section && props.section !== "*" && (
@@ -36,6 +36,7 @@ export default function CourseExpression(props: Props) {
 
   /////
 
+  // oxlint-disable-next-line typescript/prefer-nullish-coalescing -- semester and year can be falsy values like 0, which should fall through
   const temporalIdentifiers = (semester || year) && (
     <div className="temporal">
       {semester}
@@ -55,7 +56,10 @@ export default function CourseExpression(props: Props) {
         <span className="course--department">{department}</span>
         <span>
           <span className="course--number">
-            {props.number || String(props.level)[0] + "XX"}
+            {
+              // oxlint-disable-next-line typescript/prefer-nullish-coalescing -- an empty or 0 number falls back too
+              props.number || String(props.level)[0] + "XX"
+            }
           </span>
           {international}
           {lab ? "L" : null} {section}

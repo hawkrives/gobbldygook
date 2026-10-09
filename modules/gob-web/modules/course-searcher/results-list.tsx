@@ -74,7 +74,7 @@ function getRowHeight(item: string | CourseType) {
 
   let height = firstRowHeight + rowHeight
 
-  let hasTimes = item.offerings && item.offerings.length
+  let hasTimes = item.offerings?.length
   let hasSubtitle =
     item.name &&
     item.title &&

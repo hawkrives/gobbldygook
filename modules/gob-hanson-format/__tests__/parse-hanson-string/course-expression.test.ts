@@ -21,7 +21,7 @@ describe("CourseExpression", () => {
   it("requires that sections be an uppercase letter or asterisk", () => {
     expect(() => parse("CSCI 121.A")).not.toThrow()
     expect(() => parse("CSCI 121.*")).not.toThrow()
-    expect(() => parse("CSCI 121.a")).toThrowError(
+    expect(() => parse("CSCI 121.a")).toThrow(
       "A course section must be either an uppercase letter [A-Z] or an asterisk [*].",
     )
   })
@@ -35,16 +35,16 @@ describe("CourseExpression", () => {
   })
 
   it("requires section to be present if year is", () => {
-    expect(() => parse("CSCI 121.2014")).toThrowError(
+    expect(() => parse("CSCI 121.2014")).toThrow(
       "A course section must be either an uppercase letter [A-Z] or an asterisk [*].",
     )
   })
 
   it("requires section and year to be present if semester is", () => {
-    expect(() => parse("CSCI 121.A.5")).toThrowError(
+    expect(() => parse("CSCI 121.A.5")).toThrow(
       "A course year must be either a four-digit year [e.g. 1994] or an asterisk [*].",
     )
-    expect(() => parse("CSCI 121.5")).toThrowError(
+    expect(() => parse("CSCI 121.5")).toThrow(
       "A course section must be either an uppercase letter [A-Z] or an asterisk [*].",
     )
   })
@@ -70,7 +70,7 @@ describe("CourseExpression", () => {
   })
 
   it("requires the lab to be immediately after the number", () => {
-    expect(() => parse("CHEM 125 L")).toThrowError(
+    expect(() => parse("CHEM 125 L")).toThrow(
       'Expected "." or end of input but " " found.',
     )
     expect(() => parse("CHEM 125IL")).not.toThrow()
@@ -82,7 +82,7 @@ describe("CourseExpression", () => {
   })
 
   it("requires international labs to be in IL order", () => {
-    expect(() => parse("CSCI 121LI")).toThrowError(
+    expect(() => parse("CSCI 121LI")).toThrow(
       'Expected "." or end of input but "I" found.',
     )
   })

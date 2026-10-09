@@ -137,14 +137,12 @@ describe("compute", () => {
   })
 
   it("throws if neither result nor message is present", () => {
-    expect(() => compute({}, { path: ["Req"], courses: [] })).toThrowError(
-      TypeError,
-    )
+    expect(() => compute({}, { path: ["Req"], courses: [] })).toThrow(TypeError)
   })
 
   it("throws if the result is empty", () => {
     expect(() =>
       compute({ result: "" }, { path: ["Req"], courses: [] }),
-    ).toThrowError(SyntaxError)
+    ).toThrow(SyntaxError)
   })
 })

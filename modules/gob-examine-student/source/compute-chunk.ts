@@ -78,61 +78,71 @@ export default function computeChunk({
 
   // Modifiers, occurrences, references, and wheres don't need isNeeded,
   // because they don't result in recursive calls to computeChunk.
-  if (expr.$type === "boolean") {
-    ;({ computedResult, matches } = computeBoolean({
-      expr,
-      ctx,
-      courses,
-      dirty,
-      isNeeded,
-    }))
-  } else if (expr.$type === "course") {
-    ;({ computedResult } = computeCourse({
-      expr,
-      courses,
-      dirty,
-      isNeeded,
-    }))
-  } else if (expr.$type === "modifier") {
-    ;({ computedResult, matches, counted } = computeModifier({
-      expr,
-      ctx,
-      courses,
-    }))
-  } else if (expr.$type === "occurrence") {
-    ;({ computedResult, matches, counted } = computeOccurrence({
-      expr,
-      courses,
-    }))
-  } else if (expr.$type === "of") {
-    ;({ computedResult, matches, counted } = computeOf({
-      expr,
-      ctx,
-      courses,
-      dirty,
-      isNeeded,
-    }))
-  } else if (expr.$type === "reference") {
-    ;({ computedResult, matches } = computeReference({
-      expr,
-      ctx,
-    }))
-  } else if (expr.$type === "where") {
-    ;({ computedResult, matches, counted } = computeWhere({
-      expr,
-      courses,
-    }))
-  } else if (expr.$type === "filter") {
-    throw new TypeError("computeChunk(): trying to compute a filter")
-  } else {
-    // unreachable for well-typed input; area files are parsed at runtime
-    const unexpected: { $type?: unknown } = expr
-    if (!unexpected.$type) {
-      throw new TypeError("computeChunk(): expr.$type is undefined!")
+  switch (expr.$type) {
+    case "boolean":
+      ;({ computedResult, matches } = computeBoolean({
+        expr,
+        ctx,
+        courses,
+        dirty,
+        isNeeded,
+      }))
+      break
+    case "course":
+      ;({ computedResult } = computeCourse({
+        expr,
+        courses,
+        dirty,
+        isNeeded,
+      }))
+      break
+    case "modifier":
+      ;({ computedResult, matches, counted } = computeModifier({
+        expr,
+        ctx,
+        courses,
+      }))
+      break
+    case "occurrence":
+      ;({ computedResult, matches, counted } = computeOccurrence({
+        expr,
+        courses,
+      }))
+      break
+    case "of":
+      ;({ computedResult, matches, counted } = computeOf({
+        expr,
+        ctx,
+        courses,
+        dirty,
+        isNeeded,
+      }))
+      break
+    case "reference":
+      ;({ computedResult, matches } = computeReference({
+        expr,
+        ctx,
+      }))
+      break
+    case "where":
+      ;({ computedResult, matches, counted } = computeWhere({
+        expr,
+        courses,
+      }))
+      break
+    case "filter":
+      throw new TypeError("computeChunk(): trying to compute a filter")
+    default: {
+      // unreachable for well-typed input; area files are parsed at runtime
+      const unexpected: { $type?: unknown } = expr
+      const typeName = String(unexpected.$type)
+      if (!unexpected.$type) {
+        throw new TypeError("computeChunk(): expr.$type is undefined!")
+      }
+      throw new TypeError(
+        `computeChunk(): the type "${typeName}" is not a valid expression type.`,
+      )
     }
-    throw new TypeError(
-      `computeChunk(): the type "${String(unexpected.$type)}" is not a valid expression type.`,
-    )
   }
 
   if (fulfillment) {
@@ -152,7 +162,7 @@ export default function computeChunk({
       expr._matches = matches
     }
 
-    if (counted !== undefined && counted !== null) {
+    if (counted !== undefined) {
       expr._counted = counted
     }
   }
@@ -202,46 +212,51 @@ export function computeBoolean({
 }: BooleanChunkArgs) {
   let computedResult = false
 
-  if (expr.$booleanType === "or") {
-    // we only want this to use the first "true" result. we don't need to
-    // continue to look after we find one, because this is an or-clause
-    // `haveAnyBeenTrue` tells us if we need to mark any further courses as dirty.
-    // If it's true, then we don't actually need any more courses; we're just looking.
-    let haveAnyBeenTrue = false
-    const results = expr.$or.map((req) => {
-      // we check the next chunk of the requirement:
-      // isNeeded is set to the negated `haveAnyBeenTrue`, because
-      // that's how we check if we need to flag any further courses.
-      let thisResult = computeChunk({
-        expr: req,
-        ctx,
-        courses,
-        dirty,
-        isNeeded: !haveAnyBeenTrue,
+  switch (expr.$booleanType) {
+    case "or": {
+      // we only want this to use the first "true" result. we don't need to
+      // continue to look after we find one, because this is an or-clause
+      // `haveAnyBeenTrue` tells us if we need to mark any further courses as dirty.
+      // If it's true, then we don't actually need any more courses; we're just looking.
+      let haveAnyBeenTrue = false
+      const results = expr.$or.map((req) => {
+        // we check the next chunk of the requirement:
+        // isNeeded is set to the negated `haveAnyBeenTrue`, because
+        // that's how we check if we need to flag any further courses.
+        let thisResult = computeChunk({
+          expr: req,
+          ctx,
+          courses,
+          dirty,
+          isNeeded: !haveAnyBeenTrue,
+        })
+        // now, if we just found one, we set haveAnyBeenTrue; otherwise,
+        // we leave it at its prior value.
+        haveAnyBeenTrue = thisResult || haveAnyBeenTrue
+        // and we're collecting an array of the results, so we'll return
+        // the result.
+        return thisResult
       })
-      // now, if we just found one, we set haveAnyBeenTrue; otherwise,
-      // we leave it at its prior value.
-      haveAnyBeenTrue = thisResult || haveAnyBeenTrue
-      // and we're collecting an array of the results, so we'll return
-      // the result.
-      return thisResult
-    })
-    computedResult = results.some(Boolean)
-  } else if (expr.$booleanType === "and") {
-    const results = expr.$and.map((req) =>
-      computeChunk({
-        expr: req,
-        ctx,
-        courses,
-        dirty,
-        isNeeded,
-      }),
-    )
-    computedResult = results.every(Boolean)
-  } else {
-    throw new TypeError(
-      `computeBoolean(): neither $or nor $and could be found in ${stringify(expr)}`,
-    )
+      computedResult = results.some(Boolean)
+      break
+    }
+    case "and": {
+      const results = expr.$and.map((req) =>
+        computeChunk({
+          expr: req,
+          ctx,
+          courses,
+          dirty,
+          isNeeded,
+        }),
+      )
+      computedResult = results.every(Boolean)
+      break
+    }
+    default:
+      throw new TypeError(
+        `computeBoolean(): neither $or nor $and could be found in ${stringify(expr)}`,
+      )
   }
 
   return {
@@ -324,18 +339,23 @@ type ModifierChunkArgs = {
   ctx: Requirement
   courses: Course[]
 }
+const modifierWhats: ReadonlySet<unknown> = new Set([
+  "course",
+  "credit",
+  "department",
+  "term",
+])
+
 export function computeModifier({ expr, ctx, courses }: ModifierChunkArgs) {
   assertKeys(expr, "$what", "$count", "$from")
   const what = expr.$what
 
-  if (
-    what !== "course" &&
-    what !== "credit" &&
-    what !== "department" &&
-    what !== "term"
-  ) {
+  // area files are parsed at runtime, so check $what before using it
+  if (!modifierWhats.has(what)) {
+    const unexpected: unknown = what
+    const whatName = String(unexpected)
     throw new TypeError(
-      `computeModifier(): "${what || "undefined"}" is not a valid source for a modifier`,
+      `computeModifier(): "${unexpected ? whatName : "undefined"}" is not a valid source for a modifier`,
     )
   }
 
@@ -343,31 +363,40 @@ export function computeModifier({ expr, ctx, courses }: ModifierChunkArgs) {
   let numCounted: number
 
   // get matches
-  if (expr.$from === "children") {
-    assertKeys(expr, "$children")
-    filtered = getMatchesFromChildren(expr, ctx)
-  } else if (expr.$from === "filter") {
-    assertKeys(ctx, "filter")
-    filtered = getMatchesFromFilter(ctx)
-  } else if (expr.$from === "filter-where") {
-    assertKeys(expr, "$where")
-    filtered = getMatchesFromFilter(ctx)
-    filtered = filterByWhereClause(filtered, expr.$where)
-  } else if (expr.$from === "where") {
-    assertKeys(expr, "$where")
-    filtered = filterByWhereClause(courses, expr.$where)
-  } else if (expr.$from === "children-where") {
-    assertKeys(expr, "$where", "$children")
-    filtered = getMatchesFromChildren(expr, ctx)
-    filtered = filterByWhereClause(filtered, expr.$where)
-  } else {
-    const unexpected: { $from?: unknown } = expr
-    throw new TypeError(
-      `computeModifier: "${String(unexpected.$from)}" is not a valid $from value`,
-    )
+  switch (expr.$from) {
+    case "children":
+      assertKeys(expr, "$children")
+      filtered = getMatchesFromChildren(expr, ctx)
+      break
+    case "filter":
+      assertKeys(ctx, "filter")
+      filtered = getMatchesFromFilter(ctx)
+      break
+    case "filter-where":
+      assertKeys(expr, "$where")
+      filtered = getMatchesFromFilter(ctx)
+      filtered = filterByWhereClause(filtered, expr.$where)
+      break
+    case "where":
+      assertKeys(expr, "$where")
+      filtered = filterByWhereClause(courses, expr.$where)
+      break
+    case "children-where":
+      assertKeys(expr, "$where", "$children")
+      filtered = getMatchesFromChildren(expr, ctx)
+      filtered = filterByWhereClause(filtered, expr.$where)
+      break
+    default: {
+      const unexpected: { $from?: unknown } = expr
+      throw new TypeError(
+        `computeModifier: "${String(unexpected.$from)}" is not a valid $from value`,
+      )
+    }
   }
 
-  if (!expr.$count) {
+  // assertKeys only checked that the key exists; area files are parsed at runtime
+  const unchecked: { $count?: unknown } = expr
+  if (!unchecked.$count) {
     throw new TypeError(
       `expression must include $count! ${JSON.stringify(expr)}`,
     )
@@ -393,24 +422,25 @@ export function computeModifier({ expr, ctx, courses }: ModifierChunkArgs) {
   }
 
   // count things
-  if (what === "course") {
-    numCounted = countCourses(filtered)
-  } else if (what === "department") {
-    numCounted = countDepartments(filtered)
-  } else if (what === "credit") {
-    numCounted = countCredits(filtered)
-  } else if (what === "term") {
-    numCounted = countTerms(filtered)
-  } else {
-    throw new TypeError(
-      `computeModifier: "${what}" is not a valid thing to count`,
-    )
-  }
-
-  if (!expr.$count) {
-    throw new TypeError(
-      `expression must include $count! ${JSON.stringify(expr)}`,
-    )
+  switch (what) {
+    case "course":
+      numCounted = countCourses(filtered)
+      break
+    case "department":
+      numCounted = countDepartments(filtered)
+      break
+    case "credit":
+      numCounted = countCredits(filtered)
+      break
+    case "term":
+      numCounted = countTerms(filtered)
+      break
+    default: {
+      const unexpected: unknown = what
+      throw new TypeError(
+        `computeModifier: "${String(unexpected)}" is not a valid thing to count`,
+      )
+    }
   }
 
   return {
@@ -506,28 +536,33 @@ export function computeOf({
     // Note that none of these exit the loop early, because we have to
     // look at every chunk. Instead, we note that we don't need to mark
     // any other courses as being dirty once we've passed the check.
-    if (expr.$count.$operator === "$gte") {
-      // If we've amassed enough matches, stop checking.
-      if (didPass) {
-        isNeeded = false
+    switch (expr.$count.$operator) {
+      case "$gte":
+        // If we've amassed enough matches, stop checking.
+        if (didPass) {
+          isNeeded = false
+        }
+        break
+      case "$eq":
+        // If we have exactly the right number, stop.
+        if (didPass) {
+          isNeeded = false
+        }
+        break
+      case "$lte":
+        // We can't use computeCountWithOperator here, because 0 <= N for all N.
+        // Instead, we check to see if the next step would cause us to go over our limit.
+        // If it would, we stop the loop.
+        if (count + 1 >= expr.$count.$num) {
+          isNeeded = false
+        }
+        break
+      default: {
+        const op: unknown = expr.$count.$operator
+        throw new TypeError(
+          `computeOf: not sure what to do with a "${String(op)}" operator`,
+        )
       }
-    } else if (expr.$count.$operator === "$eq") {
-      // If we have exactly the right number, stop.
-      if (didPass) {
-        isNeeded = false
-      }
-    } else if (expr.$count.$operator === "$lte") {
-      // We can't use computeCountWithOperator here, because 0 <= N for all N.
-      // Instead, we check to see if the next step would cause us to go over our limit.
-      // If it would, we stop the loop.
-      if (count + 1 >= expr.$count.$num) {
-        isNeeded = false
-      }
-    } else {
-      const op = expr.$count.$operator
-      throw new TypeError(
-        `computeOf: not sure what to do with a "${op}" operator`,
-      )
     }
   })
   return {

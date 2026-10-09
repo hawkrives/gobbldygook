@@ -55,7 +55,7 @@ describe("validateSchedule", () => {
       warnings
         .get("a")
         ?.map((w) => w.type)
-        ?.toJS(),
+        .toJS(),
     ).toEqual(["time-conflict"])
   })
 
@@ -70,7 +70,7 @@ describe("validateSchedule", () => {
       warnings
         .get("a")
         ?.map((w) => w.type)
-        ?.toJS(),
+        .toJS(),
     ).toEqual(["invalid-semester"])
   })
 })

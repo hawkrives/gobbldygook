@@ -38,7 +38,7 @@ export default function Separator(props: Props) {
   let ChosenRule = Rule
   if (type === "line") {
     ChosenRule = LineRule
-  } else if (type === "spacer") {
+  } else {
     ChosenRule = SpacerRule
   }
 

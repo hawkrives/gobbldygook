@@ -28,7 +28,7 @@ const qualification = (
   $operator: "$eq",
   $value: value,
 })
-const clone = <T>(expr: T): T => JSON.parse(JSON.stringify(expr))
+const clone = <T>(expr: T): T => JSON.parse(JSON.stringify(expr)) as T
 
 function run(expr: OfExpression, courses: Course[]) {
   const { computedResult, counted } = computeOf({

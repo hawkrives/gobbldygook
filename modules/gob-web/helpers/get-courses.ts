@@ -51,7 +51,7 @@ export function getCourseFromDatabase(clbid: string): Promise<CourseType> {
     .store("courses")
     .index("clbid")
     .get<StoredCourse>(clbid)
-    .then((course) => (course ? course : getCourseFromNetwork(clbid)))
+    .then((course) => course ?? getCourseFromNetwork(clbid))
     .then((stored: StoredCourse) => {
       let { profWords: _p, words: _w, sourcePath: _s, ...course } = stored
       return course
@@ -78,7 +78,9 @@ export async function getCourse(
     }
   }
 
-  let getCourseFrom = getCourseFromDatabase
+  // in network-only mode the course is the parsed JSON, which may be null
+  let getCourseFrom: (clbid: string) => Promise<CourseType | null> =
+    getCourseFromDatabase
   if (globalThis.useNetworkOnly) {
     getCourseFrom = getCourseFromNetwork
   }

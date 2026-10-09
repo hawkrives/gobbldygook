@@ -119,10 +119,10 @@ test.describe("student plan", () => {
 
     // the change is saved
     let stored = await app.storedStudent("grace")
-    let fallSchedule = Object.values<any>(stored.schedules).find(
+    let fallSchedule = Object.values(stored!.schedules).find(
       (s) => s.year === FIRST_YEAR && s.semester === FALL,
     )
-    expect(fallSchedule.clbids).toHaveLength(2)
+    expect(fallSchedule!.clbids).toHaveLength(2)
 
     await page.reload()
     await expect(
@@ -208,7 +208,7 @@ test.describe("student plan", () => {
     await name.blur()
 
     await expect
-      .poll(async () => (await app.storedStudent("grace")).name)
+      .poll(async () => (await app.storedStudent("grace"))!.name)
       .toBe("Rear Admiral Grace Hopper")
   })
 })

@@ -3,7 +3,9 @@ import { defineConfig, devices } from "@playwright/test"
 // The suite runs against the production build in modules/gob-web/build, so
 // run `mise run build` first (`mise run e2e` does both).
 
-const port = Number(process.env.E2E_PORT || 4173)
+// An empty E2E_PORT falls back to the default port.
+const portSetting = process.env.E2E_PORT
+const port = portSetting ? Number(portSetting) : 4173
 const isCI = Boolean(process.env.CI)
 
 export default defineConfig({
@@ -18,6 +20,7 @@ export default defineConfig({
       "@flakiness/playwright",
       {
         flakinessProject: "gobbldygook/gobbldygook",
+        // oxlint-disable-next-line typescript/prefer-nullish-coalescing -- an empty FLAKINESS_TITLE should fall back to the default title too
         title: process.env.FLAKINESS_TITLE || "Playwright",
         outputFolder: "flakiness-report/playwright",
       },

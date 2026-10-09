@@ -514,6 +514,6 @@ describe("computeBoolean", () => {
         expr: { $neither: [] },
         isNeeded: true,
       }),
-    ).toThrowError(TypeError)
+    ).toThrow(TypeError)
   })
 })

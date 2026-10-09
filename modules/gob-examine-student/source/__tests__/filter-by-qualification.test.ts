@@ -110,9 +110,9 @@ describe("filterByQualification", () => {
       { department: ["REL"], number: 115, gereqs: ["BTS-T"], year: 2013 },
     ]
 
-    expect(() =>
-      filterByQualification(courses, basicQualification),
-    ).toThrowError(TypeError)
+    expect(() => filterByQualification(courses, basicQualification)).toThrow(
+      TypeError,
+    )
   })
 
   it("filters an array based on a nested where-query with the max function", () => {
@@ -264,7 +264,7 @@ describe("filterByQualification", () => {
 
     expect(() =>
       filterByQualification(courses, advancedQualificationBad),
-    ).toThrowError(ReferenceError)
+    ).toThrow(ReferenceError)
   })
 
   it("must specify a function when utilizing a nested where-query", () => {
@@ -307,7 +307,7 @@ describe("filterByQualification", () => {
 
     expect(() =>
       filterByQualification(courses, advancedQualificationBad),
-    ).toThrowError(TypeError)
+    ).toThrow(TypeError)
   })
 
   it("can require that the courses be distinct", () => {

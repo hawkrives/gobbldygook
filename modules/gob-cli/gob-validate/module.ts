@@ -47,7 +47,7 @@ export default async function main() {
       continue
     }
 
-    print(0, `${toPrettyTerm(schedule.term)}`)
+    print(0, toPrettyTerm(schedule.term))
 
     for (let course of courses) {
       print(1, buildDeptNum(course))
@@ -66,10 +66,6 @@ export default async function main() {
       }
 
       for (let conflict of courseConflicts) {
-        if (!conflict) {
-          continue
-        }
-
         print(2, `- ${conflict.msg}`)
       }
     }

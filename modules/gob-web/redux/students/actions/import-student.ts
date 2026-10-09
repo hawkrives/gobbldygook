@@ -1,5 +1,4 @@
 import { Student } from "@gob/object-student"
-import type { StudentInput } from "@gob/object-student"
 
 import { IMPORT_STUDENT } from "../constants"
 
@@ -41,6 +40,6 @@ export function importStudent({
   }
 
   // imported files are trusted to have the shape of a saved Student
-  const fleshedStudent = new Student(stu as StudentInput)
+  const fleshedStudent = new Student(stu)
   return { type: IMPORT_STUDENT, payload: fleshedStudent }
 }

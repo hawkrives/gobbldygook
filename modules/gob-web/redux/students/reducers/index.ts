@@ -21,7 +21,8 @@ const initialState: State = {}
 export function reducer(state: State = initialState, action: AnyAction): State {
   // every action reaches this reducer; the student actions, and undo and
   // redo, all carry the student's id in their payload
-  const { type, error } = action
+  const type: unknown = action.type
+  const error: unknown = action["error"]
   const payload = action["payload"] as { id: string }
 
   switch (type) {

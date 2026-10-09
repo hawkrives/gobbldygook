@@ -34,6 +34,6 @@ type Props = {
   value: string
 }
 
-export const AvatarLetter = ({ className, value = "" }: Props) => (
+export const AvatarLetter = ({ className, value }: Props) => (
   <Wrapper className={className}>{isString(value) ? value[0] : ""}</Wrapper>
 )

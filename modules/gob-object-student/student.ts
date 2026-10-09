@@ -226,6 +226,7 @@ export class Student extends StudentRecord {
   }): Schedule | undefined {
     let { year, semester } = args
     return this.schedules.find(
+      // oxlint-disable-next-line typescript/no-unnecessary-boolean-literal-compare -- `active` comes from saved data unchecked; only a literal true counts
       (s) => s.active === true && s.year === year && s.semester === semester,
     )
   }
@@ -279,6 +280,7 @@ export class Student extends StudentRecord {
   destroySchedulesForTerm(args: { year: number; semester: number }): this {
     let { year, semester } = args
 
+    // oxlint-disable-next-line typescript/no-unnecessary-condition -- guards untyped callers that leave one out; the tests check this warning
     if (year == null || semester == null) {
       console.warn("year and semester must both be provided")
     }

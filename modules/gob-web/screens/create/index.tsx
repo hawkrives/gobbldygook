@@ -56,4 +56,4 @@ export default function CreateStudentScreen(_props: RouteComponentProps) {
   )
 }
 
-WelcomePage.preload()
+void WelcomePage.preload()

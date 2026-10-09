@@ -2,6 +2,7 @@ import stringify from "stabilize"
 import type { Student } from "@gob/object-student"
 
 export function getIdCache(): Set<string> {
+  // oxlint-disable-next-line typescript/prefer-nullish-coalescing -- an empty string must also fall back to "[]"
   let stored: unknown = JSON.parse(localStorage.getItem("studentIds") || "[]")
   return new Set(Array.isArray(stored) ? stored.map(String) : [])
 }
@@ -22,6 +23,7 @@ export function removeStudentFromCache(studentId: string) {
   setIdCache(ids)
 }
 
+// oxlint-disable-next-line typescript/require-await -- without async, a throw (e.g. from localStorage) would be synchronous instead of a rejected promise
 export async function saveStudent(student: Student): Promise<Student> {
   console.info(`saving ${student.id} (${student.name})`)
 

@@ -127,15 +127,15 @@ function organizeValues(
         // handle the lookup values
         case "department":
           val = val.toLowerCase()
-          return lookup(departmentMapping, val) || val.toUpperCase()
+          return lookup(departmentMapping, val) ?? val.toUpperCase()
 
         case "gereqs":
           val = val.toLowerCase()
-          return lookup(gereqMapping, val) || val.toUpperCase()
+          return lookup(gereqMapping, val) ?? val.toUpperCase()
 
         case "semester":
           val = val.toLowerCase()
-          return lookup(semesters, val) || parseInt(val, 10)
+          return lookup(semesters, val) ?? parseInt(val, 10)
 
         // handle the string values
         case "deptnum":
@@ -193,8 +193,8 @@ export function buildQueryFromString(
   // expect from a RegExp.
   // If the regex fails, we grab the string through the end
   // and build the object from what we assume to be the title.
-  let rexTested = rex.exec(queryString) || { index: queryString.length }
-  let stringThing = queryString.substr(0, rexTested.index)
+  let rexTested = rex.exec(queryString) ?? { index: queryString.length }
+  let stringThing = queryString.substring(0, rexTested.index)
   queryString = queryString.substring(rexTested.index)
 
   // Split apart the string into an array
@@ -236,7 +236,7 @@ export function buildQueryFromString(
 
     /* istanbul ignore else */
     if (!key.startsWith("_")) {
-      key = lookup(keywordMappings, key) || key
+      key = lookup(keywordMappings, key) ?? key
     }
 
     return key

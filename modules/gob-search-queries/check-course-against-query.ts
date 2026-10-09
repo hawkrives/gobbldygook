@@ -1,7 +1,7 @@
 import toPairs from "lodash/toPairs"
 import type { Query, Queryable, QueryValue } from "./types"
 
-const isTrue = (x: boolean): boolean => x === true
+const isTrue = (x: boolean): boolean => x
 
 const SUBSTRING_KEYS = new Set([
   "title",

@@ -21,13 +21,19 @@ export default function applyFilter(
   let filtered: Array<Course> = []
 
   // a filter will be either a where-style query or a list of courses
-  if (expr.$filterType === "where") {
-    filtered = filterByWhereClause(courses, expr.$where)
-  } else if (expr.$filterType === "of") {
-    filtered = filterByOfExpression(
-      courses,
-      expr.$of.map((c) => c.$course),
-    )
+  switch (expr.$filterType) {
+    case "where":
+      filtered = filterByWhereClause(courses, expr.$where)
+      break
+    case "of":
+      filtered = filterByOfExpression(
+        courses,
+        expr.$of.map((c) => c.$course),
+      )
+      break
+    default:
+      // area files are parsed at runtime; an unknown filter matches nothing
+      break
   }
 
   // grab the matches

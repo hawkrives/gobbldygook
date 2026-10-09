@@ -66,6 +66,6 @@ describe("computeReference", () => {
   it("throws a ReferenceError if the referenced requirement doesn't exist", () => {
     const expr: ReferenceExpression = { $type: "reference", $requirement: "A" }
     const ctx: Requirement = { $type: "requirement", ONLY: {} }
-    expect(() => computeReference({ expr, ctx })).toThrowError(ReferenceError)
+    expect(() => computeReference({ expr, ctx })).toThrow(ReferenceError)
   })
 })

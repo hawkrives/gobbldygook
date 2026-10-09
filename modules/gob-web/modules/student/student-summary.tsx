@@ -83,12 +83,12 @@ class StudentSummary extends React.Component<Props, State> {
   }
 
   override componentDidMount() {
-    this.check(this.props)
+    void this.check(this.props)
   }
 
   override componentDidUpdate(prevProps: Props) {
     if (prevProps.student !== this.props.student) {
-      this.check(this.props)
+      void this.check(this.props)
     }
   }
 
@@ -323,7 +323,7 @@ type HeaderProps = {
 export class Header extends React.Component<HeaderProps> {
   handleNameChange = (val: string) => {
     console.log(val)
-    this.props.onChangeName && this.props.onChangeName(val)
+    this.props.onChangeName?.(val)
   }
 
   override render() {
@@ -332,7 +332,7 @@ export class Header extends React.Component<HeaderProps> {
     return (
       <header className="student-summary--header">
         {props.helloMessage}
-        {String(this.props.name)}!
+        {this.props.name}!
       </header>
     )
   }

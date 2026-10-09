@@ -2,7 +2,7 @@ import present from "present"
 import prepareCourse from "./lib-prepare-course"
 import { quotaExceededError } from "./lib-dispatch"
 import { db } from "./db"
-import type { InfoFileTypeEnum, RawArea, RawCourse } from "./types"
+import type { RawArea, RawCourse } from "./types"
 import prettyMs from "pretty-ms"
 
 // The parts of a failed IndexedDB write that onFailure reads
@@ -20,6 +20,7 @@ const onFailure = (err: WriteError): never => {
     quotaExceededError(db)
   }
 
+  // oxlint-disable-next-line typescript/only-throw-error -- rethrows the failed write's event unchanged so callers see what IndexedDB reported
   throw err
 }
 
@@ -68,7 +69,8 @@ export function storeArea(path: string, data: RawArea): Promise<void> {
 // `data` is what parseData read from a file of this type.
 export default function storeData(
   path: string,
-  type: InfoFileTypeEnum,
+  // `type` comes from the info index file, so it is checked at runtime
+  type: string,
   data: unknown,
 ): Promise<void> | undefined {
   // istanbul ignore else

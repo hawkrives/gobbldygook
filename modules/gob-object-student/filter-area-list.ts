@@ -16,7 +16,7 @@ type AreaSummary = {
 function convertRevisionToYear(rev: string | undefined): number {
   // The +1 is because the year is the beginning of the academic year, but
   // the graduation is the end.
-  return Number((rev || "").split("-")[0]) + 1
+  return Number((rev ?? "").split("-")[0]) + 1
 }
 
 // Matricated in: 2014
@@ -60,7 +60,7 @@ export function filterAreaList<T extends AreaSummary>(
       let revision = convertRevisionToYear(area.revision)
       return revision <= availableThrough
     })
-    return newestApplicableArea || []
+    return newestApplicableArea ?? []
   })
   return flatten(filtered)
 }

@@ -11,9 +11,9 @@ export default function prepareCourse(course: RawCourse): {
   const profWords = new Set(flatMap(course.instructors, splitParagraph))
   const allWords = new Set([
     ...splitParagraph(course.name),
-    ...splitParagraph((course.notes || []).join("\n")),
-    ...splitParagraph(course.title || ""),
-    ...splitParagraph((course.description || []).join("\n")),
+    ...splitParagraph((course.notes ?? []).join("\n")),
+    ...splitParagraph(course.title ?? ""),
+    ...splitParagraph((course.description ?? []).join("\n")),
   ])
 
   return {

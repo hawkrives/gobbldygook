@@ -5,7 +5,7 @@ describe("computeCountWithOperator", () => {
     expect(() =>
       // @ts-expect-error: checks the runtime guard against bad operators
       computeCountWithOperator({ comparator: "$invalid" }),
-    ).toThrowError(TypeError)
+    ).toThrow(TypeError)
   })
 
   it("computes $lte", () => {

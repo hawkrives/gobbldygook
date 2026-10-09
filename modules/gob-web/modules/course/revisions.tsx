@@ -137,7 +137,11 @@ export class Revisions extends React.Component<Props, State> {
     const { course } = this.props
     const { isOpen } = this.state
 
-    if (!course.revisions) {
+    // course data comes from JSON, and some courses leave out revisions
+    const courseRevisions = course.revisions as
+      | CourseType["revisions"]
+      | undefined
+    if (!courseRevisions) {
       return null
     }
 
@@ -172,11 +176,12 @@ export class Revisions extends React.Component<Props, State> {
       if (Array.isArray(value)) {
         return value.join(", ")
       }
-      if (value && typeof value === "object") {
+      if (typeof value === "object") {
         return toPairs(value)
           .map(([k, v]) => `${k}: ${String(v)}`)
           .join(", ")
       }
+      // oxlint-disable-next-line typescript/no-base-to-string -- objects are handled above, so only primitives reach here
       return String(value)
     }
 
@@ -192,7 +197,7 @@ export class Revisions extends React.Component<Props, State> {
 
     const { revisions: _revisions, ...currentState }: CourseState = course
 
-    const revisions = [...course.revisions]
+    const revisions = [...courseRevisions]
     const latestRevisionDate =
       revisions.length > 0
         ? new Date(
@@ -201,7 +206,7 @@ export class Revisions extends React.Component<Props, State> {
             ),
           )
         : null
-    const dateForCurrentState = latestRevisionDate || new Date()
+    const dateForCurrentState = latestRevisionDate ?? new Date()
 
     type DatedState = { date: string; state: CourseState }
 
@@ -209,7 +214,7 @@ export class Revisions extends React.Component<Props, State> {
       (states, revision) => {
         const revisionDate = formatDate(revision["_updated"])
         // the reduce starts with the current state, so there is always one
-        const prevState = { ...(states[states.length - 1] as DatedState).state }
+        const prevState = { ...states[states.length - 1]!.state }
 
         toPairs(revision).forEach(([key, value]) => {
           if (key !== "_updated") {
@@ -242,8 +247,8 @@ export class Revisions extends React.Component<Props, State> {
 
     for (let i = 0; i < courseStates.length - 1; i++) {
       // i and i + 1 are both in bounds
-      const newerState = courseStates[i] as DatedState
-      const olderState = courseStates[i + 1] as DatedState
+      const newerState = courseStates[i]!
+      const olderState = courseStates[i + 1]!
       const newer = newerState.state
       const older = olderState.state
       const changeDate = newerState.date

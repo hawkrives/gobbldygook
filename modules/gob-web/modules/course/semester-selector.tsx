@@ -83,7 +83,11 @@ class SemesterSelector extends React.Component<Props> {
     ))
 
     return (
-      <select value={scheduleId || NO_SCHEDULE} onChange={this.moveToSchedule}>
+      <select
+        // oxlint-disable-next-line typescript/prefer-nullish-coalescing -- an empty scheduleId means no schedule, as in moveToSchedule
+        value={scheduleId || NO_SCHEDULE}
+        onChange={this.moveToSchedule}
+      >
         {specialOption}
         {[...options]}
       </select>

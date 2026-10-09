@@ -9,5 +9,5 @@ import type { Course, Requirement } from "./types"
 
 export default function getMatchesFromFilter(ctx: Requirement): Course[] {
   assertKeys(ctx, "filter")
-  return ctx.filter?._matches || []
+  return ctx.filter?._matches ?? []
 }

@@ -30,20 +30,28 @@ async function checkStudentAgainstArea(
       const reply = JSON.parse(messageData) as WorkerReply
       if (reply.id === sourceId) {
         worker.removeEventListener("message", onMessage)
-        if (reply.type === "result") {
-          resolve(reply.data)
-        } else if (reply.type === "error") {
-          resolve({
-            $type: "requirement",
-            computed: false,
-            error: reply.data.message,
-            progress: { at: 0, of: 1 },
-          })
+        switch (reply.type) {
+          case "result": {
+            resolve(reply.data)
+            break
+          }
+          case "error": {
+            resolve({
+              $type: "requirement",
+              computed: false,
+              error: reply.data.message,
+              progress: { at: 0, of: 1 },
+            })
+            break
+          }
+          default: {
+            reply satisfies never
+          }
         }
       }
     }
     worker.addEventListener("message", onMessage)
-    student.activeCourses(getCourse).then((courses) => {
+    void student.activeCourses(getCourse).then((courses) => {
       let { fulfillments, overrides, name } = student
       let msg = JSON.stringify({
         id: sourceId,

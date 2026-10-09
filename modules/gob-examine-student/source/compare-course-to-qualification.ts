@@ -53,45 +53,48 @@ function compareCourseToQualificationViaObject(
     )
   }
 
-  if ($value.$type === "function") {
-    // we compute the value of the function-over-where-query style
-    // operators earlier, in the filterByQualification function.
-    assertKeys($value, "$computed-value")
-    return compareCourseToQualificationViaOperator(
-      course,
-      $key,
-      $operator,
-      $value["$computed-value"],
-    )
-  } else if ($value.$type === "boolean") {
-    if ($value.$booleanType === "or") {
-      return some($value.$or, (val) =>
-        compareCourseToQualification(course, {
-          $key,
-          $operator,
-          $value: val,
-          $type,
-        }),
+  switch ($value.$type) {
+    case "function":
+      // we compute the value of the function-over-where-query style
+      // operators earlier, in the filterByQualification function.
+      assertKeys($value, "$computed-value")
+      return compareCourseToQualificationViaOperator(
+        course,
+        $key,
+        $operator,
+        $value["$computed-value"],
       )
-    } else if ($value.$booleanType === "and") {
-      return every($value.$and, (val) =>
-        compareCourseToQualification(course, {
-          $key,
-          $operator,
-          $value: val,
-          $type,
-        }),
-      )
-    } else {
+    case "boolean":
+      switch ($value.$booleanType) {
+        case "or":
+          return some($value.$or, (val) =>
+            compareCourseToQualification(course, {
+              $key,
+              $operator,
+              $value: val,
+              $type,
+            }),
+          )
+        case "and":
+          return every($value.$and, (val) =>
+            compareCourseToQualification(course, {
+              $key,
+              $operator,
+              $value: val,
+              $type,
+            }),
+          )
+        default:
+          throw new TypeError(
+            `compareCourseToQualification(): neither $or nor $and could be found in ${JSON.stringify($value)}`,
+          )
+      }
+    default: {
+      const unexpected: { $type?: unknown } = $value
       throw new TypeError(
-        `compareCourseToQualification(): neither $or nor $and could be found in ${JSON.stringify($value)}`,
+        `compareCourseToQualification(): "${String(unexpected.$type)}" is not a valid type for a qualification's value.`,
       )
     }
-  } else {
-    const unexpected: { $type?: unknown } = $value
-    throw new TypeError(
-      `compareCourseToQualification(): "${String(unexpected.$type)}" is not a valid type for a qualification's value.`,
-    )
   }
 }
 
@@ -126,32 +129,36 @@ function compareCourseToQualificationViaOperator(
   const courseValue = actual[$key]
 
   // it's a static value; a number or string
-  if ($operator === "$eq") {
-    if (Array.isArray(courseValue)) {
-      return includes(courseValue, $value)
-    }
+  switch ($operator) {
+    case "$eq":
+      if (Array.isArray(courseValue)) {
+        return includes(courseValue, $value)
+      }
 
-    return courseValue === $value
-  } else if ($operator === "$ne") {
-    if (Array.isArray(courseValue)) {
-      return !includes(courseValue, $value)
-    }
+      return courseValue === $value
+    case "$ne":
+      if (Array.isArray(courseValue)) {
+        return !includes(courseValue, $value)
+      }
 
-    return courseValue !== $value
-  } else if ($operator === "$lt") {
-    return order(courseValue, $value) === -1
-  } else if ($operator === "$lte") {
-    const result = order(courseValue, $value)
-    return result === -1 || result === 0
-  } else if ($operator === "$gt") {
-    return order(courseValue, $value) === 1
-  } else if ($operator === "$gte") {
-    const result = order(courseValue, $value)
-    return result === 1 || result === 0
-  } else {
-    const unexpected: unknown = $operator
-    throw new TypeError(
-      `compareCourseToQualificationViaOperator: "${String(unexpected)} is not a valid operator"`,
-    )
+      return courseValue !== $value
+    case "$lt":
+      return order(courseValue, $value) === -1
+    case "$lte": {
+      const result = order(courseValue, $value)
+      return result === -1 || result === 0
+    }
+    case "$gt":
+      return order(courseValue, $value) === 1
+    case "$gte": {
+      const result = order(courseValue, $value)
+      return result === 1 || result === 0
+    }
+    default: {
+      const unexpected: unknown = $operator
+      throw new TypeError(
+        `compareCourseToQualificationViaOperator: "${String(unexpected)} is not a valid operator"`,
+      )
+    }
   }
 }

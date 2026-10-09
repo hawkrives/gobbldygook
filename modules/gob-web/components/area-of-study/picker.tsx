@@ -40,7 +40,7 @@ export function getOptions(
     type,
     revision,
     value: `${name} (${String(revision)})`,
-    label: `${name}`,
+    label: name,
   }))
 }
 

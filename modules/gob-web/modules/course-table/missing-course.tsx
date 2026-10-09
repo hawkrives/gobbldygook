@@ -10,8 +10,8 @@ export default function MissingCourse(props: Props) {
   return (
     <FakeCourse
       title={`Cannot load course ${props.clbid}`}
-      details={String(props.error.message)}
-      className={`missing ${props.className || ""}`}
+      details={props.error.message}
+      className={`missing ${props.className ?? ""}`}
     />
   )
 }

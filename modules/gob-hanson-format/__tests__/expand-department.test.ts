@@ -6,6 +6,6 @@ describe("expandDepartment", () => {
   })
 
   it("throws an error when a department is unknown", () => {
-    expect(() => expandDepartment("HUMONGOUS")).toThrowError(TypeError)
+    expect(() => expandDepartment("HUMONGOUS")).toThrow(TypeError)
   })
 })
