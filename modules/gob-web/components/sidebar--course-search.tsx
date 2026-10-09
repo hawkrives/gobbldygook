@@ -1,8 +1,8 @@
-import { CourseSearcher } from "../modules/course-searcher"
-import CourseRemovalBox from "../components/course-removal-box"
-import { Sidebar } from "./sidebar"
+import { CourseSearcher } from "../modules/course-searcher/index.ts"
+import CourseRemovalBox from "../components/course-removal-box.tsx"
+import { Sidebar } from "./sidebar.ts"
 import type { Student } from "@gob/object-student"
-import type { Undoable } from "../types"
+import type { Undoable } from "../types.ts"
 
 type Props = Readonly<{
   term?: string | null | undefined

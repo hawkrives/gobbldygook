@@ -1,5 +1,5 @@
-import findCourse from "../find-course"
-import type { Course } from "../types"
+import findCourse from "../find-course.ts"
+import type { Course } from "../types.ts"
 
 describe("findCourse", () => {
   it("finds a course in a list of courses", () => {

@@ -1,4 +1,4 @@
-import zip from "lodash/zip"
+import zip from "lodash/zip.js"
 
 // `keys` and `vals` are optional because search-queries spreads a possibly
 // empty `unzip()` result into this function.

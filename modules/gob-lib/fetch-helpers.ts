@@ -1,4 +1,4 @@
-import { NetworkError } from "./errors"
+import { NetworkError } from "./errors.ts"
 export function status(response: Response): Response {
   if (response.status >= 200 && response.status < 300) {
     return response

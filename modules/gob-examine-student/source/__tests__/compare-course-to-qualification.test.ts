@@ -1,5 +1,5 @@
-import compareCourseToQualification from "../compare-course-to-qualification"
-import type { Qualification } from "../types"
+import compareCourseToQualification from "../compare-course-to-qualification.ts"
+import type { Qualification } from "../types.ts"
 
 describe("compareCourseToQualification", () => {
   it("compares a course property against an operator", () => {

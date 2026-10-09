@@ -1,5 +1,5 @@
-import toPairs from "lodash/toPairs"
-import fromPairs from "lodash/fromPairs"
+import toPairs from "lodash/toPairs.js"
+import fromPairs from "lodash/fromPairs.js"
 
 import type { Course } from "@gob/types"
 import type { Course as TrimmedCourse } from "@gob/examine-student"

@@ -1,8 +1,8 @@
 import present from "present"
-import prepareCourse from "./lib-prepare-course"
-import { quotaExceededError } from "./lib-dispatch"
-import { db } from "./db"
-import type { RawArea, RawCourse } from "./types"
+import prepareCourse from "./lib-prepare-course.ts"
+import { quotaExceededError } from "./lib-dispatch.ts"
+import { db } from "./db.ts"
+import type { RawArea, RawCourse } from "./types.ts"
 import prettyMs from "pretty-ms"
 
 // The parts of a failed IndexedDB write that onFailure reads

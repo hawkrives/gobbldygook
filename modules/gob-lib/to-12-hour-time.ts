@@ -1,4 +1,4 @@
-import padStart from "lodash/padStart"
+import padStart from "lodash/padStart.js"
 
 function split24HourTime(time: string): { hour: number; minute: number } {
   const [hour = "", minute = ""] = padStart(time, 5, "0").split(":")

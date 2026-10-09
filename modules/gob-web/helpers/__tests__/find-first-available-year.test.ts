@@ -1,4 +1,4 @@
-import { findFirstAvailableYear } from "../find-first-available-year"
+import { findFirstAvailableYear } from "../find-first-available-year.ts"
 
 describe("findFirstAvailableYear", () => {
   it("takes a list of schedules and finds the first open year", () => {

@@ -1,6 +1,5 @@
-// Compiles for the current Node instead of browsers: used by Jest and by the
-// command-line tools.
-const nodeConfig = {
+// Compiles for the current Node instead of browsers: used by Jest.
+const testConfig = {
   presets: [
     [
       "@babel/preset-env",
@@ -71,8 +70,6 @@ module.exports = {
     // "babel-plugin-lodash",
   ],
   env: {
-    test: nodeConfig,
-    // The command-line tools in gob-cli load the source through @babel/register.
-    node: nodeConfig,
+    test: testConfig,
   },
 }

@@ -1,4 +1,4 @@
-import { compareProps } from "../compare-props"
+import { compareProps } from "../compare-props.ts"
 
 describe("compareProps", () => {
   it("should return true if the component should update", () => {

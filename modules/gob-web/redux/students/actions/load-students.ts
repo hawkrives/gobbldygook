@@ -1,7 +1,7 @@
-import uniq from "lodash/uniq"
+import uniq from "lodash/uniq.js"
 import type { Dispatch } from "redux"
 
-import { loadStudent } from "./load-student"
+import { loadStudent } from "./load-student.ts"
 
 export function loadStudents() {
   return (dispatch: Dispatch) => {

@@ -1,4 +1,4 @@
-import { buildDeptNum } from "../build-dept-num"
+import { buildDeptNum } from "../build-dept-num.ts"
 
 describe("buildDeptNum", () => {
   it("builds a department string", () => {

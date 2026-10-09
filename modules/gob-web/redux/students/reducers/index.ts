@@ -1,18 +1,18 @@
-import omit from "lodash/omit"
+import omit from "lodash/omit.js"
 import type { AnyAction } from "redux"
 import { ActionTypes as UndoableActionTypes } from "redux-undo"
-import { CHANGE_STUDENT } from "../actions/change"
+import { CHANGE_STUDENT } from "../actions/change.ts"
 import {
   INIT_STUDENT,
   IMPORT_STUDENT,
   DESTROY_STUDENT,
   LOAD_STUDENT,
-} from "../constants"
-import type { Undoable } from "../../types"
-import { undoableReducer as wrapper } from "./student"
+} from "../constants.ts"
+import type { Undoable } from "../../types.ts"
+import { undoableReducer as wrapper } from "./student.ts"
 import type { Student } from "@gob/object-student"
 
-export type { UndoableState as IndividualStudentState } from "./student"
+export type { UndoableState as IndividualStudentState } from "./student.ts"
 
 export type State = Readonly<Record<string, Undoable<Student>>>
 

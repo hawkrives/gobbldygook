@@ -1,10 +1,10 @@
-import uniqueId from "lodash/uniqueId"
+import uniqueId from "lodash/uniqueId.js"
 import { status, json } from "@gob/lib"
-import { Notification } from "./lib-dispatch"
-import needsUpdate from "./needs-update"
-import updateDatabase from "./update-database"
-import removeDuplicateAreas from "./remove-duplicate-areas"
-import type { InfoFileTypeEnum, InfoFileRef, InfoIndexFile } from "./types"
+import { Notification } from "./lib-dispatch.ts"
+import needsUpdate from "./needs-update.ts"
+import updateDatabase from "./update-database.ts"
+import removeDuplicateAreas from "./remove-duplicate-areas.ts"
+import type { InfoFileTypeEnum, InfoFileRef, InfoIndexFile } from "./types.ts"
 type Args = {
   readonly baseUrl: string
   // Readonly to callers; its own start() method still records the progress

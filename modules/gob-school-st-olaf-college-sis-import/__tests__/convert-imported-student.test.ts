@@ -1,6 +1,6 @@
-import { convertStudent } from "../convert-imported-student"
-import { sample } from "./__support__/sample-student"
-import expectedSchedules from "./__support__/expected-schedules"
+import { convertStudent } from "../convert-imported-student.ts"
+import { sample } from "./__support__/sample-student.ts"
+import expectedSchedules from "./__support__/expected-schedules.ts"
 import type { CourseLookupFunc } from "@gob/object-student"
 
 // Finds no courses, so every imported course becomes a fabrication

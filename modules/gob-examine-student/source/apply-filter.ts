@@ -1,6 +1,6 @@
-import checkForCourse from "./check-for-course"
-import filterByWhereClause from "./filter-by-where-clause"
-import type { FilterExpression, Course } from "./types"
+import checkForCourse from "./check-for-course.ts"
+import filterByWhereClause from "./filter-by-where-clause.ts"
+import type { FilterExpression, Course } from "./types.ts"
 
 const filterByOfExpression = (
   courses: ReadonlyArray<Course>,

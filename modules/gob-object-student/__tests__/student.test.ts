@@ -1,10 +1,10 @@
-import demoStudent from "../demo-student.json"
+import demoStudent from "../demo-student.json" with { type: "json" }
 import stringify from "stabilize"
 import { List, OrderedMap } from "immutable"
 
-import { Student } from "../student"
-import { Schedule } from "../schedule"
-import type { CourseType } from "../types"
+import { Student } from "../student.ts"
+import { Schedule } from "../schedule.ts"
+import type { CourseType } from "../types.ts"
 
 // Reads a schedule the test expects to exist
 function getSchedule(student: Student, id: string): Schedule {

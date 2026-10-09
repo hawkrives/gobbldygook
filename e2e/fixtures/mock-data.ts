@@ -13,7 +13,7 @@ import {
   areas,
   courseInfo,
   coursesForTerm,
-} from "./data"
+} from "./data.ts"
 
 const cors = { "Access-Control-Allow-Origin": "*" }
 

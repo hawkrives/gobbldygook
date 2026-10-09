@@ -1,6 +1,6 @@
-import find from "lodash/find"
-import compareCourseToCourse from "./compare-course-to-course"
-import type { Course } from "./types"
+import find from "lodash/find.js"
+import compareCourseToCourse from "./compare-course-to-course.ts"
+import type { Course } from "./types.ts"
 /**
  * Finds a course in a list of courses
  * @private

@@ -1,5 +1,5 @@
-import words from "lodash/words"
-import deburr from "lodash/deburr"
+import words from "lodash/words.js"
+import deburr from "lodash/deburr.js"
 export function splitParagraph(string: string = ""): Array<string> {
   let lowercase = string.toLowerCase()
   // removes accents and such from ascii chars

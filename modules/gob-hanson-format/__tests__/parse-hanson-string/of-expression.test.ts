@@ -1,4 +1,4 @@
-import { customParser } from "./parse-hanson-string.support"
+import { customParser } from "./parse-hanson-string.support.ts"
 const parse = customParser({ allowedStartRules: ["Of"] })
 const course = customParser({ allowedStartRules: ["Course"] })
 

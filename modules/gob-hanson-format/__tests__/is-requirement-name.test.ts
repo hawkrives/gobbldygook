@@ -1,4 +1,4 @@
-import isRequirementName from "../is-requirement-name"
+import isRequirementName from "../is-requirement-name.ts"
 
 describe("isRequirementName checks if a string is a requirement name", () => {
   it("can contain hyphens", () => {

@@ -2,14 +2,14 @@
 // area data for each test and adds an `app` helper for common setup.
 
 import { test as base, expect, type Page } from "@playwright/test"
-import { mockCourseAndAreaData } from "./mock-data"
+import { mockCourseAndAreaData } from "./mock-data.ts"
 import {
   AREA_COUNT,
   COURSE_COUNT,
   FIRST_YEAR,
   course,
   revisionFor,
-} from "./data"
+} from "./data.ts"
 
 export type SeedSchedule = {
   readonly year: number

@@ -1,8 +1,8 @@
-import isRequirementName from "./is-requirement-name"
-import fromPairs from "lodash/fromPairs"
-import toPairs from "lodash/toPairs"
-import { makeAreaSlug } from "./make-area-slug"
-import { parse } from "./parse-hanson-string"
+import isRequirementName from "./is-requirement-name.ts"
+import fromPairs from "lodash/fromPairs.js"
+import toPairs from "lodash/toPairs.js"
+import { makeAreaSlug } from "./make-area-slug.ts"
+import { parse } from "./parse-hanson-string.cjs"
 import type {
   Mapped,
   HansonFile,
@@ -10,7 +10,7 @@ import type {
   ParsedHansonFile,
   HansonRequirement,
   ParsedHansonRequirement,
-} from "./types"
+} from "./types.ts"
 
 type PegStartRule = "Filter" | "Result"
 

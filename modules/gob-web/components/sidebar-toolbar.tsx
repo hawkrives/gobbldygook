@@ -1,9 +1,9 @@
 import { Link } from "@reach/router"
 import { connect } from "react-redux"
-import { Card } from "./card"
-import { Icon } from "./icon"
-import { Toolbar, ToolbarButton } from "./toolbar"
-import { undo, redo } from "../redux/students/actions/undo"
+import { Card } from "./card.ts"
+import { Icon } from "./icon.ts"
+import { Toolbar, ToolbarButton } from "./toolbar.ts"
+import { undo, redo } from "../redux/students/actions/undo.ts"
 import {
   iosUndo,
   iosUndoOutline,
@@ -13,10 +13,10 @@ import {
   iosPeopleOutline,
   iosUploadOutline,
   grid,
-} from "../icons/ionicons"
+} from "../icons/ionicons.tsx"
 import styled from "styled-components"
 import type { Student } from "@gob/object-student"
-import type { Undoable } from "../types"
+import type { Undoable } from "../types.ts"
 
 type Props = Readonly<{
   redo: (studentId: string) => unknown

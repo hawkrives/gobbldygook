@@ -1,4 +1,4 @@
-import type { CounterOperatorEnum } from "./types"
+import type { CounterOperatorEnum } from "./types.ts"
 export default function humanizeOperator(operator: CounterOperatorEnum) {
   switch (operator) {
     case "$gte":

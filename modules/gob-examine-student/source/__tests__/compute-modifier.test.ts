@@ -1,6 +1,6 @@
-import cloneDeep from "lodash/cloneDeep"
-import computeChunk, { computeModifier } from "../compute-chunk"
-import applyFilter from "../apply-filter"
+import cloneDeep from "lodash/cloneDeep.js"
+import computeChunk, { computeModifier } from "../compute-chunk.ts"
+import applyFilter from "../apply-filter.ts"
 import type {
   AndExpression,
   Course,
@@ -8,7 +8,7 @@ import type {
   FilterExpression,
   ModifierExpression,
   Requirement,
-} from "../types"
+} from "../types.ts"
 
 describe("computeModifier", () => {
   it("checks for <things> from all children", () => {

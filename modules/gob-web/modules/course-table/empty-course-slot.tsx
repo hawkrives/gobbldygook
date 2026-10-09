@@ -1,4 +1,4 @@
-import FakeCourse from "./fake-course"
+import FakeCourse from "./fake-course.tsx"
 import styled from "styled-components"
 
 const Course = styled(FakeCourse)`

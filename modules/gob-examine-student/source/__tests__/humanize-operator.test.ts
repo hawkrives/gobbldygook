@@ -1,4 +1,4 @@
-import humanizeOperator from "../humanize-operator"
+import humanizeOperator from "../humanize-operator.ts"
 
 describe("humanizeOperator", () => {
   it("handles $gte", () => {

@@ -1,7 +1,7 @@
-import isPlainObject from "lodash/isPlainObject"
-import uniq from "lodash/uniq"
-import values from "lodash/values"
-import type { CourseExpression, Course } from "./types"
+import isPlainObject from "lodash/isPlainObject.js"
+import uniq from "lodash/uniq.js"
+import values from "lodash/values.js"
+import type { CourseExpression, Course } from "./types.ts"
 
 function isTakenCourse(node: object): node is CourseExpression {
   return (

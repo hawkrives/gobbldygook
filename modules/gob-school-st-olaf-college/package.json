@@ -1,5 +1,6 @@
 {
   "name": "@gob/school-st-olaf-college",
+  "type": "module",
   "version": "3.0.0-rc.2",
   "main": "index.ts",
   "repository": "hawkrives/gobbldygook",
@@ -7,6 +8,6 @@
   "license": "MIT",
   "dependencies": {},
   "engines": {
-    "node": ">=22"
+    "node": ">=22.18"
   }
 }

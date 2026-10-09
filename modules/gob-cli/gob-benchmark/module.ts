@@ -6,10 +6,10 @@ import type {
   ParsedHansonFile,
 } from "@gob/examine-student"
 import ms from "pretty-ms"
-import range from "lodash/range"
+import range from "lodash/range.js"
 import sparkly from "sparkly"
-import mean from "lodash/mean"
-import { loadStudent } from "../lib/load-student"
+import mean from "lodash/mean.js"
+import { loadStudent } from "../lib/load-student.ts"
 
 // oxlint-disable-next-line typescript/prefer-readonly-parameter-types -- process.hrtime() only accepts a mutable [number, number] tuple
 function now(other?: [number, number]) {
@@ -77,6 +77,7 @@ export default async function main() {
 			--debug
 	`,
     {
+      importMeta: import.meta,
       flags: {
         runs: { type: "number", default: 50 },
         graph: { type: "boolean", default: true },

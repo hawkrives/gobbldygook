@@ -1,4 +1,4 @@
-import computeChunk from "../compute-chunk"
+import computeChunk from "../compute-chunk.ts"
 
 describe("computeChunk", () => {
   it("requires that the expression be an object", () => {

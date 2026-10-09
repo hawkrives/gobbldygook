@@ -1,3 +1,3 @@
-import type { Undoable } from "./redux/types"
+import type { Undoable } from "./redux/types.ts"
 
 export type { Undoable }

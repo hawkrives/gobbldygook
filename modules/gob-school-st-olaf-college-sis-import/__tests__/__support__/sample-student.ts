@@ -1,4 +1,4 @@
-import type { PartialStudent } from "../../convert-imported-student"
+import type { PartialStudent } from "../../convert-imported-student.ts"
 
 const data: PartialStudent = {
   majors: ["Asian Studies", "Computer Science"],

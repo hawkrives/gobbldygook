@@ -24,11 +24,11 @@ import type {
   WhereExpression,
 } from "@gob/examine-student"
 import yaml from "js-yaml"
-import get from "lodash/get"
-import repeat from "lodash/repeat"
+import get from "lodash/get.js"
+import repeat from "lodash/repeat.js"
 import plur from "plur"
 import chalk from "chalk"
-import { loadStudent } from "../lib/load-student"
+import { loadStudent } from "../lib/load-student.ts"
 
 // The child requirements of an evaluated requirement
 function childRequirements(
@@ -360,6 +360,7 @@ export default async function main() {
 		--path: change the root of the evaluation
 	`,
     {
+      importMeta: import.meta,
       flags: {
         json: { type: "boolean", default: false },
         yaml: { type: "boolean", default: false },

@@ -1,11 +1,11 @@
-import forEach from "lodash/forEach"
-import max from "lodash/max"
-import min from "lodash/min"
-import take from "lodash/take"
-import uniqBy from "lodash/uniqBy"
-import assertKeys from "./assert-keys"
-import compareCourseToQualification from "./compare-course-to-qualification"
-import simplifyCourse from "./simplify-course"
+import forEach from "lodash/forEach.js"
+import max from "lodash/max.js"
+import min from "lodash/min.js"
+import take from "lodash/take.js"
+import uniqBy from "lodash/uniqBy.js"
+import assertKeys from "./assert-keys.ts"
+import compareCourseToQualification from "./compare-course-to-qualification.ts"
+import simplifyCourse from "./simplify-course.ts"
 import type {
   Course,
   Qualifier,
@@ -13,7 +13,7 @@ import type {
   Counter,
   QualificationFunctionValue,
   QualificationStaticValue,
-} from "./types"
+} from "./types.ts"
 
 type FilterOptions = Readonly<{
   distinct?: boolean | undefined

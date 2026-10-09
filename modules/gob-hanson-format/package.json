@@ -1,15 +1,16 @@
 {
   "engines": {
-    "node": ">=22"
+    "node": ">=22.18"
   },
   "name": "@gob/hanson-format",
+  "type": "module",
   "version": "3.0.0-rc.2",
   "main": "index.ts",
   "repository": "hawkrives/gobbldygook",
   "author": "Hawken MacKay Rives",
   "license": "MIT",
   "scripts": {
-    "build": "pegjs --allowed-start-rules Result,Filter < ./parse-hanson-string.pegjs > ./parse-hanson-string.js"
+    "build": "pegjs --allowed-start-rules Result,Filter < ./parse-hanson-string.pegjs > ./parse-hanson-string.cjs"
   },
   "dependencies": {
     "lodash": "^4.18.1"

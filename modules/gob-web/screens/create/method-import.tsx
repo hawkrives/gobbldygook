@@ -1,20 +1,20 @@
 import * as React from "react"
 import { serializeError } from "serialize-error"
-import { RaisedButton } from "../../components/button"
+import { RaisedButton } from "../../components/button.ts"
 import { semesterName } from "@gob/school-st-olaf-college"
 import {
   convertStudent,
   type PartialStudent,
 } from "@gob/school-st-olaf-college-sis-import"
 import { List, type Collection } from "immutable"
-import { getCourse } from "../../helpers/get-courses"
-import { StudentSummary } from "../../modules/student/student-summary"
-import { action as initStudent } from "../../redux/students/actions/init-student"
+import { getCourse } from "../../helpers/get-courses.ts"
+import { StudentSummary } from "../../modules/student/student-summary.tsx"
+import { action as initStudent } from "../../redux/students/actions/init-student.ts"
 import { connect, type ConnectedProps } from "react-redux"
 import type { RouteComponentProps } from "@reach/router"
 import type { Course as CourseType, Result } from "@gob/types"
 import { Student, Schedule } from "@gob/object-student"
-import { Header } from "./components"
+import { Header } from "./components.ts"
 import "./method-import.scss"
 
 const connector = connect(undefined, { initStudent })

@@ -1,5 +1,5 @@
 import type { Course } from "@gob/types"
-import { alterForEvaluation } from "../alter-for-evaluation"
+import { alterForEvaluation } from "../alter-for-evaluation.ts"
 
 const course: Course = {
   type: "Research",

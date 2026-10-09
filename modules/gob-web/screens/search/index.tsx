@@ -1,6 +1,6 @@
 import { Link, type RouteComponentProps } from "@reach/router"
-import { RaisedButton } from "../../components/button"
-import { CourseSearcher } from "../../modules/course-searcher"
+import { RaisedButton } from "../../components/button.ts"
+import { CourseSearcher } from "../../modules/course-searcher/index.ts"
 import styled from "styled-components"
 
 let Container = styled.div`

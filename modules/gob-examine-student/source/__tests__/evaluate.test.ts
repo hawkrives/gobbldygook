@@ -1,5 +1,5 @@
-import { evaluate } from "../evaluate"
-import type { Course, ParsedHansonFile } from "../types"
+import { evaluate } from "../evaluate.ts"
+import type { Course, ParsedHansonFile } from "../types.ts"
 
 describe("evaluate", () => {
   it("evaluates!", () => {

@@ -1,6 +1,6 @@
 {
   "engines": {
-    "node": ">=22"
+    "node": ">=22.18"
   },
   "name": "@gob/webpack-plugin-html",
   "version": "1.0.0",

@@ -1,4 +1,4 @@
-import { parse } from "../../parse-hanson-string"
+import { parse } from "../../parse-hanson-string.cjs"
 
 const f = (str: string) => {
   expect(() => parse(str, { startRule: "Filter" })).not.toThrow()

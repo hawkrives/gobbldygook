@@ -1,5 +1,5 @@
-import isEqualWith from "lodash/isEqualWith"
-import type { Course } from "./types"
+import isEqualWith from "lodash/isEqualWith.js"
+import type { Course } from "./types.ts"
 const baseKeys = new Set([
   "department",
   "international",

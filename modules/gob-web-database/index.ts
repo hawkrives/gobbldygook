@@ -6,7 +6,7 @@ treo.Promise = ES6Promise
 import queryTreoDatabase from "@gob/treo-plugin-query"
 import batchGet from "@gob/treo-plugin-batch-get"
 
-import defaultSchema from "./schema"
+import defaultSchema from "./schema.ts"
 
 export const createDatabase = (
   name: string = "gobbldygook",

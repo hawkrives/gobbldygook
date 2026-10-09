@@ -2,11 +2,11 @@ jest.spyOn(global.console, "log").mockImplementation(() => jest.fn())
 jest.spyOn(global.console, "error").mockImplementation(() => jest.fn())
 jest.spyOn(global.console, "warn").mockImplementation(() => jest.fn())
 jest.mock("@gob/web-database")
-import { db } from "../db"
+import { db } from "../db.ts"
 import cleanPriorData, {
   getPriorCourses,
   getPriorAreas,
-} from "../clean-prior-data"
+} from "../clean-prior-data.ts"
 describe("getPriorCourses", () => {
   beforeEach(async () => {
     await db.__clear()

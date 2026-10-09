@@ -1,5 +1,5 @@
-import getOccurrences from "../get-occurrences"
-import type { Course } from "../types"
+import getOccurrences from "../get-occurrences.ts"
+import type { Course } from "../types.ts"
 
 describe("getOccurrences", () => {
   it("returns a list of occurrences of a course", () => {

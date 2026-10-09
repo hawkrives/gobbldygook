@@ -1,13 +1,14 @@
 import styled from "styled-components"
 import { Router, Link, type RouteComponentProps } from "@reach/router"
-import { RaisedButton } from "../../components/button"
+import { RaisedButton } from "../../components/button.ts"
 import Loadable from "react-loadable"
-import { LoadingComponent } from "../../components/loading-comp"
+import { LoadingComponent } from "../../components/loading-comp.tsx"
 
 let NotFound = (_props: RouteComponentProps) => <h1>404 Not Found</h1>
 
 const Editor = Loadable<RouteComponentProps>({
-  loader: () => import("../../modules/area-editor").then((m) => m.AreaEditor),
+  loader: () =>
+    import("../../modules/area-editor/index.ts").then((m) => m.AreaEditor),
   loading: LoadingComponent,
 })
 

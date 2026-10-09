@@ -1,5 +1,5 @@
-import { computeOccurrence } from "../compute-chunk"
-import type { Course, OccurrenceExpression } from "../types"
+import { computeOccurrence } from "../compute-chunk.ts"
+import type { Course, OccurrenceExpression } from "../types.ts"
 
 describe("computeOccurrence", () => {
   it("computes the number of times a course has been taken vs. a minimum count", () => {

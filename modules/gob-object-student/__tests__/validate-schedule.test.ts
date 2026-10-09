@@ -1,7 +1,7 @@
 import { List } from "immutable"
-import { validateSchedule } from "../validate-schedule"
-import { Schedule } from "../schedule"
-import { course } from "./course.support"
+import { validateSchedule } from "../validate-schedule.ts"
+import { Schedule } from "../schedule.ts"
+import { course } from "./course.support.ts"
 
 const thisYear = new Date().getFullYear()
 const mondayMorning = [{ day: "Mo", start: "9:05", end: "10:00" }]

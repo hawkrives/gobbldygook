@@ -1,12 +1,12 @@
 import * as React from "react"
 import type { Course as CourseType } from "@gob/types"
-import { queryCourseDatabase } from "../../helpers/query-course-database"
+import { queryCourseDatabase } from "../../helpers/query-course-database.ts"
 import mem from "mem"
-import { sortAndGroup } from "./lib"
-import { ga } from "../../analytics"
+import { sortAndGroup } from "./lib.ts"
+import { ga } from "../../analytics.ts"
 import { List } from "immutable"
 import type { Set } from "immutable"
-import type { GROUP_BY_KEY, SORT_BY_KEY } from "./constants"
+import type { GROUP_BY_KEY, SORT_BY_KEY } from "./constants.ts"
 
 type Props = Readonly<{
   query: string

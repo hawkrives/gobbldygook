@@ -1,13 +1,13 @@
 import * as React from "react"
-import noop from "lodash/noop"
+import noop from "lodash/noop.js"
 import styled from "styled-components"
-import { InlineList, InlineListItem } from "../../components/list"
-import CourseTitle from "./course-title"
+import { InlineList, InlineListItem } from "../../components/list.tsx"
+import CourseTitle from "./course-title.tsx"
 import { buildDeptNum } from "@gob/school-st-olaf-college"
-import CourseWarnings from "./warnings"
+import CourseWarnings from "./warnings.tsx"
 import type { Course } from "@gob/types"
 import type { WarningType } from "@gob/object-student"
-import { consolidateOfferings } from "./offerings"
+import { consolidateOfferings } from "./offerings.ts"
 import type { List } from "immutable"
 
 export const Container = styled.article`

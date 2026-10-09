@@ -2,7 +2,7 @@ jest.spyOn(global.console, "log").mockImplementation(() => jest.fn())
 jest.spyOn(global.console, "error").mockImplementation(() => jest.fn())
 jest.spyOn(global.console, "warn").mockImplementation(() => jest.fn())
 jest.mock("@gob/web-database")
-jest.mock("../lib-dispatch", () => {
+jest.mock("../lib-dispatch.ts", () => {
   const NotificationMock = jest.fn(() => ({
     start: jest.fn(),
     increment: jest.fn(),
@@ -13,11 +13,11 @@ jest.mock("../lib-dispatch", () => {
     Notification: NotificationMock,
   }
 })
-jest.mock("../clean-prior-data", () => jest.fn())
-jest.mock("../store-data", () => jest.fn())
-jest.mock("../parse-data", () => jest.fn())
-jest.mock("../cache-item-hash", () => jest.fn())
-jest.mock("@gob/lib/fetch-helpers", () => {
+jest.mock("../clean-prior-data.ts", () => jest.fn())
+jest.mock("../store-data.ts", () => jest.fn())
+jest.mock("../parse-data.ts", () => jest.fn())
+jest.mock("../cache-item-hash.ts", () => jest.fn())
+jest.mock("@gob/lib/fetch-helpers.ts", () => {
   return {
     status: (x: unknown) => x,
     text: (x: unknown) => x,
@@ -37,12 +37,12 @@ const fetchMock = jest.fn<Promise<unknown>, [url: string]>(() => {
   throw new Error("you must pick either goodFetch or badFetch")
 })
 globalThis.fetch = fetchMock as unknown as typeof fetch
-import { db } from "../db"
-import cleanPriorData from "../clean-prior-data"
-import * as dispatch from "../lib-dispatch"
-import storeData from "../store-data"
-import cacheItemHash from "../cache-item-hash"
-import updateDatabase from "../update-database"
+import { db } from "../db.ts"
+import cleanPriorData from "../clean-prior-data.ts"
+import * as dispatch from "../lib-dispatch.ts"
+import storeData from "../store-data.ts"
+import cacheItemHash from "../cache-item-hash.ts"
+import updateDatabase from "../update-database.ts"
 beforeEach(async () => {
   await db.__clear()
   goodFetch.mockClear()

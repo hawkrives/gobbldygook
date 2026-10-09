@@ -1,4 +1,4 @@
-import pathToOverride from "../path-to-override"
+import pathToOverride from "../path-to-override.ts"
 
 describe("pathToOverride", () => {
   it("computes the path to an override", () => {

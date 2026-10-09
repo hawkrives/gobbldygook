@@ -1,5 +1,5 @@
-import computeCountWithOperator from "./compute-count-with-operator"
-import type { Counter, Fulfillment, Expression, Course } from "./types"
+import computeCountWithOperator from "./compute-count-with-operator.ts"
+import type { Counter, Fulfillment, Expression, Course } from "./types.ts"
 type ReturnType = {
   computedResult: boolean
   matches: Course[]

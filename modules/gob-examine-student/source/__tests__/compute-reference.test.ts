@@ -1,5 +1,5 @@
-import { computeReference } from "../compute-chunk"
-import type { ReferenceExpression, Requirement } from "../types"
+import { computeReference } from "../compute-chunk.ts"
+import type { ReferenceExpression, Requirement } from "../types.ts"
 
 describe("computeReference", () => {
   it("returns the result of the referenced requirement", () => {

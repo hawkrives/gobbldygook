@@ -1,5 +1,5 @@
 /* oxlint-disable typescript/prefer-readonly-parameter-types -- these helpers build expressions for computeOf, which writes its results onto them */
-import computeChunk, { computeOf } from "../compute-chunk"
+import computeChunk, { computeOf } from "../compute-chunk.ts"
 import type {
   Course,
   CourseExpression,
@@ -8,7 +8,7 @@ import type {
   Qualification,
   QualificationValue,
   Requirement,
-} from "../types"
+} from "../types.ts"
 
 const csci = (number: number): Course => ({ department: ["CSCI"], number })
 const course = (department: string, number: number): CourseExpression => ({

@@ -1,5 +1,5 @@
 import stringify from "stabilize"
-import { Schedule } from "../schedule"
+import { Schedule } from "../schedule.ts"
 import { List } from "immutable"
 
 describe("Schedule", () => {

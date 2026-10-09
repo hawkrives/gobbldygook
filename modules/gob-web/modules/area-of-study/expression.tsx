@@ -1,7 +1,7 @@
 import type * as React from "react"
 import cx from "classnames"
-import CourseExpression from "./expression--course"
-import ResultIndicator from "./result-indicator"
+import CourseExpression from "./expression--course.tsx"
+import ResultIndicator from "./result-indicator.tsx"
 import type {
   BooleanExpression,
   Course,

@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { db } from "../../helpers/db"
+import { db } from "../../helpers/db.ts"
 import type { HansonFile } from "@gob/hanson-format"
 
 type Props = Readonly<{

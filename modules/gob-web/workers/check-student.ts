@@ -1,9 +1,9 @@
-import uniqueId from "lodash/uniqueId"
-import CheckStudentWorker from "./check-student.worker"
+import uniqueId from "lodash/uniqueId.js"
+import CheckStudentWorker from "./check-student.worker.ts"
 import type { ParsedHansonFile } from "@gob/hanson-format"
 import type { EvaluationResult } from "@gob/examine-student"
 import { Student } from "@gob/object-student"
-import { getCourse } from "../helpers/get-courses"
+import { getCourse } from "../helpers/get-courses.ts"
 import mem from "mem"
 import QuickLRU from "quick-lru"
 

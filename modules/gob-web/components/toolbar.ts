@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import { FlatButton } from "./button"
-import { Icon } from "./icon"
+import { FlatButton } from "./button.ts"
+import { Icon } from "./icon.ts"
 
 export const Toolbar = styled.div`
   display: flex;

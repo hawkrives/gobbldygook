@@ -1,16 +1,16 @@
 import * as React from "react"
-import { RaisedButton } from "../../components/button"
+import { RaisedButton } from "../../components/button.ts"
 import cx from "classnames"
 import { connect, type ConnectedProps } from "react-redux"
 import type { RouteComponentProps } from "@reach/router"
 import { Student } from "@gob/object-student"
-import { Header } from "./components"
-import uniqueId from "lodash/uniqueId"
-import { action as initStudent } from "../../redux/students/actions/init-student"
+import { Header } from "./components.ts"
+import uniqueId from "lodash/uniqueId.js"
+import { action as initStudent } from "../../redux/students/actions/init-student.ts"
 import {
   AreaPicker,
   type Selection,
-} from "../../components/area-of-study/picker"
+} from "../../components/area-of-study/picker.tsx"
 
 import "./method-manual.scss"
 

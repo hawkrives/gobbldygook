@@ -16,4 +16,4 @@ node = "24"
 "netlify" = "mise run build"
 "start" = { dir = "{{ config_root }}/modules/gob-web", run = "node --run start" }
 "test" = "./node_modules/.bin/jest"
-"typecheck" = { run = "./node_modules/.bin/tsc -p .", description = "Typecheck the TypeScript source" }
+"typecheck" = { run = ["./node_modules/.bin/tsc -p .", "./node_modules/.bin/tsc -p modules/gob-web"], description = "Typecheck the TypeScript source" }

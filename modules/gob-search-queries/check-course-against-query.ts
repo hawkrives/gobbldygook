@@ -1,5 +1,5 @@
-import toPairs from "lodash/toPairs"
-import type { Query, Queryable, QueryValue } from "./types"
+import toPairs from "lodash/toPairs.js"
+import type { Query, Queryable, QueryValue } from "./types.ts"
 
 const isTrue = (x: boolean): boolean => x
 

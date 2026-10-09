@@ -1,13 +1,13 @@
 import * as React from "react"
 import styled from "styled-components"
-import { PlainList, ListItem } from "../../components/list"
-import { Icon } from "../../components/icon"
+import { PlainList, ListItem } from "../../components/list.tsx"
+import { Icon } from "../../components/icon.ts"
 import {
   iosClockOutline,
   iosCalendarOutline,
   alertCircled,
-} from "../../icons/ionicons"
-import * as theme from "../../theme"
+} from "../../icons/ionicons.tsx"
+import * as theme from "../../theme/index.ts"
 import type { WarningType, WarningTypeEnum } from "@gob/object-student"
 import { List } from "immutable"
 

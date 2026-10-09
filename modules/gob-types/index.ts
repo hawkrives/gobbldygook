@@ -1,4 +1,4 @@
-export type { Course, Offering } from "./course"
+export type { Course, Offering } from "./course.ts"
 
 export type Result<T> =
   | { error: false; result: T; meta?: Record<string, unknown> }

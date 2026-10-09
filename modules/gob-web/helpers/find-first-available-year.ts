@@ -1,5 +1,5 @@
-import uniq from "lodash/uniq"
-import sortBy from "lodash/sortBy"
+import uniq from "lodash/uniq.js"
+import sortBy from "lodash/sortBy.js"
 import { findMissingNumber } from "@gob/lib"
 
 /**

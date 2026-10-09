@@ -1,8 +1,8 @@
-import { db } from "./db"
+import { db } from "./db.ts"
 import { enhanceHanson } from "@gob/hanson-format"
 import type { HansonFile, ParsedHansonFile } from "@gob/hanson-format"
-import some from "lodash/some"
-import maxBy from "lodash/maxBy"
+import some from "lodash/some.js"
+import maxBy from "lodash/maxBy.js"
 import type { AreaQuery } from "@gob/object-student"
 
 type DatabaseQuery = {

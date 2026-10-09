@@ -1,4 +1,4 @@
-import pluralizeArea from "../pluralize-area"
+import pluralizeArea from "../pluralize-area.ts"
 
 describe("pluralizeArea", () => {
   it("pluralizes degree to degrees", () => {

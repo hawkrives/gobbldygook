@@ -1,4 +1,4 @@
-import takeWhile from "lodash/takeWhile"
+import takeWhile from "lodash/takeWhile.js"
 import { queryCourses } from "@gob/search-queries"
 import type { Query } from "@gob/search-queries"
 

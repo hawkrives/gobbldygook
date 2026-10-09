@@ -1,3 +1,3 @@
-export { default as DraggableCourse } from "./draggable"
-export { ModalCourse } from "./modal"
-export { default as CompactCourse } from "./compact"
+export { default as DraggableCourse } from "./draggable.tsx"
+export { ModalCourse } from "./modal.tsx"
+export { default as CompactCourse } from "./compact.tsx"

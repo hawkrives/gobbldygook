@@ -1,13 +1,13 @@
 import * as React from "react"
-import { Card } from "../../components/card"
+import { Card } from "../../components/card.ts"
 import styled from "styled-components"
 import { enhanceHanson, type HansonFile } from "@gob/hanson-format"
 import type { EvaluationResult } from "@gob/examine-student"
 import yaml from "js-yaml"
 import stabilize from "stabilize"
 import LZString from "lz-string"
-import { Editor } from "./editor"
-import { PlainAreaOfStudy } from "../area-of-study"
+import { Editor } from "./editor.tsx"
+import { PlainAreaOfStudy } from "../area-of-study/index.ts"
 
 type EditorState = Readonly<{ content?: string }>
 

@@ -1,7 +1,7 @@
-import { db } from "./db"
+import { db } from "./db.ts"
 import range from "idb-range"
-import fromPairs from "lodash/fromPairs"
-import getCacheStoreName from "./get-cache-store-name"
+import fromPairs from "lodash/fromPairs.js"
+import getCacheStoreName from "./get-cache-store-name.ts"
 
 export function getPriorCourses(path: string): Promise<Record<string, null>> {
   return db

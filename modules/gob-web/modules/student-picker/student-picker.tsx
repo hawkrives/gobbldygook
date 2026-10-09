@@ -1,20 +1,20 @@
 import type * as React from "react"
 import { Link } from "@reach/router"
-import * as theme from "../../theme"
+import * as theme from "../../theme/index.ts"
 import {
   androidSearch,
   funnel,
   androidApps,
   androidMenu,
   androidAdd,
-} from "../../icons/ionicons"
-import { Toolbar } from "../../components/toolbar"
-import { FlatButton, RaisedButton } from "../../components/button"
-import { Icon } from "../../components/icon"
-import StudentList from "./student-list"
+} from "../../icons/ionicons.tsx"
+import { Toolbar } from "../../components/toolbar.ts"
+import { FlatButton, RaisedButton } from "../../components/button.ts"
+import { Icon } from "../../components/icon.ts"
+import StudentList from "./student-list.tsx"
 import styled from "styled-components"
-import type { State as StudentState } from "../../redux/students/reducers"
-import type { SORT_BY_ENUM } from "./types"
+import type { State as StudentState } from "../../redux/students/reducers/index.ts"
+import type { SORT_BY_ENUM } from "./types.ts"
 
 const StudentListToolbar = styled(Toolbar)`
   width: 100%;

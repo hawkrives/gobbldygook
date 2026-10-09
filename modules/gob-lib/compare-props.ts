@@ -1,4 +1,4 @@
-import every from "lodash/every"
+import every from "lodash/every.js"
 
 export function compareProps(
   oldProps: Readonly<Record<string, unknown>>,

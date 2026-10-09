@@ -1,6 +1,6 @@
-import { action as initStudent } from "../init-student"
+import { action as initStudent } from "../init-student.ts"
 import { Student } from "@gob/object-student"
-import { INIT_STUDENT } from "../../constants"
+import { INIT_STUDENT } from "../../constants.ts"
 
 describe("initStudent action", () => {
   it("returns an action to create a student", () => {

@@ -2,8 +2,8 @@ jest.spyOn(global.console, "log").mockImplementation(() => jest.fn())
 jest.spyOn(global.console, "error").mockImplementation(() => jest.fn())
 jest.spyOn(global.console, "warn").mockImplementation(() => jest.fn())
 jest.mock("@gob/web-database")
-import { db } from "../db"
-import needsUpdate from "../needs-update"
+import { db } from "../db.ts"
+import needsUpdate from "../needs-update.ts"
 beforeEach(async () => {
   await db.__clear()
 })

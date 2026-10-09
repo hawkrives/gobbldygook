@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import * as theme from "../theme"
+import * as theme from "../theme/index.ts"
 
 const BaseButton = styled.button.attrs({ type: "button" })`
   cursor: pointer;

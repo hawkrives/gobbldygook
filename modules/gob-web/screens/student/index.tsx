@@ -1,31 +1,31 @@
 import type * as React from "react"
 import { Router, type RouteComponentProps } from "@reach/router"
 import Loadable from "react-loadable"
-import { LoadingComponent } from "../../components/loading-comp"
+import { LoadingComponent } from "../../components/loading-comp.tsx"
 import { Student } from "@gob/object-student"
-import type { Undoable } from "../../types"
-import { Sidebar } from "../../components/sidebar"
-import type { CourseSearcherSidebar } from "../../components/sidebar--course-search"
-import type CourseTableComponent from "../../modules/course-table"
-import type SemesterDetailComponent from "../../modules/semester-detail"
-import type ShareSheet from "./share-student"
+import type { Undoable } from "../../types.ts"
+import { Sidebar } from "../../components/sidebar.ts"
+import type { CourseSearcherSidebar } from "../../components/sidebar--course-search.tsx"
+import type CourseTableComponent from "../../modules/course-table/index.ts"
+import type SemesterDetailComponent from "../../modules/semester-detail/index.ts"
+import type ShareSheet from "./share-student.tsx"
 
-import StudentOverview from "../../modules/student"
+import StudentOverview from "../../modules/student/index.ts"
 
 const SearchSidebar = Loadable<
   React.ComponentProps<typeof CourseSearcherSidebar>
 >({
   loader: () =>
-    import("../../components/sidebar--course-search").then(
+    import("../../components/sidebar--course-search.tsx").then(
       (mod) => mod.CourseSearcherSidebar,
     ),
   loading: LoadingComponent,
 })
 
-import CourseRemovalBox from "../../components/course-removal-box"
-import { ConnectedSidebarToolbar } from "../../components/sidebar-toolbar"
-import { AreaOfStudySidebar } from "../../modules/student/area-of-study-sidebar"
-import { StudentSummary } from "../../modules/student/student-summary"
+import CourseRemovalBox from "../../components/course-removal-box.tsx"
+import { ConnectedSidebarToolbar } from "../../components/sidebar-toolbar.tsx"
+import { AreaOfStudySidebar } from "../../modules/student/area-of-study-sidebar.tsx"
+import { StudentSummary } from "../../modules/student/student-summary.tsx"
 
 type SidebarProps = Readonly<RouteComponentProps> &
   Readonly<{ student: Undoable<Student> }>
@@ -47,19 +47,19 @@ const StatusSidebar = ({ student }: SidebarProps) => (
 const CourseTable = Loadable<
   RouteComponentProps & React.ComponentProps<typeof CourseTableComponent>
 >({
-  loader: () => import("../../modules/course-table"),
+  loader: () => import("../../modules/course-table/index.ts"),
   loading: LoadingComponent,
 })
 
 const ShareStudentOverlay = Loadable<React.ComponentProps<typeof ShareSheet>>({
-  loader: () => import("./share-student"),
+  loader: () => import("./share-student.tsx"),
   loading: LoadingComponent,
 })
 
 const SemesterDetail = Loadable<
   RouteComponentProps & React.ComponentProps<typeof SemesterDetailComponent>
 >({
-  loader: () => import("../../modules/semester-detail"),
+  loader: () => import("../../modules/semester-detail/index.ts"),
   loading: LoadingComponent,
 })
 

@@ -1,4 +1,4 @@
-import { randomChar } from "../random-char"
+import { randomChar } from "../random-char.ts"
 
 describe("randomChar", () => {
   it("finds a random integer between the parameters", () => {

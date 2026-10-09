@@ -7,12 +7,12 @@ import type {
   Requirement as RequirementType,
 } from "@gob/examine-student"
 
-import { Icon } from "../../components/icon"
-import { iosBoltOutline, iosBolt } from "../../icons/ionicons"
-import Filter from "./expression--filter"
-import Expression from "./expression"
-import { FlatButton } from "../../components/button"
-import ResultIndicator from "./result-indicator"
+import { Icon } from "../../components/icon.ts"
+import { iosBoltOutline, iosBolt } from "../../icons/ionicons.tsx"
+import Filter from "./expression--filter.tsx"
+import Expression from "./expression.tsx"
+import { FlatButton } from "../../components/button.ts"
+import ResultIndicator from "./result-indicator.tsx"
 
 import "./requirement.scss"
 

@@ -1,5 +1,5 @@
-import checkForCourse from "../check-for-course"
-import type { Course } from "../types"
+import checkForCourse from "../check-for-course.ts"
+import type { Course } from "../types.ts"
 
 describe("checkForCourse", () => {
   it("returns true if the course is found", () => {

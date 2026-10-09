@@ -1,17 +1,17 @@
 import * as React from "react"
 import { pluralizeArea } from "@gob/examine-student"
-import capitalize from "lodash/capitalize"
-import { AreaOfStudy } from "../area-of-study"
+import capitalize from "lodash/capitalize.js"
+import { AreaOfStudy } from "../area-of-study/index.ts"
 import {
   AreaPicker,
   type Selection,
-} from "../../components/area-of-study/picker"
-import { FlatButton } from "../../components/button"
+} from "../../components/area-of-study/picker.tsx"
+import { FlatButton } from "../../components/button.ts"
 import { List } from "immutable"
 import { connect, type ConnectedProps } from "react-redux"
-import type { ActionMeta } from "react-select/lib/types"
+import type { ActionMeta } from "react-select/lib/types.js"
 import { Student, type AreaQuery } from "@gob/object-student"
-import { changeStudent } from "../../redux/students/actions/change"
+import { changeStudent } from "../../redux/students/actions/change.ts"
 
 import "./area-of-study-group.scss"
 

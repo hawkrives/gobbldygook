@@ -1,4 +1,4 @@
-import { splitDeptNum } from "../split-dept-num"
+import { splitDeptNum } from "../split-dept-num.ts"
 
 describe("splitDeptNum", () => {
   it("splits up a single department course into components", () => {

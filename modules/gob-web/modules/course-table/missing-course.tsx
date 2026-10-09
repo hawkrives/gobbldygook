@@ -1,4 +1,4 @@
-import FakeCourse from "./fake-course"
+import FakeCourse from "./fake-course.tsx"
 
 type Props = {
   readonly className?: string

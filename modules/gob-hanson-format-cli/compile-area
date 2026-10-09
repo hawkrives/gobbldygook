@@ -1,4 +1,5 @@
 #!/usr/bin/env node
 
-require("@gob/cli/lib/init")
-require("./compile-area.ts").cli()
+import { cli } from "./compile-area.ts"
+
+cli()

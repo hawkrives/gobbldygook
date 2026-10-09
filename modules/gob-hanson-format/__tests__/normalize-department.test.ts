@@ -1,4 +1,4 @@
-import { normalizeDepartment } from "../convert-department"
+import { normalizeDepartment } from "../convert-department.ts"
 
 describe("normalizeDepartment", () => {
   it("expands a short department abbreviation into a long abbreviation", () => {

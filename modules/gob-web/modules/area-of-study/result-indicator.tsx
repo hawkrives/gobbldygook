@@ -1,5 +1,5 @@
-import { Icon } from "../../components/icon"
-import { checkmark, close } from "../../icons/ionicons"
+import { Icon } from "../../components/icon.ts"
+import { checkmark, close } from "../../icons/ionicons.tsx"
 
 export default function ResultIndicator({
   result,

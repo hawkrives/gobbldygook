@@ -1,6 +1,6 @@
-import compact from "lodash/compact"
-import getDepartments from "./get-departments"
-import type { Course } from "./types"
+import compact from "lodash/compact.js"
+import getDepartments from "./get-departments.ts"
+import type { Course } from "./types.ts"
 /**
  * Counts the number of unique departments in a list of courses
  * @private

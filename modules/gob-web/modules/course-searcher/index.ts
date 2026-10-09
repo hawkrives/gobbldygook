@@ -1,1 +1,1 @@
-export { CourseSearcher } from "./searcher"
+export { CourseSearcher } from "./searcher.tsx"

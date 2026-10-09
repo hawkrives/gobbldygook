@@ -1,4 +1,4 @@
-import compareCourseToCourse from "../compare-course-to-course"
+import compareCourseToCourse from "../compare-course-to-course.ts"
 
 describe("compareCourseToCourse", () => {
   it("compares select keys of courses", () => {

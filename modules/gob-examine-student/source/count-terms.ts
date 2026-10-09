@@ -1,4 +1,4 @@
-import type { Course } from "./types"
+import type { Course } from "./types.ts"
 
 /**
  * Counts the number of unique terms from a list of courses

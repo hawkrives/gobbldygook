@@ -1,4 +1,4 @@
-import { db } from "./db"
+import { db } from "./db.ts"
 import { status, json } from "@gob/lib"
 import type { Course as CourseType, Result } from "@gob/types"
 import type { List } from "immutable"

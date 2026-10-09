@@ -1,16 +1,16 @@
-import flatten from "lodash/flatten"
-import mapValues from "lodash/mapValues"
-import toPairs from "lodash/toPairs"
-import uniq from "lodash/uniq"
+import flatten from "lodash/flatten.js"
+import mapValues from "lodash/mapValues.js"
+import toPairs from "lodash/toPairs.js"
+import uniq from "lodash/uniq.js"
 import { quacksLikeDeptNum, splitDeptNum } from "@gob/school-st-olaf-college"
 import {
   partitionByIndex,
   splitParagraph,
   zipToObjectWithArrays,
 } from "@gob/lib"
-import departmentMapping from "sto-course-related-data/handmade/to_department_abbreviations.json"
-import gereqMapping from "sto-course-related-data/handmade/to_gereq_abbreviations.json"
-import type { Query, QueryValue } from "./types"
+import departmentMapping from "sto-course-related-data/handmade/to_department_abbreviations.json" with { type: "json" }
+import gereqMapping from "sto-course-related-data/handmade/to_gereq_abbreviations.json" with { type: "json" }
+import type { Query, QueryValue } from "./types.ts"
 const semesters: Readonly<
   Record<string, QueryValue | ReadonlyArray<QueryValue>>
 > = {

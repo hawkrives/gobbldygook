@@ -2,12 +2,12 @@ jest.spyOn(global.console, "log").mockImplementation(() => jest.fn())
 jest.spyOn(global.console, "error").mockImplementation(() => jest.fn())
 jest.spyOn(global.console, "warn").mockImplementation(() => jest.fn())
 jest.mock("@gob/web-database")
-import { db } from "../db"
+import { db } from "../db.ts"
 import removeDuplicateAreas, {
   generateOps,
   buildRemoveAreaOps,
-} from "../remove-duplicate-areas"
-import { mockArea } from "./area.support"
+} from "../remove-duplicate-areas.ts"
+import { mockArea } from "./area.support.ts"
 beforeEach(async () => {
   await db.__clear()
 })

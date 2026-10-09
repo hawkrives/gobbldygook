@@ -1,4 +1,4 @@
-import { zipToObjectWithArrays } from "../zip-to-object-with-arrays"
+import { zipToObjectWithArrays } from "../zip-to-object-with-arrays.ts"
 
 describe("zipToObjectWithArrays", () => {
   it("parses area ids", () => {

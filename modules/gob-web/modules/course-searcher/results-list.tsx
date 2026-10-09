@@ -2,12 +2,12 @@ import * as React from "react"
 import { VariableSizeList } from "react-window"
 import type { ListChildComponentProps } from "react-window"
 import type { List } from "immutable"
-import { Card } from "../../components/card"
+import { Card } from "../../components/card.ts"
 import AutoSizer from "react-virtualized-auto-sizer"
-import { DraggableCourse } from "../course"
+import { DraggableCourse } from "../course/index.ts"
 import styled from "styled-components"
 import type { Course as CourseType } from "@gob/types"
-import type { GROUP_BY_KEY } from "./constants"
+import type { GROUP_BY_KEY } from "./constants.ts"
 
 type Results = List<string | CourseType>
 

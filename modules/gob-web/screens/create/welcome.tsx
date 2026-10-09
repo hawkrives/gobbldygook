@@ -1,6 +1,6 @@
 import { Link, type RouteComponentProps } from "@reach/router"
-import { RaisedButton } from "../../components/button"
-import { Choices, Header } from "./components"
+import { RaisedButton } from "../../components/button.ts"
+import { Choices, Header } from "./components.ts"
 
 export default function WelcomeScreen(_props: RouteComponentProps) {
   return (

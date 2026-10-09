@@ -1,8 +1,8 @@
-import groupBy from "lodash/groupBy"
-import flatten from "lodash/flatten"
-import sortBy from "lodash/sortBy"
-import values from "lodash/values"
-import findLast from "lodash/findLast"
+import groupBy from "lodash/groupBy.js"
+import flatten from "lodash/flatten.js"
+import sortBy from "lodash/sortBy.js"
+import values from "lodash/values.js"
+import findLast from "lodash/findLast.js"
 
 // The fields filterAreaList reads, which both area files and parsed areas
 // have

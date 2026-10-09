@@ -1,24 +1,24 @@
-import keys from "lodash/keys"
-import take from "lodash/take"
-import xor from "lodash/xor"
+import keys from "lodash/keys.js"
+import take from "lodash/take.js"
+import xor from "lodash/xor.js"
 import stringify from "stabilize"
-import applyFulfillmentToResult from "./apply-fulfillment-to-result"
-import asRequirement from "./as-requirement"
-import assertKeys from "./assert-keys"
-import collectMatches from "./collect-matches"
-import collectTakenCourses from "./collect-taken-courses"
-import computeCountWithOperator from "./compute-count-with-operator"
-import countCourses from "./count-courses"
-import { countCredits } from "./count-credits"
-import { countTerms } from "./count-terms"
-import countDepartments from "./count-departments"
-import excludeCourse from "./exclude-course"
-import filterByWhereClause from "./filter-by-where-clause"
-import findCourse from "./find-course"
-import getMatchesFromChildren from "./get-matches-from-children"
-import getMatchesFromFilter from "./get-matches-from-filter"
-import getOccurrences from "./get-occurrences"
-import simplifyCourse from "./simplify-course"
+import applyFulfillmentToResult from "./apply-fulfillment-to-result.ts"
+import asRequirement from "./as-requirement.ts"
+import assertKeys from "./assert-keys.ts"
+import collectMatches from "./collect-matches.ts"
+import collectTakenCourses from "./collect-taken-courses.ts"
+import computeCountWithOperator from "./compute-count-with-operator.ts"
+import countCourses from "./count-courses.ts"
+import { countCredits } from "./count-credits.ts"
+import { countTerms } from "./count-terms.ts"
+import countDepartments from "./count-departments.ts"
+import excludeCourse from "./exclude-course.ts"
+import filterByWhereClause from "./filter-by-where-clause.ts"
+import findCourse from "./find-course.ts"
+import getMatchesFromChildren from "./get-matches-from-children.ts"
+import getMatchesFromFilter from "./get-matches-from-filter.ts"
+import getOccurrences from "./get-occurrences.ts"
+import simplifyCourse from "./simplify-course.ts"
 import type {
   Expression,
   Requirement,
@@ -32,7 +32,7 @@ import type {
   OfExpression,
   ReferenceExpression,
   WhereExpression,
-} from "./types"
+} from "./types.ts"
 type StringifiedCourse = string
 
 /**

@@ -1,4 +1,4 @@
-import { Container, Title, SummaryRow } from "../course/compact"
+import { Container, Title, SummaryRow } from "../course/compact.tsx"
 
 type PropTypes = Readonly<{
   className?: string | undefined

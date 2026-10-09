@@ -1,6 +1,6 @@
 import type * as React from "react"
 
-import uniqueId from "lodash/uniqueId"
+import uniqueId from "lodash/uniqueId.js"
 
 export function LabelledSelect(
   props: Readonly<{

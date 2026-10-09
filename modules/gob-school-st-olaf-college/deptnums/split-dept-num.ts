@@ -1,4 +1,4 @@
-import { deptNumRegex } from "./dept-num-regex"
+import { deptNumRegex } from "./dept-num-regex.ts"
 export type DeptNum = {
   department: string
   number: number

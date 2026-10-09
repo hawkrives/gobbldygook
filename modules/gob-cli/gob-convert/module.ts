@@ -4,14 +4,15 @@ outputs the converted file to stdout
 `
 
 import meow from "meow"
-import { getCourse } from "../lib/get-course"
-import { loadJson } from "../lib/load-json"
+import { getCourse } from "../lib/get-course.ts"
+import { loadJson } from "../lib/load-json.ts"
 import { convertStudent } from "@gob/school-st-olaf-college-sis-import"
 import type { PartialStudent } from "@gob/school-st-olaf-college-sis-import"
-import { version } from "../package.json"
+import packageJson from "../package.json" with { type: "json" }
 
 function args() {
   return meow(usage, {
+    importMeta: import.meta,
     booleanDefault: false,
   })
 }
@@ -25,7 +26,7 @@ export default async function main() {
   let hydrated = await convertStudent(data, getCourse)
   // Student reads its default version when its module loads, which is too
   // early for anything set here, so stamp the CLI's version on directly
-  hydrated = hydrated.set("version", version)
+  hydrated = hydrated.set("version", packageJson.version)
 
   console.log(JSON.stringify(hydrated))
 }

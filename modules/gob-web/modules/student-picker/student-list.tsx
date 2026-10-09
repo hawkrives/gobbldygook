@@ -1,11 +1,11 @@
 import fuzzysearch from "fuzzysearch"
 import styled from "styled-components"
-import { Card } from "../../components/card"
-import { PlainList } from "../../components/list"
-import StudentListItem from "./student-list-item"
-import type { SORT_BY_ENUM } from "./types"
+import { Card } from "../../components/card.ts"
+import { PlainList } from "../../components/list.tsx"
+import StudentListItem from "./student-list-item.tsx"
+import type { SORT_BY_ENUM } from "./types.ts"
 import { Map } from "immutable"
-import type { State as StudentState } from "../../redux/students/reducers"
+import type { State as StudentState } from "../../redux/students/reducers/index.ts"
 
 const OuterCard = styled(Card)`
   max-width: 35em;

@@ -1,7 +1,7 @@
-import compute from "../compute"
-import asRequirement from "../as-requirement"
-import pathToOverride from "../path-to-override"
-import type { Course, CourseExpression, Requirement } from "../types"
+import compute from "../compute.ts"
+import asRequirement from "../as-requirement.ts"
+import pathToOverride from "../path-to-override.ts"
+import type { Course, CourseExpression, Requirement } from "../types.ts"
 
 const course = (department: string, number: number): CourseExpression => ({
   $type: "course",

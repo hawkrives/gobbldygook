@@ -1,6 +1,6 @@
-import { removeStudentFromCache } from "../../../helpers/save-student"
+import { removeStudentFromCache } from "../../../helpers/save-student.ts"
 
-import { DESTROY_STUDENT } from "../constants"
+import { DESTROY_STUDENT } from "../constants.ts"
 
 export type DestroyStudentAction = {
   type: typeof DESTROY_STUDENT

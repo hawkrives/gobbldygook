@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { findWordForProgress } from "@gob/lib"
-import * as theme from "../theme"
+import * as theme from "../theme/index.ts"
 
 const colorMap: Readonly<Record<string, string>> = {
   hundred: theme.green300,

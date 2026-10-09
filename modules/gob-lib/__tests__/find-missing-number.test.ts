@@ -1,4 +1,4 @@
-import { findMissingNumber } from "../find-missing-number"
+import { findMissingNumber } from "../find-missing-number.ts"
 describe("findMissingNumber", () => {
   it("takes a list of numbers and finds the first gap", () => {
     expect(findMissingNumber([1, 2, 3])).toBe(null)

@@ -1,8 +1,8 @@
 import * as React from "react"
 import Select from "react-select"
-import type { ActionMeta, ValueType } from "react-select/lib/types"
-import uniqueId from "lodash/uniqueId"
-import { AreaOfStudyProvider } from "./provider"
+import type { ActionMeta, ValueType } from "react-select/lib/types.js"
+import uniqueId from "lodash/uniqueId.js"
+import { AreaOfStudyProvider } from "./provider.tsx"
 import type { HansonFile } from "@gob/hanson-format"
 import { filterAreaList } from "@gob/object-student"
 

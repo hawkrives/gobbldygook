@@ -1,7 +1,7 @@
 import * as React from "react"
-import { ModalCourse } from "./modal"
-import CompactCourse from "./compact"
-import type { Props as MiniProps } from "./compact"
+import { ModalCourse } from "./modal.tsx"
+import CompactCourse from "./compact.tsx"
+import type { Props as MiniProps } from "./compact.tsx"
 
 type State = {
   isOpen: boolean

@@ -1,8 +1,8 @@
-import { db } from "./db"
-import groupBy from "lodash/groupBy"
-import filter from "lodash/filter"
-import fromPairs from "lodash/fromPairs"
-import sortBy from "lodash/sortBy"
+import { db } from "./db.ts"
+import groupBy from "lodash/groupBy.js"
+import filter from "lodash/filter.js"
+import fromPairs from "lodash/fromPairs.js"
+import sortBy from "lodash/sortBy.js"
 
 // A stored area. Invalid areas may be missing any field but sourcePath,
 // which is the store's key.

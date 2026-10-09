@@ -4,7 +4,7 @@ import {
   logMessage,
   removeNotification,
   startProgress,
-} from "../actions"
+} from "../actions.ts"
 
 import {
   INCREMENT_PROGRESS,
@@ -12,7 +12,7 @@ import {
   LOG_MESSAGE,
   REMOVE_NOTIFICATION,
   START_PROGRESS,
-} from "../constants"
+} from "../constants.ts"
 
 describe("removeNotification action", () => {
   it("creates an action to remove a notification", () => {

@@ -12,20 +12,20 @@ import type {
   DropTargetConnector,
   DropTargetMonitor,
 } from "react-dnd"
-import * as theme from "../../theme"
-import { FlatButton } from "../../components/button"
-import { Icon } from "../../components/icon"
-import { InlineList, InlineListItem } from "../../components/list"
-import { close, search, alertCircled } from "../../icons/ionicons"
+import * as theme from "../../theme/index.ts"
+import { FlatButton } from "../../components/button.ts"
+import { Icon } from "../../components/icon.ts"
+import { InlineList, InlineListItem } from "../../components/list.tsx"
+import { close, search, alertCircled } from "../../icons/ionicons.tsx"
 import { IDENT_COURSE } from "@gob/object-student"
 import type { Student, Schedule, WarningType } from "@gob/object-student"
 import type { Course as CourseType, Result } from "@gob/types"
-import { getCourse } from "../../helpers/get-courses"
-import { changeStudent } from "../../redux/students/actions/change"
-import type { DraggedCourse } from "../course/draggable"
-import { CourseList } from "./course-list"
+import { getCourse } from "../../helpers/get-courses.ts"
+import { changeStudent } from "../../redux/students/actions/change.ts"
+import type { DraggedCourse } from "../course/draggable.tsx"
+import { CourseList } from "./course-list.tsx"
 import styled from "styled-components"
-import { loadDataForTerm } from "../../workers/load-data"
+import { loadDataForTerm } from "../../workers/load-data.ts"
 
 const Container = styled.div`
   ${theme.card};

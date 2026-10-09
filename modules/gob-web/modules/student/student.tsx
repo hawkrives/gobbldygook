@@ -1,12 +1,12 @@
 import * as React from "react"
 import { Helmet } from "react-helmet-async"
 import { connect, type ConnectedProps } from "react-redux"
-import { loadStudent } from "../../redux/students/actions/load-student"
-import type { RootState } from "../../redux/reducer"
+import { loadStudent } from "../../redux/students/actions/load-student.ts"
+import type { RootState } from "../../redux/reducer.ts"
 import { Student as StudentObject } from "@gob/object-student"
-import type { Undoable } from "../../types"
+import type { Undoable } from "../../types.ts"
 import styled from "styled-components"
-import { Card } from "../../components/card"
+import { Card } from "../../components/card.ts"
 
 const Container = styled.div`
   display: grid;

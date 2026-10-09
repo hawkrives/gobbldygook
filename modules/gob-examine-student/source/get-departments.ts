@@ -1,4 +1,4 @@
-import type { Course } from "./types"
+import type { Course } from "./types.ts"
 /**
  * Gets the list of unique departments from a list of courses
  * @private

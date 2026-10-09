@@ -1,5 +1,5 @@
-import filterByWhereClause from "../filter-by-where-clause"
-import type { BooleanQualification, Course, Qualification } from "../types"
+import filterByWhereClause from "../filter-by-where-clause.ts"
+import type { BooleanQualification, Course, Qualification } from "../types.ts"
 
 describe("filterByWhereClause", () => {
   it("filters an array of courses by a where-clause", () => {

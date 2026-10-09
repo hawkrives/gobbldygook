@@ -1,4 +1,4 @@
-import { customParser } from "./parse-hanson-string.support"
+import { customParser } from "./parse-hanson-string.support.ts"
 const parseReference = customParser({ allowedStartRules: ["Reference"] })
 const parseRequirementTitle = customParser({
   allowedStartRules: ["RequirementTitle"],

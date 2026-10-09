@@ -1,9 +1,9 @@
-import collectTakenCourses from "../collect-taken-courses"
+import collectTakenCourses from "../collect-taken-courses.ts"
 import type {
   BooleanExpression,
   CourseExpression,
   OfExpression,
-} from "../types"
+} from "../types.ts"
 
 describe("collectTakenCourses", () => {
   it("collects a list of all of the courses anywhere in this object which have the `_taken` property.", () => {

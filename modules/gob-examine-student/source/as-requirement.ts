@@ -1,4 +1,4 @@
-import type { Requirement } from "./types"
+import type { Requirement } from "./types.ts"
 
 /**
  * Reads a value as a requirement. Requirements are objects; the code that

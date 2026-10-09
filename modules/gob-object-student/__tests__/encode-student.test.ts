@@ -1,6 +1,6 @@
 import stringify from "stabilize"
-import { encodeStudent } from "../encode-student"
-import { Student } from "../student"
+import { encodeStudent } from "../encode-student.ts"
+import { Student } from "../student.ts"
 
 describe("encodeStudent", () => {
   it("URI-encodes the student's JSON", () => {

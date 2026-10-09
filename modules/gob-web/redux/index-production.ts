@@ -2,9 +2,9 @@ import { applyMiddleware, legacy_createStore, compose } from "redux"
 import type { Middleware, StoreEnhancer } from "redux"
 import promiseMiddleware from "redux-promise"
 import thunkMiddleware from "redux-thunk"
-import saveStudentsMiddleware from "./middleware/save-student"
-import rootReducer from "./reducer"
-import type { RootState } from "./reducer"
+import saveStudentsMiddleware from "./middleware/save-student.ts"
+import rootReducer from "./reducer.ts"
+import type { RootState } from "./reducer.ts"
 
 let middleware: Array<Middleware> = [
   promiseMiddleware,

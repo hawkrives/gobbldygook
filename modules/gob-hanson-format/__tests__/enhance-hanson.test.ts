@@ -1,4 +1,4 @@
-import { enhanceHanson } from "../enhance-hanson"
+import { enhanceHanson } from "../enhance-hanson.ts"
 
 describe("enhanceHanson", () => {
   it('adds a "slug" key to the top-level', () => {

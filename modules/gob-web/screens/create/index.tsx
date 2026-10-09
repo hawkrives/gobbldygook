@@ -1,33 +1,33 @@
 import Loadable from "react-loadable"
-import { LoadingComponent } from "../../components/loading-comp"
+import { LoadingComponent } from "../../components/loading-comp.tsx"
 import styled from "styled-components"
-import { Card } from "../../components/card"
+import { Card } from "../../components/card.ts"
 import { Router, type RouteComponentProps } from "@reach/router"
 
 let NotFound = (_props: RouteComponentProps) => <h1>404 Not Found</h1>
 
 const WelcomePage = Loadable<RouteComponentProps>({
-  loader: () => import("./welcome"),
+  loader: () => import("./welcome.tsx"),
   loading: LoadingComponent,
 })
 
 const ImportPage = Loadable<RouteComponentProps>({
-  loader: () => import("./method-import"),
+  loader: () => import("./method-import.tsx"),
   loading: LoadingComponent,
 })
 
 const ManualPage = Loadable<RouteComponentProps>({
-  loader: () => import("./method-manual"),
+  loader: () => import("./method-manual.tsx"),
   loading: LoadingComponent,
 })
 
 const DrivePage = Loadable<RouteComponentProps>({
-  loader: () => import("./method-drive"),
+  loader: () => import("./method-drive.tsx"),
   loading: LoadingComponent,
 })
 
 const UploadPage = Loadable<RouteComponentProps>({
-  loader: () => import("./method-upload"),
+  loader: () => import("./method-upload.tsx"),
   loading: LoadingComponent,
 })
 

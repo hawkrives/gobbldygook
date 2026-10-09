@@ -1,0 +1,10 @@
+{
+  // webpack bundles gob-web, so it resolves imports the way a bundler does.
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "bundler"
+  },
+  "include": ["**/*.ts", "**/*.tsx", "../../config/types/**/*.d.ts"],
+  "exclude": ["**/node_modules", "**/build"]
+}

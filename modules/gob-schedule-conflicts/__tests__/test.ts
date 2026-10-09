@@ -4,7 +4,7 @@ import {
   findTimeConflicts,
   checkCoursesForTimeConflicts,
   removeColon,
-} from "../index"
+} from "../index.ts"
 
 test("times sort properly as strings", () => {
   expect(removeColon("1:00") < removeColon("14:00")).toBe(true)

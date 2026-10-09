@@ -4,14 +4,14 @@ validates the schedules of the given student
 `
 
 import meow from "meow"
-import { getCourse } from "../lib/get-course"
-import { loadJson } from "../lib/load-json"
+import { getCourse } from "../lib/get-course.ts"
+import { loadJson } from "../lib/load-json.ts"
 import { Student } from "@gob/object-student"
 import type { StudentInput } from "@gob/object-student"
 import { toPrettyTerm, buildDeptNum } from "@gob/school-st-olaf-college"
 
 function args() {
-  return meow(usage, { booleanDefault: false })
+  return meow(usage, { importMeta: import.meta, booleanDefault: false })
 }
 
 const print = (indent: number, message: string) => {

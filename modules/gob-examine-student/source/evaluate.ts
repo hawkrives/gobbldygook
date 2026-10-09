@@ -1,5 +1,5 @@
-import assertKeys from "./assert-keys"
-import compute from "./compute"
+import assertKeys from "./assert-keys.ts"
+import compute from "./compute.ts"
 import type {
   Course,
   ParsedHansonFile,
@@ -7,7 +7,7 @@ import type {
   FulfillmentsObject,
   EvaluationResult,
   Expression,
-} from "./types"
+} from "./types.ts"
 
 type Input = {
   area: ParsedHansonFile

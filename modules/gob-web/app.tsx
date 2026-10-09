@@ -5,8 +5,8 @@ import HTML5Backend from "react-dnd-html5-backend"
 import { DragDropContext } from "react-dnd"
 import styled, { createGlobalStyle } from "styled-components"
 import Loadable from "react-loadable"
-import { LoadingComponent } from "./components/loading-comp"
-import { Card } from "./components/card"
+import { LoadingComponent } from "./components/loading-comp.tsx"
+import { Card } from "./components/card.ts"
 
 let GlobalStyle = createGlobalStyle`
     *, *::before, *::after {
@@ -57,32 +57,32 @@ let NotFound = (_props: RouteComponentProps) => (
 )
 
 let AreaEditor = Loadable<RouteComponentProps>({
-  loader: () => import("./screens/area-editor"),
+  loader: () => import("./screens/area-editor/index.tsx"),
   loading: LoadingComponent,
 })
 
 let StudentPicker = Loadable<RouteComponentProps>({
-  loader: () => import("./screens/picker"),
+  loader: () => import("./screens/picker/index.tsx"),
   loading: LoadingComponent,
 })
 
 let Degubber = Loadable<RouteComponentProps>({
-  loader: () => import("./screens/degub"),
+  loader: () => import("./screens/degub.tsx"),
   loading: LoadingComponent,
 })
 
 let CreateStudent = Loadable<RouteComponentProps>({
-  loader: () => import("./screens/create"),
+  loader: () => import("./screens/create/index.tsx"),
   loading: LoadingComponent,
 })
 
 let Student = Loadable<RouteComponentProps<{ studentId: string }>>({
-  loader: () => import("./screens/student"),
+  loader: () => import("./screens/student/index.tsx"),
   loading: LoadingComponent,
 })
 
 let CourseSearcher = Loadable<RouteComponentProps>({
-  loader: () => import("./screens/search"),
+  loader: () => import("./screens/search/index.tsx"),
   loading: LoadingComponent,
 })
 

@@ -1,8 +1,8 @@
 import { Range } from "immutable"
 import { Schedule } from "@gob/object-student"
 import type { Student } from "@gob/object-student"
-import { INIT_STUDENT } from "../constants"
-import { saveStudent } from "../../../helpers/save-student"
+import { INIT_STUDENT } from "../constants.ts"
+import { saveStudent } from "../../../helpers/save-student.ts"
 
 type Action = { type: typeof INIT_STUDENT; payload: Student }
 

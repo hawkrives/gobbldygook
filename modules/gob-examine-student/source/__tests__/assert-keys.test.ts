@@ -1,4 +1,4 @@
-import assertKeys from "../assert-keys"
+import assertKeys from "../assert-keys.ts"
 
 describe("assertKeys", () => {
   it("checks for required keys", () => {

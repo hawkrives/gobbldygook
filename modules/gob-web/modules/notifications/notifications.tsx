@@ -1,10 +1,10 @@
 import styled from "styled-components"
-import map from "lodash/map"
+import map from "lodash/map.js"
 import { connect } from "react-redux"
 import type { ConnectedProps } from "react-redux"
-import { removeNotification } from "./redux/actions"
-import type { RootState } from "../../redux/reducer"
-import Notification from "./notification"
+import { removeNotification } from "./redux/actions.ts"
+import type { RootState } from "../../redux/reducer.ts"
+import Notification from "./notification.tsx"
 
 const NotificationList = styled.ul`
   position: fixed;

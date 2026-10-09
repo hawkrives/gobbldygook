@@ -7,7 +7,7 @@ import {
   expandYear,
   semesterName,
 } from "@gob/school-st-olaf-college"
-import type { SORT_BY_KEY, GROUP_BY_KEY } from "./constants"
+import type { SORT_BY_KEY, GROUP_BY_KEY } from "./constants.ts"
 
 const ALL_DAYS = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
 

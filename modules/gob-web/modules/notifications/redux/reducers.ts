@@ -1,4 +1,4 @@
-import omit from "lodash/omit"
+import omit from "lodash/omit.js"
 
 import {
   LOG_MESSAGE,
@@ -6,9 +6,9 @@ import {
   START_PROGRESS,
   INCREMENT_PROGRESS,
   REMOVE_NOTIFICATION,
-} from "./constants"
+} from "./constants.ts"
 import type { AnyAction } from "redux"
-import type { NotificationAction } from "./actions"
+import type { NotificationAction } from "./actions.ts"
 
 // INCREMENT_PROGRESS updates its own copy of a progress notification, so
 // this one stays writable

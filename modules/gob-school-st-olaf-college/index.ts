@@ -1,7 +1,7 @@
-export { expandYear, semesterName, toPrettyTerm } from "./course-info"
+export { expandYear, semesterName, toPrettyTerm } from "./course-info/index.ts"
 export {
   buildDeptNum,
   deptNumRegex,
   quacksLikeDeptNum,
   splitDeptNum,
-} from "./deptnums"
+} from "./deptnums/index.ts"

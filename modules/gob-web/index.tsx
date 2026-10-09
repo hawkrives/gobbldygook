@@ -26,28 +26,28 @@ import { render } from "react-dom"
 import type { Store } from "redux"
 
 // Include google analytics (in production)
-import startAnalytics from "./analytics"
+import startAnalytics from "./analytics.ts"
 startAnalytics()
 
 // Kick off data loading
-import loadData from "./workers/load-data"
+import loadData from "./workers/load-data.ts"
 loadData().catch((err: unknown) => {
   console.error(err)
 })
 
 // ... attach the db for debugging
-import { db } from "./helpers/db"
+import { db } from "./helpers/db.ts"
 globalThis._db = db
 
 // Kick off the GUI
 console.log("3. 2.. 1... Blast off! 🚀")
 
-import App from "./app"
+import App from "./app.tsx"
 
 // Create the redux store
-import configureStore from "./redux"
+import configureStore from "./redux/index.ts"
 import { Provider } from "react-redux"
-import Notifications from "./modules/notifications"
+import Notifications from "./modules/notifications/index.ts"
 const store = configureStore()
 
 // for debugging

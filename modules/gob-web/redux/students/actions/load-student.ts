@@ -1,7 +1,7 @@
 import type { Student } from "@gob/object-student"
-import { loadStudent as load } from "../../../helpers/load-student"
+import { loadStudent as load } from "../../../helpers/load-student.ts"
 
-import { LOAD_STUDENT } from "../constants"
+import { LOAD_STUDENT } from "../constants.ts"
 
 // redux-promise dispatches the action again once the student has loaded
 export function loadStudent(id: string): {
