@@ -12,6 +12,7 @@ import { Icon } from "./icon"
 import { iosTrashOutline } from "../icons/ionicons"
 import { action as changeStudent } from "../redux/students/actions/change"
 import type { ActionCreator as ChangeStudentFunc } from "../redux/students/actions/change"
+import type { DraggedCourse } from "../modules/course/draggable"
 
 const Box = styled.div<{ canDrop: boolean; isOver: boolean }>`
   padding: 5em 1em;
@@ -53,14 +54,6 @@ type CollectedProps = {
   canDrop: boolean
   connectDropTarget: ConnectDropTarget
   isOver: boolean
-}
-
-// What a dragged course carries; see the course's drag source
-type DraggedCourse = {
-  clbid: string
-  fromScheduleId?: string | null
-  isFromSchedule?: boolean
-  isFromSearch?: boolean
 }
 
 function CourseRemovalBox(props: OwnProps & CollectedProps) {

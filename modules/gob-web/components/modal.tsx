@@ -12,6 +12,8 @@ type ModalProps = {
   backdropClassName?: string
   children?: React.ReactNode
   className?: string
+  // react-modal's aria-label for the dialog
+  contentLabel?: string
   onClose: () => unknown
 }
 
