@@ -3,7 +3,8 @@ import type { RouteComponentProps } from "@reach/router"
 import { LoadingComponent } from "../../components/loading-comp.tsx"
 
 const StudentPicker = Loadable<{}>({
-  loader: () => import("../../modules/student-picker/index.ts"),
+  loader: () =>
+    import("../../modules/student-picker/index.ts").then((m) => m.default),
   loading: LoadingComponent,
 })
 

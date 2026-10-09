@@ -37,4 +37,4 @@ ComponentName/
 
 - Follow the existing lint configuration (`.oxlintrc.json`).
 - Ensure code passes `mise run typecheck` before submission.
-- Components should work with the project's webpack configuration and babel setup.
+- Components should work with the project's Vite build.

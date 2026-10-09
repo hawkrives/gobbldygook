@@ -17,7 +17,7 @@ This rule defines:
 
 This project uses [Changesets](https://changesets.dev/) to track user-facing changes. When a change affects what users see or do, run `mise run changeset` and describe the change; commit the generated file in `.changeset/` with the rest of your work. Refactors, tooling, and other internal-only changes do not need a changeset.
 
-The `@gob/*` packages share one version number (except `@gob/webpack-plugin-html`), so a bump to any of them bumps all of them.
+The `@gob/*` packages share one version number, so a bump to any of them bumps all of them.
 
 ## Before You Finish Your Session
 

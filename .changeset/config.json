@@ -6,7 +6,7 @@
   "changelog": "@changesets/cli/changelog",
   "commit": false,
   "ignore": [],
-  "fixed": [["@gob/*", "!@gob/webpack-plugin-html"]],
+  "fixed": [["@gob/*"]],
   "linked": [],
   "updateInternalDependencies": "patch"
 }

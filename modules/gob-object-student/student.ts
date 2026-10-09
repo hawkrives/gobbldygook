@@ -68,8 +68,8 @@ export type StudentInput = Readonly<
 const defaultValues: StudentType = {
   id: "unknown",
   name: "Student X",
-  // Kept from the Flow code, which read global.VERSION: only Jest sets it.
-  // Webpack's DefinePlugin replaces the bare VERSION identifier, not this.
+  // Kept from the Flow code, which read global.VERSION: only the test harness sets it.
+  // Vite's `define` replaces the bare VERSION identifier, not this.
   version: globalThis.VERSION,
   matriculation: 0,
   graduation: 4,

@@ -7,27 +7,27 @@ import { Router, type RouteComponentProps } from "@reach/router"
 let NotFound = (_props: RouteComponentProps) => <h1>404 Not Found</h1>
 
 const WelcomePage = Loadable<RouteComponentProps>({
-  loader: () => import("./welcome.tsx"),
+  loader: () => import("./welcome.tsx").then((m) => m.default),
   loading: LoadingComponent,
 })
 
 const ImportPage = Loadable<RouteComponentProps>({
-  loader: () => import("./method-import.tsx"),
+  loader: () => import("./method-import.tsx").then((m) => m.default),
   loading: LoadingComponent,
 })
 
 const ManualPage = Loadable<RouteComponentProps>({
-  loader: () => import("./method-manual.tsx"),
+  loader: () => import("./method-manual.tsx").then((m) => m.default),
   loading: LoadingComponent,
 })
 
 const DrivePage = Loadable<RouteComponentProps>({
-  loader: () => import("./method-drive.tsx"),
+  loader: () => import("./method-drive.tsx").then((m) => m.default),
   loading: LoadingComponent,
 })
 
 const UploadPage = Loadable<RouteComponentProps>({
-  loader: () => import("./method-upload.tsx"),
+  loader: () => import("./method-upload.tsx").then((m) => m.default),
   loading: LoadingComponent,
 })
 

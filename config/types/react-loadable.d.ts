@@ -11,9 +11,10 @@ declare module "react-loadable" {
   }
 
   type Options<Props> = {
-    loader: () => Promise<
-      ComponentType<Props> | { default: ComponentType<Props> }
-    >
+    // react-loadable unwraps a module only when it has webpack's __esModule
+    // marker, which a native import() namespace lacks, so loaders return the
+    // component itself
+    loader: () => Promise<ComponentType<Props>>
     loading: ComponentType<LoadingComponentProps>
     delay?: number
     timeout?: number

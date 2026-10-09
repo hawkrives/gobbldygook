@@ -26,18 +26,15 @@ This document provides comprehensive learning resources for developers working o
 
 ### Build Tools & Development
 
-- **Webpack 5**: https://webpack.js.org/
+- **Vite**: https://vite.dev/
   - Module bundling, code splitting, asset optimization
   - Development server, hot module replacement
-- **Babel**: https://babeljs.io/
-  - JavaScript transpilation for browser compatibility
-  - JSX transformation, ES6+ features
 - **npm Workspaces**: https://docs.npmjs.com/cli/v7/using-npm/workspaces
   - Monorepo management for the 22 modules
 
 ### Testing & Quality
 
-- **Jest**: https://jestjs.io/
+- **Vitest**: https://vitest.dev/
   - Unit testing framework with built-in assertion library
   - Mocking, coverage reporting, snapshot testing
 - **oxlint**: https://oxc.rs/docs/guide/usage/linter
@@ -123,10 +120,10 @@ This document provides comprehensive learning resources for developers working o
 - **Quality Gates**: All checks must pass before merge
   - TypeScript type checking (zero errors)
   - oxlint (zero warnings)
-  - Jest tests (full coverage)
+  - Vitest tests (full coverage)
   - oxfmt formatting
   - Playwright end-to-end tests
-  - Webpack production build
+  - Vite production build
 
 ### Deployment
 
@@ -143,9 +140,8 @@ This document provides comprehensive learning resources for developers working o
 
 ### Build Performance
 
-- **Large Bundle Size**: Known issue with webpack configuration
-- **Duplicate Dependencies**: Multiple versions of packages (documented warnings)
-- **Build Time**: ~20-25 seconds for production builds
+- **Large Bundle Size**: Some chunks exceed Vite's 500 kB warning size
+- **Build Time**: ~2 seconds for production builds
 
 ### Browser Compatibility
 

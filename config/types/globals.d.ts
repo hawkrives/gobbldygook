@@ -1,5 +1,5 @@
-// Compile-time constants injected by webpack's DefinePlugin and Jest's
-// `globals` config.
+// Compile-time constants: Vite's `define` replaces these in the web build, and
+// the test harness sets TESTING and VERSION on globalThis.
 
 declare var VERSION: string
 declare var TESTING: boolean
@@ -7,8 +7,8 @@ declare var DEVELOPMENT: boolean
 declare var PRODUCTION: boolean
 declare var APP_BASE: string
 
-// The environment variables the code reads. Webpack's DefinePlugin replaces
-// `process.env.NODE_ENV` at build time.
+// The environment variables the code reads. Vite replaces them in the web
+// build.
 declare namespace NodeJS {
   interface ProcessEnv {
     NODE_ENV?: string
