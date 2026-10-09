@@ -18,7 +18,7 @@
     "@flakiness/playwright": "2.0.2",
     "@flakiness/vitest": "1.10.1",
     "@playwright/test": "1.64.0",
-    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/jest-dom": "7.0.1",
     "@types/js-yaml": "3.12.10",
     "@types/lodash": "4.17.25",
     "@types/node": "24.19.1",
