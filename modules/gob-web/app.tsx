@@ -57,32 +57,33 @@ let NotFound = (_props: RouteComponentProps) => (
 )
 
 let AreaEditor = Loadable<RouteComponentProps>({
-  loader: () => import("./screens/area-editor/index.tsx"),
+  loader: () =>
+    import("./screens/area-editor/index.tsx").then((m) => m.default),
   loading: LoadingComponent,
 })
 
 let StudentPicker = Loadable<RouteComponentProps>({
-  loader: () => import("./screens/picker/index.tsx"),
+  loader: () => import("./screens/picker/index.tsx").then((m) => m.default),
   loading: LoadingComponent,
 })
 
 let Degubber = Loadable<RouteComponentProps>({
-  loader: () => import("./screens/degub.tsx"),
+  loader: () => import("./screens/degub.tsx").then((m) => m.default),
   loading: LoadingComponent,
 })
 
 let CreateStudent = Loadable<RouteComponentProps>({
-  loader: () => import("./screens/create/index.tsx"),
+  loader: () => import("./screens/create/index.tsx").then((m) => m.default),
   loading: LoadingComponent,
 })
 
 let Student = Loadable<RouteComponentProps<{ studentId: string }>>({
-  loader: () => import("./screens/student/index.tsx"),
+  loader: () => import("./screens/student/index.tsx").then((m) => m.default),
   loading: LoadingComponent,
 })
 
 let CourseSearcher = Loadable<RouteComponentProps>({
-  loader: () => import("./screens/search/index.tsx"),
+  loader: () => import("./screens/search/index.tsx").then((m) => m.default),
   loading: LoadingComponent,
 })
 

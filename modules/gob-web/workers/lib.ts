@@ -5,9 +5,10 @@ declare const WorkerGlobalScope: (abstract new () => object) | undefined
 export const IS_WORKER =
   typeof WorkerGlobalScope !== "undefined" && self instanceof WorkerGlobalScope
 
-// worker-loader replaces a worker module's default export with a constructor
-// for the worker. Outside of webpack (in Jest), the module exports this
-// stand-in instead, which never answers.
+// The app imports each worker module with Vite's `?worker` suffix, which gives
+// a constructor for the worker. Under Vitest, vitest.config.ts resolves those
+// imports to the module itself, whose default export is this stand-in, which
+// never answers.
 class PointlessExportForTesting {
   addEventListener(_1: string, _2: unknown) {}
   removeEventListener(_1: string, _2: unknown) {}

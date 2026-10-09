@@ -3,7 +3,7 @@
   // `tsc` only typechecks (`mise run typecheck`). Node runs the non-web
   // packages' source directly by stripping types, so this config checks them
   // as Node sees them: ES modules with explicit file extensions. gob-web is
-  // bundled by webpack and has its own config in modules/gob-web.
+  // bundled by Vite and has its own config in modules/gob-web.
   "compilerOptions": {
     "target": "es2023",
     "lib": ["es2023", "dom", "dom.iterable"],

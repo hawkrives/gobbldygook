@@ -47,19 +47,21 @@ const StatusSidebar = ({ student }: SidebarProps) => (
 const CourseTable = Loadable<
   RouteComponentProps & React.ComponentProps<typeof CourseTableComponent>
 >({
-  loader: () => import("../../modules/course-table/index.ts"),
+  loader: () =>
+    import("../../modules/course-table/index.ts").then((m) => m.default),
   loading: LoadingComponent,
 })
 
 const ShareStudentOverlay = Loadable<React.ComponentProps<typeof ShareSheet>>({
-  loader: () => import("./share-student.tsx"),
+  loader: () => import("./share-student.tsx").then((m) => m.default),
   loading: LoadingComponent,
 })
 
 const SemesterDetail = Loadable<
   RouteComponentProps & React.ComponentProps<typeof SemesterDetailComponent>
 >({
-  loader: () => import("../../modules/semester-detail/index.ts"),
+  loader: () =>
+    import("../../modules/semester-detail/index.ts").then((m) => m.default),
   loading: LoadingComponent,
 })
 

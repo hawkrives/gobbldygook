@@ -14,11 +14,6 @@
     "node": ">=22.18"
   },
   "devDependencies": {
-    "@babel/core": "7.29.7",
-    "@babel/plugin-transform-runtime": "7.29.7",
-    "@babel/preset-env": "7.29.7",
-    "@babel/preset-react": "7.29.7",
-    "@babel/preset-typescript": "7.29.7",
     "@changesets/cli": "3.0.3",
     "@flakiness/playwright": "2.0.2",
     "@flakiness/vitest": "1.10.1",
@@ -38,7 +33,6 @@
     "@types/styled-components": "5.1.36",
     "@types/uuid": "3.4.13",
     "@vitest/coverage-v8": "5.0.1",
-    "core-js": "3.50.0",
     "cross-env": "10.1.0",
     "jsdom": "30.1.1",
     "oxfmt": "0.72.0",

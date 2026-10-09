@@ -1,5 +1,5 @@
 import uniqueId from "lodash/uniqueId.js"
-import CheckStudentWorker from "./check-student.worker.ts"
+import CheckStudentWorker from "./check-student.worker.ts?worker"
 import type { ParsedHansonFile } from "@gob/hanson-format"
 import type { EvaluationResult } from "@gob/examine-student"
 import { Student } from "@gob/object-student"
