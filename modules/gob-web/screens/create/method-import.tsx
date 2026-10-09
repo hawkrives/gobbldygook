@@ -1,6 +1,4 @@
-// @flow
-
-import React from "react"
+import * as React from "react"
 import { serializeError } from "serialize-error"
 import { RaisedButton } from "../../components/button"
 import { semesterName } from "@gob/school-st-olaf-college"
@@ -8,36 +6,35 @@ import {
   convertStudent,
   type PartialStudent,
 } from "@gob/school-st-olaf-college-sis-import"
-import { Map, List } from "immutable"
+import { List, type Collection } from "immutable"
 import { getCourse } from "../../helpers/get-courses"
 import { StudentSummary } from "../../modules/student/student-summary"
-import {
-  action as initStudent,
-  type ActionCreator as InitStudentFunc,
-} from "../../redux/students/actions/init-student"
-import { connect } from "react-redux"
+import { action as initStudent } from "../../redux/students/actions/init-student"
+import { connect, type ConnectedProps } from "react-redux"
+import type { RouteComponentProps } from "@reach/router"
 import type { Course as CourseType, Result } from "@gob/types"
 import { Student, Schedule } from "@gob/object-student"
 import { Header } from "./components"
 import "./method-import.scss"
 
-type Props = {
-  +initStudent: InitStudentFunc, // redux
-  +navigate?: (string) => mixed,
-}
+const connector = connect(undefined, { initStudent })
+
+type Props = RouteComponentProps & ConnectedProps<typeof connector>
+
+type ErrorInfo = { name?: string; message?: string; stack?: string }
 
 type State = {
-  status: "pending" | "processing" | "ready",
-  error: ?Error,
-  ids: Array<mixed>,
-  selectedId: ?number,
-  student: ?Student,
-  rawStudentText: string,
-  parsedStudentText: ?PartialStudent,
+  status: "pending" | "processing" | "ready"
+  error: ErrorInfo | null
+  ids: Array<unknown>
+  selectedId: number | null
+  student: Student | null
+  rawStudentText: string
+  parsedStudentText: PartialStudent | null
 }
 
 class SISImportScreen extends React.Component<Props, State> {
-  state = {
+  override state: State = {
     status: "pending",
     error: null,
     ids: [],
@@ -61,7 +58,8 @@ class SISImportScreen extends React.Component<Props, State> {
       this.setState(() => ({ student }))
     } catch (error) {
       console.warn(error)
-      this.setState(() => ({ error: serializeError(error) }))
+      // convertStudent and getCourse throw Errors
+      this.setState(() => ({ error: serializeError(error as Error) }))
     }
   }
 
@@ -78,29 +76,33 @@ class SISImportScreen extends React.Component<Props, State> {
     this.props.navigate(`/student/${id}`)
   }
 
-  handleRawStudent = (ev: SyntheticInputEvent<HTMLTextAreaElement>) => {
+  handleRawStudent = (ev: React.ChangeEvent<HTMLTextAreaElement>) => {
     ev.preventDefault()
 
     let data = ev.currentTarget.value
 
     this.setState(() => ({ rawStudentText: data }))
 
+    let parsedStudentText: PartialStudent
+    try {
+      // the SIS's export; convertStudent works with whatever it has
+      parsedStudentText = JSON.parse(data) as PartialStudent
+    } catch (error) {
+      console.warn(error)
+      // JSON.parse throws SyntaxErrors
+      this.setState(() => ({ error: error as SyntaxError }))
+      return
+    }
+
     this.setState(
-      () => {
-        try {
-          return { parsedStudentText: JSON.parse(data) }
-        } catch (error) {
-          console.warn(error)
-          return { error }
-        }
-      },
+      () => ({ parsedStudentText }),
       () => {
         this.handleImportData()
       },
     )
   }
 
-  render() {
+  override render() {
     let { student, error, parsedStudentText } = this.state
 
     return (
@@ -195,10 +197,10 @@ const StudentInfo = ({ student }: { student: Student }) => (
 )
 
 const ScheduleListing = (props: {
-  schedules: Map<string, Schedule>,
-  fabrications: List<CourseType>,
+  schedules: Collection.Keyed<string, Schedule>
+  fabrications: List<CourseType>
 }) => {
-  let { schedules = Map(), fabrications = List() } = props
+  let { schedules, fabrications } = props
 
   return (
     <ul>
@@ -219,12 +221,15 @@ const ScheduleListing = (props: {
   )
 }
 
+type ListingProps = { schedule: Schedule; fabrications: List<CourseType> }
+type ListingState = { courses: List<Result<CourseType>> }
+
 class AbbreviatedCourseListing extends React.Component<
-  { schedule: Schedule, fabrications: List<CourseType> },
-  { courses: List<Result<CourseType>> },
+  ListingProps,
+  ListingState
 > {
-  state = { courses: List() }
-  componentDidMount() {
+  override state: ListingState = { courses: List() }
+  override componentDidMount() {
     this.fetchCourses()
   }
   fetchCourses = async () => {
@@ -234,8 +239,8 @@ class AbbreviatedCourseListing extends React.Component<
     )
     this.setState(() => ({ courses }))
   }
-  render() {
-    let { courses = List() } = this.state
+  override render() {
+    let { courses } = this.state
 
     return (
       <ul>
@@ -256,4 +261,4 @@ class AbbreviatedCourseListing extends React.Component<
   }
 }
 
-export default connect(undefined, { initStudent })(SISImportScreen)
+export default connector(SISImportScreen)

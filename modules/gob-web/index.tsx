@@ -1,5 +1,3 @@
-// @flow
-
 // Fira Sans, latin subset, every weight in upright and italic
 import "@fontsource/fira-sans/latin-100.css"
 import "@fontsource/fira-sans/latin-100-italic.css"
@@ -23,9 +21,9 @@ import "./styles/normalize.scss"
 import "./styles/css-colors.scss"
 import "./styles/css-variables.scss"
 
-// Include React and react-dom.render
-import React from "react"
+// Include react-dom.render
 import { render } from "react-dom"
+import type { Store } from "redux"
 
 // Include google analytics (in production)
 import startAnalytics from "./analytics"
@@ -37,7 +35,7 @@ loadData().catch((err) => console.error(err))
 
 // ... attach the db for debugging
 import { db } from "./helpers/db"
-global._db = db
+globalThis._db = db
 
 // Kick off the GUI
 console.log("3. 2.. 1... Blast off! 🚀")
@@ -51,10 +49,16 @@ import Notifications from "./modules/notifications"
 const store = configureStore()
 
 // for debugging
-global._dispatch = store.dispatch
-global._store = store
+globalThis._dispatch = store.dispatch
+globalThis._store = store
 
-let renderFunc = (chosenStore) => {
+declare global {
+  // the database and store, attached for debugging in the console
+  var _db: typeof db | undefined
+  var _store: Store | undefined
+}
+
+let renderFunc = (chosenStore: Store) => {
   let renderEl = document.getElementById("gobbldygook")
   if (!renderEl) {
     return

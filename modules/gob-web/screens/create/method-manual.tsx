@@ -1,17 +1,12 @@
-// @flow
-
-import React from "react"
+import * as React from "react"
 import { RaisedButton } from "../../components/button"
 import cx from "classnames"
-import { Set } from "immutable"
-import { connect } from "react-redux"
+import { connect, type ConnectedProps } from "react-redux"
+import type { RouteComponentProps } from "@reach/router"
 import { Student } from "@gob/object-student"
 import { Header } from "./components"
 import uniqueId from "lodash/uniqueId"
-import {
-  action as initStudent,
-  type ActionCreator as InitStudentFunc,
-} from "../../redux/students/actions/init-student"
+import { action as initStudent } from "../../redux/students/actions/init-student"
 import {
   AreaPicker,
   type Selection,
@@ -21,27 +16,26 @@ import "./method-manual.scss"
 
 let now = new Date()
 
-type Props = {
-  +initStudent: InitStudentFunc, // redux
-  +navigate?: (string) => mixed, // react-router
-}
+const connector = connect(undefined, { initStudent })
+
+type Props = RouteComponentProps & ConnectedProps<typeof connector>
 
 type State = {
-  error: string,
-  name: string,
-  matriculation: number,
-  matriculationIsValid: boolean,
-  graduation: number,
-  graduationIsValid: boolean,
-  degrees: Array<Selection>,
-  majors: Array<Selection>,
-  concentrations: Array<Selection>,
-  emphases: Array<Selection>,
-  submitted: boolean,
+  error: string
+  name: string
+  matriculation: number
+  matriculationIsValid: boolean
+  graduation: number
+  graduationIsValid: boolean
+  degrees: Array<Selection>
+  majors: Array<Selection>
+  concentrations: Array<Selection>
+  emphases: Array<Selection>
+  submitted: boolean
 }
 
 class ManualCreationScreen extends React.Component<Props, State> {
-  state = {
+  override state: State = {
     error: "",
     name: "Black Widow",
     matriculation: now.getFullYear() - 3,
@@ -55,15 +49,11 @@ class ManualCreationScreen extends React.Component<Props, State> {
     submitted: false,
   }
 
-  handleAreaChange = (type) => (values) => {
-    this.setState({ [type]: values })
-  }
-
-  handleNameChange = (ev) => {
+  handleNameChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ name: ev.target.value })
   }
 
-  handleMatriculationChange = (ev) => {
+  handleMatriculationChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     let val = parseInt(ev.target.value)
     let isValid = Boolean(val && ev.target.value.length === 4)
     this.setState(
@@ -72,7 +62,7 @@ class ManualCreationScreen extends React.Component<Props, State> {
     )
   }
 
-  handleGraduationChange = (ev) => {
+  handleGraduationChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     let val = parseInt(ev.target.value)
     let isValid = Boolean(val && ev.target.value.length === 4)
     this.setState(
@@ -82,7 +72,7 @@ class ManualCreationScreen extends React.Component<Props, State> {
   }
 
   checkValidity = () => {
-    let errors = []
+    let errors: Array<string> = []
 
     if (!this.state.matriculationIsValid) {
       errors.push("Matriculation is invalid.")
@@ -97,19 +87,14 @@ class ManualCreationScreen extends React.Component<Props, State> {
   onCreateStudent = () => {
     this.setState(() => ({ submitted: true }))
 
-    let studies = Set([
+    let studies = [
       ...this.state.degrees,
       ...this.state.majors,
       ...this.state.concentrations,
       ...this.state.emphases,
-    ])
-
-    // pick out only the values that we want
-    studies = studies.map(({ name, revision, type }) => ({
-      name,
-      revision,
-      type,
-    }))
+    ]
+      // pick out only the values that we want
+      .map(({ name, revision, type }) => ({ name, revision, type }))
 
     let rawStudent = {
       name: this.state.name,
@@ -118,7 +103,7 @@ class ManualCreationScreen extends React.Component<Props, State> {
       studies,
     }
 
-    let student = new Student((rawStudent: any))
+    let student = new Student(rawStudent)
 
     this.props.initStudent(student)
     if (!this.props.navigate) {
@@ -127,7 +112,7 @@ class ManualCreationScreen extends React.Component<Props, State> {
     this.props.navigate(`/student/${student.id}`)
   }
 
-  onSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
+  onSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault()
   }
 
@@ -135,7 +120,7 @@ class ManualCreationScreen extends React.Component<Props, State> {
   matriculationLabelId = `student-editor--${uniqueId()}`
   graduationLabelId = `student-editor--${uniqueId()}`
 
-  render() {
+  override render() {
     return (
       <div className="manual">
         <Header>
@@ -226,4 +211,4 @@ class ManualCreationScreen extends React.Component<Props, State> {
   }
 }
 
-export default connect(undefined, { initStudent })(ManualCreationScreen)
+export default connector(ManualCreationScreen)

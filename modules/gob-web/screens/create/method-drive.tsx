@@ -1,9 +1,8 @@
-// @flow
+import { Component } from "react"
+import type { RouteComponentProps } from "@reach/router"
 
-import React, { Component } from "react"
-
-export default class DriveLinkScreen extends Component<{}> {
-  render() {
+export default class DriveLinkScreen extends Component<RouteComponentProps> {
+  override render() {
     return (
       <div>
         <header className="header">

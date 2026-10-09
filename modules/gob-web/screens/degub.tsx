@@ -1,15 +1,22 @@
-import React from "react"
-import PropTypes from "prop-types"
+import * as React from "react"
 import map from "lodash/map"
-import { connect } from "react-redux"
+import { connect, type ConnectedProps } from "react-redux"
+import type { RouteComponentProps } from "@reach/router"
+import type { Student as StudentObject } from "@gob/object-student"
+import type { RootState } from "../redux/reducer"
+import type { Undoable } from "../types"
 import { undo, redo } from "../redux/students/actions/undo"
 import { loadStudents } from "../redux/students/actions/load-students"
 
-function Student({ undo, redo, student }) {
-  if (student.isLoading) {
-    return <div>Loading student…</div>
-  }
-
+function Student({
+  undo,
+  redo,
+  student,
+}: {
+  undo: () => unknown
+  redo: () => unknown
+  student: Undoable<StudentObject>
+}) {
   const canUndo = student.past.length
   const canRedo = student.future.length
   const present = student.present
@@ -35,14 +42,21 @@ function Student({ undo, redo, student }) {
   )
 }
 
-Student.propTypes = {
-  redo: PropTypes.func.isRequired,
-  student: PropTypes.object.isRequired,
-  undo: PropTypes.func.isRequired,
-}
+const connector = connect(
+  (state: RootState) => ({ students: state.students }),
+  {
+    undo,
+    redo,
+    loadStudents,
+  },
+)
 
-function Degub(props) {
-  const students = props.students || []
+type Props = RouteComponentProps & {
+  className?: string
+} & ConnectedProps<typeof connector>
+
+function Degub(props: Props) {
+  const students = props.students
 
   return (
     <ul className={`degub ${props.className || ""}`}>
@@ -59,27 +73,13 @@ function Degub(props) {
   )
 }
 
-Degub.propTypes = {
-  className: PropTypes.string,
-  redo: PropTypes.func.isRequired,
-  students: PropTypes.object.isRequired,
-  undo: PropTypes.func.isRequired,
-}
-
-class DegubContainer extends React.Component {
-  static propTypes = {
-    loadStudents: PropTypes.func.isRequired,
-  }
-  componentDidMount() {
+class DegubContainer extends React.Component<Props> {
+  override componentDidMount() {
     this.props.loadStudents()
   }
-  render() {
+  override render() {
     return <Degub {...this.props} />
   }
 }
 
-export default connect((state) => ({ students: state.students }), {
-  undo,
-  redo,
-  loadStudents,
-})(DegubContainer)
+export default connector(DegubContainer)

@@ -1,16 +1,20 @@
-// @flow
-
-import * as React from "react"
-import { Router } from "@reach/router"
+import type * as React from "react"
+import { Router, type RouteComponentProps } from "@reach/router"
 import Loadable from "react-loadable"
 import { LoadingComponent } from "../../components/loading-comp"
 import { Student } from "@gob/object-student"
 import type { Undoable } from "../../types"
 import { Sidebar } from "../../components/sidebar"
+import type { CourseSearcherSidebar } from "../../components/sidebar--course-search"
+import type CourseTableComponent from "../../modules/course-table"
+import type SemesterDetailComponent from "../../modules/semester-detail"
+import type ShareSheet from "./share-student"
 
 import StudentOverview from "../../modules/student"
 
-const SearchSidebar = Loadable({
+const SearchSidebar = Loadable<
+  React.ComponentProps<typeof CourseSearcherSidebar>
+>({
   loader: () =>
     import("../../components/sidebar--course-search").then(
       (mod) => mod.CourseSearcherSidebar,
@@ -23,7 +27,9 @@ import { ConnectedSidebarToolbar } from "../../components/sidebar-toolbar"
 import { AreaOfStudySidebar } from "../../modules/student/area-of-study-sidebar"
 import { StudentSummary } from "../../modules/student/student-summary"
 
-const StatusSidebar = ({ student }: { student: Undoable<Student> }) => (
+type SidebarProps = RouteComponentProps & { student: Undoable<Student> }
+
+const StatusSidebar = ({ student }: SidebarProps) => (
   <Sidebar>
     <ConnectedSidebarToolbar
       backTo="picker"
@@ -37,22 +43,26 @@ const StatusSidebar = ({ student }: { student: Undoable<Student> }) => (
   </Sidebar>
 )
 
-const CourseTable = Loadable({
+const CourseTable = Loadable<
+  RouteComponentProps & React.ComponentProps<typeof CourseTableComponent>
+>({
   loader: () => import("../../modules/course-table"),
   loading: LoadingComponent,
 })
 
-const ShareStudentOverlay = Loadable({
+const ShareStudentOverlay = Loadable<React.ComponentProps<typeof ShareSheet>>({
   loader: () => import("./share-student"),
   loading: LoadingComponent,
 })
 
-const SemesterDetail = Loadable({
+const SemesterDetail = Loadable<
+  RouteComponentProps & React.ComponentProps<typeof SemesterDetailComponent>
+>({
   loader: () => import("../../modules/semester-detail"),
   loading: LoadingComponent,
 })
 
-const TermSidebar = ({ student }: { student: Undoable<Student> }) => (
+const TermSidebar = ({ student }: SidebarProps) => (
   <Sidebar>
     <ConnectedSidebarToolbar
       backTo="picker"
@@ -63,15 +73,13 @@ const TermSidebar = ({ student }: { student: Undoable<Student> }) => (
   </Sidebar>
 )
 
-export default function StudentIndex(props: {
-  studentId?: string,
-  location?: { search: string },
-  navigate?: (string) => mixed,
-}) {
+export default function StudentIndex(
+  props: RouteComponentProps<{ studentId: string }>,
+) {
   let { location, studentId, navigate } = props
 
   if (!studentId) {
-    return <p>Student {this.props.studentId} could not be loaded.</p>
+    return <p>Student could not be loaded.</p>
   }
 
   if (!location || !navigate) {
@@ -81,7 +89,7 @@ export default function StudentIndex(props: {
   let params = new URLSearchParams(location.search)
 
   return (
-    <StudentOverview studentId={props.studentId}>
+    <StudentOverview studentId={studentId}>
       {({ student }) => (
         <>
           <Router>
@@ -110,7 +118,6 @@ export default function StudentIndex(props: {
             <ShareStudentOverlay
               student={student.present}
               navigate={navigate}
-              location={location}
             />
           )}
         </>

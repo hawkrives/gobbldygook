@@ -1,6 +1,4 @@
-// @flow
-
-import React from "react"
+import * as React from "react"
 import styled from "styled-components"
 import { Card } from "../../components/card"
 import { FlatButton } from "../../components/button"
@@ -11,14 +9,14 @@ import { close } from "../../icons/ionicons"
 import { Student } from "@gob/object-student"
 
 type Props = {
-  navigate: (string) => mixed,
-  student: Student,
-  queryString?: string,
+  navigate: (to: string) => unknown
+  student: Student
+  queryString?: string
 }
 
 type State = {
-  encoded: ?string,
-  loading: boolean,
+  encoded: string | undefined
+  loading: boolean
 }
 
 const SizedCard = styled(Card)`
@@ -30,16 +28,16 @@ const SizedCard = styled(Card)`
 `
 
 export class ShareSheet extends React.Component<Props, State> {
-  state = {
-    encoded: null,
+  override state: State = {
+    encoded: undefined,
     loading: true,
   }
 
-  componentDidMount() {
+  override componentDidMount() {
     this.encodeStudent()
   }
 
-  componentDidUpdate(prevProps: Props) {
+  override componentDidUpdate(prevProps: Props) {
     if (this.props.student !== prevProps.student) {
       this.encodeStudent()
     }
@@ -51,7 +49,7 @@ export class ShareSheet extends React.Component<Props, State> {
     this.setState(() => ({ loading: false, encoded }))
   }
 
-  render() {
+  override render() {
     let { student, navigate, queryString = window.location.search } = this.props
     let { encoded, loading } = this.state
 
