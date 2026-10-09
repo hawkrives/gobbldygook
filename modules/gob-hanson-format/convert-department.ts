@@ -173,53 +173,6 @@ forEach(
     }
   },
 )
-// eslint-disable-next-line no-unused-vars
-const geReqsMapping = {
-  "history of western culture": "HWC",
-  "historical studies in western culture": "HWC",
-  "artistic studies": "ALS-A",
-  "artistic and literary studies - art": "ALS-A",
-  "literary studies": "ALS-L",
-  "artistic and literary studies - literature": "ALS-L",
-  "multicultural domestic studies": "MCD",
-  "multicultural global studies": "MCG",
-  "integrated scientific topics": "IST",
-  "scientific exploration and discovery": "SED",
-  "first-year writing": "FYW",
-  "writing in context": "WRI",
-  writing: "WRI",
-  bible: "BTS-B",
-  biblical: "BTS-B",
-  "bible studies": "BTS-T",
-  "biblical studies": "BTS-T",
-  theology: "BTS-T",
-  theological: "BTS-T",
-  "theology studies": "BTS-T",
-  "theological studies": "BTS-T",
-  "biblical and theological studies - bible": "BTS-B",
-  "biblical and theological studies - biblical": "BTS-B",
-  "biblical and theological studies - theology": "BTS-T",
-  "biblical and theological studies - theological": "BTS-T",
-  "foreign language": "FOL",
-  "oral communication": "ORC",
-  "abstract and quantitative reasoning": "AQR",
-  "studies in physical movement": "SPM",
-  gym: "SPM",
-  "studies in human behavior and society": "HBS",
-  "ethical issues and normative perspectives": "EIN",
-  "ethical issues": "EIN",
-  ethics: "EIN",
-}
-// eslint-disable-next-line no-unused-vars
-const courseTypesMapping = {
-  L: "Lab",
-  D: "Discussion",
-  S: "Seminar",
-  T: "Topic",
-  F: "FLAC",
-  R: "Research",
-  E: "Ensemble",
-}
 const toDepartmentAbbreviations: Readonly<Record<string, string>> = {
   ...shortDepartmentAbbreviationsToFullDepartmentAbbreviations,
   ...fullDepartmentNamesToFullDepartmentAbbreviations,

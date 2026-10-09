@@ -43,7 +43,7 @@ describe("compute", () => {
 
     const actual = compute(req, { path: ["Area"], courses })
 
-    expect(asRequirement(actual.Child, "Child").computed).toBe(true)
+    expect(asRequirement(actual["Child"], "Child").computed).toBe(true)
     expect(actual.computed).toBe(true)
   })
 
@@ -89,8 +89,8 @@ describe("compute", () => {
 
     const actual = compute(req, { path: ["Area"], courses })
 
-    expect(asRequirement(actual.A, "A").computed).toBe(true)
-    expect(asRequirement(actual.B, "B").computed).toBe(false)
+    expect(asRequirement(actual["A"], "A").computed).toBe(true)
+    expect(asRequirement(actual["B"], "B").computed).toBe(false)
     expect(actual.computed).toBe(false)
   })
 
@@ -113,8 +113,8 @@ describe("compute", () => {
 
     const actual = compute(req, { path: ["Area"], courses })
 
-    expect(asRequirement(actual.A, "A").computed).toBe(true)
-    expect(asRequirement(actual.B, "B").computed).toBe(true)
+    expect(asRequirement(actual["A"], "A").computed).toBe(true)
+    expect(asRequirement(actual["B"], "B").computed).toBe(true)
     expect(actual.computed).toBe(true)
   })
 

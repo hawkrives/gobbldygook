@@ -114,6 +114,7 @@ export function deduplicateAreas({ type }: Args) {
   if (type === "areas") {
     return removeDuplicateAreas()
   }
+  return undefined
 }
 export function finishUp({ notification }: Args) {
   // Remove the progress bar after 1.5 seconds

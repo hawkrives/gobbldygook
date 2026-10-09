@@ -13,8 +13,8 @@ describe("ReferenceExpression", () => {
     const actual = parseReference("Biblical Studies (BTS-B)")
     expect(actual).toMatchSnapshot()
 
-    expect(actual.$requirement).toBeDefined()
-    expect(actual.$requirement).toBe("Biblical Studies (BTS-B)")
+    expect(actual["$requirement"]).toBeDefined()
+    expect(actual["$requirement"]).toBe("Biblical Studies (BTS-B)")
   })
 
   it("returns a full requirement title when given an abbreviation", () => {
@@ -23,8 +23,8 @@ describe("ReferenceExpression", () => {
     })
     expect(actual).toMatchSnapshot()
 
-    expect(actual.$requirement).toBeDefined()
-    expect(actual.$requirement).toBe("Biblical Studies (BTS-B)")
+    expect(actual["$requirement"]).toBeDefined()
+    expect(actual["$requirement"]).toBe("Biblical Studies (BTS-B)")
   })
 
   it("returns a full requirement title when given the title-minus-abbreviation", () => {
@@ -33,8 +33,8 @@ describe("ReferenceExpression", () => {
     })
     expect(actual).toMatchSnapshot()
 
-    expect(actual.$requirement).toBeDefined()
-    expect(actual.$requirement).toBe("Biblical Studies (BTS-B)")
+    expect(actual["$requirement"]).toBeDefined()
+    expect(actual["$requirement"]).toBe("Biblical Studies (BTS-B)")
   })
 })
 

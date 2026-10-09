@@ -12,7 +12,7 @@ export default function parseData(
       return JSON.parse(raw)
     } else if (type === "areas") {
       let data = yaml.safeLoad(raw) as Record<string, unknown>
-      data.source = raw
+      data["source"] = raw
       return data
     }
   } catch {
