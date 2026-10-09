@@ -4,7 +4,7 @@ import { Student } from "../student.ts"
 
 describe("encodeStudent", () => {
   it("URI-encodes the student's JSON", () => {
-    const encode = jest
+    const encode = vi
       .spyOn(globalThis, "encodeURIComponent")
       .mockImplementation(() => "")
     const student = new Student({ name: "s" })

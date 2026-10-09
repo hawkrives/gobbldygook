@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`computeModifier can be used to ensure that the student has taken two courses across two departments 1`] = `
+exports[`computeModifier > can be used to ensure that the student has taken two courses across two departments 1`] = `
 [
   {
     "_extraKeys": [
@@ -27,7 +27,7 @@ exports[`computeModifier can be used to ensure that the student has taken two co
 ]
 `;
 
-exports[`computeModifier can be used to ensure that the student has taken two courses across two departments 2`] = `
+exports[`computeModifier > can be used to ensure that the student has taken two courses across two departments 2`] = `
 [
   {
     "_extraKeys": [
@@ -54,7 +54,7 @@ exports[`computeModifier can be used to ensure that the student has taken two co
 ]
 `;
 
-exports[`computeModifier checks for <things> from all children 1`] = `
+exports[`computeModifier > checks for <things> from all children 1`] = `
 [
   {
     "department": [
@@ -65,7 +65,7 @@ exports[`computeModifier checks for <things> from all children 1`] = `
 ]
 `;
 
-exports[`computeModifier checks for <things> from all children 2`] = `
+exports[`computeModifier > checks for <things> from all children 2`] = `
 {
   "$children": "$all",
   "$count": {
@@ -78,7 +78,7 @@ exports[`computeModifier checks for <things> from all children 2`] = `
 }
 `;
 
-exports[`computeModifier checks for <things> from specified children 1`] = `
+exports[`computeModifier > checks for <things> from specified children 1`] = `
 [
   {
     "department": [
@@ -89,7 +89,7 @@ exports[`computeModifier checks for <things> from specified children 1`] = `
 ]
 `;
 
-exports[`computeModifier checks for <things> from specified children 2`] = `
+exports[`computeModifier > checks for <things> from specified children 2`] = `
 {
   "$children": [
     {
@@ -107,7 +107,7 @@ exports[`computeModifier checks for <things> from specified children 2`] = `
 }
 `;
 
-exports[`computeModifier checks for <things> from the filter 1`] = `
+exports[`computeModifier > checks for <things> from the filter 1`] = `
 [
   {
     "department": [
@@ -124,7 +124,7 @@ exports[`computeModifier checks for <things> from the filter 1`] = `
 ]
 `;
 
-exports[`computeModifier checks for <things> from the filter 2`] = `
+exports[`computeModifier > checks for <things> from the filter 2`] = `
 {
   "$count": {
     "$num": 1,
@@ -136,7 +136,7 @@ exports[`computeModifier checks for <things> from the filter 2`] = `
 }
 `;
 
-exports[`computeModifier checks for <things> from the given where-clause 1`] = `
+exports[`computeModifier > checks for <things> from the given where-clause 1`] = `
 [
   {
     "department": [
@@ -153,7 +153,7 @@ exports[`computeModifier checks for <things> from the given where-clause 1`] = `
 ]
 `;
 
-exports[`computeModifier checks for <things> from the given where-clause 2`] = `
+exports[`computeModifier > checks for <things> from the given where-clause 2`] = `
 {
   "$count": {
     "$num": 1,
@@ -171,7 +171,7 @@ exports[`computeModifier checks for <things> from the given where-clause 2`] = `
 }
 `;
 
-exports[`computeModifier supports counting courses 1`] = `
+exports[`computeModifier > supports counting courses 1`] = `
 [
   {
     "_extraKeys": [
@@ -206,7 +206,7 @@ exports[`computeModifier supports counting courses 1`] = `
 ]
 `;
 
-exports[`computeModifier supports counting courses 2`] = `
+exports[`computeModifier > supports counting courses 2`] = `
 {
   "$children": "$all",
   "$count": {
@@ -219,7 +219,7 @@ exports[`computeModifier supports counting courses 2`] = `
 }
 `;
 
-exports[`computeModifier supports counting credits 1`] = `
+exports[`computeModifier > supports counting credits 1`] = `
 [
   {
     "_extraKeys": [
@@ -244,7 +244,7 @@ exports[`computeModifier supports counting credits 1`] = `
 ]
 `;
 
-exports[`computeModifier supports counting credits 2`] = `
+exports[`computeModifier > supports counting credits 2`] = `
 {
   "$children": "$all",
   "$count": {
@@ -257,7 +257,7 @@ exports[`computeModifier supports counting credits 2`] = `
 }
 `;
 
-exports[`computeModifier supports counting departments 1`] = `
+exports[`computeModifier > supports counting departments 1`] = `
 [
   {
     "_extraKeys": [
@@ -294,7 +294,7 @@ exports[`computeModifier supports counting departments 1`] = `
 ]
 `;
 
-exports[`computeModifier supports counting departments 2`] = `
+exports[`computeModifier > supports counting departments 2`] = `
 {
   "$children": "$all",
   "$count": {

@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`computeBoolean can compute the result of several course expressions 1`] = `
+exports[`computeBoolean > can compute the result of several course expressions 1`] = `
 {
   "$booleanType": "or",
   "$or": [
@@ -38,7 +38,7 @@ exports[`computeBoolean can compute the result of several course expressions 1`]
 }
 `;
 
-exports[`computeBoolean can compute the result of several course expressions 2`] = `
+exports[`computeBoolean > can compute the result of several course expressions 2`] = `
 [
   {
     "department": [
@@ -49,7 +49,7 @@ exports[`computeBoolean can compute the result of several course expressions 2`]
 ]
 `;
 
-exports[`computeBoolean can compute the result of several modifier expressions 1`] = `
+exports[`computeBoolean > can compute the result of several modifier expressions 1`] = `
 {
   "$and": [
     {
@@ -157,7 +157,7 @@ exports[`computeBoolean can compute the result of several modifier expressions 1
 }
 `;
 
-exports[`computeBoolean can compute the result of several modifier expressions 2`] = `
+exports[`computeBoolean > can compute the result of several modifier expressions 2`] = `
 [
   {
     "_extraKeys": [
@@ -192,7 +192,7 @@ exports[`computeBoolean can compute the result of several modifier expressions 2
 ]
 `;
 
-exports[`computeBoolean can compute the result of several occurrence expressions 1`] = `
+exports[`computeBoolean > can compute the result of several occurrence expressions 1`] = `
 {
   "$booleanType": "or",
   "$or": [
@@ -260,7 +260,7 @@ exports[`computeBoolean can compute the result of several occurrence expressions
 }
 `;
 
-exports[`computeBoolean can compute the result of several occurrence expressions 2`] = `
+exports[`computeBoolean > can compute the result of several occurrence expressions 2`] = `
 [
   {
     "department": [
@@ -289,7 +289,7 @@ exports[`computeBoolean can compute the result of several occurrence expressions
 ]
 `;
 
-exports[`computeBoolean can compute the result of several of-expressions 1`] = `
+exports[`computeBoolean > can compute the result of several of-expressions 1`] = `
 {
   "$and": [
     {
@@ -396,7 +396,7 @@ exports[`computeBoolean can compute the result of several of-expressions 1`] = `
 }
 `;
 
-exports[`computeBoolean can compute the result of several of-expressions 2`] = `
+exports[`computeBoolean > can compute the result of several of-expressions 2`] = `
 [
   {
     "department": [
@@ -413,7 +413,7 @@ exports[`computeBoolean can compute the result of several of-expressions 2`] = `
 ]
 `;
 
-exports[`computeBoolean can compute the result of several other boolean expressions 1`] = `
+exports[`computeBoolean > can compute the result of several other boolean expressions 1`] = `
 {
   "$and": [
     {
@@ -512,7 +512,7 @@ exports[`computeBoolean can compute the result of several other boolean expressi
 }
 `;
 
-exports[`computeBoolean can compute the result of several other boolean expressions 2`] = `
+exports[`computeBoolean > can compute the result of several other boolean expressions 2`] = `
 [
   {
     "department": [
@@ -529,7 +529,7 @@ exports[`computeBoolean can compute the result of several other boolean expressi
 ]
 `;
 
-exports[`computeBoolean can compute the result of several requirement references 1`] = `
+exports[`computeBoolean > can compute the result of several requirement references 1`] = `
 {
   "$and": [
     {
@@ -572,7 +572,7 @@ exports[`computeBoolean can compute the result of several requirement references
 }
 `;
 
-exports[`computeBoolean can compute the result of several requirement references 2`] = `
+exports[`computeBoolean > can compute the result of several requirement references 2`] = `
 [
   {
     "department": [
@@ -595,7 +595,7 @@ exports[`computeBoolean can compute the result of several requirement references
 ]
 `;
 
-exports[`computeBoolean can compute the result of several where-expressions 1`] = `
+exports[`computeBoolean > can compute the result of several where-expressions 1`] = `
 {
   "$and": [
     {
@@ -660,7 +660,7 @@ exports[`computeBoolean can compute the result of several where-expressions 1`] 
 }
 `;
 
-exports[`computeBoolean can compute the result of several where-expressions 2`] = `
+exports[`computeBoolean > can compute the result of several where-expressions 2`] = `
 [
   {
     "department": [
@@ -683,7 +683,7 @@ exports[`computeBoolean can compute the result of several where-expressions 2`] 
 ]
 `;
 
-exports[`computeBoolean computes an or-clause even if the first item is false 1`] = `
+exports[`computeBoolean > computes an or-clause even if the first item is false 1`] = `
 {
   "$booleanType": "or",
   "$or": [
@@ -721,7 +721,7 @@ exports[`computeBoolean computes an or-clause even if the first item is false 1`
 }
 `;
 
-exports[`computeBoolean computes an or-clause even if the first item is false 2`] = `
+exports[`computeBoolean > computes an or-clause even if the first item is false 2`] = `
 [
   {
     "department": [
@@ -732,7 +732,7 @@ exports[`computeBoolean computes an or-clause even if the first item is false 2`
 ]
 `;
 
-exports[`computeBoolean computes the boolean result of and-clauses 1`] = `
+exports[`computeBoolean > computes the boolean result of and-clauses 1`] = `
 {
   "$and": [
     {
@@ -777,7 +777,7 @@ exports[`computeBoolean computes the boolean result of and-clauses 1`] = `
 }
 `;
 
-exports[`computeBoolean computes the boolean result of and-clauses 2`] = `
+exports[`computeBoolean > computes the boolean result of and-clauses 2`] = `
 [
   {
     "department": [
@@ -794,7 +794,7 @@ exports[`computeBoolean computes the boolean result of and-clauses 2`] = `
 ]
 `;
 
-exports[`computeBoolean computes the boolean result of or-clauses 1`] = `
+exports[`computeBoolean > computes the boolean result of or-clauses 1`] = `
 {
   "$booleanType": "or",
   "$or": [
@@ -839,7 +839,7 @@ exports[`computeBoolean computes the boolean result of or-clauses 1`] = `
 }
 `;
 
-exports[`computeBoolean computes the boolean result of or-clauses 2`] = `
+exports[`computeBoolean > computes the boolean result of or-clauses 2`] = `
 [
   {
     "department": [

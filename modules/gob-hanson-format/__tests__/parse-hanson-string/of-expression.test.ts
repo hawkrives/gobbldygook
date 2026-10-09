@@ -83,7 +83,7 @@ describe("OfExpression", () => {
   // The grammar currently accepts "one of (CSCI 121 CSCI 125)". Requiring
   // commas would change which area files parse, so it needs checking against
   // the area data before the grammar is tightened.
-  xit("requires that items be separated by commas", () => {})
+  it.skip("requires that items be separated by commas", () => {})
 
   it("supports trailing commas", () => {
     expect(parse("one of (121,)")).toMatchSnapshot()

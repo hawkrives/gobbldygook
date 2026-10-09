@@ -46,7 +46,7 @@ mise run typecheck
 
 # Run tests
 mise run test
-# or: ./node_modules/.bin/jest
+# or: ./node_modules/.bin/vitest run
 
 # Check formatting with oxfmt
 mise run format-check
@@ -297,7 +297,7 @@ This rule should be used in conjunction with:
 
 ## Notes for gobbldygook project
 
-- **Test command**: `mise run test` or `./node_modules/.bin/jest`
+- **Test command**: `mise run test` or `./node_modules/.bin/vitest run`
 - **Lint command**: `mise run lint` (oxlint)
 - **Type check**: `mise run typecheck` (strict TypeScript 7)
 - **Formatting**: `mise run format` (oxfmt)

@@ -31,7 +31,7 @@ Repository tasks (build, test, lint, etc.) are defined in `mise.toml`. Use `mise
 - `mise run check` - Run all code quality checks (lint, typecheck, test, format-check)
 - `mise run lint` - Run oxlint
 - `mise run typecheck` - Typecheck the code (strict TS 7)
-- `mise run test` - Run Jest tests
+- `mise run test` - Run Vitest tests
 - `mise run e2e` - Build the web app and run the Playwright end-to-end tests
 - `mise run format` - Format code with oxfmt
 - `mise run build` - Build the web application

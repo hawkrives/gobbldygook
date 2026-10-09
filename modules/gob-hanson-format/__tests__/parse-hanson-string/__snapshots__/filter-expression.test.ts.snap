@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`FilterExpression allows a "distinct" modifier 1`] = `
+exports[`FilterExpression > allows a "distinct" modifier 1`] = `
 {
   "$distinct": true,
   "$filterType": "of",
@@ -24,7 +24,7 @@ exports[`FilterExpression allows a "distinct" modifier 1`] = `
 }
 `;
 
-exports[`FilterExpression allows filtering by a list of valid courses 1`] = `
+exports[`FilterExpression > allows filtering by a list of valid courses 1`] = `
 {
   "$distinct": false,
   "$filterType": "of",
@@ -48,7 +48,7 @@ exports[`FilterExpression allows filtering by a list of valid courses 1`] = `
 }
 `;
 
-exports[`FilterExpression allows filtering by a where-expression 1`] = `
+exports[`FilterExpression > allows filtering by a where-expression 1`] = `
 {
   "$distinct": false,
   "$filterType": "where",

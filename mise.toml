@@ -9,11 +9,11 @@ node = "24"
 "check" = { depends = ["lint", "typecheck", "test", "format-check"], description = "Run all code quality checks" }
 "e2e" = { depends = ["build"], run = "./node_modules/.bin/playwright test", description = "Build the web app and run the Playwright end-to-end tests" }
 "count" = "echo $(fd -e scss | wc -l) files && echo $(fd -e scss | xargs wc -l | gsort | tail -n1) lines"
-"cover" = "./node_modules/.bin/jest --coverage && open coverage/index.html"
-"lint" = "./node_modules/.bin/oxlint --max-warnings=0 --report-unused-disable-directives modules/ e2e/ playwright.config.ts"
+"cover" = "./node_modules/.bin/vitest run --coverage && open coverage/index.html"
+"lint" = "./node_modules/.bin/oxlint --max-warnings=0 --report-unused-disable-directives modules/ e2e/ playwright.config.ts vitest.config.ts"
 "format" = "./node_modules/.bin/oxfmt '{*,.*,{.circleci,modules,config,scripts,e2e}/**/*}.{js,mjs,ts,tsx,json,scss,yml,yaml,md}'"
 "format-check" = "./node_modules/.bin/oxfmt --check '{*,.*,{.circleci,modules,config,scripts,e2e}/**/*}.{js,mjs,ts,tsx,json,scss,yml,yaml,md}'"
 "netlify" = "mise run build"
 "start" = { dir = "{{ config_root }}/modules/gob-web", run = "node --run start" }
-"test" = "./node_modules/.bin/jest"
+"test" = "./node_modules/.bin/vitest run"
 "typecheck" = { run = ["./node_modules/.bin/tsc -p .", "./node_modules/.bin/tsc -p modules/gob-web"], description = "Typecheck the TypeScript source" }

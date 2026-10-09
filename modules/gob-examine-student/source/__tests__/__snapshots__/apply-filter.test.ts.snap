@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`applyFilter filters a list of courses 1`] = `
+exports[`applyFilter > filters a list of courses 1`] = `
 [
   {
     "department": [
@@ -18,7 +18,7 @@ exports[`applyFilter filters a list of courses 1`] = `
 ]
 `;
 
-exports[`applyFilter filters by list-of-valid-courses queries 1`] = `
+exports[`applyFilter > filters by list-of-valid-courses queries 1`] = `
 [
   {
     "department": [
@@ -29,27 +29,7 @@ exports[`applyFilter filters by list-of-valid-courses queries 1`] = `
 ]
 `;
 
-exports[`applyFilter filters by where-style queries 1`] = `
-[
-  {
-    "department": [
-      "CSCI",
-    ],
-    "number": 121,
-  },
-  {
-    "department": [
-      "ART",
-      "ASIAN",
-    ],
-    "number": 121,
-  },
-]
-`;
-
-exports[`applyFilter returns an empty list when not presented with a filter 1`] = `[]`;
-
-exports[`applyFilter returns the matches on the expression 1`] = `
+exports[`applyFilter > filters by where-style queries 1`] = `
 [
   {
     "department": [
@@ -67,7 +47,27 @@ exports[`applyFilter returns the matches on the expression 1`] = `
 ]
 `;
 
-exports[`applyFilter returns the matches on the expression 2`] = `
+exports[`applyFilter > returns an empty list when not presented with a filter 1`] = `[]`;
+
+exports[`applyFilter > returns the matches on the expression 1`] = `
+[
+  {
+    "department": [
+      "CSCI",
+    ],
+    "number": 121,
+  },
+  {
+    "department": [
+      "ART",
+      "ASIAN",
+    ],
+    "number": 121,
+  },
+]
+`;
+
+exports[`applyFilter > returns the matches on the expression 2`] = `
 [
   {
     "department": [

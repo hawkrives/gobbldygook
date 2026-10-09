@@ -5,51 +5,6 @@
   "workspaces": [
     "modules/*"
   ],
-  "jest": {
-    "testEnvironment": "jsdom",
-    "testLocationInResults": true,
-    "reporters": [
-      "default",
-      [
-        "@flakiness/jest",
-        {
-          "flakinessProject": "gobbldygook/gobbldygook",
-          "title": "Jest",
-          "outputFolder": "flakiness-report/jest"
-        }
-      ]
-    ],
-    "collectCoverageFrom": [
-      "modules/**/*.{ts,tsx}"
-    ],
-    "coveragePathIgnorePatterns": [
-      "<rootDir>/node_modules/",
-      "<rootDir>/modules/gob-hanson-format/parse-hanson-string.cjs"
-    ],
-    "coverageReporters": [
-      "json",
-      "lcov",
-      "text-summary"
-    ],
-    "globals": {
-      "TESTING": true,
-      "VERSION": "3.0.0-test"
-    },
-    "resetModules": true,
-    "moduleNameMapper": {
-      "^.+\\.s?css$": "<rootDir>/config/jest/style-stub.js"
-    },
-    "setupFiles": [],
-    "setupFilesAfterEnv": [
-      "<rootDir>/config/test-harness.js",
-      "@testing-library/jest-dom"
-    ],
-    "testPathIgnorePatterns": [
-      "<rootDir>/e2e/",
-      "\\.support\\.[jt]sx?$",
-      "__support__"
-    ]
-  },
   "greenkeeper": {
     "ignore": [
       "history"
@@ -65,11 +20,10 @@
     "@babel/preset-react": "7.29.7",
     "@babel/preset-typescript": "7.29.7",
     "@changesets/cli": "3.0.3",
-    "@flakiness/jest": "1.4.0",
     "@flakiness/playwright": "2.0.2",
+    "@flakiness/vitest": "1.10.1",
     "@playwright/test": "1.64.0",
     "@testing-library/jest-dom": "6.9.1",
-    "@types/jest": "29.5.14",
     "@types/js-yaml": "3.12.10",
     "@types/lodash": "4.17.25",
     "@types/node": "24.19.1",
@@ -83,15 +37,16 @@
     "@types/redux-logger": "3.0.12",
     "@types/styled-components": "5.1.36",
     "@types/uuid": "3.4.13",
-    "babel-jest": "29.7.0",
+    "@vitest/coverage-v8": "5.0.1",
     "core-js": "3.50.0",
     "cross-env": "10.1.0",
-    "jest": "29.7.0",
-    "jest-environment-jsdom": "29.7.0",
+    "jsdom": "30.1.1",
     "oxfmt": "0.72.0",
     "oxlint": "1.87.0",
     "oxlint-tsgolint": "^7.0.2003",
-    "typescript": "7.0.2"
+    "typescript": "7.0.2",
+    "vite": "8.3.1",
+    "vitest": "5.0.1"
   },
   "overrides": {
     "@reach/router": {

@@ -342,7 +342,7 @@
         "**/__mocks__/**/*.{js,ts}"
       ],
       "env": {
-        "jest": true
+        "vitest": true
       },
       "rules": {
         "no-empty": "off",

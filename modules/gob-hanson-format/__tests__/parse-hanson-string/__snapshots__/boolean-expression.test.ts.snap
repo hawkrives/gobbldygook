@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`BooleanExpression allows a & b | c – boolean logic for courses 1`] = `
+exports[`BooleanExpression > allows a & b | c – boolean logic for courses 1`] = `
 {
   "$booleanType": "or",
   "$or": [
@@ -36,7 +36,7 @@ exports[`BooleanExpression allows a & b | c – boolean logic for courses 1`] = 
 }
 `;
 
-exports[`BooleanExpression allows a | b & c – boolean logic for courses 1`] = `
+exports[`BooleanExpression > allows a | b & c – boolean logic for courses 1`] = `
 {
   "$booleanType": "or",
   "$or": [
@@ -72,7 +72,7 @@ exports[`BooleanExpression allows a | b & c – boolean logic for courses 1`] = 
 }
 `;
 
-exports[`BooleanExpression allows several &-d courses in a row 1`] = `
+exports[`BooleanExpression > allows several &-d courses in a row 1`] = `
 {
   "$and": [
     {
@@ -109,7 +109,7 @@ exports[`BooleanExpression allows several &-d courses in a row 1`] = `
 }
 `;
 
-exports[`BooleanExpression allows several |-d courses in a row 1`] = `
+exports[`BooleanExpression > allows several |-d courses in a row 1`] = `
 {
   "$booleanType": "or",
   "$or": [
@@ -146,7 +146,7 @@ exports[`BooleanExpression allows several |-d courses in a row 1`] = `
 }
 `;
 
-exports[`BooleanExpression changes departments when given a new one 1`] = `
+exports[`BooleanExpression > changes departments when given a new one 1`] = `
 {
   "$booleanType": "or",
   "$or": [
@@ -169,7 +169,7 @@ exports[`BooleanExpression changes departments when given a new one 1`] = `
 }
 `;
 
-exports[`BooleanExpression keeps duplicates in a list of courses 1`] = `
+exports[`BooleanExpression > keeps duplicates in a list of courses 1`] = `
 {
   "$booleanType": "or",
   "$or": [
@@ -199,7 +199,7 @@ exports[`BooleanExpression keeps duplicates in a list of courses 1`] = `
 }
 `;
 
-exports[`BooleanExpression parses courses separated by & as being and-d 1`] = `
+exports[`BooleanExpression > parses courses separated by & as being and-d 1`] = `
 {
   "$and": [
     {
@@ -222,7 +222,7 @@ exports[`BooleanExpression parses courses separated by & as being and-d 1`] = `
 }
 `;
 
-exports[`BooleanExpression parses courses separated by | as being or-d 1`] = `
+exports[`BooleanExpression > parses courses separated by | as being or-d 1`] = `
 {
   "$booleanType": "or",
   "$or": [
@@ -245,7 +245,7 @@ exports[`BooleanExpression parses courses separated by | as being or-d 1`] = `
 }
 `;
 
-exports[`BooleanExpression parses courses with no departments after an prior department 1`] = `
+exports[`BooleanExpression > parses courses with no departments after an prior department 1`] = `
 {
   "$booleanType": "or",
   "$or": [
@@ -268,7 +268,7 @@ exports[`BooleanExpression parses courses with no departments after an prior dep
 }
 `;
 
-exports[`BooleanExpression supports parentheses to control order-of-operations - (a | b) & c 1`] = `
+exports[`BooleanExpression > supports parentheses to control order-of-operations - (a | b) & c 1`] = `
 {
   "$and": [
     {

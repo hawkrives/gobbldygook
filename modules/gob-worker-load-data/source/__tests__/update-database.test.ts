@@ -1,39 +1,42 @@
-jest.spyOn(global.console, "log").mockImplementation(() => jest.fn())
-jest.spyOn(global.console, "error").mockImplementation(() => jest.fn())
-jest.spyOn(global.console, "warn").mockImplementation(() => jest.fn())
-jest.mock("@gob/web-database")
-jest.mock("../lib-dispatch.ts", () => {
-  const NotificationMock = jest.fn(() => ({
-    start: jest.fn(),
-    increment: jest.fn(),
-    remove: jest.fn(),
-  }))
+vi.spyOn(global.console, "log").mockImplementation(() => vi.fn())
+vi.spyOn(global.console, "error").mockImplementation(() => vi.fn())
+vi.spyOn(global.console, "warn").mockImplementation(() => vi.fn())
+vi.mock("@gob/web-database")
+vi.mock("../lib-dispatch.ts", () => {
+  // Called with `new`, so the implementation can't be an arrow function
+  const NotificationMock = vi.fn(function () {
+    return {
+      start: vi.fn(),
+      increment: vi.fn(),
+      remove: vi.fn(),
+    }
+  })
   return {
-    quotaExceededError: jest.fn(),
+    quotaExceededError: vi.fn(),
     Notification: NotificationMock,
   }
 })
-jest.mock("../clean-prior-data.ts", () => jest.fn())
-jest.mock("../store-data.ts", () => jest.fn())
-jest.mock("../parse-data.ts", () => jest.fn())
-jest.mock("../cache-item-hash.ts", () => jest.fn())
-jest.mock("@gob/lib/fetch-helpers.ts", () => {
+vi.mock("../clean-prior-data.ts", () => ({ default: vi.fn() }))
+vi.mock("../store-data.ts", () => ({ default: vi.fn() }))
+vi.mock("../parse-data.ts", () => ({ default: vi.fn() }))
+vi.mock("../cache-item-hash.ts", () => ({ default: vi.fn() }))
+vi.mock("@gob/lib/fetch-helpers.ts", () => {
   return {
     status: (x: unknown) => x,
     text: (x: unknown) => x,
   }
 })
-const goodFetch = jest.fn((url: string) =>
+const goodFetch = vi.fn((url: string) =>
   Promise.resolve(
     JSON.stringify({
       url,
     }),
   ),
 )
-const badFetch = jest.fn(() => Promise.reject(new Error("could not fetch")))
+const badFetch = vi.fn(() => Promise.reject(new Error("could not fetch")))
 // status and text are mocked to pass the fetched value straight through, so
 // the fetch mock can resolve to plain values instead of Responses
-const fetchMock = jest.fn<Promise<unknown>, [url: string]>(() => {
+const fetchMock = vi.fn<(url: string) => Promise<unknown>>(() => {
   throw new Error("you must pick either goodFetch or badFetch")
 })
 globalThis.fetch = fetchMock as unknown as typeof fetch
@@ -47,10 +50,10 @@ beforeEach(async () => {
   await db.__clear()
   goodFetch.mockClear()
   badFetch.mockClear()
-  jest.mocked(cleanPriorData).mockClear()
-  jest.mocked(dispatch.quotaExceededError).mockClear()
-  jest.mocked(storeData).mockClear()
-  jest.mocked(cacheItemHash).mockClear()
+  vi.mocked(cleanPriorData).mockClear()
+  vi.mocked(dispatch.quotaExceededError).mockClear()
+  vi.mocked(storeData).mockClear()
+  vi.mocked(cacheItemHash).mockClear()
 })
 describe("updateDatabase", () => {
   test("calls fetch with an url", async () => {
@@ -110,7 +113,7 @@ describe("updateDatabase", () => {
         path: "terms/20161.json",
         hash: "deadbeef",
       })
-      // oxlint-disable-next-line typescript/unbound-method -- a jest.fn() from the Notification mock; it is only inspected, never called
+      // oxlint-disable-next-line typescript/unbound-method -- a vi.fn() from the Notification mock; it is only inspected, never called
       expect(n.increment).toHaveBeenCalledTimes(1)
     })
     test("even if the fetch fails", async () => {
@@ -121,7 +124,7 @@ describe("updateDatabase", () => {
         path: "terms/20161.json",
         hash: "deadbeef",
       })
-      // oxlint-disable-next-line typescript/unbound-method -- a jest.fn() from the Notification mock; it is only inspected, never called
+      // oxlint-disable-next-line typescript/unbound-method -- a vi.fn() from the Notification mock; it is only inspected, never called
       expect(n.increment).toHaveBeenCalledTimes(1)
     })
   })
@@ -143,9 +146,9 @@ describe("updateDatabase", () => {
   })
   test("aborts the sequence if one rejects", async () => {
     fetchMock.mockImplementationOnce(goodFetch)
-    jest
-      .mocked(cleanPriorData)
-      .mockImplementationOnce(() => Promise.reject(new Error("problem")))
+    vi.mocked(cleanPriorData).mockImplementationOnce(() =>
+      Promise.reject(new Error("problem")),
+    )
     expect.assertions(3)
     await updateDatabase(
       "courses",
@@ -178,9 +181,9 @@ describe("updateDatabase", () => {
     })
     test("false if any step fails", async () => {
       fetchMock.mockImplementationOnce(goodFetch)
-      jest
-        .mocked(storeData)
-        .mockImplementationOnce(() => Promise.reject(new Error("problem")))
+      vi.mocked(storeData).mockImplementationOnce(() =>
+        Promise.reject(new Error("problem")),
+      )
       const value = await updateDatabase(
         "courses",
         "http://i.am.an.url/",

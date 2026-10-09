@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`enhanceHanson allows defining variables in result 1`] = `
+exports[`enhanceHanson > allows defining variables in result 1`] = `
 {
   "$type": "requirement",
   "Req": {
@@ -89,7 +89,7 @@ exports[`enhanceHanson allows defining variables in result 1`] = `
 }
 `;
 
-exports[`enhanceHanson allows using variables in the filter 1`] = `
+exports[`enhanceHanson > allows using variables in the filter 1`] = `
 {
   "$type": "requirement",
   "Req": {
@@ -176,7 +176,7 @@ exports[`enhanceHanson allows using variables in the filter 1`] = `
 }
 `;
 
-exports[`enhanceHanson expands string-only keys into objects with a "result" key 1`] = `
+exports[`enhanceHanson > expands string-only keys into objects with a "result" key 1`] = `
 {
   "$type": "requirement",
   "Requirement": {
@@ -200,7 +200,7 @@ exports[`enhanceHanson expands string-only keys into objects with a "result" key
 }
 `;
 
-exports[`enhanceHanson parses "filter" strings with the Filter PEG rule 1`] = `
+exports[`enhanceHanson > parses "filter" strings with the Filter PEG rule 1`] = `
 {
   "$type": "requirement",
   "Req": {
@@ -231,7 +231,7 @@ exports[`enhanceHanson parses "filter" strings with the Filter PEG rule 1`] = `
 }
 `;
 
-exports[`enhanceHanson parses "result" strings with the Result PEG rule 1`] = `
+exports[`enhanceHanson > parses "result" strings with the Result PEG rule 1`] = `
 {
   "$type": "requirement",
   "Req": {

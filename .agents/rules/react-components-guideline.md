@@ -15,7 +15,7 @@ Apply this rule whenever you design, refactor, or review React components so tha
 - **Type checking**: the codebase is strict TypeScript 7, checked by `mise run typecheck`.
 - **React version**: React 18.3 is in use. Use modern React patterns (hooks, functional components) where appropriate.
 - **State management**: Redux is used for application state. Follow existing patterns for connecting components and dispatching actions.
-- **Testing**: Jest with @testing-library/jest-dom is configured. Write tests that exercise component behavior and user interactions.
+- **Testing**: Vitest with @testing-library/jest-dom is configured. Write tests that exercise component behavior and user interactions.
 
 ## File structure suggestion
 
