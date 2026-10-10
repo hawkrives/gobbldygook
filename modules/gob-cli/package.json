@@ -23,7 +23,7 @@
     "@gob/object-student": "^3.0.0-rc.2",
     "@gob/school-st-olaf-college": "^3.0.0-rc.2",
     "@gob/school-st-olaf-college-sis-import": "^3.0.0-rc.2",
-    "chalk": "^5.0.0",
+    "chalk": "^6.0.0",
     "get-stdin": "^9.0.0",
     "got": "^10.7.0",
     "immutable": "^4.3.9",
