@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@changesets/cli": "3.0.3",
-    "@flakiness/playwright": "2.0.2",
+    "@flakiness/playwright": "2.0.3",
     "@flakiness/vitest": "1.10.1",
     "@playwright/test": "1.64.0",
     "@testing-library/jest-dom": "7.0.1",
