@@ -30,7 +30,7 @@ export function cli() {
   if (args.json) {
     console.log(stringify(query, { space: 4 }))
   } else if (args.yaml) {
-    console.log(yaml.safeDump(query))
+    console.log(yaml.dump(query))
   } else {
     console.dir(query)
   }

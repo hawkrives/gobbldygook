@@ -326,7 +326,7 @@ function checkAgainstArea(
   if (args.json) {
     console.log(JSON.stringify(result, null, 2))
   } else if (args.yaml) {
-    console.log(yaml.safeDump(result))
+    console.log(yaml.dump(result))
   } else if (args.prose) {
     console.log(proseify(result, String(areaData.name), path))
   } else if (args.summary) {

@@ -6,7 +6,7 @@ import type { HansonFile, ParsedHansonFile } from "@gob/hanson-format"
 
 function compileStudent(data: string): ParsedHansonFile {
   // enhanceHanson checks the shape of the area itself
-  let obj = yaml.safeLoad(data) as HansonFile
+  let obj = yaml.load(data) as HansonFile
   return enhanceHanson(obj)
 }
 

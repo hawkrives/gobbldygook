@@ -58,7 +58,7 @@ async function findArea({
 async function getArea({ path }: InfoFileArea): Promise<HansonFile> {
   let r = await got(`${BASE}/${path}`)
   // area files are trusted to be valid hanson
-  return yaml.safeLoad(r.body) as HansonFile
+  return yaml.load(r.body) as HansonFile
 }
 
 async function loadArea({

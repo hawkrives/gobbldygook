@@ -20,7 +20,7 @@ function parseString(args: Args, string: string) {
   if (args.json) {
     console.log(stringify(parsed, { space: 4 }))
   } else if (args.yaml) {
-    console.log(yaml.safeDump(parsed))
+    console.log(yaml.dump(parsed))
   } else {
     console.log(util.inspect(parsed, { depth: null }))
   }
