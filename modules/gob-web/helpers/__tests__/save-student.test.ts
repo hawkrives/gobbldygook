@@ -1,4 +1,4 @@
-import uuid from "uuid/v4.js"
+import { v4 as uuid } from "uuid"
 import { Student } from "@gob/object-student"
 import type { StudentInput } from "@gob/object-student"
 import {

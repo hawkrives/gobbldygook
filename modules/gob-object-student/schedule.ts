@@ -1,4 +1,4 @@
-import uuid from "uuid/v4.js"
+import { v4 as uuid } from "uuid"
 import { randomChar } from "@gob/lib"
 import type { Result } from "@gob/types"
 
