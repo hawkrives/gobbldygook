@@ -19,7 +19,7 @@
     "@flakiness/vitest": "1.10.1",
     "@playwright/test": "1.64.0",
     "@testing-library/jest-dom": "7.0.1",
-    "@types/js-yaml": "3.12.10",
+    "@types/js-yaml": "4.0.9",
     "@types/lodash": "4.17.25",
     "@types/node": "24.19.1",
     "@types/pegjs": "0.10.6",
@@ -29,9 +29,8 @@
     "@types/react-redux": "7.1.34",
     "@types/react-select": "2.0.19",
     "@types/react-window": "1.8.8",
-    "@types/redux-logger": "3.0.12",
+    "@types/redux-logger": "3.0.13",
     "@types/styled-components": "5.1.36",
-    "@types/uuid": "3.4.13",
     "@vitest/coverage-v8": "5.0.3",
     "cross-env": "10.1.0",
     "jsdom": "30.1.2",
@@ -43,6 +42,9 @@
     "vitest": "5.0.3"
   },
   "overrides": {
+    "@types/redux-logger": {
+      "redux": "4.2.1"
+    },
     "@reach/router": {
       "react": "^18.3.1",
       "react-dom": "^18.3.1"

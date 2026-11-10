@@ -18,17 +18,6 @@ export default defineConfig({
       process.env["TRAVIS_COMMIT"] ?? process.env["COMMIT_REF"],
     ),
   },
-  resolve: {
-    alias: [
-      // js-yaml's "full" and "safe" schemas bring in esprima to support the
-      // !!js/function type, which we don't need, so both load the core
-      // schema instead
-      {
-        find: /^(.*)\/schema\/default_(?:full|safe)$/,
-        replacement: "$1/schema/core",
-      },
-    ],
-  },
   worker: {
     format: "es",
   },

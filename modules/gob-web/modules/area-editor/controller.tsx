@@ -61,7 +61,7 @@ class AreaTextEditor extends React.Component<
 class AreaCompiledViewer extends React.Component<ViewerProps> {
   override render() {
     try {
-      let data = yaml.safeLoad(this.props.value || "")
+      let data = yaml.load(this.props.value || "", { schema: yaml.CORE_SCHEMA })
       let value = ""
 
       // a YAML document can be any value, like 0 or ""
@@ -87,7 +87,9 @@ class AreaInfoViewer extends React.Component<ViewerProps> {
     try {
       // enhanceHanson throws if the YAML isn't an area of study
       let data = enhanceHanson(
-        yaml.safeLoad(this.props.value || "") as HansonFile,
+        yaml.load(this.props.value || "", {
+          schema: yaml.CORE_SCHEMA,
+        }) as HansonFile,
       )
 
       let { name, type } = data

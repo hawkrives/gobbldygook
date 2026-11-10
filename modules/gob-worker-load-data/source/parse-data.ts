@@ -11,7 +11,11 @@ export default function parseData(
     if (type === "courses") {
       return JSON.parse(raw)
     } else if (type === "areas") {
-      let data = yaml.safeLoad(raw) as Record<string, unknown>
+      // the core schema leaves dates and other YAML extras as plain strings
+      let data = yaml.load(raw, { schema: yaml.CORE_SCHEMA }) as Record<
+        string,
+        unknown
+      >
       data["source"] = raw
       return data
     }
